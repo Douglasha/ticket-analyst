@@ -1083,6 +1083,136 @@ export class AIAnalyst {
           `Já estamos verificando o serviço de envio de relatórios do sistema **S.G.H. (Spdata)**. Para localizarmos rapidamente a rotina no agendador, você poderia nos confirmar o **título exato do relatório** e **desde qual data** ele parou de chegar?\n\n` +
           `Assim que nos informar por aqui, já verificamos!`;
       }
+    } else if (
+      /\b(indicadores|indicador|wconect|wconnect)\b/i.test(normAll) ||
+      (/\b(solicito|solicita|extrair|extracao|levantamento)\b/i.test(normAll) &&
+        /\b(relatorio|relatorios|produtividade|atendimentos)\b/i.test(normAll))
+    ) {
+      const descOnly = formFields.descricao || "";
+      const fullText = `${ticket.title || ""} ${descOnly}`;
+      const sysName = /\bwconect|wconnect\b/i.test(normAll)
+        ? "WConect"
+        : /\b(s\.?g\.?h|spdata)\b/i.test(normAll)
+        ? "S.G.H. (Spdata)"
+        : /\bhrp\b/i.test(normAll)
+        ? "HRP"
+        : formFields.aplicacao || "sistema informado";
+
+      const hasPeriod =
+        /\b(\d{1,2}\/\d{1,2}|janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro|m[êe]s passado|este m[êe]s|per[íi]odo\s+de|semanal|mensal|anual|202\d)\b/i.test(
+          descOnly
+        );
+      const byRecep = /\bpor\s+recepcionista\b/i.test(fullText)
+        ? " por recepcionista"
+        : "";
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = /\b(dashboard|dashboards|painel)\b/i.test(normAll)
+        ? "T.I > BD > Big Data e BI > Dashboards"
+        : "T.I > BD > Big Data e BI > Relatórios";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Extração de indicadores/relatórios gerenciais do sistema ${sysName} para acompanhamento operacional do setor ${sectorName}.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      if (hasPeriod) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a extração dos **indicadores de atendimento do sistema ${sysName}${byRecep}**.` +
+          reclassNote +
+          ` Os parâmetros necessários para a extração já foram informados.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação dos **indicadores de atendimento do ${sysName}${byRecep}** para o setor **${sectorName}**.\n\n` +
+          `Nossa equipe já está realizando a extração dos dados e, assim que o relatório estiver consolidado, encaminharemos por aqui!`;
+      } else {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a extração dos **indicadores de atendimento do sistema ${sysName}${byRecep}**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta.` +
+          reclassNote;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no ${sysName}`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação dos **indicadores de atendimento do ${sysName}${byRecep}** para o setor **${sectorName}**.\n\n` +
+          `Para realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\n` +
+          `Assim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!`;
+      }
+    } else if (
+      /\b(meu ponto|dispositivo nao e valido)\b/i.test(normAll) ||
+      (/\bbenner\b/i.test(normAll) && /\bponto\b/i.test(normAll)) ||
+      (/\b(realizar ponto|bater ponto|registrar ponto|ponto de sua entrada)\b/i.test(
+        normAll
+      ) &&
+        /\b(app|aplicativo|celular|dispositivo)\b/i.test(normAll))
+    ) {
+      const descOnly = formFields.descricao || "";
+      const collabMatch = descOnly.match(
+        /\b(?:colaborador(?:a)?|funcion[áa]ri[oa]|usu[áa]ri[oa])\s+([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/
+      );
+      const targetCollab = collabMatch
+        ? collabMatch[1].replace(/\s*[,.;].*$/, "").trim()
+        : formFields.nomeColaborador || "";
+
+      const isSelfRequest =
+        !targetCollab &&
+        /\b(nao consegui|não consegui|meu celular|troquei de celular|meu login|meu usuario)\b/i.test(
+          normAll
+        );
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Bloqueio de registro de ponto eletrônico no aplicativo Meu Ponto (Benner) por troca/validação de dispositivo móvel.";
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      if (targetCollab || isSelfRequest) {
+        const whoTxt = targetCollab
+          ? `da colaboradora **${targetCollab}**`
+          : `do(a) colaborador(a) **${ticket.requester}**`;
+        const actionWhoTxt = targetCollab
+          ? `para que a colaboradora **${targetCollab}** possa registrar o ponto normalmente`
+          : `para que você possa registrar o ponto normalmente`;
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita suporte referente ao erro no aplicativo **Meu Ponto (Benner)** no acesso ${whoTxt} (*"Esse dispositivo não é válido para o usuário logado"*). ` +
+          `Esse erro ocorre quando o(a) colaborador(a) trocou de aparelho celular ou reinstalou o app, sendo necessário desvincular o dispositivo antigo e liberar o vínculo do novo aparelho ao login no Benner.` +
+          reclassNote;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente ao acesso ${whoTxt} no aplicativo **Meu Ponto (Benner)**.\n\n` +
+          `A mensagem apresentada (*"Esse dispositivo não é válido para o usuário logado"*) ocorre quando há troca ou reinstalação do aparelho celular, sendo necessário desvincular o dispositivo antigo e vincular o novo aparelho ao login.\n\n` +
+          `Nossa equipe técnica já está realizando a liberação do novo dispositivo no sistema Benner ${actionWhoTxt}. Assim que concluído, confirmaremos por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) relatando erro de validação de dispositivo no aplicativo **Meu Ponto (Benner)** (*"Esse dispositivo não é válido para o usuário logado"*), pendente de confirmação do nome completo/matrícula do(a) colaborador(a) que trocou de aparelho.` +
+          reclassNote;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Confirmar o nome completo (ou matrícula/CPF) do(a) colaborador(a) que precisa ter o novo dispositivo vinculado no app Meu Ponto (Benner)",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Esse erro no aplicativo **Meu Ponto (Benner)** (*"Esse dispositivo não é válido para o usuário logado"*) ocorre quando há troca de aparelho celular, sendo necessário vincular o novo dispositivo ao login.\n\n` +
+          `Para realizarmos a liberação, você poderia nos confirmar o **nome completo (ou CPF/matrícula)** do(a) colaborador(a)?\n\n` +
+          `Assim que nos informar por aqui, já efetuamos a liberação!`;
+      }
     } else {
       const resumoDesc = formFields.descricao
         ? formFields.descricao.replace(/\s+/g, " ").slice(0, 180)
@@ -1102,7 +1232,24 @@ export class AIAnalyst {
         : formFields.aplicacao
         ? "Sistemas Internos / ERP / Sistemas Corporativos"
         : "Suporte Técnico Geral / Service Desk";
-      suggestedCategory = ticket.category;
+
+      // Checagem inteligente de categoria caso o solicitante tenha escolhido uma categoria desalinhada (ex: Sistemas Operacionais / Aplicativos / Solicitação Diversa)
+      let smartCat = ticket.category;
+      if (
+        /\b(sistemas operacionais|aplicativos|solicitacao diversa)\b/i.test(
+          normalizeText(ticket.category || "")
+        )
+      ) {
+        if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard)\b/i.test(normAll)) {
+          smartCat = "T.I > BD > Big Data e BI > Relatórios";
+        } else if (/\b(acesso|permissao|permissoes|liberar|vincular|senha|login)\b/i.test(normAll)) {
+          smartCat = "T.I > ST > Acesso e Permissões";
+        } else if (looksLikeError) {
+          smartCat = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+        }
+      }
+
+      suggestedCategory = smartCat;
       realUrgency = ticket.urgency_label;
       urgencyReason = "Classificação baseada no relato e impacto operacional informados pelo solicitante.";
 

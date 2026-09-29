@@ -15,13 +15,18 @@ const STOPWORDS = new Set([
   "tenho", "ter", "teu", "teus", "ti", "toda", "todas", "todo", "todos", "tu",
   "tua", "tuas", "tudo", "um", "uma", "umas", "uns", "voce", "voces", "bom",
   "dia", "boa", "tarde", "noite", "favor", "pessoal", "preciso", "ajuda", "oi",
-  // Termos genéricos de cabeçalho do FormCreator / Categorias GLPI
+  // Termos genéricos de cabeçalho do FormCreator / Categorias GLPI / Saudação
   "suporte", "tecnico", "service", "desk", "solicitacao", "solicitacoes", "diversa",
   "tipo", "setor", "solicitante", "dados", "descricao", "observacoes", "obsevacoes",
   "anexo", "ativos", "ativo", "chamado", "unimed", "hospital", "realizado", "realizada",
   "conforme", "solicitado", "atendimento", "usuario", "usuarios", "favor", "verificar",
   "infraestrutura", "redes", "hardware", "perifericos", "periferico", "observador",
-  "localizacao", "titulo", "solicito", "urgencia", "urgente", "sistema", "sistemas"
+  "localizacao", "titulo", "solicito", "urgencia", "urgente", "sistema", "sistemas",
+  "operacionais", "operacional", "aplicativos", "aplicativo", "instalacao", "configuracao",
+  "resolucao", "problemas", "problema", "prezados", "prezado", "prezada", "gentileza",
+  "compreensao", "agradeco", "atencao", "presteza", "atenciosamente", "att", "obrigado",
+  "obrigada", "segue", "hoje", "data", "colaboradora", "colaborador", "devido", "certa",
+  "certo", "vossa", "arquivos", "arquivo", "print"
 ]);
 
 export function normalizeText(text) {
@@ -35,7 +40,9 @@ export function normalizeText(text) {
 export function extractTokens(text) {
   const norm = normalizeText(text);
   const matches = norm.match(/[a-z0-9_:-]{2,}/g) || [];
-  return matches.filter((t) => !STOPWORDS.has(t) && !/^\d+$/.test(t));
+  return [
+    ...new Set(matches.filter((t) => !STOPWORDS.has(t) && !/^\d+$/.test(t))),
+  ];
 }
 
 export function extractFormCreatorFields(rawContent) {
@@ -126,7 +133,12 @@ export function computeRelevance(
 
   let kwHits = 0;
   for (const nKw of uniqueKws) {
-    if (normTicket.includes(nKw)) {
+    if (!nKw.includes(" ") && nKw.length <= 5) {
+      const escaped = nKw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      if (new RegExp(`\\b${escaped}\\b`).test(normTicket)) {
+        kwHits += 1;
+      }
+    } else if (normTicket.includes(nKw)) {
       kwHits += 1;
     }
   }
@@ -198,6 +210,15 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-13" &&
           !/\b(cancelar|cancelamento|excluir|exclusao|engano|estornar|inativar|remover)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear Playbook de Formulários Clínicos de Enfermagem (PB-UNI-09) quando o chamado pede apenas indicadores/relatórios de atendimento (ex: WConect)
+        if (
+          pb.id === "PB-UNI-09" &&
+          !/\b(formulario|sonda|folley|cateterismo|passagem de plantao|enfermagem|pep)\b/i.test(
             normTicket
           )
         ) {
@@ -291,14 +312,17 @@ export class KnowledgeEngine {
       const learnedList = loadLearnedFeedback();
       for (const mem of learnedList) {
         if (String(mem.ticket_id) === String(ticket.id)) continue;
+        const cleanMemKws = (mem.keywords || []).filter(
+          (k) => !STOPWORDS.has(normalizeText(k))
+        );
         const score = computeRelevance(
           fullTicketText,
           ticketTokens,
           mem.title || "",
           `${mem.problem_summary || ""} ${mem.custom_instruction || ""}`,
-          mem.keywords || []
+          cleanMemKws
         );
-        if (score >= 0.45) {
+        if (score >= 0.65) {
           matches.push({
             layer: "learned_memory",
             layer_label: "Memória Contínua • Aprendido com o Analista",

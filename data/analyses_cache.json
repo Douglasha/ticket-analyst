@@ -2457,5 +2457,351 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a vinculação/liberação de acesso ao sistema **Controle de Contas (unidade Piumhi)** ao próprio usuário dela (**Priscila Santos**). *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\").* Todos os dados necessários (sistema, unidade e usuário) já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-15)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.\n  3. [PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado.",
     "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!"
+  },
+  "42006": {
+    "ticket_id": 42006,
+    "analyzed_at": "29/09/2026 12:36",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante relata que a impressora **impressora do setor** localizada no setor **H Ala 1** não está imprimindo. O equipamento já foi identificado (impressora do setor), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento impressora do setor (H Ala 1).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora impressora do setor parou de imprimir para todos os computadores do setor (H Ala 1) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41515 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora Etiquetas",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós reiniciar computador impressora voltou a funcionar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após reiniciar computador impressora voltou a funcionar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41515 (Resolvido))",
+    "resolution_steps": [
+      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
+      "[Chamado #41515 (Resolvido)] Após reiniciar computador impressora voltou a funcionar."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante relata que a impressora **impressora do setor** localizada no setor **H Ala 1** não está imprimindo. O equipamento já foi identificado (impressora do setor), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41515 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora impressora do setor parou de imprimir para todos os computadores do setor (H Ala 1) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.\n  5. [Chamado #41515 (Resolvido)] Após reiniciar computador impressora voltou a funcionar.",
+    "public_reply_draft": "Olá, Vanessa! Tudo bem?\n\nJá estamos verificando o status da impressora **impressora do setor** (H Ala 1) na rede com prioridade.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da H Ala 1 ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a H Ala 1!"
+  },
+  "42010": {
+    "ticket_id": 42010,
+    "analyzed_at": "29/09/2026 13:08",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante relata que a impressora **impressora do setor** localizada no setor **Serviço Social** não está imprimindo. O equipamento já foi identificado (impressora do setor), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento impressora do setor (Serviço Social).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora impressora do setor parou de imprimir para todos os computadores do setor (Serviço Social) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41916 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora SAMSUNG M4080FX",
+        "category": "T.I • Solucionado por rbernardes",
+        "summary": "Resolvido. Foi necessário substituição de peça",
+        "steps": [
+          "Resolvido. Foi necessário substituição de peça"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41709 (Resolvido)",
+        "title": "Infraestrutura e Redes > Suprimentos > TROCA DE TONER",
+        "category": "T.I • Solucionado por rbernardes",
+        "summary": "10% ainda consegue muitas impressões. Favor aguardar chegar à 5 ou menos que trocaremos",
+        "steps": [
+          "10% ainda consegue muitas impressões. Favor aguardar chegar à 5 ou menos que trocaremos"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41916 (Resolvido))",
+    "resolution_steps": [
+      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
+      "[Chamado #41916 (Resolvido)] Resolvido. Foi necessário substituição de peça",
+      "[Chamado #41709 (Resolvido)] 10% ainda consegue muitas impressões. Favor aguardar chegar à 5 ou menos que trocaremos"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante relata que a impressora **impressora do setor** localizada no setor **Serviço Social** não está imprimindo. O equipamento já foi identificado (impressora do setor), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41916 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora impressora do setor parou de imprimir para todos os computadores do setor (Serviço Social) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.\n  5. [Chamado #41916 (Resolvido)] Resolvido. Foi necessário substituição de peça\n  6. [Chamado #41709 (Resolvido)] 10% ainda consegue muitas impressões. Favor aguardar chegar à 5 ou menos que trocaremos",
+    "public_reply_draft": "Olá, Lidiane! Tudo bem?\n\nJá estamos verificando o status da impressora **impressora do setor** (Serviço Social) na rede com prioridade.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Serviço Social ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Serviço Social!"
+  },
+  "42012": {
+    "ticket_id": 42012,
+    "analyzed_at": "29/09/2026 13:06",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Rosy Ellen Freire Viana** (Laboratório) solicita a extração dos **indicadores de atendimento do sistema WConect por recepcionista**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Média",
+    "urgency_reason": "Extração de indicadores/relatórios gerenciais do sistema WConect para acompanhamento operacional do setor Laboratório.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no WConect"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-16",
+        "title": "Solicitação de Extração de Indicadores e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de extração ou envio de indicadores de atendimento, produtividade ou relatórios gerenciais de sistemas internos (ex: WConect por recepcionista, BI, SGH), frequentemente aberta na categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+          "Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI) para extrair os indicadores de atendimento por recepcionista/setor.",
+          "Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-16)",
+    "resolution_steps": [
+      "[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+      "[PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI) para extrair os indicadores de atendimento por recepcionista/setor.",
+      "[PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Rosy Ellen Freire Viana** (Laboratório) solicita a extração dos **indicadores de atendimento do sistema WConect por recepcionista**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-16)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no WConect\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).\n  2. [PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI) para extrair os indicadores de atendimento por recepcionista/setor.\n  3. [PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do WConect por recepcionista** para o setor **Laboratório**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!"
+  },
+  "42020": {
+    "ticket_id": 42020,
+    "analyzed_at": "29/09/2026 13:59",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita suporte referente ao erro no aplicativo **Meu Ponto (Benner)** no acesso da colaboradora **Raquel Pimentel** (*\"Esse dispositivo não é válido para o usuário logado\"*). Esse erro ocorre quando o(a) colaborador(a) trocou de aparelho celular ou reinstalou o app, sendo necessário desvincular o dispositivo antigo e liberar o vínculo do novo aparelho ao login no Benner. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Resolução de Problemas > Erros de Sistema\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Média",
+    "urgency_reason": "Bloqueio de registro de ponto eletrônico no aplicativo Meu Ponto (Benner) por troca/validação de dispositivo móvel.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-17",
+        "title": "App Meu Ponto (Benner) — Erro de Dispositivo Não Válido / Troca de Celular (Vinculação de Novo Aparelho)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Colaborador(a) não consegue registrar o ponto no aplicativo Meu Ponto (Benner), apresentando a mensagem 'Esse dispositivo não é válido para o usuário logado. Entre em contato com seu gestor ou com o RH da empresa' (ocorre quando o colaborador trocou de celular ou reinstalou o app, sendo necessário vincular o novo dispositivo ao seu login).",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.",
+          "Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.",
+          "Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-06",
+        "title": "Liberação de Wi-Fi em Aparelho Celular / Dispositivo Móvel",
+        "category": "Infraestrutura e Rede",
+        "summary": "Colaborador solicita conexão da rede Wi-Fi no aparelho celular pessoal ou corporativo.",
+        "steps": [
+          "Verificar se o pedido possui aprovação da gestão e se enquadra na política de Segurança da Informação para dispositivos móveis.",
+          "Orientar o usuário a desativar a opção 'Usar MAC Aleatório / Endereço Wi-Fi Privado' nas configurações da rede Wi-Fi do celular.",
+          "Coletar o endereço MAC físico do aparelho, cadastrar no controlador Wi-Fi / Firewall na VLAN adequada e autenticar o dispositivo."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41653 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Configuração app Meu ponto",
+        "category": "T.I • Solucionado por rcampos",
+        "summary": "dispositivos antigos excluidos, basta logar no novo e bater o ponto",
+        "steps": [
+          "dispositivos antigos excluidos, basta logar no novo e bater o ponto"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41644 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > GLPI",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nMensagem cadastrada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Mensagem cadastrada",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-17) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-06)",
+    "resolution_steps": [
+      "[PB-UNI-17] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-17] Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.",
+      "[PB-UNI-17] Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.",
+      "[PB-UNI-17] Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente.",
+      "[PB-UNI-06] Verificar se o pedido possui aprovação da gestão e se enquadra na política de Segurança da Informação para dispositivos móveis.",
+      "[PB-UNI-06] Orientar o usuário a desativar a opção 'Usar MAC Aleatório / Endereço Wi-Fi Privado' nas configurações da rede Wi-Fi do celular."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita suporte referente ao erro no aplicativo **Meu Ponto (Benner)** no acesso da colaboradora **Raquel Pimentel** (*\"Esse dispositivo não é válido para o usuário logado\"*). Esse erro ocorre quando o(a) colaborador(a) trocou de aparelho celular ou reinstalou o app, sendo necessário desvincular o dispositivo antigo e liberar o vínculo do novo aparelho ao login no Benner. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Resolução de Problemas > Erros de Sistema\").*\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-17) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-06)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-17] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [PB-UNI-17] Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.\n  3. [PB-UNI-17] Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.\n  4. [PB-UNI-17] Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente.\n  5. [PB-UNI-06] Verificar se o pedido possui aprovação da gestão e se enquadra na política de Segurança da Informação para dispositivos móveis.\n  6. [PB-UNI-06] Orientar o usuário a desativar a opção 'Usar MAC Aleatório / Endereço Wi-Fi Privado' nas configurações da rede Wi-Fi do celular.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação referente ao acesso da colaboradora **Raquel Pimentel** no aplicativo **Meu Ponto (Benner)**.\n\nA mensagem apresentada (*\"Esse dispositivo não é válido para o usuário logado\"*) ocorre quando há troca ou reinstalação do aparelho celular, sendo necessário desvincular o dispositivo antigo e vincular o novo aparelho ao login.\n\nNossa equipe técnica já está realizando a liberação do novo dispositivo no sistema Benner para que a colaboradora **Raquel Pimentel** possa registrar o ponto normalmente. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42021": {
+    "ticket_id": 42021,
+    "analyzed_at": "29/09/2026 14:03",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Dalete Garcia de Oliveira Bartelochi, do setor Promoprev, relatou uma solicitação para unificar o cadastro de uma pessoa chamada NILZA MARIA DA SILVA VITOR. Os dados fornecidos incluem o nome, data de nascimento e CPF da pessoa. O colaborador solicitou que a equipe de TI execute a unificação do cadastro.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Sistemas / Relatórios HRP",
+    "real_urgency": "Baixa",
+    "urgency_reason": "O chamado afeta diretamente o funcionamento do sistema de cadastro PEP.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-65",
+        "title": "Unificação Prontuário/Cadastro PEP - Prontu+",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Localize o cadastro duplicado em\n\n\r\n\n\r\nNo campo nome, mude o modo de pesquisa para a opção \"Contém\"\n\n\r\n\n\r\nColoque o nome a ser pesquisado e clique em \"buscar\"\n\n\r\n\n\r\nConfira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"\n\n\r\n\n\r\nSelecione o contato que contenha o CPF preenchido e clique...",
+        "steps": [
+          "Localize o cadastro duplicado em",
+          "No campo nome, mude o modo de pesquisa para a opção \"Contém\"",
+          "Coloque o nome a ser pesquisado e clique em \"buscar\"",
+          "Confira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"",
+          "Selecione o contato que contenha o CPF preenchido e clique em Salvar",
+          "Clique em confirmar, certifique-se de conferir todos os dados minunciosamente, pois esta operação não poderá ser desfeita"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41943 (Resolvido)",
+        "title": "Unificação Cadastro PEP | THOMAS LOPES ANDRADE CANCADO",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro unificado conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro unificado conforme solicitado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41927 (Resolvido)",
+        "title": "Unificação Cadastro PEP | FRANCIELE APARECIDA PAIVA",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro unificado conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro unificado conforme solicitado.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-04",
+        "title": "Integração PEP x AutoLac (Divergência de Data/Hora ou Consulta de Exames)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Dúvida operacional sobre localização de laudos/resultados no AutoLac ou divergência de data entre prescrição no PEP (próximo à meia-noite) e importação no AutoLac.",
+        "steps": [
+          "Para dúvidas de busca de resultados (Treinamento/Suporte): contatar o solicitante via HopToDesk e demonstrar os filtros de pesquisa no AutoLac (busca por nº de requisição/atendimento, CPF ou período de coleta).",
+          "Para divergência de data na virada do dia (23:50 -> 00:00): consultar os logs do integrador PEP <-> AutoLac para verificar se a tag de data de solicitação está assumindo o `SYSDATE` da importação em vez do timestamp da prescrição médica.",
+          "Documentar os IDs de atendimento de exemplo para ajuste na view/trigger de integração pela equipe de Desenvolvimento/Banco de Dados."
+        ],
+        "score": 0.42
+      }
+    ],
+    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-65) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41943 (Resolvido))",
+    "resolution_steps": [
+      "[KB-65] Localize o cadastro duplicado em",
+      "[KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"",
+      "[KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\"",
+      "[KB-65] Confira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"",
+      "[KB-65] Selecione o contato que contenha o CPF preenchido e clique em Salvar",
+      "[KB-65] Clique em confirmar, certifique-se de conferir todos os dados minunciosamente, pois esta operação não poderá ser desfeita"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Dalete Garcia de Oliveira Bartelochi, do setor Promoprev, relatou uma solicitação para unificar o cadastro de uma pessoa chamada NILZA MARIA DA SILVA VITOR. Os dados fornecidos incluem o nome, data de nascimento e CPF da pessoa. O colaborador solicitou que a equipe de TI execute a unificação do cadastro.\n\nClassificação Sugerida: T.I > ST > Sistemas / Relatórios HRP | Prioridade Real: Baixa\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-65) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41943 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-65] Localize o cadastro duplicado em\n  2. [KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"\n  3. [KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\"\n  4. [KB-65] Confira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"\n  5. [KB-65] Selecione o contato que contenha o CPF preenchido e clique em Salvar\n  6. [KB-65] Clique em confirmar, certifique-se de conferir todos os dados minunciosamente, pois esta operação não poderá ser desfeita",
+    "public_reply_draft": "Olá, Dalete! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Unificação Cadastro PEP | NILZA MARIA DA SILVA VITOR**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento:\n\n- Localize o cadastro duplicado em\n- No campo nome, mude o modo de pesquisa para a opção \"Contém\"\n- Coloque o nome a ser pesquisado e clique em \"buscar\"\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
   }
 }

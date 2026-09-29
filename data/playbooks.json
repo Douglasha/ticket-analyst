@@ -3,7 +3,18 @@
     "id": "PB-UNI-01",
     "title": "Onboarding / Criação de Usuário (AD, Relógio de Ponto, MyPlace e Wi-Fi)",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["criação de usuário", "relógio de ponto", "relogio de ponto", "myplace", "matrícula", "matricula", "pis", "recursos humanos", "novo colaborador", "admissão"],
+    "keywords": [
+      "criação de usuário",
+      "relógio de ponto",
+      "relogio de ponto",
+      "myplace",
+      "matrícula",
+      "matricula",
+      "pis",
+      "recursos humanos",
+      "novo colaborador",
+      "admissão"
+    ],
     "symptoms": "RH solicita cadastro de novo colaborador no relógio de ponto, portal MyPlace, rede/AD ou Wi-Fi.",
     "required_info": [
       "Nome completo do colaborador e setor de lotação",
@@ -23,7 +34,15 @@
     "id": "PB-UNI-02",
     "title": "Falha de Acesso ao Nextcloud (Pastas Compartilhadas / Sincronização)",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["nextcloud", "nextclaud", "pasta do nextcloud", "nuvem", "sincronização", "auditoria", "compartilhamento"],
+    "keywords": [
+      "nextcloud",
+      "nextclaud",
+      "pasta do nextcloud",
+      "nuvem",
+      "sincronização",
+      "auditoria",
+      "compartilhamento"
+    ],
     "symptoms": "Usuário relata que não consegue acessar a pasta do Nextcloud (via navegador ou cliente de sincronização Desktop).",
     "required_info": [
       "Nome exato da pasta compartilhada que está tentando acessar",
@@ -41,7 +60,18 @@
     "id": "PB-UNI-03",
     "title": "Erro de Hash em Guia XML TISS (Convênios / Faturamento / Laboratório)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["xml", "hash", "erro no hash", "convênio", "convenio", "aura saúde", "tiss", "lote", "faturamento", "importar xml"],
+    "keywords": [
+      "xml",
+      "hash",
+      "erro no hash",
+      "convênio",
+      "convenio",
+      "aura saúde",
+      "tiss",
+      "lote",
+      "faturamento",
+      "importar xml"
+    ],
     "symptoms": "Usuário solicita auxílio para corrigir arquivo XML de faturamento TISS que apresentou erro de validação de hash ao enviar/importar para convênio.",
     "required_info": [
       "ID do HopToDesk para acesso remoto à estação",
@@ -59,7 +89,19 @@
     "id": "PB-UNI-04",
     "title": "Integração PEP x AutoLac (Divergência de Data/Hora ou Consulta de Exames)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["autolac", "pep", "exames", "laboratório", "laboratorio", "resultados", "divergência", "divergencia", "meia noite", "importados", "laudo"],
+    "keywords": [
+      "autolac",
+      "pep",
+      "exames",
+      "laboratório",
+      "laboratorio",
+      "resultados",
+      "divergência",
+      "divergencia",
+      "meia noite",
+      "importados",
+      "laudo"
+    ],
     "symptoms": "Dúvida operacional sobre localização de laudos/resultados no AutoLac ou divergência de data entre prescrição no PEP (próximo à meia-noite) e importação no AutoLac.",
     "required_info": [
       "Número do atendimento / pedido de exame ou nome do paciente de exemplo (para rastreio na integração)",
@@ -77,7 +119,18 @@
     "id": "PB-UNI-05",
     "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["hrp", "tnumm", "precificação", "precificacao", "relatorio hrp", "relatorio gestantes", "gestantes", "promoprev", "alteração via banco", "clientes 0256"],
+    "keywords": [
+      "hrp",
+      "tnumm",
+      "precificação",
+      "precificacao",
+      "relatorio hrp",
+      "relatorio gestantes",
+      "gestantes",
+      "promoprev",
+      "alteração via banco",
+      "clientes 0256"
+    ],
     "symptoms": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
     "required_info": [
       "Detalhamento exato da regra/campo ou código da tabela/importação no HRP",
@@ -93,7 +146,16 @@
     "id": "PB-UNI-06",
     "title": "Liberação de Wi-Fi em Aparelho Celular / Dispositivo Móvel",
     "domain": "Infraestrutura e Rede",
-    "keywords": ["wifi", "wi-fi", "celular", "aparelho telefone", "smartphone", "mac", "rede sem fio", "corporativo"],
+    "keywords": [
+      "wifi",
+      "wi-fi",
+      "celular",
+      "aparelho telefone",
+      "smartphone",
+      "mac",
+      "rede sem fio",
+      "corporativo"
+    ],
     "symptoms": "Colaborador solicita conexão da rede Wi-Fi no aparelho celular pessoal ou corporativo.",
     "required_info": [
       "Informar se o aparelho celular é corporativo (patrimônio Unimed) ou particular",
@@ -111,7 +173,15 @@
     "id": "PB-UNI-07",
     "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
     "domain": "Suporte Técnico Geral / Service Desk",
-    "keywords": ["teclado", "mouse", "monitor", "troca de teclado", "troca de mouse", "tecla falhando", "hu00177"],
+    "keywords": [
+      "teclado",
+      "mouse",
+      "monitor",
+      "troca de teclado",
+      "troca de mouse",
+      "tecla falhando",
+      "hu00177"
+    ],
     "symptoms": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
     "required_info": [
       "Patrimônio do computador ou local/posto de enfermagem exato",
@@ -128,7 +198,18 @@
     "id": "PB-UNI-08",
     "title": "Instabilidade em Linhas Telefônicas / Ligações Caindo (PABX / VoIP)",
     "domain": "Infraestrutura e Rede",
-    "keywords": ["ligações", "ligacoes", "caindo", "linhas", "telefone", "ramal", "telefonia", "pabx", "voip", "tronco"],
+    "keywords": [
+      "ligações",
+      "ligacoes",
+      "caindo",
+      "linhas",
+      "telefone",
+      "ramal",
+      "telefonia",
+      "pabx",
+      "voip",
+      "tronco"
+    ],
     "symptoms": "Setor relata que as ligações externas ou internas estão caindo com frequência e pede verificação das linhas.",
     "required_info": [
       "Quais números de ramais específicos ou aparelhos estão apresentando queda",
@@ -146,7 +227,17 @@
     "id": "PB-UNI-09",
     "title": "Desenvolvimento / Ajustes em Formulários Clínicos e Indicadores (PEP / Enfermagem)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["checklist", "cateterismo", "sonda", "folley", "passagem de plantão", "enfermagem", "formulário", "indicadores", "desenvolvimento"],
+    "keywords": [
+      "checklist",
+      "cateterismo",
+      "sonda",
+      "folley",
+      "passagem de plantão",
+      "enfermagem",
+      "formulário clínico",
+      "formulario clinico",
+      "indicadores assistenciais"
+    ],
     "symptoms": "Coordenação de Enfermagem ou área assistencial solicita criação/alteração de campos em formulários eletrônicos (Checklist Sonda Folley, Passagem de Plantão, Indicadores).",
     "required_info": [
       "Especificação completa dos campos/opções a incluir ou alterar (ou documento/print anexo)",
@@ -164,7 +255,17 @@
     "id": "PB-UNI-10",
     "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
     "domain": "Suporte Técnico Geral / Service Desk",
-    "keywords": ["evento", "projetor", "notebook", "microfone", "caixa de som", "empréstimo", "apoio", "secretariado", "lions"],
+    "keywords": [
+      "evento",
+      "projetor",
+      "notebook",
+      "microfone",
+      "caixa de som",
+      "empréstimo",
+      "apoio",
+      "secretariado",
+      "lions"
+    ],
     "symptoms": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
     "required_info": [
       "Data, local exato e horário de início e término da montagem/evento",
@@ -182,7 +283,17 @@
     "id": "PB-ACC-01",
     "title": "Liberação de Acesso a Pastas de Rede / Espelhamento de Perfil (AD)",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["pasta de rede", "acesso a pasta", "liberar pasta", "igual ao", "espelhar", "diretório", "grupo de segurança", "compartilhamento", "mapeamento"],
+    "keywords": [
+      "pasta de rede",
+      "acesso a pasta",
+      "liberar pasta",
+      "igual ao",
+      "espelhar",
+      "diretório",
+      "grupo de segurança",
+      "compartilhamento",
+      "mapeamento"
+    ],
     "symptoms": "Usuário solicita acesso a pastas na rede ou pede 'acesso igual ao de outro colaborador'.",
     "required_info": [
       "Caminho exato da pasta ou nome do departamento/compartilhamento",
@@ -201,7 +312,18 @@
     "id": "PB-UNI-11",
     "title": "Bloqueio de Contas e Revogação de Acessos (Desligamento / Férias / Afastamento)",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["bloqueio de contas", "bloqueio de conta", "bloqueio de acesso", "desligamento", "desligada", "desligado", "quadro funcional", "revogação", "inativar usuário", "bloquear acesso"],
+    "keywords": [
+      "bloqueio de contas",
+      "bloqueio de conta",
+      "bloqueio de acesso",
+      "desligamento",
+      "desligada",
+      "desligado",
+      "quadro funcional",
+      "revogação",
+      "inativar usuário",
+      "bloquear acesso"
+    ],
     "symptoms": "Recursos Humanos ou Gestão solicita bloqueio imediato de contas, sistemas e acessos físicos de colaborador(a) por motivo de desligamento, férias ou afastamento.",
     "required_info": [
       "Relação de quais acessos e sistemas devem ser bloqueados (caso o chamado não tenha discriminado os sistemas no formulário)"
@@ -218,7 +340,22 @@
     "id": "PB-SD-02",
     "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
     "domain": "Infraestrutura e Rede",
-    "keywords": ["impressora", "impressoras", "imprimir", "imprimindo", "nao esta imprimindo", "impressão", "samsung", "m4080fx", "atolamento", "toner", "spooler", "fila", "etiqueta", "zebra"],
+    "keywords": [
+      "impressora",
+      "impressoras",
+      "imprimir",
+      "imprimindo",
+      "nao esta imprimindo",
+      "impressão",
+      "samsung",
+      "m4080fx",
+      "atolamento",
+      "toner",
+      "spooler",
+      "fila",
+      "etiqueta",
+      "zebra"
+    ],
     "symptoms": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
     "required_info": [
       "Se a falha de impressão ocorre em todos os computadores do setor ou apenas em uma máquina específica",
@@ -237,7 +374,27 @@
     "id": "PB-UNI-12",
     "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["acesso e permissões", "acesso e permissoes", "favor cadastrar", "liberar acesso", "plantão", "plantao", "médico", "medico", "dr ", "dra ", "prestador", "ultrasom", "ultrassom", "face", "facial", "portas", "reconhecimento facial", "controle de acesso", "outros (descrever em observações"],
+    "keywords": [
+      "acesso e permissões",
+      "acesso e permissoes",
+      "favor cadastrar",
+      "liberar acesso",
+      "plantão",
+      "plantao",
+      "médico",
+      "medico",
+      "dr ",
+      "dra ",
+      "prestador",
+      "ultrasom",
+      "ultrassom",
+      "face",
+      "facial",
+      "portas",
+      "reconhecimento facial",
+      "controle de acesso",
+      "outros (descrever em observações"
+    ],
     "symptoms": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
     "required_info": [
       "Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)",
@@ -256,7 +413,17 @@
     "id": "PB-UNI-13",
     "title": "Cancelamento / Exclusão de Registro ou Conta Cadastrada por Engano (Controle de Contas / SGH / Auditoria)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["conta cadastrada por engano", "cadastrada por engano", "cadastrado por engano", "cancelar no controle de contas", "cancelamento controle de contas", "excluir no controle de contas", "cancelar registro", "cancelamento de conta", "excluir registro"],
+    "keywords": [
+      "conta cadastrada por engano",
+      "cadastrada por engano",
+      "cadastrado por engano",
+      "cancelar no controle de contas",
+      "cancelamento controle de contas",
+      "excluir no controle de contas",
+      "cancelar registro",
+      "cancelamento de conta",
+      "excluir registro"
+    ],
     "symptoms": "Solicitação da Auditoria, Recepção ou Faturamento para cancelar, excluir ou estornar registro/conta lançado por engano no sistema (ex: Controle de Contas).",
     "required_info": [
       "Número do registro/conta/atendimento e nome do(a) paciente/beneficiário(a) (caso não tenham sido informados na descrição)"
@@ -272,7 +439,20 @@
     "id": "PB-UNI-14",
     "title": "Falha no Envio / Agendamento de Relatório Automático (Sistema S.G.H. / Spdata)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "keywords": ["s.g.h", "sgh", "spdata", "relatorio agendado", "relatório agendado", "envio diario", "envio diário", "nao recebo", "não recebo", "nao recebimento", "check-list", "checklist nas 24 horas"],
+    "keywords": [
+      "s.g.h",
+      "sgh",
+      "spdata",
+      "relatorio agendado",
+      "relatório agendado",
+      "envio diario",
+      "envio diário",
+      "nao recebo",
+      "não recebo",
+      "nao recebimento",
+      "check-list",
+      "checklist nas 24 horas"
+    ],
     "symptoms": "Colaborador(a) relata que parou de receber o envio diário/automático de relatório agendado do sistema S.G.H. (Spdata).",
     "required_info": [
       "Título exato do relatório agendado no S.G.H. e desde qual data parou de ser recebido (caso não tenham sido informados na descrição)"
@@ -288,7 +468,18 @@
     "id": "PB-UNI-15",
     "title": "Vinculação / Liberação de Acesso ou Unidade em Sistema Interno (Controle de Contas / SGH / HRP)",
     "domain": "Acessos, Permissões e Contas",
-    "keywords": ["acessos controle de contas", "vincular o controle de contas", "vincular ao meu usuario", "vincular ao meu usuário", "meu usuario", "meu usuário", "piumhi", "vincular unidade", "liberar unidade", "permissao controle de contas"],
+    "keywords": [
+      "acessos controle de contas",
+      "vincular o controle de contas",
+      "vincular ao meu usuario",
+      "vincular ao meu usuário",
+      "meu usuario",
+      "meu usuário",
+      "piumhi",
+      "vincular unidade",
+      "liberar unidade",
+      "permissao controle de contas"
+    ],
     "symptoms": "Colaborador(a) solicita vincular ou liberar acesso a uma unidade/módulo de sistema interno (ex: Controle de Contas de Piumhi) ao próprio usuário ou perfil do setor (muitas vezes abrindo na categoria de Aplicativos em vez de Acesso e Permissões).",
     "required_info": [
       "Sistema/módulo, unidade a ser vinculada e usuário que receberá a permissão (caso não tenham sido informados na abertura)"
@@ -299,7 +490,60 @@
       "Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o acesso ao sistema **Controle de Contas** no seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!"
+  },
+  {
+    "id": "PB-UNI-16",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "title": "Solicitação de Extração de Indicadores e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
+    "keywords": [
+      "indicadores",
+      "indicador",
+      "wconect",
+      "wconnect",
+      "indicadores de atendimento",
+      "por recepcionista",
+      "relatorio de atendimento",
+      "extracao de relatorio",
+      "levantamento de dados",
+      "produtividade"
+    ],
+    "symptoms": "Solicitação de extração ou envio de indicadores de atendimento, produtividade ou relatórios gerenciais de sistemas internos (ex: WConect por recepcionista, BI, SGH), frequentemente aberta na categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+    "required_info": [
+      "Período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores, caso não tenha sido informado na abertura"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).",
+      "Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.",
+      "Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do sistema WConect**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!"
+  },
+  {
+    "id": "PB-UNI-17",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "title": "App Meu Ponto (Benner) — Erro de Dispositivo Não Válido / Troca de Celular (Vinculação de Novo Aparelho)",
+    "keywords": [
+      "meu ponto",
+      "app meu ponto",
+      "benner",
+      "dispositivo nao e valido",
+      "dispositivo não é válido",
+      "realizar ponto",
+      "bater ponto",
+      "registrar ponto",
+      "ponto de sua entrada",
+      "erro app meu ponto"
+    ],
+    "symptoms": "Colaborador(a) não consegue registrar o ponto no aplicativo Meu Ponto (Benner), apresentando a mensagem 'Esse dispositivo não é válido para o usuário logado. Entre em contato com seu gestor ou com o RH da empresa' (ocorre quando o colaborador trocou de celular ou reinstalou o app, sendo necessário vincular o novo dispositivo ao seu login).",
+    "required_info": [
+      "Nome completo do(a) colaborador(a) que precisa ter o novo dispositivo vinculado no Meu Ponto (Benner), caso não tenha sido informado na descrição"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.",
+      "Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.",
+      "Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nA mensagem apresentada no aplicativo **Meu Ponto (Benner)** (*\"Esse dispositivo não é válido para o usuário logado\"*) ocorre quando há troca ou reinstalação do aparelho celular, sendo necessário desvincular o aparelho antigo e liberar o vínculo do novo dispositivo ao login do(a) colaborador(a).\n\nNossa equipe técnica já está realizando a liberação do novo dispositivo no sistema Benner e, assim que concluído, confirmaremos por aqui para que o ponto possa ser registrado normalmente!"
   }
 ]
-
-

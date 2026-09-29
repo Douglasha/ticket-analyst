@@ -1,5 +1,35 @@
 [
   {
+    "id": "Chamado #42010 (Resolvido)",
+    "ticket_id": 42010,
+    "solution_id": 40696,
+    "title": "Infraestrutura e Redes > Impressoras > Solicitação de troca de toner – Impressora",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42006 (Resolvido)",
+    "ticket_id": 42006,
+    "solution_id": 40694,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Impressora não quer imprimir",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #41992 (Resolvido)",
     "ticket_id": 41992,
     "solution_id": 40671,
@@ -12,6 +42,46 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41991 (Resolvido)",
+    "ticket_id": 41991,
+    "solution_id": 40688,
+    "title": "Infraestrutura e Redes > Periféricos > MOUSE E TECLADO",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Equipamentos danificados substituídos por novos",
+    "keywords": [],
+    "steps": [
+      "Equipamentos danificados substituídos por novos"
+    ]
+  },
+  {
+    "id": "Chamado #41987 (Resolvido)",
+    "ticket_id": 41987,
+    "solution_id": 40679,
+    "title": "Atualizar HRP [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Atualizado conforme as regras previstas em POP\nSetor envolvido informado",
+    "keywords": [],
+    "steps": [
+      "Atualizado conforme as regras previstas em POP",
+      "Setor envolvido informado"
+    ]
+  },
+  {
+    "id": "Chamado #41977 (Resolvido)",
+    "ticket_id": 41977,
+    "solution_id": 40686,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Teclado recepção",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Computador substituído",
+    "keywords": [],
+    "steps": [
+      "Computador substituído"
     ]
   },
   {
@@ -31,6 +101,22 @@
     ]
   },
   {
+    "id": "Chamado #41960 (Resolvido)",
+    "ticket_id": 41960,
+    "solution_id": 40685,
+    "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização das tabelas IPSM",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia. \n\n\r\nRealizado as importações solicitadas.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Realizado as importações solicitadas.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #41957 (Resolvido)",
     "ticket_id": 41957,
     "solution_id": 40627,
@@ -44,6 +130,19 @@
       "Cadastro realizado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41946 (Resolvido)",
+    "ticket_id": 41946,
+    "solution_id": 40687,
+    "title": "Infraestrutura e Redes > Impressoras",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Resolvido.",
+    "keywords": [],
+    "steps": [
+      "Resolvido."
     ]
   },
   {
@@ -544,6 +643,19 @@
     ]
   },
   {
+    "id": "Chamado #41720 (Resolvido)",
+    "ticket_id": 41720,
+    "solution_id": 40680,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > NATALIA DA SILVA OLIVEIRA",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito conforme solicitado",
+    "keywords": [],
+    "steps": [
+      "feito conforme solicitado"
+    ]
+  },
+  {
     "id": "Chamado #41709 (Resolvido)",
     "ticket_id": 41709,
     "solution_id": 40367,
@@ -570,6 +682,19 @@
       "Permissão para consultar autorizações liberada para o login: tramos",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41699 (Resolvido)",
+    "ticket_id": 41699,
+    "solution_id": 40681,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
     ]
   },
   {

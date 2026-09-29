@@ -1,17 +1,37 @@
 [
   {
+    "ticket_id": 42012,
+    "title": "Sistemas Operacionais  -  Indicadores WConect",
+    "category": "T.I > BD > Big Data e BI > Relatórios",
+    "keywords": [
+      "indicadores",
+      "wconect",
+      "recepcionista",
+      "at"
+    ],
+    "problem_summary": "Boa tarde, prezados.\nSolicito, por gentileza, os indicadores de atendimento do WConect por recepcionista.\nCerta de vossa compreensão, agradeço a atenção e presteza.\nAt.te",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do WConect por recepcionista** para o setor **Laboratório**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!",
+    "required_info": [
+      "Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no WConect"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+      "[PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI) para extrair os indicadores de atendimento por recepcionista/setor.",
+      "[PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-09-29T16:19:58.141Z"
+  },
+  {
     "ticket_id": 41992,
     "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
     "category": "T.I > ST > Acesso e Permissões",
     "keywords": [
-      "aplicativos",
       "acessos",
       "controle",
       "contas",
-      "aplicativos",
       "vincular",
-      "controle",
-      "contas"
+      "piumhi"
     ],
     "problem_summary": "Bom dia!\nFavor vincular o controle de contas de Piumhi ao meu usuário.\n \nAtt",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
@@ -33,10 +53,10 @@
       "teclado",
       "venho",
       "solicitar",
-      "mouse",
-      "teclado",
       "coordenacao",
-      "enfermagem"
+      "enfermagem",
+      "mesmos",
+      "encontra-se"
     ],
     "problem_summary": "Bom dia!\nVenho solicitar um mouse e um teclado(coordenação) para enfermagem, os mesmos encontra-se danificados.",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
@@ -62,9 +82,7 @@
       "teclado",
       "recepcao",
       "trocar",
-      "teclado",
       "computador",
-      "recepcao",
       "letras",
       "apagadas"
     ],
@@ -91,9 +109,9 @@
       "recebimento",
       "diario",
       "relatorio",
-      "correcao",
-      "bugs",
-      "recebo"
+      "recebo",
+      "desde",
+      "sabado"
     ],
     "problem_summary": "Não recebo desde sábado o envio diário de Relatório agendado do sistema S.G.H. Título: RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS. Quando não tem inserção dos cateteres o relatório chega como zerado, mas desde sábado não chega relatório algum.",
     "custom_instruction": "A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
