@@ -75,12 +75,30 @@ Durante a análise de cada chamado, o motor de busca ([`src/knowledgeEngine.js`]
 
 ---
 
-## Como Executar
+## Como Executar (Servidor + LLM Local Ollama)
 
-Dê dois cliques em [`run.bat`](run.bat) ou execute no terminal:
+### 1. Subir o Serviço de LLM Local (Ollama)
+O sistema utiliza por padrão o **Ollama** rodando localmente na porta `11434` com o modelo `qwen2.5:3b`.
+
+- **No PowerShell (caso o Ollama já esteja no PATH):**
+  ```powershell
+  ollama serve
+  ```
+- **No PowerShell (caminho completo padrão de instalação no Windows):**
+  ```powershell
+  & "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" serve
+  ```
+- **Caso esteja em uma máquina nova e precise baixar o modelo pela primeira vez:**
+  ```powershell
+  & "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" pull qwen2.5:3b
+  ```
+
+### 2. Subir o Servidor do GLPI Ticket Analyst
+Em outro terminal (ou dando dois cliques em [`run.bat`](run.bat), que já sobe o Ollama e o servidor Node.js automaticamente), execute:
 
 ```powershell
 node src/server.js
 ```
 
 Em seguida, acesse no navegador: **http://localhost:8000**
+
