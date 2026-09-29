@@ -1,0 +1,1274 @@
+import {
+  extractFormCreatorFields,
+  loadPlaybooks,
+  normalizeText,
+} from "./knowledgeEngine.js";
+
+const SYSTEM_PROMPT = `Você é um Analista Sênior de T.I. da Unimed (Copiloto de Triagem GLPI).
+Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil contendo:
+- translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor.
+- urgency_reason: explique em 1 frase curta o impacto operacional deste chamado.
+- public_reply_draft: escreva uma mensagem cordial e objetiva pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
+  * Se 'Status da Triagem' for 'COMPLETO', apenas confirme que todos os dados necessários já foram recebidos e que a equipe de T.I. já está executando a solicitação (NÃO faça perguntas e NÃO peça ID do HopToDesk).
+  * Se houver 'Perguntas de Triagem Pendentes', inclua APENAS essas perguntas em tópicos claros para o solicitante responder.`;
+
+export function buildUserPrompt(
+  ticket,
+  matches,
+  orgContext,
+  customInstruction = null,
+  missingInfoHints = []
+) {
+  const firstName =
+    (ticket.requester_first_name || ticket.requester || "Solicitante")
+      .trim()
+      .split(/\s+/)[0];
+  const formFields = extractFormCreatorFields(ticket.content);
+
+  const followupsTxt =
+    (ticket.followups || [])
+      .slice(-2)
+      .map(
+        (f) =>
+          `- [${f.date}] ${f.author}: ${String(f.content || "").slice(0, 180)}`
+      )
+      .join("\n") || "Nenhum.";
+
+  const topMatches = (matches || [])
+    .filter((m, idx) => idx === 0 || m.score >= 0.4)
+    .slice(0, 2);
+
+  let matchesTxt = "";
+  if (topMatches.length > 0) {
+    topMatches.forEach((m, idx) => {
+      const stepsJoined = (m.steps || []).slice(0, 3).join(" | ");
+      matchesTxt += `[${idx + 1}] ${m.source_id} (${m.title}): ${stepsJoined}\n`;
+    });
+  } else {
+    matchesTxt = "Sem artigo específico na KB; use boas práticas de suporte de T.I.";
+  }
+
+  const extra = customInstruction
+    ? `\nDIRETIVA DO ANALISTA (PRIORIDADE MÁXIMA): ${customInstruction}\n`
+    : "";
+
+  const cleanRelato = formFields.descricao || ticket.content || "";
+  const extraFields = [
+    formFields.tipo ? `Tipo: ${formFields.tipo}` : "",
+    formFields.nomeColaborador ? `Colaborador(a): ${formFields.nomeColaborador}` : "",
+    formFields.cpf ? `CPF: ${formFields.cpf}` : "",
+    formFields.motivo ? `Motivo: ${formFields.motivo}` : "",
+    formFields.acessos ? `Acessos Informados: ${formFields.acessos}` : "",
+    formFields.localizacao || formFields.setorAlvo || formFields.setor
+      ? `Local/Setor: ${formFields.localizacao || formFields.setorAlvo || formFields.setor}`
+      : "",
+    formFields.ativo ? `Equipamento/Ativo: ${formFields.ativo}` : "",
+  ]
+    .filter(Boolean)
+    .join(" | ");
+
+  const triageHintsTxt =
+    Array.isArray(missingInfoHints) && missingInfoHints.length > 0
+      ? `\n- Status da Triagem: PENDENTE DE INFORMAÇÕES\n- Perguntas de Triagem Pendentes para incluir na resposta ao solicitante:\n  * ${missingInfoHints.join("\n  * ")}`
+      : `\n- Status da Triagem: COMPLETO (todas as informações pertinentes já constam no chamado; NÃO faça perguntas na resposta ao solicitante)`;
+
+  return `CHAMADO #${ticket.id}:
+- Título: ${ticket.title}
+- Solicitante: ${ticket.requester} (Primeiro Nome para saudação: ${firstName} | Setor: ${ticket.requester_department || "Não informado"})
+- Categoria GLPI: ${ticket.category} | Urgência: ${ticket.urgency_label}
+${extraFields ? `- Dados do Formulário: ${extraFields}\n` : ""}- Relato do Solicitante: "${cleanRelato.slice(0, 450)}"${triageHintsTxt}
+- Acompanhamentos: ${followupsTxt}
+- Base Técnica Consultada:
+${matchesTxt}${extra}`;
+}
+
+export function extractJsonObject(rawText) {
+  let cleaned = String(rawText || "").trim();
+  cleaned = cleaned.replace(/^```(?:json)?\s*/i, "");
+  cleaned = cleaned.replace(/\s*```$/, "");
+  const start = cleaned.indexOf("{");
+  const end = cleaned.lastIndexOf("}");
+  if (start !== -1 && end !== -1 && end > start) {
+    cleaned = cleaned.slice(start, end + 1);
+  }
+  return JSON.parse(cleaned);
+}
+
+export class AIAnalyst {
+  constructor(settings) {
+    this.settings = settings;
+  }
+
+  async analyzeTicket(ticket, matches, customInstruction = null) {
+    const provider = this.settings.ai_provider;
+    const heuristic = this._buildSmartHeuristicAnalysis(
+      ticket,
+      matches,
+      customInstruction
+    );
+    const userPrompt = buildUserPrompt(
+      ticket,
+      matches,
+      this.settings.org_context,
+      customInstruction,
+      heuristic.missing_info
+    );
+
+    let llmData = null;
+    let providerLabel = "";
+
+    try {
+      if (provider === "gemini" && this.settings.gemini_api_key?.trim()) {
+        llmData = await this._callGemini(userPrompt);
+        providerLabel = `Google Gemini (${this.settings.gemini_model})`;
+      } else if (provider === "openai" && this.settings.openai_api_key?.trim()) {
+        llmData = await this._callOpenAI(userPrompt);
+        providerLabel = `OpenAI (${this.settings.openai_model})`;
+      } else if (provider === "ollama") {
+        llmData = await this._callOllama(userPrompt);
+        providerLabel = `Ollama Local (${this.settings.ollama_model})`;
+      }
+    } catch (err) {
+      providerLabel = `Motor Inteligente 3 Camadas (Fallback • ${String(err.message).slice(0, 55)})`;
+    }
+
+    if (!llmData) {
+      if (!providerLabel) {
+        providerLabel = "Copiloto Heurístico + Motor 3 Camadas (Node.js)";
+      }
+      llmData = heuristic;
+    } else {
+      const customWantsQuestions =
+        customInstruction &&
+        /\b(pe[çc]a|pergunte|perguntar|solicite|solicitar|cobrar|questionar|qual\b|quais\b)\b/i.test(
+          customInstruction
+        );
+      const useSpecializedIntent =
+        heuristic.has_custom_reply && !customInstruction;
+
+      const validIntent =
+        !useSpecializedIntent &&
+        llmData.translated_intent &&
+        llmData.translated_intent.length > 20 &&
+        !/diagn[óo]stico t[ée]cnico claro/i.test(llmData.translated_intent)
+          ? llmData.translated_intent
+          : heuristic.translated_intent;
+
+      const validUrgencyReason =
+        !useSpecializedIntent &&
+        llmData.urgency_reason &&
+        llmData.urgency_reason.length > 10 &&
+        !/justificativa curta/i.test(llmData.urgency_reason)
+          ? llmData.urgency_reason
+          : heuristic.urgency_reason;
+
+      const shouldNotAskQuestions =
+        heuristic.sufficiency_status === "completo" && !customWantsQuestions;
+      const llmReplyHasUnwantedQuestions =
+        shouldNotAskQuestions &&
+        (/\?|hoptodesk|responda [àa]s perguntas|por favor,\s*verifique/i.test(
+          llmData.public_reply_draft || ""
+        ) &&
+          !/tudo bem\?/i.test(
+            (llmData.public_reply_draft || "").replace(/ol[áa],\s*[^?!]+\?\s*/i, "")
+          ));
+
+      const hasProperGreeting = /^ol[áa]\b/i.test(
+        (llmData.public_reply_draft || "").trim()
+      );
+
+      const validPublicReply =
+        !useSpecializedIntent &&
+        llmData.public_reply_draft &&
+        llmData.public_reply_draft.length > 25 &&
+        hasProperGreeting &&
+        !llmReplyHasUnwantedQuestions &&
+        !/<PrimeiroNome>|o que falta para o atendimento\?|fornecemos a id/i.test(
+          llmData.public_reply_draft
+        )
+          ? llmData.public_reply_draft
+          : heuristic.public_reply_draft;
+
+      llmData.translated_intent = validIntent;
+      llmData.urgency_reason = validUrgencyReason;
+      llmData.public_reply_draft = validPublicReply;
+      llmData.detected_domain = heuristic.detected_domain;
+      llmData.suggested_category = heuristic.suggested_category || ticket.category;
+      llmData.real_urgency = heuristic.real_urgency;
+      llmData.sufficiency_status = heuristic.sufficiency_status;
+      llmData.missing_info = heuristic.missing_info;
+      llmData.primary_knowledge_source = heuristic.primary_knowledge_source;
+      llmData.resolution_steps = heuristic.resolution_steps;
+
+      const missingTxt =
+        llmData.missing_info.length > 0
+          ? llmData.missing_info.map((item) => `  - ${item}`).join("\n")
+          : "  - Dados suficientes no relato para iniciar a tratativa.";
+      const stepsTxt = (llmData.resolution_steps || [])
+        .slice(0, 6)
+        .map((step, idx) => `  ${idx + 1}. ${step}`)
+        .join("\n");
+
+      llmData.private_note_draft =
+        `[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n` +
+        `----------------------------------------\n` +
+        `ENTENDIMENTO TÉCNICO:\n` +
+        `${llmData.translated_intent}\n\n` +
+        `Classificação Sugerida: ${llmData.suggested_category} | Prioridade Real: ${llmData.real_urgency}\n` +
+        `Base Consultada: ${llmData.primary_knowledge_source}\n\n` +
+        `TRIAGEM DE INFORMAÇÕES (${String(llmData.sufficiency_status).toUpperCase()}):\n` +
+        `${missingTxt}\n\n` +
+        `ROTEIRO DE RESOLUÇÃO SUGERIDO:\n` +
+        `${stepsTxt}`;
+    }
+
+    const now = new Date();
+    const nowStr = `${String(now.getDate()).padStart(2, "0")}/${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}/${now.getFullYear()} ${String(now.getHours()).padStart(
+      2,
+      "0"
+    )}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+    return {
+      ticket_id: ticket.id,
+      analyzed_at: nowStr,
+      provider_used: providerLabel,
+      translated_intent: llmData.translated_intent || heuristic.translated_intent,
+      detected_domain:
+        llmData.detected_domain || heuristic.detected_domain,
+      suggested_category: llmData.suggested_category || ticket.category,
+      real_urgency: llmData.real_urgency || heuristic.real_urgency,
+      urgency_reason: llmData.urgency_reason || heuristic.urgency_reason,
+      sufficiency_status: llmData.sufficiency_status || "parcial",
+      missing_info: llmData.missing_info || [],
+      knowledge_matches: matches || [],
+      primary_knowledge_source:
+        llmData.primary_knowledge_source || heuristic.primary_knowledge_source,
+      resolution_steps: llmData.resolution_steps || [],
+      private_note_draft: llmData.private_note_draft || heuristic.private_note_draft,
+      public_reply_draft: llmData.public_reply_draft || heuristic.public_reply_draft,
+    };
+  }
+
+  async _callGemini(userPrompt) {
+    const model = (this.settings.gemini_model || "gemini-2.5-flash").trim();
+    const apiKey = this.settings.gemini_api_key.trim();
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(
+      apiKey
+    )}`;
+
+    const payload = {
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+      generationConfig: {
+        temperature: 0.2,
+        responseMimeType: "application/json",
+      },
+    };
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      throw new Error(`Gemini HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    const text =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    return extractJsonObject(text);
+  }
+
+  async _callOpenAI(userPrompt) {
+    const baseUrl = (this.settings.openai_base_url || "https://api.openai.com/v1").replace(
+      /\/+$/,
+      ""
+    );
+    const res = await fetch(`${baseUrl}/chat/completions`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.settings.openai_api_key.trim()}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: (this.settings.openai_model || "gpt-4o-mini").trim(),
+        temperature: 0.2,
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userPrompt },
+        ],
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`OpenAI HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    const text = data?.choices?.[0]?.message?.content || "{}";
+    return extractJsonObject(text);
+  }
+
+  async _callOllama(userPrompt) {
+    const baseUrl = (this.settings.ollama_base_url || "http://localhost:11434").replace(
+      /\/+$/,
+      ""
+    );
+    const res = await fetch(`${baseUrl}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: (this.settings.ollama_model || "qwen2.5:3b").trim(),
+        stream: false,
+        format: {
+          type: "object",
+          properties: {
+            translated_intent: { type: "string" },
+            urgency_reason: { type: "string" },
+            public_reply_draft: { type: "string" },
+          },
+          required: ["translated_intent", "urgency_reason", "public_reply_draft"],
+        },
+        keep_alive: "30m",
+        options: {
+          temperature: 0.2,
+          num_ctx: 2048,
+        },
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userPrompt },
+        ],
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`Ollama HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    const text = data?.message?.content || "{}";
+    return extractJsonObject(text);
+  }
+
+  _buildSmartHeuristicAnalysis(ticket, matches, customInstruction = null) {
+    const formFields = extractFormCreatorFields(ticket.content);
+    const normAll = normalizeText(`${ticket.title} ${ticket.content}`);
+    const normCore = normalizeText(
+      `${ticket.title} ${formFields.tipo} ${formFields.ativo} ${formFields.descricao}`
+    );
+    const firstName = (
+      ticket.requester_first_name ||
+      ticket.requester ||
+      "Solicitante"
+    )
+      .trim()
+      .split(/\s+/)[0];
+    const sectorName =
+      formFields.localizacao ||
+      formFields.setor ||
+      ticket.requester_department ||
+      "setor solicitante";
+    const playbooks = loadPlaybooks();
+
+    let matchedPb = null;
+    let matchedMemory = null;
+    for (const m of matches || []) {
+      if (!matchedMemory && m.layer === "learned_memory" && m.score >= 0.55) {
+        matchedMemory = m;
+      }
+      if (!matchedPb && m.layer === "local_playbook") {
+        matchedPb = playbooks.find((pb) => pb.id === m.source_id) || null;
+      }
+    }
+
+    let primarySource =
+      "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)";
+    if (matches && matches.length > 0) {
+      primarySource = matches
+        .slice(0, 2)
+        .map((m) => `${m.layer_label} (${m.source_id})`)
+        .join(" + ");
+    }
+
+    let translatedIntent = "";
+    let detectedDomain = "Suporte Técnico Geral / Service Desk";
+    let suggestedCategory = ticket.category;
+    let realUrgency = ticket.urgency_label;
+    let urgencyReason = "";
+    let sufficiencyStatus = "parcial";
+    let missingInfo = [];
+    let customPublicReply = "";
+
+    if (/\[r\]\s*$/i.test(ticket.title)) {
+      const cleanRoutineName = ticket.title.replace(/\s*\[R\]\s*$/i, "").trim();
+      translatedIntent =
+        `Tarefa interna preventiva/recorrente da equipe de T.I. (${ticket.category}): "${cleanRoutineName}". ` +
+        `Trata-se de um checklist operacional programado no GLPI para execução, validação e registro de evidências técnicas.`;
+      detectedDomain =
+        ticket.category.includes("IR") || ticket.category.includes("SI")
+          ? "Infraestrutura e Rede"
+          : ticket.category.includes("DV") || ticket.category.includes("BD")
+          ? "Sistemas Internos / ERP / Sistemas Corporativos"
+          : "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = "Rotina preventiva programada da operação de T.I.";
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+    } else if (
+      normCore.includes("impressora") ||
+      normCore.includes("impressoras") ||
+      normCore.includes("imprimir") ||
+      normCore.includes("imprimindo") ||
+      normCore.includes("samsung") ||
+      normCore.includes("m4080fx") ||
+      normCore.includes("spooler") ||
+      normCore.includes("toner")
+    ) {
+      const printerModel = formFields.ativo || "impressora do setor";
+      const asksUrgency =
+        normCore.includes("urgencia") ||
+        normCore.includes("urgente") ||
+        normAll.includes("farmacia") ||
+        normAll.includes("recepcao");
+
+      translatedIntent =
+        `O solicitante relata que a impressora **${printerModel}** localizada no setor **${sectorName}** não está imprimindo` +
+        (asksUrgency ? " e solicita atendimento com urgência. " : ". ") +
+        `O equipamento já foi identificado (${printerModel}), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).`;
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      realUrgency = asksUrgency ? "Alta" : "Média";
+      urgencyReason = asksUrgency
+        ? `Parada de impressão em setor operacional assistencial (${sectorName}) com pedido de urgência.`
+        : `Falha de impressão no equipamento ${printerModel} (${sectorName}).`;
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        `Confirmar se a impressora ${printerModel} parou de imprimir para todos os computadores do setor (${sectorName}) ou apenas na sua estação`,
+        `Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da ${printerModel} (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)`,
+        "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente",
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Já estamos verificando o status da impressora **${printerModel}** (${sectorName}) na rede com prioridade.\n\n` +
+        `Para agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n` +
+        `1. A falha ocorre em **todos os computadores** da ${sectorName} ou apenas na **sua máquina**?\n` +
+        `2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da ${printerModel} (como atolamento de papel, bandeja aberta ou falha de rede)?\n` +
+        `3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\n` +
+        `Caso a impressora esteja inacessível na rede, já deslocaremos um técnico até a ${sectorName}!`;
+    } else if (
+      normAll.includes("bloqueio de conta") ||
+      normAll.includes("bloqueio de acesso") ||
+      normAll.includes("desligamento") ||
+      normAll.includes("quadro funcional") ||
+      (normAll.includes("bloquear") &&
+        (normAll.includes("colaborador") || normAll.includes("acesso")))
+    ) {
+      const colabNome =
+        formFields.nomeColaborador ||
+        ticket.title.split(">").pop().trim() ||
+        "colaborador(a)";
+      const cpfTxt = formFields.cpf ? ` (CPF: ${formFields.cpf})` : "";
+      const motivoTxt =
+        formFields.motivo ||
+        (normAll.includes("desligamento") || normAll.includes("desligada")
+          ? "Desligamento"
+          : "Bloqueio de Contas");
+      const unidadeSetor = [
+        formFields.unidade,
+        formFields.setorAlvo || sectorName,
+      ]
+        .filter(Boolean)
+        .join(" • ");
+
+      const rawAcessos = (formFields.acessos || "")
+        .replace(/outros\s*\(?descrever em observa[çc][õo]es\)?,?\s*/gi, "")
+        .trim();
+      const normDesc = normalizeText(formFields.descricao || "");
+      const mentionsPhysicalBlock =
+        normDesc.includes("entrada no hospital") ||
+        normDesc.includes("portaria") ||
+        normDesc.includes("catraca") ||
+        normDesc.includes("biometria");
+      const mentionsSystemsInDesc =
+        /\b(spdata|sgh|wifi|wi-fi|lgpd|faculdade|email|e-mail|nextcloud|rede|active directory|totvs|hrp|autolac|myplace)\b/i.test(
+          normDesc
+        );
+
+      const hasDiscriminatedAccesses =
+        Boolean(rawAcessos) || mentionsPhysicalBlock || mentionsSystemsInDesc;
+
+      const accessParts = [];
+      if (rawAcessos) accessParts.push(rawAcessos);
+      if (mentionsPhysicalBlock) {
+        accessParts.push("Acesso físico de entrada no hospital");
+      }
+      const acessosListTxt =
+        accessParts.join(" + ") || "sistemas informados na descrição";
+
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões > Bloqueio de Contas";
+      realUrgency = "Alta";
+      urgencyReason =
+        "Revogação imediata de credenciais por desligamento/afastamento para segurança da informação e conformidade LGPD.";
+
+      if (hasDiscriminatedAccesses) {
+        translatedIntent =
+          `Solicitação de **${motivoTxt}** aberta pelo RH referente a **${colabNome}**${cpfTxt}` +
+          (unidadeSetor ? ` (${unidadeSetor})` : "") +
+          `. Todas as informações pertinentes e os acessos a serem bloqueados (**${acessosListTxt}**) já estão discriminados no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação de bloqueio de acessos por motivo de **${motivoTxt}** referente a **${colabNome}**.\n\n` +
+          `Todas as informações necessárias já constam no chamado e nossa equipe já iniciou o bloqueio imediato das credenciais discriminadas (**${acessosListTxt}**).\n\n` +
+          `Assim que todos os bloqueios forem concluídos, confirmaremos por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação de **${motivoTxt}** referente a **${colabNome}**${cpfTxt}` +
+          (unidadeSetor ? ` (${unidadeSetor})` : "") +
+          `, porém o chamado não discriminou quais sistemas e credenciais devem ser bloqueados.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Informar quais acessos, sistemas e credenciais devem ser bloqueados para ${colabNome} (ex: Rede/AD, SGH Spdata, E-mail, Wi-Fi, Faculdade Unimed, LGPD ou acesso físico/portaria)`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação de bloqueio de contas referente a **${colabNome}**.\n\n` +
+          `Como a relação de sistemas não veio discriminada no formulário, você poderia nos informar **quais acessos e credenciais devem ser bloqueados** (ex: Rede/AD, SGH Spdata, E-mail, Wi-Fi, Faculdade Unimed, LGPD ou acesso de entrada no hospital)?\n\n` +
+          `Assim que confirmar, executamos o bloqueio imediatamente!`;
+      }
+    } else if (
+      normAll.includes("relogio de ponto") ||
+      normAll.includes("myplace") ||
+      (normAll.includes("criacao de usuario") && normAll.includes("recursos humanos"))
+    ) {
+      const hasMatricula = /matricula\s*[:\-]?\s*\d+/i.test(normAll);
+      const hasPis = /\bpis\s*[:\-]?\s*[\d.\-]+/i.test(normAll);
+      const colabMatch = ticket.content.match(/(?:Colaboradora?|Nome)\s*:\s*([^\n]+)/i);
+      const colabName = colabMatch ? colabMatch[1].trim() : "novo(a) colaborador(a)";
+
+      if (hasMatricula && hasPis) {
+        translatedIntent =
+          `Solicitação do RH para cadastro de colaborador (${colabName}) no Relógio de Ponto Eletrônico (REP), ` +
+          `portal MyPlace e liberação de Wi-Fi. Os dados obrigatórios (Matrícula e PIS) já foram informados na descrição do chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+      } else {
+        translatedIntent =
+          `Solicitação do RH para cadastro de colaborador (${colabName}) no Relógio de Ponto Eletrônico (REP), ` +
+          `portal MyPlace e liberação de Wi-Fi. Porém, faltam dados cadastrais obrigatórios (Matrícula e/ou PIS) para inclusão no sistema de ponto.`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [];
+        if (!hasMatricula) {
+          missingInfo.push("Número da Matrícula do(a) colaborador(a) (obrigatório para Relógio de Ponto e MyPlace)");
+        }
+        if (!hasPis) {
+          missingInfo.push("Número do PIS/CPF do(a) colaborador(a) (obrigatório para cadastro no REP)");
+        }
+        missingInfo.push("Caso precise de Wi-Fi em dispositivo móvel, informar o endereço MAC do aparelho");
+      }
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Criação de Usuário / Acessos";
+      realUrgency = "Média";
+      urgencyReason = "Admissão/onboarding de colaborador aguardando liberação de registro de ponto e portal RH.";
+    } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
+      translatedIntent =
+        "Usuária do setor de Auditoria Hospitalar relata falha genérica ao tentar acessar pasta compartilhada no Nextcloud, " +
+        "sem especificar o nome da pasta, se o acesso ocorre via navegador ou cliente de sincronização Desktop, nem a mensagem de erro ou ID do HopToDesk.";
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso a Pastas / Nextcloud";
+      realUrgency = "Média";
+      urgencyReason = "Impacta a rotina individual da colaboradora na Auditoria, mas requer dados básicos para diagnóstico.";
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        "Nome exato da pasta compartilhada no Nextcloud que está tentando acessar",
+        "Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows",
+        "ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida",
+      ];
+    } else if (normAll.includes("xml") && normAll.includes("hash")) {
+      const hasAsset = Boolean(formFields.ativo) || /hu\d{3,}|patrimonio\s*:\s*\w+/i.test(normAll);
+      translatedIntent =
+        "Solicitação do Laboratório para correção/recálculo de hash MD5 em 2 arquivos XML de faturamento TISS do convênio Aura Saúde. " +
+        "O acesso remoto e os arquivos XML não foram informados na abertura.";
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > ST > Validação XML TISS / Faturamento";
+      realUrgency = "Alta";
+      urgencyReason = "Impacto direto no envio de lote de faturamento TISS de exames laboratoriais para o convênio.";
+      sufficiencyStatus = hasAsset ? "parcial" : "incompleto";
+      missingInfo = [
+        "ID do HopToDesk do computador para conexão remota",
+        "Anexar os 2 arquivos XML do convênio Aura Saúde no chamado (ou informar a pasta onde estão salvos)",
+      ];
+    } else if (normAll.includes("autolac") || (normAll.includes("pep") && normAll.includes("exame"))) {
+      if (normAll.includes("meia noite") || normAll.includes("divergencia") || normAll.includes("23:50")) {
+        translatedIntent =
+          "Inconsistência na integração entre o prontuário eletrônico (PEP) e o sistema laboratorial (AutoLac): " +
+          "exames prescritos no PEP próximo à meia-noite (ex: 23:50) e importados no AutoLac após 00:00 estão assumindo a data de importação " +
+          "em vez da data/hora real da solicitação médica, gerando divergência nos laudos.";
+        detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+        suggestedCategory = "T.I > ST / DV > Integração PEP x AutoLac";
+        realUrgency = "Alta";
+        urgencyReason = "Divergência de data em documentos clínicos/laudos laboratoriais na virada de plantão.";
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Número de 1 ou 2 atendimentos/requisições de exame onde ocorreu a divergência na virada da meia-noite (para rastreio no log de integração)",
+        ];
+      } else {
+        translatedIntent =
+          "Solicitação de orientação/treinamento operacional sobre como pesquisar e consultar resultados de exames no sistema AutoLac (Núcleo Passos).";
+        detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+        suggestedCategory = "T.I > TR > Treinamento AutoLac";
+        realUrgency = "Média";
+        urgencyReason = "Dúvida de utilização do sistema; resolução rápida via orientação remota ao usuário.";
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac",
+        ];
+      }
+    } else if (normAll.includes("hrp") || normAll.includes("tnumm") || normAll.includes("promoprev")) {
+      if (normAll.includes("banco") || normAll.includes("tnumm") || normAll.includes("precificacao")) {
+        translatedIntent =
+          "Solicitação do setor de Faturamento para atualização massiva via banco de dados no sistema HRP (ajuste do campo 'precificação' " +
+          "conforme regra pós-importação da tabela TNUMM).";
+        detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+        suggestedCategory = "T.I > BD > Manutenção de Dados HRP / TNUMM";
+        realUrgency = "Alta";
+        urgencyReason = "Parametrização necessária para o correto processamento de valores e faturamento no HRP.";
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+      } else {
+        translatedIntent =
+          "Solicitação da equipe Promoprev buscando o caminho/módulo no sistema HRP para extração do Relatório de Gestantes (carteira Clientes 0256).";
+        detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+        suggestedCategory = "T.I > ST > Sistemas / Relatórios HRP";
+        realUrgency = "Baixa";
+        urgencyReason = "Consulta de caminho para extração de relatório gerencial.";
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+      }
+    } else if (
+      (normAll.includes("wifi") || normAll.includes("wi fi")) &&
+      (normAll.includes("celular") || normAll.includes("aparelho") || normAll.includes("telefone"))
+    ) {
+      translatedIntent =
+        "Solicitação para configurar a rede Wi-Fi corporativa em um aparelho celular/telefone no setor Financeiro, " +
+        "sem informar se o dispositivo é corporativo ou particular, o endereço MAC nem a aprovação da gestão.";
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > ST > Acesso Wi-Fi / Dispositivos Móveis";
+      realUrgency = "Baixa";
+      urgencyReason = "Liberação de acesso complementar em dispositivo móvel sujeita à política de Segurança da Informação.";
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        "Confirmar se o aparelho celular é corporativo da Unimed ou particular",
+        "Justificativa de uso e 'De acordo' da coordenação/gerência do setor",
+        "Endereço MAC Wi-Fi do aparelho (com 'MAC Aleatório / Endereço Privado' desativado)",
+      ];
+    } else if (normCore.includes("teclado") || normCore.includes("mouse") || normCore.includes("hu0")) {
+      const patMatch = ticket.content.match(/\b(HU\d{3,}|\d{4,6})\b/i);
+      const patCode = patMatch ? patMatch[1].toUpperCase() : formFields.ativo || null;
+      translatedIntent =
+        `Solicitação de manutenção presencial para substituição de periférico (teclado/mouse) no setor ${sectorName}` +
+        (patCode ? `, estação identificada pelo patrimônio ${patCode}.` : ".");
+      detectedDomain = "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = "T.I > ST > Hardware / Periféricos";
+      realUrgency = "Média";
+      urgencyReason = "Periférico físico com falha em posto de trabalho hospitalar; patrimônio já identificado.";
+      sufficiencyStatus = patCode ? "completo" : "parcial";
+      missingInfo = patCode
+        ? []
+        : ["Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"];
+    } else if (normAll.includes("ligacoes") || (normAll.includes("caindo") && normAll.includes("linhas"))) {
+      translatedIntent =
+        "Relato de instabilidade na telefonia (quedas frequentes de ligações) no Núcleo Passos, " +
+        "solicitando revisão das linhas telefônicas/tronco VoIP sem especificar quais ramais ou horários foram afetados.";
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Telefonia / PABX / VoIP";
+      realUrgency = "Alta";
+      urgencyReason = "Impacto direto no atendimento telefônico aos beneficiários/pacientes da unidade.";
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        "Quais números de ramais específicos do setor estão apresentando queda nas ligações",
+        "Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos",
+        "Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX",
+      ];
+    } else if (
+      normAll.includes("checklist") ||
+      normAll.includes("sonda") ||
+      normAll.includes("folley") ||
+      normAll.includes("passagem de plantao") ||
+      normAll.includes("titulo de formulario") ||
+      normAll.includes("hemocomponentes") ||
+      normAll.includes("mapas transfusionais")
+    ) {
+      translatedIntent =
+        `Solicitação da área assistencial (${sectorName}) para desenvolvimento/atualização de formulário ou mapa eletrônico ("${ticket.title}"), ` +
+        `visando padronização clínica/regulatória. Os modelos de referência já foram encaminhados no chamado.`;
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = ticket.category.includes("DV")
+        ? ticket.category
+        : "T.I > DV > Evolução de Formulários Clínicos (PEP)";
+      realUrgency = "Média";
+      urgencyReason = "Demanda evolutiva de desenvolvimento para atualização de formulários/mapas assistenciais.";
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+    } else if (
+      normAll.includes("ativo imobilizado") ||
+      normAll.includes("sobras contabeis") ||
+      normAll.includes("levantamento de ativos")
+    ) {
+      translatedIntent =
+        `Demanda do setor de Contabilidade referente ao controle/inventário de Ativo Imobilizado (${ticket.title}): ` +
+        `alinhamento sobre listagem de equipamentos de T.I. e viabilidade de solução/aplicativo para leitura de etiquetas de patrimônio.`;
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = ticket.category;
+      realUrgency = "Baixa";
+      urgencyReason = "Projeto/levantamento contábil e patrimonial planejado sem parada operacional.";
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+    } else if (normAll.includes("treinamento") && ticket.category.includes("TR")) {
+      translatedIntent =
+        `Solicitação de agendamento de treinamento/capacitação técnica (${formFields.descricao.slice(0, 140) || ticket.title}).`;
+      detectedDomain = "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = "T.I > TR > Treinamentos Técnicos";
+      realUrgency = "Baixa";
+      urgencyReason = "Demanda programada de capacitação/treinamento.";
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+    } else if (
+      normAll.includes("evento") ||
+      (normAll.includes("projetor") && normAll.includes("notebook")) ||
+      normAll.includes("microfone")
+    ) {
+      translatedIntent =
+        "Solicitação de reserva/empréstimo de kit audiovisual (notebook, projetor, som e microfone) e apoio presencial da T.I. " +
+        "para o evento 'Dia do Secretariado' (01/10 às 19h no Lions Club).";
+      detectedDomain = "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos";
+      realUrgency = "Média";
+      urgencyReason = "Evento institucional com data e horário marcados, exigindo reserva de equipamentos e agendamento de escala.";
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Horário exato em que o local (Lions Club) estará aberto para montagem e testes antes das 19h",
+        "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos",
+      ];
+    } else if (
+      normAll.includes("acesso e permissoes") ||
+      ticket.category.includes("Acesso e Permissões") ||
+      /\bfavor cadastrar\b|\bliberar acesso\b|\bcadastro d[eo]\b/i.test(normCore)
+    ) {
+      const descText = formFields.descricao || "";
+      const normDesc = normalizeText(descText);
+
+      // Tenta identificar se o relato pede cadastro/acesso para outra pessoa (ex: "Favor cadastrar Dr Humberto França Ferreira")
+      const targetMatch = descText.match(
+        /(?:favor\s+)?(?:cadastrar|liberar\s+acesso\s+(?:para|ao|a)|cadastro\s+d[eo]a?|acesso\s+(?:para|ao|a))\s+(?:o\s+|a\s+)?((?:dr\.?|dra\.?)\s+[^,\n.;]+|[A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
+      );
+      const targetPerson = targetMatch
+        ? targetMatch[1].replace(/\s+/g, " ").trim()
+        : "";
+
+      const normColabForm = normalizeText(formFields.nomeColaborador || "");
+      const normReqFirst = normalizeText(firstName);
+      const normReqFull = normalizeText(ticket.requester || "");
+      const normTarget = normalizeText(targetPerson);
+
+      // Verifica se o solicitante preencheu os próprios dados no formulário em vez dos dados do beneficiário do acesso
+      const filledOwnData =
+        Boolean(targetPerson) &&
+        normTarget !== normColabForm &&
+        !normTarget.includes(normReqFirst) &&
+        (normColabForm === normReqFirst ||
+          normReqFull.startsWith(normColabForm) ||
+          normColabForm.startsWith(normReqFirst));
+
+      const beneficiaryName =
+        targetPerson || formFields.nomeColaborador || "o(a) profissional";
+
+      const rawAcessos = (formFields.acessos || "")
+        .replace(/outros\s*\(?descrever em observa[çc][õo]es\)?,?\s*/gi, "")
+        .trim();
+      const mentionsSpecificSystem =
+        /\b(spdata|sgh|wifi|wi-fi|lgpd|faculdade|email|e-mail|nextcloud|rede|active directory|totvs|hrp|autolac|myplace|pacs|biometria|facial|catraca|porta|portas)\b/i.test(
+          normDesc
+        );
+      const hasSpecifiedAccesses = Boolean(rawAcessos) || mentionsSpecificSystem;
+      const specifiedAccessTxt =
+        rawAcessos || "sistemas informados na descrição";
+
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões";
+      realUrgency =
+        normDesc.includes("plantao") || normDesc.includes("medico") || normDesc.includes("dr ")
+          ? "Alta"
+          : ticket.urgency_label || "Média";
+      urgencyReason =
+        realUrgency === "Alta"
+          ? "Liberação de acesso para profissional/médico em atuação assistencial/plantão no Hospital."
+          : "Solicitação de concessão/cadastro de acessos e permissões.";
+
+      const followupsPublicTxt = (ticket.followups || [])
+        .filter((f) => !f.is_private)
+        .map((f) => f.content)
+        .join(" ");
+      const normDescAndFollowups = normalizeText(`${descText} ${followupsPublicTxt}`);
+      const mentionsFacialAccess =
+        /\b(face|facial|biometria|catraca|porta|portas|reconhecimento facial|controle de acesso)\b/i.test(
+          normDescAndFollowups
+        );
+      const hasPhotoAttached = /\.(jpg|jpeg|png|webp|bmp)\b/i.test(ticket.content);
+
+      if (filledOwnData && !hasSpecifiedAccesses) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando acesso para **${beneficiaryName}**, ` +
+          `porém preencheu os campos do formulário (Nome e CPF) com os **próprios dados dela (${formFields.nomeColaborador})** em vez dos dados de **${beneficiaryName}**, ` +
+          `além de não especificar quais acessos/sistemas ele(a) precisa.`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          `Especificar quais acessos ou sistemas precisam ser liberados para ${beneficiaryName} (ex.: sistema SGH Spdata, login de Rede/Windows, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)`,
+          `Informar os dados cadastrais de ${beneficiaryName} (Nome completo, CPF, CRM/matrícula e contato/vínculo), pois o formulário foi preenchido com os dados da própria solicitante (${firstName})`,
+          `Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital, enviar uma fotografia frontal e com expressão neutra do rosto de ${beneficiaryName}`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de acesso para o(a) **${beneficiaryName}**.\n\n` +
+          `Verificamos que os campos do formulário foram preenchidos com os seus próprios dados (Nome e CPF) e não foi especificado quais acessos ele(a) necessita. Para realizarmos o cadastro corretamente, você poderia nos informar:\n` +
+          `1. **Quais acessos ou sistemas** precisam ser liberados para o(a) **${beneficiaryName}** (ex.: SGH Spdata, login de Rede/computador, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n` +
+          `2. Os **dados cadastrais do(a) ${beneficiaryName}** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n` +
+          `3. **Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\n` +
+          `Assim que nos enviar essas informações por aqui, já realizamos a liberação!`;
+      } else if (filledOwnData && hasSpecifiedAccesses) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando acesso para **${beneficiaryName}** (${specifiedAccessTxt}), ` +
+          `porém preencheu os campos do formulário (Nome e CPF) com os **próprios dados dela (${formFields.nomeColaborador})** em vez dos dados de **${beneficiaryName}**.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Informar os dados cadastrais de ${beneficiaryName} (CPF, CRM/matrícula e contato/vínculo), pois o formulário foi preenchido com os dados da própria solicitante (${firstName})`,
+        ];
+        if (mentionsFacialAccess && !hasPhotoAttached) {
+          missingInfo.push(
+            `Enviar uma fotografia frontal e com expressão neutra do rosto de ${beneficiaryName} para o cadastro no controle de acesso/reconhecimento facial nas portas do Hospital`
+          );
+        }
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de acesso para o(a) **${beneficiaryName}**.\n\n` +
+          `Notamos que os campos do formulário saíram preenchidos com os seus próprios dados (Nome e CPF). Para concluirmos a liberação, você poderia nos enviar:\n` +
+          `1. Os **dados cadastrais do(a) ${beneficiaryName}** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n` +
+          (mentionsFacialAccess && !hasPhotoAttached
+            ? `2. Uma **fotografia frontal e com expressão neutra do rosto** do(a) **${beneficiaryName}** (necessária para o controle de acesso/reconhecimento facial nas portas do Hospital)?\n\n`
+            : `\n`) +
+          `Assim que confirmar por aqui, já finalizamos o cadastro!`;
+      } else if (!filledOwnData && !hasSpecifiedAccesses) {
+        translatedIntent =
+          `Solicitação de acesso aberta por **${ticket.requester}** referente a **${beneficiaryName}**` +
+          (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
+          `, porém o campo de acessos foi marcado como "Outros" sem especificar quais sistemas ou permissões precisam ser liberados.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Especificar quais acessos ou sistemas precisam ser liberados para ${beneficiaryName} (ex.: SGH Spdata, login de Rede/Windows, E-mail, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)`,
+          `Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital, enviar uma fotografia frontal e com expressão neutra do rosto de ${beneficiaryName}`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação de acesso referente a **${beneficiaryName}**.\n\n` +
+          `Como o campo de acessos ficou marcado como "Outros", você poderia nos confirmar:\n` +
+          `1. **Quais sistemas ou acessos específicos precisam ser liberados** (ex.: SGH Spdata, Rede/Windows, E-mail, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n` +
+          `2. **Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\n` +
+          `Assim que confirmar, já realizamos a liberação!`;
+      } else if (mentionsFacialAccess && !hasPhotoAttached) {
+        translatedIntent =
+          `Solicitação de acesso ao controle de acesso/reconhecimento facial nas portas do Hospital referente a **${beneficiaryName}**` +
+          (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
+          `, porém sem o envio da fotografia facial obrigatória para o cadastro.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Enviar uma fotografia frontal e com expressão neutra do rosto de ${beneficiaryName} para o cadastro no controle de acesso/reconhecimento facial nas portas do Hospital`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação de cadastro no controle de acesso/reconhecimento facial das portas do Hospital para **${beneficiaryName}**.\n\n` +
+          `Para concluirmos o cadastro, por favor nos envie em anexo uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\n` +
+          `Assim que anexar a foto aqui no chamado, já realizamos a liberação!`;
+      } else {
+        translatedIntent =
+          `Solicitação de acesso aberta por **${ticket.requester}** referente a **${beneficiaryName}**` +
+          (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
+          `, com os acessos solicitados (${specifiedAccessTxt}) e dados cadastrais já informados no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação de acesso referente a **${beneficiaryName}** (${specifiedAccessTxt}).\n\n` +
+          `Todas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!`;
+      }
+    } else if (
+      normAll.includes("cadastrada por engano") ||
+      normAll.includes("cadastrado por engano") ||
+      (/\b(cancelar|cancelamento|excluir|exclusao|estornar|inativar|remover)\b/i.test(
+        normAll
+      ) &&
+        (normAll.includes("controle de contas") ||
+          /\b(registro|conta|atendimento|guia)\b/i.test(normCore)))
+    ) {
+      const descText = formFields.descricao || "";
+      const appName = formFields.aplicacao || "Controle de Contas";
+      const regMatch = descText.match(/(?:registro|conta|atendimento|n[º°]?)\s*[:#-]?\s*(\d{3,12})/i) ||
+        descText.match(/\b(\d{4,12})\b/);
+      const recordNum = regMatch ? regMatch[1] : "";
+
+      let personName = "";
+      if (recordNum) {
+        const afterNum = descText.match(
+          new RegExp(`\\b${recordNum}\\s+([A-ZÀ-Úa-zà-ú]+(?:\\s+[A-ZÀ-Úa-zà-ú]+){1,5})`)
+        );
+        if (afterNum && afterNum[1]) {
+          personName = afterNum[1].replace(/\s*,\s*.*$/, "").trim();
+        }
+      }
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Sistemas Internos";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = `Regularização de registro/conta no sistema ${appName} solicitado pelo setor ${sectorName}.`;
+
+      if (recordNum || personName) {
+        const targetLabel = [
+          recordNum ? `registro **${recordNum}**` : "",
+          personName ? `(**${personName}**)` : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        translatedIntent =
+          `Solicitação do setor **${sectorName}** (**${ticket.requester}**) para cancelamento no sistema **${appName}** ` +
+          `do ${targetLabel}, cadastrado por engano. Todos os dados necessários para o cancelamento já foram informados no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para cancelar no sistema **${appName}** o ${targetLabel}, cadastrado por engano.\n\n` +
+          `Todos os dados necessários já constam no chamado e nossa equipe já iniciou o procedimento. Assim que o cancelamento for concluído, confirmaremos por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação do setor **${sectorName}** (**${ticket.requester}**) para cancelamento de registro/conta no sistema **${appName}**, ` +
+          `porém sem informar o número do registro ou o nome do(a) paciente/beneficiário(a).`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          `Informar o número do registro/conta e o nome completo do(a) paciente/beneficiário(a) que deve ser cancelado no ${appName}`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de cancelamento no sistema **${appName}**.\n\n` +
+          `Para executarmos o cancelamento com segurança, você poderia nos informar o **número do registro/conta** e o **nome completo do(a) paciente/beneficiário(a)**?\n\n` +
+          `Assim que confirmar por aqui, já realizamos o cancelamento!`;
+      }
+    } else if (
+      (/\b(vincular|vinculacao|habilitar|atribuir)\b/i.test(normAll) &&
+        /\b(usuario|perfil|controle de contas|sgh|spdata|hrp|sistema|unidade)\b/i.test(
+          normAll
+        )) ||
+      (normAll.includes("controle de contas") &&
+        /\b(acesso|acessos|permissao|permissoes|vincular|liberar|meu usuario)\b/i.test(
+          normAll
+        ))
+    ) {
+      const descText = `${ticket.title || ""} ${formFields.descricao || ""}`;
+      const sysName = normAll.includes("controle de contas")
+        ? "Controle de Contas"
+        : /\b(s\.?g\.?h|spdata)\b/i.test(normAll)
+        ? "S.G.H. (Spdata)"
+        : normAll.includes("hrp")
+        ? "HRP"
+        : formFields.aplicacao || "sistema interno";
+
+      const unitMatch = descText.match(
+        /\b(?:(?:controle de contas|sistema)\s+(?:de|da|do)|(?:unidade|nucleo|núcleo)\s+(?:de\s+|da\s+|do\s+)?)\s*([A-ZÀ-Úa-zà-ú]+(?:\s+d[eo]\s+[A-ZÀ-Úa-zà-ú]+)?)\b/i
+      );
+      const rawUnit = unitMatch ? unitMatch[1].trim() : "";
+      const unitName =
+        rawUnit &&
+        !/^(ao|no|para|meu|minha|usuario|usuário|bom|boa|ola|olá|favor)$/i.test(
+          rawUnit
+        )
+          ? rawUnit.charAt(0).toUpperCase() + rawUnit.slice(1)
+          : "";
+
+      const sysWithUnit = unitName
+        ? `${sysName} (unidade ${unitName})`
+        : sysName;
+      const isForOwnUser =
+        /\b(meu usuario|meu perfil|para mim|no meu login|ao meu)\b/i.test(
+          normAll
+        );
+      const categoryMismatch =
+        !/acesso|permiss/i.test(ticket.category || "");
+
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Liberação/vinculação de permissão de acesso ao sistema ${sysWithUnit} para execução das rotinas do setor ${sectorName}.`;
+
+      if (isForOwnUser || formFields.nomeColaborador) {
+        const targetWho = isForOwnUser
+          ? `ao próprio usuário dela (**${ticket.requester}**)`
+          : `ao usuário de **${formFields.nomeColaborador}**`;
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a vinculação/liberação de acesso ao sistema **${sysWithUnit}** ${targetWho}.` +
+          (categoryMismatch
+            ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "T.I > ST > Acesso e Permissões").*`
+            : "") +
+          ` Todos os dados necessários (sistema, unidade e usuário) já constam no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para vincular o sistema **${sysWithUnit}** ao seu usuário.\n\n` +
+          `Nossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) para vinculação/liberação de acesso no sistema **${sysWithUnit}**, pendente de confirmação de qual usuário receberá a permissão.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Confirmar o nome completo/login do usuário que deverá receber o vínculo no ${sysWithUnit}`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de acesso ao sistema **${sysWithUnit}**. Para realizarmos a vinculação corretamente, você poderia confirmar para **qual usuário (nome/login)** devemos liberar o acesso e se há alguma unidade específica a vincular?\n\n` +
+          `Assim que confirmar por aqui, já realizamos a liberação!`;
+      }
+    } else if (
+      (/\b(s\.?g\.?h|spdata)\b/i.test(normAll) &&
+        /\b(relatorio|relatorios|agendado|envio diario|check-?list)\b/i.test(
+          normAll
+        )) ||
+      /\b(relatorio agendado|envio diario de relatorio)\b/i.test(normAll)
+    ) {
+      const descText = `${ticket.title || ""} ${formFields.descricao || ""}`;
+      const titleMatch =
+        descText.match(/t[íi]tulo\s*:\s*([^\n.]+)/i) ||
+        descText.match(/\b(RELAT[ÓO]RIO\s+[A-ZÀ-Ú0-9\s-]{5,60})/i);
+      const reportTitle = titleMatch ? titleMatch[1].trim() : "";
+      const hasEnoughContext =
+        Boolean(reportTitle) ||
+        (formFields.descricao || "").trim().length >= 35;
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory =
+        ticket.category || "T.I > DV > Desenvolvimento > Correção de bugs";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Interrupção no envio automático de relatório agendado no sistema S.G.H. (Spdata).";
+
+      if (hasEnoughContext) {
+        const repLabel = reportTitle ? ` (**${reportTitle}**)` : "";
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) relatando interrupção no recebimento do envio diário de relatório agendado do sistema **S.G.H. (Spdata)**${repLabel}. ` +
+          `Os dados necessários (sistema, título do relatório e período da falha) já constam informados no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)**${repLabel}.\n\n` +
+          `Nossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) relatando falha no recebimento de relatório agendado no sistema **S.G.H. (Spdata)**, pendente de confirmação do título exato do relatório.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Título exato do relatório agendado no S.G.H. (Spdata) e desde qual data parou de ser recebido",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Já estamos verificando o serviço de envio de relatórios do sistema **S.G.H. (Spdata)**. Para localizarmos rapidamente a rotina no agendador, você poderia nos confirmar o **título exato do relatório** e **desde qual data** ele parou de chegar?\n\n` +
+          `Assim que nos informar por aqui, já verificamos!`;
+      }
+    } else {
+      const resumoDesc = formFields.descricao
+        ? formFields.descricao.replace(/\s+/g, " ").slice(0, 180)
+        : ticket.title;
+      const normDescOnly = normalizeText(formFields.descricao || "");
+      const looksLikeError =
+        /\b(erro|falha|travando|travou|lento|lentidao|nao abre|nao funciona|parou|caiu|inoperante)\b/i.test(
+          normDescOnly
+        );
+      const hasConcreteIdentifiers =
+        /\b\d{4,}\b/.test(formFields.descricao || "") ||
+        /\banexo\s*:/i.test(ticket.content || "") ||
+        (formFields.descricao || "").trim().length >= 50;
+
+      detectedDomain = matchedPb
+        ? matchedPb.domain
+        : formFields.aplicacao
+        ? "Sistemas Internos / ERP / Sistemas Corporativos"
+        : "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = ticket.category;
+      realUrgency = ticket.urgency_label;
+      urgencyReason = "Classificação baseada no relato e impacto operacional informados pelo solicitante.";
+
+      if (matchedMemory) {
+        translatedIntent =
+          `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
+          `Triagem orientada pelo padrão aprendido anteriormente com o analista (${matchedMemory.source_id}).`;
+        sufficiencyStatus = matchedMemory.sufficiency_status || "parcial";
+        missingInfo = Array.isArray(matchedMemory.required_info)
+          ? matchedMemory.required_info
+          : [];
+        if (matchedMemory.reply_template) {
+          customPublicReply = matchedMemory.reply_template
+            .replace(/\{solicitante\}/g, firstName)
+            .replace(/\{titulo\}/g, ticket.title);
+        }
+      } else if (!looksLikeError && hasConcreteIdentifiers && !matchedPb) {
+        translatedIntent =
+          `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}". ` +
+          "As informações necessárias para atendimento já constam descritas no chamado.";
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+      } else {
+        translatedIntent =
+          `O solicitante ${ticket.requester} (${sectorName}) abriu o chamado relatando: "${resumoDesc}". ` +
+          "A solicitação requer validação técnica inicial para atendimento.";
+        sufficiencyStatus = "parcial";
+        missingInfo = matchedPb
+          ? matchedPb.required_info || []
+          : looksLikeError
+          ? [
+              "ID do HopToDesk do computador para acesso remoto",
+              "Print da tela ou mensagem exata do erro enfrentado",
+            ]
+          : [
+              "Detalhar os dados específicos necessários para execução da solicitação",
+            ];
+      }
+    }
+
+    const resolutionSteps = [];
+    const relevantMatches = (matches || []).filter(
+      (m, idx) => idx === 0 || m.score >= 0.45
+    );
+    for (const m of relevantMatches) {
+      for (const st of m.steps || []) {
+        const cleanSt = String(st).replace(/^\d+\.\s*/, "").trim();
+        // Ignora linhas puramente de cabeçalho de documento ou saudação/encerramento padrão
+        if (
+          /^(chamado aberto|autor\s*:|data d[eo]|vers[ãa]o\s*:|elaborado por|douglas henrique|prezados|ol[áa]\b|bom dia|boa tarde|atenciosamente|att\.?\b|ap[óo]s as tratativas)/i.test(
+            cleanSt
+          ) ||
+          cleanSt.length < 15
+        ) {
+          continue;
+        }
+        const tagged = `[${m.source_id}] ${cleanSt}`;
+        if (cleanSt && !resolutionSteps.includes(tagged)) {
+          resolutionSteps.push(tagged);
+        }
+      }
+    }
+
+    if (resolutionSteps.length === 0) {
+      if (/\[r\]\s*$/i.test(ticket.title)) {
+        resolutionSteps.push(
+          "Executar a verificação técnica prevista no procedimento operacional da rotina recorrente [R].",
+          "Validar se todos os serviços, backups ou agentes monitorados estão íntegros e sem alertas críticos.",
+          "Registrar a evidência/conclusão no chamado e solucionar a tarefa preventiva do período."
+        );
+      } else {
+        resolutionSteps.push(
+          "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+          "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+          "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+        );
+      }
+    }
+
+    if (customInstruction) {
+      resolutionSteps.unshift(`[Diretriz do Analista] ${customInstruction}`);
+      if (
+        !/\b(pe[çc]a|pergunte|perguntar|solicite|solicitar|cobrar|questionar|qual\b|quais\b)\b/i.test(
+          customInstruction
+        )
+      ) {
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+      }
+    } else if (matchedMemory?.custom_instruction) {
+      resolutionSteps.unshift(
+        `[Aprendido em ${matchedMemory.source_id}] ${matchedMemory.custom_instruction}`
+      );
+    }
+
+    let publicReply = "";
+    if (customPublicReply) {
+      publicReply = customPublicReply;
+    } else if (matchedMemory?.reply_template) {
+      publicReply = matchedMemory.reply_template
+        .replace(/\{solicitante\}/g, firstName)
+        .replace(/\{titulo\}/g, ticket.title);
+    } else if (
+      matchedPb &&
+      matchedPb.reply_template &&
+      sufficiencyStatus !== "completo"
+    ) {
+      publicReply = matchedPb.reply_template
+        .replace(/\{solicitante\}/g, firstName)
+        .replace(/\{titulo\}/g, ticket.title);
+    } else if (missingInfo.length > 0) {
+      const questionsBul = missingInfo.map((q) => `- ${q}`).join("\n");
+      publicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Já estamos analisando o seu chamado #${ticket.id} (**${ticket.title}**). Para avançarmos com a solução o mais rápido possível, ` +
+        `você poderia nos confirmar as seguintes informações?\n\n` +
+        `${questionsBul}\n\n` +
+        `Assim que nos responder aqui no chamado, daremos sequência imediata!`;
+    } else {
+      const stepsForUser = resolutionSteps
+        .slice(0, 3)
+        .map((s) => `- ${s.replace(/^\[[^\]]+\]\s*/, "")}`)
+        .join("\n");
+      publicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos e analisamos a sua solicitação referente a **${ticket.title}**.\n` +
+        `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento:\n\n` +
+        `${stepsForUser}\n\n` +
+        `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
+    }
+
+    const missingTxt =
+      missingInfo.length > 0
+        ? missingInfo.map((item) => `  - ${item}`).join("\n")
+        : "  - Dados suficientes no relato para iniciar a tratativa.";
+
+    const stepsTxt = resolutionSteps
+      .slice(0, 6)
+      .map((step, idx) => `  ${idx + 1}. ${step}`)
+      .join("\n");
+
+    const privateNote =
+      `[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n` +
+      `----------------------------------------\n` +
+      `ENTENDIMENTO TÉCNICO:\n` +
+      `${translatedIntent}\n\n` +
+      `Classificação Sugerida: ${suggestedCategory} | Prioridade Real: ${realUrgency}\n` +
+      `Base Consultada: ${primarySource}\n\n` +
+      `TRIAGEM DE INFORMAÇÕES (${sufficiencyStatus.toUpperCase()}):\n` +
+      `${missingTxt}\n\n` +
+      `ROTEIRO DE RESOLUÇÃO SUGERIDO:\n` +
+      `${stepsTxt}`;
+
+    return {
+      has_custom_reply: Boolean(customPublicReply),
+      translated_intent: translatedIntent,
+      detected_domain: detectedDomain,
+      suggested_category: suggestedCategory,
+      real_urgency: realUrgency,
+      urgency_reason: urgencyReason,
+      sufficiency_status: sufficiencyStatus,
+      missing_info: missingInfo,
+      primary_knowledge_source: primarySource,
+      resolution_steps: resolutionSteps.slice(0, 6),
+      private_note_draft: privateNote,
+      public_reply_draft: publicReply,
+    };
+  }
+}

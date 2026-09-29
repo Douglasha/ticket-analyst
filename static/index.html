@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="darkreader-lock" id="meta-darkreader-lock" />
+  <meta name="color-scheme" content="only light" id="meta-color-scheme" />
+  <title>Ticket Analyst • Gestão e Triagem GLPI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css?v=6" />
+  <style>
+    :root,
+    html:not(.dark),
+    html:not(.dark) body,
+    html:not(.dark) .main-content-area {
+      background-color: #f6faf7 !important;
+      color: #0f172a !important;
+      color-scheme: only light !important;
+      forced-color-adjust: none !important;
+    }
+    html:not(.dark) .surface-card {
+      background-color: #ffffff !important;
+      border-color: #e2ece9 !important;
+      color: #0f172a !important;
+      color-scheme: only light !important;
+    }
+    html:not(.dark) .surface-sub,
+    html:not(.dark) .table-header-bar {
+      background-color: #f4f8f6 !important;
+      border-color: #e2ece9 !important;
+      color: #334155 !important;
+      color-scheme: only light !important;
+    }
+    html:not(.dark) .ticket-row {
+      background-color: #ffffff !important;
+      border-color: #e2ece9 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) .ticket-row.active {
+      background-color: #ecf7f4 !important;
+      border-left: 4px solid #0f4c43 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex bg-[#f6faf7] text-slate-900">
+
+  <!-- ========================================================= -->
+  <!-- TELA DE LOGIN (AUTENTICAÇÃO GLPI + ADMIN CONTINGÊNCIA)    -->
+  <!-- ========================================================= -->
+  <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: linear-gradient(135deg, #025a4e 0%, #013831 55%, #071b18 100%);">
+    <div class="surface-card w-full max-w-md rounded-2xl p-8 shadow-2xl border border-white/15 space-y-6">
+      <!-- Brand Header -->
+      <div class="text-center space-y-2">
+        <div class="w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-white shadow-md" style="background-color: #025a4e;">
+          <span class="material-symbols-outlined" style="font-size: 26px;">support_agent</span>
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-semibold pill-brand-soft">
+          <span class="material-symbols-outlined" style="font-size: 14px;">verified_user</span>
+          <span>Acesso Restrito • Equipe de T.I.</span>
+        </div>
+        <h1 class="text-xl font-bold tracking-tight" style="color: var(--text-main);">Ticket Analyst</h1>
+        <p class="text-xs" style="color: var(--text-muted);">
+          Entre com seu usuário e senha do <strong>GLPI</strong> para acessar a central de triagem.
+        </p>
+      </div>
+
+      <!-- Mensagem de Erro -->
+      <div id="login-error" class="hidden rounded-xl p-3.5 text-xs font-medium bg-rose-500/10 text-rose-600 border border-rose-500/25 flex items-start gap-2">
+        <span class="material-symbols-outlined icon-sm shrink-0 mt-0.5">error</span>
+        <span id="login-error-text">Usuário ou senha inválidos.</span>
+      </div>
+
+      <!-- Formulário de Login -->
+      <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Usuário GLPI</label>
+          <div class="relative">
+            <span class="material-symbols-outlined icon-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--text-muted);">person</span>
+            <input
+              type="text"
+              id="login-username"
+              required
+              autocomplete="username"
+              placeholder="Ex: damaral"
+              class="w-full surface-sub rounded-xl pl-10 pr-4 py-2.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-teal-700/40"
+              style="color: var(--text-main);"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Senha</label>
+          <div class="relative">
+            <span class="material-symbols-outlined icon-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--text-muted);">lock</span>
+            <input
+              type="password"
+              id="login-password"
+              required
+              autocomplete="current-password"
+              placeholder="Digite sua senha"
+              class="w-full surface-sub rounded-xl pl-10 pr-10 py-2.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-teal-700/40"
+              style="color: var(--text-main);"
+            />
+            <button
+              type="button"
+              onclick="toggleLoginPasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 hover:opacity-80"
+              style="color: var(--text-muted);"
+              title="Mostrar/ocultar senha"
+            >
+              <span class="material-symbols-outlined icon-sm" id="login-pass-icon">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-login-submit"
+          class="btn-counters-primary w-full py-2.5 rounded-xl text-xs font-semibold shadow-md inline-flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined icon-sm">login</span>
+          <span>Entrar no Sistema</span>
+        </button>
+      </form>
+
+      <div class="pt-3 border-t text-center" style="border-color: var(--border-color);">
+        <p class="text-[11px] leading-relaxed" style="color: var(--text-muted);">
+          Autenticação integrada à API do GLPI (exige perfil técnico de T.I.) ou credencial local de contingência.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- SIDEBAR ESQUERDA (PADRÃO VISUAL COUNTERS)                 -->
+  <!-- ========================================================= -->
+  <aside class="w-60 shrink-0 counters-sidebar text-white flex flex-col justify-between sticky top-0 h-screen select-none">
+    <div>
+      <!-- Brand Header -->
+      <div class="px-5 py-5 flex items-center gap-3 border-b border-white/10">
+        <div class="w-9 h-9 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-emerald-300">
+          <span class="material-symbols-outlined icon-md">support_agent</span>
+        </div>
+        <div>
+          <div class="text-sm font-bold tracking-tight text-white leading-tight">Ticket Analyst</div>
+          <div class="text-[11px] text-emerald-200/75">Triagem de Chamados</div>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3 space-y-1">
+        <button onclick="switchTab('triage')" id="tab-btn-triage" class="nav-item active w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs">
+          <span class="material-symbols-outlined icon-sm">confirmation_number</span>
+          <span>Chamados</span>
+        </button>
+
+        <button onclick="switchTab('knowledge')" id="tab-btn-knowledge" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs">
+          <span class="material-symbols-outlined icon-sm">menu_book</span>
+          <span>Base & Playbooks</span>
+        </button>
+
+        <button onclick="switchTab('settings')" id="tab-btn-settings" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs">
+          <span class="material-symbols-outlined icon-sm">tune</span>
+          <span>Configurações</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Bottom Profile & Theme Toggle -->
+    <div class="p-3.5 space-y-3 border-t border-white/10">
+      <div class="bg-black/15 border border-white/10 rounded-xl p-2.5 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div id="sidebar-user-avatar" class="w-8 h-8 rounded-full bg-white text-[#01473e] font-bold text-xs flex items-center justify-center shrink-0">
+            TI
+          </div>
+          <div class="min-w-0">
+            <div id="sidebar-user-name" class="text-xs font-semibold text-white truncate">Analista T.I.</div>
+            <div id="sidebar-user-role" class="text-[10px] text-emerald-300 font-medium truncate">U-Tecnologia</div>
+          </div>
+        </div>
+        <button
+          onclick="logoutUser()"
+          class="p-1.5 rounded-lg text-emerald-200/80 hover:text-white hover:bg-white/10 transition shrink-0"
+          title="Sair do sistema"
+        >
+          <span class="material-symbols-outlined icon-sm">logout</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between px-2 text-[11px] text-emerald-100/80">
+        <button onclick="toggleTheme()" class="inline-flex items-center gap-1.5 hover:text-white transition">
+          <span class="material-symbols-outlined icon-sm" id="theme-icon">dark_mode</span>
+          <span id="theme-label">Escuro</span>
+        </button>
+        <span id="sidebar-mode-text" class="text-[10px] text-emerald-300/90 font-medium">Online</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
+
+  <!-- ========================================================= -->
+  <!-- ÁREA PRINCIPAL DE CONTEÚDO                                -->
+  <!-- ========================================================= -->
+  <div class="flex-1 flex flex-col min-w-0 main-content-area">
+
+    <!-- TOP PAGE HEADER -->
+    <header class="px-8 pt-6 pb-4 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium pill-brand-soft mb-2">
+          <span class="material-symbols-outlined" style="font-size: 14px;">hub</span>
+          <span id="connection-badge">Central GLPI • Modo Simulação</span>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight" style="color: var(--text-main);">Triagem e Tratativa de Chamados</h1>
+        <p class="text-xs mt-0.5" style="color: var(--text-muted);">
+          Tradução técnica de solicitações, consulta em 3 camadas de conhecimento e respostas assistidas para o GLPI.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2.5 pt-1">
+        <button onclick="loadTickets()" class="btn-counters-outline inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium shadow-sm">
+          <span class="material-symbols-outlined icon-sm">sync</span>
+          <span>Sincronizar</span>
+        </button>
+        <button onclick="analyzeAllVisible()" id="btn-analyze-batch" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
+          <span class="material-symbols-outlined icon-sm">auto_awesome</span>
+          <span>Analisar Fila</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 px-8 pb-8">
+
+      <!-- ========================================================= -->
+      <!-- TAB 1: TRIAGEM DE CHAMADOS                                -->
+      <!-- ========================================================= -->
+      <section id="tab-triage" class="surface-card rounded-2xl p-6 shadow-sm space-y-5">
+
+        <!-- Section Header inside card -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">inbox</span>
+            <h2 class="text-base font-bold" style="color: var(--text-main);">Fila de Atendimento T.I.</h2>
+          </div>
+
+          <!-- Filtros Rápidos -->
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="filter-group" onchange="loadTickets()" class="surface-sub rounded-lg px-3 py-1.5 text-xs font-medium focus:outline-none">
+              <option value="Todos">Todos os Grupos</option>
+            </select>
+            <select id="filter-status" onchange="loadTickets()" class="surface-sub rounded-lg px-3 py-1.5 text-xs font-medium focus:outline-none">
+              <option value="0">Todos os Status</option>
+              <option value="1">Status: Novo</option>
+              <option value="2">Status: Em atendimento</option>
+              <option value="4">Status: Pendente</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 3 KPI CARDS (PADRÃO COUNTERS) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- KPI 1 -->
+          <div class="surface-card rounded-xl p-4 flex items-start justify-between">
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">CHAMADOS NA FILA</div>
+              <div id="kpi-total-tickets" class="text-2xl font-bold mt-2" style="color: var(--text-main);">0</div>
+              <div class="text-[11px] mt-0.5" style="color: var(--text-muted);">abertos para o setor</div>
+            </div>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center pill-brand-soft">
+              <span class="material-symbols-outlined icon-md">confirmation_number</span>
+            </div>
+          </div>
+
+          <!-- KPI 2 -->
+          <div class="surface-card rounded-xl p-4 flex items-start justify-between">
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">FALTAM INFORMAÇÕES</div>
+              <div id="kpi-missing-info" class="text-2xl font-bold mt-2" style="color: var(--text-main);">0</div>
+              <div class="text-[11px] mt-0.5" style="color: var(--text-muted);">relatos vagos ou incompletos</div>
+            </div>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-rose-500/10 text-rose-500 border border-rose-500/15">
+              <span class="material-symbols-outlined icon-md">help</span>
+            </div>
+          </div>
+
+          <!-- KPI 3 -->
+          <div class="surface-card rounded-xl p-4 flex items-start justify-between">
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">TRATATIVAS PRONTAS</div>
+              <div id="kpi-ready-count" class="text-2xl font-bold mt-2" style="color: var(--text-main);">0</div>
+              <div class="text-[11px] mt-0.5" style="color: var(--text-muted);">analisados nas 3 camadas</div>
+            </div>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center pill-brand-soft">
+              <span class="material-symbols-outlined icon-md">fact_check</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Busca Ampla (Padrão Counters) -->
+        <div class="relative">
+          <span class="material-symbols-outlined icon-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--text-muted);">search</span>
+          <input
+            type="text"
+            id="filter-search"
+            oninput="debounceLoadTickets()"
+            placeholder="Buscar por #ID, nome do solicitante, assunto ou sintoma..."
+            class="w-full surface-card rounded-lg pl-10 pr-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+          />
+        </div>
+
+        <!-- GRID PRINCIPAL: LISTA DE CHAMADOS (5 cols) + PAINEL DE TRATATIVA (7 cols) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-1">
+
+          <!-- COLUNA ESQUERDA: TABELA/LISTA DE CHAMADOS -->
+          <div class="lg:col-span-5 surface-card rounded-xl overflow-hidden">
+            <div class="table-header-bar px-4 py-2.5 grid grid-cols-12 text-[11px] font-semibold uppercase tracking-wider">
+              <div class="col-span-7">CHAMADO / SOLICITANTE</div>
+              <div class="col-span-5 text-right">TRATATIVA</div>
+            </div>
+            <div id="ticket-list" class="max-h-[620px] overflow-y-auto">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+          <!-- COLUNA DIREITA: WORKSPACE DO CHAMADO SELECIONADO -->
+          <div class="lg:col-span-7" id="ticket-workspace">
+
+            <!-- Estado Vazio -->
+            <div id="empty-workspace" class="surface-sub rounded-xl p-14 text-center">
+              <span class="material-symbols-outlined mb-2" style="font-size: 34px; color: var(--text-muted);">inbox</span>
+              <h3 class="text-sm font-semibold mb-1" style="color: var(--text-main);">Selecione um chamado na lista</h3>
+              <p class="text-xs max-w-sm mx-auto" style="color: var(--text-muted);">
+                Clique em um chamado ao lado para ver a tradução técnica, o roteiro de resolução e enviar a resposta para o GLPI.
+              </p>
+            </div>
+
+            <!-- Conteúdo do Chamado Selecionado -->
+            <div id="active-workspace" class="hidden space-y-4">
+
+              <!-- BLOCO 1: DADOS DO CHAMADO ORIGINAL -->
+              <div class="surface-card rounded-xl p-5 space-y-3.5">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                  <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span id="detail-id" class="text-xs font-mono font-bold px-2 py-0.5 rounded pill-brand-soft">#0000</span>
+                      <span id="detail-status" class="text-[11px] font-medium px-2.5 py-0.5 rounded-full">Status</span>
+                      <span id="detail-urgency" class="text-[11px] font-medium px-2.5 py-0.5 rounded-full">Urgência</span>
+                      <span id="detail-group" class="text-[11px] px-2.5 py-0.5 rounded-full surface-sub font-medium">Grupo</span>
+                    </div>
+                    <h3 id="detail-title" class="text-base font-bold leading-snug pt-0.5" style="color: var(--text-main);">Título do Chamado</h3>
+                  </div>
+
+                  <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="toggleCustomPrompt()" class="btn-counters-outline inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium" title="Orientar IA">
+                      <span class="material-symbols-outlined icon-sm">tune</span>
+                      <span>Orientar IA</span>
+                    </button>
+                    <button onclick="analyzeCurrentTicket(true)" id="btn-analyze-single" class="btn-counters-primary inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-semibold">
+                      <span class="material-symbols-outlined icon-sm">auto_awesome</span>
+                      <span>Reanalisar</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Metadados do Solicitante -->
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs" style="color: var(--text-muted);">
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">person</span>
+                    <strong class="font-semibold" style="color: var(--text-main);" id="detail-requester">Solicitante</strong>
+                    <span id="detail-dept"></span>
+                  </span>
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">folder</span>
+                    <span id="detail-category">-</span>
+                  </span>
+                  <span class="inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">schedule</span>
+                    <span id="detail-date">-</span>
+                  </span>
+                </div>
+
+                <!-- Barra de instrução opcional (recolhida por padrão) -->
+                <div id="custom-instruction-bar" class="hidden flex items-center gap-2 surface-sub p-2 rounded-lg">
+                  <span class="material-symbols-outlined icon-sm ml-1" style="color: var(--brand-soft-text);">edit_note</span>
+                  <input
+                    type="text"
+                    id="custom-instruction-input"
+                    placeholder="Instrução adicional para o Copiloto (ex: Peça o ID do AnyDesk)..."
+                    class="flex-1 bg-transparent text-xs focus:outline-none"
+                  />
+                  <button onclick="analyzeCurrentTicket(true)" class="btn-counters-primary px-3 py-1 rounded-md text-xs font-medium shrink-0">
+                    Aplicar
+                  </button>
+                </div>
+
+                <!-- Texto Original do Usuário -->
+                <div class="surface-sub rounded-lg p-3.5">
+                  <div class="text-[10px] font-semibold uppercase tracking-wider mb-1" style="color: var(--text-muted);">RELATO DO SOLICITANTE</div>
+                  <p id="detail-content" class="text-xs whitespace-pre-line leading-relaxed" style="color: var(--text-main);"></p>
+                </div>
+
+                <!-- Histórico de Acompanhamentos -->
+                <div id="detail-followups-box" class="hidden pt-1">
+                  <div class="text-[10px] font-semibold uppercase tracking-wider mb-2 flex items-center gap-1" style="color: var(--text-muted);">
+                    <span class="material-symbols-outlined icon-sm">forum</span>
+                    <span>ACOMPANHAMENTOS NO GLPI</span>
+                  </div>
+                  <div id="detail-followups-list" class="space-y-2 max-h-36 overflow-y-auto"></div>
+                </div>
+              </div>
+
+              <!-- BLOCO 2: TRATATIVA PRÉVIA DO AGENTE -->
+              <div id="analysis-container" class="surface-card rounded-xl p-5 space-y-5">
+
+                <!-- 1. Entendimento Técnico -->
+                <div class="space-y-3">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">psychology</span>
+                      <h4 class="text-sm font-bold" style="color: var(--text-main);">Diagnóstico Técnico (Tradução do Chamado)</h4>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span id="analysis-domain-badge" class="text-[11px] font-medium px-2.5 py-0.5 rounded-full pill-brand-soft">Domínio</span>
+                      <span id="analysis-real-urgency" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full">Prioridade</span>
+                    </div>
+                  </div>
+
+                  <p id="analysis-intent" class="text-xs leading-relaxed font-medium" style="color: var(--text-main);"></p>
+
+                  <div class="flex flex-wrap items-center gap-x-6 gap-y-1 text-xs" style="color: var(--text-muted);">
+                    <span class="inline-flex items-center gap-1.5">
+                      <span>Categoria sugerida: <strong id="analysis-suggested-cat" class="font-semibold" style="color: var(--text-main);"></strong></span>
+                      <button onclick="toggleCategoryReclassBox(true)" id="btn-open-reclass" class="text-[11px] underline opacity-80 hover:opacity-100" style="color: var(--brand-soft-text);" title="Escolher ou alterar a categoria deste chamado no GLPI">Alterar</button>
+                    </span>
+                    <span>Motivo: <span id="analysis-urgency-reason"></span></span>
+                  </div>
+
+                  <!-- Card Interativo de Reclassificação de Categoria no GLPI -->
+                  <div id="category-reclass-box" class="hidden surface-sub rounded-lg p-3 border" style="border-color: var(--brand-primary);">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold" style="color: var(--brand-soft-text);">
+                        <span class="material-symbols-outlined icon-sm">swap_horiz</span>
+                        <span id="category-reclass-title">Sugestão de Reclassificação de Categoria no GLPI</span>
+                      </div>
+                      <span id="category-reclass-current" class="text-[11px] opacity-80" style="color: var(--text-muted);"></span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                      <select id="reclass-category-select" class="input-counters flex-1 min-w-[240px] rounded-lg px-2.5 py-1.5 text-xs">
+                        <option value="">Carregando categorias do GLPI...</option>
+                      </select>
+                      <button onclick="applySuggestedCategory()" id="btn-apply-category" class="btn-counters-primary inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                        <span class="material-symbols-outlined icon-sm">check_circle</span>
+                        <span>Acatar e Alterar no GLPI</span>
+                      </button>
+                      <button onclick="dismissCategorySuggestion()" class="btn-counters-outline inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                        <span>Manter Atual</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Banner de Alerta Amarelo (Idêntico ao aviso amarelo do Counters!) -->
+                  <div id="sufficiency-box" class="alert-counters-warning rounded-lg p-3.5">
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <span class="material-symbols-outlined icon-sm">warning</span>
+                      <span id="sufficiency-badge" class="text-xs font-semibold">Informações faltantes no relato (solicitar ao usuário):</span>
+                    </div>
+                    <ul id="missing-info-list" class="list-disc list-inside text-xs space-y-1 pl-1"></ul>
+                  </div>
+                </div>
+
+                <hr style="border-color: var(--border-color);" />
+
+                <!-- 2. Roteiro de Resolução e 3 Camadas -->
+                <div class="space-y-3">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">checklist</span>
+                      <h4 class="text-sm font-bold" style="color: var(--text-main);">Processo de Resolução Sugerido</h4>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span id="analysis-primary-source" class="text-[11px] font-medium px-2.5 py-0.5 rounded-full pill-brand-soft">Fonte</span>
+                      <button onclick="createPlaybookFromCurrentTicket()" class="btn-counters-outline inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold" title="Transformar a tratativa deste chamado em um Playbook oficial do setor">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">bookmark_add</span>
+                        <span>Virar Playbook</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Checklist -->
+                  <div id="resolution-steps-list" class="space-y-1"></div>
+
+                  <!-- Acordeão das 3 Camadas -->
+                  <div class="pt-1">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider mb-2 flex items-center gap-1.5" style="color: var(--text-muted);">
+                      <span class="material-symbols-outlined icon-sm">layers</span>
+                      <span>BASE CONSULTADA NAS 3 CAMADAS (CLIQUE PARA DETALHES)</span>
+                    </div>
+                    <div id="knowledge-matches-list" class="space-y-2"></div>
+                  </div>
+                </div>
+
+                <hr style="border-color: var(--border-color);" />
+
+                <!-- 3. Editor de Resposta / Nota Privada para o GLPI -->
+                <div class="space-y-3">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="inline-flex surface-sub p-1 rounded-lg">
+                      <button onclick="switchDraftMode('public')" id="draft-tab-public" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold btn-counters-primary">
+                        <span class="material-symbols-outlined icon-sm">chat_bubble</span>
+                        <span>Resposta ao Solicitante</span>
+                      </button>
+                      <button onclick="switchDraftMode('private')" id="draft-tab-private" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium" style="color: var(--text-secondary);">
+                        <span class="material-symbols-outlined icon-sm">lock</span>
+                        <span>Nota Privada (T.I.)</span>
+                      </button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <span id="analysis-provider-label" class="text-[11px] hidden sm:inline" style="color: var(--text-muted);">Motor</span>
+                      <button onclick="copyActiveDraft()" class="btn-counters-outline inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium">
+                        <span class="material-symbols-outlined icon-sm">content_copy</span>
+                        <span>Copiar</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <textarea
+                    id="draft-textarea"
+                    rows="6"
+                    class="w-full surface-sub rounded-xl p-3.5 text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                    style="color: var(--text-main);"
+                  ></textarea>
+
+                  <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                    <label class="inline-flex items-center gap-2 text-xs cursor-pointer select-none" style="color: var(--text-secondary);">
+                      <input type="checkbox" id="chk-mark-pending" class="rounded accent-[#0f4c43]" />
+                      <span>Mudar status para <strong>Pendente</strong> no GLPI</span>
+                    </label>
+
+                    <div class="flex items-center gap-2">
+                      <button onclick="sendFollowupToGLPI(true)" class="btn-counters-outline inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold">
+                        <span class="material-symbols-outlined icon-sm">lock</span>
+                        <span>Gravar Nota Privada</span>
+                      </button>
+                      <button onclick="sendFollowupToGLPI(false)" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">
+                        <span class="material-symbols-outlined icon-sm">send</span>
+                        <span>Enviar Resposta no GLPI</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 2: BASE EM 3 CAMADAS & PLAYBOOKS LOCAIS               -->
+      <!-- ========================================================= -->
+      <section id="tab-knowledge" class="hidden space-y-5">
+        <div class="surface-card rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center pill-brand-soft">
+              <span class="material-symbols-outlined icon-lg">layers</span>
+            </div>
+            <div>
+              <h2 class="text-base font-bold" style="color: var(--text-main);">Fontes de Conhecimento em 3 Camadas</h2>
+              <p class="text-xs" style="color: var(--text-muted);">
+                Artigos oficiais da KB do GLPI, histórico de chamados solucionados e Playbooks locais do seu setor.
+              </p>
+            </div>
+          </div>
+          <button onclick="openPlaybookModal()" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold">
+            <span class="material-symbols-outlined icon-sm">add</span>
+            <span>Adicionar Playbook</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Camada 1 -->
+          <div class="surface-card rounded-2xl p-5 flex flex-col shadow-sm">
+            <div class="flex items-center justify-between mb-3 pb-3 border-b" style="border-color: var(--border-color);">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">library_books</span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider block" style="color: var(--brand-soft-text);">1ª Camada</span>
+                  <h3 class="text-xs font-bold" style="color: var(--text-main);">Base de Conhecimento GLPI</h3>
+                </div>
+              </div>
+              <span id="kb-layer1-count" class="text-xs font-semibold px-2.5 py-0.5 rounded-full pill-brand-soft">0</span>
+            </div>
+            <div id="kb-layer1-list" class="space-y-3 overflow-y-auto max-h-[560px] pr-1"></div>
+          </div>
+
+          <!-- Camada 2 -->
+          <div class="surface-card rounded-2xl p-5 flex flex-col shadow-sm">
+            <div class="flex items-center justify-between mb-3 pb-3 border-b" style="border-color: var(--border-color);">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">history</span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider block" style="color: var(--brand-soft-text);">2ª Camada</span>
+                  <h3 class="text-xs font-bold" style="color: var(--text-main);">Chamados Resolvidos</h3>
+                </div>
+              </div>
+              <span id="kb-layer2-count" class="text-xs font-semibold px-2.5 py-0.5 rounded-full pill-brand-soft">0</span>
+            </div>
+            <div id="kb-layer2-list" class="space-y-3 overflow-y-auto max-h-[560px] pr-1"></div>
+          </div>
+
+          <!-- Camada 3 -->
+          <div class="surface-card rounded-2xl p-5 flex flex-col shadow-sm">
+            <div class="flex items-center justify-between mb-3 pb-3 border-b" style="border-color: var(--border-color);">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">description</span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider block" style="color: var(--brand-soft-text);">3ª Camada</span>
+                  <h3 class="text-xs font-bold" style="color: var(--text-main);">Playbooks do Setor</h3>
+                </div>
+              </div>
+              <span id="kb-layer3-count" class="text-xs font-semibold px-2.5 py-0.5 rounded-full pill-brand-soft">0</span>
+            </div>
+            <div id="kb-layer3-list" class="space-y-3 overflow-y-auto max-h-[560px] pr-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 3: CONFIGURAÇÕES (GLPI REST API & PROVEDOR IA)        -->
+      <!-- ========================================================= -->
+      <section id="tab-settings" class="hidden max-w-3xl">
+        <div class="surface-card rounded-2xl p-6 space-y-6 shadow-sm">
+          <div class="border-b pb-4 flex items-center gap-3" style="border-color: var(--border-color);">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center pill-brand-soft">
+              <span class="material-symbols-outlined icon-md">settings</span>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold" style="color: var(--text-main);">Configurações do Sistema</h2>
+              <p class="text-xs" style="color: var(--text-muted);">Integração com a API REST do GLPI e credenciais do provedor de IA.</p>
+            </div>
+          </div>
+
+          <!-- Conexão GLPI -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between surface-sub rounded-xl p-4">
+              <div>
+                <div class="text-xs font-bold" style="color: var(--text-main);">Modo Simulação (Dados de Demonstração)</div>
+                <div class="text-[11px]" style="color: var(--text-muted);">Desative para conectar diretamente à API REST do GLPI da sua organização.</div>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="cfg-demo-mode" class="sr-only peer" />
+                <div class="w-10 h-5 bg-slate-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#0f4c43]"></div>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <div class="md:col-span-2">
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">URL da API REST do GLPI (`apirest.php`)</label>
+                <input type="text" id="cfg-glpi-url" placeholder="https://glpi.suaempresa.com.br/apirest.php" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">GLPI User-Token</label>
+                <input type="password" id="cfg-glpi-user-token" placeholder="Chave de acesso remoto do usuário" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">GLPI App-Token (Opcional)</label>
+                <input type="password" id="cfg-glpi-app-token" placeholder="Token da aplicação no GLPI" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button onclick="testGlpiConnectionUI()" class="btn-counters-outline inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium">
+                <span class="material-symbols-outlined icon-sm">lan</span>
+                <span>Testar Conexão GLPI</span>
+              </button>
+              <span id="glpi-test-result" class="text-xs"></span>
+            </div>
+          </div>
+
+          <!-- Motor de IA -->
+          <div class="pt-4 border-t space-y-4" style="border-color: var(--border-color);">
+            <h3 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);">Provedor de IA (LLM)</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Provedor Principal</label>
+                <select id="cfg-ai-provider" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none">
+                  <option value="gemini">Google Gemini API</option>
+                  <option value="openai">OpenAI API</option>
+                  <option value="ollama">Ollama Local (100% Privado)</option>
+                  <option value="heuristic">Motor Heurístico 3 Camadas (Offline)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Modelo Gemini</label>
+                <input type="text" id="cfg-gemini-model" placeholder="gemini-2.5-flash" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Google Gemini API Key</label>
+                <input type="password" id="cfg-gemini-key" placeholder="AIzaSy..." class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">OpenAI API Key</label>
+                <input type="password" id="cfg-openai-key" placeholder="sk-..." class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Modelo OpenAI</label>
+                <input type="text" id="cfg-openai-model" placeholder="gpt-4o-mini" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">URL do Ollama Local</label>
+                <input type="text" id="cfg-ollama-url" placeholder="http://localhost:11434" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Modelo Ollama</label>
+                <input type="text" id="cfg-ollama-model" placeholder="llama3.1" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Contexto e Regras do Setor de T.I.</label>
+              <textarea id="cfg-org-context" rows="3" class="w-full surface-sub rounded-lg p-3 text-xs focus:outline-none"></textarea>
+            </div>
+          </div>
+
+          <!-- Segurança e Admin de Contingência -->
+          <div class="pt-4 border-t space-y-4" style="border-color: var(--border-color);">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);">Segurança e Admin Local de Contingência</h3>
+              <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full pill-brand-soft">Login GLPI + Contingência</span>
+            </div>
+            <p class="text-[11px]" style="color: var(--text-muted);">
+              O acesso padrão é feito com o próprio usuário e senha do GLPI (restrito aos perfis técnicos de T.I.). Abaixo você pode definir o usuário e senha do Administrador Local de contingência.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Usuário Admin Local</label>
+                <input type="text" id="cfg-auth-local-user" placeholder="admin" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium mb-1" style="color: var(--text-secondary);">Senha Admin Local</label>
+                <input type="password" id="cfg-auth-local-pass" placeholder="Senha de contingência" class="w-full surface-sub rounded-lg px-3 py-2 text-xs focus:outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t flex justify-end" style="border-color: var(--border-color);">
+            <button onclick="saveSettingsUI()" class="btn-counters-primary inline-flex items-center gap-1.5 px-5 py-2 rounded-lg text-xs font-semibold">
+              <span class="material-symbols-outlined icon-sm">save</span>
+              <span>Salvar Configurações</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL DE CRIAÇÃO / EDIÇÃO DE PLAYBOOK LOCAL -->
+  <div id="playbook-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="surface-card rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">description</span>
+          <h3 class="text-sm font-bold" style="color: var(--text-main);">Playbook Local (3ª Camada)</h3>
+        </div>
+        <button onclick="closePlaybookModal()" style="color: var(--text-muted);">
+          <span class="material-symbols-outlined icon-sm">close</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Código ID</label>
+          <input type="text" id="pb-id" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
+        </div>
+        <div>
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Domínio de TI</label>
+          <select id="pb-domain" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs">
+            <option value="Suporte Técnico Geral / Service Desk">Suporte Técnico Geral / Service Desk</option>
+            <option value="Acessos, Permissões e Contas">Acessos, Permissões e Contas</option>
+            <option value="Sistemas Internos / ERP / Sistemas Corporativos">Sistemas Internos / ERP / Sistemas Corporativos</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Título do Processo</label>
+          <input type="text" id="pb-title" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Palavras-chave (separadas por vírgula)</label>
+          <input type="text" id="pb-keywords" placeholder="impressora, spooler, fila, papel" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Sintoma / Quando aplicar</label>
+          <input type="text" id="pb-symptoms" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Dados a solicitar se faltarem (1 por linha)</label>
+          <textarea id="pb-req-info" rows="2" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Passos de Resolução (1 por linha)</label>
+          <textarea id="pb-steps" rows="3" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Modelo de Resposta ao Solicitante ({solicitante})</label>
+          <textarea id="pb-reply" rows="3" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2 border-t" style="border-color: var(--border-color);">
+        <button onclick="closePlaybookModal()" class="btn-counters-outline px-4 py-1.5 rounded-lg text-xs font-medium">Cancelar</button>
+        <button onclick="savePlaybookModal()" class="btn-counters-primary inline-flex items-center gap-1 px-4 py-1.5 rounded-lg text-xs font-semibold">
+          <span class="material-symbols-outlined icon-sm">check</span>
+          <span>Salvar Playbook</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=10"></script>
+</body>
+</html>

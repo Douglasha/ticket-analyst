@@ -1,0 +1,14 @@
+# Dependências Node.js
+node_modules/
+
+# Arquivos de ambiente e credenciais locais
+.env
+.env.*
+!.env.example
+data/settings.json
+
+# Logs e arquivos temporários do sistema operacional
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

@@ -1,0 +1,305 @@
+[
+  {
+    "id": "PB-UNI-01",
+    "title": "Onboarding / Criação de Usuário (AD, Relógio de Ponto, MyPlace e Wi-Fi)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["criação de usuário", "relógio de ponto", "relogio de ponto", "myplace", "matrícula", "matricula", "pis", "recursos humanos", "novo colaborador", "admissão"],
+    "symptoms": "RH solicita cadastro de novo colaborador no relógio de ponto, portal MyPlace, rede/AD ou Wi-Fi.",
+    "required_info": [
+      "Nome completo do colaborador e setor de lotação",
+      "Número da Matrícula (obrigatório para Relógio de Ponto e MyPlace)",
+      "Número do PIS/CPF (obrigatório para importação no sistema de Ponto)",
+      "Sistemas/pastas que o colaborador precisará acessar"
+    ],
+    "resolution_steps": [
+      "Conferir se o RH informou o Nome Completo, Número de Matrícula e PIS no chamado.",
+      "Cadastrar o colaborador no sistema de controle de ponto (REP) vinculando PIS e Matrícula para coleta de biometria.",
+      "Liberar o acesso ao portal de autoatendimento RH (MyPlace) e criar conta no Active Directory se utilizar estação de trabalho.",
+      "Caso solicitado Wi-Fi corporativo, registrar a liberação mediante política de dispositivos móveis da Unimed."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de cadastro do(a) colaborador(a). Para concluirmos o cadastro no **Relógio de Ponto** e no **MyPlace**, precisamos que nos confirme:\n- **Número da Matrícula**;\n- **Número do PIS/CPF**.\n\nAssim que informar esses dados aqui no chamado, finalizamos a liberação imediatamente!"
+  },
+  {
+    "id": "PB-UNI-02",
+    "title": "Falha de Acesso ao Nextcloud (Pastas Compartilhadas / Sincronização)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["nextcloud", "nextclaud", "pasta do nextcloud", "nuvem", "sincronização", "auditoria", "compartilhamento"],
+    "symptoms": "Usuário relata que não consegue acessar a pasta do Nextcloud (via navegador ou cliente de sincronização Desktop).",
+    "required_info": [
+      "Nome exato da pasta compartilhada que está tentando acessar",
+      "Se o acesso é pelo navegador web ou pelo ícone/pasta sincronizada no Windows",
+      "Mensagem de erro exibida (ex: 'Acesso negado', 'Usuário/senha inválidos' ou 'Servidor indisponível') e ID do HopToDesk para acesso remoto"
+    ],
+    "resolution_steps": [
+      "Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!"
+  },
+  {
+    "id": "PB-UNI-03",
+    "title": "Erro de Hash em Guia XML TISS (Convênios / Faturamento / Laboratório)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["xml", "hash", "erro no hash", "convênio", "convenio", "aura saúde", "tiss", "lote", "faturamento", "importar xml"],
+    "symptoms": "Usuário solicita auxílio para corrigir arquivo XML de faturamento TISS que apresentou erro de validação de hash ao enviar/importar para convênio.",
+    "required_info": [
+      "ID do HopToDesk para acesso remoto à estação",
+      "Anexar os arquivos XML afetados no chamado (ou informar o caminho onde estão salvos)",
+      "Nome do convênio e número do lote/remessa"
+    ],
+    "resolution_steps": [
+      "Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPodemos acessar sim para recalcular o hash dos arquivos XML do convênio **Aura Saúde**.\n\nPor favor, nos informe:\n1. O **ID do HopToDesk** do seu computador para conectarmos remotamente;\n2. Se preferir, você também pode **anexar os 2 arquivos XML** diretamente aqui no chamado que já fazemos a correção e devolvemos validados!"
+  },
+  {
+    "id": "PB-UNI-04",
+    "title": "Integração PEP x AutoLac (Divergência de Data/Hora ou Consulta de Exames)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["autolac", "pep", "exames", "laboratório", "laboratorio", "resultados", "divergência", "divergencia", "meia noite", "importados", "laudo"],
+    "symptoms": "Dúvida operacional sobre localização de laudos/resultados no AutoLac ou divergência de data entre prescrição no PEP (próximo à meia-noite) e importação no AutoLac.",
+    "required_info": [
+      "Número do atendimento / pedido de exame ou nome do paciente de exemplo (para rastreio na integração)",
+      "Data e horário exato do pedido no PEP e horário da importação no AutoLac",
+      "ID do HopToDesk para acesso remoto / ramal de contato do setor"
+    ],
+    "resolution_steps": [
+      "Para dúvidas de busca de resultados (Treinamento/Suporte): contatar o solicitante via HopToDesk e demonstrar os filtros de pesquisa no AutoLac (busca por nº de requisição/atendimento, CPF ou período de coleta).",
+      "Para divergência de data na virada do dia (23:50 -> 00:00): consultar os logs do integrador PEP <-> AutoLac para verificar se a tag de data de solicitação está assumindo o `SYSDATE` da importação em vez do timestamp da prescrição médica.",
+      "Documentar os IDs de atendimento de exemplo para ajuste na view/trigger de integração pela equipe de Desenvolvimento/Banco de Dados."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá estamos analisando a sua solicitação referente ao sistema **AutoLac**.\n\nPara agilizar o atendimento, você poderia nos informar:\n1. Caso seja uma divergência em exame específico, qual o **número do atendimento/pedido** de exemplo para rastrearmos no banco?\n2. Qual o seu **ID do HopToDesk** (e ramal de contato) para acompanharmos com você?\n\nAguardamos seu retorno!"
+  },
+  {
+    "id": "PB-UNI-05",
+    "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["hrp", "tnumm", "precificação", "precificacao", "relatorio hrp", "relatorio gestantes", "gestantes", "promoprev", "alteração via banco", "clientes 0256"],
+    "symptoms": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
+    "required_info": [
+      "Detalhamento exato da regra/campo ou código da tabela/importação no HRP",
+      "Validação/aprovação da regra de negócio pelo setor responsável (Faturamento / Promoprev)"
+    ],
+    "resolution_steps": [
+      "Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+      "Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nSua solicitação referente ao **HRP** já está em análise pela equipe técnica.\n\nEstamos verificando os parâmetros no sistema e, assim que a consulta/atualização estiver concluída (ou caso precisemos validar algum filtro adicional com você), atualizaremos este chamado!"
+  },
+  {
+    "id": "PB-UNI-06",
+    "title": "Liberação de Wi-Fi em Aparelho Celular / Dispositivo Móvel",
+    "domain": "Infraestrutura e Rede",
+    "keywords": ["wifi", "wi-fi", "celular", "aparelho telefone", "smartphone", "mac", "rede sem fio", "corporativo"],
+    "symptoms": "Colaborador solicita conexão da rede Wi-Fi no aparelho celular pessoal ou corporativo.",
+    "required_info": [
+      "Informar se o aparelho celular é corporativo (patrimônio Unimed) ou particular",
+      "Justificativa de uso e aprovação da coordenação/gestão do setor",
+      "Endereço MAC do Wi-Fi do aparelho (com 'MAC Aleatório / Endereço Privado' desativado)"
+    ],
+    "resolution_steps": [
+      "Verificar se o pedido possui aprovação da gestão e se enquadra na política de Segurança da Informação para dispositivos móveis.",
+      "Orientar o usuário a desativar a opção 'Usar MAC Aleatório / Endereço Wi-Fi Privado' nas configurações da rede Wi-Fi do celular.",
+      "Coletar o endereço MAC físico do aparelho, cadastrar no controlador Wi-Fi / Firewall na VLAN adequada e autenticar o dispositivo."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara avaliarmos e configurarmos a liberação de **Wi-Fi no aparelho celular**, precisamos que você nos informe:\n1. O aparelho é **corporativo da Unimed** ou **particular**?\n2. Qual a **finalidade/justificativa** de uso no setor (e o 'De acordo' do coordenador da área)?\n3. O **endereço MAC Wi-Fi** do aparelho (lembrando de desativar a opção 'MAC Aleatório / Endereço Privado' nas configurações de Wi-Fi do celular).\n\nAssim que confirmado, damos andamento!"
+  },
+  {
+    "id": "PB-UNI-07",
+    "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "keywords": ["teclado", "mouse", "monitor", "troca de teclado", "troca de mouse", "tecla falhando", "hu00177"],
+    "symptoms": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
+    "required_info": [
+      "Patrimônio do computador ou local/posto de enfermagem exato",
+      "Qual o defeito apresentado pelo teclado/mouse/monitor (teclas falhando, cabo rompido, sem vídeo)"
+    ],
+    "resolution_steps": [
+      "Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+      "Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+      "Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!"
+  },
+  {
+    "id": "PB-UNI-08",
+    "title": "Instabilidade em Linhas Telefônicas / Ligações Caindo (PABX / VoIP)",
+    "domain": "Infraestrutura e Rede",
+    "keywords": ["ligações", "ligacoes", "caindo", "linhas", "telefone", "ramal", "telefonia", "pabx", "voip", "tronco"],
+    "symptoms": "Setor relata que as ligações externas ou internas estão caindo com frequência e pede verificação das linhas.",
+    "required_info": [
+      "Quais números de ramais específicos ou aparelhos estão apresentando queda",
+      "Se as quedas ocorrem em ligações externas (recebidas/realizadas) ou também entre ramais internos",
+      "Exemplos de horário/números em que a ligação caiu para rastreio nos logs do PABX/Operadora"
+    ],
+    "resolution_steps": [
+      "Verificar o status do tronco SIP/E1 e latência/perda de pacotes na VLAN de Voz da unidade (ex: Núcleo Passos).",
+      "Analisar os registros de chamadas (CDR/Logs do PABX) nos ramais do setor para identificar código de desconexão (queda por timeout RTP, falha na operadora ou cabo/aparelho com mau contato).",
+      "Realizar testes de chamadas entrantes e saintes junto ao setor e acionar a operadora caso a desconexão parta do entroncamento externo."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá iniciamos a verificação da telefonia da sua unidade. Para identificarmos rapidamente se a falha está em aparelhos específicos ou no tronco da operadora, você poderia nos informar:\n1. Quais **números de ramal** estão sofrendo as quedas?\n2. As quedas acontecem apenas em **ligações externas** ou também entre ramais internos?\n3. Se possível, informe um **horário aproximado ou número** de uma ligação que caiu hoje para rastrearmos no log da central telefônica.\n\nFicamos no aguardo!"
+  },
+  {
+    "id": "PB-UNI-09",
+    "title": "Desenvolvimento / Ajustes em Formulários Clínicos e Indicadores (PEP / Enfermagem)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["checklist", "cateterismo", "sonda", "folley", "passagem de plantão", "enfermagem", "formulário", "indicadores", "desenvolvimento"],
+    "symptoms": "Coordenação de Enfermagem ou área assistencial solicita criação/alteração de campos em formulários eletrônicos (Checklist Sonda Folley, Passagem de Plantão, Indicadores).",
+    "required_info": [
+      "Especificação completa dos campos/opções a incluir ou alterar (ou documento/print anexo)",
+      "Regras de obrigatoriedade e perfil profissional que preencherá o formulário",
+      "Validação em homologação antes da publicação em produção"
+    ],
+    "resolution_steps": [
+      "Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+      "Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+      "Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a especificação para ajuste/evolução do formulário clínico (**{titulo}**).\n\nNossa equipe de Desenvolvimento já está analisando os itens solicitados. Assim que a versão ajustada estiver disponível para validação/homologação (ou caso surja alguma dúvida sobre o comportamento de algum campo), entraremos em contato por este chamado!"
+  },
+  {
+    "id": "PB-UNI-10",
+    "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "keywords": ["evento", "projetor", "notebook", "microfone", "caixa de som", "empréstimo", "apoio", "secretariado", "lions"],
+    "symptoms": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
+    "required_info": [
+      "Data, local exato e horário de início e término da montagem/evento",
+      "Lista completa de equipamentos e cabos/adaptadores necessários (HDMI, som, passador de slides)",
+      "Responsável pela retirada/devolução dos equipamentos"
+    ],
+    "resolution_steps": [
+      "Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+      "Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+      "Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de equipamentos e apoio para o evento! Já estamos verificando a reserva na agenda da T.I.\n\nPara deixarmos tudo alinhado com antecedência, poderia apenas confirmar:\n1. Qual o **horário exato em que o local estará aberto para montagem** e o **horário previsto de término** do evento?\n2. As **caixas de som e microfone** utilizados serão os do kit interno ou do espaço do evento (para levarmos os cabos/adaptadores de áudio corretos para o notebook)?\n\nSeguimos à disposição!"
+  },
+  {
+    "id": "PB-ACC-01",
+    "title": "Liberação de Acesso a Pastas de Rede / Espelhamento de Perfil (AD)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["pasta de rede", "acesso a pasta", "liberar pasta", "igual ao", "espelhar", "diretório", "grupo de segurança", "compartilhamento", "mapeamento"],
+    "symptoms": "Usuário solicita acesso a pastas na rede ou pede 'acesso igual ao de outro colaborador'.",
+    "required_info": [
+      "Caminho exato da pasta ou nome do departamento/compartilhamento",
+      "Login de rede (matrícula/usuário) de quem receberá o acesso",
+      "Nível de permissão necessário (Somente Leitura ou Leitura e Gravação)",
+      "Aprovação formal do gestor da área dona da pasta (no próprio chamado)"
+    ],
+    "resolution_steps": [
+      "Verificar se o chamado possui aprovação do gestor responsável pela área (nunca conceder acesso por 'espelhamento' sem validar grupos sensíveis).",
+      "No Active Directory (dsa.msc), localizar o usuário solicitante e verificar os grupos de segurança atuais na aba 'Membro de' (Member Of).",
+      "Adicionar o usuário ao grupo de segurança correspondente da pasta e orientar o usuário a fazer logoff/login no Windows."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara liberarmos o acesso solicitado com segurança, precisamos confirmar:\n1. Qual é o caminho/nome exato da pasta e se precisa apenas visualizar ou também editar arquivos?\n2. Qual o login/nome completo do usuário que receberá a permissão?\n3. O 'De acordo' do gestor responsável pelo setor aqui no chamado.\n\nAssim que confirmado, faremos a liberação!"
+  },
+  {
+    "id": "PB-UNI-11",
+    "title": "Bloqueio de Contas e Revogação de Acessos (Desligamento / Férias / Afastamento)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["bloqueio de contas", "bloqueio de conta", "bloqueio de acesso", "desligamento", "desligada", "desligado", "quadro funcional", "revogação", "inativar usuário", "bloquear acesso"],
+    "symptoms": "Recursos Humanos ou Gestão solicita bloqueio imediato de contas, sistemas e acessos físicos de colaborador(a) por motivo de desligamento, férias ou afastamento.",
+    "required_info": [
+      "Relação de quais acessos e sistemas devem ser bloqueados (caso o chamado não tenha discriminado os sistemas no formulário)"
+    ],
+    "resolution_steps": [
+      "Localizar o cadastro do(a) colaborador(a) pelo Nome Completo e CPF informados no formulário do RH.",
+      "Executar o bloqueio imediato de todos os sistemas e credenciais discriminados no chamado (ex: Active Directory/Rede, SGH Spdata, Faculdade Unimed, LGPD, E-mail, Nextcloud e Wi-Fi Corporativo), encerrando sessões ativas.",
+      "Caso solicitado bloqueio físico (acesso de entrada no hospital / catracas / biometria), revogar as credenciais no sistema de controle de acesso da portaria.",
+      "Registrar no chamado a confirmação de todos os bloqueios efetuados para auditoria e conformidade LGPD."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de bloqueio de contas. Todos os acessos discriminados no chamado já estão sendo bloqueados com prioridade pela nossa equipe.\n\nAssim que concluído em todos os sistemas informados, confirmaremos por aqui!"
+  },
+  {
+    "id": "PB-SD-02",
+    "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+    "domain": "Infraestrutura e Rede",
+    "keywords": ["impressora", "impressoras", "imprimir", "imprimindo", "nao esta imprimindo", "impressão", "samsung", "m4080fx", "atolamento", "toner", "spooler", "fila", "etiqueta", "zebra"],
+    "symptoms": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+    "required_info": [
+      "Se a falha de impressão ocorre em todos os computadores do setor ou apenas em uma máquina específica",
+      "Se aparece alguma mensagem de erro ou luz vermelha/laranja no visor da impressora (ex: atolamento de papel, bandeja aberta, toner ou rede desconectada)",
+      "ID do HopToDesk do computador que tentou imprimir (caso seja falha apenas nessa estação)"
+    ],
+    "resolution_steps": [
+      "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá estamos verificando o status da impressora do seu setor na rede. Para agilizarmos o diagnóstico e destravarmos as impressões o mais rápido possível, você poderia nos confirmar:\n1. O problema ocorre em **todos os computadores** do setor ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora (como papel preso, bandeja ou falha de rede)?\n3. Caso seja apenas no seu computador, qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nAssim que confirmar (ou caso precise de intervenção física no local), já atuamos!"
+  },
+  {
+    "id": "PB-UNI-12",
+    "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["acesso e permissões", "acesso e permissoes", "favor cadastrar", "liberar acesso", "plantão", "plantao", "médico", "medico", "dr ", "dra ", "prestador", "ultrasom", "ultrassom", "face", "facial", "portas", "reconhecimento facial", "controle de acesso", "outros (descrever em observações"],
+    "symptoms": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+    "required_info": [
+      "Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)",
+      "Dados cadastrais completos da pessoa que receberá o acesso (Nome Completo, CPF, CRM/Matrícula e vínculo/empresa), caso o formulário tenha sido preenchido com os dados do próprio solicitante",
+      "Caso solicite acesso ao Controle de Acesso / Reconhecimento Facial nas portas do Hospital: enviar uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada"
+    ],
+    "resolution_steps": [
+      "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de cadastro de acesso. Porém, verificamos que os campos do formulário foram preenchidos com os seus próprios dados e não foi especificado quais acessos precisam ser liberados.\n\nPara prosseguirmos com o cadastro, você poderia nos informar:\n1. **Quais acessos ou sistemas** precisam ser liberados (ex.: SGH Spdata, login de Rede/computador, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n2. Os **dados cadastrais da pessoa a ser cadastrada** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n3. **Caso necessite de acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar em anexo uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\nAssim que nos enviar essas informações por aqui, já realizamos a liberação!"
+  },
+  {
+    "id": "PB-UNI-13",
+    "title": "Cancelamento / Exclusão de Registro ou Conta Cadastrada por Engano (Controle de Contas / SGH / Auditoria)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["conta cadastrada por engano", "cadastrada por engano", "cadastrado por engano", "cancelar no controle de contas", "cancelamento controle de contas", "excluir no controle de contas", "cancelar registro", "cancelamento de conta", "excluir registro"],
+    "symptoms": "Solicitação da Auditoria, Recepção ou Faturamento para cancelar, excluir ou estornar registro/conta lançado por engano no sistema (ex: Controle de Contas).",
+    "required_info": [
+      "Número do registro/conta/atendimento e nome do(a) paciente/beneficiário(a) (caso não tenham sido informados na descrição)"
+    ],
+    "resolution_steps": [
+      "Localizar no sistema indicado (ex: Controle de Contas) o número do registro e o nome do(a) paciente/beneficiário(a) informados pelo solicitante.",
+      "Verificar o status de tramitação do registro (ex: encaminhado à recepção/auditoria) e efetuar o cancelamento/inativação conforme solicitado.",
+      "Confirmar a conclusão do cancelamento no chamado junto ao setor solicitante."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de cancelamento do registro no sistema **Controle de Contas**. Todos os dados necessários já foram informados e nossa equipe já está executando o cancelamento.\n\nAssim que concluído, confirmaremos por aqui!"
+  },
+  {
+    "id": "PB-UNI-14",
+    "title": "Falha no Envio / Agendamento de Relatório Automático (Sistema S.G.H. / Spdata)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": ["s.g.h", "sgh", "spdata", "relatorio agendado", "relatório agendado", "envio diario", "envio diário", "nao recebo", "não recebo", "nao recebimento", "check-list", "checklist nas 24 horas"],
+    "symptoms": "Colaborador(a) relata que parou de receber o envio diário/automático de relatório agendado do sistema S.G.H. (Spdata).",
+    "required_info": [
+      "Título exato do relatório agendado no S.G.H. e desde qual data parou de ser recebido (caso não tenham sido informados na descrição)"
+    ],
+    "resolution_steps": [
+      "Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+      "Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+      "Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)**.\n\nNossa equipe técnica já está verificando o serviço de agendamento e disparo do relatório e retornaremos o mais breve possível por aqui!"
+  },
+  {
+    "id": "PB-UNI-15",
+    "title": "Vinculação / Liberação de Acesso ou Unidade em Sistema Interno (Controle de Contas / SGH / HRP)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": ["acessos controle de contas", "vincular o controle de contas", "vincular ao meu usuario", "vincular ao meu usuário", "meu usuario", "meu usuário", "piumhi", "vincular unidade", "liberar unidade", "permissao controle de contas"],
+    "symptoms": "Colaborador(a) solicita vincular ou liberar acesso a uma unidade/módulo de sistema interno (ex: Controle de Contas de Piumhi) ao próprio usuário ou perfil do setor (muitas vezes abrindo na categoria de Aplicativos em vez de Acesso e Permissões).",
+    "required_info": [
+      "Sistema/módulo, unidade a ser vinculada e usuário que receberá a permissão (caso não tenham sido informados na abertura)"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+      "Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o acesso ao sistema **Controle de Contas** no seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!"
+  }
+]
+
+

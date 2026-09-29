@@ -1,0 +1,112 @@
+[
+  {
+    "ticket_id": 41992,
+    "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "aplicativos",
+      "acessos",
+      "controle",
+      "contas",
+      "aplicativos",
+      "vincular",
+      "controle",
+      "contas"
+    ],
+    "problem_summary": "Bom dia!\nFavor vincular o controle de contas de Piumhi ao meu usuário.\n \nAtt",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+      "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-29T13:41:35.072Z"
+  },
+  {
+    "ticket_id": 41991,
+    "title": "Periféricos  -  MOUSE E TECLADO",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos",
+    "keywords": [
+      "mouse",
+      "teclado",
+      "venho",
+      "solicitar",
+      "mouse",
+      "teclado",
+      "coordenacao",
+      "enfermagem"
+    ],
+    "problem_summary": "Bom dia!\nVenho solicitar um mouse e um teclado(coordenação) para enfermagem, os mesmos encontra-se danificados.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+    "required_info": [
+      "Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+      "[PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+      "[PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local.",
+      "[PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+      "[PB-UNI-09] Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+      "[PB-UNI-09] Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-09-29T13:09:40.846Z"
+  },
+  {
+    "ticket_id": 41977,
+    "title": "Solicitação Diversa  -  Teclado recepção",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Teclados",
+    "keywords": [
+      "teclado",
+      "recepcao",
+      "trocar",
+      "teclado",
+      "computador",
+      "recepcao",
+      "letras",
+      "apagadas"
+    ],
+    "problem_summary": "Por favor trocar o teclado do computador da recepção, letras muito apagadas.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+    "required_info": [
+      "Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+      "[PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+      "[PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-09-29T10:43:36.570Z"
+  },
+  {
+    "ticket_id": 41961,
+    "title": "Correção de bugs  -  Não recebimento diário de Relatório",
+    "category": "T.I > DV > Desenvolvimento > Correção de bugs",
+    "keywords": [
+      "correcao",
+      "bugs",
+      "recebimento",
+      "diario",
+      "relatorio",
+      "correcao",
+      "bugs",
+      "recebo"
+    ],
+    "problem_summary": "Não recebo desde sábado o envio diário de Relatório agendado do sistema S.G.H. Título: RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS. Quando não tem inserção dos cateteres o relatório chega como zerado, mas desde sábado não chega relatório algum.",
+    "custom_instruction": "A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+      "[PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+      "[PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+      "[Chamado #41783 (Resolvido)] Sistema reiniciado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-28T20:19:51.384Z",
+    "updated_at": "2026-09-28T20:34:06.221Z"
+  }
+]
