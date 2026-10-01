@@ -3214,34 +3214,31 @@
   },
   "42105": {
     "ticket_id": 42105,
-    "analyzed_at": "30/09/2026 16:36",
+    "analyzed_at": "01/10/2026 09:55",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O solicitante **Viviane Souza** (Nucleo Passos) relata falha de impressão em a **impressora do setor** localizada no setor **Nucleo Passos**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "translated_intent": "A solicitante **Viviane Souza** (Nucleo Passos) solicita o cadastro do seu e-mail institucional (vsouza@unimedsudoestemg.coop.br) no catálogo de endereços da impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), destacando a conformidade com a LGPD e a privacidade no tratamento de dados sensíveis.",
     "detected_domain": "Infraestrutura e Rede",
     "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
     "real_urgency": "Média",
-    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - Nucleo Passos).",
-    "sufficiency_status": "parcial",
-    "missing_info": [
-      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Nucleo Passos) ou apenas na sua estação",
-      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
-      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
-    ],
+    "urgency_reason": "Configuração de catálogo na impressora para envio de digitalizações por e-mail, garantindo sigilo e conformidade com a LGPD.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
     "knowledge_matches": [
       {
-        "layer": "glpi_kb",
-        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
-        "source_id": "KB-12",
-        "title": "Editar Assinatura do e-mail Coorporativo",
-        "category": "Base de Conhecimento GLPI",
-        "summary": "NOME\n\nSETOR\n\nwww.unimedsudoestemg.coop.br\n\nTelefone: TELEFONE",
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-23",
+        "title": "Configuração de Scan to E-mail / Cadastro de E-mail na Impressora (Samsung M4080 / Multifuncional)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Colaborador(a) solicita o cadastro de seu endereço de e-mail no catálogo de endereços (Scan to E-mail) da impressora multifuncional do setor (ex: Samsung M4080FX), visando enviar digitalizações diretamente à sua caixa de entrada e atender aos requisitos de conformidade com a LGPD (evitando pasta compartilhada pública na rede).",
         "steps": [
-          "NOME",
-          "SETOR",
-          "www.unimedsudoestemg.coop.br",
-          "Telefone: TELEFONE"
+          "Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+          "Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+          "Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.",
+          "Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.",
+          "Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste."
         ],
-        "score": 0.68
+        "score": 0.99
       },
       {
         "layer": "glpi_history",
@@ -3259,46 +3256,19 @@
           "login: lgiotti@unimedsudoestemg.coop.br"
         ],
         "score": 0.68
-      },
-      {
-        "layer": "local_playbook",
-        "layer_label": "3ª Camada • Playbook Local de Processos TI",
-        "source_id": "PB-SD-02",
-        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
-        "category": "Infraestrutura e Rede",
-        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
-        "steps": [
-          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
-          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
-          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
-          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
-        ],
-        "score": 0.47
-      },
-      {
-        "layer": "glpi_kb",
-        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
-        "source_id": "KB-13",
-        "title": "Next Cloud para compartilhamento de laudos",
-        "category": "Base de Conhecimento GLPI",
-        "summary": "Acesse o link: http://cloud.unimedsudoestemg.coop.br/ ou 192.168.41.30 bloco bloco@33566",
-        "steps": [
-          "Acesse o link: http://cloud.unimedsudoestemg.coop.br/ ou 192.168.41.30 bloco bloco@33566"
-        ],
-        "score": 0.51
       }
     ],
-    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))",
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-23) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))",
     "resolution_steps": [
-      "[KB-12] www.unimedsudoestemg.coop.br",
-      "[KB-12] Telefone: TELEFONE",
-      "[Chamado #41656 (Resolvido)] Segue credenciais de acessos",
-      "[Chamado #41656 (Resolvido)] --------------------------------------------------------------",
-      "[Chamado #41656 (Resolvido)] E-mail Institucional",
-      "[Chamado #41656 (Resolvido)] link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br"
+      "[PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+      "[PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+      "[PB-UNI-23] Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.",
+      "[PB-UNI-23] Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.",
+      "[PB-UNI-23] Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste.",
+      "[Chamado #41656 (Resolvido)] Segue credenciais de acessos"
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Viviane Souza** (Nucleo Passos) relata falha de impressão em a **impressora do setor** localizada no setor **Nucleo Passos**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Nucleo Passos) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-12] www.unimedsudoestemg.coop.br\n  2. [KB-12] Telefone: TELEFONE\n  3. [Chamado #41656 (Resolvido)] Segue credenciais de acessos\n  4. [Chamado #41656 (Resolvido)] --------------------------------------------------------------\n  5. [Chamado #41656 (Resolvido)] E-mail Institucional\n  6. [Chamado #41656 (Resolvido)] link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
-    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (Nucleo Passos) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Nucleo Passos ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Nucleo Passos!"
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) solicita o cadastro do seu e-mail institucional (vsouza@unimedsudoestemg.coop.br) no catálogo de endereços da impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), destacando a conformidade com a LGPD e a privacidade no tratamento de dados sensíveis.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-23) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.\n  2. [PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.\n  3. [PB-UNI-23] Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.\n  4. [PB-UNI-23] Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.\n  5. [PB-UNI-23] Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste.\n  6. [Chamado #41656 (Resolvido)] Segue credenciais de acessos",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail (**vsouza@unimedsudoestemg.coop.br**) na impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que concluirmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!"
   },
   "42112": {
     "ticket_id": 42112,

@@ -706,5 +706,47 @@
       "Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao acesso da colaboradora **{colaborador}** na **Intranet**.\n\nComo o acesso básico já foi liberado, para que possamos ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!"
+  },
+  {
+    "id": "PB-UNI-23",
+    "domain": "Infraestrutura e Rede",
+    "title": "Configuração de Scan to E-mail / Cadastro de E-mail na Impressora (Samsung M4080 / Multifuncional)",
+    "keywords": [
+      "cadastrar e-mail na impressora",
+      "cadastrar meu e-mail na impressora",
+      "cadastrar email na impressora",
+      "cadastrar meu email na impressora",
+      "e-mail na impressora",
+      "email na impressora",
+      "cadastro do meu e-mail",
+      "cadastro do meu email",
+      "impressora da recepção",
+      "impressora da recepcao",
+      "pasta compartilhada",
+      "scan to email",
+      "scaner direto",
+      "scanner direto",
+      "enviar os scaners",
+      "enviar os scanners",
+      "digitalizar para e-mail",
+      "digitalizar para email",
+      "catálogo de endereços",
+      "catalogo de enderecos",
+      "syncthru",
+      "dados sensíveis lgpd",
+      "dados sensiveis lgpd"
+    ],
+    "symptoms": "Colaborador(a) solicita o cadastro de seu endereço de e-mail no catálogo de endereços (Scan to E-mail) da impressora multifuncional do setor (ex: Samsung M4080FX), visando enviar digitalizações diretamente à sua caixa de entrada e atender aos requisitos de conformidade com a LGPD (evitando pasta compartilhada pública na rede).",
+    "required_info": [
+      "Endereço de e-mail institucional do(a) colaborador(a) para inclusão no catálogo da impressora (caso não tenha sido informado na descrição)"
+    ],
+    "resolution_steps": [
+      "Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+      "Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+      "Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.",
+      "Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.",
+      "Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail na impressora **{impressora}** ({setor}) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que finalizarmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!"
   }
 ]

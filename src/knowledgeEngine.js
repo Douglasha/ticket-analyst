@@ -251,11 +251,22 @@ export class KnowledgeEngine {
           /\b(trocar|mudar|transferir|levar|passar|colocar)\b[\s\S]{0,60}\b(do|da)\b[\s\S]{0,50}\bpara\b/i.test(
             normTicket
           );
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) ou Queda de Ligações (PB-UNI-08) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede
+        const isScanToEmail =
+          (/\b(scan|scanner|digitaliz|digitalizacao)\b/i.test(normTicket) ||
+            /\b(cadastr(ar|o))\b[\s\S]{0,30}\b(e-?mail|email)\b/i.test(normTicket) ||
+            /\b(e-?mail|email)\b[\s\S]{0,30}\b(impressora|scanner|scan)\b/i.test(normTicket)) &&
+          !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila)\b/i.test(
+            normTicket
+          );
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          isRelocationOrPhoneInstall
+          (isRelocationOrPhoneInstall || isScanToEmail)
         ) {
+          continue;
+        }
+        // Evita parear Playbook de Scan to E-mail (PB-UNI-23) quando não trata de scan/cadastro de e-mail na impressora
+        if (pb.id === "PB-UNI-23" && !isScanToEmail) {
           continue;
         }
         // Evita parear Playbook de XML TISS (PB-UNI-03) quando o chamado não trata de XML, TISS ou Hash
@@ -317,6 +328,14 @@ export class KnowledgeEngine {
       const normKbTitle = normalizeText(kb.title || "");
       // Evita falso positivo de "Print to PDF" quando o chamado é de impressora física sem citar PDF
       if (normKbTitle.includes("print to pdf") && !normTicket.includes("pdf")) {
+        continue;
+      }
+      // Evita falso positivo de assinatura de e-mail (KB-12) quando o chamado não é sobre assinatura de e-mail
+      if (normKbTitle.includes("assinatura") && !normTicket.includes("assinatura")) {
+        continue;
+      }
+      // Evita falso positivo de Nextcloud (KB-13) quando o chamado não cita Nextcloud
+      if (normKbTitle.includes("next cloud") && !normTicket.includes("nextcloud") && !normTicket.includes("next cloud")) {
         continue;
       }
 

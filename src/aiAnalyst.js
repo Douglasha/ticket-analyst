@@ -508,6 +508,51 @@ export class AIAnalyst {
           : questionsBul) +
         `\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!`;
     } else if (
+      (/\b(scan|scanner|digitaliz|digitaliza[çc][ãa]o)\b/i.test(normAll) ||
+        /\b(cadastr(ar|o))\b[\s\S]{0,30}\b(e-?mail|email)\b/i.test(normAll) ||
+        /\b(e-?mail|email)\b[\s\S]{0,30}\b(impressora|scanner|scan)\b/i.test(normAll)) &&
+      /\b(impressora|samsung|m4080|multifuncional|scanner)\b/i.test(normAll) &&
+      !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|offline)\b/i.test(normAll)
+    ) {
+      const emailMatch = ticket.content.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
+      const userEmail = emailMatch ? emailMatch[0].trim() : "";
+      const isRecepcao = /recep[çc][ãa]o/i.test(normAll);
+      const printerLocation = isRecepcao ? `Recepção do ${sectorName}` : sectorName;
+      const printerModel =
+        /\b(m4080|4080|samsung)\b/i.test(normAll) || /nucleo|hospital|passos/i.test(sectorName)
+          ? "Samsung M4080"
+          : "multifuncional";
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) solicita o cadastro do seu e-mail institucional (${userEmail || "e-mail"}) ` +
+        `no catálogo de endereços da impressora **${printerModel}** (${printerLocation}) para envio direto de digitalizações (Scan to E-mail), ` +
+        `destacando a conformidade com a LGPD e a privacidade no tratamento de dados sensíveis.`;
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      realUrgency = "Média";
+      urgencyReason =
+        "Configuração de catálogo na impressora para envio de digitalizações por e-mail, garantindo sigilo e conformidade com a LGPD.";
+
+      if (userEmail) {
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para cadastrar o seu e-mail (**${userEmail}**) na impressora **${printerModel}** (${printerLocation}) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\n` +
+          `Todos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\n` +
+          `Assim que concluirmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!`;
+      } else {
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Informar o endereço de e-mail institucional exato que deve ser cadastrado no catálogo da impressora",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para cadastro no catálogo da impressora **${printerModel}** (${printerLocation}) para envio de digitalizações (Scan to E-mail).\n\n` +
+          `Para efetuarmos a inclusão no equipamento, você poderia nos confirmar qual o seu **endereço de e-mail institucional**?\n\n` +
+          `Assim que nos confirmar por aqui, já finalizamos o cadastro no painel da impressora!`;
+      }
+    } else if (
       normCore.includes("impressora") ||
       normCore.includes("impressoras") ||
       normCore.includes("imprimir") ||
