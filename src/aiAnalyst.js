@@ -1004,6 +1004,42 @@ export class AIAnalyst {
         "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos",
       ];
     } else if (
+      (/\b(clinicas?|16\d{6})\b/i.test(normAll) &&
+        /\b(nas|atendentes?|secret[aá]rias?|web\s*sa[uú]de|liberar acesso|vincular)\b/i.test(normAll)) ||
+      /\bweb\s*sa[uú]de\b/i.test(normAll)
+    ) {
+      const clinicMatches = (ticket.content || "").match(/\b16\d{6}(?:\s*-\s*[^\n,]+)?/g) || [];
+      const clinicsList = clinicMatches.length > 0
+        ? clinicMatches.map((c) => `**${c.trim()}**`).join(" e ")
+        : "novas clínicas informadas";
+
+      const mentionsNas = /\bnas\b/i.test(normAll);
+      const targetGroup = mentionsNas
+        ? "atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**"
+        : "atendentes/secretárias";
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) solicita a vinculação de acesso às clínicas ${clinicsList} ` +
+        `no sistema **Web Saúde (subsistema HRP Unimed)** para as ${targetGroup}. ` +
+        `O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.`;
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões";
+      realUrgency = "Média";
+      urgencyReason =
+        "Vinculação de clínicas no Web Saúde para atendimento de prestadores no NAS.";
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        "Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde",
+        "Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência",
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à liberação de acesso às novas clínicas (${clinicsList}) no sistema **Web Saúde (HRP)** para as ${targetGroup}.\n\n` +
+        `Para que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n` +
+        `1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n` +
+        `2. Caso a permissão deva espelhar o perfil de alguma colaboradora que já atende no setor, você poderia nos informar o **usuário de referência** (ou se deve liberar para toda a recepção do NAS)?\n\n` +
+        `Assim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!`;
+    } else if (
       normAll.includes("acesso e permissoes") ||
       ticket.category.includes("Acesso e Permissões") ||
       /\bfavor cadastrar\b|\bliberar acesso\b|\bcadastro d[eo]\b/i.test(normCore)
@@ -1015,9 +1051,17 @@ export class AIAnalyst {
       const targetMatch = descText.match(
         /(?:favor\s+)?(?:cadastrar|liberar\s+acesso\s+(?:para|ao|a)|cadastro\s+d[eo]a?|acesso\s+(?:para|ao|a))\s+(?:o\s+|a\s+)?((?:dr\.?|dra\.?)\s+[^,\n.;]+|[A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
       );
-      const targetPerson = targetMatch
+      let targetPerson = targetMatch
         ? targetMatch[1].replace(/\s+/g, " ").trim()
         : "";
+      if (
+        targetPerson &&
+        /\b(atendentes?|clinicas?|novas?|usuarios?|setor|recepcao|nas)\b/i.test(
+          targetPerson
+        )
+      ) {
+        targetPerson = "";
+      }
 
       const normColabForm = normalizeText(formFields.nomeColaborador || "");
       const normReqFirst = normalizeText(firstName);

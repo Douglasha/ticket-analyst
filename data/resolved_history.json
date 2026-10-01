@@ -48,6 +48,19 @@
     ]
   },
   {
+    "id": "Chamado #42156 (Resolvido)",
+    "ticket_id": 42156,
+    "solution_id": 40873,
+    "title": "Desenvolvimento e Qualidade > Atualização de versão/sistema > Paciente sem opção de alergias",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "O erro está no momento do cadastro da alergia.",
+    "keywords": [],
+    "steps": [
+      "O erro está no momento do cadastro da alergia."
+    ]
+  },
+  {
     "id": "Chamado #42144 (Resolvido)",
     "ticket_id": 42144,
     "solution_id": 40824,
@@ -744,6 +757,19 @@
     "keywords": [],
     "steps": [
       "Verificação Efetuada."
+    ]
+  },
+  {
+    "id": "Chamado #41906 (Resolvido)",
+    "ticket_id": 41906,
+    "solution_id": 40876,
+    "title": "Atualizar Senha Spdata [R]",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "solucionado",
+    "keywords": [],
+    "steps": [
+      "solucionado"
     ]
   },
   {

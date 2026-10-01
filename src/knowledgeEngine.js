@@ -244,6 +244,24 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-12 (Médico/Prestador/Reconhecimento Facial) quando se trata de vinculação de clínicas no Web Saúde / Atendentes do NAS
+        if (
+          pb.id === "PB-UNI-12" &&
+          /\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS
+        if (
+          pb.id === "PB-UNI-25" &&
+          !/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
         const isRelocationOrPhoneInstall =
           /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
             normTicket
@@ -414,6 +432,15 @@ export class KnowledgeEngine {
       const learnedList = loadLearnedFeedback();
       for (const mem of learnedList) {
         if (String(mem.ticket_id) === String(ticket.id)) continue;
+        // Evita parear memórias de outros sistemas (ex: PEP / Dalete) quando o chamado é de clínicas / Web Saúde
+        if (
+          /\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(normTicket) &&
+          !/\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
         const cleanMemKws = (mem.keywords || []).filter(
           (k) => !STOPWORDS.has(normalizeText(k))
         );

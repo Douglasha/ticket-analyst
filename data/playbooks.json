@@ -786,5 +786,43 @@
       "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **{setor}**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o {setor} para checar o ponto de rede e o aparelho!"
+  },
+  {
+    "id": "PB-UNI-25",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Vinculação de Acesso a Clínicas / Prestadores no Sistema Web Saúde (HRP Unimed / NAS)",
+    "keywords": [
+      "web saude",
+      "web saúde",
+      "clinicas",
+      "clínicas",
+      "novas clinicas",
+      "novas clínicas",
+      "atendentes do nas",
+      "atendentes nas",
+      "nas passos",
+      "nucleo de atencao a saude",
+      "núcleo de atenção à saúde",
+      "liberar acesso atendentes",
+      "vinculação de clínica",
+      "vinculacao de clinica",
+      "código de clínica",
+      "codigo de clinica",
+      "relacionamento prestadores",
+      "secretária vinculado"
+    ],
+    "symptoms": "Solicitação (frequentemente aberta pelo Relacionamento com Prestadores ou Recepção) para vincular novas clínicas/prestadores (identificados por códigos de 8 dígitos, ex: 16000070) ao perfil de atendentes/secretárias do NAS (Núcleo de Atenção à Saúde) no Sistema Web Saúde (subsistema HRP Unimed), muitas vezes sem especificar os nomes/logins das atendentes que receberão a permissão.",
+    "required_info": [
+      "Nomes completos ou logins das atendentes/secretárias do NAS que devem ter as novas clínicas vinculadas no Web Saúde",
+      "Caso o acesso deva espelhar as permissões de outra atendente do setor, informar o usuário de referência (ou se deve liberar para toda a recepção do NAS)"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas no sistema **Web Saúde (HRP)** para a equipe do **NAS (Núcleo de Atenção à Saúde)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n2. Caso o acesso deva espelhar as permissões de alguma colaboradora que já atende no setor, informar o **nome da atendente de referência** (ou se a liberação deve ser aplicada a toda a recepção do NAS).\n\nAssim que nos confirmar essas informações por aqui, daremos sequência imediata na vinculação no Web Saúde!"
   }
 ]

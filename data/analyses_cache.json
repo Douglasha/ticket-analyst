@@ -3908,5 +3908,64 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Jessica Rosa** referente a **Liliane Alves de Souza** (CPF: 05229591641), com os acessos solicitados (HRP Web Saúde) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42127) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.\n  5. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  6. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
     "public_reply_draft": "Olá, Jessica! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Liliane Alves de Souza** (HRP Web Saúde).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42184": {
+    "ticket_id": 42184,
+    "analyzed_at": "01/10/2026 16:55",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Jessica Rosa** (Relacionamento Prestadores) solicita a vinculação de acesso às clínicas **16000070 - Mateus Giannini e 16000068 Marcelo Pereira** no sistema **Web Saúde (subsistema HRP Unimed)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**. O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Média",
+    "urgency_reason": "Vinculação de clínicas no Web Saúde para atendimento de prestadores no NAS.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde",
+      "Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-25",
+        "title": "Vinculação de Acesso a Clínicas / Prestadores no Sistema Web Saúde (HRP Unimed / NAS)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação (frequentemente aberta pelo Relacionamento com Prestadores ou Recepção) para vincular novas clínicas/prestadores (identificados por códigos de 8 dígitos, ex: 16000070) ao perfil de atendentes/secretárias do NAS (Núcleo de Atenção à Saúde) no Sistema Web Saúde (subsistema HRP Unimed), muitas vezes sem especificar os nomes/logins das atendentes que receberão a permissão.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42179 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Liliane Alves de Souza",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-25) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Jessica Rosa** (Relacionamento Prestadores) solicita a vinculação de acesso às clínicas **16000070 - Mateus Giannini e 16000068 Marcelo Pereira** no sistema **Web Saúde (subsistema HRP Unimed)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**. O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-25) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde\n  - Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+    "public_reply_draft": "Olá, Jessica! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n2. Caso a permissão deva espelhar o perfil de alguma colaboradora que já atende no setor, você poderia nos informar o **usuário de referência** (ou se deve liberar para toda a recepção do NAS)?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!"
   }
 }

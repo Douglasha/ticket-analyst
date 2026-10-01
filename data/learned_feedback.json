@@ -1,5 +1,31 @@
 [
   {
+    "ticket_id": 42139,
+    "title": "Resolução de Problemas  -  Telefone",
+    "category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "keywords": [
+      "telefone",
+      "outros",
+      "descrever",
+      "funcionando"
+    ],
+    "problem_summary": "O telefone do setor não está funcionando",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!",
+    "required_info": [
+      "Desconectar o cabo de rede (cabo conectado atrás do telefone), aguardar cerca de 10 segundos e reconectar firmemente para que o aparelho reinicie;",
+      "O visor do telefone chega a acender ou permanece totalmente apagado?",
+      "Qual é o número do ramal desse aparelho?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "[PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+      "[PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+      "[PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-01T19:06:47.736Z"
+  },
+  {
     "ticket_id": 42179,
     "title": "Acesso e Permissões  -  Liliane Alves de Souza",
     "category": "T.I > ST > Acesso e Permissões",
