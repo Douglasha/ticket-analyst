@@ -673,5 +673,38 @@
       "Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **{setor}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!"
+  },
+  {
+    "id": "PB-UNI-22",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Permissão e Visualização de Conteúdos/Módulos na Intranet Corporativa",
+    "keywords": [
+      "intranet",
+      "ferramenta intranet",
+      "acesso intranet",
+      "informações na intranet",
+      "informacoes na intranet",
+      "visualizar as informações",
+      "visualizar as informacoes",
+      "permissão intranet",
+      "permissao intranet",
+      "perfil intranet",
+      "dentro da ferramenta",
+      "módulos intranet",
+      "modulos intranet"
+    ],
+    "symptoms": "Colaborador(a) possui acesso liberado à Intranet, porém não consegue visualizar determinadas informações, páginas, documentos ou menus específicos dentro da ferramenta, frequentemente sem especificar quais módulos estão faltando.",
+    "required_info": [
+      "Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet",
+      "Informar se é exibida mensagem de erro/restrição de perfil ou se as opções simplesmente não constam no menu (se possível, anexar print da tela)"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).",
+      "Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.",
+      "Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.",
+      "Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.",
+      "Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao acesso da colaboradora **{colaborador}** na **Intranet**.\n\nComo o acesso básico já foi liberado, para que possamos ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!"
   }
 ]

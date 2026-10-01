@@ -1,5 +1,85 @@
 [
   {
+    "ticket_id": 42128,
+    "title": "Resolução de Problemas  -  Finalizar o atendimento",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "finalizar",
+      "pep",
+      "colaboradores",
+      "nucleo",
+      "apoio",
+      "justificativa:",
+      "permitindo"
+    ],
+    "problem_summary": "Bom dia!\n \nPrezados, solicito apoio\nJustificativa: PEP não está permitindo finalizar o atendimento.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Finalizar o atendimento**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-10] Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+      "[PB-UNI-10] Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+      "[PB-UNI-10] Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-01T11:15:16.518Z"
+  },
+  {
+    "ticket_id": 42127,
+    "title": "Acesso e Permissões  -  Dalete Olivira",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "dalete",
+      "olivira",
+      "analise",
+      "pep",
+      "passos",
+      "justificativa:"
+    ],
+    "problem_summary": "Bom dia!\n \nPrezados, solicito analise do meu acesso ao PEP (NAS Passos)\nJustificativa: Hoje (01/10/2026) apenas 3 médicos apareceram no acesso.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-01T11:14:52.490Z"
+  },
+  {
+    "ticket_id": 42112,
+    "title": "Internet e WiFi  -  ROTEADOR WIFI",
+    "category": "T.I > IR > Conectividade > Internet e WiFi",
+    "keywords": [
+      "internet",
+      "wifi",
+      "roteador",
+      "faturamento",
+      "lentidao",
+      "oscilacao",
+      "principalmente",
+      "ligacoes"
+    ],
+    "problem_summary": "Boa tarde!\nSolicito a instalação de um roteador no setor de faturamento, devido a lentidão e oscilação da internet, principalmente em ligações do whatsapp do setor.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **Faturamento** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares)?\n2. A lentidão nas ligações do WhatsApp ocorre em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para viabilidade de uma nova instalação.",
+    "required_info": [
+      "A lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares)?",
+      "A lentidão nas ligações do WhatsApp ocorre em aparelhos específicos ou em todos os celulares utilizados no setor?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-21] Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+      "[PB-UNI-21] Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+      "[PB-UNI-21] Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
+      "[PB-UNI-21] Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
+      "[PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-01T11:06:40.557Z"
+  },
+  {
     "ticket_id": 42096,
     "title": "Redefinição de Senhas  -  Izabel Heloisa Duarte da Silva",
     "category": "T.I > ST > Acesso e Permissões > Redefinição de Senhas",

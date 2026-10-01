@@ -1,5 +1,49 @@
 [
   {
+    "id": "Chamado #42132 (Resolvido)",
+    "ticket_id": 42132,
+    "solution_id": 40794,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Publicação relatório Igualdade Salarial - Site Unimed Sudoeste MG",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Relatório Inserido na página",
+    "keywords": [],
+    "steps": [
+      "Relatório Inserido na página"
+    ]
+  },
+  {
+    "id": "Chamado #42127 (Resolvido)",
+    "ticket_id": 42127,
+    "solution_id": 40793,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Dalete Olivira",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42124 (Resolvido)",
+    "ticket_id": 42124,
+    "solution_id": 40795,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42089 (Resolvido)",
     "ticket_id": 42089,
     "solution_id": 40780,

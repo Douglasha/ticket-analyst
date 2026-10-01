@@ -275,6 +275,19 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear Playbook de Onboarding/Ponto/MyPlace (PB-UNI-01) quando o chamado trata de Intranet ou permissões de usuário já existente
+        if (
+          pb.id === "PB-UNI-01" &&
+          (/\bintranet\b/i.test(normTicket) ||
+            (/\b(ja foi liberado|já foi liberado)\b/i.test(normTicket) &&
+              !/\b(ponto|myplace|rep|biometria)\b/i.test(normTicket)))
+        ) {
+          continue;
+        }
+        // Evita parear Playbook de Intranet (PB-UNI-22) quando o chamado não cita Intranet
+        if (pb.id === "PB-UNI-22" && !/\bintranet\b/i.test(normTicket)) {
+          continue;
+        }
         const score = computeRelevance(
           fullTicketText,
           ticketTokens,

@@ -639,9 +639,54 @@ export class AIAnalyst {
           `Assim que confirmar, executamos o bloqueio imediatamente!`;
       }
     } else if (
-      normAll.includes("relogio de ponto") ||
-      normAll.includes("myplace") ||
-      (normAll.includes("criacao de usuario") && normAll.includes("recursos humanos"))
+      normAll.includes("intranet") &&
+      (normAll.includes("visualizar") ||
+        normAll.includes("disponivel") ||
+        normAll.includes("disponível") ||
+        normAll.includes("informac") ||
+        normAll.includes("informaç") ||
+        normAll.includes("modulo") ||
+        normAll.includes("módulo") ||
+        normAll.includes("permissao") ||
+        normAll.includes("permissão") ||
+        normAll.includes("ja foi liberado") ||
+        normAll.includes("já foi liberado") ||
+        normAll.includes("ferramenta"))
+    ) {
+      const colabMatch = ticket.content.match(/(?:Colaboradora?|Nome)\s*:\s*([^\n]+)/i);
+      const colabName = colabMatch ? colabMatch[1].trim() : "colaboradora";
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (Recursos Humanos) relata que a colaboradora **${colabName}** já possui acesso liberado à **Intranet**, ` +
+        `porém não está conseguindo visualizar determinadas informações ou módulos na ferramenta. O chamado não especifica quais páginas ou dados estão ausentes, demandando detalhamento para ajuste das permissões de perfil.`;
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões";
+      realUrgency = "Média";
+      urgencyReason = "Colaboradora com acesso ativo à Intranet, mas sem visualização de conteúdos ou módulos necessários para suas atividades.";
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        "Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet",
+        "Informar se é exibida mensagem de restrição/permissão negada ou se as opções simplesmente não constam na tela (se possível, anexar print da tela)",
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a solicitação referente ao acesso da colaboradora **${colabName}** na **Intranet**.\n\n` +
+        `Como a colaboradora já possui acesso à ferramenta, para que nossa equipe de T.I. possa ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n` +
+        `1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n` +
+        `2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n` +
+        `3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\n` +
+        `Assim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!`;
+    } else if (
+      !normAll.includes("intranet") &&
+      (
+        normAll.includes("relogio de ponto") ||
+        normAll.includes("myplace") ||
+        (
+          normAll.includes("criacao de usuario") &&
+          normAll.includes("recursos humanos") &&
+          /\b(ponto|rep|myplace|admissao|admissão|biometria|folha|matricula|matrícula|pis)\b/i.test(normAll)
+        )
+      )
     ) {
       const hasMatricula = /matricula\s*[:\-]?\s*\d+/i.test(normAll);
       const hasPis = /\bpis\s*[:\-]?\s*[\d.\-]+/i.test(normAll);
@@ -1690,9 +1735,13 @@ export class AIAnalyst {
       matchedPb.reply_template &&
       sufficiencyStatus !== "completo"
     ) {
+      const colabMatch = (ticket.content || "").match(/(?:Colaboradora?|Nome)\s*:\s*([^\n]+)/i);
+      const colabName = colabMatch ? colabMatch[1].trim() : "colaborador(a)";
       publicReply = matchedPb.reply_template
         .replace(/\{solicitante\}/g, firstName)
-        .replace(/\{titulo\}/g, cleanSubject);
+        .replace(/\{titulo\}/g, cleanSubject)
+        .replace(/\{setor\}/g, sectorName)
+        .replace(/\{colaborador\}/g, colabName);
     } else if (missingInfo.length > 0) {
       const questionsBul = missingInfo.map((q) => `- ${q}`).join("\n");
       publicReply =

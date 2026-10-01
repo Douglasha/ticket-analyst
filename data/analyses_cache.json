@@ -3369,6 +3369,156 @@
       "[PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (Faturamento) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Conectividade > Internet e WiFi | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-21) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-08)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (Faturamento)\n  - Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-21] Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).\n  2. [PB-UNI-21] Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.\n  3. [PB-UNI-21] Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.\n  4. [PB-UNI-21] Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.\n  5. [PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi.",
-    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **Faturamento** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!"
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **Faturamento** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares)?\n2. A lentidão nas ligações do WhatsApp ocorre em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para viabilidade de uma nova instalação."
+  },
+  "42127": {
+    "ticket_id": 42127,
+    "analyzed_at": "01/10/2026 08:13",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Dalete Garcia de Oliveira Bartelochi, do setor Unimed > Promoprev, solicitou análise do seu acesso ao PEP (Núcleo). Ele relatou que hoje (01/10/2026) apenas 3 médicos apareceram no acesso, o que o levou a solicitar análise. O colaborador Dalete Olivira, cujo acesso está em análise, informou que os acessos informados são PEP (Núcleo).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Baixa",
+    "urgency_reason": "O chamado envolve acesso a sistemas críticos que podem afetar a eficiência operacional.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "resolution_steps": [
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Dalete Garcia de Oliveira Bartelochi, do setor Unimed > Promoprev, solicitou análise do seu acesso ao PEP (Núcleo). Ele relatou que hoje (01/10/2026) apenas 3 médicos apareceram no acesso, o que o levou a solicitar análise. O colaborador Dalete Olivira, cujo acesso está em análise, informou que os acessos informados são PEP (Núcleo).\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+    "public_reply_draft": "Olá, Dalete! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Dalete Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42128": {
+    "ticket_id": 42128,
+    "analyzed_at": "01/10/2026 08:03",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Dalete Garcia de Oliveira Bartelochi, do setor Promoprev, está pedindo suporte para finalizar um atendimento que está sendo bloqueado pelo sistema PEP. O problema está relacionado ao sistema de atendimento ao cliente (ST) e solicita que o suporte técnico realize a finalização do atendimento.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Baixa",
+    "urgency_reason": "O atendimento está bloqueado, comprometendo a eficiência operacional.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-10",
+        "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
+        "steps": [
+          "Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+          "Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+          "Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+        ],
+        "score": 0.42
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-10)",
+    "resolution_steps": [
+      "[PB-UNI-10] Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+      "[PB-UNI-10] Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+      "[PB-UNI-10] Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Dalete Garcia de Oliveira Bartelochi, do setor Promoprev, está pedindo suporte para finalizar um atendimento que está sendo bloqueado pelo sistema PEP. O problema está relacionado ao sistema de atendimento ao cliente (ST) e solicita que o suporte técnico realize a finalização do atendimento.\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-10)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-10] Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).\n  2. [PB-UNI-10] Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.\n  3. [PB-UNI-10] Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo.",
+    "public_reply_draft": "Olá, Dalete! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Finalizar o atendimento**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42133": {
+    "ticket_id": 42133,
+    "analyzed_at": "01/10/2026 09:05",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Lucelia Fernanda** (Recursos Humanos) relata que a colaboradora **LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS** já possui acesso liberado à **Intranet**, porém não está conseguindo visualizar determinadas informações ou módulos na ferramenta. O chamado não especifica quais páginas ou dados estão ausentes, demandando detalhamento para ajuste das permissões de perfil.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Média",
+    "urgency_reason": "Colaboradora com acesso ativo à Intranet, mas sem visualização de conteúdos ou módulos necessários para suas atividades.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet",
+      "Informar se é exibida mensagem de restrição/permissão negada ou se as opções simplesmente não constam na tela (se possível, anexar print da tela)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-22",
+        "title": "Permissão e Visualização de Conteúdos/Módulos na Intranet Corporativa",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Colaborador(a) possui acesso liberado à Intranet, porém não consegue visualizar determinadas informações, páginas, documentos ou menus específicos dentro da ferramenta, frequentemente sem especificar quais módulos estão faltando.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).",
+          "Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.",
+          "Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.",
+          "Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.",
+          "Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41957 (Resolvido)",
+        "title": "Segurança da Informação > Gestão de Acessos > LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro realizado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41656 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Lízia Magalhães Pereira Giotti de Morais",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSegue credenciais de acessos\n\n\r\n--------------------------------------------------------------\nE-mail Institucional \nlink: https://webmail-seguro.com.br/unimedsudoestemg.coop.br\nlogin: lgiotti@unimedsudoestemg.coop.br\nsenha: 014@Lgm629\n--------------------------------------------------------------\nFaculdade Unimed\nlink: https://www",
+        "steps": [
+          "Prezados(as),",
+          "Segue credenciais de acessos",
+          "--------------------------------------------------------------",
+          "E-mail Institucional",
+          "link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+          "login: lgiotti@unimedsudoestemg.coop.br"
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-22) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41957 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-22] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).",
+      "[PB-UNI-22] Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.",
+      "[PB-UNI-22] Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.",
+      "[PB-UNI-22] Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.",
+      "[PB-UNI-22] Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos.",
+      "[Chamado #41957 (Resolvido)] Cadastro realizado"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Lucelia Fernanda** (Recursos Humanos) relata que a colaboradora **LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS** já possui acesso liberado à **Intranet**, porém não está conseguindo visualizar determinadas informações ou módulos na ferramenta. O chamado não especifica quais páginas ou dados estão ausentes, demandando detalhamento para ajuste das permissões de perfil.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-22) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41957 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet\n  - Informar se é exibida mensagem de restrição/permissão negada ou se as opções simplesmente não constam na tela (se possível, anexar print da tela)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-22] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).\n  2. [PB-UNI-22] Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.\n  3. [PB-UNI-22] Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.\n  4. [PB-UNI-22] Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.\n  5. [PB-UNI-22] Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos.\n  6. [Chamado #41957 (Resolvido)] Cadastro realizado",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação referente ao acesso da colaboradora **LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS** na **Intranet**.\n\nComo a colaboradora já possui acesso à ferramenta, para que nossa equipe de T.I. possa ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!"
   }
 }
