@@ -265,6 +265,25 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear Playbook de Ligações Caindo (PB-UNI-08) quando o chamado NÃO menciona queda/instabilidade de chamadas
+        if (
+          pb.id === "PB-UNI-08" &&
+          !/\b(caindo|queda|quedas|interromp|desconect|cortando|chiando|oscila|instabilidade)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear Playbook de Telefone Inoperante (PB-UNI-24) quando o chamado trata de queda/instabilidade ou não trata de telefone
+        if (
+          pb.id === "PB-UNI-24" &&
+          (!/\b(telefone|ramal|voip)\b/i.test(normTicket) ||
+            /\b(caindo|quedas?|interromp|ligacoes caindo|ligações caindo)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
+        }
         // Evita parear Playbook de Scan to E-mail (PB-UNI-23) quando não trata de scan/cadastro de e-mail na impressora
         if (pb.id === "PB-UNI-23" && !isScanToEmail) {
           continue;

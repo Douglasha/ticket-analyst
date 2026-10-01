@@ -200,16 +200,19 @@
     "title": "Instabilidade em Linhas Telefônicas / Ligações Caindo (PABX / VoIP)",
     "domain": "Infraestrutura e Rede",
     "keywords": [
-      "ligações",
-      "ligacoes",
-      "caindo",
-      "linhas",
-      "telefone",
-      "ramal",
-      "telefonia",
-      "pabx",
-      "voip",
-      "tronco"
+      "ligações caindo",
+      "ligacoes caindo",
+      "ligação caindo",
+      "ligacao caindo",
+      "queda de ligação",
+      "queda de ligacao",
+      "queda nas ligações",
+      "chamada caindo",
+      "chamadas caindo",
+      "linhas caindo",
+      "instabilidade nas ligações",
+      "instabilidade nas ligacoes",
+      "tronco sip"
     ],
     "symptoms": "Setor relata que as ligações externas ou internas estão caindo com frequência e pede verificação das linhas.",
     "required_info": [
@@ -748,5 +751,40 @@
       "Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail na impressora **{impressora}** ({setor}) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que finalizarmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!"
+  },
+  {
+    "id": "PB-UNI-24",
+    "domain": "Infraestrutura e Rede",
+    "title": "Aparelho Telefônico VoIP Inoperante / Telefone Sem Sinal ou Mudo (Reinício e Cabo de Rede)",
+    "keywords": [
+      "telefone não está funcionando",
+      "telefone nao esta funcionando",
+      "o telefone do setor",
+      "telefone do setor",
+      "telefone sem sinal",
+      "telefone mudo",
+      "telefone apagado",
+      "aparelho de telefone",
+      "ramal mudo",
+      "ramal não funciona",
+      "ramal nao funciona",
+      "ramal sem sinal",
+      "reiniciar telefone",
+      "cabo de rede do telefone",
+      "telefones voip"
+    ],
+    "symptoms": "Usuário relata de forma genérica que o aparelho de telefone VoIP do setor não está funcionando, está sem sinal, mudo ou apagado.",
+    "required_info": [
+      "Verificar se o visor do telefone está aceso ou totalmente apagado",
+      "Informar o número do ramal desse aparelho",
+      "Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10s) para reinicializar"
+    ],
+    "resolution_steps": [
+      "Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+      "Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+      "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **{setor}**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o {setor} para checar o ponto de rede e o aparelho!"
   }
 ]

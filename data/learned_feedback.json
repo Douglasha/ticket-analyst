@@ -1,5 +1,93 @@
 [
   {
+    "ticket_id": 42179,
+    "title": "Acesso e Permissões  -  Liliane Alves de Souza",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "liliane",
+      "alves",
+      "souza",
+      "adequar",
+      "secretaria",
+      "clinca"
+    ],
+    "problem_summary": "Boa tarde\nGentileza adequar o usuário da secretária para a clínca do médico \n16000068 - Marcelo Pereira Servicos Medicos Ltda",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Liliane Alves de Souza** (HRP Web Saúde).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-01T18:40:01.768Z"
+  },
+  {
+    "ticket_id": 42159,
+    "title": "Erros de Sistema  -  Sincronização Nextcloud",
+    "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "keywords": [
+      "erros",
+      "sincronizacao",
+      "nextcloud",
+      "next",
+      "cloud",
+      "error",
+      "transferring",
+      "http:"
+    ],
+    "problem_summary": "Error transferring http://192.168.41.23/remote.php/\ndav/files/rfreitas/Contas a auditar (2)/2026/09/\nFatura - Raissa Ribeiro Souza.PDF - server replied:\nNot Found\nCaminho errado, arquivo/pasta nao existe",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!",
+    "required_info": [
+      "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+      "Você está tentando acessar pelo navegador ou pelo atalho no computador?",
+      "Qual mensagem de erro aparece na tela e qual o seu ID do HopToDesk para acessarmos remotamente?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "[PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "[PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+      "[Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+      "[Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+      "[Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-01T18:34:45.967Z"
+  },
+  {
+    "ticket_id": 42105,
+    "title": "Solicitação Diversa  -  Cadastrar meu e-mail na impressora",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "keywords": [
+      "cadastrar",
+      "e-mail",
+      "impressora",
+      "trabalho",
+      "sensiveis",
+      "cadastro",
+      "recepcao",
+      "nucleo"
+    ],
+    "problem_summary": "Como trabalho com dados sensíveis solicito o cadastro do meu e-mail na impressora da recepção do Núcleo, fica com pasta compartilhada não e indicado devido a LGPD. vsouza@unimedsudoestemg.coop.br",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail (**vsouza@unimedsudoestemg.coop.br**) na impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que concluirmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+      "[PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+      "[PB-UNI-23] Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.",
+      "[PB-UNI-23] Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.",
+      "[PB-UNI-23] Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste.",
+      "[Chamado #41656 (Resolvido)] Segue credenciais de acessos"
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-01T13:02:29.966Z"
+  },
+  {
     "ticket_id": 42128,
     "title": "Resolução de Problemas  -  Finalizar o atendimento",
     "category": "T.I > ST > Resolução de Problemas",

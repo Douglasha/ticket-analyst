@@ -3490,5 +3490,423 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Lucelia Fernanda** (Recursos Humanos) relata que a colaboradora **LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS** já possui acesso liberado à **Intranet**, porém não está conseguindo visualizar determinadas informações ou módulos na ferramenta. O chamado não especifica quais páginas ou dados estão ausentes, demandando detalhamento para ajuste das permissões de perfil.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-22) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41957 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet\n  - Informar se é exibida mensagem de restrição/permissão negada ou se as opções simplesmente não constam na tela (se possível, anexar print da tela)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-22] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).\n  2. [PB-UNI-22] Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.\n  3. [PB-UNI-22] Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.\n  4. [PB-UNI-22] Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.\n  5. [PB-UNI-22] Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos.\n  6. [Chamado #41957 (Resolvido)] Cadastro realizado",
     "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação referente ao acesso da colaboradora **LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS** na **Intranet**.\n\nComo a colaboradora já possui acesso à ferramenta, para que nossa equipe de T.I. possa ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!"
+  },
+  "42139": {
+    "ticket_id": 42139,
+    "analyzed_at": "01/10/2026 16:02",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Maria Clara Oliveira** (H OPME) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "real_urgency": "Média",
+    "urgency_reason": "Telefone do setor inoperante; demanda checagem de alimentação física, cabo de rede ou registro do ramal no PABX.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Verificar se o visor do telefone está aceso ou totalmente apagado",
+      "Informar o número do ramal desse aparelho",
+      "Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-24",
+        "title": "Aparelho Telefônico VoIP Inoperante / Telefone Sem Sinal ou Mudo (Reinício e Cabo de Rede)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata de forma genérica que o aparelho de telefone VoIP do setor não está funcionando, está sem sinal, mudo ou apagado.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+          "Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+          "Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+          "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-24) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "resolution_steps": [
+      "[PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "[PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+      "[PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+      "[PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Maria Clara Oliveira** (H OPME) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-24) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Verificar se o visor do telefone está aceso ou totalmente apagado\n  - Informar o número do ramal desse aparelho\n  - Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.\n  2. [PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.\n  3. [PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.\n  4. [PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.",
+    "public_reply_draft": "Olá, Maria! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!"
+  },
+  "42158": {
+    "ticket_id": 42158,
+    "analyzed_at": "01/10/2026 13:59",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário relatou um problema técnico de manutenção eletrônica no NOBREAK computador do Dr. Rafael Rick no prédio azul sala 402, localizado no setor de Centro de Especialidades. O equipamento não segura durante picos de energia ou quedas de energia elétrica.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "Hospital > Manutenção",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "O chamado afeta a operação do sistema de segurança do hospital.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)",
+      "Dados cadastrais completos da pessoa que receberá o acesso (Nome Completo, CPF, CRM/Matrícula e vínculo/empresa), caso o formulário tenha sido preenchido com os dados do próprio solicitante",
+      "Caso solicite acesso ao Controle de Acesso / Reconhecimento Facial nas portas do Hospital: enviar uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "resolution_steps": [
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário relatou um problema técnico de manutenção eletrônica no NOBREAK computador do Dr. Rafael Rick no prédio azul sala 402, localizado no setor de Centro de Especialidades. O equipamento não segura durante picos de energia ou quedas de energia elétrica.\n\nClassificação Sugerida: Hospital > Manutenção | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)\n  - Dados cadastrais completos da pessoa que receberá o acesso (Nome Completo, CPF, CRM/Matrícula e vínculo/empresa), caso o formulário tenha sido preenchido com os dados do próprio solicitante\n  - Caso solicite acesso ao Controle de Acesso / Reconhecimento Facial nas portas do Hospital: enviar uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+    "public_reply_draft": "Olá, RAFAEL! Tudo bem?\n\nRecebemos a sua solicitação de cadastro de acesso. Porém, verificamos que os campos do formulário foram preenchidos com os seus próprios dados e não foi especificado quais acessos precisam ser liberados.\n\nPara prosseguirmos com o cadastro, você poderia nos informar:\n1. **Quais acessos ou sistemas** precisam ser liberados (ex.: SGH Spdata, login de Rede/computador, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n2. Os **dados cadastrais da pessoa a ser cadastrada** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n3. **Caso necessite de acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar em anexo uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\nAssim que nos enviar essas informações por aqui, já realizamos a liberação!"
+  },
+  "42159": {
+    "ticket_id": 42159,
+    "analyzed_at": "01/10/2026 15:31",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Rebeca Gonçalves de Freitas Silva relatou um problema de sincronização do Nextcloud, onde ela está recebendo uma mensagem de 'Not Found' ao tentar acessar um arquivo específico no servidor Nextcloud. O erro ocorre tanto pelo navegador web quanto pelo aplicativo Nextcloud sincronizado no Windows. Este chamado refere-se a um erro técnico relacionado à sincronização do Nextcloud no setor de Faturamento.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso a Pastas / Nextcloud",
+    "real_urgency": "Média",
+    "urgency_reason": "O chamado envolve um erro técnico que pode afetar a eficiência operacional do setor de Faturamento.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Nome exato da pasta compartilhada no Nextcloud que está tentando acessar",
+      "Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows",
+      "ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-02",
+        "title": "Falha de Acesso ao Nextcloud (Pastas Compartilhadas / Sincronização)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Usuário relata que não consegue acessar a pasta do Nextcloud (via navegador ou cliente de sincronização Desktop).",
+        "steps": [
+          "Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41867 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Conflito de Pasta",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\n\r\n\r\nDiagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud. \n\n\r\n\n\r\n\r\nAção Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.\n\n\r\n\n\r\n\r\nResultado: O cliente Nextcloud retomou o f",
+        "steps": [
+          "Prezados(as),",
+          "Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+          "Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+          "Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41867 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "[PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "[PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+      "[Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+      "[Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+      "[Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Rebeca Gonçalves de Freitas Silva relatou um problema de sincronização do Nextcloud, onde ela está recebendo uma mensagem de 'Not Found' ao tentar acessar um arquivo específico no servidor Nextcloud. O erro ocorre tanto pelo navegador web quanto pelo aplicativo Nextcloud sincronizado no Windows. Este chamado refere-se a um erro técnico relacionado à sincronização do Nextcloud no setor de Faturamento.\n\nClassificação Sugerida: T.I > ST > Acesso a Pastas / Nextcloud | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-02) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41867 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Nome exato da pasta compartilhada no Nextcloud que está tentando acessar\n  - Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows\n  - ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.\n  2. [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.\n  3. [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.\n  4. [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.\n  5. [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.\n  6. [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado.",
+    "public_reply_draft": "Olá, Rebeca! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!"
+  },
+  "42168": {
+    "ticket_id": 42168,
+    "analyzed_at": "01/10/2026 15:48",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A usuária Fernanda Cristina da Costa Padua solicitou ajustes em um documento de automação de processos (RPA) para alterar a localização do campo de horário de entrada na tela de registro pós-operatório imediato e sbar. Ela mencionou que o campo de sinais vitais também precisa ser alterado na mesma tela de RPA.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "real_urgency": "Baixa",
+    "urgency_reason": "O chamado afeta diretamente a eficiência operacional no Centro Cirúrgico.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42132 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Publicação relatório Igualdade Salarial - Site Unimed Sudoeste MG",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Relatório Inserido na página",
+        "steps": [
+          "Relatório Inserido na página"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41861 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+        "steps": [
+          "Prezados(as),",
+          "Informamos que o formulário foi atualizado conforme solicitado:",
+          "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+          "Nova pergunta adicionada: Tipo de procedimento",
+          "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+          "Sonda Folley 2 vias"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41839 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização do Título de Formulário",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nFormulário renomeado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Formulário renomeado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41644 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > GLPI",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nMensagem cadastrada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Mensagem cadastrada",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #42132 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41861 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #42132 (Resolvido)] Relatório Inserido na página",
+      "[Chamado #41861 (Resolvido)] Informamos que o formulário foi atualizado conforme solicitado:",
+      "[Chamado #41861 (Resolvido)] Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+      "[Chamado #41861 (Resolvido)] Nova pergunta adicionada: Tipo de procedimento",
+      "[Chamado #41861 (Resolvido)] Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+      "[Chamado #41861 (Resolvido)] Sonda Folley 2 vias"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA usuária Fernanda Cristina da Costa Padua solicitou ajustes em um documento de automação de processos (RPA) para alterar a localização do campo de horário de entrada na tela de registro pós-operatório imediato e sbar. Ela mencionou que o campo de sinais vitais também precisa ser alterado na mesma tela de RPA.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Baixa\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42132 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41861 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #42132 (Resolvido)] Relatório Inserido na página\n  2. [Chamado #41861 (Resolvido)] Informamos que o formulário foi atualizado conforme solicitado:\n  3. [Chamado #41861 (Resolvido)] Nome alterado para: CHECKLIST DE CATETERISMO VESICAL\n  4. [Chamado #41861 (Resolvido)] Nova pergunta adicionada: Tipo de procedimento\n  5. [Chamado #41861 (Resolvido)] Novas respostas adicionadas à pergunta \"Tipo de Sonda\":\n  6. [Chamado #41861 (Resolvido)] Sonda Folley 2 vias",
+    "public_reply_draft": "Olá, Fernanda! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Documento RPA - Registro pós operatório imediato + sbar**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42169": {
+    "ticket_id": 42169,
+    "analyzed_at": "01/10/2026 15:46",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante, Fernanda da Costa Padua, do setor de Centro Cirúrgico, solicitou a criação de um documento no PEP para relatar os procedimentos de pequena cirurgia ou não necessitando a sistematização de enfermagem. O documento foi aprovado pela comissão de prontuário. O chamado refere-se a uma solicitação de desenvolvimento de uma nova aplicação no sistema PEP.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "O chamado é de baixa urgência, pois não há impacto imediato no funcionamento do sistema ou na prestação de serviços do setor de Centro Cirúrgico.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Especificação completa dos campos/opções a incluir ou alterar (ou documento/print anexo)",
+      "Regras de obrigatoriedade e perfil profissional que preencherá o formulário",
+      "Validação em homologação antes da publicação em produção"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-29",
+        "title": "Solicitar Certificado SafeWeb",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "1. Objetivo\n\n\r\nDescrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.\n\n\r\n \n\n\r\n2. Âmbito de aplicação\n\n\r\nEste documento aplica-se a todos que precisem...",
+        "steps": [
+          "1. Objetivo",
+          "Descrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.",
+          "2. Âmbito de aplicação",
+          "Este documento aplica-se a todos que precisem utilizar a ferramenta.",
+          "3. Definições e siglas",
+          "PEP: Prontuário Eletrônico do Paciente"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-09",
+        "title": "Desenvolvimento / Ajustes em Formulários Clínicos e Indicadores (PEP / Enfermagem)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Coordenação de Enfermagem ou área assistencial solicita criação/alteração de campos em formulários eletrônicos (Checklist Sonda Folley, Passagem de Plantão, Indicadores).",
+        "steps": [
+          "Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+          "Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+          "Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+        ],
+        "score": 0.53
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41290 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criar Mensagem de Alerta para Alergias",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde.\n\nRealizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Boa tarde.",
+          "Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #40855 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação e configuração de pastas compartilhadas – Documentos da Qualidade",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado.",
+        "steps": [
+          "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-29) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)",
+    "resolution_steps": [
+      "[KB-29] Descrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.",
+      "[KB-29] Âmbito de aplicação",
+      "[KB-29] Este documento aplica-se a todos que precisem utilizar a ferramenta.",
+      "[KB-29] Definições e siglas",
+      "[KB-29] PEP: Prontuário Eletrônico do Paciente",
+      "[PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante, Fernanda da Costa Padua, do setor de Centro Cirúrgico, solicitou a criação de um documento no PEP para relatar os procedimentos de pequena cirurgia ou não necessitando a sistematização de enfermagem. O documento foi aprovado pela comissão de prontuário. O chamado refere-se a uma solicitação de desenvolvimento de uma nova aplicação no sistema PEP.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-29) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Especificação completa dos campos/opções a incluir ou alterar (ou documento/print anexo)\n  - Regras de obrigatoriedade e perfil profissional que preencherá o formulário\n  - Validação em homologação antes da publicação em produção\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-29] Descrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.\n  2. [KB-29] Âmbito de aplicação\n  3. [KB-29] Este documento aplica-se a todos que precisem utilizar a ferramenta.\n  4. [KB-29] Definições e siglas\n  5. [KB-29] PEP: Prontuário Eletrônico do Paciente\n  6. [PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+    "public_reply_draft": "Olá, Fernanda! Tudo bem?\n\nRecebemos a especificação para ajuste/evolução do formulário clínico (**Criação de documento para pequena cirurgia**).\n\nNossa equipe de Desenvolvimento já está analisando os itens solicitados. Assim que a versão ajustada estiver disponível para validação/homologação (ou caso surja alguma dúvida sobre o comportamento de algum campo), entraremos em contato por este chamado!"
+  },
+  "42179": {
+    "ticket_id": 42179,
+    "analyzed_at": "01/10/2026 15:39",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação de acesso aberta por **Jessica Rosa** referente a **Liliane Alves de Souza** (CPF: 05229591641), com os acessos solicitados (HRP Web Saúde) e dados cadastrais já informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Alta",
+    "urgency_reason": "Liberação de acesso para profissional/médico em atuação assistencial/plantão no Hospital.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42127",
+        "title": "Acesso e Permissões  -  Dalete Olivira",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41945 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Maria Alves Andrade",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro realizado conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro realizado conforme solicitado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41641 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > LIDIANE ROSARIA SIMAO SOUZA",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42127) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "resolution_steps": [
+      "[MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Jessica Rosa** referente a **Liliane Alves de Souza** (CPF: 05229591641), com os acessos solicitados (HRP Web Saúde) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42127) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.\n  5. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  6. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+    "public_reply_draft": "Olá, Jessica! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Liliane Alves de Souza** (HRP Web Saúde).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
   }
 }

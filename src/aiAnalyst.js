@@ -902,12 +902,39 @@ export class AIAnalyst {
       missingInfo = patCode
         ? []
         : ["Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"];
+    } else if (
+      /\btelefone\b/i.test(normAll) &&
+      (/\b(nao esta funcionando|não está funcionando|nao funciona|não funciona|sem sinal|mudo|apagado|parou de funcionar|problema no telefone)\b/i.test(normAll) ||
+        (normAll.includes("telefone") && (normAll.includes("setor") || normAll.includes("aparelho")))) &&
+      !/\b(caindo|quedas?|interromp|ligacoes caindo|ligações caindo|ponto de telefone|remanej)\b/i.test(normAll)
+    ) {
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) relata que o telefone do setor não está funcionando. ` +
+        `Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.`;
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Administração de Redes > Telefones VoIP";
+      realUrgency = "Média";
+      urgencyReason = "Telefone do setor inoperante; demanda checagem de alimentação física, cabo de rede ou registro do ramal no PABX.";
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Verificar se o visor do telefone está aceso ou totalmente apagado",
+        "Informar o número do ramal desse aparelho",
+        "Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar",
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu chamado referente ao telefone do setor **${sectorName}**.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n` +
+        `1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n` +
+        `2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n` +
+        `3. Qual é o **número do ramal** desse aparelho?\n\n` +
+        `Caso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o ${sectorName} para checar o ponto de rede e o aparelho!`;
     } else if (normAll.includes("ligacoes") || (normAll.includes("caindo") && normAll.includes("linhas"))) {
       translatedIntent =
-        "Relato de instabilidade na telefonia (quedas frequentes de ligações) no Núcleo Passos, " +
+        `Relato de instabilidade na telefonia (quedas frequentes de ligações) no setor ${sectorName}, ` +
         "solicitando revisão das linhas telefônicas/tronco VoIP sem especificar quais ramais ou horários foram afetados.";
       detectedDomain = "Infraestrutura e Rede";
-      suggestedCategory = "T.I > IR > Telefonia / PABX / VoIP";
+      suggestedCategory = "T.I > IR > Administração de Redes > Telefones VoIP";
       realUrgency = "Alta";
       urgencyReason = "Impacto direto no atendimento telefônico aos beneficiários/pacientes da unidade.";
       sufficiencyStatus = "incompleto";

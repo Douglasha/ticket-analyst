@@ -1,5 +1,97 @@
 [
   {
+    "id": "Chamado #42179 (Resolvido)",
+    "ticket_id": 42179,
+    "solution_id": 40872,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Liliane Alves de Souza",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42170 (Resolvido)",
+    "ticket_id": 42170,
+    "solution_id": 40825,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Julia vitoria grilo silva",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue nova senha: Jminas@0256\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue nova senha: Jminas@0256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42159 (Resolvido)",
+    "ticket_id": 42159,
+    "solution_id": 40870,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Sincronização Nextcloud",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAo acessar a estação de trabalho da colaboradora, constatamos que o sistema Nextcloud estava desatualizado. Aplicamos a atualização para a última versão estável, mas o problema continuou. No servidor, executamos o comando sudo nextcloud.occ files:scan rfreitas para o usuário afetado. Após todos os procedimentos, os arquivos voltara",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Ao acessar a estação de trabalho da colaboradora, constatamos que o sistema Nextcloud estava desatualizado. Aplicamos a atualização para a última versão estável, mas o problema continuou. No servidor, executamos o comando sudo nextcloud.occ files:scan rfreitas para o usuário afetado. Após todos os procedimentos, os arquivos voltaram a sincronizar.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42144 (Resolvido)",
+    "ticket_id": 42144,
+    "solution_id": 40824,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Atualizar Nextcloud",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42137 (Resolvido)",
+    "ticket_id": 42137,
+    "solution_id": 40826,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Nextcloud com erro de sincronização",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Problema solucionado",
+    "keywords": [],
+    "steps": [
+      "Problema solucionado"
+    ]
+  },
+  {
+    "id": "Chamado #42133 (Resolvido)",
+    "ticket_id": 42133,
+    "solution_id": 40813,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > LIZIA MAGALHAES PEREIRA GIOTTI DE MORAIS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nPermissões básicas do sistema intranet liberadas, caso futuramente necessite de novos acessos, solicitar a coordenadora solicitar via glpi\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Permissões básicas do sistema intranet liberadas, caso futuramente necessite de novos acessos, solicitar a coordenadora solicitar via glpi",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42132 (Resolvido)",
     "ticket_id": 42132,
     "solution_id": 40794,
@@ -10,6 +102,24 @@
     "keywords": [],
     "steps": [
       "Relatório Inserido na página"
+    ]
+  },
+  {
+    "id": "Chamado #42131 (Resolvido)",
+    "ticket_id": 42131,
+    "solution_id": 40823,
+    "title": "Gerar contadores impressoras [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Segue contadores\n\n\r\n \r\n\r\n\r\nImpressora\r\nNúmero de Série\r\nModelo\r\nLocalização\r\nTotal Inicial\r\nTotal Final\r\nDiferença (Páginas)\r\n\r\n\r\nRecepção_L\r\nZEQYBQAF300759R\r\n4020\r\nLaboratório\r\n443556\r\n454025\r\n10469\r\n\r\n\r\nFarmácia\r\n088WBQBH8000M2A\r\n4080\r\nHospital\r\n693066\r\n699416\r\n6350\r\n\r\n\r\nUTI Adulto\r\n088WB07K452D0VN\r\n4080\r\nHospital\r\n298687\r\n303463\r\n4776\r\n\r\n\r\nAgênc",
+    "keywords": [],
+    "steps": [
+      "Segue contadores",
+      "Impressora",
+      "Número de Série",
+      "Modelo",
+      "Localização",
+      "Total Inicial"
     ]
   },
   {
@@ -39,6 +149,22 @@
     "steps": [
       "Prezados(as),",
       "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42105 (Resolvido)",
+    "ticket_id": 42105,
+    "solution_id": 40812,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Cadastrar meu e-mail na impressora",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro Realizado, por gentileza testar\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro Realizado, por gentileza testar",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -238,6 +364,22 @@
     "keywords": [],
     "steps": [
       "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42004 (Resolvido)",
+    "ticket_id": 42004,
+    "solution_id": 40814,
+    "title": "Verificar Estoque de Suprimentos – Impressoras [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\nVerificado, sem necessidades de novos pedidos \n\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado, sem necessidades de novos pedidos",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -579,6 +721,19 @@
     ]
   },
   {
+    "id": "Chamado #41910 (Resolvido)",
+    "ticket_id": 41910,
+    "solution_id": 40857,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Dia do secretariado",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Participação de colaborador do setor de T.I., com instalação e desinstalação de projetor, microfone e notebook realizado conforme solicitação",
+    "keywords": [],
+    "steps": [
+      "Participação de colaborador do setor de T.I., com instalação e desinstalação de projetor, microfone e notebook realizado conforme solicitação"
+    ]
+  },
+  {
     "id": "Chamado #41907 (Resolvido)",
     "ticket_id": 41907,
     "solution_id": 40772,
@@ -688,6 +843,24 @@
     ]
   },
   {
+    "id": "Chamado #41861 (Resolvido)",
+    "ticket_id": 41861,
+    "solution_id": 40868,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Informamos que o formulário foi atualizado conforme solicitado:",
+      "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+      "Nova pergunta adicionada: Tipo de procedimento",
+      "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+      "Sonda Folley 2 vias"
+    ]
+  },
+  {
     "id": "Chamado #41848 (Resolvido)",
     "ticket_id": 41848,
     "solution_id": 40541,
@@ -711,6 +884,22 @@
     "keywords": [],
     "steps": [
       "Teclado danificado substituído"
+    ]
+  },
+  {
+    "id": "Chamado #41839 (Resolvido)",
+    "ticket_id": 41839,
+    "solution_id": 40827,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização do Título de Formulário",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nFormulário renomeado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Formulário renomeado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
