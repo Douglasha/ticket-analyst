@@ -793,7 +793,7 @@ export class AIAnalyst {
     } else if (normAll.includes("autolac") || (normAll.includes("pep") && normAll.includes("exame"))) {
       if (normAll.includes("meia noite") || normAll.includes("divergencia") || normAll.includes("23:50")) {
         translatedIntent =
-          "Inconsistência na integração entre o prontuário eletrônico (PEP) e o sistema laboratorial (AutoLac): " +
+          "Inconsistência na integração entre o PEP Hospitalar (módulo do SGH Spdata no Hospital Unimed) e o sistema laboratorial (AutoLac): " +
           "exames prescritos no PEP próximo à meia-noite (ex: 23:50) e importados no AutoLac após 00:00 estão assumindo a data de importação " +
           "em vez da data/hora real da solicitação médica, gerando divergência nos laudos.";
         detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
@@ -953,12 +953,12 @@ export class AIAnalyst {
       normAll.includes("mapas transfusionais")
     ) {
       translatedIntent =
-        `Solicitação da área assistencial (${sectorName}) para desenvolvimento/atualização de formulário ou mapa eletrônico ("${ticket.title}"), ` +
+        `Solicitação da área assistencial do Hospital Unimed (${sectorName}) para desenvolvimento/atualização de formulário ou mapa eletrônico no PEP Hospitalar (SGH Spdata) ("${ticket.title}"), ` +
         `visando padronização clínica/regulatória. Os modelos de referência já foram encaminhados no chamado.`;
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
       suggestedCategory = ticket.category.includes("DV")
         ? ticket.category
-        : "T.I > DV > Evolução de Formulários Clínicos (PEP)";
+        : "T.I > DV > Evolução de Formulários Clínicos (PEP Hospitalar / SGH Spdata)";
       realUrgency = "Média";
       urgencyReason = "Demanda evolutiva de desenvolvimento para atualização de formulários/mapas assistenciais.";
       sufficiencyStatus = "completo";
@@ -1020,7 +1020,7 @@ export class AIAnalyst {
 
       translatedIntent =
         `A solicitante **${ticket.requester}** (${sectorName}) solicita a vinculação de acesso às clínicas ${clinicsList} ` +
-        `no sistema **Web Saúde (subsistema HRP Unimed)** para as ${targetGroup}. ` +
+        `no sistema **Web Saúde (módulo do ERP HRP Unimed, administrado centralmente no HRP)** para as ${targetGroup}. ` +
         `O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.`;
       detectedDomain = "Acessos, Permissões e Contas";
       suggestedCategory = "T.I > ST > Acesso e Permissões";
@@ -1515,11 +1515,21 @@ export class AIAnalyst {
       )
     ) {
       const descOnly = formFields.descricao || "";
-      const sysName = /\bsgh\b/i.test(normAll)
-        ? "S.G.H."
+      const isNucleoOrOutpatient =
+        /\b(nucleo|núcleo|nas|piumhi|passos|promoprev|consultorio|consultório|prontu|prontu\+|prontuplus)\b/i.test(
+          normAll
+        ) ||
+        /\b(nucleo|núcleo|nas|promoprev)\b/i.test(sectorName);
+
+      const sysName = isNucleoOrOutpatient
+        ? "Prontu+ (PEP do Núcleo)"
+        : /\bsgh\b/i.test(normAll)
+        ? "PEP Hospitalar (SGH Spdata)"
+        : /\bprontu\b/i.test(normAll)
+        ? "Prontu+"
         : /\bpep\b/i.test(normAll)
-        ? "PEP"
-        : formFields.aplicacao || "PEP";
+        ? "Prontu+ (PEP)"
+        : formFields.aplicacao || "Prontu+ (PEP)";
 
       const profDescMatch = descOnly.match(
         /\bagenda\s+d[aoe]\s+(?:(fisioterapeuta|m[ée]dic[oa]|dr\.?(?:a)?|nutricionista|psic[óo]log[oa]|terapeuta|enfermeir[oa]|profissional|colaborador(?:a)?)\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i

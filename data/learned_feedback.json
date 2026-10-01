@@ -1,5 +1,35 @@
 [
   {
+    "ticket_id": 42184,
+    "title": "Aplicativos  -  Liberar acesso atendentes NAS Passos",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "liberar",
+      "acesso",
+      "atendentes",
+      "passos",
+      "novas",
+      "clinicas",
+      "mateus",
+      "giannini"
+    ],
+    "problem_summary": "Boa tarde\nGentileza liberar acesso para as atendentes do NAS para as novas clinicas 16000070 - Mateus Giannini e 16000068 Marcelo Pereira\nObrigada",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+    "required_info": [
+      "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-01T20:00:50.232Z"
+  },
+  {
     "ticket_id": 42139,
     "title": "Resolução de Problemas  -  Telefone",
     "category": "T.I > IR > Administração de Redes > Telefones VoIP",

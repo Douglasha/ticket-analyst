@@ -87,7 +87,7 @@
   },
   {
     "id": "PB-UNI-04",
-    "title": "Integração PEP x AutoLac (Divergência de Data/Hora ou Consulta de Exames)",
+    "title": "Integração PEP Hospitalar (SGH Spdata) x AutoLac (Divergência de Data/Hora ou Consulta de Exames)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
     "keywords": [
       "autolac",
@@ -103,7 +103,7 @@
       "importados",
       "laudo"
     ],
-    "symptoms": "Dúvida operacional sobre localização de laudos/resultados no AutoLac ou divergência de data entre prescrição no PEP (próximo à meia-noite) e importação no AutoLac.",
+    "symptoms": "Dúvida operacional sobre localização de laudos/resultados no AutoLac ou divergência de data entre prescrição no PEP Hospitalar (módulo assistencial do sistema SGH Spdata no Hospital Unimed) e importação no AutoLac.",
     "required_info": [
       "Número do atendimento / pedido de exame ou nome do paciente de exemplo (para rastreio na integração)",
       "Data e horário exato do pedido no PEP e horário da importação no AutoLac",
@@ -229,7 +229,7 @@
   },
   {
     "id": "PB-UNI-09",
-    "title": "Desenvolvimento / Ajustes em Formulários Clínicos e Indicadores (PEP / Enfermagem)",
+    "title": "Desenvolvimento / Ajustes em Formulários Clínicos Assistenciais (PEP Hospitalar / SGH Spdata)",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
     "keywords": [
       "checklist",
@@ -240,9 +240,11 @@
       "enfermagem",
       "formulário clínico",
       "formulario clinico",
-      "indicadores assistenciais"
+      "indicadores assistenciais",
+      "pep hospitalar",
+      "sgh spdata"
     ],
-    "symptoms": "Coordenação de Enfermagem ou área assistencial solicita criação/alteração de campos em formulários eletrônicos (Checklist Sonda Folley, Passagem de Plantão, Indicadores).",
+    "symptoms": "Coordenação de Enfermagem ou área assistencial do Hospital Unimed (Centro Cirúrgico, UTI, Enfermagem) solicita criação/alteração de campos em formulários eletrônicos assistenciais no PEP (módulo do SGH Spdata).",
     "required_info": [
       "Especificação completa dos campos/opções a incluir ou alterar (ou documento/print anexo)",
       "Regras de obrigatoriedade e perfil profissional que preencherá o formulário",
@@ -553,7 +555,7 @@
   {
     "id": "PB-UNI-18",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "title": "Criação / Alteração de Agenda de Profissional no Sistema PEP / SGH (Parametrização de Horários e Intervalos)",
+    "title": "Criação / Alteração de Agenda de Profissional no Sistema Prontu+ (PEP do Núcleo / Consultórios)",
     "keywords": [
       "alteracao agenda",
       "alteração agenda",
@@ -566,20 +568,27 @@
       "horario de atendimento",
       "horário de atendimento",
       "intervalo de",
-      "atendimento de"
+      "atendimento de",
+      "prontu",
+      "prontu+",
+      "prontuplus",
+      "pep nucleo",
+      "pep núcleo",
+      "pep piumhi",
+      "pep passos"
     ],
-    "symptoms": "Solicitação de criação, bloqueio ou alteração de grade/horários de agenda de profissional de saúde (médico, fisioterapeuta, terapeuta, etc.) no sistema PEP / SGH, especificando dias da semana, faixa de horário, tempo de atendimento e intervalos.",
+    "symptoms": "Solicitação de criação, bloqueio ou alteração de grade/horários de agenda de profissional de saúde (médico, fisioterapeuta, terapeuta, etc.) no sistema Prontu+ (comumente chamado de PEP pelas equipes dos Núcleos de Atenção à Saúde / NAS / consultórios médicos), especificando dias da semana, faixa de horário, tempo de atendimento e intervalos.",
     "required_info": [
       "Nome completo do(a) profissional de saúde cuja agenda será alterada",
       "Dias da semana, faixa de horário (início e fim), duração de cada atendimento e tempo de intervalo"
     ],
     "resolution_steps": [
       "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
-      "Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
       "Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
-      "Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+      "Salvar a nova configuração de agenda no Prontu+ (PEP) e confirmar a conclusão ao(à) solicitante no chamado."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **PEP**.\n\nOs parâmetros informados (profissional, horários de atendimento e intervalos) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, avisaremos você por aqui!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nOs parâmetros informados (profissional, horários de atendimento e intervalos) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ / PEP, avisaremos você por aqui!"
   },
   {
     "id": "PB-UNI-19",
@@ -790,7 +799,7 @@
   {
     "id": "PB-UNI-25",
     "domain": "Acessos, Permissões e Contas",
-    "title": "Vinculação de Acesso a Clínicas / Prestadores no Sistema Web Saúde (HRP Unimed / NAS)",
+    "title": "Vinculação de Acesso a Clínicas / Prestadores no Sistema Web Saúde (Módulo HRP Unimed / NAS)",
     "keywords": [
       "web saude",
       "web saúde",
@@ -811,16 +820,16 @@
       "relacionamento prestadores",
       "secretária vinculado"
     ],
-    "symptoms": "Solicitação (frequentemente aberta pelo Relacionamento com Prestadores ou Recepção) para vincular novas clínicas/prestadores (identificados por códigos de 8 dígitos, ex: 16000070) ao perfil de atendentes/secretárias do NAS (Núcleo de Atenção à Saúde) no Sistema Web Saúde (subsistema HRP Unimed), muitas vezes sem especificar os nomes/logins das atendentes que receberão a permissão.",
+    "symptoms": "Solicitação (frequentemente aberta pelo Relacionamento com Prestadores ou Recepção) para vincular novas clínicas/prestadores (identificados por códigos de 8 dígitos, ex: 16000070) ao perfil de atendentes/secretárias do NAS (Núcleo de Atenção à Saúde) no Sistema Web Saúde (que funciona como módulo web do ERP HRP Unimed, tendo todo seu processo de administração centralizado diretamente no HRP), muitas vezes sem especificar os nomes/logins das atendentes que receberão a permissão.",
     "required_info": [
       "Nomes completos ou logins das atendentes/secretárias do NAS que devem ter as novas clínicas vinculadas no Web Saúde",
       "Caso o acesso deva espelhar as permissões de outra atendente do setor, informar o usuário de referência (ou se deve liberar para toda a recepção do NAS)"
     ],
     "resolution_steps": [
       "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
-      "Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "Acessar o módulo de controle de acessos/permissões centralizado diretamente no sistema HRP Unimed (onde é feita toda a gestão de usuários e vínculos do Web Saúde).",
       "Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
-      "Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no HRP/Web Saúde com vigência ativa.",
       "Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas no sistema **Web Saúde (HRP)** para a equipe do **NAS (Núcleo de Atenção à Saúde)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n2. Caso o acesso deva espelhar as permissões de alguma colaboradora que já atende no setor, informar o **nome da atendente de referência** (ou se a liberação deve ser aplicada a toda a recepção do NAS).\n\nAssim que nos confirmar essas informações por aqui, daremos sequência imediata na vinculação no Web Saúde!"
