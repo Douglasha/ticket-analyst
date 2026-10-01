@@ -199,10 +199,13 @@ export class KnowledgeEngine {
     if (!isRoutine) {
       const playbooks = loadPlaybooks();
       for (const pb of playbooks) {
-        // Evita parear Playbook exclusivo do HRP/TNUMM quando o chamado é de outro sistema (ex: S.G.H. / Spdata)
+        // Evita parear Playbook exclusivo do HRP/TNUMM quando o chamado é de outro sistema (ex: S.G.H. / Spdata) ou unificação de cadastro
         if (
           pb.id === "PB-UNI-05" &&
-          !/\b(hrp|tnumm|promoprev|0256)\b/i.test(normTicket)
+          (!/\b(hrp|tnumm|promoprev|0256)\b/i.test(normTicket) ||
+            /\b(unifica|unificar|unificacao|mais de um cadastro|2 cadastros|dois cadastros|duplicad)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
@@ -215,10 +218,58 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear Playbook de Formulários Clínicos de Enfermagem (PB-UNI-09) quando o chamado pede apenas indicadores/relatórios de atendimento (ex: WConect)
+        // Evita parear Playbook exclusivo do AutoLac (PB-UNI-04) quando o chamado não cita AutoLac
+        if (pb.id === "PB-UNI-04" && !normTicket.includes("autolac")) {
+          continue;
+        }
+        // Evita parear Playbook de Formulários Clínicos de Enfermagem (PB-UNI-09) quando o chamado pede apenas indicadores/relatórios ou agenda no PEP
         if (
           pb.id === "PB-UNI-09" &&
-          !/\b(formulario|sonda|folley|cateterismo|passagem de plantao|enfermagem|pep)\b/i.test(
+          !/\b(formulario|sonda|folley|cateterismo|passagem de plantao|enfermagem)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear Playbook de Agenda no PEP (PB-UNI-18) quando o chamado não menciona agenda
+        if (pb.id === "PB-UNI-18" && !/\bagenda\b/i.test(normTicket)) {
+          continue;
+        }
+        // Evita parear Playbook de Unificação de Cadastro (PB-UNI-19) quando o chamado não trata de unificação/duplicidade de cadastro
+        if (
+          pb.id === "PB-UNI-19" &&
+          !/\b(unifica|unificar|unificacao|mais de um cadastro|2 cadastros|dois cadastros|cadastro duplicado|cadastros duplicados|unificar as chaves)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        const isRelocationOrPhoneInstall =
+          /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
+            normTicket
+          ) ||
+          /\b(trocar|mudar|transferir|levar|passar|colocar)\b[\s\S]{0,60}\b(do|da)\b[\s\S]{0,50}\bpara\b/i.test(
+            normTicket
+          );
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) ou Queda de Ligações (PB-UNI-08) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede
+        if (
+          (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
+          isRelocationOrPhoneInstall
+        ) {
+          continue;
+        }
+        // Evita parear Playbook de XML TISS (PB-UNI-03) quando o chamado não trata de XML, TISS ou Hash
+        if (pb.id === "PB-UNI-03" && !/\b(xml|tiss|hash)\b/i.test(normTicket)) {
+          continue;
+        }
+        // Evita parear Playbook de Remanejamento / Ponto de Telefone (PB-UNI-20) quando não há solicitação de mudança de local ou ponto físico
+        if (pb.id === "PB-UNI-20" && !isRelocationOrPhoneInstall) {
+          continue;
+        }
+        // Evita parear Playbook de Instalação de Roteador / Wi-Fi (PB-UNI-21) quando não se trata de internet/wifi/roteador
+        if (
+          pb.id === "PB-UNI-21" &&
+          !/\b(roteador|access point|ap wifi|wifi|wi-fi|internet|oscilacao|whatsapp)\b/i.test(
             normTicket
           )
         ) {

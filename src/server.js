@@ -437,6 +437,24 @@ app.get("/api/knowledge", async (_req, res) => {
   }
 });
 
+// Proxy autenticado de imagens/documentos da Base de Conhecimento do GLPI
+app.get("/api/glpi/documents/:docId/media", async (req, res) => {
+  try {
+    const docId = Number(req.params.docId);
+    const settings = loadSettings();
+    const client = new GLPIClient(settings);
+    const media = await client.downloadDocumentMedia(docId);
+    if (!media) {
+      return res.status(404).send("Documento não encontrado no GLPI.");
+    }
+    res.setHeader("Content-Type", media.contentType);
+    res.setHeader("Cache-Control", "private, max-age=3600");
+    res.send(media.buffer);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // Cria ou atualiza um Playbook Local (3ª Camada)
 app.post("/api/playbooks", (req, res) => {
   try {

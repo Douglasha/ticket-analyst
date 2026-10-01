@@ -64,12 +64,12 @@
       "xml",
       "hash",
       "erro no hash",
-      "convênio",
-      "convenio",
+      "recalcular hash",
+      "hash tiss",
+      "xml tiss",
+      "faturamento tiss",
+      "lote tiss",
       "aura saúde",
-      "tiss",
-      "lote",
-      "faturamento",
       "importar xml"
     ],
     "symptoms": "Usuário solicita auxílio para corrigir arquivo XML de faturamento TISS que apresentou erro de validação de hash ao enviar/importar para convênio.",
@@ -91,7 +91,8 @@
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
     "keywords": [
       "autolac",
-      "pep",
+      "pep autolac",
+      "integracao autolac",
       "exames",
       "laboratório",
       "laboratorio",
@@ -545,5 +546,132 @@
       "Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nA mensagem apresentada no aplicativo **Meu Ponto (Benner)** (*\"Esse dispositivo não é válido para o usuário logado\"*) ocorre quando há troca ou reinstalação do aparelho celular, sendo necessário desvincular o aparelho antigo e liberar o vínculo do novo dispositivo ao login do(a) colaborador(a).\n\nNossa equipe técnica já está realizando a liberação do novo dispositivo no sistema Benner e, assim que concluído, confirmaremos por aqui para que o ponto possa ser registrado normalmente!"
+  },
+  {
+    "id": "PB-UNI-18",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "title": "Criação / Alteração de Agenda de Profissional no Sistema PEP / SGH (Parametrização de Horários e Intervalos)",
+    "keywords": [
+      "alteracao agenda",
+      "alteração agenda",
+      "agenda",
+      "alteracao no pep",
+      "alteração no pep",
+      "agenda da fisioterapeuta",
+      "agenda medica",
+      "agenda médica",
+      "horario de atendimento",
+      "horário de atendimento",
+      "intervalo de",
+      "atendimento de"
+    ],
+    "symptoms": "Solicitação de criação, bloqueio ou alteração de grade/horários de agenda de profissional de saúde (médico, fisioterapeuta, terapeuta, etc.) no sistema PEP / SGH, especificando dias da semana, faixa de horário, tempo de atendimento e intervalos.",
+    "required_info": [
+      "Nome completo do(a) profissional de saúde cuja agenda será alterada",
+      "Dias da semana, faixa de horário (início e fim), duração de cada atendimento e tempo de intervalo"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **PEP**.\n\nOs parâmetros informados (profissional, horários de atendimento e intervalos) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, avisaremos você por aqui!"
+  },
+  {
+    "id": "PB-UNI-19",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "title": "Unificação de Cadastros Duplicados de Beneficiário / Paciente (HRP Unimed / PEP / SGH)",
+    "keywords": [
+      "unificacao de cadastro",
+      "unificação de cadastro",
+      "unificacao cadastro",
+      "unificação cadastro",
+      "unificar",
+      "unificar as chaves",
+      "mais de um cadastro",
+      "2 cadastros",
+      "dois cadastros",
+      "cadastro duplicado",
+      "cliente intercambio",
+      "cliente saude"
+    ],
+    "symptoms": "Beneficiário(a) ou paciente possui dois ou mais cadastros no sistema (HRP Unimed, PEP ou SGH — ex: um como 'Cliente Intercâmbio' e outro como 'Cliente Saúde', ou duas chaves distintas), sendo solicitada a unificação dos registros mantendo o cadastro correto como principal.",
+    "required_info": [
+      "Nome completo ou códigos/chaves dos cadastros do(a) beneficiário(a)/paciente a serem unificados",
+      "Indicação de qual cadastro/chave deve prevalecer como principal (ex: Cliente Saúde)"
+    ],
+    "resolution_steps": [
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+      "Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+      "Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação de **unificação de cadastro**.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica iniciou o procedimento de unificação no sistema.\n\nAssim que concluído, atualizaremos você por aqui!"
+  },
+  {
+    "id": "PB-UNI-20",
+    "domain": "Infraestrutura e Rede",
+    "title": "Remanejamento Físico de Equipamentos (Impressora / Computador) e Instalação de Ponto de Telefone / Rede",
+    "keywords": [
+      "trocar impressora",
+      "remanejar",
+      "remanejamento",
+      "ponto de telefone",
+      "linha e aparelho",
+      "almoxarifado",
+      "balcao da farmacia",
+      "balcão da farmacia",
+      "mudar de lugar",
+      "transferir impressora",
+      "instalar telefone",
+      "ponto de rede"
+    ],
+    "symptoms": "Solicitação de mudança física / remanejamento de equipamentos de T.I. (ex: trocar impressora Zebra ou computador de um local/bancada para outro ambiente, como Almoxarifado) e/ou instalação de ponto de telefone (linha/ramal e aparelho) ou ponto de rede.",
+    "required_info": [
+      "Confirmar se no local de destino já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a impressora seja conectada via USB)",
+      "Caso envolva ponto de telefone: informar se deve ser criado um novo número de ramal ou transferido um ramal já existente"
+    ],
+    "resolution_steps": [
+      "Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+      "Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+      "Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de remanejamento de equipamento e instalação de ponto de telefone.\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução, você poderia nos confirmar:\n1. No local de destino já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a impressora será conectada)?\n2. Sobre o telefone, será necessário configurar um **novo número de ramal** ou transferir um ramal já existente?\n\nAssim que confirmar por aqui, já programamos a ida do técnico ao local!"
+  },
+  {
+    "id": "PB-UNI-21",
+    "domain": "Infraestrutura e Rede",
+    "title": "Instabilidade de Internet / Solicitação de Instalação de Roteador ou Access Point Wi-Fi",
+    "keywords": [
+      "roteador wifi",
+      "roteador",
+      "instalacao de roteador",
+      "instalação de roteador",
+      "lentidao internet",
+      "lentidão internet",
+      "oscilacao internet",
+      "oscilação internet",
+      "whatsapp do setor",
+      "ligacoes do whatsapp",
+      "ligações do whatsapp",
+      "sinal wifi",
+      "access point",
+      "ap wifi",
+      "internet lenta"
+    ],
+    "symptoms": "Setor relata lentidão, oscilação ou quedas na conexão de internet (especialmente em ligações do WhatsApp ou estações móveis) e solicita a instalação de roteador ou Access Point Wi-Fi adicional.",
+    "required_info": [
+      "Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede",
+      "Confirmar se a falha nas ligações do WhatsApp afeta aparelhos específicos ou todos os celulares utilizados no setor"
+    ],
+    "resolution_steps": [
+      "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+      "Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+      "Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
+      "Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
+      "Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **{setor}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!"
   }
 ]

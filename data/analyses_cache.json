@@ -2803,5 +2803,572 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Dalete Garcia de Oliveira Bartelochi, do setor Promoprev, relatou uma solicitação para unificar o cadastro de uma pessoa chamada NILZA MARIA DA SILVA VITOR. Os dados fornecidos incluem o nome, data de nascimento e CPF da pessoa. O colaborador solicitou que a equipe de TI execute a unificação do cadastro.\n\nClassificação Sugerida: T.I > ST > Sistemas / Relatórios HRP | Prioridade Real: Baixa\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-65) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41943 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-65] Localize o cadastro duplicado em\n  2. [KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"\n  3. [KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\"\n  4. [KB-65] Confira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"\n  5. [KB-65] Selecione o contato que contenha o CPF preenchido e clique em Salvar\n  6. [KB-65] Clique em confirmar, certifique-se de conferir todos os dados minunciosamente, pois esta operação não poderá ser desfeita",
     "public_reply_draft": "Olá, Dalete! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Unificação Cadastro PEP | NILZA MARIA DA SILVA VITOR**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento:\n\n- Localize o cadastro duplicado em\n- No campo nome, mude o modo de pesquisa para a opção \"Contém\"\n- Coloque o nome a ser pesquisado e clique em \"buscar\"\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42034": {
+    "ticket_id": 42034,
+    "analyzed_at": "29/09/2026 17:42",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**, parametrizando os horários e intervalos de atendimento (Solicito alteração no PEP, na agenda da fisioterapeuta Jéssica Lima Costa, atendimento todos os dias das 13:00 às 17:00hs Atendimento de 0:45minutos Intervalo de 0:15minutos). Todas as informações necessárias (profissional, faixa de horário, duração do atendimento e intervalo) já foram informadas no relato. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Instalação/Configuração > Aplicativos\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de parametrização/alteração de grade de agenda de profissional no sistema PEP, impactando a disponibilização de horários de atendimento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-18",
+        "title": "Criação / Alteração de Agenda de Profissional no Sistema PEP / SGH (Parametrização de Horários e Intervalos)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de criação, bloqueio ou alteração de grade/horários de agenda de profissional de saúde (médico, fisioterapeuta, terapeuta, etc.) no sistema PEP / SGH, especificando dias da semana, faixa de horário, tempo de atendimento e intervalos.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-18)",
+    "resolution_steps": [
+      "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**, parametrizando os horários e intervalos de atendimento (Solicito alteração no PEP, na agenda da fisioterapeuta Jéssica Lima Costa, atendimento todos os dias das 13:00 às 17:00hs Atendimento de 0:45minutos Intervalo de 0:15minutos). Todas as informações necessárias (profissional, faixa de horário, duração do atendimento e intervalo) já foram informadas no relato. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Instalação/Configuração > Aplicativos\").*\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.\n  3. [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.\n  4. [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!"
+  },
+  "42057": {
+    "ticket_id": 42057,
+    "analyzed_at": "30/09/2026 10:20",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Layne Dielly Vidigal** (Cadastro) relatou que a beneficiária **Emmely Aparecida Figueiredo** possui dois cadastros no sistema **HRP Unimed** e solicitou a unificação dos registros, mantendo o cadastro **Cliente Saúde** como principal. Os dados necessários para a unificação já constam descritos no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Administração de Banco de Dados",
+    "real_urgency": "Alta",
+    "urgency_reason": "Duplicidade de cadastro no sistema HRP Unimed, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) beneficiária.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-19",
+        "title": "Unificação de Cadastros Duplicados de Beneficiário / Paciente (HRP Unimed / PEP / SGH)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Beneficiário(a) ou paciente possui dois ou mais cadastros no sistema (HRP Unimed, PEP ou SGH — ex: um como 'Cliente Intercâmbio' e outro como 'Cliente Saúde', ou duas chaves distintas), sendo solicitada a unificação dos registros mantendo o cadastro correto como principal.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+          "Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+          "Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+          "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-19)",
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Layne Dielly Vidigal** (Cadastro) relatou que a beneficiária **Emmely Aparecida Figueiredo** possui dois cadastros no sistema **HRP Unimed** e solicitou a unificação dos registros, mantendo o cadastro **Cliente Saúde** como principal. Os dados necessários para a unificação já constam descritos no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*\n\nClassificação Sugerida: T.I > BD > Administração de Banco de Dados | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-19)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).\n  2. [PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.\n  3. [PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.\n  4. [PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+    "public_reply_draft": "Olá, Layne! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Emmely Aparecida Figueiredo** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42061": {
+    "ticket_id": 42061,
+    "analyzed_at": "30/09/2026 10:22",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Layne Dielly Vidigal** (Cadastro) relatou que a beneficiária **Isadora Maria Ribeiro Batista** possui dois cadastros no sistema **HRP Unimed** e solicitou a unificação dos registros, mantendo o cadastro **Cliente Saúde** como principal. Os dados necessários para a unificação já constam descritos no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Administração de Banco de Dados",
+    "real_urgency": "Alta",
+    "urgency_reason": "Duplicidade de cadastro no sistema HRP Unimed, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) beneficiária.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-19",
+        "title": "Unificação de Cadastros Duplicados de Beneficiário / Paciente (HRP Unimed / PEP / SGH)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Beneficiário(a) ou paciente possui dois ou mais cadastros no sistema (HRP Unimed, PEP ou SGH — ex: um como 'Cliente Intercâmbio' e outro como 'Cliente Saúde', ou duas chaves distintas), sendo solicitada a unificação dos registros mantendo o cadastro correto como principal.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+          "Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+          "Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+          "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-19)",
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Layne Dielly Vidigal** (Cadastro) relatou que a beneficiária **Isadora Maria Ribeiro Batista** possui dois cadastros no sistema **HRP Unimed** e solicitou a unificação dos registros, mantendo o cadastro **Cliente Saúde** como principal. Os dados necessários para a unificação já constam descritos no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*\n\nClassificação Sugerida: T.I > BD > Administração de Banco de Dados | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-19)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).\n  2. [PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.\n  3. [PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.\n  4. [PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+    "public_reply_draft": "Olá, Layne! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Isadora Maria Ribeiro Batista** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42065": {
+    "ticket_id": 42065,
+    "analyzed_at": "30/09/2026 11:17",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Renan Oliveira** (Farmacia) solicita atendimento presencial da equipe de Infraestrutura e Redes para **remanejar a impressora Zebra** (do balcão da farmacia para almoxarifado) e **instalar um ponto de telefone (linha/ramal e aparelho)** no almoxarifado. Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de remanejamento físico de equipamento e/ou instalação de ponto de telefonia/rede, demandando atendimento presencial da equipe de Infraestrutura.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se no local de destino (almoxarifado) já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a impressora Zebra seja conectada via USB)",
+      "Informar se para o ponto de telefone (almoxarifado) deve ser configurado um novo número de ramal ou transferido um ramal já existente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-20",
+        "title": "Remanejamento Físico de Equipamentos (Impressora / Computador) e Instalação de Ponto de Telefone / Rede",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de mudança física / remanejamento de equipamentos de T.I. (ex: trocar impressora Zebra ou computador de um local/bancada para outro ambiente, como Almoxarifado) e/ou instalação de ponto de telefone (linha/ramal e aparelho) ou ponto de rede.",
+        "steps": [
+          "Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+          "Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+          "Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-20)",
+    "resolution_steps": [
+      "[PB-UNI-20] Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+      "[PB-UNI-20] Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+      "[PB-UNI-20] Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Renan Oliveira** (Farmacia) solicita atendimento presencial da equipe de Infraestrutura e Redes para **remanejar a impressora Zebra** (do balcão da farmacia para almoxarifado) e **instalar um ponto de telefone (linha/ramal e aparelho)** no almoxarifado. Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-20)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se no local de destino (almoxarifado) já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a impressora Zebra seja conectada via USB)\n  - Informar se para o ponto de telefone (almoxarifado) deve ser configurado um novo número de ramal ou transferido um ramal já existente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-20] Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).\n  2. [PB-UNI-20] Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.\n  3. [PB-UNI-20] Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante.",
+    "public_reply_draft": "Olá, Renan! Tudo bem?\n\nRecebemos a sua solicitação para **remanejar a impressora Zebra** (do balcão da farmacia para almoxarifado) e **instalar um ponto de telefone (linha/ramal e aparelho)** no almoxarifado.\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. No local onde os equipamentos ficarão (almoxarifado), já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a impressora Zebra será conectada)?\n2. Sobre o ponto de telefone, será necessário configurar um **novo número de ramal** para o almoxarifado ou transferir algum ramal já existente?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!"
+  },
+  "42068": {
+    "ticket_id": 42068,
+    "analyzed_at": "30/09/2026 11:19",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Rosy Ellen Freire Viana relatou um problema técnico relacionado à integração entre sistemas, especificamente a integração com o Laboratório de Apoio Sollutio. Ela mencionou que enviou um e-mail detalhando a montagem de um evento e solicitou que fornecêssemos mais informações sobre os equipamentos necessários e o responsável pela retirada/devolução.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Integração entre sistemas",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "O chamado é de baixa urgência, pois não há impacto imediato no funcionamento do sistema.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Data, local exato e horário de início e término da montagem/evento",
+      "Lista completa de equipamentos e cabos/adaptadores necessários (HDMI, som, passador de slides)",
+      "Responsável pela retirada/devolução dos equipamentos"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-10",
+        "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
+        "steps": [
+          "Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+          "Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+          "Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+        ],
+        "score": 0.42
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-10)",
+    "resolution_steps": [
+      "[PB-UNI-10] Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+      "[PB-UNI-10] Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+      "[PB-UNI-10] Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nRosy Ellen Freire Viana relatou um problema técnico relacionado à integração entre sistemas, especificamente a integração com o Laboratório de Apoio Sollutio. Ela mencionou que enviou um e-mail detalhando a montagem de um evento e solicitou que fornecêssemos mais informações sobre os equipamentos necessários e o responsável pela retirada/devolução.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Integração entre sistemas | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-10)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Data, local exato e horário de início e término da montagem/evento\n  - Lista completa de equipamentos e cabos/adaptadores necessários (HDMI, som, passador de slides)\n  - Responsável pela retirada/devolução dos equipamentos\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-10] Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).\n  2. [PB-UNI-10] Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.\n  3. [PB-UNI-10] Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação de equipamentos e apoio para o evento! Já estamos verificando a reserva na agenda da T.I.\n\nPara deixarmos tudo alinhado com antecedência, poderia apenas confirmar:\n1. Qual o **horário exato em que o local estará aberto para montagem** e o **horário previsto de término** do evento?\n2. As **caixas de som e microfone** utilizados serão os do kit interno ou do espaço do evento (para levarmos os cabos/adaptadores de áudio corretos para o notebook)?\n\nSeguimos à disposição!"
+  },
+  "42071": {
+    "ticket_id": 42071,
+    "analyzed_at": "30/09/2026 15:52",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante, Priscila Santos, está relutando em relação a uma diferença de valor de R$ 186,81 no XML anexado, que está gerando uma discrepância com a fatura global. Ela aguarda para enviar o XML no fechamento de hoje para o convênio Rede Total. Este problema está relacionado ao sistema de emissão de XML, que está lançando uma guia extra no valor de R$ 186,81.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "real_urgency": "Média",
+    "urgency_reason": "O impacto operacional deste chamado é significativo, pois o XML anexado afeta a fatura global e pode causar problemas de fechamento de contas.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-03",
+        "title": "Erro de Hash em Guia XML TISS (Convênios / Faturamento / Laboratório)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Usuário solicita auxílio para corrigir arquivo XML de faturamento TISS que apresentou erro de validação de hash ao enviar/importar para convênio.",
+        "steps": [
+          "Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+          "Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+          "Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-81",
+        "title": "Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Sistema: SGH Spdata | Módulo: Faturamento\n\n\r\nProblema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)\n\n\r\n\r\n\r\n\n▸ 1. Descrição do Incidente\n\r\nAo realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incl...",
+        "steps": [
+          "Sistema: SGH Spdata | Módulo: Faturamento",
+          "Problema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+          "▸ 1. Descrição do Incidente",
+          "Ao realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incluiu uma guia extra no arquivo XML, gerando duplicidade na cobrança de procedimento.",
+          "Exemplo registrado na Conta 1407294:",
+          "Na conta hospitalar (Correto): Constando apenas a Guia 00000000000000002626 com 2 itens, somando R$ 421,55."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42089 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Erro no valor do medicamento",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n\n\r\nRealizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n\n\r\nApós o ajuste, os valores passaram a ser apresentados corretamente.",
+        "steps": [
+          "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+          "Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+          "Após o ajuste, os valores passaram a ser apresentados corretamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-03) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "resolution_steps": [
+      "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "[PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "[PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante, Priscila Santos, está relutando em relação a uma diferença de valor de R$ 186,81 no XML anexado, que está gerando uma discrepância com a fatura global. Ela aguarda para enviar o XML no fechamento de hoje para o convênio Rede Total. Este problema está relacionado ao sistema de emissão de XML, que está lançando uma guia extra no valor de R$ 186,81.\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-03) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi\n  2. [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).\n  3. [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).\n  4. [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.\n  5. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  6. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42077": {
+    "ticket_id": 42077,
+    "analyzed_at": "30/09/2026 12:36",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação de acesso aberta por **Priscila Santos** referente a **PRISCILA ROQUE SANTOS** (CPF: 08112760667), com os acessos solicitados (HRP Unimed) e dados cadastrais já informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.57
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42066 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Rosy Ellen Freire Viana Santos",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Foram dadas as permissões",
+        "steps": [
+          "Foram dadas as permissões"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41952 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Mercia",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, realizado o cadastro.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Bom dia, realizado o cadastro.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41945 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Maria Alves Andrade",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro realizado conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro realizado conforme solicitado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42066 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+      "[Chamado #42066 (Resolvido)] Foram dadas as permissões",
+      "[Chamado #41945 (Resolvido)] Cadastro realizado conforme solicitado"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Priscila Santos** referente a **PRISCILA ROQUE SANTOS** (CPF: 08112760667), com os acessos solicitados (HRP Unimed) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42066 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.\n  5. [Chamado #42066 (Resolvido)] Foram dadas as permissões\n  6. [Chamado #41945 (Resolvido)] Cadastro realizado conforme solicitado",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **PRISCILA ROQUE SANTOS** (HRP Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42096": {
+    "ticket_id": 42096,
+    "analyzed_at": "30/09/2026 15:54",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Izabel Heloisa Duarte Silva, da Farmácia do Hospital, não consegue entrar com sua senha no sistema intranet da Unimed. Ela relatou que não consegue acessar o sistema, mesmo com o mesmo CPF e acesso informado. Este chamado é de alta prioridade devido ao impacto operacional no funcionamento do sistema de acesso.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "O sistema de acesso está fora de operação, comprometendo a eficiência operacional do setor farmacêutico.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41941 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Renan Augusto de Oliveira",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Senha redefinida para Unimed@256!",
+        "steps": [
+          "Senha redefinida para Unimed@256!"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41615 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Tatiane Carvalho",
+        "category": "T.I • Solucionado por rcampos",
+        "summary": "senha resetada\n\n\r\nlogin: tatiane.carvalho\n\n\r\nsenha: 1234@unimed",
+        "steps": [
+          "senha resetada",
+          "login: tatiane.carvalho",
+          "senha: 1234@unimed"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #41941 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41615 (Resolvido))",
+    "resolution_steps": [
+      "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[Chamado #41941 (Resolvido)] Senha redefinida para Unimed@256!",
+      "[Chamado #41615 (Resolvido)] login: tatiane.carvalho",
+      "[Chamado #41615 (Resolvido)] senha: 1234@unimed"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Izabel Heloisa Duarte Silva, da Farmácia do Hospital, não consegue entrar com sua senha no sistema intranet da Unimed. Ela relatou que não consegue acessar o sistema, mesmo com o mesmo CPF e acesso informado. Este chamado é de alta prioridade devido ao impacto operacional no funcionamento do sistema de acesso.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41941 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41615 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi\n  2. [Chamado #41941 (Resolvido)] Senha redefinida para Unimed@256!\n  3. [Chamado #41615 (Resolvido)] login: tatiane.carvalho\n  4. [Chamado #41615 (Resolvido)] senha: 1234@unimed",
+    "public_reply_draft": "Olá, Izabel! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Izabel Heloisa Duarte da Silva** (Intranet).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42105": {
+    "ticket_id": 42105,
+    "analyzed_at": "30/09/2026 16:36",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Viviane Souza** (Nucleo Passos) relata falha de impressão em a **impressora do setor** localizada no setor **Nucleo Passos**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - Nucleo Passos).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Nucleo Passos) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-12",
+        "title": "Editar Assinatura do e-mail Coorporativo",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "NOME\n\nSETOR\n\nwww.unimedsudoestemg.coop.br\n\nTelefone: TELEFONE",
+        "steps": [
+          "NOME",
+          "SETOR",
+          "www.unimedsudoestemg.coop.br",
+          "Telefone: TELEFONE"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41656 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Lízia Magalhães Pereira Giotti de Morais",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSegue credenciais de acessos\n\n\r\n--------------------------------------------------------------\nE-mail Institucional \nlink: https://webmail-seguro.com.br/unimedsudoestemg.coop.br\nlogin: lgiotti@unimedsudoestemg.coop.br\nsenha: 014@Lgm629\n--------------------------------------------------------------\nFaculdade Unimed\nlink: https://www",
+        "steps": [
+          "Prezados(as),",
+          "Segue credenciais de acessos",
+          "--------------------------------------------------------------",
+          "E-mail Institucional",
+          "link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+          "login: lgiotti@unimedsudoestemg.coop.br"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-13",
+        "title": "Next Cloud para compartilhamento de laudos",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Acesse o link: http://cloud.unimedsudoestemg.coop.br/ ou 192.168.41.30 bloco bloco@33566",
+        "steps": [
+          "Acesse o link: http://cloud.unimedsudoestemg.coop.br/ ou 192.168.41.30 bloco bloco@33566"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))",
+    "resolution_steps": [
+      "[KB-12] www.unimedsudoestemg.coop.br",
+      "[KB-12] Telefone: TELEFONE",
+      "[Chamado #41656 (Resolvido)] Segue credenciais de acessos",
+      "[Chamado #41656 (Resolvido)] --------------------------------------------------------------",
+      "[Chamado #41656 (Resolvido)] E-mail Institucional",
+      "[Chamado #41656 (Resolvido)] link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Viviane Souza** (Nucleo Passos) relata falha de impressão em a **impressora do setor** localizada no setor **Nucleo Passos**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-12) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41656 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Nucleo Passos) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-12] www.unimedsudoestemg.coop.br\n  2. [KB-12] Telefone: TELEFONE\n  3. [Chamado #41656 (Resolvido)] Segue credenciais de acessos\n  4. [Chamado #41656 (Resolvido)] --------------------------------------------------------------\n  5. [Chamado #41656 (Resolvido)] E-mail Institucional\n  6. [Chamado #41656 (Resolvido)] link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (Nucleo Passos) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Nucleo Passos ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Nucleo Passos!"
+  },
+  "42112": {
+    "ticket_id": 42112,
+    "analyzed_at": "01/10/2026 07:55",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Priscila Santos** (Faturamento) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Conectividade > Internet e WiFi",
+    "real_urgency": "Média",
+    "urgency_reason": "Instabilidade e oscilação na conexão de internet afetando a rotina e chamadas de WhatsApp do setor Faturamento.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (Faturamento)",
+      "Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-21",
+        "title": "Instabilidade de Internet / Solicitação de Instalação de Roteador ou Access Point Wi-Fi",
+        "category": "Infraestrutura e Rede",
+        "summary": "Setor relata lentidão, oscilação ou quedas na conexão de internet (especialmente em ligações do WhatsApp ou estações móveis) e solicita a instalação de roteador ou Access Point Wi-Fi adicional.",
+        "steps": [
+          "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+          "Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+          "Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
+          "Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
+          "Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-08",
+        "title": "Instabilidade em Linhas Telefônicas / Ligações Caindo (PABX / VoIP)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Setor relata que as ligações externas ou internas estão caindo com frequência e pede verificação das linhas.",
+        "steps": [
+          "Verificar o status do tronco SIP/E1 e latência/perda de pacotes na VLAN de Voz da unidade (ex: Núcleo Passos).",
+          "Analisar os registros de chamadas (CDR/Logs do PABX) nos ramais do setor para identificar código de desconexão (queda por timeout RTP, falha na operadora ou cabo/aparelho com mau contato).",
+          "Realizar testes de chamadas entrantes e saintes junto ao setor e acionar a operadora caso a desconexão parta do entroncamento externo."
+        ],
+        "score": 0.42
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-06",
+        "title": "Liberação de Wi-Fi em Aparelho Celular / Dispositivo Móvel",
+        "category": "Infraestrutura e Rede",
+        "summary": "Colaborador solicita conexão da rede Wi-Fi no aparelho celular pessoal ou corporativo.",
+        "steps": [
+          "Verificar se o pedido possui aprovação da gestão e se enquadra na política de Segurança da Informação para dispositivos móveis.",
+          "Orientar o usuário a desativar a opção 'Usar MAC Aleatório / Endereço Wi-Fi Privado' nas configurações da rede Wi-Fi do celular.",
+          "Coletar o endereço MAC físico do aparelho, cadastrar no controlador Wi-Fi / Firewall na VLAN adequada e autenticar o dispositivo."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-21) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-08)",
+    "resolution_steps": [
+      "[PB-UNI-21] Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+      "[PB-UNI-21] Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+      "[PB-UNI-21] Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
+      "[PB-UNI-21] Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
+      "[PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (Faturamento) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Conectividade > Internet e WiFi | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-21) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-08)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (Faturamento)\n  - Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-21] Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).\n  2. [PB-UNI-21] Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.\n  3. [PB-UNI-21] Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.\n  4. [PB-UNI-21] Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.\n  5. [PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **Faturamento** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!"
   }
 }

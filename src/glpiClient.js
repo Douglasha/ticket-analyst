@@ -919,7 +919,8 @@ export class GLPIClient {
         const items = await res.json();
         if (Array.isArray(items)) {
           for (const item of items) {
-            const answerClean = cleanGlpiHtml(item.answer || "");
+            const rawAnswer = String(item.answer || "");
+            const answerClean = cleanGlpiHtml(rawAnswer);
             const lines = answerClean
               .split(/\r?\n/)
               .map((l) => l.trim())
@@ -929,14 +930,49 @@ export class GLPIClient {
               rawCat && String(rawCat) !== "0"
                 ? cleanGlpiHtml(String(rawCat))
                 : "Base de Conhecimento GLPI";
+            const authorClean =
+              item.users_id && String(item.users_id) !== "0"
+                ? cleanGlpiHtml(String(item.users_id))
+                : "Equipe T.I.";
+
+            // Prepara o HTML para leitura segura na modal, convertendo imagens internas do GLPI para o proxy autenticado
+            let safeHtml = rawAnswer;
+            if (/&lt;(?:p|h[1-6]|ul|ol|li|div|strong|br|img|table)\b/i.test(safeHtml)) {
+              const entities = {
+                "&lt;": "<",
+                "&gt;": ">",
+                "&amp;": "&",
+                "&quot;": '"',
+                "&#039;": "'",
+                "&#39;": "'",
+              };
+              safeHtml = safeHtml.replace(
+                /&(lt|gt|amp|quot|#039|#39);/gi,
+                (m) => entities[m.toLowerCase()] || m
+              );
+            }
+            safeHtml = safeHtml
+              .replace(/<script[\s\S]*?<\/script>/gi, "")
+              .replace(
+                /src=["'][^"']*document\.send\.php\?[^"']*docid=(\d+)[^"']*["']/gi,
+                'src="/api/glpi/documents/$1/media"'
+              );
+
             articles.push({
               id: `KB-${item.id}`,
+              kb_id: item.id,
               title: cleanGlpiHtml(item.name || "Artigo KB"),
               category: catClean,
+              author: authorClean,
+              updated_at: item.date_mod || item.date_creation || "",
+              views: Number(item.view || 0),
               summary:
                 answerClean.slice(0, 320) + (answerClean.length > 320 ? "..." : ""),
+              full_content: answerClean,
+              html_content: safeHtml,
               keywords: [],
               steps: lines.length > 0 ? lines.slice(0, 6) : [answerClean],
+              all_steps: lines.length > 0 ? lines : [answerClean],
             });
           }
         }
@@ -949,6 +985,30 @@ export class GLPIClient {
       await this._killSession(sessionToken);
     }
     return articles;
+  }
+
+  async downloadDocumentMedia(docId) {
+    const idNum = Number(docId);
+    if (!idNum) return null;
+    const sessionToken = await this._initSession();
+    try {
+      const res = await fetch(`${this.baseUrl}/Document/${idNum}`, {
+        headers: {
+          ...this._authHeaders(sessionToken),
+          Accept: "application/octet-stream",
+        },
+      });
+      if (!res.ok) return null;
+      const contentType =
+        res.headers.get("content-type") || "application/octet-stream";
+      const arrayBuf = await res.arrayBuffer();
+      return {
+        buffer: Buffer.from(arrayBuf),
+        contentType,
+      };
+    } finally {
+      await this._killSession(sessionToken);
+    }
   }
 
   async fetchResolvedHistory() {

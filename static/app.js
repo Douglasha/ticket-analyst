@@ -1067,17 +1067,23 @@ async function loadKnowledgeLayers() {
     document.getElementById("kb-layer1-count").textContent = l1.length;
     document.getElementById("kb-layer1-list").innerHTML = l1
       .map(
-        (item) => `
-      <div class="surface-sub rounded-xl p-3.5 space-y-1">
-        <div class="flex items-center justify-between text-[11px]">
+        (item, idx) => `
+      <div class="surface-sub rounded-xl p-3.5 space-y-1.5">
+        <div class="flex items-center justify-between text-[11px] gap-2">
           <span class="font-mono font-bold" style="color: var(--brand-soft-text);">${escapeHtml(
             item.id
           )}</span>
-          <span style="color: var(--text-muted);">${escapeHtml(
-            item.category || ""
-          )}</span>
+          <div class="flex items-center gap-1.5">
+            <span class="truncate max-w-[130px]" style="color: var(--text-muted);">${escapeHtml(
+              item.category || ""
+            )}</span>
+            <button onclick="viewKbArticle(${idx})" class="btn-counters-outline inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium" title="Ler artigo completo da Base de Conhecimento do GLPI">
+              <span class="material-symbols-outlined" style="font-size: 13px;">visibility</span>
+              <span>Visualizar</span>
+            </button>
+          </div>
         </div>
-        <h4 class="text-xs font-bold" style="color: var(--text-main);">${escapeHtml(
+        <h4 class="text-xs font-bold cursor-pointer hover:underline" onclick="viewKbArticle(${idx})" style="color: var(--text-main);">${escapeHtml(
           item.title
         )}</h4>
         <p class="text-[11px] leading-relaxed" style="color: var(--text-secondary);">${escapeHtml(
@@ -1097,17 +1103,18 @@ async function loadKnowledgeLayers() {
           <span class="font-mono font-bold" style="color: var(--brand-soft-text);">${escapeHtml(
             item.id
           )}</span>
-          <div class="flex items-center gap-1.5">
-            <span class="truncate max-w-[130px]" style="color: var(--text-muted);">${escapeHtml(
-              item.category || ""
-            )}</span>
+          <div class="flex items-center gap-1.5 flex-wrap justify-end">
+            <button onclick="viewHistoryItem(${idx})" class="btn-counters-outline inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold" title="Visualizar solução completa do chamado">
+              <span class="material-symbols-outlined" style="font-size: 12px;">visibility</span>
+              <span>Visualizar</span>
+            </button>
             <button onclick="createPlaybookFromHistoryItem(${idx})" class="btn-counters-outline inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold" title="Criar um Playbook a partir desta solução">
               <span class="material-symbols-outlined" style="font-size: 12px;">bookmark_add</span>
               <span>Virar Playbook</span>
             </button>
           </div>
         </div>
-        <h4 class="text-xs font-bold" style="color: var(--text-main);">${escapeHtml(
+        <h4 class="text-xs font-bold cursor-pointer hover:underline" onclick="viewHistoryItem(${idx})" style="color: var(--text-main);">${escapeHtml(
           item.title
         )}</h4>
         <p class="text-[11px] leading-relaxed" style="color: var(--text-secondary);">${escapeHtml(
@@ -1121,28 +1128,29 @@ async function loadKnowledgeLayers() {
     document.getElementById("kb-layer3-count").textContent = l3.length;
     document.getElementById("kb-layer3-list").innerHTML = l3
       .map(
-        (pb) => `
+        (pb, idx) => `
       <div class="surface-sub rounded-xl p-3.5 space-y-2">
-        <div class="flex items-center justify-between text-[11px]">
+        <div class="flex items-center justify-between text-[11px] gap-2">
           <span class="font-mono font-bold" style="color: var(--brand-soft-text);">${escapeHtml(
             pb.id
           )}</span>
-          <div class="flex items-center gap-1.5">
-            <button onclick='editPlaybook(${JSON.stringify(pb).replace(
-              /'/g,
-              "&#39;"
-            )})' class="btn-counters-primary inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium">
+          <div class="flex items-center gap-1.5 flex-wrap justify-end">
+            <button onclick="viewPlaybook(${idx})" class="btn-counters-outline inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium" title="Visualizar detalhes completos do Playbook">
+              <span class="material-symbols-outlined" style="font-size: 13px;">visibility</span>
+              <span>Visualizar</span>
+            </button>
+            <button onclick="editPlaybookByIndex(${idx})" class="btn-counters-primary inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium" title="Editar este Playbook">
               <span class="material-symbols-outlined" style="font-size: 13px;">edit</span>
               <span>Editar</span>
             </button>
             <button onclick="deletePlaybook('${escapeHtml(
               pb.id
-            )}')" class="bg-[#dc2626] hover:bg-red-700 text-white inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium transition">
+            )}')" class="bg-[#dc2626] hover:bg-red-700 text-white inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium transition" title="Excluir Playbook">
               <span>Excluir</span>
             </button>
           </div>
         </div>
-        <h4 class="text-xs font-bold" style="color: var(--text-main);">${escapeHtml(
+        <h4 class="text-xs font-bold cursor-pointer hover:underline" onclick="viewPlaybook(${idx})" style="color: var(--text-main);">${escapeHtml(
           pb.title
         )}</h4>
         <p class="text-[11px]" style="color: var(--text-secondary);">${escapeHtml(
@@ -1154,6 +1162,133 @@ async function loadKnowledgeLayers() {
   } catch (err) {
     showToast("Erro ao carregar camadas: " + err.message, "error");
   }
+}
+
+let currentViewedKbItem = null;
+
+function viewKbArticle(idx) {
+  const list = state.knowledge?.layer1_glpi_kb || [];
+  const item = list[idx];
+  if (!item) return;
+  currentViewedKbItem = { layer: 1, item, idx };
+
+  document.getElementById("kb-view-icon").textContent = "library_books";
+  document.getElementById("kb-view-header-title").textContent =
+    "Base de Conhecimento Oficial do GLPI (1ª Camada)";
+  document.getElementById("kb-view-badge").textContent = "1ª Camada • KB GLPI";
+  document.getElementById("kb-view-subtitle").textContent =
+    "Leitura completa do artigo técnico sincronizado diretamente do GLPI.";
+
+  document.getElementById("kb-view-id").value = item.id || "";
+  document.getElementById("kb-view-category").value =
+    item.category || "Base de Conhecimento GLPI";
+
+  const metaParts = [];
+  if (item.author) metaParts.push(`Autor: ${item.author}`);
+  if (item.updated_at) metaParts.push(`Atualizado: ${item.updated_at}`);
+  if (item.views) metaParts.push(`${item.views} visualizações`);
+  document.getElementById("kb-view-meta").value =
+    metaParts.join(" • ") || "Sincronizado via API REST do GLPI";
+
+  document.getElementById("kb-view-title").value = item.title || "";
+
+  const fullPlainText =
+    item.full_content ||
+    (Array.isArray(item.all_steps) && item.all_steps.length > 0
+      ? item.all_steps.join("\n")
+      : item.summary || "");
+  document.getElementById("kb-view-plain-text").value = fullPlainText;
+
+  const richBody = document.getElementById("kb-view-rich-body");
+  if (item.html_content && item.html_content.trim()) {
+    richBody.innerHTML = `<div class="kb-rich-article space-y-3">${item.html_content}</div>`;
+    richBody.querySelectorAll("img").forEach((img) => {
+      img.className = "max-w-full h-auto rounded-xl border my-3 shadow-sm";
+      img.style.borderColor = "var(--border-color)";
+    });
+  } else {
+    richBody.innerHTML = `<div class="whitespace-pre-wrap">${escapeHtml(
+      fullPlainText
+    )}</div>`;
+  }
+
+  document.getElementById("kb-viewer-modal").classList.remove("hidden");
+}
+
+function viewHistoryItem(idx) {
+  const list = state.knowledge?.layer2_glpi_history || [];
+  const item = list[idx];
+  if (!item) return;
+  currentViewedKbItem = { layer: 2, item, idx };
+
+  document.getElementById("kb-view-icon").textContent = "history";
+  document.getElementById("kb-view-header-title").textContent =
+    "Histórico de Chamado Solucionado pela T.I. (2ª Camada)";
+  document.getElementById("kb-view-badge").textContent =
+    "2ª Camada • Chamado Resolvido";
+  document.getElementById("kb-view-subtitle").textContent =
+    "Detalhes da solução registrada no GLPI para chamados atribuídos ao grupo T.I.";
+
+  document.getElementById("kb-view-id").value = item.id || "";
+  document.getElementById("kb-view-category").value =
+    item.category || "T.I • Chamado Solucionado";
+  document.getElementById("kb-view-meta").value = item.ticket_id
+    ? `Chamado GLPI #${item.ticket_id} (Grupo T.I)`
+    : "Histórico Cumulativo T.I";
+  document.getElementById("kb-view-title").value = item.title || "";
+
+  const fullSteps =
+    Array.isArray(item.steps) && item.steps.length > 0
+      ? item.steps.join("\n\n")
+      : item.summary || "";
+  document.getElementById("kb-view-plain-text").value = fullSteps;
+  document.getElementById("kb-view-rich-body").innerHTML = `<div class="whitespace-pre-wrap leading-relaxed">${escapeHtml(
+    fullSteps
+  )}</div>`;
+
+  document.getElementById("kb-viewer-modal").classList.remove("hidden");
+}
+
+function closeKbViewerModal() {
+  document.getElementById("kb-viewer-modal").classList.add("hidden");
+}
+
+async function copyKbViewerText() {
+  const txt = document.getElementById("kb-view-plain-text")?.value || "";
+  if (!txt) return;
+  await navigator.clipboard.writeText(txt);
+  showToast("Conteúdo copiado para a área de transferência!");
+}
+
+function convertViewedKbToPlaybook() {
+  if (!currentViewedKbItem) return;
+  const { layer, item, idx } = currentViewedKbItem;
+  closeKbViewerModal();
+  if (layer === 2) {
+    createPlaybookFromHistoryItem(idx);
+    return;
+  }
+  const cleanTitle = item.title || "Procedimento da Base de Conhecimento";
+  const stepsList =
+    Array.isArray(item.all_steps) && item.all_steps.length > 0
+      ? item.all_steps
+      : [item.full_content || item.summary || ""];
+  openPlaybookModal(
+    {
+      id: nextPlaybookId(),
+      domain: "Sistemas Internos / ERP / Sistemas Corporativos",
+      title: cleanTitle,
+      keywords: extractSuggestedKeywords(
+        `${cleanTitle} ${item.full_content || item.summary || ""}`
+      ),
+      symptoms: `Procedimento baseado no artigo oficial ${item.id} da Base de Conhecimento do GLPI: ${cleanTitle}`,
+      required_info: [],
+      resolution_steps: stepsList,
+      reply_template: `Olá, {solicitante}! Tudo bem?\n\nRecebemos sua solicitação referente a **${cleanTitle}** e já iniciamos o atendimento conforme o procedimento técnico da equipe de T.I.\n\nAssim que concluído, atualizaremos você por aqui!`,
+    },
+    false
+  );
+  showToast(`Playbook pré-preenchido a partir do artigo ${item.id}!`, "info");
 }
 
 function nextPlaybookId() {
@@ -1219,21 +1354,31 @@ function createPlaybookFromCurrentTicket() {
     "Suporte Técnico Geral / Service Desk",
     "Acessos, Permissões e Contas",
     "Sistemas Internos / ERP / Sistemas Corporativos",
+    "Infraestrutura e Rede",
   ];
-  const domain = validDomains.includes(analysis.domain)
-    ? analysis.domain
+  const domain = validDomains.includes(analysis.detected_domain || analysis.domain)
+    ? analysis.detected_domain || analysis.domain
     : "Suporte Técnico Geral / Service Desk";
 
-  openPlaybookModal({
-    id: nextPlaybookId(),
-    domain,
-    title: cleanTitle,
-    keywords: extractSuggestedKeywords(`${cleanTitle} ${analysis.suggested_category || ""} ${analysis.intent_summary || ""}`),
-    symptoms: analysis.intent_summary || cleanTitle,
-    required_info: analysis.missing_info || [],
-    resolution_steps: analysis.resolution_steps || [],
-    reply_template: replyTemplate,
-  });
+  openPlaybookModal(
+    {
+      id: nextPlaybookId(),
+      domain,
+      title: cleanTitle,
+      keywords: extractSuggestedKeywords(
+        `${cleanTitle} ${analysis.suggested_category || ""} ${
+          analysis.translated_intent || analysis.intent_summary || ""
+        }`
+      ),
+      symptoms: analysis.translated_intent || analysis.intent_summary || cleanTitle,
+      required_info: analysis.missing_info || [],
+      resolution_steps: (analysis.resolution_steps || []).map((s) =>
+        String(s).replace(/^\[[^\]]+\]\s*/, "")
+      ),
+      reply_template: replyTemplate,
+    },
+    false
+  );
   showToast(`Rascunho de Playbook preenchido a partir do Chamado #${ticket.id}! Revise e clique em Salvar.`, "info");
 }
 
@@ -1246,20 +1391,87 @@ function createPlaybookFromHistoryItem(idx) {
     ? item.title.split(">").slice(-2).join(" - ").trim()
     : item.title;
 
-  openPlaybookModal({
-    id: nextPlaybookId(),
-    domain: "Suporte Técnico Geral / Service Desk",
-    title: cleanTitle,
-    keywords: extractSuggestedKeywords(`${cleanTitle} ${item.summary || ""}`),
-    symptoms: `Chamados similares a ${item.id}: ${cleanTitle}`,
-    required_info: [],
-    resolution_steps: item.steps && item.steps.length > 0 ? item.steps : [item.summary],
-    reply_template: `Olá {solicitante}! Recebemos seu chamado referente a "${cleanTitle}". ${item.summary}`,
-  });
+  openPlaybookModal(
+    {
+      id: nextPlaybookId(),
+      domain: "Suporte Técnico Geral / Service Desk",
+      title: cleanTitle,
+      keywords: extractSuggestedKeywords(`${cleanTitle} ${item.summary || ""}`),
+      symptoms: `Chamados similares a ${item.id}: ${cleanTitle}`,
+      required_info: [],
+      resolution_steps: item.steps && item.steps.length > 0 ? item.steps : [item.summary],
+      reply_template: `Olá {solicitante}! Recebemos seu chamado referente a "${cleanTitle}". ${item.summary}`,
+    },
+    false
+  );
   showToast(`Playbook pré-preenchido com a solução de ${item.id}!`, "info");
 }
 
-function openPlaybookModal(pb = null) {
+function setPlaybookModalMode(readOnly, isNew = false) {
+  const fields = [
+    "pb-id",
+    "pb-title",
+    "pb-keywords",
+    "pb-symptoms",
+    "pb-req-info",
+    "pb-steps",
+    "pb-reply",
+  ];
+  fields.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.readOnly = Boolean(readOnly);
+    }
+  });
+
+  const domainEl = document.getElementById("pb-domain");
+  if (domainEl) {
+    domainEl.disabled = Boolean(readOnly);
+  }
+
+  const titleEl = document.getElementById("pb-modal-title");
+  const badgeEl = document.getElementById("pb-modal-mode-badge");
+  const subtitleEl = document.getElementById("pb-modal-subtitle");
+  const iconEl = document.getElementById("pb-modal-icon");
+  const btnCancel = document.getElementById("pb-btn-cancel");
+  const btnSwitchEdit = document.getElementById("pb-btn-switch-edit");
+  const btnSave = document.getElementById("pb-btn-save");
+
+  if (readOnly) {
+    if (titleEl) titleEl.textContent = "Visualização de Playbook Local (3ª Camada)";
+    if (badgeEl) badgeEl.textContent = "Somente Leitura";
+    if (subtitleEl) {
+      subtitleEl.textContent =
+        "Visualização ampliada de todos os parâmetros, passos técnicos e modelo de resposta do Playbook.";
+    }
+    if (iconEl) iconEl.textContent = "visibility";
+    if (btnCancel) btnCancel.textContent = "Fechar";
+    if (btnSwitchEdit) btnSwitchEdit.classList.remove("hidden");
+    if (btnSave) btnSave.classList.add("hidden");
+  } else {
+    if (titleEl) {
+      titleEl.textContent = isNew
+        ? "Novo Playbook Local (3ª Camada)"
+        : "Editar Playbook Local (3ª Camada)";
+    }
+    if (badgeEl) badgeEl.textContent = isNew ? "Criação" : "Edição";
+    if (subtitleEl) {
+      subtitleEl.textContent =
+        "Preencha ou ajuste os sintomas, informações obrigatórias, roteiro de resolução e modelo de resposta.";
+    }
+    if (iconEl) iconEl.textContent = isNew ? "post_add" : "edit_note";
+    if (btnCancel) btnCancel.textContent = "Cancelar";
+    if (btnSwitchEdit) btnSwitchEdit.classList.add("hidden");
+    if (btnSave) btnSave.classList.remove("hidden");
+  }
+}
+
+function enablePlaybookEditMode() {
+  setPlaybookModalMode(false, false);
+}
+
+function openPlaybookModal(pb = null, readOnly = false) {
+  const isNew = !pb || !pb.title;
   document.getElementById("playbook-modal").classList.remove("hidden");
   document.getElementById("pb-id").value =
     pb?.id || nextPlaybookId();
@@ -1271,10 +1483,25 @@ function openPlaybookModal(pb = null) {
   document.getElementById("pb-req-info").value = (pb?.required_info || []).join("\n");
   document.getElementById("pb-steps").value = (pb?.resolution_steps || []).join("\n");
   document.getElementById("pb-reply").value = pb?.reply_template || "";
+  setPlaybookModalMode(readOnly, isNew);
+}
+
+function viewPlaybook(idx) {
+  const list = state.knowledge?.layer3_local_playbooks || [];
+  const pb = list[idx];
+  if (!pb) return;
+  openPlaybookModal(pb, true);
+}
+
+function editPlaybookByIndex(idx) {
+  const list = state.knowledge?.layer3_local_playbooks || [];
+  const pb = list[idx];
+  if (!pb) return;
+  openPlaybookModal(pb, false);
 }
 
 function editPlaybook(pb) {
-  openPlaybookModal(pb);
+  openPlaybookModal(pb, false);
 }
 
 function closePlaybookModal() {

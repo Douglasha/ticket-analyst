@@ -1,5 +1,174 @@
 [
   {
+    "id": "Chamado #42089 (Resolvido)",
+    "ticket_id": 42089,
+    "solution_id": 40780,
+    "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Erro no valor do medicamento",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n\n\r\nRealizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n\n\r\nApós o ajuste, os valores passaram a ser apresentados corretamente.",
+    "keywords": [],
+    "steps": [
+      "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+      "Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+      "Após o ajuste, os valores passaram a ser apresentados corretamente."
+    ]
+  },
+  {
+    "id": "Chamado #42080 (Resolvido)",
+    "ticket_id": 42080,
+    "solution_id": 40773,
+    "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > Alteração via banco no HRP",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito conforme solicitado",
+    "keywords": [],
+    "steps": [
+      "feito conforme solicitado"
+    ]
+  },
+  {
+    "id": "Chamado #42071 (Resolvido)",
+    "ticket_id": 42071,
+    "solution_id": 40791,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > DIFERENÇA DE VALOR XML",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42066 (Resolvido)",
+    "ticket_id": 42066,
+    "solution_id": 40766,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Rosy Ellen Freire Viana Santos",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foram dadas as permissões",
+    "keywords": [],
+    "steps": [
+      "Foram dadas as permissões"
+    ]
+  },
+  {
+    "id": "Chamado #42061 (Resolvido)",
+    "ticket_id": 42061,
+    "solution_id": 40765,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Beneficiária com mais de um cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 10:38:13Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 10:38:20Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 10:38:20\n\n\r\n121256387;206195869 EMMELY APARECIDA FIGUEIREDO\n186610252;206100122 I",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado",
+      "Início da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 10:38:13Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 10:38:20Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 10:38:20",
+      "121256387;206195869 EMMELY APARECIDA FIGUEIREDO",
+      "186610252;206100122 ISADORA MARIA RIBEIRO BATISTA",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição."
+    ]
+  },
+  {
+    "id": "Chamado #42057 (Resolvido)",
+    "ticket_id": 42057,
+    "solution_id": 40764,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Beneficiária com mais de um cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 10:38:13Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 10:38:20Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 10:38:20\n\n\r\n121256387;206195869 EMMELY APARECIDA FIGUEIREDO\n186610252;206100122 I",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado",
+      "Início da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 10:38:13Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 10:38:20Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 10:38:20",
+      "121256387;206195869 EMMELY APARECIDA FIGUEIREDO",
+      "186610252;206100122 ISADORA MARIA RIBEIRO BATISTA",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição."
+    ]
+  },
+  {
+    "id": "Chamado #42052 (Resolvido)",
+    "ticket_id": 42052,
+    "solution_id": 40762,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Correção do campo 92 - Prog. de Atenção no Intercâmbio",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito conforme solicitado",
+    "keywords": [],
+    "steps": [
+      "feito conforme solicitado"
+    ]
+  },
+  {
+    "id": "Chamado #42049 (Resolvido)",
+    "ticket_id": 42049,
+    "solution_id": 40758,
+    "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > Unificação de cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado:\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 08:31:07Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 08:31:15Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 08:31:15\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, perman",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado:",
+      "Início da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 08:31:07Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 08:31:15Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 08:31:15",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42034 (Resolvido)",
+    "ticket_id": 42034,
+    "solution_id": 40755,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Alteração agenda Jéssica Lima",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAgenda alterada conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Agenda alterada conforme solicitado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42021 (Resolvido)",
+    "ticket_id": 42021,
+    "solution_id": 40735,
+    "title": "Unificação Cadastro PEP | NILZA MARIA DA SILVA VITOR",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42020 (Resolvido)",
+    "ticket_id": 42020,
+    "solution_id": 40723,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Erro app meu ponto",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42010 (Resolvido)",
     "ticket_id": 42010,
     "solution_id": 40696,
@@ -58,6 +227,40 @@
     ]
   },
   {
+    "id": "Chamado #41989 (Resolvido)",
+    "ticket_id": 41989,
+    "solution_id": 40733,
+    "title": "Verificação do Portal Transparência [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\n\r\n\r\n\r\nExibindo 6 transações... 6 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos\r\n\r\n\r\n \r\n\r\nNr. Solicitação\r\n\r\n \r\n\r\n\r\nNr Transação\r\nTipo de transação\r\nVersão TISS\r\nPrestador\r\nCarteira\r\nPrestador\r\nOperadora\r\nData\r\nDuração(s)\r\nStatus\r",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Exibindo 6 transações... 6 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos",
+      "Nr. Solicitação",
+      "Nr Transação",
+      "Tipo de transação"
+    ]
+  },
+  {
+    "id": "Chamado #41988 (Resolvido)",
+    "ticket_id": 41988,
+    "solution_id": 40734,
+    "title": "Atualizar Simpro [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nTabela Atualizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Tabela Atualizada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #41987 (Resolvido)",
     "ticket_id": 41987,
     "solution_id": 40679,
@@ -69,6 +272,22 @@
     "steps": [
       "Atualizado conforme as regras previstas em POP",
       "Setor envolvido informado"
+    ]
+  },
+  {
+    "id": "Chamado #41981 (Resolvido)",
+    "ticket_id": 41981,
+    "solution_id": 40732,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado, 1 cadastro novo\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado, 1 cadastro novo",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -101,6 +320,19 @@
     ]
   },
   {
+    "id": "Chamado #41961 (Resolvido)",
+    "ticket_id": 41961,
+    "solution_id": 40722,
+    "title": "Desenvolvimento e Qualidade > Correção de bugs > Não recebimento diário de Relatório",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde! Acredito que, a partir de agora, os envios devem se normalizar. Caso perceba que parou de receber novamente, por favor, me avise.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde! Acredito que, a partir de agora, os envios devem se normalizar. Caso perceba que parou de receber novamente, por favor, me avise."
+    ]
+  },
+  {
     "id": "Chamado #41960 (Resolvido)",
     "ticket_id": 41960,
     "solution_id": 40685,
@@ -128,6 +360,21 @@
     "steps": [
       "Prezados(as),",
       "Cadastro realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41952 (Resolvido)",
+    "ticket_id": 41952,
+    "solution_id": 40763,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Mercia",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia, realizado o cadastro.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Bom dia, realizado o cadastro.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -288,6 +535,19 @@
     ]
   },
   {
+    "id": "Chamado #41907 (Resolvido)",
+    "ticket_id": 41907,
+    "solution_id": 40772,
+    "title": "T.I > SI > Monitoramento e Análise de Segurança > Monitoramento de Antivírus [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Verificação Efetuada.",
+    "keywords": [],
+    "steps": [
+      "Verificação Efetuada."
+    ]
+  },
+  {
     "id": "Chamado #41905 (Resolvido)",
     "ticket_id": 41905,
     "solution_id": 40646,
@@ -319,6 +579,19 @@
       "Verificado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41889 (Resolvido)",
+    "ticket_id": 41889,
+    "solution_id": 40720,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Sistema laboratório",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Fechado, solucionado pela equipe do Laboratório que a instruiu",
+    "keywords": [],
+    "steps": [
+      "Fechado, solucionado pela equipe do Laboratório que a instruiu"
     ]
   },
   {
@@ -611,6 +884,19 @@
     "keywords": [],
     "steps": [
       "feito"
+    ]
+  },
+  {
+    "id": "Chamado #41765 (Resolvido)",
+    "ticket_id": 41765,
+    "solution_id": 40721,
+    "title": "Infraestrutura e Redes > Internet e WiFi > Disponibilizar Rede Wifi",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi colocado voucher",
+    "keywords": [],
+    "steps": [
+      "Foi colocado voucher"
     ]
   },
   {
@@ -914,6 +1200,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41633 (Resolvido)",
+    "ticket_id": 41633,
+    "solution_id": 40716,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Nextclaud",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Finalizado por Douglas, que atualizou e recuperou os arquivos.",
+    "keywords": [],
+    "steps": [
+      "Finalizado por Douglas, que atualizou e recuperou os arquivos."
     ]
   },
   {
@@ -1332,6 +1631,19 @@
     ]
   },
   {
+    "id": "Chamado #41496 (Resolvido)",
+    "ticket_id": 41496,
+    "solution_id": 40718,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > XML COM HASH DANDO ERRO",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Fechamento realizado, XML ok",
+    "keywords": [],
+    "steps": [
+      "Fechamento realizado, XML ok"
+    ]
+  },
+  {
     "id": "Chamado #41494 (Resolvido)",
     "ticket_id": 41494,
     "solution_id": 40498,
@@ -1415,6 +1727,21 @@
     ]
   },
   {
+    "id": "Chamado #41348 (Resolvido)",
+    "ticket_id": 41348,
+    "solution_id": 40754,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > SOBRAS CONTÁBEIS - LEVANTAMENTO DE ATIVOS - ATIVO IMOBILIZADO",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #41340 (Resolvido)",
     "ticket_id": 41340,
     "solution_id": 40207,
@@ -1456,6 +1783,32 @@
       "Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #40855 (Resolvido)",
+    "ticket_id": 40855,
+    "solution_id": 40717,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação e configuração de pastas compartilhadas – Documentos da Qualidade",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado.",
+    "keywords": [],
+    "steps": [
+      "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+    ]
+  },
+  {
+    "id": "Chamado #39964 (Resolvido)",
+    "ticket_id": 39964,
+    "solution_id": 40714,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Termo de Consentimento Livre e Esclarecido",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Programa instalado, colaboradoras instruídas e testaram replicando o conhecimento sobre.",
+    "keywords": [],
+    "steps": [
+      "Programa instalado, colaboradoras instruídas e testaram replicando o conhecimento sobre."
     ]
   },
   {

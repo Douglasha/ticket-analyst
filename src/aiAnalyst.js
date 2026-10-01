@@ -415,6 +415,99 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
+      /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
+        normAll
+      ) ||
+      /\b(trocar|mudar|transferir|levar|passar|colocar)\b[\s\S]{0,60}\b(do|da)\b[\s\S]{0,50}\bpara\b/i.test(
+        normAll
+      )
+    ) {
+      const descOnly = formFields.descricao || "";
+      const mentionsPrinterReloc = /\bimpressora\b/i.test(normAll);
+      const isZebra = /\bzebra\b/i.test(normAll);
+      const printerName = isZebra ? "impressora Zebra" : "impressora";
+      const mentionsPhoneInstall =
+        /\b(ponto de telefone|linha e aparelho|telefone|ramal|aparelho)\b/i.test(
+          normAll
+        );
+
+      const fromToMatch = descOnly.match(
+        /\bd[oa]\s+([^,\n]+?)\s+para\s+(?:o\s+|a\s+)?([^,\n.]+)/i
+      );
+      const originLoc = fromToMatch?.[1]
+        ? fromToMatch[1].replace(/bal[cç][ãa]o/i, "balcão").trim()
+        : sectorName;
+      const destLoc = fromToMatch?.[2]
+        ? fromToMatch[2].replace(/\s+coloca.*$/i, "").trim()
+        : /\balmoxarifado\b/i.test(normAll)
+        ? "Almoxarifado"
+        : "novo local solicitado";
+
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Solicitação de remanejamento físico de equipamento e/ou instalação de ponto de telefonia/rede, demandando atendimento presencial da equipe de Infraestrutura.";
+
+      const actionsRequested = [];
+      if (mentionsPrinterReloc) {
+        actionsRequested.push(
+          `**remanejar a ${printerName}** (d${
+            originLoc.toLowerCase().startsWith("a") ? "a" : "o"
+          } ${originLoc} para ${destLoc})`
+        );
+      }
+      if (mentionsPhoneInstall) {
+        actionsRequested.push(
+          `**instalar um ponto de telefone (linha/ramal e aparelho)** n${
+            destLoc.toLowerCase().startsWith("a") && !destLoc.toLowerCase().startsWith("almox")
+              ? "a"
+              : "o"
+          } ${destLoc}`
+        );
+      }
+      const actionsTxt =
+        actionsRequested.length > 0
+          ? actionsRequested.join(" e ")
+          : `realizar a mudança/instalação física solicitada (${descOnly
+              .replace(/\s+/g, " ")
+              .trim()})`;
+
+      translatedIntent =
+        `O solicitante **${ticket.requester}** (${sectorName}) solicita atendimento presencial da equipe de Infraestrutura e Redes para ${actionsTxt}. ` +
+        `Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.`;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [];
+      if (mentionsPrinterReloc) {
+        missingInfo.push(
+          `Confirmar se no local de destino (${destLoc}) já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a ${printerName} seja conectada via USB)`
+        );
+      } else {
+        missingInfo.push(
+          `Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (${destLoc})`
+        );
+      }
+      if (mentionsPhoneInstall) {
+        missingInfo.push(
+          `Informar se para o ponto de telefone (${destLoc}) deve ser configurado um novo número de ramal ou transferido um ramal já existente`
+        );
+      }
+
+      const questionsBul = missingInfo
+        .map((q, idx) => `${idx + 1}. ${q}?`)
+        .join("\n");
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação para ${actionsTxt}.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n` +
+        (mentionsPrinterReloc && mentionsPhoneInstall
+          ? `1. No local onde os equipamentos ficarão (${destLoc}), já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a ${printerName} será conectada)?\n` +
+            `2. Sobre o ponto de telefone, será necessário configurar um **novo número de ramal** para o ${destLoc} ou transferir algum ramal já existente?`
+          : questionsBul) +
+        `\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!`;
+    } else if (
       normCore.includes("impressora") ||
       normCore.includes("impressoras") ||
       normCore.includes("imprimir") ||
@@ -424,35 +517,42 @@ export class AIAnalyst {
       normCore.includes("spooler") ||
       normCore.includes("toner")
     ) {
-      const printerModel = formFields.ativo || "impressora do setor";
+      const explicitModel =
+        formFields.ativo ||
+        (/\bm4080(?:fx)?\b/i.test(normAll)
+          ? "Samsung M4080FX"
+          : /\bzebra\b/i.test(normAll)
+          ? "Zebra"
+          : "");
+      const printerLabel = explicitModel
+        ? `a impressora **${explicitModel}**`
+        : "a **impressora do setor**";
+      const printerShort = explicitModel || "impressora do setor";
       const asksUrgency =
-        normCore.includes("urgencia") ||
-        normCore.includes("urgente") ||
-        normAll.includes("farmacia") ||
-        normAll.includes("recepcao");
+        normCore.includes("urgencia") || normCore.includes("urgente");
 
       translatedIntent =
-        `O solicitante relata que a impressora **${printerModel}** localizada no setor **${sectorName}** não está imprimindo` +
+        `O solicitante **${ticket.requester}** (${sectorName}) relata falha de impressão em ${printerLabel} localizada no setor **${sectorName}**` +
         (asksUrgency ? " e solicita atendimento com urgência. " : ". ") +
-        `O equipamento já foi identificado (${printerModel}), porém o relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).`;
+        `O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).`;
       detectedDomain = "Infraestrutura e Rede";
       suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
-      realUrgency = asksUrgency ? "Alta" : "Média";
+      realUrgency = asksUrgency ? "Alta" : ticket.urgency_label || "Média";
       urgencyReason = asksUrgency
-        ? `Parada de impressão em setor operacional assistencial (${sectorName}) com pedido de urgência.`
-        : `Falha de impressão no equipamento ${printerModel} (${sectorName}).`;
+        ? `Parada de impressão em setor operacional (${sectorName}) com pedido de urgência.`
+        : `Falha de impressão no equipamento (${printerShort} - ${sectorName}).`;
       sufficiencyStatus = "parcial";
       missingInfo = [
-        `Confirmar se a impressora ${printerModel} parou de imprimir para todos os computadores do setor (${sectorName}) ou apenas na sua estação`,
-        `Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da ${printerModel} (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)`,
+        `Confirmar se a ${printerShort} parou de imprimir para todos os computadores do setor (${sectorName}) ou apenas na sua estação`,
+        `Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da ${printerShort} (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)`,
         "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente",
       ];
       customPublicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Já estamos verificando o status da impressora **${printerModel}** (${sectorName}) na rede com prioridade.\n\n` +
+        `Já estamos verificando o status d${printerLabel} (${sectorName}) na rede.\n\n` +
         `Para agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n` +
         `1. A falha ocorre em **todos os computadores** da ${sectorName} ou apenas na **sua máquina**?\n` +
-        `2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da ${printerModel} (como atolamento de papel, bandeja aberta ou falha de rede)?\n` +
+        `2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da ${printerShort} (como atolamento de papel, bandeja aberta ou falha de rede)?\n` +
         `3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\n` +
         `Caso a impressora esteja inacessível na rede, já deslocaremos um técnico até a ${sectorName}!`;
     } else if (
@@ -626,13 +726,19 @@ export class AIAnalyst {
           "ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac",
         ];
       }
-    } else if (normAll.includes("hrp") || normAll.includes("tnumm") || normAll.includes("promoprev")) {
+    } else if (
+      normAll.includes("tnumm") ||
+      normAll.includes("promoprev") ||
+      normAll.includes("0256") ||
+      (normAll.includes("hrp") &&
+        (normAll.includes("precificacao") || normAll.includes("gestantes")))
+    ) {
       if (normAll.includes("banco") || normAll.includes("tnumm") || normAll.includes("precificacao")) {
         translatedIntent =
           "Solicitação do setor de Faturamento para atualização massiva via banco de dados no sistema HRP (ajuste do campo 'precificação' " +
           "conforme regra pós-importação da tabela TNUMM).";
         detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
-        suggestedCategory = "T.I > BD > Manutenção de Dados HRP / TNUMM";
+        suggestedCategory = "T.I > BD > Administração de Banco de Dados";
         realUrgency = "Alta";
         urgencyReason = "Parametrização necessária para o correto processamento de valores e faturamento no HRP.";
         sufficiencyStatus = "completo";
@@ -641,12 +747,40 @@ export class AIAnalyst {
         translatedIntent =
           "Solicitação da equipe Promoprev buscando o caminho/módulo no sistema HRP para extração do Relatório de Gestantes (carteira Clientes 0256).";
         detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
-        suggestedCategory = "T.I > ST > Sistemas / Relatórios HRP";
+        suggestedCategory = "T.I > BD > Big Data e BI > Relatórios";
         realUrgency = "Baixa";
         urgencyReason = "Consulta de caminho para extração de relatório gerencial.";
         sufficiencyStatus = "completo";
         missingInfo = [];
       }
+    } else if (
+      /\b(roteador|access point|ap wifi)\b/i.test(normAll) ||
+      (/\b(wifi|wi-fi|internet)\b/i.test(normAll) &&
+        /\b(lentid[aã]o|oscila[cç][aã]o|instabilidade|quedas?|whatsapp)\b/i.test(
+          normAll
+        ))
+    ) {
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Conectividade > Internet e WiFi";
+      realUrgency = ticket.urgency_label && ticket.urgency_label !== "Muito baixa" ? ticket.urgency_label : "Média";
+      urgencyReason = `Instabilidade e oscilação na conexão de internet afetando a rotina e chamadas de WhatsApp do setor ${sectorName}.`;
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. ` +
+        `Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.`;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        `Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (${sectorName})`,
+        "Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor",
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **${sectorName}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n` +
+        `1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n` +
+        `2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\n` +
+        `Assim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!`;
     } else if (
       (normAll.includes("wifi") || normAll.includes("wi fi")) &&
       (normAll.includes("celular") || normAll.includes("aparelho") || normAll.includes("telefone"))
@@ -1213,6 +1347,196 @@ export class AIAnalyst {
           `Para realizarmos a liberação, você poderia nos confirmar o **nome completo (ou CPF/matrícula)** do(a) colaborador(a)?\n\n` +
           `Assim que nos informar por aqui, já efetuamos a liberação!`;
       }
+    } else if (
+      /\bagenda\b/i.test(normAll) &&
+      /\b(pep|sgh|spdata|atendimento|intervalo|horario|horarios|fisioterapeuta|medic[oa]|dr|dra|consulta|consultorio)\b/i.test(
+        normAll
+      )
+    ) {
+      const descOnly = formFields.descricao || "";
+      const sysName = /\bsgh\b/i.test(normAll)
+        ? "S.G.H."
+        : /\bpep\b/i.test(normAll)
+        ? "PEP"
+        : formFields.aplicacao || "PEP";
+
+      const profDescMatch = descOnly.match(
+        /\bagenda\s+d[aoe]\s+(?:(fisioterapeuta|m[ée]dic[oa]|dr\.?(?:a)?|nutricionista|psic[óo]log[oa]|terapeuta|enfermeir[oa]|profissional|colaborador(?:a)?)\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
+      );
+      const profTitleMatch = (ticket.title || "").match(
+        /\bagenda\s+(?:d[aoe]\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){0,4})\s*$/i
+      );
+
+      const profRole = profDescMatch?.[1]
+        ? profDescMatch[1].toLowerCase()
+        : "profissional";
+      const profName = profDescMatch?.[2]
+        ? profDescMatch[2].replace(/\s*[,.;].*$/, "").trim()
+        : profTitleMatch?.[1]
+        ? profTitleMatch[1].trim()
+        : "";
+
+      const hasTimeRange =
+        /\b\d{1,2}\s*:\s*\d{2}\b/.test(descOnly) ||
+        /\b\d{1,2}\s*h(?:oras|s)?\b/i.test(descOnly);
+      const hasDurationOrInterval =
+        /\b(atendimento\s+de|intervalo\s+de|dura[çc][ãa]o|minutos|min)\b/i.test(
+          descOnly
+        );
+
+      const scheduleDetails = descOnly
+        .replace(/^boa\s+(?:tarde|dia|noite)\s*[,!]?\s*/i, "")
+        .replace(/\b(?:obrigad[oa]|att|atenciosamente)\b[\s\S]*$/i, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > ST > Instalação/Configuração > Aplicativos";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Solicitação de parametrização/alteração de grade de agenda de profissional no sistema ${sysName}, impactando a disponibilização de horários de atendimento.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      if (profName && (hasTimeRange || hasDurationOrInterval)) {
+        const roleAndName =
+          profRole && profRole !== "profissional"
+            ? `${profRole} **${profName}**`
+            : `profissional **${profName}**`;
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita alteração na agenda d${
+            profRole.endsWith("a") ? "a" : "o"
+          } ${roleAndName} no sistema **${sysName}**, parametrizando os horários e intervalos de atendimento (${scheduleDetails}). ` +
+          `Todas as informações necessárias (profissional, faixa de horário, duração do atendimento e intervalo) já foram informadas no relato.` +
+          reclassNote;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de alteração na agenda d${
+            profRole.endsWith("a") ? "a" : "o"
+          } ${roleAndName} no sistema **${sysName}**.\n\n` +
+          `Todos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\n` +
+          `Assim que a alteração estiver concluída e disponível no ${sysName}, confirmaremos por aqui!`;
+      } else {
+        const missingList = [];
+        if (!profName) {
+          missingList.push(
+            `Nome completo do(a) profissional de saúde cuja agenda deve ser alterada no ${sysName}`
+          );
+        }
+        if (!hasTimeRange && !hasDurationOrInterval) {
+          missingList.push(
+            "Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo"
+          );
+        }
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) para alteração de agenda no sistema **${sysName}**${
+            profName ? ` referente a **${profName}**` : ""
+          }, pendente de detalhamento completo dos parâmetros de horário.` +
+          reclassNote;
+        sufficiencyStatus = "parcial";
+        missingInfo = missingList;
+        const questionsBul = missingList.map((q) => `- ${q}`).join("\n");
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de alteração de agenda no sistema **${sysName}**.\n\n` +
+          `Para realizarmos a parametrização corretamente, você poderia nos confirmar:\n` +
+          `${questionsBul}\n\n` +
+          `Assim que nos informar por aqui, já executamos a alteração!`;
+      }
+    } else if (
+      /\b(unifica|unificar|unificacao|mais de um cadastro|2 cadastros|dois cadastros|cadastro duplicado|cadastros duplicados|unificar as chaves)\b/i.test(
+        normAll
+      )
+    ) {
+      const descOnly = formFields.descricao || "";
+      const sysName =
+        formFields.aplicacao ||
+        (/\bhrp\b/i.test(normAll)
+          ? "HRP Unimed"
+          : /\bpep\b/i.test(normAll)
+          ? "PEP"
+          : /\bsgh\b/i.test(normAll)
+          ? "S.G.H."
+          : "sistema");
+
+      const personMatch = descOnly.match(
+        /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/
+      );
+      const pipeTitleMatch = (ticket.title || "").match(/\|\s*([A-ZÀ-Ú\s]{5,})$/);
+      const personRole = personMatch?.[1]
+        ? personMatch[1].toLowerCase()
+        : "beneficiário(a)/paciente";
+      const targetPerson = personMatch?.[2]
+        ? personMatch[2].replace(/\s+(?:possui|tem|está|esta|com)\b.*$/i, "").trim()
+        : pipeTitleMatch?.[1]
+        ? pipeTitleMatch[1].trim()
+        : "";
+
+      const prevailMatch = descOnly.match(
+        /\bprevalecer\s+(?:[ée]\s+)?(?:o\s+|a\s+)?["']?([^."',\n]+)["']?/i
+      );
+      const prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
+      const hasNumericKeys = /\b\d{3,}\b/.test(descOnly);
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > BD > Administração de Banco de Dados";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = `Duplicidade de cadastro no sistema ${sysName}, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) ${personRole}.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      if (targetPerson || hasNumericKeys) {
+        const whoLabel = targetPerson
+          ? `d${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
+          : "dos registros informados";
+        const prevailTxt = prevailTarget
+          ? `, mantendo o cadastro **${prevailTarget}** como principal`
+          : "";
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) relatou que ${
+            targetPerson
+              ? `${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
+              : "um(a) beneficiário(a)/paciente"
+          } possui dois cadastros no sistema **${sysName}** e solicitou a unificação dos registros${prevailTxt}. ` +
+          `Os dados necessários para a unificação já constam descritos no chamado.` +
+          reclassNote;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos e analisamos a sua solicitação referente à unificação de cadastro ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n` +
+          `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\n` +
+          `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastros duplicados no sistema **${sysName}**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer.` +
+          reclassNote;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Nome completo e códigos/chaves dos dois cadastros no sistema ${sysName}`,
+          "Confirmar qual dos cadastros deve prevalecer como principal após a unificação",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de unificação de cadastro no sistema **${sysName}**.\n\n` +
+          `Para realizarmos o procedimento com segurança, você poderia nos informar:\n` +
+          `- O **nome completo** (ou códigos/chaves) dos cadastros duplicados;\n` +
+          `- Qual dos cadastros deve **prevalecer como principal**?\n\n` +
+          `Assim que nos confirmar por aqui, já executamos a unificação!`;
+      }
     } else {
       const resumoDesc = formFields.descricao
         ? formFields.descricao.replace(/\s+/g, " ").slice(0, 180)
@@ -1246,6 +1570,11 @@ export class AIAnalyst {
           smartCat = "T.I > ST > Acesso e Permissões";
         } else if (looksLikeError) {
           smartCat = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+        } else if (
+          /\bsistemas operacionais\b/i.test(normalizeText(ticket.category || "")) &&
+          /\b(pep|sgh|spdata|wconect|benner|hrp|autolac|sistema|agenda)\b/i.test(normAll)
+        ) {
+          smartCat = "T.I > ST > Instalação/Configuração > Aplicativos";
         }
       }
 
@@ -1345,13 +1674,17 @@ export class AIAnalyst {
       );
     }
 
+    const cleanSubject = (ticket.title || "").includes(">")
+      ? ticket.title.split(">").pop().trim()
+      : ticket.title;
+
     let publicReply = "";
     if (customPublicReply) {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
       publicReply = matchedMemory.reply_template
         .replace(/\{solicitante\}/g, firstName)
-        .replace(/\{titulo\}/g, ticket.title);
+        .replace(/\{titulo\}/g, cleanSubject);
     } else if (
       matchedPb &&
       matchedPb.reply_template &&
@@ -1359,25 +1692,20 @@ export class AIAnalyst {
     ) {
       publicReply = matchedPb.reply_template
         .replace(/\{solicitante\}/g, firstName)
-        .replace(/\{titulo\}/g, ticket.title);
+        .replace(/\{titulo\}/g, cleanSubject);
     } else if (missingInfo.length > 0) {
       const questionsBul = missingInfo.map((q) => `- ${q}`).join("\n");
       publicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Já estamos analisando o seu chamado #${ticket.id} (**${ticket.title}**). Para avançarmos com a solução o mais rápido possível, ` +
+        `Já estamos analisando o seu chamado #${ticket.id} (**${cleanSubject}**). Para avançarmos com a solução o mais rápido possível, ` +
         `você poderia nos confirmar as seguintes informações?\n\n` +
         `${questionsBul}\n\n` +
         `Assim que nos responder aqui no chamado, daremos sequência imediata!`;
     } else {
-      const stepsForUser = resolutionSteps
-        .slice(0, 3)
-        .map((s) => `- ${s.replace(/^\[[^\]]+\]\s*/, "")}`)
-        .join("\n");
       publicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos e analisamos a sua solicitação referente a **${ticket.title}**.\n` +
-        `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento:\n\n` +
-        `${stepsForUser}\n\n` +
+        `Recebemos e analisamos a sua solicitação referente a **${cleanSubject}**.\n` +
+        `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\n` +
         `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
     }
 

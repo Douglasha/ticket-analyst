@@ -772,61 +772,83 @@
     </main>
   </div>
 
-  <!-- MODAL DE CRIAÇÃO / EDIÇÃO DE PLAYBOOK LOCAL -->
-  <div id="playbook-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="surface-card rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">description</span>
-          <h3 class="text-sm font-bold" style="color: var(--text-main);">Playbook Local (3ª Camada)</h3>
+  <!-- MODAL AMPLIADO DE VISUALIZAÇÃO / CRIAÇÃO / EDIÇÃO DE PLAYBOOK LOCAL -->
+  <div id="playbook-modal" onclick="if(event.target === this) closePlaybookModal()" class="fixed inset-0 z-50 hidden bg-black/65 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+    <div class="surface-card rounded-2xl flex flex-col p-6 sm:p-8 shadow-2xl border" style="width: min(96vw, 1560px); height: 92vh; max-height: 94vh; border-color: var(--border-color);">
+      <div class="flex items-center justify-between border-b pb-4 mb-5 shrink-0" style="border-color: var(--border-color);">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center pill-brand-soft">
+            <span id="pb-modal-icon" class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">description</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 id="pb-modal-title" class="text-base sm:text-lg font-bold" style="color: var(--text-main);">Playbook Local (3ª Camada)</h3>
+              <span id="pb-modal-mode-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full pill-brand-soft">Edição</span>
+            </div>
+            <p id="pb-modal-subtitle" class="text-xs" style="color: var(--text-muted);">
+              Consulte ou edite os sintomas, informações obrigatórias, roteiro técnico e modelo de resposta.
+            </p>
+          </div>
         </div>
-        <button onclick="closePlaybookModal()" style="color: var(--text-muted);">
-          <span class="material-symbols-outlined icon-sm">close</span>
+        <button onclick="closePlaybookModal()" class="p-1.5 rounded-lg hover:opacity-80 transition" style="color: var(--text-muted);" title="Fechar (Esc)">
+          <span class="material-symbols-outlined icon-md">close</span>
         </button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Código ID</label>
-          <input type="text" id="pb-id" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
-        </div>
-        <div>
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Domínio de TI</label>
-          <select id="pb-domain" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs">
-            <option value="Suporte Técnico Geral / Service Desk">Suporte Técnico Geral / Service Desk</option>
-            <option value="Acessos, Permissões e Contas">Acessos, Permissões e Contas</option>
-            <option value="Sistemas Internos / ERP / Sistemas Corporativos">Sistemas Internos / ERP / Sistemas Corporativos</option>
-          </select>
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Título do Processo</label>
-          <input type="text" id="pb-title" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Palavras-chave (separadas por vírgula)</label>
-          <input type="text" id="pb-keywords" placeholder="impressora, spooler, fila, papel" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Sintoma / Quando aplicar</label>
-          <input type="text" id="pb-symptoms" class="w-full surface-sub rounded-lg px-3 py-1.5 text-xs" />
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Dados a solicitar se faltarem (1 por linha)</label>
-          <textarea id="pb-req-info" rows="2" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Passos de Resolução (1 por linha)</label>
-          <textarea id="pb-steps" rows="3" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
-        </div>
-        <div class="sm:col-span-2">
-          <label class="block text-xs mb-1" style="color: var(--text-secondary);">Modelo de Resposta ao Solicitante ({solicitante})</label>
-          <textarea id="pb-reply" rows="3" class="w-full surface-sub rounded-lg p-2.5 text-xs"></textarea>
+      <div class="overflow-y-auto flex-1 pr-2 space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Código ID</label>
+            <input type="text" id="pb-id" class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm font-mono font-semibold focus:outline-none" />
+          </div>
+          <div class="md:col-span-4">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Domínio de TI</label>
+            <select id="pb-domain" class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm focus:outline-none">
+              <option value="Suporte Técnico Geral / Service Desk">Suporte Técnico Geral / Service Desk</option>
+              <option value="Acessos, Permissões e Contas">Acessos, Permissões e Contas</option>
+              <option value="Sistemas Internos / ERP / Sistemas Corporativos">Sistemas Internos / ERP / Sistemas Corporativos</option>
+              <option value="Infraestrutura e Rede">Infraestrutura e Rede</option>
+            </select>
+          </div>
+          <div class="md:col-span-6">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Palavras-chave (separadas por vírgula)</label>
+            <input type="text" id="pb-keywords" placeholder="impressora, spooler, fila, papel" class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm focus:outline-none" />
+          </div>
+
+          <div class="md:col-span-12">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Título do Processo</label>
+            <input type="text" id="pb-title" class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:outline-none" />
+          </div>
+
+          <div class="md:col-span-6">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Sintoma / Quando aplicar</label>
+            <textarea id="pb-symptoms" rows="5" class="w-full surface-sub rounded-xl p-3.5 text-sm leading-relaxed focus:outline-none"></textarea>
+          </div>
+
+          <div class="md:col-span-6">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Dados a solicitar se faltarem (1 por linha)</label>
+            <textarea id="pb-req-info" rows="5" class="w-full surface-sub rounded-xl p-3.5 text-sm leading-relaxed focus:outline-none"></textarea>
+          </div>
+
+          <div class="md:col-span-6">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Passos de Resolução Técnica (1 por linha)</label>
+            <textarea id="pb-steps" rows="11" class="w-full surface-sub rounded-xl p-3.5 text-sm leading-relaxed focus:outline-none"></textarea>
+          </div>
+
+          <div class="md:col-span-6">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Modelo de Resposta ao Solicitante ({solicitante})</label>
+            <textarea id="pb-reply" rows="11" class="w-full surface-sub rounded-xl p-3.5 text-sm leading-relaxed focus:outline-none"></textarea>
+          </div>
         </div>
       </div>
 
-      <div class="flex justify-end gap-2 pt-2 border-t" style="border-color: var(--border-color);">
-        <button onclick="closePlaybookModal()" class="btn-counters-outline px-4 py-1.5 rounded-lg text-xs font-medium">Cancelar</button>
-        <button onclick="savePlaybookModal()" class="btn-counters-primary inline-flex items-center gap-1 px-4 py-1.5 rounded-lg text-xs font-semibold">
+      <div class="flex items-center justify-end gap-2.5 pt-4 mt-4 border-t shrink-0" style="border-color: var(--border-color);">
+        <button id="pb-btn-cancel" onclick="closePlaybookModal()" class="btn-counters-outline px-4 py-2 rounded-xl text-xs font-semibold">Cancelar</button>
+        <button id="pb-btn-switch-edit" onclick="enablePlaybookEditMode()" class="hidden btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold">
+          <span class="material-symbols-outlined icon-sm">edit</span>
+          <span>Editar este Playbook</span>
+        </button>
+        <button id="pb-btn-save" onclick="savePlaybookModal()" class="btn-counters-primary inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-semibold">
           <span class="material-symbols-outlined icon-sm">check</span>
           <span>Salvar Playbook</span>
         </button>
@@ -834,6 +856,77 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=10"></script>
+  <!-- MODAL AMPLIADO DE LEITURA DA BASE DE CONHECIMENTO DO GLPI (1ª E 2ª CAMADAS) -->
+  <div id="kb-viewer-modal" onclick="if(event.target === this) closeKbViewerModal()" class="fixed inset-0 z-50 hidden bg-black/65 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+    <div class="surface-card rounded-2xl flex flex-col p-6 sm:p-8 shadow-2xl border" style="width: min(96vw, 1560px); height: 92vh; max-height: 94vh; border-color: var(--border-color);">
+      <div class="flex items-center justify-between border-b pb-4 mb-5 shrink-0" style="border-color: var(--border-color);">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center pill-brand-soft">
+            <span id="kb-view-icon" class="material-symbols-outlined icon-md" style="color: var(--brand-soft-text);">library_books</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 id="kb-view-header-title" class="text-base sm:text-lg font-bold" style="color: var(--text-main);">Base de Conhecimento Oficial do GLPI (1ª Camada)</h3>
+              <span id="kb-view-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full pill-brand-soft">Somente Leitura</span>
+            </div>
+            <p id="kb-view-subtitle" class="text-xs" style="color: var(--text-muted);">
+              Leitura completa do artigo sincronizado diretamente do GLPI sem precisar sair do sistema.
+            </p>
+          </div>
+        </div>
+        <button onclick="closeKbViewerModal()" class="p-1.5 rounded-lg hover:opacity-80 transition" style="color: var(--text-muted);" title="Fechar (Esc)">
+          <span class="material-symbols-outlined icon-md">close</span>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto flex-1 pr-2 space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Código ID</label>
+            <input type="text" id="kb-view-id" readonly class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm font-mono font-semibold focus:outline-none" />
+          </div>
+          <div class="md:col-span-5">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Categoria / Origem</label>
+            <input type="text" id="kb-view-category" readonly class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm focus:outline-none" />
+          </div>
+          <div class="md:col-span-5">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Autor / Atualização</label>
+            <input type="text" id="kb-view-meta" readonly class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm focus:outline-none" />
+          </div>
+
+          <div class="md:col-span-12">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Título do Artigo / Procedimento</label>
+            <input type="text" id="kb-view-title" readonly class="w-full surface-sub rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:outline-none" />
+          </div>
+
+          <div class="md:col-span-7">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Conteúdo Completo do Artigo (Formatado / Imagens do GLPI)</label>
+            <div id="kb-view-rich-body" class="w-full surface-sub rounded-xl p-5 text-sm leading-relaxed overflow-y-auto space-y-3" style="min-height: 440px; max-height: 54vh; color: var(--text-main);"></div>
+          </div>
+
+          <div class="md:col-span-5">
+            <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Texto Limpo / Comandos e Passos Extraídos</label>
+            <textarea id="kb-view-plain-text" rows="18" readonly class="w-full surface-sub rounded-xl p-4 text-sm font-mono leading-relaxed focus:outline-none" style="min-height: 440px; max-height: 54vh;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2.5 pt-4 mt-4 border-t shrink-0" style="border-color: var(--border-color);">
+        <button onclick="copyKbViewerText()" class="btn-counters-outline inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold">
+          <span class="material-symbols-outlined icon-sm">content_copy</span>
+          <span>Copiar Texto</span>
+        </button>
+        <div class="flex items-center gap-2.5">
+          <button id="kb-btn-to-playbook" onclick="convertViewedKbToPlaybook()" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold">
+            <span class="material-symbols-outlined icon-sm">bookmark_add</span>
+            <span>Virar Playbook Local</span>
+          </button>
+          <button onclick="closeKbViewerModal()" class="btn-counters-outline px-5 py-2 rounded-xl text-xs font-semibold">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=12"></script>
 </body>
 </html>

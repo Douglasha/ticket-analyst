@@ -1,5 +1,167 @@
 [
   {
+    "ticket_id": 42096,
+    "title": "Redefinição de Senhas  -  Izabel Heloisa Duarte da Silva",
+    "category": "T.I > ST > Acesso e Permissões > Redefinição de Senhas",
+    "keywords": [
+      "redefinicao",
+      "senhas",
+      "izabel",
+      "heloisa",
+      "duarte",
+      "silva",
+      "consigo",
+      "entrar"
+    ],
+    "problem_summary": "Não consigo entrar com minha senha no intranet.",
+    "custom_instruction": "Verifique em alguma base de conhecimento do glpi",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **{solicitante} Heloisa Duarte da Silva** (Intranet).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[Chamado #41941 (Resolvido)] Senha redefinida para Unimed@256!",
+      "[Chamado #41615 (Resolvido)] login: tatiane.carvalho",
+      "[Chamado #41615 (Resolvido)] senha: 1234@unimed"
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-30T18:54:43.022Z"
+  },
+  {
+    "ticket_id": 42071,
+    "title": "Solicitação Diversa  -  DIFERENÇA DE VALOR XML",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "diferenca",
+      "valor",
+      "xml",
+      "anexado",
+      "pois",
+      "gerado",
+      "dando",
+      "fatura"
+    ],
+    "problem_summary": "Bom dia !\nFavor verificar o XML anexado, pois o valor gerado está dando uma diferença de R$ 186,81 com a fatura global.\nComp.: 08/2026\nRemessa: 104\nAguardo para enviar no fechamento de hoje do convênio Rede Total.\n \nAtt,",
+    "custom_instruction": "Verifique em alguma base de conhecimento do glpi",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "[PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "[PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-30T18:52:22.844Z"
+  },
+  {
+    "ticket_id": 42065,
+    "title": "Impressoras  -  impressora",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "keywords": [
+      "impressoras",
+      "impressora",
+      "trocar",
+      "zebra",
+      "balcao",
+      "farmacia",
+      "almoxarifado",
+      "coloca"
+    ],
+    "problem_summary": "Bom dia \nfavor trocar impressora Zebra do balção da farmacia para almoxarifado \ncoloca ponto de telefone no almoxarifado (linha e aparelho)",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para **remanejar a impressora Zebra** (do balcão da farmacia para almoxarifado) e **instalar um ponto de telefone (linha/ramal e aparelho)** no almoxarifado.\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. No local onde os equipamentos ficarão (almoxarifado), já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a impressora Zebra será conectada)?\n2. Sobre o ponto de telefone, será necessário configurar um **novo número de ramal** para o almoxarifado ou transferir algum ramal já existente?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!",
+    "required_info": [
+      "No local onde os equipamentos ficarão (almoxarifado), já existem pontos de rede/cabeamento e tomadas elétricas próximos (ou computador onde a impressora Zebra será conectada)?",
+      "Sobre o ponto de telefone, será necessário configurar um novo número de ramal para o almoxarifado ou transferir algum ramal já existente?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-20] Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+      "[PB-UNI-20] Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+      "[PB-UNI-20] Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-09-30T14:20:43.314Z"
+  },
+  {
+    "ticket_id": 42061,
+    "title": "Resolução de Problemas  -  Beneficiária com mais de um cadastro",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "beneficiaria",
+      "cadastro",
+      "hrp",
+      "isadora",
+      "maria",
+      "ribeiro",
+      "batista",
+      "possui"
+    ],
+    "problem_summary": "Bom dia!\nA beneficiária Isadora Maria Ribeiro Batista possui 2 cadastros no sistema. Um como \"Cliente intercâmbio\" outro como \"Cliente Saúde\". Vocês podem unificar por gentileza? O que deve prevalecer é o Cliente Saúde.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Isadora Maria Ribeiro Batista** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-30T13:23:59.085Z"
+  },
+  {
+    "ticket_id": 42057,
+    "title": "Resolução de Problemas  -  Beneficiária com mais de um cadastro",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "beneficiaria",
+      "cadastro",
+      "hrp",
+      "emmely",
+      "aparecida",
+      "figueiredo",
+      "possui",
+      "cadastros"
+    ],
+    "problem_summary": "Bom dia!\nA beneficiária Emmely Aparecida Figueiredo possui 2 cadastros no sistema. Um como \"Cliente intercâmbio\" e outro como \"Cliente Saúde\". Voces podem unificar por gentileza? O que deve prevalecer é o Cliente Saúde.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Emmely Aparecida Figueiredo** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-30T13:23:04.912Z"
+  },
+  {
+    "ticket_id": 42034,
+    "title": "Sistemas Operacionais  -  Alteração agenda Jéssica Lima",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "alteracao",
+      "agenda",
+      "jessica",
+      "lima",
+      "pep",
+      "fisioterapeuta",
+      "costa",
+      "dias"
+    ],
+    "problem_summary": "Boa tarde, \nSolicito alteração no PEP, na agenda da fisioterapeuta Jéssica Lima Costa, atendimento todos os dias das 13:00 às 17:00hs\nAtendimento de 0:45minutos \nIntervalo de 0:15minutos \nObrigada",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-09-29T20:47:45.055Z"
+  },
+  {
     "ticket_id": 42012,
     "title": "Sistemas Operacionais  -  Indicadores WConect",
     "category": "T.I > BD > Big Data e BI > Relatórios",
