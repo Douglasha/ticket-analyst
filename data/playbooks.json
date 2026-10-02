@@ -871,5 +871,41 @@
       "Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do computador** ({setor}).\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante oscilações ou quedas de energia. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando o equipamento/bateria reserva e deslocará um técnico até o local para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!"
+  },
+  {
+    "id": "PB-UNI-27",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Criação de Usuário de Secretária / Prestador no Sistema Web Saúde (Módulo HRP Unimed)",
+    "keywords": [
+      "criação de usuários",
+      "criacao de usuarios",
+      "acesso secretária",
+      "acesso secretaria",
+      "hrp web saúde",
+      "hrp web saude",
+      "web saúde",
+      "web saude",
+      "código do prestador",
+      "codigo do prestador",
+      "nome do prestador",
+      "novo usuário web saúde",
+      "novo usuario web saude",
+      "cadastro secretária",
+      "cadastro secretaria",
+      "relacionamento prestadores",
+      "secretária prestador"
+    ],
+    "symptoms": "Solicitação aberta pelo Relacionamento com Prestadores para criação de novo usuário no sistema Web Saúde (módulo do ERP HRP Unimed) para secretária ou atendente de clínica credenciada, informando dados pessoais (Nome, CPF, Data de Nascimento, E-mail) e o código do prestador (8 dígitos, ex: 16000071 - DIAS SAUDE LTDA).",
+    "required_info": [
+      "Nome completo, CPF, Data de Nascimento, E-mail pessoal da secretária e Código/Nome do Prestador (caso algum desses campos não tenha sido informado no formulário)"
+    ],
+    "resolution_steps": [
+      "Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+      "Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+      "Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+      "Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **{colaborador}**, vinculada ao prestador **{prestador}**.\n\nTodos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador) já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e as credenciais enviadas para o e-mail informado, confirmaremos por aqui!"
   }
 ]

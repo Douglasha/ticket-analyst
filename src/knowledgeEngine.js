@@ -263,12 +263,22 @@ export class KnowledgeEngine {
             continue;
           }
         }
-        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS
+        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27)
         if (
           pb.id === "PB-UNI-25" &&
-          !/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
+          (!/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
             normTicket
-          )
+          ) ||
+            /\bcria[çc][ãa]o de usu[áa]rios?\b/i.test(normTicket) ||
+            /\borigem\s*:\s*acesso secret[aá]ria\b/i.test(normTicket))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-27 quando o chamado NÃO trata de criação de usuário de secretária/prestador no Web Saúde
+        if (
+          pb.id === "PB-UNI-27" &&
+          (!/\b(secret[aá]ria|prestador|web\s*sa[uú]de|16\d{6})\b/i.test(normTicket) ||
+            !/\b(cria[çc][ãa]o de usu[áa]rios?|cadastr(ar|o)|novo usu[áa]rio)\b/i.test(normTicket))
         ) {
           continue;
         }
@@ -340,10 +350,13 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear Playbook de Onboarding/Ponto/MyPlace (PB-UNI-01) quando o chamado trata de Intranet ou permissões de usuário já existente
+        // Evita parear Playbook de Onboarding/Ponto/MyPlace (PB-UNI-01) quando o chamado trata de Intranet, permissões de usuário já existente ou secretária externa no Web Saúde
         if (
           pb.id === "PB-UNI-01" &&
           (/\bintranet\b/i.test(normTicket) ||
+            /\b(acesso secret[aá]ria|web\s*sa[uú]de|c[oó]digo do prestador|16\d{6})\b/i.test(
+              normTicket
+            ) ||
             (/\b(ja foi liberado|já foi liberado)\b/i.test(normTicket) &&
               !/\b(ponto|myplace|rep|biometria)\b/i.test(normTicket)))
         ) {

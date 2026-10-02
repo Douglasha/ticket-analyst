@@ -1,5 +1,33 @@
 [
   {
+    "ticket_id": 42158,
+    "title": "Manutenção Eletrônica | NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402",
+    "category": "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS",
+    "keywords": [
+      "manutencao",
+      "eletronica",
+      "nobreak",
+      "computador",
+      "dr",
+      "rafael",
+      "rick",
+      "predio"
+    ],
+    "problem_summary": "1) Tipo de Manutenção: Eletrônica\n2) Título: NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402\n3) Equipamento: \n4) Urgência: Média\n5) Local: Centro de Especialidades\n6) Setor Solicitante: Nucleo Passos\n7) Descreva o problema: NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402\n\nNão segura durante pico de energia ou queda de energia elétrica.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do seu computador**, localizado no **Centro de Especialidades (PREDIO AZUL, SALA 402)**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Centro de Especialidades (PREDIO AZUL, SALA 402)**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+      "[PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+      "[PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+      "[PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+      "[PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-02T11:20:40.092Z",
+    "updated_at": "2026-10-02T11:24:06.881Z"
+  },
+  {
     "ticket_id": 42184,
     "title": "Aplicativos  -  Liberar acesso atendentes NAS Passos",
     "category": "T.I > ST > Instalação/Configuração > Aplicativos",

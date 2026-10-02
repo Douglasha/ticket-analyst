@@ -3965,5 +3965,137 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Jessica Rosa** (Relacionamento Prestadores) solicita a vinculação de acesso às clínicas **16000070 - Mateus Giannini e 16000068 Marcelo Pereira** no sistema **Web Saúde (subsistema HRP Unimed)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**. O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-25) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde\n  - Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
     "public_reply_draft": "Olá, Jessica! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!"
+  },
+  "42197": {
+    "ticket_id": 42197,
+    "analyzed_at": "02/10/2026 08:34",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Jessica Rosa** (Relacionamento Prestadores) solicita a criação de novo usuário no sistema **Web Saúde (módulo do ERP HRP Unimed)** para a secretária **Adriana Balduino Yashinishi**, com vinculação ao prestador **16000071 - DIAS SAUDE LTDA**. O chamado foi aberto na categoria correta (T.I > ST > Acesso e Permissões > Criação de Usuários) e contém todos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador).",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Criação de novo usuário para secretária/atendente de clínica credenciada no Web Saúde (16000071 - DIAS SAUDE LTDA).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-27",
+        "title": "Criação de Usuário de Secretária / Prestador no Sistema Web Saúde (Módulo HRP Unimed)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação aberta pelo Relacionamento com Prestadores para criação de novo usuário no sistema Web Saúde (módulo do ERP HRP Unimed) para secretária ou atendente de clínica credenciada, informando dados pessoais (Nome, CPF, Data de Nascimento, E-mail) e o código do prestador (8 dígitos, ex: 16000071 - DIAS SAUDE LTDA).",
+        "steps": [
+          "Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+          "Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+          "Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+          "Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+          "Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42179",
+        "title": "Acesso e Permissões  -  Liliane Alves de Souza",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Liliane Alves de Souza** (HRP Web Saúde).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "[MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "[MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+          "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Liliane Alves de Souza** (HRP Web Saúde).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42179 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Liliane Alves de Souza",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41645 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Bruna Cassia Silva Teodoro Balduíno",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nComutador liberado, por gentileza verifique\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Comutador liberado, por gentileza verifique",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-27) + Memória Contínua • Aprendido com o Analista (MEM-#42179)",
+    "resolution_steps": [
+      "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+      "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+      "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+      "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+      "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Jessica Rosa** (Relacionamento Prestadores) solicita a criação de novo usuário no sistema **Web Saúde (módulo do ERP HRP Unimed)** para a secretária **Adriana Balduino Yashinishi**, com vinculação ao prestador **16000071 - DIAS SAUDE LTDA**. O chamado foi aberto na categoria correta (T.I > ST > Acesso e Permissões > Criação de Usuários) e contém todos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador).\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Criação de Usuários | Prioridade Real: Muito alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-27) + Memória Contínua • Aprendido com o Analista (MEM-#42179)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.\n  2. [PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).\n  3. [PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.\n  4. [PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.\n  5. [PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.\n  6. [MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+    "public_reply_draft": "Olá, Jessica! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!"
+  },
+  "42198": {
+    "ticket_id": 42198,
+    "analyzed_at": "02/10/2026 08:19",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Reabrir o registro 1411181 no controle de contas que foi encerrada erroneamente. Obrigado.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41992).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41992",
+        "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+          "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#41992)",
+    "resolution_steps": [
+      "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#41992] [PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+      "[MEM-#41992] [PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Reabrir o registro 1411181 no controle de contas que foi encerrada erroneamente. Obrigado.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41992).\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#41992)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#41992] [PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.\n  3. [MEM-#41992] [PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!"
   }
 }

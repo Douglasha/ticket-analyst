@@ -1078,40 +1078,95 @@ export class AIAnalyst {
       ];
     } else if (
       (/\b(clinicas?|16\d{6})\b/i.test(normAll) &&
-        /\b(nas|atendentes?|secret[aá]rias?|web\s*sa[uú]de|liberar acesso|vincular)\b/i.test(normAll)) ||
+        /\b(nas|atendentes?|secret[aá]rias?|web\s*sa[uú]de|liberar acesso|vincular|prestador)\b/i.test(normAll)) ||
       /\bweb\s*sa[uú]de\b/i.test(normAll)
     ) {
-      const clinicMatches = (ticket.content || "").match(/\b16\d{6}(?:\s*-\s*[^\n,]+)?/g) || [];
-      const clinicsList = clinicMatches.length > 0
-        ? clinicMatches.map((c) => `**${c.trim()}**`).join(" e ")
-        : "novas clínicas informadas";
+      const isUserCreation =
+        /\bcria[çc][ãa]o de usu[áa]rios?\b/i.test(normAll) ||
+        formFields.tipo === "Criação de Usuários" ||
+        ticket.category.includes("Criação de Usuários");
 
-      const mentionsNas = /\bnas\b/i.test(normAll);
-      const targetGroup = mentionsNas
-        ? "atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**"
-        : "atendentes/secretárias";
+      const colabName =
+        formFields.nomeColaborador ||
+        ((ticket.content || "").match(/Nome\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
 
-      translatedIntent =
-        `A solicitante **${ticket.requester}** (${sectorName}) solicita a vinculação de acesso às clínicas ${clinicsList} ` +
-        `no sistema **Web Saúde (módulo do ERP HRP Unimed, administrado centralmente no HRP)** para as ${targetGroup}. ` +
-        `O chamado foi aberto em categoria incorreta (Aplicativos) e não especifica os nomes completos ou logins das atendentes que devem receber a permissão.`;
-      detectedDomain = "Acessos, Permissões e Contas";
-      suggestedCategory = "T.I > ST > Acesso e Permissões";
-      realUrgency = "Média";
-      urgencyReason =
-        "Vinculação de clínicas no Web Saúde para atendimento de prestadores no NAS.";
-      sufficiencyStatus = "incompleto";
-      missingInfo = [
-        "Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde",
-        "Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência",
-      ];
-      customPublicReply =
-        `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a sua solicitação referente à liberação de acesso às novas clínicas (${clinicsList}) no sistema **Web Saúde (HRP)** para as ${targetGroup}.\n\n` +
-        `Para que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n` +
-        `1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n` +
-        `2. Caso a permissão deva espelhar o perfil de alguma colaboradora que já atende no setor, você poderia nos informar o **usuário de referência** (ou se deve liberar para toda a recepção do NAS)?\n\n` +
-        `Assim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!`;
+      const prestadorCode =
+        ((ticket.content || "").match(/C[óo]digo do Prestador\s*:\s*([^\n\r]+)/i)?.[1] || "").trim() ||
+        ((ticket.content || "").match(/\b(16\d{6})\b/)?.[1] || "").trim();
+
+      const prestadorName =
+        ((ticket.content || "").match(/Nome do Prestador\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
+
+      const prestadorFull = prestadorCode
+        ? (prestadorName ? `${prestadorCode} - ${prestadorName}` : prestadorCode)
+        : "";
+
+      const emailMatch = (ticket.content || "").match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
+      const userEmail = emailMatch ? emailMatch[0].trim() : "";
+
+      if (isUserCreation && colabName) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a criação de novo usuário no sistema **Web Saúde (módulo do ERP HRP Unimed)** para a secretária **${colabName}**, ` +
+          `com vinculação ao prestador **${prestadorFull}**. ` +
+          `O chamado foi aberto na categoria correta (${ticket.category}) e contém todos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador).`;
+        detectedDomain = "Acessos, Permissões e Contas";
+        suggestedCategory = "T.I > ST > Acesso e Permissões > Criação de Usuários";
+        realUrgency = ticket.urgency_label || "Média";
+        urgencyReason =
+          `Criação de novo usuário para secretária/atendente de clínica credenciada no Web Saúde (${prestadorFull}).`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        const emailNote = userEmail
+          ? ` e os dados de primeiro acesso encaminhados para o e-mail informado (**${userEmail}**)`
+          : "";
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **${colabName}**, vinculada ao prestador **${prestadorFull}**.\n\n` +
+          `Todos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\n` +
+          `Assim que o acesso for liberado${emailNote}, confirmaremos por aqui!`;
+      } else {
+        const clinicMatches = (ticket.content || "").match(/\b16\d{6}(?:\s*-\s*[^\n,]+)?/g) || [];
+        const clinicsList = clinicMatches.length > 0
+          ? clinicMatches.map((c) => `**${c.trim()}**`).join(" e ")
+          : "novas clínicas informadas";
+
+        const mentionsNas = /\bnas\b/i.test(normAll);
+        const targetGroup = mentionsNas
+          ? "atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**"
+          : "atendentes/secretárias";
+
+        const isWrongCat =
+          normalizeText(ticket.category || "").includes("aplicativos") ||
+          normalizeText(ticket.category || "").includes("sistemas operacionais");
+
+        const catNote = isWrongCat
+          ? "O chamado foi aberto em categoria incorreta (Aplicativos) e recomenda-se reclassificar para 'T.I > ST > Acesso e Permissões'."
+          : `O chamado foi aberto na categoria '${ticket.category}'.`;
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a vinculação de acesso às clínicas ${clinicsList} ` +
+          `no sistema **Web Saúde (módulo do ERP HRP Unimed, administrado centralmente no HRP)** para as ${targetGroup}. ` +
+          `${catNote} Não foram especificados os nomes completos ou logins das atendentes que devem receber a permissão.`;
+        detectedDomain = "Acessos, Permissões e Contas";
+        suggestedCategory = "T.I > ST > Acesso e Permissões";
+        realUrgency = "Média";
+        urgencyReason =
+          "Vinculação de clínicas no Web Saúde para atendimento de prestadores no NAS.";
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          "Nomes completos ou logins das atendentes do NAS que devem receber a permissão no Web Saúde",
+          "Informar se a liberação deve contemplar toda a equipe do NAS ou espelhar o perfil de alguma atendente de referência",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à liberação de acesso às novas clínicas (${clinicsList}) no sistema **Web Saúde (HRP)** para as ${targetGroup}.\n\n` +
+          `Para que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n` +
+          `1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n` +
+          `2. Caso a permissão deva espelhar o perfil de alguma colaboradora que já atende no setor, você poderia nos informar o **usuário de referência** (ou se deve liberar para toda a recepção do NAS)?\n\n` +
+          `Assim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!`;
+      }
     } else if (
       normAll.includes("acesso e permissoes") ||
       ticket.category.includes("Acesso e Permissões") ||
