@@ -937,5 +937,48 @@
       "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **{registro}** no sistema **Controle de Contas**, encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no {setor}.\n\nAssim que o registro for reaberto e estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
+  },
+  {
+    "id": "PB-UNI-29",
+    "domain": "Desenvolvimento de Software / Aplicações Internas",
+    "title": "Criação ou Parametrização de Formulários / Itens no GLPI (Formcreator / Demandas Intersetoriais)",
+    "keywords": [
+      "criação de item no glpi",
+      "criacao de item no glpi",
+      "novo item no glpi",
+      "novos itens no glpi",
+      "criar novo item",
+      "criar novos itens",
+      "formulário no glpi",
+      "formulario no glpi",
+      "formulários no glpi",
+      "formularios no glpi",
+      "criar novo formulário",
+      "criar novo formulario",
+      "novo formulário",
+      "novo formulario",
+      "novos formulários",
+      "formcreator",
+      "destino automático do chamado",
+      "destino automatico do chamado",
+      "opções do faturamento",
+      "opcoes do faturamento",
+      "campos obrigatório opcional"
+    ],
+    "symptoms": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, etc.) para criação, parametrização ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
+    "required_info": [
+      "Nome do(s) novo(s) formulário(s) ou item(ns) a ser(em) criado(s) no catálogo do GLPI",
+      "Relação detalhada dos campos, tipos de dados e obrigatoriedade (obrigatório ou opcional)",
+      "Setores, grupos ou observadores de destino automático dos chamados gerados"
+    ],
+    "resolution_steps": [
+      "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+      "Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
+      "Criar ou parametrizar o(s) formulário(s) na categoria do setor solicitante (ex.: Faturamento), atribuindo o título, descrição e ícone apropriados.",
+      "Adicionar as seções e os campos solicitados (Nome do prestador, Código, Tipo de solicitação com opções, Descrição, Data de vigência e Anexo), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+      "Configurar na aba 'Alvos / Destinos' a criação automática do chamado encaminhando para os grupos/setores designados (ex.: Faturamento Unimed, Financeiro, Contábil, Regulação) e observadores indicados.",
+      "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo(s) formulário(s)/item(ns) no **GLPI** para o setor de **{setor}**.\n\nA especificação detalhada (nomes dos itens, campos obrigatórios/opcionais, tipos de solicitação e destinos automáticos) já foi validada na triagem pela equipe de Desenvolvimento.\n\nNossa equipe já iniciou a criação e parametrização dos formulários no Formcreator do GLPI. Assim que estiverem publicados e disponíveis no catálogo para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!"
   }
 ]

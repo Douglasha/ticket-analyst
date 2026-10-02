@@ -263,22 +263,28 @@ export class KnowledgeEngine {
             continue;
           }
         }
-        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27)
+        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27) ou criação de formulários no GLPI
         if (
           pb.id === "PB-UNI-25" &&
           (!/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
             normTicket
           ) ||
             /\bcria[çc][ãa]o de usu[áa]rios?\b/i.test(normTicket) ||
-            /\borigem\s*:\s*acesso secret[aá]ria\b/i.test(normTicket))
+            /\borigem\s*:\s*acesso secret[aá]ria\b/i.test(normTicket) ||
+            /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
-        // Evita parear PB-UNI-27 quando o chamado NÃO trata de criação de usuário de secretária/prestador no Web Saúde
+        // Evita parear PB-UNI-27 quando o chamado NÃO trata de criação de usuário de secretária/prestador no Web Saúde ou trata de formulários no GLPI
         if (
           pb.id === "PB-UNI-27" &&
           (!/\b(secret[aá]ria|prestador|web\s*sa[uú]de|16\d{6})\b/i.test(normTicket) ||
-            !/\b(cria[çc][ãa]o de usu[áa]rios?|cadastr(ar|o)|novo usu[áa]rio)\b/i.test(normTicket))
+            !/\b(cria[çc][ãa]o de usu[áa]rios?|cadastr(ar|o)|novo usu[áa]rio)\b/i.test(normTicket) ||
+            /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
@@ -293,6 +299,15 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-28" &&
           !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-29 (Criação de Formulários GLPI) quando o chamado não trata de itens/formulários no GLPI
+        if (
+          pb.id === "PB-UNI-29" &&
+          !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|op[çc][õo]es do faturamento|destino autom[aá]tico do chamado)\b/i.test(
             normTicket
           )
         ) {
@@ -484,6 +499,24 @@ export class KnowledgeEngine {
         if (
           /\b(reabrir|reabertura|cancelar|cancelamento|excluir|exclusao|estornar)\b/i.test(normTicket) &&
           /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Web Saúde / secretárias / acessos quando o chamado trata de criação de formulários no GLPI
+        if (
+          /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(normTicket) &&
+          /\b(web\s*sa[uú]de|secret[aá]ria|prestador|16\d{6}|acesso e permiss[õo]es|cria[çc][ãa]o de usu[áa]rios?)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de formulários no GLPI quando o chamado NÃO trata de GLPI
+        if (
+          !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(normTicket) &&
+          /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

@@ -1,5 +1,73 @@
 [
   {
+    "id": "Chamado #42231 (Resolvido)",
+    "ticket_id": 42231,
+    "solution_id": 40910,
+    "title": "Verificar Inventário T.I no GLPI [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42210 (Resolvido)",
+    "ticket_id": 42210,
+    "solution_id": 40904,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Luiza Barros Maciel",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.\n\n\r\nCadastro concluído com sucesso!\n\n\r\nLogin: CPFSenha: 1253\nlink: hrp.unimedsudoestemg.coop.br\n\n\r\nOs dados de login do(a) atendente foram enviados para o e-mail informado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos ",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.",
+      "Cadastro concluído com sucesso!",
+      "Login: CPFSenha: 1253",
+      "link: hrp.unimedsudoestemg.coop.br",
+      "Os dados de login do(a) atendente foram enviados para o e-mail informado."
+    ]
+  },
+  {
+    "id": "Chamado #42205 (Resolvido)",
+    "ticket_id": 42205,
+    "solution_id": 40900,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Ajuste web saude - Instituto Neurologico Maoliv Ltda",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastros vinculados\n\n\r\nGabriela Silva Reis\nLuciana de Oliveira\nViviane Aparecida de Souza\nSabrina de Fatima Damaceno\nHellen Dimas Moreira\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastros vinculados",
+      "Gabriela Silva Reis",
+      "Luciana de Oliveira",
+      "Viviane Aparecida de Souza",
+      "Sabrina de Fatima Damaceno"
+    ]
+  },
+  {
+    "id": "Chamado #42198 (Resolvido)",
+    "ticket_id": 42198,
+    "solution_id": 40885,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > ABRIR CONTAS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nRegistro reaberto\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Registro reaberto",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42197 (Resolvido)",
     "ticket_id": 42197,
     "solution_id": 40884,

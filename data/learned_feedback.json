@@ -1,5 +1,88 @@
 [
   {
+    "ticket_id": 42210,
+    "title": "Criação de Usuários  -  Luiza Barros Maciel",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "luiza",
+      "barros",
+      "maciel",
+      "petite",
+      "vie",
+      "medicina",
+      "fetal"
+    ],
+    "problem_summary": "16000057\n \nPetite Vie Medicina Fetal Ltda\n \n16000067\n \nCLINICA CUIDADOS CIRURGICO INFANTIL LTDA\n16000028 Cs Ginecologia E Obstetricia Sociedade Simples Pura",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Luiza Barros Maciel**, vinculada ao prestador **16000056 - Saude Feminina Servicos Medicos Ltda**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**luizabarrosmaciel@gmail.com**), confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+      "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+      "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+      "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+      "[MEM-#42205] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-02T13:34:22.756Z"
+  },
+  {
+    "ticket_id": 42205,
+    "title": "Aplicativos  -  Ajuste web saude - Instituto Neurologico Maoliv Ltda",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "ajuste",
+      "web",
+      "saude",
+      "instituto",
+      "neurologico",
+      "maoliv",
+      "ltda",
+      "ajustar"
+    ],
+    "problem_summary": "Bom dia\nGentileza ajustar o web saúde para as atendentes do NAS autorizar consultas e fechar lote. Dr Marcos Antonio de Oliveira - Instituto Neurologico Maoliv Ltda - 16000073",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000073**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+    "required_info": [
+      "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-25] Acessar o módulo de controle de acessos/permissões centralizado diretamente no sistema HRP Unimed (onde é feita toda a gestão de usuários e vínculos do Web Saúde).",
+      "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no HRP/Web Saúde com vigência ativa.",
+      "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-02T13:27:11.945Z"
+  },
+  {
+    "ticket_id": 42198,
+    "title": "Solicitação Diversa  -  ABRIR CONTAS",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "abrir",
+      "contas",
+      "reabrir",
+      "registro",
+      "controle",
+      "encerrada",
+      "erroneamente"
+    ],
+    "problem_summary": "Bom dia.\nReabrir o registro 1411181 no controle de contas que foi encerrada erroneamente.\nObrigado.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-02T12:04:49.742Z"
+  },
+  {
     "ticket_id": 42197,
     "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
     "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",

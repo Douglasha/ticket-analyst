@@ -1077,9 +1077,109 @@ export class AIAnalyst {
         "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos",
       ];
     } else if (
-      (/\b(clinicas?|16\d{6})\b/i.test(normAll) &&
-        /\b(nas|atendentes?|secret[aá]rias?|web\s*sa[uú]de|liberar acesso|vincular|prestador)\b/i.test(normAll)) ||
-      /\bweb\s*sa[uú]de\b/i.test(normAll)
+      /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|criar item no glpi)\b/i.test(
+        normAll
+      ) ||
+      (/\bglpi\b/i.test(normAll) &&
+        /\b(formul[aá]rio|formul[aá]rios|item|itens)\b/i.test(normAll) &&
+        /\b(criar|cria[çc][ãa]o|novo|novos|inclus[ãa]o|adicionar|parametrizar)\b/i.test(normAll))
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const isMale = /^(frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|diego|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const hasMultipleItems = /\b(item 2|item\s*2|dois itens|2 itens|novos itens|novos formul[aá]rios)\b/i.test(
+        descText
+      );
+      const itemsCountLabel = hasMultipleItems
+        ? "dois novos formulários/itens"
+        : "novo(s) formulário(s)/item(ns)";
+
+      // Tenta extrair nomes dos formulários/itens informados
+      const itemNames = [];
+      const itemMatches = descText.matchAll(/Nome\s*:\s*([^\n\r]+)/gi);
+      for (const m of itemMatches) {
+        const nameVal = m[1].replace(/obrigat[oó]rio/i, "").trim();
+        if (
+          nameVal &&
+          !itemNames.includes(nameVal) &&
+          !/^(prestador|colaborador|usuario|secretaria)$/i.test(nameVal)
+        ) {
+          itemNames.push(nameVal);
+        }
+      }
+
+      const itemsListed =
+        itemNames.length > 0
+          ? itemNames.map((n) => `**${n}**`).join(" e ")
+          : itemsCountLabel;
+
+      detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
+      suggestedCategory = "T.I > DV > Desenvolvimento > Novas aplicações";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason = `Criação e parametrização de novos formulários no catálogo do GLPI para atender os fluxos de trabalho e demandas intersetoriais do ${sectorName}.`;
+
+      const hasFieldsSpecification =
+        /\b(campos?|obrigat[oó]rio|opcional|destino autom[aá]tico)\b/i.test(
+          descText
+        );
+
+      if (hasFieldsSpecification) {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de ${itemsCountLabel} no catálogo do sistema **GLPI** vinculados à categoria de **${sectorName}** (${itemsListed}). ` +
+          `O solicitante detalhou toda a estrutura necessária: nomes dos formulários, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. ` +
+          `O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        const itemsBullet =
+          itemNames.length > 0
+            ? itemNames
+                .map(
+                  (n, i) =>
+                    `${i + 1}. **${n}**${i === itemNames.length - 1 ? "." : ";"}`
+                )
+                .join("\n") + "\n\n"
+            : "";
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à criação de ${itemsCountLabel} no catálogo do **GLPI** para o setor de **${sectorName}**:\n` +
+          (itemsBullet || "") +
+          `Todos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\n` +
+          `Nossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de novo(s) formulário(s)/item(ns) no **GLPI** para o setor de **${sectorName}**, porém sem especificar todos os campos necessários.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Relação dos campos a serem criados no formulário (indicando quais são obrigatórios e quais são opcionais)",
+          "Opções de seleção para campos do tipo lista suspensa/menu",
+          "Setores, grupos ou observadores de destino automático dos chamados gerados pelo formulário",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à criação de novo(s) formulário(s) no **GLPI** para o setor de **${sectorName}**.\n\n` +
+          `Para que possamos parametrizar os formulários exatamente conforme a necessidade do fluxo de trabalho, você poderia nos detalhar:\n` +
+          `1. A **relação dos campos** desejados (indicando quais devem ser obrigatórios e quais são opcionais);\n` +
+          `2. As **opções de seleção** para campos de lista/menu;\n` +
+          `3. Quais **setores, grupos ou observadores** devem receber automaticamente os chamados abertos por esse formulário?\n\n` +
+          `Assim que nos confirmar essas informações por aqui, daremos sequência imediata na configuração!`;
+      }
+    } else if (
+      !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
+        normAll
+      ) &&
+      ((/\b(clinicas?|16\d{6})\b/i.test(normAll) &&
+        /\b(nas|atendentes?|secret[aá]rias?|web\s*sa[uú]de|liberar acesso|vincular)\b/i.test(
+          normAll
+        )) ||
+        /\bweb\s*sa[uú]de\b/i.test(normAll) ||
+        (/\b16\d{6}\b/.test(normAll) &&
+          /\b(prestador|acesso|permissao)\b/i.test(normAll)))
     ) {
       const isUserCreation =
         /\bcria[çc][ãa]o de usu[áa]rios?\b/i.test(normAll) ||
