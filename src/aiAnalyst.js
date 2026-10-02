@@ -508,6 +508,79 @@ export class AIAnalyst {
           : questionsBul) +
         `\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!`;
     } else if (
+      /\b(nobreak|no-break|\bups\b)\b/i.test(normAll) ||
+      (/\benergia\b/i.test(normAll) &&
+        /\b(queda|pico|oscila|segura|bateria|desligando)\b/i.test(normAll))
+    ) {
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory =
+        "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS";
+      realUrgency =
+        /alta|urgente|servidor|uti|centro cirurgico/i.test(normAll)
+          ? "Alta"
+          : ticket.urgency_label || "Média";
+      urgencyReason =
+        "Nobreak sem autonomia de bateria durante oscilações ou quedas de energia elétrica, com risco de desligamento abrupto de equipamento e perda de dados.";
+
+      const locMatch = (ticket.content || "").match(/Local\s*:\s*([^\n\r]+)/i);
+      const roomMatches = (ticket.content || "").match(
+        /\b(?:pr[ée]dio\s+[a-zà-ú]+|sala\s*\d{2,4}[a-z]?)\b/gi
+      );
+      const uniqueRooms = [
+        ...new Set((roomMatches || []).map((r) => r.trim())),
+      ];
+      let localStr = locMatch ? locMatch[1].trim() : sectorName;
+      if (uniqueRooms.length > 0) {
+        localStr = locMatch
+          ? `${locMatch[1].trim()} (${uniqueRooms.join(", ")})`
+          : uniqueRooms.join(", ");
+      }
+
+      const mentionsEquipment = /\b(computador|pc|desktop|servidor)\b/i.test(
+        normAll
+      );
+      const eqpLabel = mentionsEquipment ? "computador" : "equipamento";
+
+      const userDocMatch = (ticket.content || "").match(
+        /\b((?:dr\.?|dra\.?)\s+[A-ZÀ-Úa-zà-ú]+(?:\s+[A-ZÀ-Úa-zà-ú]+){1,3}?)(?=\s+(?:no|na|sala|predio|pr[ée]dio|em|\/|-|,|\.|$))/i
+      );
+      const userDoc = userDocMatch ? userDocMatch[1].trim() : "";
+
+      const isOwnComputer =
+        userDoc &&
+        (normalizeText(ticket.requester || "").includes(
+          normalizeText(userDoc.replace(/^(?:dr\.?|dra\.?)\s*/i, ""))
+        ) ||
+          normalizeText(userDoc).includes(normalizeText(firstName)));
+
+      const userDocTxt = isOwnComputer
+        ? "do seu computador"
+        : userDoc
+        ? `do computador (${userDoc})`
+        : `do ${eqpLabel}`;
+
+      const locationDetails = isOwnComputer
+        ? `${eqpLabel} de **${ticket.requester}** em ${localStr}`
+        : userDoc
+        ? `${eqpLabel} de **${userDoc}** em ${localStr}`
+        : `${eqpLabel} em ${localStr}`;
+
+      translatedIntent =
+        `O solicitante **${ticket.requester}** (${sectorName}) relata falha no Nobreak ${userDocTxt}, ` +
+        `informando que o equipamento não segura a carga durante picos ou quedas de energia elétrica. ` +
+        `Demanda vistoria presencial da equipe de Infraestrutura e Redes para teste de carga da bateria e substituição física do nobreak ou troca das baterias seladas. ` +
+        `Todas as informações necessárias para atendimento já constam descritas no chamado.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao **Nobreak ${userDocTxt}**, localizado no **${localStr}**.\n\n` +
+        `Identificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**${localStr}**) para realizar a vistoria técnica e a substituição do nobreak.\n\n` +
+        `Assim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!`;
+    } else if (
       (/\b(scan|scanner|digitaliz|digitaliza[çc][ãa]o)\b/i.test(normAll) ||
         /\b(cadastr(ar|o))\b[\s\S]{0,30}\b(e-?mail|email)\b/i.test(normAll) ||
         /\b(e-?mail|email)\b[\s\S]{0,30}\b(impressora|scanner|scan)\b/i.test(normAll)) &&

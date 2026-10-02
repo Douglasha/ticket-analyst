@@ -1,5 +1,33 @@
 [
   {
+    "id": "Chamado #42196 (Resolvido)",
+    "ticket_id": 42196,
+    "solution_id": 40880,
+    "title": "T.I > IR > Administração de Redes > Telefones VoIP > Verificar gravador (ligações) [R]",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Gravações OK",
+    "keywords": [],
+    "steps": [
+      "Gravações OK"
+    ]
+  },
+  {
+    "id": "Chamado #42184 (Resolvido)",
+    "ticket_id": 42184,
+    "solution_id": 40882,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Liberar acesso atendentes NAS Passos",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42179 (Resolvido)",
     "ticket_id": 42179,
     "solution_id": 40872,
@@ -73,6 +101,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42139 (Resolvido)",
+    "ticket_id": 42139,
+    "solution_id": 40881,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Telefone",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Resolvido",
+    "keywords": [],
+    "steps": [
+      "Resolvido"
     ]
   },
   {
@@ -2039,6 +2080,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #41329 (Resolvido)",
+    "ticket_id": 41329,
+    "solution_id": 40883,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > VERIFICAR LIGAÇÕES",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Ligações normalizadas",
+    "keywords": [],
+    "steps": [
+      "Ligações normalizadas"
     ]
   },
   {

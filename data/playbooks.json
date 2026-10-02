@@ -387,11 +387,14 @@
       "liberar acesso",
       "plantão",
       "plantao",
-      "médico",
-      "medico",
-      "dr ",
-      "dra ",
-      "prestador",
+      "cadastro de médico",
+      "cadastro de medico",
+      "acesso médico",
+      "acesso medico",
+      "médico plantonista",
+      "medico plantonista",
+      "cadastro de prestador",
+      "acesso prestador",
       "ultrasom",
       "ultrassom",
       "face",
@@ -833,5 +836,40 @@
       "Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas no sistema **Web Saúde (HRP)** para a equipe do **NAS (Núcleo de Atenção à Saúde)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n2. Caso o acesso deva espelhar as permissões de alguma colaboradora que já atende no setor, informar o **nome da atendente de referência** (ou se a liberação deve ser aplicada a toda a recepção do NAS).\n\nAssim que nos confirmar essas informações por aqui, daremos sequência imediata na vinculação no Web Saúde!"
+  },
+  {
+    "id": "PB-UNI-26",
+    "domain": "Infraestrutura e Rede",
+    "title": "Falha / Manutenção de Nobreak / UPS (Autonomia de Bateria / Não Segura Carga)",
+    "keywords": [
+      "nobreak",
+      "no-break",
+      "ups",
+      "não segura durante pico",
+      "nao segura durante pico",
+      "queda de energia",
+      "pico de energia",
+      "oscilação de energia",
+      "bateria do nobreak",
+      "troca de bateria nobreak",
+      "manutencao de nobreaks",
+      "manutenção de nobreaks",
+      "teste de nobreak",
+      "autonomia nobreak",
+      "nobreak apitando",
+      "estabilizador"
+    ],
+    "symptoms": "Relato de falha em Nobreak/UPS de computador ou equipamento (ex: não segura carga durante oscilações/quedas de energia elétrica ou desliga o computador imediatamente), frequentemente aberto via formulário de manutenção predial/eletrônica e escalonado para a equipe de T.I (Infraestrutura e Redes).",
+    "required_info": [
+      "Localização exata (prédio, andar e sala/consultório) onde o nobreak está instalado e equipamento conectado (caso não constem informados)"
+    ],
+    "resolution_steps": [
+      "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+      "Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+      "Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+      "Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+      "Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do computador** ({setor}).\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante oscilações ou quedas de energia. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando o equipamento/bateria reserva e deslocará um técnico até o local para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!"
   }
 ]

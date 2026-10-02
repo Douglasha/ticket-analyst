@@ -3550,45 +3550,43 @@
   },
   "42158": {
     "ticket_id": 42158,
-    "analyzed_at": "01/10/2026 13:59",
+    "analyzed_at": "02/10/2026 08:12",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O usuário relatou um problema técnico de manutenção eletrônica no NOBREAK computador do Dr. Rafael Rick no prédio azul sala 402, localizado no setor de Centro de Especialidades. O equipamento não segura durante picos de energia ou quedas de energia elétrica.",
-    "detected_domain": "Acessos, Permissões e Contas",
-    "suggested_category": "Hospital > Manutenção",
+    "translated_intent": "O solicitante **RAFAEL RICK MATSUO DE CARVALHO** (Nucleo Passos) relata falha no Nobreak do seu computador, informando que o equipamento não segura a carga durante picos ou quedas de energia elétrica. Demanda vistoria presencial da equipe de Infraestrutura e Redes para teste de carga da bateria e substituição física do nobreak ou troca das baterias seladas. Todas as informações necessárias para atendimento já constam descritas no chamado.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS",
     "real_urgency": "Muito baixa",
-    "urgency_reason": "O chamado afeta a operação do sistema de segurança do hospital.",
-    "sufficiency_status": "parcial",
-    "missing_info": [
-      "Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)",
-      "Dados cadastrais completos da pessoa que receberá o acesso (Nome Completo, CPF, CRM/Matrícula e vínculo/empresa), caso o formulário tenha sido preenchido com os dados do próprio solicitante",
-      "Caso solicite acesso ao Controle de Acesso / Reconhecimento Facial nas portas do Hospital: enviar uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada"
-    ],
+    "urgency_reason": "Nobreak sem autonomia de bateria durante oscilações ou quedas de energia elétrica, com risco de desligamento abrupto de equipamento e perda de dados.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
     "knowledge_matches": [
       {
         "layer": "local_playbook",
         "layer_label": "3ª Camada • Playbook Local de Processos TI",
-        "source_id": "PB-UNI-12",
-        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
-        "category": "Acessos, Permissões e Contas",
-        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "source_id": "PB-UNI-26",
+        "title": "Falha / Manutenção de Nobreak / UPS (Autonomia de Bateria / Não Segura Carga)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Relato de falha em Nobreak/UPS de computador ou equipamento (ex: não segura carga durante oscilações/quedas de energia elétrica ou desliga o computador imediatamente), frequentemente aberto via formulário de manutenção predial/eletrônica e escalonado para a equipe de T.I (Infraestrutura e Redes).",
         "steps": [
-          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
-          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
-          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
-          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+          "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+          "Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+          "Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+          "Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+          "Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
         ],
-        "score": 0.38
+        "score": 0.99
       }
     ],
-    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-12)",
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-26)",
     "resolution_steps": [
-      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
-      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
-      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
-      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+      "[PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+      "[PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+      "[PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+      "[PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+      "[PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário relatou um problema técnico de manutenção eletrônica no NOBREAK computador do Dr. Rafael Rick no prédio azul sala 402, localizado no setor de Centro de Especialidades. O equipamento não segura durante picos de energia ou quedas de energia elétrica.\n\nClassificação Sugerida: Hospital > Manutenção | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Quais sistemas, portas ou acessos específicos precisam ser liberados (ex: SGH Spdata, Rede/Windows, PACS, Wi-Fi ou Controle de Acesso/Reconhecimento Facial nas portas do Hospital)\n  - Dados cadastrais completos da pessoa que receberá o acesso (Nome Completo, CPF, CRM/Matrícula e vínculo/empresa), caso o formulário tenha sido preenchido com os dados do próprio solicitante\n  - Caso solicite acesso ao Controle de Acesso / Reconhecimento Facial nas portas do Hospital: enviar uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
-    "public_reply_draft": "Olá, RAFAEL! Tudo bem?\n\nRecebemos a sua solicitação de cadastro de acesso. Porém, verificamos que os campos do formulário foram preenchidos com os seus próprios dados e não foi especificado quais acessos precisam ser liberados.\n\nPara prosseguirmos com o cadastro, você poderia nos informar:\n1. **Quais acessos ou sistemas** precisam ser liberados (ex.: SGH Spdata, login de Rede/computador, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n2. Os **dados cadastrais da pessoa a ser cadastrada** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n3. **Caso necessite de acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar em anexo uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\nAssim que nos enviar essas informações por aqui, já realizamos a liberação!"
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **RAFAEL RICK MATSUO DE CARVALHO** (Nucleo Passos) relata falha no Nobreak do seu computador, informando que o equipamento não segura a carga durante picos ou quedas de energia elétrica. Demanda vistoria presencial da equipe de Infraestrutura e Redes para teste de carga da bateria e substituição física do nobreak ou troca das baterias seladas. Todas as informações necessárias para atendimento já constam descritas no chamado.\n\nClassificação Sugerida: T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-26)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').\n  2. [PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).\n  3. [PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.\n  4. [PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.\n  5. [PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado.",
+    "public_reply_draft": "Olá, RAFAEL! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do seu computador**, localizado no **Centro de Especialidades (PREDIO AZUL, SALA 402)**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Centro de Especialidades (PREDIO AZUL, SALA 402)**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!"
   },
   "42159": {
     "ticket_id": 42159,

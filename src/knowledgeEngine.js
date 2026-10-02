@@ -244,14 +244,24 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-12 (Médico/Prestador/Reconhecimento Facial) quando se trata de vinculação de clínicas no Web Saúde / Atendentes do NAS
-        if (
-          pb.id === "PB-UNI-12" &&
-          /\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos)\b/i.test(
-            normTicket
-          )
-        ) {
-          continue;
+        // Evita parear PB-UNI-12 (Médico/Prestador/Acesso) quando o chamado trata de clínicas no Web Saúde, de hardware/infraestrutura (nobreak, impressora, telefone, etc.) ou quando não possui contexto de acesso/permissão
+        if (pb.id === "PB-UNI-12") {
+          const isHardwareOrInfra =
+            /\b(nobreak|no-break|ups|bateria|gerador|energia|impressora|toner|papel|telefone|ramal|pabx|cabo de rede|wifi|wi-fi|remanejamento|formatar|computador)\b/i.test(
+              normTicket
+            );
+          const hasAccessContext =
+            /\b(acesso|acessos|permissao|permissoes|cadastr|liberar|usuario|login|facial|catraca|porta|portas|biometria)\b/i.test(
+              normTicket
+            );
+          const isWebSaudeNas =
+            /\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos)\b/i.test(
+              normTicket
+            );
+
+          if (isWebSaudeNas || isHardwareOrInfra || !hasAccessContext) {
+            continue;
+          }
         }
         // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS
         if (
@@ -259,6 +269,13 @@ export class KnowledgeEngine {
           !/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
             normTicket
           )
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-26 (Nobreak/UPS) quando o chamado não trata de nobreak, ups ou energia
+        if (
+          pb.id === "PB-UNI-26" &&
+          !/\b(nobreak|no-break|ups|energia|bateria|estabilizador)\b/i.test(normTicket)
         ) {
           continue;
         }
