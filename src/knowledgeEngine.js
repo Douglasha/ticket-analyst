@@ -289,6 +289,15 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-28 (Reabertura de Registro) quando o chamado não trata de reabertura de conta/registro
+        if (
+          pb.id === "PB-UNI-28" &&
+          !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
         const isRelocationOrPhoneInstall =
           /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
             normTicket
@@ -466,6 +475,15 @@ export class KnowledgeEngine {
         if (
           /\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(normTicket) &&
           !/\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de vinculação de unidade/perfil (ex: MEM-#41992) quando o chamado trata de reabertura ou cancelamento de registro no Controle de Contas
+        if (
+          /\b(reabrir|reabertura|cancelar|cancelamento|excluir|exclusao|estornar)\b/i.test(normTicket) &&
+          /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

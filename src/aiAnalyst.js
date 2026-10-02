@@ -1387,6 +1387,60 @@ export class AIAnalyst {
           `Assim que confirmar por aqui, já realizamos o cancelamento!`;
       }
     } else if (
+      /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
+        normAll
+      ) &&
+      (normAll.includes("controle de contas") ||
+        /\b(registro|conta|atendimento|faturamento)\b/i.test(normCore) ||
+        /\b(faturamento|auditoria)\b/i.test(sectorName))
+    ) {
+      const descText = formFields.descricao || "";
+      const appName =
+        formFields.aplicacao ||
+        (normAll.includes("controle de contas")
+          ? "Controle de Contas"
+          : "sistema interno");
+      const regMatch =
+        descText.match(
+          /(?:registro|conta|atendimento|n[º°]?)\s*[:#-]?\s*(\d{3,12})/i
+        ) || descText.match(/\b(\d{4,12})\b/);
+      const recordNum = regMatch ? regMatch[1] : "";
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory =
+        ticket.category.includes("Solicitação Diversa") ||
+        ticket.category.includes("Acesso")
+          ? "T.I > ST > Resolução de Problemas > Sistemas Internos"
+          : ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Reabertura de registro/conta no sistema ${appName} solicitada pelo setor ${sectorName} para continuidade do faturamento/auditoria.`;
+
+      if (recordNum) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a reabertura do registro **${recordNum}** no sistema **${appName}**, ` +
+          `informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à reabertura do registro **${recordNum}** no sistema **${appName}**, que foi encerrado erroneamente.\n\n` +
+          `Os dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no ${sectorName}.\n\n` +
+          `Assim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!`;
+      } else {
+        translatedIntent =
+          `Solicitação do setor **${sectorName}** (**${ticket.requester}**) para reabertura de registro/conta no sistema **${appName}**, ` +
+          `porém sem informar o número do registro afetado.`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          `Informar o número do registro/conta no sistema ${appName} que precisa ser reaberto`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de reabertura de conta no sistema **${appName}**.\n\n` +
+          `Para localizarmos e reabrirmos o registro correto no sistema, você poderia nos informar o **número do registro/conta**?\n\n` +
+          `Assim que nos confirmar o número por aqui, já efetuamos a reabertura!`;
+      }
+    } else if (
       (/\b(vincular|vinculacao|habilitar|atribuir)\b/i.test(normAll) &&
         /\b(usuario|perfil|controle de contas|sgh|spdata|hrp|sistema|unidade)\b/i.test(
           normAll
@@ -1882,17 +1936,29 @@ export class AIAnalyst {
       urgencyReason = "Classificação baseada no relato e impacto operacional informados pelo solicitante.";
 
       if (matchedMemory) {
-        translatedIntent =
-          `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
-          `Triagem orientada pelo padrão aprendido anteriormente com o analista (${matchedMemory.source_id}).`;
-        sufficiencyStatus = matchedMemory.sufficiency_status || "parcial";
-        missingInfo = Array.isArray(matchedMemory.required_info)
-          ? matchedMemory.required_info
-          : [];
-        if (matchedMemory.reply_template) {
-          customPublicReply = matchedMemory.reply_template
-            .replace(/\{solicitante\}/g, firstName)
-            .replace(/\{titulo\}/g, ticket.title);
+        const isMemActionMismatch =
+          /\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+          /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          );
+        if (!isMemActionMismatch) {
+          translatedIntent =
+            `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
+            `Triagem orientada pelo padrão aprendido anteriormente com o analista (${matchedMemory.source_id}).`;
+          sufficiencyStatus = matchedMemory.sufficiency_status || "parcial";
+          missingInfo = Array.isArray(matchedMemory.required_info)
+            ? matchedMemory.required_info
+            : [];
+          if (matchedMemory.reply_template) {
+            customPublicReply = matchedMemory.reply_template
+              .replace(/\{solicitante\}/g, firstName)
+              .replace(/\{titulo\}/g, ticket.title);
+          }
+        } else {
+          translatedIntent =
+            `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}".`;
+          sufficiencyStatus = hasConcreteIdentifiers ? "completo" : "parcial";
+          missingInfo = hasConcreteIdentifiers ? [] : ["Informar os dados complementares para atendimento"];
         }
       } else if (!looksLikeError && hasConcreteIdentifiers && !matchedPb) {
         translatedIntent =
@@ -1981,9 +2047,16 @@ export class AIAnalyst {
     if (customPublicReply) {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
-      publicReply = matchedMemory.reply_template
-        .replace(/\{solicitante\}/g, firstName)
-        .replace(/\{titulo\}/g, cleanSubject);
+      const isMemActionMismatch =
+        /\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+        /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+          normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+        );
+      if (!isMemActionMismatch) {
+        publicReply = matchedMemory.reply_template
+          .replace(/\{solicitante\}/g, firstName)
+          .replace(/\{titulo\}/g, cleanSubject);
+      }
     } else if (
       matchedPb &&
       matchedPb.reply_template &&

@@ -907,5 +907,35 @@
       "Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **{colaborador}**, vinculada ao prestador **{prestador}**.\n\nTodos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador) já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e as credenciais enviadas para o e-mail informado, confirmaremos por aqui!"
+  },
+  {
+    "id": "PB-UNI-28",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "title": "Reabertura de Registro ou Conta Encerrada Erroneamente (Controle de Contas / SGH / Faturamento)",
+    "keywords": [
+      "reabrir registro",
+      "reabertura de registro",
+      "reabrir conta",
+      "reabertura de conta",
+      "abrir contas",
+      "abrir conta",
+      "encerrada erroneamente",
+      "encerrado erroneamente",
+      "fechada por engano",
+      "reabertura controle de contas",
+      "controle de contas reabrir"
+    ],
+    "symptoms": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro ou conta hospitalar que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH), permitindo novos lançamentos, estornos e conferência.",
+    "required_info": [
+      "Número do registro/conta no sistema que deve ser reaberto (caso não conste informado na descrição)"
+    ],
+    "resolution_steps": [
+      "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **{registro}** no sistema **Controle de Contas**, encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no {setor}.\n\nAssim que o registro for reaberto e estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
   }
 ]

@@ -4060,42 +4060,42 @@
   },
   "42198": {
     "ticket_id": 42198,
-    "analyzed_at": "02/10/2026 08:19",
+    "analyzed_at": "02/10/2026 09:00",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Reabrir o registro 1411181 no controle de contas que foi encerrada erroneamente. Obrigado.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41992).",
-    "detected_domain": "Suporte Técnico Geral / Service Desk",
-    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1411181** no sistema **Controle de Contas**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Sistemas Internos",
     "real_urgency": "Média",
-    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "urgency_reason": "Reabertura de registro/conta no sistema Controle de Contas solicitada pelo setor H Faturamento para continuidade do faturamento/auditoria.",
     "sufficiency_status": "completo",
     "missing_info": [],
     "knowledge_matches": [
       {
-        "layer": "learned_memory",
-        "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#41992",
-        "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
-        "category": "T.I > ST > Acesso e Permissões",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-28",
+        "title": "Reabertura de Registro ou Conta Encerrada Erroneamente (Controle de Contas / SGH / Faturamento)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro ou conta hospitalar que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH), permitindo novos lançamentos, estornos e conferência.",
         "steps": [
-          "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
-          "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
-          "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+          "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
         ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
-        "required_info": [],
-        "sufficiency_status": "completo",
-        "custom_instruction": "",
-        "score": 0.85
+        "score": 0.99
       }
     ],
-    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#41992)",
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-28)",
     "resolution_steps": [
-      "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
-      "[MEM-#41992] [PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
-      "[MEM-#41992] [PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+      "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Reabrir o registro 1411181 no controle de contas que foi encerrada erroneamente. Obrigado.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41992).\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#41992)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#41992] [PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.\n  3. [MEM-#41992] [PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado.",
-    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!"
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1411181** no sistema **Controle de Contas**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Sistemas Internos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
   }
 }

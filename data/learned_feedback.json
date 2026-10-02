@@ -1,5 +1,33 @@
 [
   {
+    "ticket_id": 42197,
+    "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "adriana",
+      "balduino",
+      "yashinishi",
+      "solicitacao:",
+      "solicitante:",
+      "relacionamento",
+      "prestadores"
+    ],
+    "problem_summary": "▸ Solicitação\n1) Tipo de Solicitação: Criação de Usuários\n2) Setor Solicitante: Relacionamento Prestadores\n3) Observador: \n\n▸ Acesso e Permissões\n1) Origem: Acesso secretária\n2) Nome: Adriana Balduino Yashinishi\n3) E-mail Pessoal: balduinoadriana51@gmail.com\n4) CPF: 09631570606\n5) Data Nascimento: 24-05-1983\n6) Acessos: HRP Web Saúde\n7) Código do Prestador: 16000071\n8) Nome do Prestador: DIAS SAUDE LTDA\n9) Obsevações:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+      "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+      "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+      "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+      "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-02T11:37:19.045Z"
+  },
+  {
     "ticket_id": 42158,
     "title": "Manutenção Eletrônica | NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402",
     "category": "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS",
