@@ -1791,6 +1791,60 @@ export class AIAnalyst {
           `Assim que nos informar por aqui, já efetuamos a liberação!`;
       }
     } else if (
+      /\boncologia\b/i.test(normAll) &&
+      (/\bagenda\b/i.test(normAll) ||
+        /\bagendamento\b/i.test(normAll) ||
+        /\b(layout|interface|duracao|tempo minimo|tempo de duracao)\b/i.test(normAll))
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
+      suggestedCategory = ticket.category.includes("DV")
+        ? ticket.category
+        : "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+      realUrgency = ticket.urgency_label || "Muito baixa";
+      urgencyReason =
+        "Demanda evolutiva de desenvolvimento no Sistema de Agendamento de Oncologia para ajuste de tempo mínimo de duração.";
+
+      const minTimeMatch = descText.match(
+        /(?:tempo\s+m[íi]nimo.*?|preenchimento\s+seja\s+de\s*)(\d+)\s*(?:minutos?|min)/i
+      );
+      const targetMinTime = minTimeMatch ? `${minTimeMatch[1]} minutos` : "15 minutos";
+
+      const currTimeMatch = descText.match(
+        /(?:atualmente.*?|tempo\s+m[íi]nimo\s+[ée]\s+de\s*)(\d+)\s*(?:minutos?|min|hora|uma hora)/i
+      );
+      const currTime = currTimeMatch ? `${currTimeMatch[1]} minutos` : "60 minutos (uma hora)";
+
+      const mentionsDev = /\b(mois[ée]s|desenvolvedor)\b/i.test(descText);
+      const devNote = mentionsDev
+        ? " (demanda alinhada com o desenvolvedor Moisés)"
+        : "";
+
+      const sectorLabel =
+        formFields.setor && formFields.setor !== "Oncologia"
+          ? `${formFields.setor} / Oncologia`
+          : sectorName;
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorLabel}) solicita ajuste no sistema **Agenda Oncologia** (aplicação web de agendamento de consultas e sessões oncológicas), ` +
+        `para alterar o tempo mínimo de duração dos agendamentos de ${currTime} para **${targetMinTime}**, permitindo a gestão de procedimentos de menor duração (como administração de medicação via subcutânea)${devNote}. ` +
+        `Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em '${ticket.category}'.`;
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\n` +
+        `A especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **${targetMinTime}** (atualmente configurado em ${currTime}), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\n` +
+        `Assim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      !/\boncologia\b/i.test(normAll) &&
       /\bagenda\b/i.test(normAll) &&
       /\b(pep|sgh|spdata|atendimento|intervalo|horario|horarios|fisioterapeuta|medic[oa]|dr|dra|consulta|consultorio)\b/i.test(
         normAll

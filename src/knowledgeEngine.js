@@ -231,8 +231,11 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear Playbook de Agenda no PEP (PB-UNI-18) quando o chamado não menciona agenda
-        if (pb.id === "PB-UNI-18" && !/\bagenda\b/i.test(normTicket)) {
+        // Evita parear Playbook de Agenda no PEP (PB-UNI-18) quando o chamado não menciona agenda ou quando trata da Agenda Oncologia (PB-UNI-30)
+        if (
+          pb.id === "PB-UNI-18" &&
+          (!/\bagenda\b/i.test(normTicket) || /\boncologia\b/i.test(normTicket))
+        ) {
           continue;
         }
         // Evita parear Playbook de Unificação de Cadastro (PB-UNI-19) quando o chamado não trata de unificação/duplicidade de cadastro
@@ -310,6 +313,13 @@ export class KnowledgeEngine {
           !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|op[çc][õo]es do faturamento|destino autom[aá]tico do chamado)\b/i.test(
             normTicket
           )
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-30 (Agenda Oncologia) quando o chamado não trata do sistema ou agendamento de Oncologia
+        if (
+          pb.id === "PB-UNI-30" &&
+          !/\boncologia\b/i.test(normTicket)
         ) {
           continue;
         }

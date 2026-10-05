@@ -980,5 +980,40 @@
       "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo(s) formulário(s)/item(ns) no **GLPI** para o setor de **{setor}**.\n\nA especificação detalhada (nomes dos itens, campos obrigatórios/opcionais, tipos de solicitação e destinos automáticos) já foi validada na triagem pela equipe de Desenvolvimento.\n\nNossa equipe já iniciou a criação e parametrização dos formulários no Formcreator do GLPI. Assim que estiverem publicados e disponíveis no catálogo para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-30",
+    "domain": "Desenvolvimento de Software / Aplicações Internas",
+    "title": "Ajustes e Parametrizações no Sistema de Agendamento de Oncologia (Agenda Oncologia)",
+    "keywords": [
+      "agenda oncologia",
+      "agendamento oncologia",
+      "agenda da oncologia",
+      "sistema de agendamento de oncologia",
+      "site de agendamento de oncologia",
+      "oncologia",
+      "sessões oncológicas",
+      "sessoes oncologicas",
+      "tempo mínimo da agenda",
+      "tempo minimo da agenda",
+      "medicação via subcutânea",
+      "medicacao via subcutanea",
+      "horários pré-definidos",
+      "horarios pre-definidos",
+      "calendário semanal oncologia",
+      "calendario semanal oncologia"
+    ],
+    "symptoms": "Solicitação da equipe de Enfermagem/Oncologia do Hospital para evolução, parametrização ou ajustes em layout/interface e regras de agendamento no site/sistema interno de Agendamento de Oncologia (ex.: alteração de tempo mínimo de duração, visualização de faixas de horários, filtros e status de agendamentos).",
+    "required_info": [
+      "Descrição da alteração ou parâmetro desejado na agenda (ex.: novo tempo mínimo de duração, campo ou filtro a ser modificado)"
+    ],
+    "resolution_steps": [
+      "Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+      "Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+      "Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+      "Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de duração dos agendamentos (de 60 minutos para **15 minutos**) já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for publicado no sistema e estiver disponível para a equipe da Oncologia realizar os agendamentos fracionados, confirmaremos a liberação por aqui para a sua validação!\n\nPermanecemos à disposição!"
   }
 ]

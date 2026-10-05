@@ -4402,5 +4402,172 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Uanne Reis** (Compras) abriu o chamado: \"Ajustar campos abertura inicial e abertura final, de forma que não seja obrigatório o seu preenchimento na aplicação do filtro. Neste exemplo, eu preciso trazer apenas chamados fil\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42205).\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42205) + 1ª Camada • Base de Conhecimento GLPI (KB-34)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42205] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#42205] [PB-UNI-25] Acessar o módulo de controle de acessos/permissões centralizado diretamente no sistema HRP Unimed (onde é feita toda a gestão de usuários e vínculos do Web Saúde).\n  3. [MEM-#42205] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [MEM-#42205] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no HRP/Web Saúde com vigência ativa.\n  5. [MEM-#42205] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [KB-34] ▸ Abrir Chamados no GLPI",
     "public_reply_draft": "Olá, Uanne! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000073**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!"
+  },
+  "42241": {
+    "ticket_id": 42241,
+    "analyzed_at": "05/10/2026 09:09",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Diego Torres da Silva** (H Coordenação Enfermagem / Oncologia) solicita ajuste no sistema **Agenda Oncologia** (aplicação web de agendamento de consultas e sessões oncológicas), para alterar o tempo mínimo de duração dos agendamentos de 60 minutos para **15 minutos**, permitindo a gestão de procedimentos de menor duração (como administração de medicação via subcutânea) (demanda alinhada com o desenvolvedor Moisés). Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Demanda evolutiva de desenvolvimento no Sistema de Agendamento de Oncologia para ajuste de tempo mínimo de duração.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-30",
+        "title": "Ajustes e Parametrizações no Sistema de Agendamento de Oncologia (Agenda Oncologia)",
+        "category": "Desenvolvimento de Software / Aplicações Internas",
+        "summary": "Solicitação da equipe de Enfermagem/Oncologia do Hospital para evolução, parametrização ou ajustes em layout/interface e regras de agendamento no site/sistema interno de Agendamento de Oncologia (ex.: alteração de tempo mínimo de duração, visualização de faixas de horários, filtros e status de agendamentos).",
+        "steps": [
+          "Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+          "Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+          "Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+          "Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+          "Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41414 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Adequação Painel Acompanhamento de Pacientes",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde Diego, conclui o desenvolvimento solicitado.\n\nQuando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação.",
+        "steps": [
+          "Boa tarde Diego, conclui o desenvolvimento solicitado.",
+          "Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42132 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Publicação relatório Igualdade Salarial - Site Unimed Sudoeste MG",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Relatório Inserido na página",
+        "steps": [
+          "Relatório Inserido na página"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41861 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+        "steps": [
+          "Prezados(as),",
+          "Informamos que o formulário foi atualizado conforme solicitado:",
+          "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+          "Nova pergunta adicionada: Tipo de procedimento",
+          "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+          "Sonda Folley 2 vias"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-30) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41414 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+      "[PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+      "[PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+      "[PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+      "[Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Diego Torres da Silva** (H Coordenação Enfermagem / Oncologia) solicita ajuste no sistema **Agenda Oncologia** (aplicação web de agendamento de consultas e sessões oncológicas), para alterar o tempo mínimo de duração dos agendamentos de 60 minutos para **15 minutos**, permitindo a gestão de procedimentos de menor duração (como administração de medicação via subcutânea) (demanda alinhada com o desenvolvedor Moisés). Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-30) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41414 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n  2. [PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.\n  3. [PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).\n  4. [PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).\n  5. [PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.\n  6. [Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação.",
+    "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!"
+  },
+  "42249": {
+    "ticket_id": 42249,
+    "analyzed_at": "05/10/2026 08:00",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **THATIANA MARA VALETA DA SILVEIRA** (H Ultrassom) abriu o chamado: \"Por favor ativar a conta 1403820 Rafael Camarano . Obrigada\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42198).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42198",
+        "title": "Solicitação Diversa  -  ABRIR CONTAS",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "steps": [
+          "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41992",
+        "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+          "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42198) + Memória Contínua • Aprendido com o Analista (MEM-#41992)",
+    "resolution_steps": [
+      "[MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+      "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **THATIANA MARA VALETA DA SILVEIRA** (H Ultrassom) abriu o chamado: \"Por favor ativar a conta 1403820 Rafael Camarano . Obrigada\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42198).\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42198) + Memória Contínua • Aprendido com o Analista (MEM-#41992)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).\n  6. [MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+    "public_reply_draft": "Olá, THATIANA! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
+  },
+  "42262": {
+    "ticket_id": 42262,
+    "analyzed_at": "05/10/2026 07:58",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Priscila solicitou a instalação do aplicativo NOTPAD++ nos computadores das colaboradoras do setor de faturamento do hospital. O chamado foi feito pelo setor de faturamento.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "A instalação do aplicativo pode afetar a produtividade dos colaboradores do setor de faturamento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nPriscila solicitou a instalação do aplicativo NOTPAD++ nos computadores das colaboradoras do setor de faturamento do hospital. O chamado foi feito pelo setor de faturamento.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **NOTPAD++**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
   }
 }

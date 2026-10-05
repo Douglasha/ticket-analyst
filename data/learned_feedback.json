@@ -1,5 +1,84 @@
 [
   {
+    "ticket_id": 42262,
+    "title": "Aplicativos  -  NOTPAD++",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "notpad",
+      "computadores",
+      "colaboradoras",
+      "faturamento",
+      "grata"
+    ],
+    "problem_summary": "Solicito a instalação do aplicativo NOTPAD++ nos computadores das colaboradoras do setor de faturamento do hospital.\nGrata!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **NOTPAD++**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T11:07:56.000Z"
+  },
+  {
+    "ticket_id": 42249,
+    "title": "Solicitação Diversa  -  ativar conta no controle de contas",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "ativar",
+      "conta",
+      "controle",
+      "contas",
+      "rafael",
+      "camarano"
+    ],
+    "problem_summary": "Por favor ativar a conta 1403820 Rafael Camarano . Obrigada",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+      "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T11:05:52.248Z"
+  },
+  {
+    "ticket_id": 42165,
+    "title": "Criação de item no GLPI  -  Faturamento",
+    "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "keywords": [
+      "criacao",
+      "item",
+      "glpi",
+      "faturamento",
+      "entra",
+      "opcoes",
+      "criar",
+      "novos"
+    ],
+    "problem_summary": "Bom dia!\nEm entra as opções do faturamento, favor criar novos itens:\nItem:\nNome: Prestador: Reajuste / Inclusão de serviço / Exclusão de serviço\nCampos:\nNome do prestador: obrigatório\nCódigo do prestador: opcional\nTipo de solicitação: obrigatório\nReajuste\nInclusão de novo serviço\nExclusão de serviço\nDescrição da solicitação: obrigatório\nAnexo: opcional\nData de vigência ( Obrigatório)\n \n \nItem 2:\n \nNome: Prestador: Inclusão em clínica / Exclusão\nNome do prestador: obrigatório\nCódigo do prestador: Obrigatório\nTipo de solicitação: obrigatório\nInclusão em clínica\nExclusão de clínica\nDescrição da solicitação: obrigatório\nData de vigência ou fim: obrigatório\nAnexo: opcional\nDestino automático do chamado:\nFaturamento Unimed\nFinanceiro\nContábil\nRegulação\nWalisson Avelar Rosa",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de dois novos formulários/itens no catálogo do **GLPI** para o setor de **Faturamento**:\n1. **Prestador: Reajuste / Inclusão de serviço / Exclusão de serviço**;\n2. **Prestador: Inclusão em clínica / Exclusão**.\n\nTodos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\nNossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Prestador: Reajuste / Inclusão de serviço / Exclusão de serviço;",
+      "Prestador: Inclusão em clínica / Exclusão."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-29] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+      "[PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
+      "[PB-UNI-29] Criar ou parametrizar o(s) formulário(s) na categoria do setor solicitante (ex.: Faturamento), atribuindo o título, descrição e ícone apropriados.",
+      "[PB-UNI-29] Adicionar as seções e os campos solicitados (Nome do prestador, Código, Tipo de solicitação com opções, Descrição, Data de vigência e Anexo), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+      "[PB-UNI-29] Configurar na aba 'Alvos / Destinos' a criação automática do chamado encaminhando para os grupos/setores designados (ex.: Faturamento Unimed, Financeiro, Contábil, Regulação) e observadores indicados.",
+      "[PB-UNI-29] Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-02T16:24:50.516Z"
+  },
+  {
     "ticket_id": 42210,
     "title": "Criação de Usuários  -  Luiza Barros Maciel",
     "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",

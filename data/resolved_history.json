@@ -1,5 +1,69 @@
 [
   {
+    "id": "Chamado #42266 (Resolvido)",
+    "ticket_id": 42266,
+    "solution_id": 40964,
+    "title": "Liberação de informações de beneficiários e prestadores PINSS [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcesso liberado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acesso liberado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42261 (Resolvido)",
+    "ticket_id": 42261,
+    "solution_id": 40965,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42249 (Resolvido)",
+    "ticket_id": 42249,
+    "solution_id": 40959,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > ativar conta no controle de contas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConta reativada conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Conta reativada conforme solicitado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42245 (Resolvido)",
+    "ticket_id": 42245,
+    "solution_id": 40936,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Leticia vilela carneiro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro concluído com sucesso!Login: 14580300670Senha: 1458Os dados de login do(a) atendente foram enviados para o e-mail informado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro concluído com sucesso!Login: 14580300670Senha: 1458Os dados de login do(a) atendente foram enviados para o e-mail informado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42231 (Resolvido)",
     "ticket_id": 42231,
     "solution_id": 40910,
@@ -13,6 +77,19 @@
       "Verificado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42224 (Resolvido)",
+    "ticket_id": 42224,
+    "solution_id": 40923,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suprimentos reabastecidos.",
+    "keywords": [],
+    "steps": [
+      "Suprimentos reabastecidos."
     ]
   },
   {
@@ -34,6 +111,21 @@
     ]
   },
   {
+    "id": "Chamado #42206 (Resolvido)",
+    "ticket_id": 42206,
+    "solution_id": 40934,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > NOVO ENCAMINHAMENTO CONTROLE DE CONTAS",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde, implementado o encaminhamento conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde, implementado o encaminhamento conforme solicitado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42205 (Resolvido)",
     "ticket_id": 42205,
     "solution_id": 40900,
@@ -49,6 +141,23 @@
       "Luciana de Oliveira",
       "Viviane Aparecida de Souza",
       "Sabrina de Fatima Damaceno"
+    ]
+  },
+  {
+    "id": "Chamado #42204 (Resolvido)",
+    "ticket_id": 42204,
+    "solution_id": 40966,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 14 V\nTemperatura da água do Radiador: 50° C\nNível do óleo motor: ok\nNível do óleo combustível: ok\nLigar o Motor 15 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 14 V",
+      "Temperatura da água do Radiador: 50° C",
+      "Nível do óleo motor: ok",
+      "Nível do óleo combustível: ok",
+      "Ligar o Motor 15 min. Feito"
     ]
   },
   {
@@ -138,6 +247,22 @@
     "steps": [
       "Prezados(as),",
       "Segue nova senha: Jminas@0256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42165 (Resolvido)",
+    "ticket_id": 42165,
+    "solution_id": 40914,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Criação de item no GLPI > Faturamento",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nFoi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -2246,6 +2371,19 @@
       "De acordo, chamado fechado...",
       "resposta do chamado:",
       "coloque em caixas box identifique corretamentecom datas e demais detalhese traga para o arquivo da unimedvou depois fazer um alinhamentocom o Lauro sobre essa necessidade"
+    ]
+  },
+  {
+    "id": "Chamado #38735 (Resolvido)",
+    "ticket_id": 38735,
+    "solution_id": 40935,
+    "title": "Infraestrutura e Redes > Telefones VoIP > REDSET COM DEFEITO",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Após testes confirmamos que o sistema funciona normalmente. Peço por gentileza que solicite um fone headset USB para o setor de compras. Após a chegada, iremos fazer a instalação dele",
+    "keywords": [],
+    "steps": [
+      "Após testes confirmamos que o sistema funciona normalmente. Peço por gentileza que solicite um fone headset USB para o setor de compras. Após a chegada, iremos fazer a instalação dele"
     ]
   },
   {
