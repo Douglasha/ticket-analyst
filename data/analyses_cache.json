@@ -5216,5 +5216,194 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Lucelia Fernanda** referente a **Marcela Venancio da Costa** (CPF: 02017265640), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42278) + Memória Contínua • Aprendido com o Analista (MEM-#42273)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [MEM-#42278] [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
     "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Marcela Venancio da Costa** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42292": {
+    "ticket_id": 42292,
+    "analyzed_at": "05/10/2026 12:33",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Viviane Souza** (Nucleo Passos) solicita a **troca de toner** da impressora do setor **Nucleo Passos**. Todos os dados necessários para o atendimento presencial já constam descritos no chamado. O chamado foi aberto na categoria 'T.I > ST > Solicitação Diversa' e recomenda-se reclassificar para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras'.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de troca de toner para manutenção da continuidade das impressões do setor Nucleo Passos.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42280",
+        "title": "Manutenção de Computadores  -  Troca de toner",
+        "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **H SND**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+          "[PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+          "[PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+          "[PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+          "[PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+          "[PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **H SND**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-31",
+        "title": "Solicitação de Troca de Toner e Suprimentos de Impressão",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de setor operacional para fornecimento ou substituição física do cartucho de toner da impressora do setor (ex.: Samsung M4080FX / multifuncional / impressora de rede), por término de carga ou impressão falhada/clara.",
+        "steps": [
+          "Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+          "Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+          "Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+          "Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+          "Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+          "Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42010 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Solicitação de troca de toner – Impressora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42280) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-31)",
+    "resolution_steps": [
+      "[MEM-#42280] [PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+      "[MEM-#42280] [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[MEM-#42280] [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+      "[MEM-#42280] [PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+      "[MEM-#42280] [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+      "[MEM-#42280] [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) solicita a **troca de toner** da impressora do setor **Nucleo Passos**. Todos os dados necessários para o atendimento presencial já constam descritos no chamado. O chamado foi aberto na categoria 'T.I > ST > Solicitação Diversa' e recomenda-se reclassificar para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras'.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42280) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-31)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42280] [PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.\n  2. [MEM-#42280] [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).\n  3. [MEM-#42280] [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.\n  4. [MEM-#42280] [PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.\n  5. [MEM-#42280] [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.\n  6. [MEM-#42280] [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **Nucleo Passos**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42293": {
+    "ticket_id": 42293,
+    "analyzed_at": "05/10/2026 12:34",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Viviane Souza informou que os telefones da recepção 2627 e 2681 não estão transferindo ligações de um ramal para o outro. Este problema está ocorrendo no setor de Nucleo Passos.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "real_urgency": "Média",
+    "urgency_reason": "Ocorre um problema de transferência de chamados que pode causar atrasos e mal-entendidos entre os colaboradores.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Viviane Souza informou que os telefones da recepção 2627 e 2681 não estão transferindo ligações de um ramal para o outro. Este problema está ocorrendo no setor de Nucleo Passos.\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42294": {
+    "ticket_id": 42294,
+    "analyzed_at": "05/10/2026 12:40",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Frederico Roosevelt** (Faturamento) solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **Faturamento** (**Nota Avulsa**). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. O chamado foi aberto na categoria 'T.I > ST > Instalação/Configuração > Sistemas Operacionais' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Média",
+    "urgency_reason": "Criação e parametrização de novo formulário no catálogo do GLPI para atender o fluxo de trabalho do setor Faturamento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42165 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Criação de item no GLPI > Faturamento",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nFoi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41862 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Novo item no GLPI > Faturamento Unimed",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nBoa tarde,\n\n\r\nO formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.\n\n\r\nPor favor, efetue a validação do formulário\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessár",
+        "steps": [
+          "Prezados(as),",
+          "Boa tarde,",
+          "O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.",
+          "Por favor, efetue a validação do formulário",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-65",
+        "title": "Unificação Prontuário/Cadastro PEP - Prontu+",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Localize o cadastro duplicado em\n\n\r\n\n\r\nNo campo nome, mude o modo de pesquisa para a opção \"Contém\"\n\n\r\n\n\r\nColoque o nome a ser pesquisado e clique em \"buscar\"\n\n\r\n\n\r\nConfira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"\n\n\r\n\n\r\nSelecione o contato que contenha o CPF preenchido e clique...",
+        "steps": [
+          "Localize o cadastro duplicado em",
+          "No campo nome, mude o modo de pesquisa para a opção \"Contém\"",
+          "Coloque o nome a ser pesquisado e clique em \"buscar\"",
+          "Confira os dados, selecione os registros duplicados e clique em \"Consolidação de Contatos\"",
+          "Selecione o contato que contenha o CPF preenchido e clique em Salvar",
+          "Clique em confirmar, certifique-se de conferir todos os dados minunciosamente, pois esta operação não poderá ser desfeita"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-29",
+        "title": "Criação ou Parametrização de Formulários / Itens no GLPI (Formcreator / Demandas Intersetoriais)",
+        "category": "Desenvolvimento de Software / Aplicações Internas",
+        "summary": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, etc.) para criação, parametrização ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+          "Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
+          "Criar ou parametrizar o(s) formulário(s) na categoria do setor solicitante (ex.: Faturamento), atribuindo o título, descrição e ícone apropriados.",
+          "Adicionar as seções e os campos solicitados (Nome do prestador, Código, Tipo de solicitação com opções, Descrição, Data de vigência e Anexo), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+          "Configurar na aba 'Alvos / Destinos' a criação automática do chamado encaminhando para os grupos/setores designados (ex.: Faturamento Unimed, Financeiro, Contábil, Regulação) e observadores indicados.",
+          "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
+        ],
+        "score": 0.63
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #42165 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #42165 (Resolvido)] Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.",
+      "[Chamado #41862 (Resolvido)] O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.",
+      "[Chamado #41862 (Resolvido)] Por favor, efetue a validação do formulário",
+      "[KB-65] Localize o cadastro duplicado em",
+      "[KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"",
+      "[KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\""
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Frederico Roosevelt** (Faturamento) solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **Faturamento** (**Nota Avulsa**). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. O chamado foi aberto na categoria 'T.I > ST > Instalação/Configuração > Sistemas Operacionais' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Média\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42165 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #42165 (Resolvido)] Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.\n  2. [Chamado #41862 (Resolvido)] O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.\n  3. [Chamado #41862 (Resolvido)] Por favor, efetue a validação do formulário\n  4. [KB-65] Localize o cadastro duplicado em\n  5. [KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"\n  6. [KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\"",
+    "public_reply_draft": "Olá, Frederico! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de um novo formulário/item no catálogo do **GLPI** para o setor de **Faturamento**:\n1. **Nota Avulsa**.\n\nTodos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\nNossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!"
   }
 }

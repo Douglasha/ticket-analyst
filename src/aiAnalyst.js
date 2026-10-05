@@ -1139,13 +1139,6 @@ export class AIAnalyst {
       );
       const solPrefix = isMale ? "O solicitante" : "A solicitante";
 
-      const hasMultipleItems = /\b(item 2|item\s*2|dois itens|2 itens|novos itens|novos formul[aá]rios)\b/i.test(
-        descText
-      );
-      const itemsCountLabel = hasMultipleItems
-        ? "dois novos formulários/itens"
-        : "novo(s) formulário(s)/item(ns)";
-
       // Tenta extrair nomes dos formulários/itens informados
       const itemNames = [];
       const itemMatches = descText.matchAll(/Nome\s*:\s*([^\n\r]+)/gi);
@@ -1160,6 +1153,17 @@ export class AIAnalyst {
         }
       }
 
+      const hasMultipleItems =
+        itemNames.length > 1 ||
+        /\b(item 2|item\s*2|dois itens|2 itens|novos itens|novos formul[aá]rios|mais de um item|mais de um formul[aá]rio)\b/i.test(
+          descText
+        );
+      const itemsCountLabel = hasMultipleItems
+        ? itemNames.length > 1
+          ? `${itemNames.length} novos formulários/itens`
+          : "novos formulários/itens"
+        : "um novo formulário/item";
+
       const itemsListed =
         itemNames.length > 0
           ? itemNames.map((n) => `**${n}**`).join(" e ")
@@ -1168,7 +1172,9 @@ export class AIAnalyst {
       detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
       suggestedCategory = "T.I > DV > Desenvolvimento > Novas aplicações";
       realUrgency = ticket.urgency_label || "Baixa";
-      urgencyReason = `Criação e parametrização de novos formulários no catálogo do GLPI para atender os fluxos de trabalho e demandas intersetoriais do ${sectorName}.`;
+      urgencyReason = hasMultipleItems
+        ? `Criação e parametrização de novos formulários no catálogo do GLPI para atender os fluxos de trabalho e demandas intersetoriais do ${sectorName}.`
+        : `Criação e parametrização de novo formulário no catálogo do GLPI para atender o fluxo de trabalho do setor ${sectorName}.`;
 
       const hasFieldsSpecification =
         /\b(campos?|obrigat[oó]rio|opcional|destino autom[aá]tico)\b/i.test(
@@ -1176,9 +1182,12 @@ export class AIAnalyst {
         );
 
       if (hasFieldsSpecification) {
+        const singularOrPluralIntent = hasMultipleItems
+          ? `solicita a criação de ${itemsCountLabel} no catálogo do sistema **GLPI** vinculados à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nomes dos formulários, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`
+          : `solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`;
+
         translatedIntent =
-          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de ${itemsCountLabel} no catálogo do sistema **GLPI** vinculados à categoria de **${sectorName}** (${itemsListed}). ` +
-          `O solicitante detalhou toda a estrutura necessária: nomes dos formulários, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. ` +
+          `${solPrefix} **${ticket.requester}** (${sectorName}) ${singularOrPluralIntent} ` +
           `O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.`;
         sufficiencyStatus = "completo";
         missingInfo = [];
@@ -1193,26 +1202,39 @@ export class AIAnalyst {
                 .join("\n") + "\n\n"
             : "";
 
+        const formActionPhrase = hasMultipleItems
+          ? `criação de ${itemsCountLabel} no catálogo do **GLPI** para o setor de **${sectorName}**`
+          : `criação de um novo formulário/item no catálogo do **GLPI** para o setor de **${sectorName}**`;
+
+        const devStartPhrase = hasMultipleItems
+          ? `Nossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`
+          : `Nossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`;
+
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à criação de ${itemsCountLabel} no catálogo do **GLPI** para o setor de **${sectorName}**:\n` +
-          (itemsBullet || "") +
+          `Recebemos a sua solicitação referente à ${formActionPhrase}:\n` +
+          (itemsBullet || (itemNames.length === 1 ? `1. **${itemNames[0]}**.\n\n` : "")) +
           `Todos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\n` +
-          `Nossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\n` +
+          `${devStartPhrase}\n\n` +
           `Permanecemos à disposição!`;
       } else {
+        const formLabelIncomplete = hasMultipleItems
+          ? "novos formulários/itens"
+          : "um novo formulário/item";
         translatedIntent =
-          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de novo(s) formulário(s)/item(ns) no **GLPI** para o setor de **${sectorName}**, porém sem especificar todos os campos necessários.`;
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**, porém sem especificar todos os campos necessários.`;
         sufficiencyStatus = "parcial";
         missingInfo = [
-          "Relação dos campos a serem criados no formulário (indicando quais são obrigatórios e quais são opcionais)",
+          hasMultipleItems
+            ? "Relação dos campos a serem criados nos formulários (indicando quais são obrigatórios e quais são opcionais)"
+            : "Relação dos campos a serem criados no formulário (indicando quais são obrigatórios e quais são opcionais)",
           "Opções de seleção para campos do tipo lista suspensa/menu",
           "Setores, grupos ou observadores de destino automático dos chamados gerados pelo formulário",
         ];
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à criação de novo(s) formulário(s) no **GLPI** para o setor de **${sectorName}**.\n\n` +
-          `Para que possamos parametrizar os formulários exatamente conforme a necessidade do fluxo de trabalho, você poderia nos detalhar:\n` +
+          `Recebemos a sua solicitação referente à criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**.\n\n` +
+          `Para que possamos parametrizar ${hasMultipleItems ? "os formulários" : "o formulário"} exatamente conforme a necessidade do fluxo de trabalho, você poderia nos detalhar:\n` +
           `1. A **relação dos campos** desejados (indicando quais devem ser obrigatórios e quais são opcionais);\n` +
           `2. As **opções de seleção** para campos de lista/menu;\n` +
           `3. Quais **setores, grupos ou observadores** devem receber automaticamente os chamados abertos por esse formulário?\n\n` +

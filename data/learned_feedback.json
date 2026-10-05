@@ -1,5 +1,82 @@
 [
   {
+    "ticket_id": 42293,
+    "title": "Solicitação Diversa  -  Telefones não estão transferindo",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "telefones",
+      "transferindo",
+      "recepcao",
+      "fazendo",
+      "transferencias",
+      "ramal",
+      "outro"
+    ],
+    "problem_summary": "Os telefones da recepção 2627 e 2681 não estão fazendo transferências de um ramal para o outro.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T15:34:57.708Z"
+  },
+  {
+    "ticket_id": 42292,
+    "title": "Solicitação Diversa  -  Toner salas técnicas",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "toner",
+      "salas",
+      "tecnicas",
+      "troca",
+      "impressora"
+    ],
+    "problem_summary": "Solicito a troca do toner da impressora.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **Nucleo Passos**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42280] [PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+      "[MEM-#42280] [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[MEM-#42280] [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+      "[MEM-#42280] [PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+      "[MEM-#42280] [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+      "[MEM-#42280] [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T15:34:00.341Z"
+  },
+  {
+    "ticket_id": 42272,
+    "title": "Novas aplicações  -  DATA DE ALTA",
+    "category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "keywords": [
+      "novas",
+      "aplicacoes",
+      "alta",
+      "moises",
+      "gostaria",
+      "saber",
+      "existe",
+      "possibilidade"
+    ],
+    "problem_summary": "Bom dia Moises!\nGostaria de saber se existe a possibilidade de parametrizar o controle de contas, incluindo para contas INTERNAS a data da alta do paciente e se possível o encaminhamento automático do sistema no dia da alta.\nFico a disposição para mais esclarecimentos, caso necessário.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+      "[PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+      "[PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+      "[PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+      "[PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+      "[PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T14:26:35.945Z"
+  },
+  {
     "ticket_id": 42280,
     "title": "Manutenção de Computadores  -  Troca de toner",
     "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
