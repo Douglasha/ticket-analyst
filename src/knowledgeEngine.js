@@ -340,6 +340,15 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-33 (Videoconferência / Reunião Online) quando o chamado não trata de videoconferência / meet / teams / zoom
+        if (
+          pb.id === "PB-UNI-33" &&
+          !/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o\s+online|link\s+(?:d[ea]|para)\s+reuni[aã]o|link\s+no\s+meet)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
         const isRelocationOrPhoneInstall =
           /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
             normTicket
@@ -598,6 +607,24 @@ export class KnowledgeEngine {
         if (
           /\b(insumo|insumos|material|materiais|medicamento|medicamentos|produto)\b/i.test(normTicket) &&
           /\b(benefici[áa]ri[oa]|paciente|cliente)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias do Controle de Contas (ex: MEM-#42272, MEM-#42249, MEM-#42198, MEM-#41992) quando o chamado NÃO trata de Controle de Contas
+        if (
+          !normTicket.includes("controle de contas") &&
+          /\b(controle de contas|data da alta|data de alta|1411181)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.custom_instruction || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros assuntos quando o chamado trata de videoconferência / reunião online / Google Meet / Teams / Zoom
+        if (
+          /\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o\s+online|link\s+(?:d[ea]|para)\s+reuni[aã]o|link\s+no\s+meet)\b/i.test(normTicket) &&
+          !/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

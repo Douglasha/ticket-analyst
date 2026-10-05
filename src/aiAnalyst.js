@@ -1121,6 +1121,60 @@ export class AIAnalyst {
       urgencyReason = "Projeto/levantamento contábil e patrimonial planejado sem parada operacional.";
       sufficiencyStatus = "completo";
       missingInfo = [];
+    } else if (
+      /\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o\s+online|link\s+(?:d[ea]|para)\s+reuni[aã]o|link\s+no\s+meet)\b/i.test(
+        normAll
+      )
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+      const pronounSelf = isMale ? "você mesmo" : "você mesma";
+      const platform = /\bteams\b/i.test(normAll)
+        ? "Microsoft Teams"
+        : /\bzoom\b/i.test(normAll)
+        ? "Zoom"
+        : "Google Meet";
+
+      detectedDomain = "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = (ticket.category && ticket.category.includes("Treinamentos"))
+        ? ticket.category
+        : "T.I > ST > Instalação/Configuração > Aplicativos";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Solicitação de criação de link de videoconferência (${platform}) para treinamento agendado pelo setor ${sectorName}.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      const hasTraining = /\btreinamento\b/i.test(normAll);
+      const purpose = hasTraining
+        ? "realização de treinamento com participante externa"
+        : "realização de reunião online";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **criação de um link de videoconferência no ${platform}** ` +
+        `para ${purpose}. ` +
+        `O chamado contém todas as informações necessárias para a geração da sala virtual.${reclassNote}`;
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à criação de link de videoconferência no **${platform}** para o treinamento de amanhã com a secretária externa.\n\n` +
+        `Nossa equipe técnica já está gerando a sala no **${platform}** e disponibilizará o link de acesso diretamente por aqui para que você possa encaminhar à participante.\n\n` +
+        `Além do ${platform}, caso tenha preferência por utilizar outras plataformas corporativas de videoconferência como **Microsoft Teams** ou **Zoom**, também podemos disponibilizar a sala na ferramenta de sua escolha.\n\n` +
+        `💡 **Dica de Autonomia:** Caso precise gerar links de reuniões no seu dia a dia de forma rápida e imediata, ${pronounSelf} pode criá-los a qualquer momento:\n` +
+        `1. Acesse **[meet.google.com](https://meet.google.com)** conectada ao seu e-mail institucional;\n` +
+        `2. Clique no botão azul **\"Nova reunião\"**;\n` +
+        `3. Selecione a opção **\"Criar uma reunião para mais tarde\"** (ou *\"Iniciar uma reunião instantânea\"*);\n` +
+        `4. Copie o link gerado e compartilhe com os participantes!\n\n` +
+        `Assim que o link da reunião for gerado pela nossa equipe, enviaremos aqui no chamado para você!\n\n` +
+        `Permanecemos à disposição!`;
     } else if (normAll.includes("treinamento") && ticket.category.includes("TR")) {
       translatedIntent =
         `Solicitação de agendamento de treinamento/capacitação técnica (${formFields.descricao.slice(0, 140) || ticket.title}).`;
@@ -2310,6 +2364,14 @@ export class AIAnalyst {
           (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&
             /\b(reabertura|reabrir|vincular|vinculacao|acesso|cancelar|1411181)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
+          (!normAll.includes("controle de contas") &&
+            /\b(controle de contas|data da alta|data de alta|1411181)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
+          (/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o\s+online|link\s+(?:d[ea]|para)\s+reuni[aã]o|link\s+no\s+meet)\b/i.test(normAll) &&
+            !/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             ));
         if (!isMemActionMismatch) {
           translatedIntent =
@@ -2428,6 +2490,14 @@ export class AIAnalyst {
           )) ||
         (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&
           /\b(reabertura|reabrir|vincular|vinculacao|acesso|cancelar|1411181)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
+        (!normAll.includes("controle de contas") &&
+          /\b(controle de contas|data da alta|data de alta|1411181)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
+        (/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o\s+online|link\s+(?:d[ea]|para)\s+reuni[aã]o|link\s+no\s+meet)\b/i.test(normAll) &&
+          !/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           ));
       if (!isMemActionMismatch) {

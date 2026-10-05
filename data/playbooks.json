@@ -1110,5 +1110,44 @@
       "Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-33",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "title": "Criação e Suporte a Links de Videoconferência / Reuniões Online (Google Meet, Teams, Zoom)",
+    "keywords": [
+      "google meet",
+      "meet",
+      "link no google meet",
+      "link do meet",
+      "link para reunião",
+      "link para reuniao",
+      "link de reunião",
+      "link de reuniao",
+      "link da reunião",
+      "link da reuniao",
+      "criar link",
+      "criação de link",
+      "criacao de link",
+      "reunião online",
+      "reuniao online",
+      "videoconferência",
+      "videoconferencia",
+      "teams",
+      "microsoft teams",
+      "zoom",
+      "treinamento online"
+    ],
+    "symptoms": "Solicitação de colaborador para geração ou disponibilização de link de reunião online/videoconferência (Google Meet, Microsoft Teams, Zoom) para realização de treinamentos, alinhamentos internos ou reuniões externas com secretárias/prestadores.",
+    "required_info": [],
+    "resolution_steps": [
+      "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > TR > Treinamentos' ou 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto indevidamente em Desenvolvimento ('Novas aplicações').",
+      "Acessar a conta institucional corporativa no Google Meet (meet.google.com), Microsoft Teams ou Zoom e gerar a nova sala de videoconferência.",
+      "Copiar o link gerado (ex.: https://meet.google.com/xxx-yyyy-zzz) e disponibilizar no chamado ao(à) solicitante.",
+      "Oferecer a criação da sala em outras plataformas corporativas de videoconferência homologadas (como Microsoft Teams ou Zoom), caso o solicitante tenha preferência.",
+      "Orientar o(a) colaborador(a) com passo a passo simplificado para que possa gerar seus próprios links de reunião no Google Meet (meet.google.com) de forma rápida e autônoma sempre que necessário.",
+      "Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de link de videoconferência no **Google Meet** para a realização de reunião/treinamento online.\n\nNossa equipe técnica já está gerando a sala no **Google Meet** e disponibilizará o link de acesso diretamente por aqui em instantes para que você possa encaminhar à participante.\n\nAlém do Google Meet, caso tenha preferência por utilizar outras plataformas de videoconferência como **Microsoft Teams** ou **Zoom**, também podemos disponibilizar a sala na ferramenta de sua escolha.\n\n💡 **Dica de Autonomia:** Caso precise gerar links de reuniões no seu dia a dia de forma rápida e imediata, você mesma pode criá-los a qualquer momento:\n1. Acesse **[meet.google.com](https://meet.google.com)** conectada ao seu e-mail institucional;\n2. Clique no botão azul **\"Nova reunião\"**;\n3. Selecione a opção **\"Criar uma reunião para mais tarde\"** (ou *\"Iniciar uma reunião instantânea\"*);\n4. Copie o link gerado e compartilhe com os participantes!\n\nAssim que o link da reunião for gerado pela nossa equipe, enviaremos aqui no chamado para você!\n\nPermanecemos à disposição!"
   }
 ]

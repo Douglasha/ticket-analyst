@@ -5603,57 +5603,32 @@
   },
   "42307": {
     "ticket_id": 42307,
-    "analyzed_at": "05/10/2026 14:03",
+    "analyzed_at": "05/10/2026 14:35",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O solicitante **Letícia Maximiano De Sousa** (Faturamento) abriu o chamado: \"Boa tarde! Por gentileza, peço que seja criado um link no Google Meet, pois amanhã, no período da manhã, irei realizar um treinamento com uma secretária que estará de forma externa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42272).",
+    "translated_intent": "A solicitante **Letícia Maximiano De Sousa** (Faturamento) solicita a **criação de um link de videoconferência no Google Meet** para realização de treinamento com participante externa. O chamado contém todas as informações necessárias para a geração da sala virtual.",
     "detected_domain": "Suporte Técnico Geral / Service Desk",
-    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
-    "real_urgency": "Muito baixa",
-    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "suggested_category": "T.I > TR > Treinamentos",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Solicitação de criação de link de videoconferência (Google Meet) para treinamento agendado pelo setor Faturamento.",
     "sufficiency_status": "completo",
     "missing_info": [],
     "knowledge_matches": [
       {
-        "layer": "learned_memory",
-        "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#42272",
-        "title": "Novas aplicações  -  DATA DE ALTA",
-        "category": "T.I > DV > Desenvolvimento > Novas aplicações",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-33",
+        "title": "Criação e Suporte a Links de Videoconferência / Reuniões Online (Google Meet, Teams, Zoom)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de colaborador para geração ou disponibilização de link de reunião online/videoconferência (Google Meet, Microsoft Teams, Zoom) para realização de treinamentos, alinhamentos internos ou reuniões externas com secretárias/prestadores.",
         "steps": [
-          "[PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
-          "[PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
-          "[PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
-          "[PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
-          "[PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
-          "[PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > TR > Treinamentos' ou 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto indevidamente em Desenvolvimento ('Novas aplicações').",
+          "Acessar a conta institucional corporativa no Google Meet (meet.google.com), Microsoft Teams ou Zoom e gerar a nova sala de videoconferência.",
+          "Copiar o link gerado (ex.: https://meet.google.com/xxx-yyyy-zzz) e disponibilizar no chamado ao(à) solicitante.",
+          "Oferecer a criação da sala em outras plataformas corporativas de videoconferência homologadas (como Microsoft Teams ou Zoom), caso o solicitante tenha preferência.",
+          "Orientar o(a) colaborador(a) com passo a passo simplificado para que possa gerar seus próprios links de reunião no Google Meet (meet.google.com) de forma rápida e autônoma sempre que necessário.",
+          "Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI."
         ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
-        "required_info": [],
-        "sufficiency_status": "completo",
-        "custom_instruction": "",
-        "score": 0.85
-      },
-      {
-        "layer": "learned_memory",
-        "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#42273",
-        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
-        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
-        "steps": [
-          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
-          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
-          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
-          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
-          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
-          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
-        ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
-        "required_info": [],
-        "sufficiency_status": "completo",
-        "custom_instruction": "",
-        "score": 0.85
+        "score": 0.99
       },
       {
         "layer": "glpi_history",
@@ -5685,16 +5660,92 @@
         "score": 0.51
       }
     ],
-    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42272) + Memória Contínua • Aprendido com o Analista (MEM-#42273)",
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-33) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))",
     "resolution_steps": [
-      "[MEM-#42272] [PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
-      "[MEM-#42272] [PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
-      "[MEM-#42272] [PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
-      "[MEM-#42272] [PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
-      "[MEM-#42272] [PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
-      "[MEM-#42272] [PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+      "[PB-UNI-33] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > TR > Treinamentos' ou 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto indevidamente em Desenvolvimento ('Novas aplicações').",
+      "[PB-UNI-33] Acessar a conta institucional corporativa no Google Meet (meet.google.com), Microsoft Teams ou Zoom e gerar a nova sala de videoconferência.",
+      "[PB-UNI-33] Copiar o link gerado (ex.: https://meet.google.com/xxx-yyyy-zzz) e disponibilizar no chamado ao(à) solicitante.",
+      "[PB-UNI-33] Oferecer a criação da sala em outras plataformas corporativas de videoconferência homologadas (como Microsoft Teams ou Zoom), caso o solicitante tenha preferência.",
+      "[PB-UNI-33] Orientar o(a) colaborador(a) com passo a passo simplificado para que possa gerar seus próprios links de reunião no Google Meet (meet.google.com) de forma rápida e autônoma sempre que necessário.",
+      "[PB-UNI-33] Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Letícia Maximiano De Sousa** (Faturamento) abriu o chamado: \"Boa tarde! Por gentileza, peço que seja criado um link no Google Meet, pois amanhã, no período da manhã, irei realizar um treinamento com uma secretária que estará de forma externa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42272).\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42272) + Memória Contínua • Aprendido com o Analista (MEM-#42273)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42272] [PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').\n  2. [MEM-#42272] [PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).\n  3. [MEM-#42272] [PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.\n  4. [MEM-#42272] [PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.\n  5. [MEM-#42272] [PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).\n  6. [MEM-#42272] [PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI.",
-    "public_reply_draft": "Olá, Letícia! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Letícia Maximiano De Sousa** (Faturamento) solicita a **criação de um link de videoconferência no Google Meet** para realização de treinamento com participante externa. O chamado contém todas as informações necessárias para a geração da sala virtual.\n\nClassificação Sugerida: T.I > TR > Treinamentos | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-33) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-33] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > TR > Treinamentos' ou 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto indevidamente em Desenvolvimento ('Novas aplicações').\n  2. [PB-UNI-33] Acessar a conta institucional corporativa no Google Meet (meet.google.com), Microsoft Teams ou Zoom e gerar a nova sala de videoconferência.\n  3. [PB-UNI-33] Copiar o link gerado (ex.: https://meet.google.com/xxx-yyyy-zzz) e disponibilizar no chamado ao(à) solicitante.\n  4. [PB-UNI-33] Oferecer a criação da sala em outras plataformas corporativas de videoconferência homologadas (como Microsoft Teams ou Zoom), caso o solicitante tenha preferência.\n  5. [PB-UNI-33] Orientar o(a) colaborador(a) com passo a passo simplificado para que possa gerar seus próprios links de reunião no Google Meet (meet.google.com) de forma rápida e autônoma sempre que necessário.\n  6. [PB-UNI-33] Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI.",
+    "public_reply_draft": "Olá, Letícia! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de link de videoconferência no **Google Meet** para o treinamento de amanhã com a secretária externa.\n\nNossa equipe técnica já está gerando a sala no **Google Meet** e disponibilizará o link de acesso diretamente por aqui para que você possa encaminhar à participante.\n\nAlém do Google Meet, caso tenha preferência por utilizar outras plataformas corporativas de videoconferência como **Microsoft Teams** ou **Zoom**, também podemos disponibilizar a sala na ferramenta de sua escolha.\n\n💡 **Dica de Autonomia:** Caso precise gerar links de reuniões no seu dia a dia de forma rápida e imediata, você mesma pode criá-los a qualquer momento:\n1. Acesse **[meet.google.com](https://meet.google.com)** conectada ao seu e-mail institucional;\n2. Clique no botão azul **\"Nova reunião\"**;\n3. Selecione a opção **\"Criar uma reunião para mais tarde\"** (ou *\"Iniciar uma reunião instantânea\"*);\n4. Copie o link gerado e compartilhe com os participantes!\n\nAssim que o link da reunião for gerado pela nossa equipe, enviaremos aqui no chamado para você!\n\nPermanecemos à disposição!"
+  },
+  "42310": {
+    "ticket_id": 42310,
+    "analyzed_at": "05/10/2026 14:18",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita a extração dos **indicadores de atendimento do sistema sistema informado**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Média",
+    "urgency_reason": "Extração de indicadores/relatórios gerenciais do sistema sistema informado para acompanhamento operacional do setor Nucleo Piumhi.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no sistema informado"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42034",
+        "title": "Sistemas Operacionais  -  Alteração agenda Jéssica Lima",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-18",
+        "title": "Criação / Alteração de Agenda de Profissional no Sistema Prontu+ (PEP do Núcleo / Consultórios)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de criação, bloqueio ou alteração de grade/horários de agenda de profissional de saúde (médico, fisioterapeuta, terapeuta, etc.) no sistema Prontu+ (comumente chamado de PEP pelas equipes dos Núcleos de Atenção à Saúde / NAS / consultórios médicos), especificando dias da semana, faixa de horário, tempo de atendimento e intervalos.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "Salvar a nova configuração de agenda no Prontu+ (PEP) e confirmar a conclusão ao(à) solicitante no chamado."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42034 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Alteração agenda Jéssica Lima",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nAgenda alterada conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Agenda alterada conforme solicitado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42034) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)",
+    "resolution_steps": [
+      "[MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+      "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita a extração dos **indicadores de atendimento do sistema sistema informado**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42034) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no sistema informado\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.\n  3. [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.\n  4. [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.\n  5. [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  6. [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do sistema informado** para o setor **Nucleo Piumhi**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!"
   }
 }
