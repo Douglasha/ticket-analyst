@@ -1536,6 +1536,49 @@ export class AIAnalyst {
           `Assim que confirmar por aqui, já realizamos o cancelamento!`;
       }
     } else if (
+      normAll.includes("controle de contas") &&
+      (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|data da alta|data de alta|encaminhamento autom[aá]tico)\b/i.test(
+        normAll
+      ) ||
+        ticket.category.includes("Desenvolvimento") ||
+        ticket.category.includes("DV")) &&
+      !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|cancelar|cancelamento|excluir)\b/i.test(
+        normAll
+      )
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
+      suggestedCategory = ticket.category.includes("DV")
+        ? ticket.category
+        : "T.I > DV > Desenvolvimento > Novas aplicações";
+      realUrgency = ticket.urgency_label || "Muito baixa";
+      urgencyReason =
+        "Demanda de desenvolvimento e parametrização de novas regras/funcionalidades no sistema Controle de Contas.";
+
+      const mentionsDev = /\b(mois[ée]s|moises conte)\b/i.test(normAll);
+      const devNote = mentionsDev
+        ? " (demanda de Desenvolvimento direcionada ao desenvolvedor Moisés Conte)"
+        : " (demanda de Desenvolvimento de aplicações internas)";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a análise de viabilidade e parametrização no sistema **Controle de Contas**, ` +
+        `para inclusão do campo **data da alta do paciente em contas internas** e da regra de **encaminhamento automático** do sistema no dia da alta${devNote}. ` +
+        `Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em '${ticket.category}'.`;
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\n` +
+        `A proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\n` +
+        `Assim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
       /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
         normAll
       ) &&
@@ -2140,10 +2183,18 @@ export class AIAnalyst {
 
       if (matchedMemory) {
         const isMemActionMismatch =
-          /\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
-          /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
-            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
-          );
+          (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+            /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
+          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(normAll) &&
+            /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
+          (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&
+            /\b(reabertura|reabrir|vincular|vinculacao|acesso|cancelar|1411181)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            ));
         if (!isMemActionMismatch) {
           translatedIntent =
             `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
@@ -2251,10 +2302,18 @@ export class AIAnalyst {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
       const isMemActionMismatch =
-        /\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
-        /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
-          normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
-        );
+        (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+          /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
+        (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(normAll) &&
+          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
+        (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&
+          /\b(reabertura|reabrir|vincular|vinculacao|acesso|cancelar|1411181)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          ));
       if (!isMemActionMismatch) {
         publicReply = matchedMemory.reply_template
           .replace(/\{solicitante\}/g, firstName)

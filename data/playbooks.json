@@ -1049,5 +1049,38 @@
       "Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner da impressora** do setor **{setor}**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-32",
+    "domain": "Desenvolvimento de Software / Aplicações Internas",
+    "title": "Análise de Viabilidade e Parametrização de Melhorias no Controle de Contas (Desenvolvimento)",
+    "keywords": [
+      "possibilidade de parametrizar",
+      "parametrizar o controle de contas",
+      "melhoria no controle de contas",
+      "data da alta",
+      "data de alta",
+      "contas internas",
+      "encaminhamento automático",
+      "encaminhamento automatico",
+      "novas aplicações controle de contas",
+      "ajustes controle de contas",
+      "viabilidade desenvolvimento",
+      "moises conte",
+      "moises"
+    ],
+    "symptoms": "Solicitação de setor de faturamento ou operacional para análise de viabilidade técnica, parametrização ou implementação de melhorias e automações no sistema Controle de Contas (ex.: inclusão do campo data de alta do paciente em contas internas e regras de encaminhamento automático).",
+    "required_info": [
+      "Descrição detalhada da melhoria, campos ou regras de automação desejadas no sistema"
+    ],
+    "resolution_steps": [
+      "Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+      "Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+      "Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+      "Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+      "Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+      "Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
   }
 ]

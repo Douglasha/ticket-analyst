@@ -4638,6 +4638,91 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nPriscila solicitou a instalação do aplicativo NOTPAD++ nos computadores das colaboradoras do setor de faturamento do hospital. O chamado foi feito pelo setor de faturamento.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
     "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **NOTPAD++**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
   },
+  "42272": {
+    "ticket_id": 42272,
+    "analyzed_at": "05/10/2026 11:23",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita a análise de viabilidade e parametrização no sistema **Controle de Contas**, para inclusão do campo **data da alta do paciente em contas internas** e da regra de **encaminhamento automático** do sistema no dia da alta (demanda de Desenvolvimento direcionada ao desenvolvedor Moisés Conte). Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Demanda de desenvolvimento e parametrização de novas regras/funcionalidades no sistema Controle de Contas.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-32",
+        "title": "Análise de Viabilidade e Parametrização de Melhorias no Controle de Contas (Desenvolvimento)",
+        "category": "Desenvolvimento de Software / Aplicações Internas",
+        "summary": "Solicitação de setor de faturamento ou operacional para análise de viabilidade técnica, parametrização ou implementação de melhorias e automações no sistema Controle de Contas (ex.: inclusão do campo data de alta do paciente em contas internas e regras de encaminhamento automático).",
+        "steps": [
+          "Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+          "Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+          "Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+          "Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+          "Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+          "Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42249 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Solicitação Diversa > ativar conta no controle de contas",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nConta reativada conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Conta reativada conforme solicitado.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42206 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > NOVO ENCAMINHAMENTO CONTROLE DE CONTAS",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde, implementado o encaminhamento conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Boa tarde, implementado o encaminhamento conforme solicitado.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41992 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Aplicativos > ACESSOS CONTROLE DE CONTAS",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-32) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42249 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+      "[PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+      "[PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+      "[PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+      "[PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+      "[PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a análise de viabilidade e parametrização no sistema **Controle de Contas**, para inclusão do campo **data da alta do paciente em contas internas** e da regra de **encaminhamento automático** do sistema no dia da alta (demanda de Desenvolvimento direcionada ao desenvolvedor Moisés Conte). Todos os parâmetros e a justificativa constam informados no chamado. O chamado está corretamente categorizado em 'T.I > DV > Desenvolvimento > Novas aplicações'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-32) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42249 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').\n  2. [PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).\n  3. [PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.\n  4. [PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.\n  5. [PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).\n  6. [PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
+  },
   "42273": {
     "ticket_id": 42273,
     "analyzed_at": "05/10/2026 09:38",

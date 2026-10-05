@@ -1,5 +1,32 @@
 [
   {
+    "ticket_id": 42280,
+    "title": "Manutenção de Computadores  -  Troca de toner",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "keywords": [
+      "manutencao",
+      "computadores",
+      "troca",
+      "toner",
+      "impressora",
+      "snd",
+      "desde"
+    ],
+    "problem_summary": "Bom dia\nSolicito troca de toner da impressora do SND.\nDesde já agradeço!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **H SND**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+      "[PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+      "[PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+      "[PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+      "[PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T13:33:17.899Z"
+  },
+  {
     "ticket_id": 42285,
     "title": "Criação de Usuários  -  Marcela Venancio da Costa",
     "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",

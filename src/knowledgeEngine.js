@@ -298,12 +298,25 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-28 (Reabertura de Registro) quando o chamado não trata de reabertura de conta/registro
+        // Evita parear PB-UNI-28 (Reabertura de Registro) quando o chamado não trata de reabertura de conta/registro ou quando trata de desenvolvimento/parametrização
         if (
           pb.id === "PB-UNI-28" &&
-          !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
+          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
             normTicket
-          )
+          ) ||
+            /\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-32 (Melhoria Controle de Contas / Desenvolvimento) quando o chamado não trata de parametrização/melhoria no Controle de Contas
+        if (
+          pb.id === "PB-UNI-32" &&
+          (!normTicket.includes("controle de contas") ||
+            !/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|data da alta|data de alta|encaminhamento autom[aá]tico)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
@@ -520,6 +533,24 @@ export class KnowledgeEngine {
         if (
           /\b(reabrir|reabertura|cancelar|cancelamento|excluir|exclusao|estornar)\b/i.test(normTicket) &&
           /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de reabertura/ativação de contas quando o chamado NÃO trata de reabrir/ativar conta
+        if (
+          !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|encerrad[ao] erroneamente)\b/i.test(normTicket) &&
+          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|1411181)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de suporte operacional quando o chamado trata de desenvolvimento/melhoria/parametrização
+        if (
+          /\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|encaminhamento autom[aá]tico)\b/i.test(normTicket) &&
+          /\b(reabertura|reabrir|vincular|vinculacao|senha|acesso|cancelar|ativar conta)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
