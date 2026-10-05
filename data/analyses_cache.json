@@ -5672,19 +5672,72 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Letícia Maximiano De Sousa** (Faturamento) solicita a **criação de um link de videoconferência no Google Meet** para realização de treinamento com participante externa. O chamado contém todas as informações necessárias para a geração da sala virtual.\n\nClassificação Sugerida: T.I > TR > Treinamentos | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-33) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-33] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > TR > Treinamentos' ou 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto indevidamente em Desenvolvimento ('Novas aplicações').\n  2. [PB-UNI-33] Acessar a conta institucional corporativa no Google Meet (meet.google.com), Microsoft Teams ou Zoom e gerar a nova sala de videoconferência.\n  3. [PB-UNI-33] Copiar o link gerado (ex.: https://meet.google.com/xxx-yyyy-zzz) e disponibilizar no chamado ao(à) solicitante.\n  4. [PB-UNI-33] Oferecer a criação da sala em outras plataformas corporativas de videoconferência homologadas (como Microsoft Teams ou Zoom), caso o solicitante tenha preferência.\n  5. [PB-UNI-33] Orientar o(a) colaborador(a) com passo a passo simplificado para que possa gerar seus próprios links de reunião no Google Meet (meet.google.com) de forma rápida e autônoma sempre que necessário.\n  6. [PB-UNI-33] Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI.",
     "public_reply_draft": "Olá, Letícia! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de link de videoconferência no **Google Meet** para o treinamento de amanhã com a secretária externa.\n\nNossa equipe técnica já está gerando a sala no **Google Meet** e disponibilizará o link de acesso diretamente por aqui para que você possa encaminhar à participante.\n\nAlém do Google Meet, caso tenha preferência por utilizar outras plataformas corporativas de videoconferência como **Microsoft Teams** ou **Zoom**, também podemos disponibilizar a sala na ferramenta de sua escolha.\n\n💡 **Dica de Autonomia:** Caso precise gerar links de reuniões no seu dia a dia de forma rápida e imediata, você mesma pode criá-los a qualquer momento:\n1. Acesse **[meet.google.com](https://meet.google.com)** conectada ao seu e-mail institucional;\n2. Clique no botão azul **\"Nova reunião\"**;\n3. Selecione a opção **\"Criar uma reunião para mais tarde\"** (ou *\"Iniciar uma reunião instantânea\"*);\n4. Copie o link gerado e compartilhe com os participantes!\n\nAssim que o link da reunião for gerado pela nossa equipe, enviaremos aqui no chamado para você!\n\nPermanecemos à disposição!"
   },
-  "42310": {
-    "ticket_id": 42310,
-    "analyzed_at": "05/10/2026 14:18",
+  "42308": {
+    "ticket_id": 42308,
+    "analyzed_at": "05/10/2026 14:38",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita a extração dos **indicadores de atendimento do sistema sistema informado**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*",
-    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
     "real_urgency": "Média",
-    "urgency_reason": "Extração de indicadores/relatórios gerenciais do sistema sistema informado para acompanhamento operacional do setor Nucleo Piumhi.",
+    "urgency_reason": "Telefone do setor inoperante; demanda checagem de alimentação física, cabo de rede ou registro do ramal no PABX.",
     "sufficiency_status": "parcial",
     "missing_info": [
-      "Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no sistema informado"
+      "Verificar se o visor do telefone está aceso ou totalmente apagado",
+      "Informar o número do ramal desse aparelho",
+      "Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar"
     ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-17",
+        "title": "App Meu Ponto (Benner) — Erro de Dispositivo Não Válido / Troca de Celular (Vinculação de Novo Aparelho)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Colaborador(a) não consegue registrar o ponto no aplicativo Meu Ponto (Benner), apresentando a mensagem 'Esse dispositivo não é válido para o usuário logado. Entre em contato com seu gestor ou com o RH da empresa' (ocorre quando o colaborador trocou de celular ou reinstalou o app, sendo necessário vincular o novo dispositivo ao seu login).",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.",
+          "Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.",
+          "Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41653 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Configuração app Meu ponto",
+        "category": "T.I • Solucionado por rcampos",
+        "summary": "dispositivos antigos excluidos, basta logar no novo e bater o ponto",
+        "steps": [
+          "dispositivos antigos excluidos, basta logar no novo e bater o ponto"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-17) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41653 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-17] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-17] Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.",
+      "[PB-UNI-17] Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.",
+      "[PB-UNI-17] Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente.",
+      "[Chamado #41653 (Resolvido)] dispositivos antigos excluidos, basta logar no novo e bater o ponto"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-17) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41653 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Verificar se o visor do telefone está aceso ou totalmente apagado\n  - Informar o número do ramal desse aparelho\n  - Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-17] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ou 'T.I > ST > Acesso e Permissões') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [PB-UNI-17] Acessar o painel administrativo do sistema Benner / Meu Ponto e localizar o cadastro do(a) colaborador(a) informado(a) no chamado.\n  3. [PB-UNI-17] Excluir/desvincular o dispositivo móvel antigo vinculado ao login do(a) colaborador(a) para permitir o vínculo do novo aparelho celular.\n  4. [PB-UNI-17] Confirmar no chamado que o vínculo foi redefinido e orientar o(a) colaborador(a) a acessar o aplicativo Meu Ponto no celular novo e registrar o ponto normalmente.\n  5. [Chamado #41653 (Resolvido)] dispositivos antigos excluidos, basta logar no novo e bater o ponto",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **Nucleo Piumhi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o Nucleo Piumhi para checar o ponto de rede e o aparelho!"
+  },
+  "42310": {
+    "ticket_id": 42310,
+    "analyzed_at": "05/10/2026 15:15",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**, parametrizando os horários e intervalos de atendimento (Atendimentos de 45/45minutos De segunda a sexta das 07:00 às 12:30hs Intervalo de 15minutos Jéssica Lima Atendimentos de 45/45minutos De segunda a sexta das 13:00 às 16:15hs Sem intervalo). Todas as informações necessárias (profissionais, faixas de horário, duração dos atendimentos e intervalos) já foram informadas no relato. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Instalação/Configuração > Aplicativos\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de parametrização/alteração de grade de agenda de profissional no sistema Prontu+ (PEP do Núcleo), impactando a disponibilização de horários de atendimento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
     "knowledge_matches": [
       {
         "layer": "learned_memory",
@@ -5745,7 +5798,7 @@
       "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
       "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita a extração dos **indicadores de atendimento do sistema sistema informado**, porém não especificou o período (data inicial e final ou mês de referência) para a consulta. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > BD > Big Data e BI > Relatórios\").*\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42034) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no sistema informado\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.\n  3. [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.\n  4. [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.\n  5. [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  6. [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
-    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do sistema informado** para o setor **Nucleo Piumhi**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!"
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**, parametrizando os horários e intervalos de atendimento (Atendimentos de 45/45minutos De segunda a sexta das 07:00 às 12:30hs Intervalo de 15minutos Jéssica Lima Atendimentos de 45/45minutos De segunda a sexta das 13:00 às 16:15hs Sem intervalo). Todas as informações necessárias (profissionais, faixas de horário, duração dos atendimentos e intervalos) já foram informadas no relato. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Instalação/Configuração > Aplicativos\").*\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42034) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.\n  3. [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.\n  4. [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.\n  5. [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  6. [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 }

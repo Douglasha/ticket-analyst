@@ -1853,9 +1853,12 @@ export class AIAnalyst {
           `Assim que nos informar por aqui, já verificamos!`;
       }
     } else if (
-      /\b(indicadores|indicador|wconect|wconnect)\b/i.test(normAll) ||
-      (/\b(solicito|solicita|extrair|extracao|levantamento)\b/i.test(normAll) &&
-        /\b(relatorio|relatorios|produtividade|atendimentos)\b/i.test(normAll))
+      !/\bagenda\b/i.test(normAll) &&
+      (/\b(indicadores|indicador|wconect|wconnect)\b/i.test(normAll) ||
+        (/\b(extrair|extra[çc][ãa]o|levantamento|exportar|exporta[çc][ãa]o|puxar)\b/i.test(normAll) &&
+          /\b(relat[oó]rios?|produtividade|dados de atendimentos?)\b/i.test(normAll)) ||
+        (/\brelat[oó]rios?\b/i.test(normAll) &&
+          /\b(produtividade|indicadores?)\b/i.test(normAll)))
     ) {
       const descOnly = formFields.descricao || "";
       const fullText = `${ticket.title || ""} ${descOnly}`;
@@ -1865,7 +1868,7 @@ export class AIAnalyst {
         ? "S.G.H. (Spdata)"
         : /\bhrp\b/i.test(normAll)
         ? "HRP"
-        : formFields.aplicacao || "sistema informado";
+        : formFields.aplicacao || "sistema";
 
       const hasPeriod =
         /\b(\d{1,2}\/\d{1,2}|janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro|m[êe]s passado|este m[êe]s|per[íi]odo\s+de|semanal|mensal|anual|202\d)\b/i.test(
@@ -2060,20 +2063,29 @@ export class AIAnalyst {
         : formFields.aplicacao || "Prontu+ (PEP)";
 
       const profDescMatch = descOnly.match(
-        /\bagenda\s+d[aoe]\s+(?:(fisioterapeuta|m[ée]dic[oa]|dr\.?(?:a)?|nutricionista|psic[óo]log[oa]|terapeuta|enfermeir[oa]|profissional|colaborador(?:a)?)\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
+        /\bagenda\s+(?:pep\s+)?(?:d[aoes]\s+)?(?:(fisioterapeuta|m[ée]dic[oa]|dr\.?(?:a)?|nutricionista|psic[óo]log[oa]|terapeuta|enfermeir[oa]|profissional|colaborador(?:a|as|es)?)\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
       );
       const profTitleMatch = (ticket.title || "").match(
-        /\bagenda\s+(?:d[aoe]\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){0,4})\s*$/i
+        /\bagenda\s+(?:pep\s+)?(?:d[aoes]\s+)?(?:(fisioterapeuta|m[ée]dic[oa]|dr\.?(?:a)?|nutricionista|psic[óo]log[oa]|terapeuta|enfermeir[oa]|profissional|colaborador(?:a|as|es)?)\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+))*)/i
       );
 
-      const profRole = profDescMatch?.[1]
-        ? profDescMatch[1].toLowerCase()
-        : "profissional";
-      const profName = profDescMatch?.[2]
-        ? profDescMatch[2].replace(/\s*[,.;].*$/, "").trim()
-        : profTitleMatch?.[1]
-        ? profTitleMatch[1].trim()
-        : "";
+      let profRole = profDescMatch?.[1] || profTitleMatch?.[1];
+      profRole = profRole ? profRole.toLowerCase() : "profissional";
+
+      let profName = "";
+      if (profTitleMatch?.[2] && /\be\b/i.test(profTitleMatch[2])) {
+        profName = profTitleMatch[2].trim();
+      } else if (profDescMatch?.[2]) {
+        profName = profDescMatch[2].replace(/\s*[,.;:].*$/, "").trim();
+      } else if (profTitleMatch?.[2]) {
+        profName = profTitleMatch[2].trim();
+      }
+
+      const isMultiple = /\be\b/i.test(profName);
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
 
       const hasTimeRange =
         /\b\d{1,2}\s*:\s*\d{2}\b/.test(descOnly) ||
@@ -2085,7 +2097,8 @@ export class AIAnalyst {
 
       const scheduleDetails = descOnly
         .replace(/^boa\s+(?:tarde|dia|noite)\s*[,!]?\s*/i, "")
-        .replace(/\b(?:obrigad[oa]|att|atenciosamente)\b[\s\S]*$/i, "")
+        .replace(/\b(?:desde[, ]?\s*j[áa]\s*agrade[çc]o|obrigad[oa]|att|atenciosamente)\b[\s\S]*$/i, "")
+        .replace(/\bsolicito\s+altera[çc][ãa]o\s+na\s+agenda\s+(?:pep\s+)?(?:d[aoes]\s+)?(?:colaborador[a-z]*\s+)?[^:\n]+:\s*/i, "")
         .replace(/\s+/g, " ")
         .trim();
 
@@ -2101,27 +2114,29 @@ export class AIAnalyst {
         ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
         : "";
 
-      if (profName && (hasTimeRange || hasDurationOrInterval)) {
-        const roleAndName =
-          profRole && profRole !== "profissional"
-            ? `${profRole} **${profName}**`
-            : `profissional **${profName}**`;
+      const roleAndName = isMultiple
+        ? `das colaboradoras **${profName}**`
+        : profRole && profRole !== "profissional"
+        ? `d${profRole.endsWith("a") ? "a" : "o"} ${profRole} **${profName}**`
+        : `do(a) profissional **${profName}**`;
 
+      const agendaLabel = isMultiple ? "nas agendas" : "na agenda";
+      const configLabel = isMultiple ? "das agendas" : "da agenda";
+
+      if (profName && (hasTimeRange || hasDurationOrInterval)) {
         translatedIntent =
-          `A solicitante **${ticket.requester}** (${sectorName}) solicita alteração na agenda d${
-            profRole.endsWith("a") ? "a" : "o"
-          } ${roleAndName} no sistema **${sysName}**, parametrizando os horários e intervalos de atendimento (${scheduleDetails}). ` +
-          `Todas as informações necessárias (profissional, faixa de horário, duração do atendimento e intervalo) já foram informadas no relato.` +
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita alteração ${agendaLabel} ${roleAndName} no sistema **${sysName}**, ` +
+          `parametrizando os horários e intervalos de atendimento (${scheduleDetails}). ` +
+          `Todas as informações necessárias (${isMultiple ? "profissionais, faixas de horário, duração dos atendimentos e intervalos" : "profissional, faixa de horário, duração do atendimento e intervalo"}) já foram informadas no relato.` +
           reclassNote;
         sufficiencyStatus = "completo";
         missingInfo = [];
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação de alteração na agenda d${
-            profRole.endsWith("a") ? "a" : "o"
-          } ${roleAndName} no sistema **${sysName}**.\n\n` +
-          `Todos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\n` +
-          `Assim que a alteração estiver concluída e disponível no ${sysName}, confirmaremos por aqui!`;
+          `Recebemos a sua solicitação de alteração ${agendaLabel} ${roleAndName} no sistema **${sysName}**.\n\n` +
+          `Todos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração ${configLabel} no sistema.\n\n` +
+          `Assim que a alteração estiver concluída e disponível no ${sysName}, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
       } else {
         const missingList = [];
         if (!profName) {

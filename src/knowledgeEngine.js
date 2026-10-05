@@ -295,6 +295,23 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-16 (Extração de Indicadores/Relatórios) quando o chamado trata de agenda de profissional ou não cita indicadores/relatórios/wconect
+        if (
+          pb.id === "PB-UNI-16" &&
+          (/\bagenda\b/i.test(normTicket) ||
+            !/\b(indicador|indicadores|wconect|wconnect|produtividade|relat[oó]rio|extra[çc][ãa]o|levantamento)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-18 (Agenda de Profissional no Prontu+) quando o chamado trata de Oncologia ou não cita agenda
+        if (
+          pb.id === "PB-UNI-18" &&
+          (/\boncologia\b/i.test(normTicket) || !/\bagenda\b/i.test(normTicket))
+        ) {
+          continue;
+        }
         // Evita parear PB-UNI-26 (Nobreak/UPS) quando o chamado não trata de nobreak, ups ou energia
         if (
           pb.id === "PB-UNI-26" &&
