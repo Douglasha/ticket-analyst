@@ -350,22 +350,29 @@ export class KnowledgeEngine {
           !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila)\b/i.test(
             normTicket
           );
-        const isTonerRequest =
+        const isSupplyOrTonerRequest =
           /\b(troca de toner|trocar toner|troca do toner|substitui[çc][ãa]o de toner|toner vazio|toner fraco|acabou o toner|novo toner)\b/i.test(
             normTicket
           ) ||
           (/\btoner\b/i.test(normTicket) &&
-            /\b(troca|trocar|substitui|solicito|troque|colocar|acabou)\b/i.test(normTicket));
+            /\b(troca|trocar|substitui|solicito|troque|colocar|acabou)\b/i.test(normTicket)) ||
+          /\b(reposi[çc][ãa]o de tintas?|troca de tintas?|abastecimento de tintas?|refil de tintas?|tintas? da impressora|acabou a tinta|tinta acabou|n[íi]vel de tinta)\b/i.test(
+            normTicket
+          ) ||
+          (/\b(tinta|tintas)\b/i.test(normTicket) &&
+            (/\b(impressora|reposi[çc][ãa]o|suprimentos?|epson|ecotank|recarga|abastecer)\b/i.test(normTicket) ||
+              normTicket.includes("suprimentos") ||
+              normTicket.includes("hardware")));
 
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail || isTonerRequest)
+          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest)
         ) {
           continue;
         }
-        // Evita parear PB-UNI-31 (Troca de Toner) quando o chamado NÃO trata de troca de toner
-        if (pb.id === "PB-UNI-31" && !isTonerRequest) {
+        // Evita parear PB-UNI-31 (Troca de Toner / Tintas) quando o chamado NÃO trata de toner/tinta/suprimentos
+        if (pb.id === "PB-UNI-31" && !isSupplyOrTonerRequest) {
           continue;
         }
         // Evita parear Playbook de Ligações Caindo (PB-UNI-08) quando o chamado NÃO menciona queda/instabilidade de chamadas

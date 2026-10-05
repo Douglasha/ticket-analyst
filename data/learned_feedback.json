@@ -1,5 +1,35 @@
 [
   {
+    "ticket_id": 42294,
+    "title": "Sistemas Operacionais  -  Criação de item no GLPI - Modo Faturamento",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "criacao",
+      "item",
+      "glpi",
+      "modo",
+      "faturamento",
+      "criado",
+      "novo",
+      "abertura"
+    ],
+    "problem_summary": "Boa tarde!\nPreciso que seja criado um novo item para abertura de chamado no modo Faturamento:\nNome: Nota Avulsa\nCampos:\nCNPJ ( obrigatório) - Se possível que tenha formato e quantidade obrigatório do padrão numérico 14 dígitos → 00.000.000/0000-00.\nNome do Prestador ( obrigatório).\nCarteira do beneficiário ( Obrigatório e que aceite apenas 17 dígitos)\nNome do beneficiário ( obrigatório).\nCampo para escrita livre ( não obrigatório)\nAnexo ( obrigatório).\nAo selecionar essa opção, o setor de \"financeiro\" deve-se associado ao chamado.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de um novo formulário/item no catálogo do **GLPI** para o setor de **Faturamento**:\n1. **Nota Avulsa**.\n\nTodos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\nNossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Nota Avulsa."
+    ],
+    "resolution_steps": [
+      "[Chamado #42165 (Resolvido)] Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.",
+      "[Chamado #41862 (Resolvido)] O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.",
+      "[Chamado #41862 (Resolvido)] Por favor, efetue a validação do formulário",
+      "[KB-65] Localize o cadastro duplicado em",
+      "[KB-65] No campo nome, mude o modo de pesquisa para a opção \"Contém\"",
+      "[KB-65] Coloque o nome a ser pesquisado e clique em \"buscar\""
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-05T15:44:45.981Z"
+  },
+  {
     "ticket_id": 42293,
     "title": "Solicitação Diversa  -  Telefones não estão transferindo",
     "category": "T.I > ST > Solicitação Diversa",

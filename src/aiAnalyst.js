@@ -637,24 +637,46 @@ export class AIAnalyst {
       (/\btoner\b/i.test(normAll) &&
         /\b(troca|trocar|substitui|solicito|troque|colocar|acabou|fornecer|solicita[çc][ãa]o)\b/i.test(
           normAll
-        ))
+        )) ||
+      /\b(reposi[çc][ãa]o de tintas?|troca de tintas?|abastecimento de tintas?|refil de tintas?|tintas? da impressora|acabou a tinta|tinta acabou|n[íi]vel de tinta)\b/i.test(
+        normAll
+      ) ||
+      (/\b(tinta|tintas)\b/i.test(normAll) &&
+        (/\b(impressora|reposi[çc][ãa]o|suprimentos?|epson|ecotank|recarga|abastecer)\b/i.test(normAll) ||
+          ticket.category.includes("Tintas")))
     ) {
-      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
         firstName
       );
       const solPrefix = isMale ? "O solicitante" : "A solicitante";
 
+      const isInk =
+        /\b(tinta|tintas|ecotank|epson|l14150)\b/i.test(normAll) &&
+        !/\b(toner)\b/i.test(normAll);
+
       const explicitModel =
         formFields.ativo ||
-        (/\bm4080(?:fx)?\b/i.test(normAll) ? "Samsung M4080FX" : "");
+        (/\bl14150\b/i.test(normAll)
+          ? "EPSON L14150 Series"
+          : /\bm4080(?:fx)?\b/i.test(normAll)
+          ? "Samsung M4080FX"
+          : "");
       const printerLabel = explicitModel
         ? `da impressora **${explicitModel}**`
         : "da impressora";
 
+      const supplyType = isInk ? "reposição de tintas" : "troca de toner";
+      const supplyItem = isInk ? "os refis de tinta compatíveis" : "o cartucho de toner compatível";
+      const actionVerb = isInk ? "abastecimento dos tanques de tinta" : "substituição física";
+
       detectedDomain = "Infraestrutura e Rede";
-      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      suggestedCategory = ticket.category.includes("Tintas")
+        ? ticket.category
+        : isInk
+        ? "T.I > IR > Suporte a Hardware > Suprimentos > Tintas"
+        : "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
       realUrgency = ticket.urgency_label || "Média";
-      urgencyReason = `Solicitação de troca de toner para manutenção da continuidade das impressões do setor ${sectorName}.`;
+      urgencyReason = `Solicitação de ${supplyType} para manutenção da continuidade das impressões do setor ${sectorName}.`;
       sufficiencyStatus = "completo";
       missingInfo = [];
 
@@ -663,17 +685,17 @@ export class AIAnalyst {
         normalizeText(suggestedCategory);
       const catNote = categoryMismatch
         ? ` O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para '${suggestedCategory}'.`
-        : "";
+        : ` O chamado está corretamente categorizado em '${ticket.category}'.`;
 
       translatedIntent =
-        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **troca de toner** ${printerLabel} do setor **${sectorName}**. ` +
-        `Todos os dados necessários para o atendimento presencial já constam descritos no chamado.${catNote}`;
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **${supplyType}** ${printerLabel} do setor **${sectorName}**. ` +
+        `Todos os dados necessários para o atendimento presencial e separação d${isInk ? "os refis de tinta compatíveis" : "o toner compatível"} constam no chamado.${catNote}`;
 
       customPublicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a sua solicitação referente à **troca de toner** ${printerLabel} do setor **${sectorName}**.\n\n` +
-        `Nossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\n` +
-        `Assim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\n` +
+        `Recebemos a sua solicitação referente à **${supplyType}** ${printerLabel} do setor **${sectorName}**.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está separando ${supplyItem} no estoque e providenciará o deslocamento de um técnico até o setor para realizar o ${actionVerb} e efetuar os testes de impressão no equipamento.\n\n` +
+        `Assim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
       normCore.includes("impressora") ||
