@@ -595,7 +595,7 @@
   {
     "id": "PB-UNI-19",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "title": "Unificação de Cadastros Duplicados de Beneficiário / Paciente (HRP Unimed / PEP / SGH)",
+    "title": "Unificação de Cadastros Duplicados (Beneficiário, Paciente ou Insumos / Materiais — HRP Unimed / PEP / SGH)",
     "keywords": [
       "unificacao de cadastro",
       "unificação de cadastro",
@@ -603,25 +603,36 @@
       "unificação cadastro",
       "unificar",
       "unificar as chaves",
+      "unificar cadastro do insumo",
+      "unificar insumo",
+      "unificação de insumo",
+      "unificacao de insumo",
+      "unificar insumos",
+      "chave de insumo",
+      "chave desse insumo",
+      "chave para a chave",
       "mais de um cadastro",
       "2 cadastros",
       "dois cadastros",
       "cadastro duplicado",
+      "inconsistência no sistema",
+      "inconsistencia no sistema",
       "cliente intercambio",
       "cliente saude"
     ],
-    "symptoms": "Beneficiário(a) ou paciente possui dois ou mais cadastros no sistema (HRP Unimed, PEP ou SGH — ex: um como 'Cliente Intercâmbio' e outro como 'Cliente Saúde', ou duas chaves distintas), sendo solicitada a unificação dos registros mantendo o cadastro correto como principal.",
+    "symptoms": "Beneficiário(a), paciente ou insumo/material possui dois ou mais cadastros/chaves no sistema (HRP Unimed, PEP ou SGH — ex: 'Cliente Intercâmbio' x 'Cliente Saúde', ou duplicidade de chaves de insumo gerando inconsistência no faturamento), sendo solicitada a unificação dos registros mantendo a chave/cadastro mais completo como principal.",
     "required_info": [
-      "Nome completo ou códigos/chaves dos cadastros do(a) beneficiário(a)/paciente a serem unificados",
-      "Indicação de qual cadastro/chave deve prevalecer como principal (ex: Cliente Saúde)"
+      "Nome completo, código do insumo ou chaves dos cadastros a serem unificados",
+      "Indicação de qual cadastro/chave deve prevalecer como principal (ex: Cliente Saúde ou chave mais completa)"
     ],
     "resolution_steps": [
-      "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
-      "Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
-      "Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+      "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+      "Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
       "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação de **unificação de cadastro**.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica iniciou o procedimento de unificação no sistema.\n\nAssim que concluído, atualizaremos você por aqui!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação de **unificação de cadastro**.\n\nOs dados informados já foram validados na triagem técnica e nossa equipe de Banco de Dados iniciou o procedimento de unificação no sistema.\n\nAssim que concluído, atualizaremos você por aqui!"
   },
   {
     "id": "PB-UNI-20",

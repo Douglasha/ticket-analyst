@@ -247,10 +247,14 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-12 (Médico/Prestador/Acesso) quando o chamado trata de clínicas no Web Saúde, de hardware/infraestrutura (nobreak, impressora, telefone, etc.) ou quando não possui contexto de acesso/permissão
+        // Evita parear PB-UNI-12 (Médico/Prestador/Acesso) quando o chamado trata de clínicas no Web Saúde, de hardware/infraestrutura (nobreak, impressora, telefone, etc.), unificação de cadastros ou quando não possui contexto de acesso/permissão
         if (pb.id === "PB-UNI-12") {
           const isHardwareOrInfra =
             /\b(nobreak|no-break|ups|bateria|gerador|energia|impressora|toner|papel|telefone|ramal|pabx|cabo de rede|wifi|wi-fi|remanejamento|formatar|computador)\b/i.test(
+              normTicket
+            );
+          const isUnification =
+            /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
               normTicket
             );
           const hasAccessContext =
@@ -262,7 +266,7 @@ export class KnowledgeEngine {
               normTicket
             );
 
-          if (isWebSaudeNas || isHardwareOrInfra || !hasAccessContext) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext) {
             continue;
           }
         }
@@ -585,6 +589,15 @@ export class KnowledgeEngine {
         if (
           !/\b(nobreak|no-break|ups|bateria|gerador|energia)\b/i.test(normTicket) &&
           /\b(nobreak|no-break|ups|bateria|gerador)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de unificação de beneficiário/pessoa quando o chamado trata de insumos/materiais
+        if (
+          /\b(insumo|insumos|material|materiais|medicamento|medicamentos|produto)\b/i.test(normTicket) &&
+          /\b(benefici[áa]ri[oa]|paciente|cliente)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

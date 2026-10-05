@@ -1,5 +1,18 @@
 [
   {
+    "id": "Chamado #42306 (Resolvido)",
+    "ticket_id": 42306,
+    "solution_id": 40986,
+    "title": "Infraestrutura e Redes > Tintas > Reposição de tintas da impressora do setor EPSON L14150 Series",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Tintas carregadas.",
+    "keywords": [],
+    "steps": [
+      "Tintas carregadas."
+    ]
+  },
+  {
     "id": "Chamado #42285 (Resolvido)",
     "ticket_id": 42285,
     "solution_id": 40973,

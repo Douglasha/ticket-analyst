@@ -5487,6 +5487,78 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Viviane Souza** (Nucleo Passos) relata falha no Nobreak do computador, informando que o equipamento não segura a carga durante picos ou quedas de energia elétrica. Demanda vistoria presencial da equipe de Infraestrutura e Redes para teste de carga da bateria e substituição física do nobreak ou troca das baterias seladas. Todas as informações necessárias para atendimento já constam descritas no chamado.\n\nClassificação Sugerida: T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42158) + Memória Contínua • Aprendido com o Analista (MEM-#41977)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42158] [PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').\n  2. [MEM-#42158] [PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).\n  3. [MEM-#42158] [PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.\n  4. [MEM-#42158] [PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.\n  5. [MEM-#42158] [PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado.\n  6. [MEM-#41977] [PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
     "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do computador**, localizado no **Nucleo Passos**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Nucleo Passos**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!"
   },
+  "42303": {
+    "ticket_id": 42303,
+    "analyzed_at": "05/10/2026 14:16",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Ana Paula Silva Braga** (Faturamento) solicita a **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed** (unificação da chave de origem **120083038** para a chave principal **72603080**, na qual o cadastro está mais completo e deve prevalecer), devido a inconsistência no sistema. Todos os dados necessários para o procedimento técnico no banco de dados constam informados no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas > Erros de Sistema\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Administração de Banco de Dados",
+    "real_urgency": "Alta",
+    "urgency_reason": "Inconsistência cadastral por duplicidade de chaves do insumo no sistema HRP Unimed, com impacto nas rotinas do Faturamento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-19",
+        "title": "Unificação de Cadastros Duplicados (Beneficiário, Paciente ou Insumos / Materiais — HRP Unimed / PEP / SGH)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Beneficiário(a), paciente ou insumo/material possui dois ou mais cadastros/chaves no sistema (HRP Unimed, PEP ou SGH — ex: 'Cliente Intercâmbio' x 'Cliente Saúde', ou duplicidade de chaves de insumo gerando inconsistência no faturamento), sendo solicitada a unificação dos registros mantendo a chave/cadastro mais completo como principal.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+          "Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+          "Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+          "Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+          "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42049 (Resolvido)",
+        "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > Unificação de cadastro",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro unificado:\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 08:31:07Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 08:31:15Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 08:31:15\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, perman",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro unificado:",
+          "Início da substituição da(s) chave(s) do arquivo em: 30/09/2026 - 08:31:07Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 30/09/2026 - 08:31:15Deleção das chaves originais deletadas com sucesso em: 30/09/2026 - 08:31:15",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41838 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Unificação de cadastro",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 25/09/2026 - 10:01:04Substituição da(s) 6 chave(s) do arquivo executada com sucesso em: 25/09/2026 - 10:02:26Deleção das chaves originais deletadas com sucesso em: 25/09/2026 - 10:02:26\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r",
+        "steps": [
+          "Prezados(as),",
+          "Início da substituição da(s) chave(s) do arquivo em: 25/09/2026 - 10:01:04Substituição da(s) 6 chave(s) do arquivo executada com sucesso em: 25/09/2026 - 10:02:26Deleção das chaves originais deletadas com sucesso em: 25/09/2026 - 10:02:26",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-19) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42049 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+      "[Chamado #42049 (Resolvido)] Cadastro unificado:"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ana Paula Silva Braga** (Faturamento) solicita a **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed** (unificação da chave de origem **120083038** para a chave principal **72603080**, na qual o cadastro está mais completo e deve prevalecer), devido a inconsistência no sistema. Todos os dados necessários para o procedimento técnico no banco de dados constam informados no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas > Erros de Sistema\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*\n\nClassificação Sugerida: T.I > BD > Administração de Banco de Dados | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-19) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42049 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).\n  2. [PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.\n  3. [PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.\n  4. [PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.\n  5. [PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.\n  6. [Chamado #42049 (Resolvido)] Cadastro unificado:",
+    "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed**.\n\nOs dados informados (unificação da chave **120083038** para a chave principal **72603080**) já foram validados na triagem técnica e nossa equipe técnica de Banco de Dados já iniciou o procedimento de unificação no sistema para resolução da inconsistência.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui para a continuidade dos lançamentos no Faturamento!\n\nPermanecemos à disposição!"
+  },
   "42306": {
     "ticket_id": 42306,
     "analyzed_at": "05/10/2026 14:01",
@@ -5528,5 +5600,101 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Tarcisio Lara Coelho** (Marketing) solicita a **reposição de tintas** da impressora **EPSON L14150 Series** do setor **Marketing**. Todos os dados necessários para o atendimento presencial e separação dos refis de tinta compatíveis constam no chamado. O chamado está corretamente categorizado em 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas'.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Suprimentos > Tintas | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-31)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-31] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).\n  2. [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).\n  3. [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.\n  4. [PB-UNI-31] Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.\n  5. [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.\n  6. [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI.",
     "public_reply_draft": "Olá, Tarcisio! Tudo bem?\n\nRecebemos a sua solicitação referente à **reposição de tintas** da impressora **EPSON L14150 Series** do setor **Marketing**.\n\nNossa equipe de Infraestrutura e Redes já está separando os refis de tinta compatíveis no estoque e providenciará o deslocamento de um técnico até o setor para realizar o abastecimento dos tanques de tinta e efetuar os testes de impressão no equipamento.\n\nAssim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42307": {
+    "ticket_id": 42307,
+    "analyzed_at": "05/10/2026 14:03",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Letícia Maximiano De Sousa** (Faturamento) abriu o chamado: \"Boa tarde! Por gentileza, peço que seja criado um link no Google Meet, pois amanhã, no período da manhã, irei realizar um treinamento com uma secretária que estará de forma externa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42272).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42272",
+        "title": "Novas aplicações  -  DATA DE ALTA",
+        "category": "T.I > DV > Desenvolvimento > Novas aplicações",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+          "[PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+          "[PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+          "[PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+          "[PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+          "[PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42273",
+        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41862 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Novo item no GLPI > Faturamento Unimed",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nBoa tarde,\n\n\r\nO formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.\n\n\r\nPor favor, efetue a validação do formulário\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessár",
+        "steps": [
+          "Prezados(as),",
+          "Boa tarde,",
+          "O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.",
+          "Por favor, efetue a validação do formulário",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #40855 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação e configuração de pastas compartilhadas – Documentos da Qualidade",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado.",
+        "steps": [
+          "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42272) + Memória Contínua • Aprendido com o Analista (MEM-#42273)",
+    "resolution_steps": [
+      "[MEM-#42272] [PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').",
+      "[MEM-#42272] [PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).",
+      "[MEM-#42272] [PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.",
+      "[MEM-#42272] [PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.",
+      "[MEM-#42272] [PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).",
+      "[MEM-#42272] [PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Letícia Maximiano De Sousa** (Faturamento) abriu o chamado: \"Boa tarde! Por gentileza, peço que seja criado um link no Google Meet, pois amanhã, no período da manhã, irei realizar um treinamento com uma secretária que estará de forma externa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42272).\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42272) + Memória Contínua • Aprendido com o Analista (MEM-#42273)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42272] [PB-UNI-32] Confirmar que o chamado está categorizado na área de Desenvolvimento ('T.I > DV > Desenvolvimento > Novas aplicações' ou 'T.I > DV > Desenvolvimento > Ajustes em layout/interface').\n  2. [MEM-#42272] [PB-UNI-32] Encaminhar a demanda para o desenvolvedor responsável pelos sistemas internos (Moisés Conte).\n  3. [MEM-#42272] [PB-UNI-32] Avaliar o modelo de dados do Controle de Contas e a viabilidade da inclusão do campo de data de alta para o tipo de atendimento 'Contas Internas'.\n  4. [MEM-#42272] [PB-UNI-32] Estruturar a regra de encaminhamento automático de contas no sistema a partir da data de alta registrada.\n  5. [MEM-#42272] [PB-UNI-32] Homologar a rotina em ambiente de testes/desenvolvimento junto ao setor de Faturamento (Priscila).\n  6. [MEM-#42272] [PB-UNI-32] Publicar a parametrização em produção e notificar a conclusão no chamado GLPI.",
+    "public_reply_draft": "Olá, Letícia! Tudo bem?\n\nRecebemos a sua solicitação referente à melhoria e parametrização no sistema **Controle de Contas**.\n\nA proposta para inclusão do campo **data da alta do paciente em contas internas** e a regra de **encaminhamento automático** no dia da alta já foram validadas na triagem técnica e direcionadas para o desenvolvedor (**Moisés Conte**) analisar a viabilidade e estrutura de implementação.\n\nAssim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
   }
 }

@@ -1361,9 +1361,11 @@ export class AIAnalyst {
           `Assim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!`;
       }
     } else if (
-      normAll.includes("acesso e permissoes") ||
-      ticket.category.includes("Acesso e Permissões") ||
-      /\bfavor cadastrar\b|\bliberar acesso\b|\bcadastro d[eo]\b/i.test(normCore)
+      !/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
+      (normAll.includes("acesso e permissoes") ||
+        ticket.category.includes("Acesso e Permissões") ||
+        /\bfavor cadastrar\b|\bliberar acesso\b/i.test(normCore) ||
+        /\bcadastro d[eo]\s+(m[ée]dic[oa]|colaborador|funcion[áa]ri[oa]|doutor|dr\.?|dra\.?|profissional|prestador|usu[áa]ri[oa]|plantonista)\b/i.test(normCore))
     ) {
       const descText = formFields.descricao || "";
       const normDesc = normalizeText(descText);
@@ -2099,6 +2101,11 @@ export class AIAnalyst {
       )
     ) {
       const descOnly = formFields.descricao || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
       const sysName =
         formFields.aplicacao ||
         (/\bhrp\b/i.test(normAll)
@@ -2109,29 +2116,14 @@ export class AIAnalyst {
           ? "S.G.H."
           : "sistema");
 
-      const personMatch = descOnly.match(
-        /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/
-      );
-      const pipeTitleMatch = (ticket.title || "").match(/\|\s*([A-ZÀ-Ú\s]{5,})$/);
-      const personRole = personMatch?.[1]
-        ? personMatch[1].toLowerCase()
-        : "beneficiário(a)/paciente";
-      const targetPerson = personMatch?.[2]
-        ? personMatch[2].replace(/\s+(?:possui|tem|está|esta|com)\b.*$/i, "").trim()
-        : pipeTitleMatch?.[1]
-        ? pipeTitleMatch[1].trim()
-        : "";
-
-      const prevailMatch = descOnly.match(
-        /\bprevalecer\s+(?:[ée]\s+)?(?:o\s+|a\s+)?["']?([^."',\n]+)["']?/i
-      );
-      const prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
-      const hasNumericKeys = /\b\d{3,}\b/.test(descOnly);
+      const isSupplyOrItem =
+        /\b(insumo|insumos|material|materiais|medicamento|medicamentos|produto|produtos)\b/i.test(
+          normAll
+        );
 
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
       suggestedCategory = "T.I > BD > Administração de Banco de Dados";
       realUrgency = ticket.urgency_label || "Alta";
-      urgencyReason = `Duplicidade de cadastro no sistema ${sysName}, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) ${personRole}.`;
 
       const categoryMismatch =
         normalizeText(ticket.category || "") !==
@@ -2140,45 +2132,125 @@ export class AIAnalyst {
         ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
         : "";
 
-      if (targetPerson || hasNumericKeys) {
-        const whoLabel = targetPerson
-          ? `d${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
-          : "dos registros informados";
-        const prevailTxt = prevailTarget
-          ? `, mantendo o cadastro **${prevailTarget}** como principal`
+      if (isSupplyOrItem) {
+        const itemMatch =
+          descOnly.match(/insumo\s*[-:]?\s*(\d+)\s*(?:\(([^)]+)\))?/i) ||
+          (ticket.title || "").match(/insumo\s*[-:]?\s*(\d+)\s*(?:\(([^)]+)\))?/i) ||
+          descOnly.match(/(?:insumo|material|medicamento|item)\s*[-:]?\s*([^\n\r,]+)/i);
+
+        const itemCode = itemMatch?.[1] ? itemMatch[1].trim() : "";
+        const itemDesc = itemMatch?.[2] ? itemMatch[2].trim() : "";
+        const itemFullLabel = itemDesc
+          ? `do insumo ${itemCode} (${itemDesc})`
+          : itemCode
+          ? `do insumo ${itemCode}`
+          : "do insumo informado";
+
+        const chavesMatch = descOnly.match(
+          /chave\s+(\d+)[^0-9]+para\s+a\s+chave\s+(\d+)/i
+        );
+        const originKey = chavesMatch?.[1] || "";
+        const destKey = chavesMatch?.[2] || "";
+        const hasItemKeys = Boolean(originKey && destKey) || /\b\d{6,}\b/.test(descOnly);
+
+        urgencyReason = `Inconsistência cadastral por duplicidade de chaves do insumo no sistema ${sysName}, com impacto nas rotinas do Faturamento.`;
+
+        if (hasItemKeys) {
+          const keysDesc = originKey && destKey
+            ? ` (unificação da chave de origem **${originKey}** para a chave principal **${destKey}**, na qual o cadastro está mais completo e deve prevalecer)`
+            : "";
+
+          translatedIntent =
+            `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **unificação de cadastro ${itemFullLabel}** no sistema **${sysName}**${keysDesc}, devido a inconsistência no sistema. ` +
+            `Todos os dados necessários para o procedimento técnico no banco de dados constam informados no chamado.` +
+            reclassNote;
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos e analisamos a sua solicitação referente à **unificação de cadastro ${itemFullLabel}** no sistema **${sysName}**.\n\n` +
+            (originKey && destKey
+              ? `Os dados informados (unificação da chave **${originKey}** para a chave principal **${destKey}**) já foram validados na triagem técnica e nossa equipe técnica de Banco de Dados já iniciou o procedimento de unificação no sistema para resolução da inconsistência.\n\n`
+              : `Os dados informados já foram validados na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de unificação no sistema.\n\n`) +
+            `Assim que a unificação for concluída no ${sysName}, confirmaremos a finalização por aqui para a continuidade dos lançamentos no ${sectorName}!\n\n` +
+            `Permanecemos à disposição!`;
+        } else {
+          translatedIntent =
+            `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastro ${itemFullLabel} no sistema **${sysName}**, pendente de especificação das chaves (chave de origem a ser unificada e chave principal de destino).` +
+            reclassNote;
+          sufficiencyStatus = "parcial";
+          missingInfo = [
+            `Informar os códigos das chaves do insumo (chave de origem a ser unificada e chave principal que deve prevalecer) no sistema ${sysName}`,
+          ];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à unificação de cadastro ${itemFullLabel} no sistema **${sysName}**.\n\n` +
+            `Para realizarmos o procedimento no banco de dados com segurança, você poderia nos informar os **códigos das chaves** (a chave que deve ser unificada e a chave principal que deve prevalecer)?\n\n` +
+            `Assim que nos confirmar por aqui, já executamos a unificação!`;
+        }
+      } else {
+        const personMatch = descOnly.match(
+          /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/
+        );
+        const pipeTitleMatch = (ticket.title || "").match(/\|\s*([A-ZÀ-Ú\s]{5,})$/);
+        const personRole = personMatch?.[1]
+          ? personMatch[1].toLowerCase()
+          : "beneficiário(a)/paciente";
+        const targetPerson = personMatch?.[2]
+          ? personMatch[2].replace(/\s+(?:possui|tem|está|esta|com)\b.*$/i, "").trim()
+          : pipeTitleMatch?.[1]
+          ? pipeTitleMatch[1].trim()
           : "";
 
-        translatedIntent =
-          `A solicitante **${ticket.requester}** (${sectorName}) relatou que ${
-            targetPerson
-              ? `${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
-              : "um(a) beneficiário(a)/paciente"
-          } possui dois cadastros no sistema **${sysName}** e solicitou a unificação dos registros${prevailTxt}. ` +
-          `Os dados necessários para a unificação já constam descritos no chamado.` +
-          reclassNote;
-        sufficiencyStatus = "completo";
-        missingInfo = [];
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos e analisamos a sua solicitação referente à unificação de cadastro ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n` +
-          `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\n` +
-          `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
-      } else {
-        translatedIntent =
-          `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastros duplicados no sistema **${sysName}**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer.` +
-          reclassNote;
-        sufficiencyStatus = "parcial";
-        missingInfo = [
-          `Nome completo e códigos/chaves dos dois cadastros no sistema ${sysName}`,
-          "Confirmar qual dos cadastros deve prevalecer como principal após a unificação",
-        ];
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação de unificação de cadastro no sistema **${sysName}**.\n\n` +
-          `Para realizarmos o procedimento com segurança, você poderia nos informar:\n` +
-          `- O **nome completo** (ou códigos/chaves) dos cadastros duplicados;\n` +
-          `- Qual dos cadastros deve **prevalecer como principal**?\n\n` +
-          `Assim que nos confirmar por aqui, já executamos a unificação!`;
+        const prevailMatch = descOnly.match(
+          /\bprevalecer\s+(?:[ée]\s+)?(?:o\s+|a\s+)?["']?([^."',\n]+)["']?/i
+        );
+        const prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
+        const hasNumericKeys = /\b\d{3,}\b/.test(descOnly);
+
+        urgencyReason = `Duplicidade de cadastro no sistema ${sysName}, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) ${personRole}.`;
+
+        if (targetPerson || hasNumericKeys) {
+          const whoLabel = targetPerson
+            ? `d${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
+            : "dos registros informados";
+          const prevailTxt = prevailTarget
+            ? `, mantendo o cadastro **${prevailTarget}** como principal`
+            : "";
+
+          translatedIntent =
+            `${solPrefix} **${ticket.requester}** (${sectorName}) relatou que ${
+              targetPerson
+                ? `${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
+                : "um(a) beneficiário(a)/paciente"
+            } possui dois cadastros no sistema **${sysName}** e solicitou a unificação dos registros${prevailTxt}. ` +
+            `Os dados necessários para a unificação já constam descritos no chamado.` +
+            reclassNote;
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos e analisamos a sua solicitação referente à unificação de cadastro ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n` +
+            `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\n` +
+            `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
+        } else {
+          translatedIntent =
+            `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastros duplicados no sistema **${sysName}**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer.` +
+            reclassNote;
+          sufficiencyStatus = "parcial";
+          missingInfo = [
+            `Nome completo e códigos/chaves dos dois cadastros no sistema ${sysName}`,
+            "Confirmar qual dos cadastros deve prevalecer como principal após a unificação",
+          ];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação de unificação de cadastro no sistema **${sysName}**.\n\n` +
+            `Para realizarmos o procedimento com segurança, você poderia nos informar:\n` +
+            `- O **nome completo** (ou códigos/chaves) dos cadastros duplicados;\n` +
+            `- Qual dos cadastros deve **prevalecer como principal**?\n\n` +
+            `Assim que nos confirmar por aqui, já executamos a unificação!`;
+        }
       }
     } else {
       const resumoDesc = formFields.descricao
