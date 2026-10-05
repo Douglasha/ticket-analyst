@@ -3548,6 +3548,74 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Maria Clara Oliveira** (H OPME) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-24) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-12)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Verificar se o visor do telefone está aceso ou totalmente apagado\n  - Informar o número do ramal desse aparelho\n  - Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.\n  2. [PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.\n  3. [PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.\n  4. [PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.",
     "public_reply_draft": "Olá, Maria! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!"
   },
+  "42148": {
+    "ticket_id": 42148,
+    "analyzed_at": "05/10/2026 09:16",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante relatou uma solicitação de transferência de um monitor Dell E1916H 18.5P do Hospital para a NAS Passos – Centro de Especialidades Médicas, sala 401. O monitor foi identificado pela placa de patrimônio 01071. O colaborador Rodrigo solicitou a transferência e agora o solicitante deseja confirmar a transferência.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "Contabilidade",
+    "real_urgency": "Baixa",
+    "urgency_reason": "O monitor é um equipamento crucial para a operação do setor de TI.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-07",
+        "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
+        "steps": [
+          "Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+          "Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+          "Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41940 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Sala 401",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nO computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio",
+        "steps": [
+          "Prezados(as),",
+          "O computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio do núcleo 0845 e instalamos um monitor com placa de patrimônio do Hospital 1071. Após a troca, a conexão foi restabelecida.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-25",
+        "title": "Vinculação de Acesso a Clínicas / Prestadores no Sistema Web Saúde (Módulo HRP Unimed / NAS)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação (frequentemente aberta pelo Relacionamento com Prestadores ou Recepção) para vincular novas clínicas/prestadores (identificados por códigos de 8 dígitos, ex: 16000070) ao perfil de atendentes/secretárias do NAS (Núcleo de Atenção à Saúde) no Sistema Web Saúde (que funciona como módulo web do ERP HRP Unimed, tendo todo seu processo de administração centralizado diretamente no HRP), muitas vezes sem especificar os nomes/logins das atendentes que receberão a permissão.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "Acessar o módulo de controle de acessos/permissões centralizado diretamente no sistema HRP Unimed (onde é feita toda a gestão de usuários e vínculos do Web Saúde).",
+          "Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no HRP/Web Saúde com vigência ativa.",
+          "Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-07) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41940 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+      "[PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+      "[PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local.",
+      "[Chamado #41940 (Resolvido)] O computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio do núcleo 0845 e instalamos um monitor com placa de patrimônio do Hospital 1071. Após a troca, a conexão foi restabelecida."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante relatou uma solicitação de transferência de um monitor Dell E1916H 18.5P do Hospital para a NAS Passos – Centro de Especialidades Médicas, sala 401. O monitor foi identificado pela placa de patrimônio 01071. O colaborador Rodrigo solicitou a transferência e agora o solicitante deseja confirmar a transferência.\n\nClassificação Sugerida: Contabilidade | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-07) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41940 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.\n  2. [PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.\n  3. [PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local.\n  4. [Chamado #41940 (Resolvido)] O computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio do núcleo 0845 e instalamos um monitor com placa de patrimônio do Hospital 1071. Após a troca, a conexão foi restabelecida.",
+    "public_reply_draft": "Olá, Christian! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Solicitação | TRANSFERÊNCIA DE ATIVO IMOBILIZADO**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
   "42158": {
     "ticket_id": 42158,
     "analyzed_at": "02/10/2026 08:12",
@@ -4569,5 +4637,499 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nPriscila solicitou a instalação do aplicativo NOTPAD++ nos computadores das colaboradoras do setor de faturamento do hospital. O chamado foi feito pelo setor de faturamento.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
     "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **NOTPAD++**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42273": {
+    "ticket_id": 42273,
+    "analyzed_at": "05/10/2026 09:38",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação de acesso aberta por **Lucelia Fernanda** referente a **Tatiane Batista Cardoso Veras** (CPF: 07727044652), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42184",
+        "title": "Aplicativos  -  Liberar acesso atendentes NAS Passos",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "steps": [
+          "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "required_info": [
+          "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-01",
+        "title": "Onboarding / Criação de Usuário (AD, Relógio de Ponto, MyPlace e Wi-Fi)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "RH solicita cadastro de novo colaborador no relógio de ponto, portal MyPlace, rede/AD ou Wi-Fi.",
+        "steps": [
+          "Conferir se o RH informou o Nome Completo, Número de Matrícula e PIS no chamado.",
+          "Cadastrar o colaborador no sistema de controle de ponto (REP) vinculando PIS e Matrícula para coleta de biometria.",
+          "Liberar o acesso ao portal de autoatendimento RH (MyPlace) e criar conta no Active Directory se utilizar estação de trabalho.",
+          "Caso solicitado Wi-Fi corporativo, registrar a liberação mediante política de dispositivos móveis da Unimed."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41656 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Lízia Magalhães Pereira Giotti de Morais",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSegue credenciais de acessos\n\n\r\n--------------------------------------------------------------\nE-mail Institucional \nlink: https://webmail-seguro.com.br/unimedsudoestemg.coop.br\nlogin: lgiotti@unimedsudoestemg.coop.br\nsenha: 014@Lgm629\n--------------------------------------------------------------\nFaculdade Unimed\nlink: https://www",
+        "steps": [
+          "Prezados(as),",
+          "Segue credenciais de acessos",
+          "--------------------------------------------------------------",
+          "E-mail Institucional",
+          "link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+          "login: lgiotti@unimedsudoestemg.coop.br"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41629 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Natália da Silva Oliveira",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n-----------------------------------------------\nspdata\nlogin: nsoliveira\nsenha: cadastrada no primeiro acesso\n-----------------------------------------------\nFaculdade Unimed\nlogin: CPF\nsenha: 122@Nso626\n-----------------------------------------------\nLGPD\nlogin: natyanaju22502@gmail.com\nsenha: 122@Nso626\n----",
+        "steps": [
+          "Prezados(as),",
+          "Segue credenciais:",
+          "-----------------------------------------------",
+          "spdata",
+          "login: nsoliveira",
+          "senha: cadastrada no primeiro acesso"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42184) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-01)",
+    "resolution_steps": [
+      "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Lucelia Fernanda** referente a **Tatiane Batista Cardoso Veras** (CPF: 07727044652), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42184) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-01)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42275": {
+    "ticket_id": 42275,
+    "analyzed_at": "05/10/2026 09:43",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitação refere-se a Elaine Costa, do Núcleo Passos, solicitando uma avaliação do teclado do seu notebook, especificamente a tecla M que está falhando. Este chamado foi feito para a categoria de Manutenção de Computadores.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Hardware / Periféricos",
+    "real_urgency": "Média",
+    "urgency_reason": "O chamado afeta a funcionalidade do sistema e pode causar desconforto ou ineficiência no trabalho.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42158",
+        "title": "Manutenção Eletrônica | NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402",
+        "category": "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do seu computador**, localizado no **Centro de Especialidades (PREDIO AZUL, SALA 402)**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Centro de Especialidades (PREDIO AZUL, SALA 402)**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!",
+        "steps": [
+          "[PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+          "[PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+          "[PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+          "[PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+          "[PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do seu computador**, localizado no **Centro de Especialidades (PREDIO AZUL, SALA 402)**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Centro de Especialidades (PREDIO AZUL, SALA 402)**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41977",
+        "title": "Solicitação Diversa  -  Teclado recepção",
+        "category": "T.I > IR > Suporte a Hardware > Periféricos > Teclados",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+        "steps": [
+          "[PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+          "[PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+          "[PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+        "required_info": [
+          "Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-07",
+        "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
+        "steps": [
+          "Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+          "Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+          "Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-10",
+        "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
+        "steps": [
+          "Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+          "Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+          "Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+        ],
+        "score": 0.47
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42158) + Memória Contínua • Aprendido com o Analista (MEM-#41977)",
+    "resolution_steps": [
+      "[MEM-#42158] [PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+      "[MEM-#42158] [PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+      "[MEM-#42158] [PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+      "[MEM-#42158] [PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+      "[MEM-#42158] [PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado.",
+      "[MEM-#41977] [PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitação refere-se a Elaine Costa, do Núcleo Passos, solicitando uma avaliação do teclado do seu notebook, especificamente a tecla M que está falhando. Este chamado foi feito para a categoria de Manutenção de Computadores.\n\nClassificação Sugerida: T.I > ST > Hardware / Periféricos | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42158) + Memória Contínua • Aprendido com o Analista (MEM-#41977)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42158] [PB-UNI-26] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').\n  2. [MEM-#42158] [PB-UNI-26] Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).\n  3. [MEM-#42158] [PB-UNI-26] Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.\n  4. [MEM-#42158] [PB-UNI-26] Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.\n  5. [MEM-#42158] [PB-UNI-26] Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado.\n  6. [MEM-#41977] [PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+    "public_reply_draft": "Olá, Elaine! Tudo bem?\n\nRecebemos a sua solicitação referente ao **Nobreak do seu computador**, localizado no **Centro de Especialidades (PREDIO AZUL, SALA 402)**.\n\nIdentificamos o relato de que o equipamento não está segurando a carga durante picos ou quedas de energia elétrica. Todas as informações de localização e descrição da falha já foram validadas na triagem.\n\nNossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**Centro de Especialidades (PREDIO AZUL, SALA 402)**) para realizar a vistoria técnica e a substituição do nobreak.\n\nAssim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!"
+  },
+  "42278": {
+    "ticket_id": 42278,
+    "analyzed_at": "05/10/2026 09:39",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação de acesso aberta por **Lucelia Fernanda** referente a **Ana Paula Martins** (CPF: 02085793622), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42273",
+        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42184",
+        "title": "Aplicativos  -  Liberar acesso atendentes NAS Passos",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "steps": [
+          "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "required_info": [
+          "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-01",
+        "title": "Onboarding / Criação de Usuário (AD, Relógio de Ponto, MyPlace e Wi-Fi)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "RH solicita cadastro de novo colaborador no relógio de ponto, portal MyPlace, rede/AD ou Wi-Fi.",
+        "steps": [
+          "Conferir se o RH informou o Nome Completo, Número de Matrícula e PIS no chamado.",
+          "Cadastrar o colaborador no sistema de controle de ponto (REP) vinculando PIS e Matrícula para coleta de biometria.",
+          "Liberar o acesso ao portal de autoatendimento RH (MyPlace) e criar conta no Active Directory se utilizar estação de trabalho.",
+          "Caso solicitado Wi-Fi corporativo, registrar a liberação mediante política de dispositivos móveis da Unimed."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41934 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > ANA PAULA LUCIANO",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Acessos bloqueado.",
+        "steps": [
+          "Acessos bloqueado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42273) + Memória Contínua • Aprendido com o Analista (MEM-#42184)",
+    "resolution_steps": [
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Lucelia Fernanda** referente a **Ana Paula Martins** (CPF: 02085793622), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42273) + Memória Contínua • Aprendido com o Analista (MEM-#42184)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
+  },
+  "42280": {
+    "ticket_id": 42280,
+    "analyzed_at": "05/10/2026 10:28",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Dayane Garcia Oliveira de Araujo** (H SND) solicita a **troca de toner** da impressora do setor **H SND**. Todos os dados necessários para o atendimento presencial já constam descritos no chamado. O chamado foi aberto na categoria 'T.I > IR > Suporte a Hardware > Manutenção de Computadores' e recomenda-se reclassificar para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras'.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de troca de toner para manutenção da continuidade das impressões do setor H SND.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-31",
+        "title": "Solicitação de Troca de Toner e Suprimentos de Impressão",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de setor operacional para fornecimento ou substituição física do cartucho de toner da impressora do setor (ex.: Samsung M4080FX / multifuncional / impressora de rede), por término de carga ou impressão falhada/clara.",
+        "steps": [
+          "Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+          "Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+          "Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+          "Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+          "Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+          "Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42010 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Solicitação de troca de toner – Impressora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-31) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42010 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+      "[PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+      "[PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+      "[PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+      "[PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Dayane Garcia Oliveira de Araujo** (H SND) solicita a **troca de toner** da impressora do setor **H SND**. Todos os dados necessários para o atendimento presencial já constam descritos no chamado. O chamado foi aberto na categoria 'T.I > IR > Suporte a Hardware > Manutenção de Computadores' e recomenda-se reclassificar para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras'.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-31) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42010 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-31] Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.\n  2. [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).\n  3. [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.\n  4. [PB-UNI-31] Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.\n  5. [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.\n  6. [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI.",
+    "public_reply_draft": "Olá, Dayane! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **H SND**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42281": {
+    "ticket_id": 42281,
+    "analyzed_at": "05/10/2026 10:17",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Favor verificar o relatório de Listagem, modelo I: Quando colocado o filtro de emitidas e não fechadas está trazendo contas já até apresentadas, como no exemplo abaixo: Att,\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41961).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41961",
+        "title": "Correção de bugs  -  Não recebimento diário de Relatório",
+        "category": "T.I > DV > Desenvolvimento > Correção de bugs",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+        "steps": [
+          "[PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+          "[PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+          "[PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+          "[Chamado #41783 (Resolvido)] Sistema reiniciado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#41961)",
+    "resolution_steps": [
+      "[Aprendido em MEM-#41961] A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+      "[MEM-#41961] [PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+      "[MEM-#41961] [PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+      "[MEM-#41961] [PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+      "[MEM-#41961] [Chamado #41783 (Resolvido)] Sistema reiniciado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Favor verificar o relatório de Listagem, modelo I: Quando colocado o filtro de emitidas e não fechadas está trazendo contas já até apresentadas, como no exemplo abaixo: Att,\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#41961).\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#41961)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#41961] A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível\n  2. [MEM-#41961] [PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.\n  3. [MEM-#41961] [PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.\n  4. [MEM-#41961] [PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.\n  5. [MEM-#41961] [Chamado #41783 (Resolvido)] Sistema reiniciado.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!"
+  },
+  "42285": {
+    "ticket_id": 42285,
+    "analyzed_at": "05/10/2026 10:12",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação de acesso aberta por **Lucelia Fernanda** referente a **Marcela Venancio da Costa** (CPF: 02017265640), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42278",
+        "title": "Criação de Usuários  -  Ana Paula Martins",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42273",
+        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42184",
+        "title": "Aplicativos  -  Liberar acesso atendentes NAS Passos",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "steps": [
+          "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000070 - Mateus Giannini e 16000068 Marcelo Pereira**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "required_info": [
+          "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41629 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Natália da Silva Oliveira",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n-----------------------------------------------\nspdata\nlogin: nsoliveira\nsenha: cadastrada no primeiro acesso\n-----------------------------------------------\nFaculdade Unimed\nlogin: CPF\nsenha: 122@Nso626\n-----------------------------------------------\nLGPD\nlogin: natyanaju22502@gmail.com\nsenha: 122@Nso626\n----",
+        "steps": [
+          "Prezados(as),",
+          "Segue credenciais:",
+          "-----------------------------------------------",
+          "spdata",
+          "login: nsoliveira",
+          "senha: cadastrada no primeiro acesso"
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42278) + Memória Contínua • Aprendido com o Analista (MEM-#42273)",
+    "resolution_steps": [
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de acesso aberta por **Lucelia Fernanda** referente a **Marcela Venancio da Costa** (CPF: 02017265640), com os acessos solicitados (Faculdade Unimed, LGPD) e dados cadastrais já informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42278) + Memória Contínua • Aprendido com o Analista (MEM-#42273)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  2. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  3. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.\n  4. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.\n  5. [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.\n  6. [MEM-#42278] [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Marcela Venancio da Costa** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!"
   }
 }

@@ -337,11 +337,22 @@ export class KnowledgeEngine {
           !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila)\b/i.test(
             normTicket
           );
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan
+        const isTonerRequest =
+          /\b(troca de toner|trocar toner|troca do toner|substitui[çc][ãa]o de toner|toner vazio|toner fraco|acabou o toner|novo toner)\b/i.test(
+            normTicket
+          ) ||
+          (/\btoner\b/i.test(normTicket) &&
+            /\b(troca|trocar|substitui|solicito|troque|colocar|acabou)\b/i.test(normTicket));
+
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail)
+          (isRelocationOrPhoneInstall || isScanToEmail || isTonerRequest)
         ) {
+          continue;
+        }
+        // Evita parear PB-UNI-31 (Troca de Toner) quando o chamado NÃO trata de troca de toner
+        if (pb.id === "PB-UNI-31" && !isTonerRequest) {
           continue;
         }
         // Evita parear Playbook de Ligações Caindo (PB-UNI-08) quando o chamado NÃO menciona queda/instabilidade de chamadas
@@ -527,6 +538,15 @@ export class KnowledgeEngine {
         if (
           !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(normTicket) &&
           /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de nobreak/energia (ex: MEM-#42158) quando o chamado NÃO trata de nobreak/energia
+        if (
+          !/\b(nobreak|no-break|ups|bateria|gerador|energia)\b/i.test(normTicket) &&
+          /\b(nobreak|no-break|ups|bateria|gerador)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

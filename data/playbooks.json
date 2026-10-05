@@ -356,7 +356,6 @@
       "samsung",
       "m4080fx",
       "atolamento",
-      "toner",
       "spooler",
       "fila",
       "etiqueta",
@@ -1015,5 +1014,40 @@
       "Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de duração dos agendamentos (de 60 minutos para **15 minutos**) já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for publicado no sistema e estiver disponível para a equipe da Oncologia realizar os agendamentos fracionados, confirmaremos a liberação por aqui para a sua validação!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-31",
+    "domain": "Infraestrutura e Rede",
+    "title": "Solicitação de Troca de Toner e Suprimentos de Impressão",
+    "keywords": [
+      "troca de toner",
+      "troca toner",
+      "trocar toner",
+      "substituição de toner",
+      "substituicao de toner",
+      "troca do toner",
+      "toner acabou",
+      "toner vazio",
+      "toner fraco",
+      "toner da impressora",
+      "suprimento de impressão",
+      "suprimento de impressao",
+      "novo toner",
+      "cartucho de toner",
+      "troca de toner da impressora"
+    ],
+    "symptoms": "Solicitação de setor operacional para fornecimento ou substituição física do cartucho de toner da impressora do setor (ex.: Samsung M4080FX / multifuncional / impressora de rede), por término de carga ou impressão falhada/clara.",
+    "required_info": [
+      "Identificação do setor ou modelo da impressora (caso não conste especificado na descrição)"
+    ],
+    "resolution_steps": [
+      "Reclassificar ou confirmar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Manutenção de Computadores' ou 'Solicitação Diversa'.",
+      "Verificar no estoque de T.I. a disponibilidade de cartucho de toner compatível com o modelo da impressora do setor solicitante (ex.: Samsung MLT-D201L/S para Samsung M4080FX).",
+      "Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: H SND) portando o cartucho de toner reserva lacrado.",
+      "Realizar a substituição física do cartucho no compartimento frontal da impressora e recolher o cartucho vazio para o descarte ecológico/logística reversa.",
+      "Imprimir relatório de status de suprimentos ou página de teste diretamente no painel do equipamento para atestar o reconhecimento do chip e a qualidade da impressão.",
+      "Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner da impressora** do setor **{setor}**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\nAssim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
   }
 ]

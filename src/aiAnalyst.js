@@ -362,10 +362,15 @@ export class AIAnalyst {
     )
       .trim()
       .split(/\s+/)[0];
+    const rawSetor = formFields.setor ? formFields.setor.trim() : "";
+    const rawLoc = formFields.localizacao ? formFields.localizacao.trim() : "";
+    const isGenericLoc = /^(hospital|sede|passos|unimed)$/i.test(rawLoc);
+
     const sectorName =
-      formFields.localizacao ||
-      formFields.setor ||
+      rawSetor ||
+      (!isGenericLoc ? rawLoc : "") ||
       ticket.requester_department ||
+      rawLoc ||
       "setor solicitante";
     const playbooks = loadPlaybooks();
 
@@ -626,14 +631,58 @@ export class AIAnalyst {
           `Assim que nos confirmar por aqui, já finalizamos o cadastro no painel da impressora!`;
       }
     } else if (
+      /\b(troca de toner|trocar toner|troca do toner|substitui[çc][ãa]o de toner|toner vazio|toner fraco|acabou o toner|novo toner)\b/i.test(
+        normAll
+      ) ||
+      (/\btoner\b/i.test(normAll) &&
+        /\b(troca|trocar|substitui|solicito|troque|colocar|acabou|fornecer|solicita[çc][ãa]o)\b/i.test(
+          normAll
+        ))
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const explicitModel =
+        formFields.ativo ||
+        (/\bm4080(?:fx)?\b/i.test(normAll) ? "Samsung M4080FX" : "");
+      const printerLabel = explicitModel
+        ? `da impressora **${explicitModel}**`
+        : "da impressora";
+
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Solicitação de troca de toner para manutenção da continuidade das impressões do setor ${sectorName}.`;
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const catNote = categoryMismatch
+        ? ` O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para '${suggestedCategory}'.`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **troca de toner** ${printerLabel} do setor **${sectorName}**. ` +
+        `Todos os dados necessários para o atendimento presencial já constam descritos no chamado.${catNote}`;
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **troca de toner** ${printerLabel} do setor **${sectorName}**.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física e efetuar os testes de impressão no equipamento.\n\n` +
+        `Assim que a troca for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
       normCore.includes("impressora") ||
       normCore.includes("impressoras") ||
       normCore.includes("imprimir") ||
       normCore.includes("imprimindo") ||
       normCore.includes("samsung") ||
       normCore.includes("m4080fx") ||
-      normCore.includes("spooler") ||
-      normCore.includes("toner")
+      normCore.includes("spooler")
     ) {
       const explicitModel =
         formFields.ativo ||

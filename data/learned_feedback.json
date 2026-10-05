@@ -1,5 +1,117 @@
 [
   {
+    "ticket_id": 42285,
+    "title": "Criação de Usuários  -  Marcela Venancio da Costa",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "marcela",
+      "venancio",
+      "costa",
+      "liberar",
+      "links",
+      "acesso",
+      "realizar"
+    ],
+    "problem_summary": "Prezados,\nSolicito liberar os links de acesso, para realizar os cursos iniciais.\nObrigada!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Marcela Venancio da Costa** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42278] [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T13:13:05.368Z"
+  },
+  {
+    "ticket_id": 42278,
+    "title": "Criação de Usuários  -  Ana Paula Martins",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "ana",
+      "paula",
+      "martins",
+      "liberar",
+      "links",
+      "acessos",
+      "selecionados"
+    ],
+    "problem_summary": "Prezados,\nSolicito liberar os links de acessos selecionados para realizar os cursos iniciais da integração.\nObrigada!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T12:40:12.768Z"
+  },
+  {
+    "ticket_id": 42273,
+    "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "tatiane",
+      "batista",
+      "cardoso",
+      "veras",
+      "liberar",
+      "acessos",
+      "realizar"
+    ],
+    "problem_summary": "Prezados,\nSolicito liberar os acessos para realizar os cursos iniciais de integração.\nObrigada!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+      "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+      "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+      "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T12:39:21.326Z"
+  },
+  {
+    "ticket_id": 42241,
+    "title": "Ajustes em layout/interface  -  Ajuste em agenda Oncologia",
+    "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "keywords": [
+      "ajustes",
+      "layout",
+      "interface",
+      "ajuste",
+      "agenda",
+      "oncologia",
+      "conversa",
+      "presencial"
+    ],
+    "problem_summary": "Em conversa presencial com Moisés, vimos a possibilidade de alterar o tempo mínimo da agenda utilizada pela Oncologia.\nA mudança se faz necessária, para uma melhor gestão dos horários, visto que possuímos procedimentos de menor duração. Como uma administração de medicação via subcutânea.\nNo item duração, precisamos que o tempo mínimo para preenchimento seja de 15 minutos.\nAtualmente o tempo mínimo é de 60 minutos (uma hora)",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+      "[PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+      "[PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+      "[PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+      "[Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T12:14:04.474Z"
+  },
+  {
     "ticket_id": 42262,
     "title": "Aplicativos  -  NOTPAD++",
     "category": "T.I > ST > Instalação/Configuração > Aplicativos",

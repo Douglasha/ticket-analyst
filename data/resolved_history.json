@@ -1,5 +1,72 @@
 [
   {
+    "id": "Chamado #42285 (Resolvido)",
+    "ticket_id": 42285,
+    "solution_id": 40973,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Marcela Venancio da Costa",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n---------------------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 020@Mvc640\n---------------------------------------------------------------------------\nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: marcelavenanciodacosta@gma",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "---------------------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
+    "id": "Chamado #42278 (Resolvido)",
+    "ticket_id": 42278,
+    "solution_id": 40974,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Ana Paula Martins",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n---------------------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 020@Apm622\n---------------------------------------------------------------------------\nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: aninha912266@gmail.com\n",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "---------------------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
+    "id": "Chamado #42276 (Resolvido)",
+    "ticket_id": 42276,
+    "solution_id": 40969,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > ROSEANE MACHADO RODRIGUES DE PADUA",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "As permissões foram copiadas com sucesso.",
+    "keywords": [],
+    "steps": [
+      "As permissões foram copiadas com sucesso."
+    ]
+  },
+  {
+    "id": "Chamado #42273 (Resolvido)",
+    "ticket_id": 42273,
+    "solution_id": 40975,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Tatiane Batista Cardoso Veras",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n---------------------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 077@Tbc652\n---------------------------------------------------------------------------\nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: tatianebatistaveras3@gm",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "---------------------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
     "id": "Chamado #42266 (Resolvido)",
     "ticket_id": 42266,
     "solution_id": 40964,
@@ -90,6 +157,22 @@
     "keywords": [],
     "steps": [
       "Suprimentos reabastecidos."
+    ]
+  },
+  {
+    "id": "Chamado #42218 (Resolvido)",
+    "ticket_id": 42218,
+    "solution_id": 40968,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Ajuste em interface",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia.\n\n\r\nImplementado os ajustes solicitados. \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Implementado os ajustes solicitados.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -596,6 +679,21 @@
     "keywords": [],
     "steps": [
       "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42012 (Resolvido)",
+    "ticket_id": 42012,
+    "solution_id": 40971,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Indicadores WConect",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia, por nada.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Bom dia, por nada.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
