@@ -1580,13 +1580,99 @@ export class AIAnalyst {
           `Todas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!`;
       }
     } else if (
-      normAll.includes("cadastrada por engano") ||
-      normAll.includes("cadastrado por engano") ||
-      (/\b(cancelar|cancelamento|excluir|exclusao|estornar|inativar|remover)\b/i.test(
-        normAll
-      ) &&
-        (normAll.includes("controle de contas") ||
-          /\b(registro|conta|atendimento|guia)\b/i.test(normCore)))
+      (/\b(taxa|taxas)\b/i.test(normAll) &&
+        /\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|retirar|remover|lan[çc]ad[ao]|equivocad)\b/i.test(
+          normAll
+        )) ||
+      normAll.includes("taxa de registro")
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const appName =
+        formFields.aplicacao ||
+        (/\bspdata\b/i.test(normAll) ? "SGH Spdata" : "SGH (Spdata)");
+
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const patientMatch =
+        descText.match(/Nome do Paciente\s*:\s*([^\n\r]+)/i) ||
+        descText.match(/Paciente\s*:\s*([^\n\r]+)/i);
+      const patientName = patientMatch
+        ? patientMatch[1].replace(/Prontu[aá]rio\s*:.*$/i, "").trim()
+        : "";
+
+      const regMatch =
+        descText.match(/(?:registro|conta|atendimento|n[º°]?)\s*[:#-]?\s*(\d{3,12})/i) ||
+        descText.match(/\b(\d{4,12})\b/);
+      const recordNum = regMatch ? regMatch[1] : "";
+
+      const prontMatch = descText.match(/Prontu[aá]rio\s*:\s*(\d+)/i);
+      const prontNum = prontMatch ? prontMatch[1] : "";
+
+      const taxaMatch =
+        descText.match(/(taxa\s+(?:de\s+)?[^,.\n\r]+(?:\s*\(c[oó]digo\s*\d+\))?)/i) ||
+        descText.match(/(taxa\s+[^,.\n\r]+)/i);
+      let taxaDesc = taxaMatch ? taxaMatch[1].trim() : "taxa de registro ambulatorial (código 3028)";
+      if (/favor verificar como excluir/i.test(taxaDesc)) {
+        taxaDesc = taxaDesc.replace(/.*como excluir\s+/i, "");
+      }
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory =
+        ticket.category.includes("Solicitação Diversa") ||
+        ticket.category.includes("Aplicativos") ||
+        ticket.category.includes("Sistemas Operacionais")
+          ? "T.I > ST > Resolução de Problemas > Sistemas Internos"
+          : ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        `Exclusão de taxa lançada indevidamente em conta hospitalar no módulo de Faturamento de Convênios do sistema ${appName} para continuidade da auditoria e faturamento.`;
+
+      if (recordNum || patientName) {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a exclusão da **${taxaDesc}**, lançada equivocadamente em serviço Hospitalar na conta externa/registro **${recordNum}**` +
+          (patientName
+            ? ` (Paciente: **${patientName}**${prontNum ? `, Prontuário: **${prontNum}**` : ""})`
+            : "") +
+          ` no módulo de Faturamento de Convênios do sistema **${appName}**. Todos os dados necessários para localização da conta e exclusão do lançamento constam informados no chamado.`;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à exclusão da **${taxaDesc}**, lançada indevidamente em serviço Hospitalar no módulo de Faturamento de Convênios do sistema **${appName}** (Conta Externa: Registro **${recordNum}**` +
+          (patientName ? ` - **${patientName}**` : "") +
+          (prontNum ? `, Prontuário: **${prontNum}**` : "") +
+          `).\n\n` +
+          `Todos os dados informados já foram validados na triagem técnica e nossa equipe já está verificando o procedimento para a exclusão/estorno do lançamento da taxa no sistema.\n\n` +
+          `Assim que a taxa for excluída e a conta estiver liberada para continuidade dos trabalhos no ${sectorName}, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a exclusão de taxa no módulo de Faturamento de Convênios do sistema **${appName}**, ` +
+          `porém sem informar o número do registro/conta ou o nome do(a) paciente.`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          `Informar o número do registro/conta externa e o nome do(a) paciente afetado no ${appName}`,
+          "Informar o nome ou código da taxa a ser excluída/estornada",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à exclusão de taxa no sistema **${appName}**.\n\n` +
+          `Para localizarmos a conta e executarmos o estorno/exclusão, você poderia nos informar o **número do registro/conta externa**, o **nome do(a) paciente** e a **taxa/código** a ser excluída?\n\n` +
+          `Assim que nos confirmar esses dados por aqui, realizamos o procedimento!`;
+      }
+    } else if (
+      !/\b(taxa|taxas)\b/i.test(normAll) &&
+      (normAll.includes("cadastrada por engano") ||
+        normAll.includes("cadastrado por engano") ||
+        (/\b(cancelar|cancelamento|excluir|exclusao|estornar|inativar|remover)\b/i.test(
+          normAll
+        ) &&
+          (normAll.includes("controle de contas") ||
+            /\b(registro|conta|atendimento|guia)\b/i.test(normCore))))
     ) {
       const descText = formFields.descricao || "";
       const appName = formFields.aplicacao || "Controle de Contas";
@@ -2373,6 +2459,10 @@ export class AIAnalyst {
 
       if (matchedMemory) {
         const isMemActionMismatch =
+          (/\b(taxa|taxas)\b/i.test(normAll) &&
+            !/\b(taxa|taxas)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
           (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
             /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
@@ -2500,6 +2590,10 @@ export class AIAnalyst {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
       const isMemActionMismatch =
+        (/\b(taxa|taxas)\b/i.test(normAll) &&
+          !/\b(taxa|taxas)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
         (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
           /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)

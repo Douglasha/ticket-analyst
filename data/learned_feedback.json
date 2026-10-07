@@ -1,5 +1,32 @@
 [
   {
+    "ticket_id": 42382,
+    "title": "Toners  -  Tonner",
+    "category": "T.I > IR > Suporte a Hardware > Suprimentos > Toners",
+    "keywords": [
+      "toners",
+      "tonner",
+      "ola",
+      "gostaria",
+      "solicitar",
+      "trocado",
+      "impressora"
+    ],
+    "problem_summary": "Olá boa tarde, \nGostaria de solicitar, que seja trocado o Tonner da impressora.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **Financeiro**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física do toner e efetuar os testes de impressão no equipamento.\n\nAssim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-31] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).",
+      "[PB-UNI-31] Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.",
+      "[PB-UNI-31] Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.",
+      "[PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.",
+      "[PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-07T11:07:38.452Z"
+  },
+  {
     "ticket_id": 42310,
     "title": "Sistemas Operacionais  -  Alteração agenda PEP Ângela Tayná e Jéssica Lima",
     "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",

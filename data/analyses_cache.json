@@ -5841,6 +5841,46 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1412358** no sistema **sistema interno**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Sistemas Internos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
     "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1412358** no sistema **sistema interno**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
   },
+  "42377": {
+    "ticket_id": 42377,
+    "analyzed_at": "07/10/2026 10:13",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Ana Paula Silva** (H Faturamento) solicita a exclusão da **taxa de registro ambulatorial (código 3028)**, lançada equivocadamente em serviço Hospitalar na conta externa/registro **1412438** (Paciente: **JOSE MIGUEL DE SOUZA GARCIA GALVAO**, Prontuário: **176078**) no módulo de Faturamento de Convênios do sistema **SGH Spdata**. Todos os dados necessários para localização da conta e exclusão do lançamento constam informados no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Média",
+    "urgency_reason": "Exclusão de taxa lançada indevidamente em conta hospitalar no módulo de Faturamento de Convênios do sistema SGH Spdata para continuidade da auditoria e faturamento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-34",
+        "title": "Exclusão / Estorno de Taxa ou Lançamento Indevido no Faturamento de Convênios (Sistema SGH / Spdata)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Setor de Faturamento (H Faturamento), Recepção ou Auditoria solicita exclusão, cancelamento ou estorno de taxa (ex.: taxa de registro ambulatorial código 3028) lançada erroneamente ou equivocadamente em conta externa ou serviço hospitalar no módulo de Faturamento de Convênios do sistema SGH (Spdata).",
+        "steps": [
+          "Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.",
+          "Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.",
+          "Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).",
+          "Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.",
+          "Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-34)",
+    "resolution_steps": [
+      "[PB-UNI-34] Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.",
+      "[PB-UNI-34] Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.",
+      "[PB-UNI-34] Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).",
+      "[PB-UNI-34] Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.",
+      "[PB-UNI-34] Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ana Paula Silva** (H Faturamento) solicita a exclusão da **taxa de registro ambulatorial (código 3028)**, lançada equivocadamente em serviço Hospitalar na conta externa/registro **1412438** (Paciente: **JOSE MIGUEL DE SOUZA GARCIA GALVAO**, Prontuário: **176078**) no módulo de Faturamento de Convênios do sistema **SGH Spdata**. Todos os dados necessários para localização da conta e exclusão do lançamento constam informados no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-34)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-34] Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.\n  2. [PB-UNI-34] Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.\n  3. [PB-UNI-34] Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).\n  4. [PB-UNI-34] Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.\n  5. [PB-UNI-34] Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI.",
+    "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos a sua solicitação referente à exclusão da **taxa de registro ambulatorial (código 3028)**, lançada indevidamente em serviço Hospitalar no módulo de Faturamento de Convênios do sistema **SGH Spdata** (Conta Externa: Registro **1412438** - **JOSE MIGUEL DE SOUZA GARCIA GALVAO**, Prontuário: **176078**).\n\nTodos os dados informados já foram validados na triagem técnica e nossa equipe já está verificando o procedimento para a exclusão/estorno do lançamento da taxa no sistema.\n\nAssim que a taxa for excluída e a conta estiver liberada para continuidade dos trabalhos no H Faturamento, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
   "42382": {
     "ticket_id": 42382,
     "analyzed_at": "07/10/2026 08:00",

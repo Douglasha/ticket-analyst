@@ -366,6 +366,37 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-14 (Relatórios Agendados SGH) quando o chamado não trata de relatório agendado
+        if (
+          pb.id === "PB-UNI-14" &&
+          !/\b(relat[oó]rio|agendad[ao]|envio|disparo|checklist|check-list|di[aá]ri[ao]|smtp)\b/i.test(
+            normTicket
+          )
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-13 (Cancelamento de Registro) quando o chamado trata de exclusão de taxa/serviço no faturamento ou não trata de cancelamento
+        if (
+          pb.id === "PB-UNI-13" &&
+          (/\b(taxa|taxas|diaria|di[aá]rias|procedimento|c[oó]digo\s*\d+|3028)\b/i.test(
+            normTicket
+          ) ||
+            !/\b(cancelar|cancelamento|excluir|exclusao|estornar|cadastrad[ao] por engano)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-34 (Exclusão de Taxa no Faturamento SGH Spdata) quando não trata de taxa
+        if (
+          pb.id === "PB-UNI-34" &&
+          (!/\b(taxa|taxas)\b/i.test(normTicket) ||
+            !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|retirar|remover|lan[çc]ad[ao]|equivocad)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
+        }
         const isRelocationOrPhoneInstall =
           /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
             normTicket
@@ -466,13 +497,23 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-22" && !/\bintranet\b/i.test(normTicket)) {
           continue;
         }
-        const score = computeRelevance(
+        let score = computeRelevance(
           fullTicketText,
           ticketTokens,
           pb.title || "",
           `${pb.symptoms || ""} ${(pb.resolution_steps || []).join(" ")}`,
           pb.keywords || []
         );
+        if (
+          pb.id === "PB-UNI-34" &&
+          /\b(taxa|taxas)\b/i.test(normTicket) &&
+          (/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|lan[çc]ad[ao]|3028|hospitalar|ambulatorial)\b/i.test(
+            normTicket
+          ) ||
+            normTicket.includes("taxa de registro"))
+        ) {
+          score = Math.max(score, 0.85);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({

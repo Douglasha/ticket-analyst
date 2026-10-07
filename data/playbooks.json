@@ -1157,5 +1157,47 @@
       "Confirmar a disponibilização do link para o treinamento/reunião e finalizar o atendimento no GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de link de videoconferência no **Google Meet** para a realização de reunião/treinamento online.\n\nNossa equipe técnica já está gerando a sala no **Google Meet** e disponibilizará o link de acesso diretamente por aqui em instantes para que você possa encaminhar à participante.\n\nAlém do Google Meet, caso tenha preferência por utilizar outras plataformas de videoconferência como **Microsoft Teams** ou **Zoom**, também podemos disponibilizar a sala na ferramenta de sua escolha.\n\n💡 **Dica de Autonomia:** Caso precise gerar links de reuniões no seu dia a dia de forma rápida e imediata, você mesma pode criá-los a qualquer momento:\n1. Acesse **[meet.google.com](https://meet.google.com)** conectada ao seu e-mail institucional;\n2. Clique no botão azul **\"Nova reunião\"**;\n3. Selecione a opção **\"Criar uma reunião para mais tarde\"** (ou *\"Iniciar uma reunião instantânea\"*);\n4. Copie o link gerado e compartilhe com os participantes!\n\nAssim que o link da reunião for gerado pela nossa equipe, enviaremos aqui no chamado para você!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-34",
+    "title": "Exclusão / Estorno de Taxa ou Lançamento Indevido no Faturamento de Convênios (Sistema SGH / Spdata)",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": [
+      "taxa de registro",
+      "taxa",
+      "taxas",
+      "excluir taxa",
+      "exclusao de taxa",
+      "estornar taxa",
+      "estorno de taxa",
+      "cancelar taxa",
+      "taxa ambulatorial",
+      "código 3028",
+      "codigo 3028",
+      "3028",
+      "lançada em serviço hospitalar",
+      "lancada em servico hospitalar",
+      "faturamento de convênios",
+      "faturamento convenios",
+      "conta externa",
+      "lançada equivocadamente",
+      "lancada equivocadamente",
+      "taxa lançada",
+      "taxa lancada"
+    ],
+    "symptoms": "Setor de Faturamento (H Faturamento), Recepção ou Auditoria solicita exclusão, cancelamento ou estorno de taxa (ex.: taxa de registro ambulatorial código 3028) lançada erroneamente ou equivocadamente em conta externa ou serviço hospitalar no módulo de Faturamento de Convênios do sistema SGH (Spdata).",
+    "required_info": [
+      "Número do registro ou conta externa",
+      "Nome do(a) paciente e prontuário",
+      "Identificação ou código da taxa/item a ser excluído (ex.: taxa de registro ambulatorial código 3028)"
+    ],
+    "resolution_steps": [
+      "Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.",
+      "Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.",
+      "Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).",
+      "Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.",
+      "Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à exclusão da {taxa} lançada equivocadamente no módulo de Faturamento de Convênios do sistema **SGH (Spdata)**.\n\nTodos os dados da conta externa (Registro **{registro}**, Paciente: **{paciente}**, Prontuário: **{prontuario}**) foram validados e nossa equipe técnica já está verificando o procedimento para exclusão/estorno da taxa no sistema.\n\nAssim que o lançamento for excluído e a conta liberada no SGH, confirmaremos a conclusão por aqui!\n\nPermanecemos à disposição!"
   }
 ]
