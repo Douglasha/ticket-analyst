@@ -381,11 +381,16 @@ export class KnowledgeEngine {
             normTicket
           );
         const isSupplyOrTonerRequest =
-          /\b(troca de toner|trocar toner|troca do toner|substitui[çc][ãa]o de toner|toner vazio|toner fraco|acabou o toner|novo toner)\b/i.test(
+          /\b(troca de tonn?er|trocar tonn?er|troca do tonn?er|trocado o tonn?er|substitui[çc][ãa]o de tonn?er|tonn?er vazio|tonn?er fraco|acabou o tonn?er|novo tonn?er)\b/i.test(
             normTicket
           ) ||
-          (/\btoner\b/i.test(normTicket) &&
-            /\b(troca|trocar|substitui|solicito|troque|colocar|acabou)\b/i.test(normTicket)) ||
+          (/\b(tonn?er|toners)\b/i.test(normTicket) &&
+            (/\b(troca|trocar|trocado|troque|substitui|substituir|substituicao|substituição|solicito|solicitar|solicitacao|solicitação|colocar|acabou|fornecer)\b/i.test(
+              normTicket
+            ) ||
+              normTicket.includes("suprimentos") ||
+              normTicket.includes("toners") ||
+              normTicket.includes("impressora"))) ||
           /\b(reposi[çc][ãa]o de tintas?|troca de tintas?|abastecimento de tintas?|refil de tintas?|tintas? da impressora|acabou a tinta|tinta acabou|n[íi]vel de tinta)\b/i.test(
             normTicket
           ) ||

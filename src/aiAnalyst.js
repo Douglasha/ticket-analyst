@@ -631,13 +631,16 @@ export class AIAnalyst {
           `Assim que nos confirmar por aqui, já finalizamos o cadastro no painel da impressora!`;
       }
     } else if (
-      /\b(troca de toner|trocar toner|troca do toner|substitui[çc][ãa]o de toner|toner vazio|toner fraco|acabou o toner|novo toner)\b/i.test(
+      /\b(troca de tonn?er|trocar tonn?er|troca do tonn?er|trocado o tonn?er|substitui[çc][ãa]o de tonn?er|tonn?er vazio|tonn?er fraco|acabou o tonn?er|novo tonn?er)\b/i.test(
         normAll
       ) ||
-      (/\btoner\b/i.test(normAll) &&
-        /\b(troca|trocar|substitui|solicito|troque|colocar|acabou|fornecer|solicita[çc][ãa]o)\b/i.test(
+      (/\b(tonn?er|toners)\b/i.test(normAll) &&
+        (/\b(troca|trocar|trocado|troque|substitui|substituir|substituicao|substituição|solicito|solicitar|solicitacao|solicitação|colocar|acabou|fornecer)\b/i.test(
           normAll
-        )) ||
+        ) ||
+          ticket.category.includes("Toners") ||
+          normAll.includes("suprimentos") ||
+          normAll.includes("impressora"))) ||
       /\b(reposi[çc][ãa]o de tintas?|troca de tintas?|abastecimento de tintas?|refil de tintas?|tintas? da impressora|acabou a tinta|tinta acabou|n[íi]vel de tinta)\b/i.test(
         normAll
       ) ||
@@ -652,7 +655,7 @@ export class AIAnalyst {
 
       const isInk =
         /\b(tinta|tintas|ecotank|epson|l14150)\b/i.test(normAll) &&
-        !/\b(toner)\b/i.test(normAll);
+        !/\b(tonn?er|toners)\b/i.test(normAll);
 
       const explicitModel =
         formFields.ativo ||
@@ -667,14 +670,16 @@ export class AIAnalyst {
 
       const supplyType = isInk ? "reposição de tintas" : "troca de toner";
       const supplyItem = isInk ? "os refis de tinta compatíveis" : "o cartucho de toner compatível";
-      const actionVerb = isInk ? "abastecimento dos tanques de tinta" : "substituição física";
+      const actionVerb = isInk ? "o abastecimento dos tanques de tinta" : "a substituição física do toner";
 
       detectedDomain = "Infraestrutura e Rede";
       suggestedCategory = ticket.category.includes("Tintas")
         ? ticket.category
+        : ticket.category.includes("Toners")
+        ? ticket.category
         : isInk
         ? "T.I > IR > Suporte a Hardware > Suprimentos > Tintas"
-        : "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+        : "T.I > IR > Suporte a Hardware > Suprimentos > Toners";
       realUrgency = ticket.urgency_label || "Média";
       urgencyReason = `Solicitação de ${supplyType} para manutenção da continuidade das impressões do setor ${sectorName}.`;
       sufficiencyStatus = "completo";
@@ -684,8 +689,8 @@ export class AIAnalyst {
         normalizeText(ticket.category || "") !==
         normalizeText(suggestedCategory);
       const catNote = categoryMismatch
-        ? ` O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para '${suggestedCategory}'.`
-        : ` O chamado está corretamente categorizado em '${ticket.category}'.`;
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
 
       translatedIntent =
         `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **${supplyType}** ${printerLabel} do setor **${sectorName}**. ` +
@@ -694,7 +699,7 @@ export class AIAnalyst {
       customPublicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
         `Recebemos a sua solicitação referente à **${supplyType}** ${printerLabel} do setor **${sectorName}**.\n\n` +
-        `Nossa equipe de Infraestrutura e Redes já está separando ${supplyItem} no estoque e providenciará o deslocamento de um técnico até o setor para realizar o ${actionVerb} e efetuar os testes de impressão no equipamento.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está separando ${supplyItem} no estoque e providenciará o deslocamento de um técnico até o setor para realizar ${actionVerb} e efetuar os testes de impressão no equipamento.\n\n` +
         `Assim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (

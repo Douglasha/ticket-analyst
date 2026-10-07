@@ -1,5 +1,61 @@
 [
   {
+    "ticket_id": 42310,
+    "title": "Sistemas Operacionais  -  Alteração agenda PEP Ângela Tayná e Jéssica Lima",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "alteracao",
+      "agenda",
+      "pep",
+      "angela",
+      "tayna",
+      "jessica",
+      "lima",
+      "tayna:"
+    ],
+    "problem_summary": "Boa tarde, \nSolicito alteração na agenda pep da colaboradora Ângela Tayná: \nAtendimentos de 45/45minutos \nDe segunda a sexta das 07:00 às 12:30hs \nIntervalo de 15minutos \nJéssica Lima \nAtendimentos de 45/45minutos \nDe segunda a sexta das 13:00 às 16:15hs \nSem intervalo \nDesde, já agradeço!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+      "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T18:28:58.597Z"
+  },
+  {
+    "ticket_id": 42303,
+    "title": "Erros de Sistema  -  Unificar cadastro do insumo - 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)",
+    "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "keywords": [
+      "erros",
+      "unificar",
+      "cadastro",
+      "insumo",
+      "kit",
+      "drenagem",
+      "mediastinal",
+      "dreno"
+    ],
+    "problem_summary": "Boa tarde! \nSolicito a unificação do insumo - 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)\nMotivo: Está aparecendo inconsistência no sistema\nDesta forma solicito a unificação a chave 120083038, desse insumo, para a chave 72603080 na qual o cadastro está mais completo.\n \nCaminho:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed**.\n\nOs dados informados (unificação da chave **120083038** para a chave principal **72603080**) já foram validados na triagem técnica e nossa equipe técnica de Banco de Dados já iniciou o procedimento de unificação no sistema para resolução da inconsistência.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui para a continuidade dos lançamentos no Faturamento!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+      "[Chamado #42049 (Resolvido)] Cadastro unificado:"
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-05T17:18:29.712Z"
+  },
+  {
     "ticket_id": 42294,
     "title": "Sistemas Operacionais  -  Criação de item no GLPI - Modo Faturamento",
     "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",

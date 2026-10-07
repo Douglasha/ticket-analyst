@@ -5800,5 +5800,99 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Nucleo Piumhi) solicita alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**, parametrizando os horários e intervalos de atendimento (Atendimentos de 45/45minutos De segunda a sexta das 07:00 às 12:30hs Intervalo de 15minutos Jéssica Lima Atendimentos de 45/45minutos De segunda a sexta das 13:00 às 16:15hs Sem intervalo). Todas as informações necessárias (profissionais, faixas de horário, duração dos atendimentos e intervalos) já foram informadas no relato. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Sistemas Operacionais\", recomenda-se reclassificar para \"T.I > ST > Instalação/Configuração > Aplicativos\").*\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42034) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-18)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.\n  3. [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.\n  4. [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.\n  5. [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.\n  6. [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado.",
     "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42314": {
+    "ticket_id": 42314,
+    "analyzed_at": "05/10/2026 16:02",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1412358** no sistema **sistema interno**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Sistemas Internos",
+    "real_urgency": "Média",
+    "urgency_reason": "Reabertura de registro/conta no sistema sistema interno solicitada pelo setor H Faturamento para continuidade do faturamento/auditoria.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-28",
+        "title": "Reabertura de Registro ou Conta Encerrada Erroneamente (Controle de Contas / SGH / Faturamento)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro ou conta hospitalar que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH), permitindo novos lançamentos, estornos e conferência.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-28)",
+    "resolution_steps": [
+      "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1412358** no sistema **sistema interno**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Sistemas Internos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1412358** no sistema **sistema interno**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
+  },
+  "42382": {
+    "ticket_id": 42382,
+    "analyzed_at": "07/10/2026 08:00",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Julia Vitoria Grilo Silva** (Financeiro) solicita a **troca de toner** da impressora do setor **Financeiro**. Todos os dados necessários para o atendimento presencial e separação do toner compatível constam no chamado.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Suprimentos > Toners",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de troca de toner para manutenção da continuidade das impressões do setor Financeiro.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-31",
+        "title": "Solicitação de Troca de Toner, Reposição de Tintas e Suprimentos de Impressão",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de setor operacional para fornecimento, substituição física de toner ou reposição de tintas da impressora do setor (ex.: Samsung M4080FX / EPSON L14150 Series / impressora de rede), por término de carga ou nível baixo de suprimento.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).",
+          "Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).",
+          "Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.",
+          "Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.",
+          "Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.",
+          "Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+        ],
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41723 (Resolvido)",
+        "title": "Infraestrutura e Redes > Toners > Troca de Tonner da Impressora Brother HL-1200 series",
+        "category": "T.I • Solucionado por rbernardes",
+        "summary": "Impressora OK",
+        "steps": [
+          "Impressora OK"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-31) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41723 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-31] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).",
+      "[PB-UNI-31] Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).",
+      "[PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.",
+      "[PB-UNI-31] Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.",
+      "[PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.",
+      "[PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Julia Vitoria Grilo Silva** (Financeiro) solicita a **troca de toner** da impressora do setor **Financeiro**. Todos os dados necessários para o atendimento presencial e separação do toner compatível constam no chamado.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Suprimentos > Toners | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-31) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41723 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-31] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).\n  2. [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).\n  3. [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.\n  4. [PB-UNI-31] Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.\n  5. [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.\n  6. [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI.",
+    "public_reply_draft": "Olá, Julia! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **Financeiro**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física do toner e efetuar os testes de impressão no equipamento.\n\nAssim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
   }
 }
