@@ -247,7 +247,7 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-12 (Médico/Prestador/Acesso) quando o chamado trata de clínicas no Web Saúde, de hardware/infraestrutura (nobreak, impressora, telefone, etc.), unificação de cadastros ou quando não possui contexto de acesso/permissão
+        // Evita parear PB-UNI-12 (Médico/Prestador/Acesso) quando o chamado trata de clínicas no Web Saúde, de hardware/infraestrutura (nobreak, impressora, telefone, etc.), unificação de cadastros, erros de sistema no HRP/SGH ou quando não possui contexto de concessão de acesso/permissão
         if (pb.id === "PB-UNI-12") {
           const isHardwareOrInfra =
             /\b(nobreak|no-break|ups|bateria|gerador|energia|impressora|toner|papel|telefone|ramal|pabx|cabo de rede|wifi|wi-fi|remanejamento|formatar|computador)\b/i.test(
@@ -257,18 +257,35 @@ export class KnowledgeEngine {
             /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
               normTicket
             );
-          const hasAccessContext =
-            /\b(acesso|acessos|permissao|permissoes|cadastr|liberar|usuario|login|facial|catraca|porta|portas|biometria)\b/i.test(
+          const isSystemError =
+            /\b(dando erro|aparece este erro|erro ao salvar|erro para eu salvar|erro para salvar|falha ao salvar|erros de sistema|abrir um chamado na federa[çc][ãa]o)\b/i.test(
               normTicket
-            );
+            ) ||
+            ticket.category.includes("Erros de Sistema");
+          const hasAccessContext =
+            (/\b(acesso|acessos|permissao|permissoes|liberar|usuario|login|facial|catraca|porta|portas|biometria)\b/i.test(
+              normTicket
+            ) ||
+              /\bfavor cadastrar\b|\bliberar acesso\b/i.test(normTicket)) &&
+            !isSystemError;
           const isWebSaudeNas =
             /\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos)\b/i.test(
               normTicket
             );
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError) {
             continue;
           }
+        }
+        // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
+        if (
+          pb.id === "PB-UNI-35" &&
+          (!/\b(hrp|federa[çc][ãa]o)\b/i.test(normTicket) ||
+            !/\b(contrato|contratos|prestador|prestadores|salvar|erro|dando erro)\b/i.test(
+              normTicket
+            ))
+        ) {
+          continue;
         }
         // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27) ou criação de formulários no GLPI
         if (
@@ -514,6 +531,15 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.85);
         }
+        if (
+          pb.id === "PB-UNI-35" &&
+          /\b(hrp|federa[çc][ãa]o)\b/i.test(normTicket) &&
+          /\b(contrato|contratos|prestador|prestadores|salvar|erro|dando erro)\b/i.test(
+            normTicket
+          )
+        ) {
+          score = Math.max(score, 0.85);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -661,6 +687,15 @@ export class KnowledgeEngine {
         if (
           !/\b(nobreak|no-break|ups|bateria|gerador|energia)\b/i.test(normTicket) &&
           /\b(nobreak|no-break|ups|bateria|gerador)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de unificação de cadastros (beneficiário ou insumos) quando o chamado NÃO trata de unificação
+        if (
+          !/\b(unifica|unificar|unificacao|duplicad|duplicidade|mesmo cadastro|mais de um cadastro)\b/i.test(normTicket) &&
+          /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

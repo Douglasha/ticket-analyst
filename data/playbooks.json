@@ -1199,5 +1199,41 @@
       "Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à exclusão da {taxa} lançada equivocadamente no módulo de Faturamento de Convênios do sistema **SGH (Spdata)**.\n\nTodos os dados da conta externa (Registro **{registro}**, Paciente: **{paciente}**, Prontuário: **{prontuario}**) foram validados e nossa equipe técnica já está verificando o procedimento para exclusão/estorno da taxa no sistema.\n\nAssim que o lançamento for excluído e a conta liberada no SGH, confirmaremos a conclusão por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-35",
+    "title": "Erro de Sistema no ERP HRP Unimed — Cadastro de Prestadores, Contratos e Acionamento da Federação",
+    "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "keywords": [
+      "hrp unimed",
+      "hrp",
+      "cadastro do prestador",
+      "cadastro de prestador",
+      "contratos",
+      "itau prestadores",
+      "salvar contratos",
+      "erro para salvar",
+      "erro ao salvar",
+      "chamado na federação",
+      "chamado na federacao",
+      "federação",
+      "federacao",
+      "erros de sistema hrp",
+      "dando erro para eu salvar"
+    ],
+    "symptoms": "Colaborador(a) do setor de Cadastro relata erro no ERP HRP Unimed ao tentar salvar ou atualizar a aba de contratos (ex.: Itaú prestadores) no cadastro de prestadores, consultando sobre apoio da T.I ou necessidade de abertura de chamado junto ao suporte da Federação.",
+    "required_info": [
+      "Mensagem ou print da tela com o código do erro no HRP Unimed",
+      "Código do prestador afetado e qual contrato está sendo vinculado",
+      "Número do chamado/protocolo aberto junto à Federação (caso já acionada)"
+    ],
+    "resolution_steps": [
+      "Analisar o erro de sistema reportado na tela de contratos de prestadores (ex.: vínculo de Itaú prestadores) no ERP HRP Unimed.",
+      "Verificar se a inconsistência decorre de parametrização local ou se trata de regra/tabela da Federação exigindo escalonamento externo.",
+      "Orientar ou registrar a abertura de chamado técnico junto ao portal de suporte da Federação das Unimeds com os prints e evidências do erro.",
+      "Vincular o número do chamado da Federação ao ticket do GLPI e manter o status em 'Pendente' para acompanhamento conjunto.",
+      "Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente ao erro no sistema **HRP Unimed** ao salvar a aba de contratos ({contrato}) no cadastro de prestadores.\n\nComo essa inconsistência envolve regras e tabelas geridas pela **Federação**, orientamos a abertura de chamado no suporte da Federação (ou ficamos no aguardo do número do protocolo federativo) para que nossa equipe de T.I. possa acompanhar a resolução em conjunto.\n\nManteremos este chamado em acompanhamento (status Pendente) até a conclusão pela Federação!\n\nPermanecemos à disposição!"
   }
 ]

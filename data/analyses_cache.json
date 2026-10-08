@@ -5841,6 +5841,102 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a reabertura do registro **1412358** no sistema **sistema interno**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Sistemas Internos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
     "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1412358** no sistema **sistema interno**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
   },
+  "42348": {
+    "ticket_id": 42348,
+    "analyzed_at": "07/10/2026 10:25",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Todos os telefones do Núcleo e centro de especialidades médicas estão apresentando instabilidade, com quedas nas ligações, e já foram realizadas tentativas de religação sem sucesso. Viviane Souza (Viviane) relatou o problema no Núcleo Passos.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "real_urgency": "Alta",
+    "urgency_reason": "Ocorre uma interrupção significativa no serviço de telefonia, comprometendo a eficiência operacional.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Quais números de ramais específicos do setor estão apresentando queda nas ligações",
+      "Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos",
+      "Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX"
+    ],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nTodos os telefones do Núcleo e centro de especialidades médicas estão apresentando instabilidade, com quedas nas ligações, e já foram realizadas tentativas de religação sem sucesso. Viviane Souza (Viviane) relatou o problema no Núcleo Passos.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Quais números de ramais específicos do setor estão apresentando queda nas ligações\n  - Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos\n  - Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nJá estamos analisando o seu chamado #42348 (**Telefones estão instáveis**). Para avançarmos com a solução o mais rápido possível, você poderia nos confirmar as seguintes informações?\n\n- Quais números de ramais específicos do setor estão apresentando queda nas ligações\n- Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos\n- Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX\n\nAssim que nos responder aqui no chamado, daremos sequência imediata!"
+  },
+  "42361": {
+    "ticket_id": 42361,
+    "analyzed_at": "07/10/2026 10:23",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Frederico Roosevelt** (Faturamento) abriu o chamado solicitando acesso para **versão teste no SP DA**, porém preencheu os campos do formulário (Nome e CPF) com os **próprios dados dela (frederico)** em vez dos dados de **versão teste no SP DA**, além de não especificar quais acessos/sistemas ele(a) precisa.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Especificar quais acessos ou sistemas precisam ser liberados para versão teste no SP DA (ex.: sistema SGH Spdata, login de Rede/Windows, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)",
+      "Informar os dados cadastrais de versão teste no SP DA (Nome completo, CPF, CRM/matrícula e contato/vínculo), pois o formulário foi preenchido com os dados da própria solicitante (Frederico)",
+      "Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital, enviar uma fotografia frontal e com expressão neutra do rosto de versão teste no SP DA"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42197",
+        "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+          "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+          "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+          "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+          "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+          "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42197)",
+    "resolution_steps": [
+      "[MEM-#42197] [PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "[MEM-#42197] [PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+      "[MEM-#42197] [PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+      "[MEM-#42197] [PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+      "[MEM-#42197] [PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+      "[MEM-#42197] [MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Frederico Roosevelt** (Faturamento) abriu o chamado solicitando acesso para **versão teste no SP DA**, porém preencheu os campos do formulário (Nome e CPF) com os **próprios dados dela (frederico)** em vez dos dados de **versão teste no SP DA**, além de não especificar quais acessos/sistemas ele(a) precisa.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42197)\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Especificar quais acessos ou sistemas precisam ser liberados para versão teste no SP DA (ex.: sistema SGH Spdata, login de Rede/Windows, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)\n  - Informar os dados cadastrais de versão teste no SP DA (Nome completo, CPF, CRM/matrícula e contato/vínculo), pois o formulário foi preenchido com os dados da própria solicitante (Frederico)\n  - Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital, enviar uma fotografia frontal e com expressão neutra do rosto de versão teste no SP DA\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42197] [PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.\n  2. [MEM-#42197] [PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).\n  3. [MEM-#42197] [PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.\n  4. [MEM-#42197] [PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.\n  5. [MEM-#42197] [PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.\n  6. [MEM-#42197] [MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+    "public_reply_draft": "Olá, Frederico! Tudo bem?\n\nRecebemos a sua solicitação de acesso para o(a) **versão teste no SP DA**.\n\nVerificamos que os campos do formulário foram preenchidos com os seus próprios dados (Nome e CPF) e não foi especificado quais acessos ele(a) necessita. Para realizarmos o cadastro corretamente, você poderia nos informar:\n1. **Quais acessos ou sistemas** precisam ser liberados para o(a) **versão teste no SP DA** (ex.: SGH Spdata, login de Rede/computador, PACS, Wi-Fi ou controle de acesso/reconhecimento facial nas portas do Hospital)?\n2. Os **dados cadastrais do(a) versão teste no SP DA** (**CPF**, **CRM/matrícula** e contato/vínculo)?\n3. **Caso solicite acesso ao controle de acesso/reconhecimento facial nas portas do Hospital**, enviar uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\nAssim que nos enviar essas informações por aqui, já realizamos a liberação!"
+  },
+  "42364": {
+    "ticket_id": 42364,
+    "analyzed_at": "07/10/2026 10:23",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitação refere-se a uma câmera de segurança que não está funcionando corretamente na sede administrativa da Unimed. O problema é que a câmera esquerda da porta principal da sede não está permitindo acesso. Bianca Silva está solicitando que alguém verifique e verifique se há algo de perigoso por trás da câmera.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "Hospital > Manutenção",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "O acesso à câmera é crucial para garantir a segurança da sede durante a noite.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitação refere-se a uma câmera de segurança que não está funcionando corretamente na sede administrativa da Unimed. O problema é que a câmera esquerda da porta principal da sede não está permitindo acesso. Bianca Silva está solicitando que alguém verifique e verifique se há algo de perigoso por trás da câmera.\n\nClassificação Sugerida: Hospital > Manutenção | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Bianca! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Manutenção Eletrônica | CÂMERA SEM ACESSO**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
   "42377": {
     "ticket_id": 42377,
     "analyzed_at": "07/10/2026 10:13",
@@ -5934,5 +6030,203 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Julia Vitoria Grilo Silva** (Financeiro) solicita a **troca de toner** da impressora do setor **Financeiro**. Todos os dados necessários para o atendimento presencial e separação do toner compatível constam no chamado.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Suprimentos > Toners | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-31) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41723 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-31] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Suprimentos > Tintas' (para impressoras tanque/jato de tinta) ou 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' (ou 'Suprimentos > Toner' para laser).\n  2. [PB-UNI-31] Verificar no estoque de T.I. a disponibilidade dos suprimentos compatíveis com o modelo da impressora solicitante (ex.: refis de tinta Epson T504 para EPSON L14150 Series ou toner Samsung MLT-D201L/S para Samsung M4080FX).\n  3. [PB-UNI-31] Deslocar técnico de Infraestrutura e Redes até o setor solicitante (ex.: Marketing, H SND) portando os suprimentos lacrados.\n  4. [PB-UNI-31] Realizar a substituição do cartucho de toner ou o abastecimento cuidadoso dos tanques de tinta (EcoTank) no compartimento da impressora.\n  5. [PB-UNI-31] Imprimir relatório de status de suprimentos ou página de teste/verificação de jatos diretamente no painel do equipamento para atestar o reconhecimento e a qualidade da impressão.\n  6. [PB-UNI-31] Confirmar a conclusão do atendimento presencial e normalização do equipamento no chamado GLPI.",
     "public_reply_draft": "Olá, Julia! Tudo bem?\n\nRecebemos a sua solicitação referente à **troca de toner** da impressora do setor **Financeiro**.\n\nNossa equipe de Infraestrutura e Redes já está separando o cartucho de toner compatível no estoque e providenciará o deslocamento de um técnico até o setor para realizar a substituição física do toner e efetuar os testes de impressão no equipamento.\n\nAssim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42404": {
+    "ticket_id": 42404,
+    "analyzed_at": "07/10/2026 10:21",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante Maria Julia Batista Silva está relutando com a perda de uma pasta compartilhada no Nextcloud, que é usada para gerar faturas diariamente. A pasta sumiu e ela não consegue localizá-la, nem na lixeira do Nextcloud. Ela precisa dessa pasta para realizar suas tarefas de faturamento. Este problema está relacionado ao setor de Faturamento do Hospital.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso a Pastas / Nextcloud",
+    "real_urgency": "Média",
+    "urgency_reason": "O problema pode causar atrasos na geração de faturas, comprometendo a operação financeira do setor.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Nome exato da pasta compartilhada no Nextcloud que está tentando acessar",
+      "Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows",
+      "ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42159",
+        "title": "Erros de Sistema  -  Sincronização Nextcloud",
+        "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "steps": [
+          "[PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "[PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "[PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+          "[Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+          "[Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+          "[Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "required_info": [
+          "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+          "Você está tentando acessar pelo navegador ou pelo atalho no computador?",
+          "Qual mensagem de erro aparece na tela e qual o seu ID do HopToDesk para acessarmos remotamente?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-02",
+        "title": "Falha de Acesso ao Nextcloud (Pastas Compartilhadas / Sincronização)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Usuário relata que não consegue acessar a pasta do Nextcloud (via navegador ou cliente de sincronização Desktop).",
+        "steps": [
+          "Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42159) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-02)",
+    "resolution_steps": [
+      "[MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "[MEM-#42159] [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "[MEM-#42159] [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante Maria Julia Batista Silva está relutando com a perda de uma pasta compartilhada no Nextcloud, que é usada para gerar faturas diariamente. A pasta sumiu e ela não consegue localizá-la, nem na lixeira do Nextcloud. Ela precisa dessa pasta para realizar suas tarefas de faturamento. Este problema está relacionado ao setor de Faturamento do Hospital.\n\nClassificação Sugerida: T.I > ST > Acesso a Pastas / Nextcloud | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42159) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-02)\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Nome exato da pasta compartilhada no Nextcloud que está tentando acessar\n  - Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows\n  - ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.\n  2. [MEM-#42159] [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.\n  3. [MEM-#42159] [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.\n  4. [MEM-#42159] [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.\n  5. [MEM-#42159] [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.\n  6. [MEM-#42159] [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado.",
+    "public_reply_draft": "Olá, Maria! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n\nFicamos no aguardo para regularizar seu acesso!"
+  },
+  "42421": {
+    "ticket_id": 42421,
+    "analyzed_at": "07/10/2026 12:43",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Rebeca Gonçalves de Freitas Silva** (H Faturamento) solicita atendimento presencial da equipe de Infraestrutura e Redes para realizar a mudança/instalação física solicitada (Por gentileza, trocar o convênio da conta da paciente Clara Maria Galazzi Santos do 970 para o 5.). Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "real_urgency": "Média",
+    "urgency_reason": "Solicitação de remanejamento físico de equipamento e/ou instalação de ponto de telefonia/rede, demandando atendimento presencial da equipe de Infraestrutura.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (5)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-66",
+        "title": "Não foi possível realizar a troca. Operation aborted",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Erro apresentado ao realizar a troca de convênio de um registro\n\n\r\nPara corrigir atualizamos o faturamento em Utilitário, mas a ocorrência pode ser por outras causas também, segundo chamado aberto para a Spdata, segue abaixo resposta do ticket.\n\n\r\nTicket 202607018894\n\n\r\nReginaldo de Melo Silva16/07/2026 16:32 \r\n \r\n2\r\n\r...",
+        "steps": [
+          "Erro apresentado ao realizar a troca de convênio de um registro",
+          "Para corrigir atualizamos o faturamento em Utilitário, mas a ocorrência pode ser por outras causas também, segundo chamado aberto para a Spdata, segue abaixo resposta do ticket.",
+          "Ticket 202607018894",
+          "Reginaldo de Melo Silva16/07/2026 16:32",
+          "2",
+          "Boa tarde, Douglas!"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-66)",
+    "resolution_steps": [
+      "[KB-66] Erro apresentado ao realizar a troca de convênio de um registro",
+      "[KB-66] Para corrigir atualizamos o faturamento em Utilitário, mas a ocorrência pode ser por outras causas também, segundo chamado aberto para a Spdata, segue abaixo resposta do ticket.",
+      "[KB-66] Ticket 202607018894",
+      "[KB-66] Reginaldo de Melo Silva16/07/2026 16:32"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Rebeca Gonçalves de Freitas Silva** (H Faturamento) solicita atendimento presencial da equipe de Infraestrutura e Redes para realizar a mudança/instalação física solicitada (Por gentileza, trocar o convênio da conta da paciente Clara Maria Galazzi Santos do 970 para o 5.). Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-66)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (5)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-66] Erro apresentado ao realizar a troca de convênio de um registro\n  2. [KB-66] Para corrigir atualizamos o faturamento em Utilitário, mas a ocorrência pode ser por outras causas também, segundo chamado aberto para a Spdata, segue abaixo resposta do ticket.\n  3. [KB-66] Ticket 202607018894\n  4. [KB-66] Reginaldo de Melo Silva16/07/2026 16:32",
+    "public_reply_draft": "Olá, Rebeca! Tudo bem?\n\nRecebemos a sua solicitação para realizar a mudança/instalação física solicitada (Por gentileza, trocar o convênio da conta da paciente Clara Maria Galazzi Santos do 970 para o 5.).\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (5)?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!"
+  },
+  "42480": {
+    "ticket_id": 42480,
+    "analyzed_at": "08/10/2026 15:33",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Ediléa Almeida** (Cadastro) relata erro de sistema no **HRP Unimed** ao salvar a aba de contratos (Itau prestadores) durante o cadastro de prestador, consultando sobre apoio da T.I ou abertura de chamado na Federação. Já foi alinhado que a colaboradora abrirá chamado junto ao suporte da Federação e retornará as informações neste chamado do GLPI para acompanhamento conjunto (chamado em status Pendente).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Inconsistência de sistema ao salvar contratos no cadastro de prestadores do ERP HRP Unimed, com acompanhamento de chamado junto à Federação.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-35",
+        "title": "Erro de Sistema no ERP HRP Unimed — Cadastro de Prestadores, Contratos e Acionamento da Federação",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Colaborador(a) do setor de Cadastro relata erro no ERP HRP Unimed ao tentar salvar ou atualizar a aba de contratos (ex.: Itaú prestadores) no cadastro de prestadores, consultando sobre apoio da T.I ou necessidade de abertura de chamado junto ao suporte da Federação.",
+        "steps": [
+          "Analisar o erro de sistema reportado na tela de contratos de prestadores (ex.: vínculo de Itaú prestadores) no ERP HRP Unimed.",
+          "Verificar se a inconsistência decorre de parametrização local ou se trata de regra/tabela da Federação exigindo escalonamento externo.",
+          "Orientar ou registrar a abertura de chamado técnico junto ao portal de suporte da Federação das Unimeds com os prints e evidências do erro.",
+          "Vincular o número do chamado da Federação ao ticket do GLPI e manter o status em 'Pendente' para acompanhamento conjunto.",
+          "Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-60",
+        "title": "Autenticação Facial",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "▸ Parametrização no HRP\n\r\n\r\nCadastrar prestadores que deverão solicitar biometria facial no portal.\nLocalização: Menu > Atendimento > Autenticação de beneficiário > Cadastro > Controle de integração para autenticação de beneficiários.ip\nGrade: Parâmetro Prestador\nPrestador parametrizado com biometria obrigatória dentro...",
+        "steps": [
+          "▸ Parametrização no HRP",
+          "Cadastrar prestadores que deverão solicitar biometria facial no portal.",
+          "Localização: Menu > Atendimento > Autenticação de beneficiário > Cadastro > Controle de integração para autenticação de beneficiários.ip",
+          "Grade: Parâmetro Prestador",
+          "Prestador parametrizado com biometria obrigatória dentro da vigência, o portal deverá exigir biometria facial.",
+          "Cadastro de Exceções de Beneficiários"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-05",
+        "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
+        "steps": [
+          "Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+          "Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42210 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Criação de Usuários > Luiza Barros Maciel",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nAcesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.\n\n\r\nCadastro concluído com sucesso!\n\n\r\nLogin: CPFSenha: 1253\nlink: hrp.unimedsudoestemg.coop.br\n\n\r\nOs dados de login do(a) atendente foram enviados para o e-mail informado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos ",
+        "steps": [
+          "Prezados(as),",
+          "Acesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.",
+          "Cadastro concluído com sucesso!",
+          "Login: CPFSenha: 1253",
+          "link: hrp.unimedsudoestemg.coop.br",
+          "Os dados de login do(a) atendente foram enviados para o e-mail informado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-35) + 1ª Camada • Base de Conhecimento GLPI (KB-60)",
+    "resolution_steps": [
+      "[PB-UNI-35] Analisar o erro de sistema reportado na tela de contratos de prestadores (ex.: vínculo de Itaú prestadores) no ERP HRP Unimed.",
+      "[PB-UNI-35] Verificar se a inconsistência decorre de parametrização local ou se trata de regra/tabela da Federação exigindo escalonamento externo.",
+      "[PB-UNI-35] Orientar ou registrar a abertura de chamado técnico junto ao portal de suporte da Federação das Unimeds com os prints e evidências do erro.",
+      "[PB-UNI-35] Vincular o número do chamado da Federação ao ticket do GLPI e manter o status em 'Pendente' para acompanhamento conjunto.",
+      "[PB-UNI-35] Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado.",
+      "[KB-60] ▸ Parametrização no HRP"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ediléa Almeida** (Cadastro) relata erro de sistema no **HRP Unimed** ao salvar a aba de contratos (Itau prestadores) durante o cadastro de prestador, consultando sobre apoio da T.I ou abertura de chamado na Federação. Já foi alinhado que a colaboradora abrirá chamado junto ao suporte da Federação e retornará as informações neste chamado do GLPI para acompanhamento conjunto (chamado em status Pendente).\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-35) + 1ª Camada • Base de Conhecimento GLPI (KB-60)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-35] Analisar o erro de sistema reportado na tela de contratos de prestadores (ex.: vínculo de Itaú prestadores) no ERP HRP Unimed.\n  2. [PB-UNI-35] Verificar se a inconsistência decorre de parametrização local ou se trata de regra/tabela da Federação exigindo escalonamento externo.\n  3. [PB-UNI-35] Orientar ou registrar a abertura de chamado técnico junto ao portal de suporte da Federação das Unimeds com os prints e evidências do erro.\n  4. [PB-UNI-35] Vincular o número do chamado da Federação ao ticket do GLPI e manter o status em 'Pendente' para acompanhamento conjunto.\n  5. [PB-UNI-35] Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado.\n  6. [KB-60] ▸ Parametrização no HRP",
+    "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nRecebemos o seu relato referente ao erro no sistema **HRP Unimed** ao tentar salvar os contratos (**Itau prestadores**) no cadastro do prestador.\n\nComo essa inconsistência na gravação de contratos envolve regras e tabelas do sistema geridas centralmente pela **Federação**, ficamos no aguardo do número de protocolo do chamado aberto junto ao suporte da **Federação** para que nossa equipe técnica possa acompanhar a resolução em conjunto por aqui.\n\nO chamado permanecerá em acompanhamento (status Pendente) até a conclusão e retorno da Federação!\n\nPermanecemos à disposição!"
   }
 }

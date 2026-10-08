@@ -1,5 +1,36 @@
 [
   {
+    "ticket_id": 42404,
+    "title": "Resolução de Problemas  -  uma pasta do nextcloud sumiu",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "pasta",
+      "nextcloud",
+      "sumiu",
+      "next",
+      "cloud",
+      "compartilhada",
+      "convenio",
+      "aura"
+    ],
+    "problem_summary": "Bom dia.\nTenho uma pasta compartilhada do convenio AURA que utilizo todos os dias para faturar as contas, ela fica com guias de paciente assinadas dentro, porém hoje a pasta sumiu e não encontro ela na lixeira, nem um nenhum lugar rsssss 😭, e preciso dela para conseguir faturar.......\nMês passado ocorreu a mesma coisa com a pasta que não aparecia para mim mas aparecia para auditoria, porém agora não sei o que pode ter acontecido.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n\nFicamos no aguardo para regularizar seu acesso!",
+    "required_info": [
+      "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+      "Você está tentando acessar pelo navegador ou pelo atalho no computador?"
+    ],
+    "resolution_steps": [
+      "[MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "[MEM-#42159] [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "[MEM-#42159] [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+      "[MEM-#42159] [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-07T13:22:28.221Z"
+  },
+  {
     "ticket_id": 42382,
     "title": "Toners  -  Tonner",
     "category": "T.I > IR > Suporte a Hardware > Suprimentos > Toners",

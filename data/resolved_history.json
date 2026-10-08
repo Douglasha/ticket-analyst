@@ -1,5 +1,247 @@
 [
   {
+    "id": "Chamado #42496 (Resolvido)",
+    "ticket_id": 42496,
+    "solution_id": 41215,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Laura Beatriz Ribeiro Nascimento",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Cadastro efetuado com sucesso.",
+    "keywords": [],
+    "steps": [
+      "Cadastro efetuado com sucesso."
+    ]
+  },
+  {
+    "id": "Chamado #42468 (Resolvido)",
+    "ticket_id": 42468,
+    "solution_id": 41201,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização do nextcloud",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nErro do usuário corrigido, testado e avaliado.\nFoi feita a atualização do Nextcloud. \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Erro do usuário corrigido, testado e avaliado.",
+      "Foi feita a atualização do Nextcloud.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42454 (Resolvido)",
+    "ticket_id": 42454,
+    "solution_id": 41196,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Lentidão na maquina ( computador )",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Foi realizada uma limpeza de hardware e software no computador, a lentidão foi resolvida",
+    "keywords": [],
+    "steps": [
+      "Foi realizada uma limpeza de hardware e software no computador, a lentidão foi resolvida"
+    ]
+  },
+  {
+    "id": "Chamado #42444 (Resolvido)",
+    "ticket_id": 42444,
+    "solution_id": 41193,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Mercia Cristina de Oliveira",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nPermissões replicadas para a colaboradora.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Permissões replicadas para a colaboradora.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42438 (Resolvido)",
+    "ticket_id": 42438,
+    "solution_id": 41159,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Unificação de Cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 07/10/2026 - 15:37:13Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 07/10/2026 - 15:38:02Deleção das chaves originais deletadas com sucesso em: 07/10/2026 - 15:38:03\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permane",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado",
+      "Início da substituição da(s) chave(s) do arquivo em: 07/10/2026 - 15:37:13Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 07/10/2026 - 15:38:02Deleção das chaves originais deletadas com sucesso em: 07/10/2026 - 15:38:03",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42432 (Resolvido)",
+    "ticket_id": 42432,
+    "solution_id": 41143,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Divergência de nome no Registro de Ponto",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Usuário removido.",
+    "keywords": [],
+    "steps": [
+      "Usuário removido."
+    ]
+  },
+  {
+    "id": "Chamado #42431 (Resolvido)",
+    "ticket_id": 42431,
+    "solution_id": 41176,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Incluir plano aura",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConvênio inserido na agenda.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Convênio inserido na agenda.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42428 (Resolvido)",
+    "ticket_id": 42428,
+    "solution_id": 41198,
+    "title": "Manutenção Preventiva - DHU-1269-UTI",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Foi realizada a limpeza preventiva anual no dia 07/10/2026.",
+    "keywords": [],
+    "steps": [
+      "Foi realizada a limpeza preventiva anual no dia 07/10/2026."
+    ]
+  },
+  {
+    "id": "Chamado #42427 (Resolvido)",
+    "ticket_id": 42427,
+    "solution_id": 41197,
+    "title": "Manutenção Preventiva - DHU-0956-UTI",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Foi realizada a limpeza preventiva anual dia 08//10/2026",
+    "keywords": [],
+    "steps": [
+      "Foi realizada a limpeza preventiva anual dia 08//10/2026"
+    ]
+  },
+  {
+    "id": "Chamado #42421 (Resolvido)",
+    "ticket_id": 42421,
+    "solution_id": 41157,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Troca de convênio",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42416 (Resolvido)",
+    "ticket_id": 42416,
+    "solution_id": 41146,
+    "title": "Segurança da Informação > Gestão de Acessos > Ana Paula Martins",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Cadastro efetuado com sucesso",
+    "keywords": [],
+    "steps": [
+      "Cadastro efetuado com sucesso"
+    ]
+  },
+  {
+    "id": "Chamado #42415 (Resolvido)",
+    "ticket_id": 42415,
+    "solution_id": 41145,
+    "title": "Segurança da Informação > Gestão de Acessos > Tatiane Batista Cardoso Veras",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Cadastro Efetuado Com sucesso",
+    "keywords": [],
+    "steps": [
+      "Cadastro Efetuado Com sucesso"
+    ]
+  },
+  {
+    "id": "Chamado #42413 (Resolvido)",
+    "ticket_id": 42413,
+    "solution_id": 41137,
+    "title": "Segurança da Informação > Gestão de Acessos > Marcela Venancio da Costa",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42410 (Resolvido)",
+    "ticket_id": 42410,
+    "solution_id": 41134,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > REGINA MITUYO MATSUO DE CARVALHO",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "caso tenha duvida oriente ela a buscar o setor de TI",
+    "keywords": [],
+    "steps": [
+      "caso tenha duvida oriente ela a buscar o setor de TI"
+    ]
+  },
+  {
+    "id": "Chamado #42409 (Resolvido)",
+    "ticket_id": 42409,
+    "solution_id": 41135,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Thatiana Mara valletta da Silveira",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "caso tenha duvida oriente ela a buscar o setor de TI",
+    "keywords": [],
+    "steps": [
+      "caso tenha duvida oriente ela a buscar o setor de TI"
+    ]
+  },
+  {
+    "id": "Chamado #42404 (Resolvido)",
+    "ticket_id": 42404,
+    "solution_id": 41133,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > uma pasta do nextcloud sumiu",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42396 (Resolvido)",
+    "ticket_id": 42396,
+    "solution_id": 41144,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
     "id": "Chamado #42394 (Resolvido)",
     "ticket_id": 42394,
     "solution_id": 41115,
@@ -47,6 +289,21 @@
     ]
   },
   {
+    "id": "Chamado #42377 (Resolvido)",
+    "ticket_id": 42377,
+    "solution_id": 41158,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Taxa de registro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42374 (Resolvido)",
     "ticket_id": 42374,
     "solution_id": 41101,
@@ -58,6 +315,22 @@
     "steps": [
       "Prezados(as),",
       "Conta reaberta",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42372 (Resolvido)",
+    "ticket_id": 42372,
+    "solution_id": 41164,
+    "title": "T.I > ST > Acesso e Permissões > Revogar Certificados [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSem certificados para solicitar revogação\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Sem certificados para solicitar revogação",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -533,6 +806,24 @@
       "Faculdade Unimed",
       "link: https://www.faculdadeunimed.edu.br/",
       "login: CPF"
+    ]
+  },
+  {
+    "id": "Chamado #42272 (Resolvido)",
+    "ticket_id": 42272,
+    "solution_id": 41132,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > DATA DE ALTA",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia, implementação concluída.\n\n\r\nData da alta\n\n\r\nReferente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.\n\n\r\nAtualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da",
+    "keywords": [],
+    "steps": [
+      "Bom dia, implementação concluída.",
+      "Data da alta",
+      "Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.",
+      "Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada.",
+      "Vale ressaltar que a funcionalidade verifica previamente as contas que já estão cadastradas no Controle de Contas. Dessa forma, somente as contas que ainda não possuem cadastro serão incluídas automaticamente, evitando registros duplicados.",
+      "Em relação às contas de atendimento externo, não haverá impacto nesse processo, pois elas já são criadas no SPDATA com a data de entrada e a data de alta no mesmo dia. Sendo assim, essas contas estarão aptas para serem identificadas normalmente pelo processamento automático, sem risco de ficarem pendentes por ausência da informação de alta."
     ]
   },
   {
@@ -3147,6 +3438,21 @@
     "keywords": [],
     "steps": [
       "Após testes confirmamos que o sistema funciona normalmente. Peço por gentileza que solicite um fone headset USB para o setor de compras. Após a chegada, iremos fazer a instalação dele"
+    ]
+  },
+  {
+    "id": "Chamado #37471 (Resolvido)",
+    "ticket_id": 37471,
+    "solution_id": 41136,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Desenvolvimento de Etiquetas para Rotulos",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {

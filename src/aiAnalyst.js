@@ -1421,10 +1421,15 @@ export class AIAnalyst {
       }
     } else if (
       !/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
+      !/\b(dando erro|aparece este erro|erro ao salvar|erro para eu salvar|erro para salvar|falha ao salvar|erros de sistema|abrir um chamado na federa[çc][ãa]o)\b/i.test(
+        normAll
+      ) &&
+      !ticket.category.includes("Erros de Sistema") &&
       (normAll.includes("acesso e permissoes") ||
         ticket.category.includes("Acesso e Permissões") ||
         /\bfavor cadastrar\b|\bliberar acesso\b/i.test(normCore) ||
-        /\bcadastro d[eo]\s+(m[ée]dic[oa]|colaborador|funcion[áa]ri[oa]|doutor|dr\.?|dra\.?|profissional|prestador|usu[áa]ri[oa]|plantonista)\b/i.test(normCore))
+        (/\bcadastro d[eo]\s+(m[ée]dic[oa]|colaborador|funcion[áa]ri[oa]|doutor|dr\.?|dra\.?|profissional|prestador|usu[áa]ri[oa]|plantonista)\b/i.test(normCore) &&
+          !/\b(erro|erros|falha|salvar|gravar|contrato|contratos)\b/i.test(normCore)))
     ) {
       const descText = formFields.descricao || "";
       const normDesc = normalizeText(descText);
@@ -1438,7 +1443,7 @@ export class AIAnalyst {
         : "";
       if (
         targetPerson &&
-        /\b(atendentes?|clinicas?|novas?|usuarios?|setor|recepcao|nas)\b/i.test(
+        /\b(atendentes?|clinicas?|novas?|usuarios?|setor|recepcao|nas|prestador(es)?|medico(s)?|profissional|colaborador(a)?)\b/i.test(
           targetPerson
         )
       ) {
@@ -1664,6 +1669,70 @@ export class AIAnalyst {
           `Para localizarmos a conta e executarmos o estorno/exclusão, você poderia nos informar o **número do registro/conta externa**, o **nome do(a) paciente** e a **taxa/código** a ser excluída?\n\n` +
           `Assim que nos confirmar esses dados por aqui, realizamos o procedimento!`;
       }
+    } else if (
+      (/\b(hrp|federa[çc][ãa]o)\b/i.test(normAll) &&
+        /\b(contrato|contratos|itau prestadores|prestador|prestadores)\b/i.test(normAll) &&
+        /\b(erro|erros|dando erro|aparece este erro|salvar|chamado na federa[çc][ãa]o)\b/i.test(
+          normAll
+        )) ||
+      (normAll.includes("hrp") &&
+        normAll.includes("contratos") &&
+        /\b(erro|salvar)\b/i.test(normAll))
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const appName = formFields.aplicacao || "HRP Unimed";
+
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const contractMatch =
+        descText.match(/\b(?:colocar|contrato|contratos)\s*([A-ZÀ-Úa-zà-ú0-9\s]+prestadores?)\b/i) ||
+        descText.match(/\b(itau prestadores?)\b/i);
+      const contractDesc = contractMatch
+        ? contractMatch[1].trim()
+        : "contratos de prestadores (Itau prestadores)";
+
+      const allFollowupsTxt = (ticket.followups || [])
+        .map((f) => f.content)
+        .join(" ");
+      const alreadyEscalatedFed =
+        /\bfedera[çc][ãa]o\b/i.test(allFollowupsTxt) ||
+        /\bvai abrir um chamado na federa[çc][ãa]o\b/i.test(
+          normalizeText(allFollowupsTxt)
+        );
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory =
+        ticket.category.includes("Solicitação Diversa") ||
+        ticket.category.includes("Aplicativos") ||
+        ticket.category.includes("Sistemas Operacionais")
+          ? "T.I > ST > Resolução de Problemas > Erros de Sistema"
+          : ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        `Inconsistência de sistema ao salvar contratos no cadastro de prestadores do ERP ${appName}, com acompanhamento de chamado junto à Federação.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      if (alreadyEscalatedFed) {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) relata erro de sistema no **${appName}** ao salvar a aba de contratos (${contractDesc}) durante o cadastro de prestador, consultando sobre apoio da T.I ou abertura de chamado na Federação. ` +
+          `Já foi alinhado que a colaboradora abrirá chamado junto ao suporte da Federação e retornará as informações neste chamado do GLPI para acompanhamento conjunto (chamado em status Pendente).`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) relata erro de sistema no **${appName}** ao salvar a aba de contratos (${contractDesc}) durante o cadastro de prestador, consultando sobre apoio da T.I ou necessidade de abertura de chamado junto ao suporte da Federação. ` +
+          `Demanda validação técnica da inconsistência e orientação para abertura de chamado federativo.`;
+      }
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu relato referente ao erro no sistema **${appName}** ao tentar salvar os contratos (**${contractDesc}**) no cadastro do prestador.\n\n` +
+        `Como essa inconsistência na gravação de contratos envolve regras e tabelas do sistema geridas centralmente pela **Federação**, ficamos no aguardo do número de protocolo do chamado aberto junto ao suporte da **Federação** para que nossa equipe técnica possa acompanhar a resolução em conjunto por aqui.\n\n` +
+        `O chamado permanecerá em acompanhamento (status Pendente) até a conclusão e retorno da Federação!\n\n` +
+        `Permanecemos à disposição!`;
     } else if (
       !/\b(taxa|taxas)\b/i.test(normAll) &&
       (normAll.includes("cadastrada por engano") ||
@@ -2459,6 +2528,10 @@ export class AIAnalyst {
 
       if (matchedMemory) {
         const isMemActionMismatch =
+          (!/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
+            /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
+              normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+            )) ||
           (/\b(taxa|taxas)\b/i.test(normAll) &&
             !/\b(taxa|taxas)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
@@ -2590,6 +2663,10 @@ export class AIAnalyst {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
       const isMemActionMismatch =
+        (!/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
+          /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
+            normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+          )) ||
         (/\b(taxa|taxas)\b/i.test(normAll) &&
           !/\b(taxa|taxas)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
