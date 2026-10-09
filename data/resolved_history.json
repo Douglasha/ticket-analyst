@@ -1,5 +1,92 @@
 [
   {
+    "id": "Chamado #42552 (Resolvido)",
+    "ticket_id": 42552,
+    "solution_id": 41257,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Campo Observações no Exame Hemograma",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Busquei aqui, mas realmente não tem como alterar o tamanho da variável, para aceitar mais caractere.",
+    "keywords": [],
+    "steps": [
+      "Busquei aqui, mas realmente não tem como alterar o tamanho da variável, para aceitar mais caractere."
+    ]
+  },
+  {
+    "id": "Chamado #42551 (Resolvido)",
+    "ticket_id": 42551,
+    "solution_id": 41255,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > RUBIA JULIANA MESQUITA",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Acessos revogado.",
+    "keywords": [],
+    "steps": [
+      "Acessos revogado."
+    ]
+  },
+  {
+    "id": "Chamado #42544 (Resolvido)",
+    "ticket_id": 42544,
+    "solution_id": 41254,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > ANA LUIZA TEODORO CAMPOS",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Login: ateodoro\nSenha: Unimed@256",
+    "keywords": [],
+    "steps": [
+      "Login: ateodoro",
+      "Senha: Unimed@256"
+    ]
+  },
+  {
+    "id": "Chamado #42533 (Resolvido)",
+    "ticket_id": 42533,
+    "solution_id": 41252,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42526 (Resolvido)",
+    "ticket_id": 42526,
+    "solution_id": 41248,
+    "title": "Infraestrutura e Redes > Toners > Trocar toner",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Toner substituído.",
+    "keywords": [],
+    "steps": [
+      "Toner substituído."
+    ]
+  },
+  {
+    "id": "Chamado #42522 (Resolvido)",
+    "ticket_id": 42522,
+    "solution_id": 41249,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Hellem Dimas Moreira",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\nlogin: hdimas\nsenha: 705@Hdm670\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "login: hdimas",
+      "senha: 705@Hdm670",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42496 (Resolvido)",
     "ticket_id": 42496,
     "solution_id": 41215,
@@ -40,6 +127,19 @@
     "keywords": [],
     "steps": [
       "Foi realizada uma limpeza de hardware e software no computador, a lentidão foi resolvida"
+    ]
+  },
+  {
+    "id": "Chamado #42445 (Resolvido)",
+    "ticket_id": 42445,
+    "solution_id": 41253,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > monitor",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Novo monitor foi instalado e testado.",
+    "keywords": [],
+    "steps": [
+      "Novo monitor foi instalado e testado."
     ]
   },
   {
@@ -183,6 +283,21 @@
     "steps": [
       "Prezados(as),",
       "Cadastro realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42412 (Resolvido)",
+    "ticket_id": 42412,
+    "solution_id": 41256,
+    "title": "Infraestrutura e Redes > Administração de Redes > Telefones",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -377,6 +492,19 @@
     "keywords": [],
     "steps": [
       "Cadastro efetuado com sucesso, deve chegar em seu e-mail um link de acesso e a palavra passe é unimed@256"
+    ]
+  },
+  {
+    "id": "Chamado #42361 (Resolvido)",
+    "ticket_id": 42361,
+    "solution_id": 41220,
+    "title": "Segurança da Informação > Gestão de Acessos > frederico",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Solucionado",
+    "keywords": [],
+    "steps": [
+      "Solucionado"
     ]
   },
   {

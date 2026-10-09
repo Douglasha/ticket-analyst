@@ -78,6 +78,10 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
    - No **HRP Unimed**, a gestão de contratos de prestadores (ex.: operadora Itaú prestadores) e regras cadastrais possui governança federativa.
    - Quando um colaborador do setor de Cadastro relata erro ao salvar dados na tela de contratos, a demanda trata-se de **Erro de Sistema** (`T.I > ST > Resolução de Problemas > Erros de Sistema`).
    - **Distinção Crítica:** NUNCA confundir o relato de erro durante a gravação cadastral de prestadores com uma solicitação de concessão de acessos/permissões (`PB-UNI-12`), nem com unificação de cadastros (`PB-UNI-19`). Quando alinhado com a solicitante que o suporte da Federação será acionado, o chamado deve permanecer com status Pendente até o retorno do protocolo federativo.
+9. **Diferenciação de Solicitação de Acesso Próprio vs. Terceiros (`PB-UNI-12`):**
+   - Quando o colaborador abre chamado de Acesso e Permissões para **si mesmo** (ex.: Thatiana Silveira / H Ultrassom preenchendo o formulário com seu próprio nome e CPF) e especifica no campo de observações o sistema desejado (ex.: *'Preciso de acesso ao faturamento eletrônico no SPDATA para faturar as contas do ultrassom'*), a solicitação é estritamente pessoal e `COMPLETA`.
+   - **Distinção Crítica:** NUNCA interpretar termos do sistema (como *'faturamento eletrônico'*) como sendo o nome de uma terceira pessoa a receber o acesso. NUNCA sinalizar que a colaboradora preencheu os próprios dados por engano, NUNCA solicitar CPF/CRM de terceiros e NUNCA solicitar fotografia facial quando o acesso não envolver reconhecimento facial ou controle de acesso físico em portas.
+
 
 
 

@@ -728,6 +728,24 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear memórias de telefonia/VoIP/ramal (ex: MEM-#42139) quando o chamado NÃO trata de telefone/VoIP/ramal
+        if (
+          !/\b(telefone|telefonia|voip|ramal|pabx|ligac|discagem|mudo|sem sinal|sem tom)\b/i.test(normTicket) &&
+          /\b(telefone|telefonia|voip|ramal|pabx)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de impressora/toner/suprimentos quando o chamado NÃO trata de impressora/toner/suprimentos
+        if (
+          !/\b(impressora|impressao|imprimir|toner|tonner|tinta|tintas|cartucho|spooler|zebra|epson|samsung)\b/i.test(normTicket) &&
+          /\b(impressora|impressao|toner|tonner|tinta|tintas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
         const cleanMemKws = (mem.keywords || []).filter(
           (k) => !STOPWORDS.has(normalizeText(k))
         );

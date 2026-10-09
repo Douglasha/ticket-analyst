@@ -12,6 +12,20 @@ Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil 
   * Se 'Status da Triagem' for 'COMPLETO', apenas confirme que todos os dados necessários já foram recebidos e que a equipe de T.I. já está executando a solicitação (NÃO faça perguntas e NÃO peça ID do HopToDesk).
   * Se houver 'Perguntas de Triagem Pendentes', inclua APENAS essas perguntas em tópicos claros para o solicitante responder.`;
 
+export function formatPersonName(rawName) {
+  if (!rawName) return "";
+  const lowers = new Set(["de", "da", "do", "dos", "das", "e"]);
+  return rawName
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word, idx) => {
+      if (idx > 0 && lowers.has(word)) return word;
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+
 export function buildUserPrompt(
   ticket,
   matches,
@@ -19,10 +33,12 @@ export function buildUserPrompt(
   customInstruction = null,
   missingInfoHints = []
 ) {
-  const firstName =
+  const rawFirstName =
     (ticket.requester_first_name || ticket.requester || "Solicitante")
       .trim()
       .split(/\s+/)[0];
+  const firstName =
+    rawFirstName.charAt(0).toUpperCase() + rawFirstName.slice(1).toLowerCase();
   const formFields = extractFormCreatorFields(ticket.content);
 
   const followupsTxt =
@@ -355,13 +371,26 @@ export class AIAnalyst {
     const normCore = normalizeText(
       `${ticket.title} ${formFields.tipo} ${formFields.ativo} ${formFields.descricao}`
     );
-    const firstName = (
+    const rawFirstName = (
       ticket.requester_first_name ||
       ticket.requester ||
       "Solicitante"
     )
       .trim()
       .split(/\s+/)[0];
+    const firstName =
+      rawFirstName.charAt(0).toUpperCase() + rawFirstName.slice(1).toLowerCase();
+    const formattedRequester = formatPersonName(ticket.requester || firstName);
+
+    const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+      firstName
+    );
+    const isFemale =
+      /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia)\b/i.test(
+        firstName
+      ) || /a$/i.test(firstName);
+    const solPrefix = isMale ? "O solicitante" : (isFemale ? "A solicitante" : "O(a) solicitante");
+
     const rawSetor = formFields.setor ? formFields.setor.trim() : "";
     const rawLoc = formFields.localizacao ? formFields.localizacao.trim() : "";
     const isGenericLoc = /^(hospital|sede|passos|unimed)$/i.test(rawLoc);
@@ -402,6 +431,7 @@ export class AIAnalyst {
     let sufficiencyStatus = "parcial";
     let missingInfo = [];
     let customPublicReply = "";
+    let customResolutionSteps = null;
 
     if (/\[r\]\s*$/i.test(ticket.title)) {
       const cleanRoutineName = ticket.title.replace(/\s*\[R\]\s*$/i, "").trim();
@@ -1434,16 +1464,16 @@ export class AIAnalyst {
       const descText = formFields.descricao || "";
       const normDesc = normalizeText(descText);
 
-      // Tenta identificar se o relato pede cadastro/acesso para outra pessoa (ex: "Favor cadastrar Dr Humberto França Ferreira")
+      // Tenta identificar se o relato pede cadastro/acesso para outra pessoa (ex: "Favor cadastrar Dr Humberto França Ferreira", "liberar acesso para a Dra Paula")
       const targetMatch = descText.match(
-        /(?:favor\s+)?(?:cadastrar|liberar\s+acesso\s+(?:para|ao|a)|cadastro\s+d[eo]a?|acesso\s+(?:para|ao|a))\s+(?:o\s+|a\s+)?((?:dr\.?|dra\.?)\s+[^,\n.;]+|[A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
+        /(?:favor\s+)?(?:cadastrar|liberar\s+acesso\s+(?:para|ao\s+(?:dr\.?|m[ée]dico)|a\s+(?:dra\.?|m[ée]dica))|cadastro\s+d[eo]a?\s+(?:dr\.?|dra\.?|m[ée]dic[oa]|colaborador[a]?|profissional|prestador)|acesso\s+para)\s+(?:o\s+|a\s+)?((?:dr\.?|dra\.?)\s+[^,\n.;]+|[A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,4})/i
       );
       let targetPerson = targetMatch
         ? targetMatch[1].replace(/\s+/g, " ").trim()
         : "";
       if (
         targetPerson &&
-        /\b(atendentes?|clinicas?|novas?|usuarios?|setor|recepcao|nas|prestador(es)?|medico(s)?|profissional|colaborador(a)?)\b/i.test(
+        /\b(faturamento|eletr[oô]nic[oa]|sistema|sistemas|m[oó]dulo(s)?|spdata|sgh|hrp|prontu|pep|biometria|facial|catraca|porta(s)?|rede|pasta(s)?|contas|ultrassom|laborat[oó]rio|recep[çc][ãa]o|intranet|internet|wi-?fi|e-?mail|totvs|autolac|myplace|pacs|benner|agenda|atendentes?|cl[íi]nicas?|nov[ao]s?|usu[áa]rios?|setor|nas|prestador(es)?|m[ée]dico(s)?|profissional|colaborador(a)?)\b/i.test(
           targetPerson
         )
       ) {
@@ -1455,9 +1485,20 @@ export class AIAnalyst {
       const normReqFull = normalizeText(ticket.requester || "");
       const normTarget = normalizeText(targetPerson);
 
-      // Verifica se o solicitante preencheu os próprios dados no formulário em vez dos dados do beneficiário do acesso
+      // Identifica se a solicitação é de acesso próprio do solicitante
+      const isSelfRequestText = /\b(preciso de|solicito|meu acesso|meu usu[áa]rio|para mim|me liberar|me conceder|meu login)\b/i.test(descText);
+      const isSamePerson =
+        !targetPerson &&
+        (Boolean(normColabForm) &&
+          (normReqFull.includes(normColabForm) ||
+            normColabForm.includes(normReqFirst) ||
+            normReqFirst === normColabForm.split(/\s+/)[0] ||
+            normColabForm.startsWith(normReqFirst)));
+
+      // Verifica se o solicitante preencheu os próprios dados no formulário em vez dos dados do beneficiário do acesso (apenas quando pede acesso para um terceiro)
       const filledOwnData =
         Boolean(targetPerson) &&
+        !isSamePerson &&
         normTarget !== normColabForm &&
         !normTarget.includes(normReqFirst) &&
         (normColabForm === normReqFirst ||
@@ -1465,7 +1506,7 @@ export class AIAnalyst {
           normColabForm.startsWith(normReqFirst));
 
       const beneficiaryName =
-        targetPerson || formFields.nomeColaborador || "o(a) profissional";
+        targetPerson || (formFields.nomeColaborador ? formatPersonName(formFields.nomeColaborador) : "") || "o(a) profissional";
 
       const rawAcessos = (formFields.acessos || "")
         .replace(/outros\s*\(?descrever em observa[çc][õo]es\)?,?\s*/gi, "")
@@ -1475,8 +1516,29 @@ export class AIAnalyst {
           normDesc
         );
       const hasSpecifiedAccesses = Boolean(rawAcessos) || mentionsSpecificSystem;
-      const specifiedAccessTxt =
-        rawAcessos || "sistemas informados na descrição";
+
+      let specifiedAccessTxt = rawAcessos;
+      if (!specifiedAccessTxt) {
+        if (/\bfaturamento\s+eletr[oô]nico\b/i.test(descText) && /\bspdata\b/i.test(descText)) {
+          specifiedAccessTxt = "Faturamento Eletrônico no SPDATA";
+        } else if (/\bfaturamento\s+eletr[oô]nico\b/i.test(descText)) {
+          specifiedAccessTxt = "Faturamento Eletrônico";
+        } else if (/\bspdata\b/i.test(descText)) {
+          specifiedAccessTxt = "Sistema SGH Spdata";
+        } else if (/\bhrp\b/i.test(descText)) {
+          specifiedAccessTxt = "ERP HRP Unimed";
+        } else if (/\bpep\b/i.test(descText) || /\bprontu\b/i.test(descText)) {
+          specifiedAccessTxt = "Prontu+ (PEP)";
+        } else if (/\bmyplace\b/i.test(descText)) {
+          specifiedAccessTxt = "MyPlace / Benner";
+        } else if (/\bnextcloud\b/i.test(descText)) {
+          specifiedAccessTxt = "Nextcloud";
+        } else if (/\bactive\s+directory\b|\brede\b/i.test(descText)) {
+          specifiedAccessTxt = "Rede / Active Directory";
+        } else {
+          specifiedAccessTxt = "sistemas informados na descrição";
+        }
+      }
 
       detectedDomain = "Acessos, Permissões e Contas";
       suggestedCategory = "T.I > ST > Acesso e Permissões";
@@ -1573,16 +1635,47 @@ export class AIAnalyst {
           `Para concluirmos o cadastro, por favor nos envie em anexo uma **fotografia frontal e com expressão neutra do rosto** da pessoa a ser cadastrada.\n\n` +
           `Assim que anexar a foto aqui no chamado, já realizamos a liberação!`;
       } else {
-        translatedIntent =
-          `Solicitação de acesso aberta por **${ticket.requester}** referente a **${beneficiaryName}**` +
-          (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
-          `, com os acessos solicitados (${specifiedAccessTxt}) e dados cadastrais já informados no chamado.`;
-        sufficiencyStatus = "completo";
-        missingInfo = [];
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a solicitação de acesso referente a **${beneficiaryName}** (${specifiedAccessTxt}).\n\n` +
-          `Todas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!`;
+        const isSelf = isSamePerson || (!targetPerson && isSelfRequestText) || !targetPerson;
+        const targetSector = formFields.setorAlvo || sectorName;
+        const targetUnit = formFields.unidade ? ` (${formFields.unidade})` : "";
+
+        if (isSelf) {
+          translatedIntent =
+            `${solPrefix} **${formattedRequester}** (${sectorName}) solicita liberação de acesso ao módulo de **${specifiedAccessTxt}**` +
+            (targetSector && targetSector.toLowerCase() !== sectorName.toLowerCase() ? ` para o setor **${targetSector}**` : "") +
+            `. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.`;
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação de acesso ao **${specifiedAccessTxt}**` +
+            (targetSector ? ` para o setor **${targetSector}**` : "") +
+            `${targetUnit}.\n\n` +
+            `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\n` +
+            `Permanecemos à disposição!`;
+          customResolutionSteps = [
+            `[PB-UNI-12] Localizar o cadastro de ${beneficiaryName} (${formFields.cpf ? `CPF: ${formFields.cpf}` : `usuário ${ticket.requester_login || firstName}`}) no sistema ${specifiedAccessTxt.includes("SPDATA") ? "SGH Spdata" : "correspondente"}.`,
+            `[PB-UNI-12] Conceder e vincular as permissões do módulo de ${specifiedAccessTxt} para a unidade ${formFields.unidade || "Hospital Unimed"} (setor ${targetSector}).`,
+            `[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.`
+          ];
+        } else {
+          translatedIntent =
+            `Solicitação de acesso aberta por **${ticket.requester}** referente a **${beneficiaryName}**` +
+            (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
+            `, com os acessos solicitados (${specifiedAccessTxt}) e dados cadastrais já informados no chamado.`;
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a solicitação de acesso referente a **${beneficiaryName}** (${specifiedAccessTxt}).\n\n` +
+            `Todas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!\n\n` +
+            `Permanecemos à disposição!`;
+          customResolutionSteps = [
+            `[PB-UNI-12] Localizar o cadastro do(a) profissional ${beneficiaryName} (${formFields.cpf ? `CPF: ${formFields.cpf}` : ""}) no sistema correspondente.`,
+            `[PB-UNI-12] Efetuar a liberação das permissões solicitadas (${specifiedAccessTxt}) para o setor ${targetSector}.`,
+            `[PB-UNI-12] Comunicar a conclusão no chamado GLPI.`
+          ];
+        }
       }
     } else if (
       (/\b(taxa|taxas)\b/i.test(normAll) &&
@@ -2600,24 +2693,28 @@ export class AIAnalyst {
     }
 
     const resolutionSteps = [];
-    const relevantMatches = (matches || []).filter(
-      (m, idx) => idx === 0 || m.score >= 0.45
-    );
-    for (const m of relevantMatches) {
-      for (const st of m.steps || []) {
-        const cleanSt = String(st).replace(/^\d+\.\s*/, "").trim();
-        // Ignora linhas puramente de cabeçalho de documento ou saudação/encerramento padrão
-        if (
-          /^(chamado aberto|autor\s*:|data d[eo]|vers[ãa]o\s*:|elaborado por|douglas henrique|prezados|ol[áa]\b|bom dia|boa tarde|atenciosamente|att\.?\b|ap[óo]s as tratativas)/i.test(
-            cleanSt
-          ) ||
-          cleanSt.length < 15
-        ) {
-          continue;
-        }
-        const tagged = `[${m.source_id}] ${cleanSt}`;
-        if (cleanSt && !resolutionSteps.includes(tagged)) {
-          resolutionSteps.push(tagged);
+    if (customResolutionSteps && customResolutionSteps.length > 0) {
+      resolutionSteps.push(...customResolutionSteps);
+    } else {
+      const relevantMatches = (matches || []).filter(
+        (m, idx) => idx === 0 || m.score >= 0.45
+      );
+      for (const m of relevantMatches) {
+        for (const st of m.steps || []) {
+          const cleanSt = String(st).replace(/^\d+\.\s*/, "").trim();
+          // Ignora linhas puramente de cabeçalho de documento ou saudação/encerramento padrão
+          if (
+            /^(chamado aberto|autor\s*:|data d[eo]|vers[ãa]o\s*:|elaborado por|douglas henrique|prezados|ol[áa]\b|bom dia|boa tarde|atenciosamente|att\.?\b|ap[óo]s as tratativas)/i.test(
+              cleanSt
+            ) ||
+            cleanSt.length < 15
+          ) {
+            continue;
+          }
+          const tagged = `[${m.source_id}] ${cleanSt}`;
+          if (cleanSt && !resolutionSteps.includes(tagged)) {
+            resolutionSteps.push(tagged);
+          }
         }
       }
     }
