@@ -6141,6 +6141,99 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Rebeca Gonçalves de Freitas Silva** (H Faturamento) solicita atendimento presencial da equipe de Infraestrutura e Redes para realizar a mudança/instalação física solicitada (Por gentileza, trocar o convênio da conta da paciente Clara Maria Galazzi Santos do 970 para o 5.). Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-66)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (5)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-66] Erro apresentado ao realizar a troca de convênio de um registro\n  2. [KB-66] Para corrigir atualizamos o faturamento em Utilitário, mas a ocorrência pode ser por outras causas também, segundo chamado aberto para a Spdata, segue abaixo resposta do ticket.\n  3. [KB-66] Ticket 202607018894\n  4. [KB-66] Reginaldo de Melo Silva16/07/2026 16:32",
     "public_reply_draft": "Olá, Rebeca! Tudo bem?\n\nRecebemos a sua solicitação para realizar a mudança/instalação física solicitada (Por gentileza, trocar o convênio da conta da paciente Clara Maria Galazzi Santos do 970 para o 5.).\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (5)?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!"
   },
+  "42472": {
+    "ticket_id": 42472,
+    "analyzed_at": "09/10/2026 13:19",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Leonardo Batista** (Financeiro) solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **Financeiro** (**Compra de Serviços**). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. O chamado foi aberto na categoria 'T.I > DV > Desenvolvimento > Novas aplicações' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Criação e parametrização de novo formulário no catálogo do GLPI para atender o fluxo de trabalho do setor Financeiro.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42071",
+        "title": "Solicitação Diversa  -  DIFERENÇA DE VALOR XML",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+          "[PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+          "[PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+          "[PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+          "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Verifique em alguma base de conhecimento do glpi",
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41862 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Novo item no GLPI > Faturamento Unimed",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nBoa tarde,\n\n\r\nO formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.\n\n\r\nPor favor, efetue a validação do formulário\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessár",
+        "steps": [
+          "Prezados(as),",
+          "Boa tarde,",
+          "O formulário \"Quimioterapia (Coparticipação)\" foi criado no GLPI, contemplando a validação dos 17 dígitos da carteirinha, campos adicionais, encaminhamento automático para os setores de Auditoria e Regulatório.",
+          "Por favor, efetue a validação do formulário",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42165 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Criação de item no GLPI > Faturamento",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nFoi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Foi publicado um novo formulário no catálogo de serviços do GLPI, intitulado Manutenção Prestadores. Solicito, por favor, que seja realizada a validação.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41290 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criar Mensagem de Alerta para Alergias",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde.\n\nRealizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Boa tarde.",
+          "Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42071) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))",
+    "resolution_steps": [
+      "[Aprendido em MEM-#42071] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "[MEM-#42071] [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "[MEM-#42071] [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+      "[MEM-#42071] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Leonardo Batista** (Financeiro) solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **Financeiro** (**Compra de Serviços**). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados. O chamado foi aberto na categoria 'T.I > DV > Desenvolvimento > Novas aplicações' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42071) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41862 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#42071] Verifique em alguma base de conhecimento do glpi\n  2. [MEM-#42071] [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi\n  3. [MEM-#42071] [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).\n  4. [MEM-#42071] [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).\n  5. [MEM-#42071] [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.\n  6. [MEM-#42071] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+    "public_reply_draft": "Olá, Leonardo! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de um novo formulário/item no catálogo do **GLPI** para o setor de **Financeiro**:\n1. **Compra de Serviços**.\n\nTodos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\nNossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!"
+  },
   "42480": {
     "ticket_id": 42480,
     "analyzed_at": "08/10/2026 15:33",
@@ -6228,6 +6321,98 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ediléa Almeida** (Cadastro) relata erro de sistema no **HRP Unimed** ao salvar a aba de contratos (Itau prestadores) durante o cadastro de prestador, consultando sobre apoio da T.I ou abertura de chamado na Federação. Já foi alinhado que a colaboradora abrirá chamado junto ao suporte da Federação e retornará as informações neste chamado do GLPI para acompanhamento conjunto (chamado em status Pendente).\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-35) + 1ª Camada • Base de Conhecimento GLPI (KB-60)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-35] Analisar o erro de sistema reportado na tela de contratos de prestadores (ex.: vínculo de Itaú prestadores) no ERP HRP Unimed.\n  2. [PB-UNI-35] Verificar se a inconsistência decorre de parametrização local ou se trata de regra/tabela da Federação exigindo escalonamento externo.\n  3. [PB-UNI-35] Orientar ou registrar a abertura de chamado técnico junto ao portal de suporte da Federação das Unimeds com os prints e evidências do erro.\n  4. [PB-UNI-35] Vincular o número do chamado da Federação ao ticket do GLPI e manter o status em 'Pendente' para acompanhamento conjunto.\n  5. [PB-UNI-35] Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado.\n  6. [KB-60] ▸ Parametrização no HRP",
     "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nRecebemos o seu relato referente ao erro no sistema **HRP Unimed** ao tentar salvar os contratos (**Itau prestadores**) no cadastro do prestador.\n\nComo essa inconsistência na gravação de contratos envolve regras e tabelas do sistema geridas centralmente pela **Federação**, ficamos no aguardo do número de protocolo do chamado aberto junto ao suporte da **Federação** para que nossa equipe técnica possa acompanhar a resolução em conjunto por aqui.\n\nO chamado permanecerá em acompanhamento (status Pendente) até a conclusão e retorno da Federação!\n\nPermanecemos à disposição!"
+  },
+  "42510": {
+    "ticket_id": 42510,
+    "analyzed_at": "09/10/2026 13:18",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Felipe Rodrigues Silva solicitou um cabo adaptador DisplayPort para VGA para o setor T.I. Ele mencionou que o responsável pelo setor é Raphael Campos e que a solicitação foi feita pelo setor T.I. O problema é que o solicitante ainda não forneceu todas as informações necessárias, incluindo o horário de abertura do local para a montagem e testes e as conexões de áudio utilizadas na caixa de som.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos",
+    "real_urgency": "Média",
+    "urgency_reason": "O chamado é urgente pois a montagem e testes do equipamento estão programados para antes das 19h.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Horário exato em que o local (Lions Club) estará aberto para montagem e testes antes das 19h",
+      "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42071",
+        "title": "Solicitação Diversa  -  DIFERENÇA DE VALOR XML",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+          "[PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+          "[PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+          "[PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+          "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Verifique em alguma base de conhecimento do glpi",
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-10",
+        "title": "Apoio Técnico em Eventos / Empréstimo e Montagem de Equipamentos Audiovisuais",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
+        "steps": [
+          "Reservar na agenda da T.I. os equipamentos solicitados (notebook, projetor, cabos HDMI/extensões) e verificar quais itens pertencem à T.I. e quais são de responsabilidade do setor de Eventos/Manutenção (ex: sonorização externa).",
+          "Testar previamente o notebook (atualizações do Windows, Office, áudio e vídeo) para evitar imprevistos durante o evento.",
+          "Alinhar com o solicitante o horário de montagem no local e registrar o termo de cautela/empréstimo."
+        ],
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41940 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Sala 401",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nO computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio",
+        "steps": [
+          "Prezados(as),",
+          "O computador não estava conectando ao monitor, que possuía apenas entrada padrão VGA e estava ligado por meio de um adaptador HDMI para VGA, já que o computador tinha apenas saída HDMI. Trocamos o cabo VGA e o adaptador, mas o problema persistiu. Foi então necessário substituir o monitor. Retiramos o monitor com placa de patrimônio do núcleo 0845 e instalamos um monitor com placa de patrimônio do Hospital 1071. Após a troca, a conexão foi restabelecida.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-07",
+        "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
+        "steps": [
+          "Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+          "Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+          "Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+        ],
+        "score": 0.47
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42071) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-10)",
+    "resolution_steps": [
+      "[Aprendido em MEM-#42071] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "[MEM-#42071] [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "[MEM-#42071] [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+      "[MEM-#42071] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Felipe Rodrigues Silva solicitou um cabo adaptador DisplayPort para VGA para o setor T.I. Ele mencionou que o responsável pelo setor é Raphael Campos e que a solicitação foi feita pelo setor T.I. O problema é que o solicitante ainda não forneceu todas as informações necessárias, incluindo o horário de abertura do local para a montagem e testes e as conexões de áudio utilizadas na caixa de som.\n\nClassificação Sugerida: T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42071) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-10)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Horário exato em que o local (Lions Club) estará aberto para montagem e testes antes das 19h\n  - Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#42071] Verifique em alguma base de conhecimento do glpi\n  2. [MEM-#42071] [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi\n  3. [MEM-#42071] [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).\n  4. [MEM-#42071] [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).\n  5. [MEM-#42071] [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.\n  6. [MEM-#42071] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+    "public_reply_draft": "Olá, Felipe! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **DIFERENÇA DE VALOR XML**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
   },
   "42522": {
     "ticket_id": 42522,
@@ -6363,6 +6548,112 @@
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Viviane Souza** (Nucleo Passos) solicita atendimento presencial da equipe de Infraestrutura e Redes para realizar a mudança/instalação física solicitada (Mudar computador da neuropsicóloga para o consultório do Dr Rodrigo, mudar o da Elaine para a sala da frente, mudar aos técnicas para a sala de medicação. Precisamos realizar na data do 09/10 para que no dia 13/10 a federação chegue com o Núcleo com as instalações necessárias). Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.\n\nClassificação Sugerida: T.I > IR > Administração de Redes | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (consultório do Dr Rodrigo)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
     "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação para realizar a mudança/instalação física solicitada (Mudar computador da neuropsicóloga para o consultório do Dr Rodrigo, mudar o da Elaine para a sala da frente, mudar aos técnicas para a sala de medicação. Precisamos realizar na data do 09/10 para que no dia 13/10 a federação chegue com o Núcleo com as instalações necessárias).\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (consultório do Dr Rodrigo)?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!"
   },
+  "42545": {
+    "ticket_id": 42545,
+    "analyzed_at": "09/10/2026 13:13",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Por favor liberar no spdata o acesso para gerar XML, para as usuárias REGINA MITUYO MATSUO DE CARVALHO e Thatiana Mara valletta da Silveira.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42556).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42556",
+        "title": "Acesso e Permissões  -  Thatiana Silveira",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+          "[PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+          "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42285",
+        "title": "Criação de Usuários  -  Marcela Venancio da Costa",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Marcela Venancio da Costa** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42278] [MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Marcela Venancio da Costa** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42278",
+        "title": "Criação de Usuários  -  Ana Paula Martins",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42273] [MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42273] [MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Ana Paula Martins** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42273",
+        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42556) + Memória Contínua • Aprendido com o Analista (MEM-#42285)",
+    "resolution_steps": [
+      "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+      "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+      "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia. Por favor liberar no spdata o acesso para gerar XML, para as usuárias REGINA MITUYO MATSUO DE CARVALHO e Thatiana Mara valletta da Silveira.\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42556).\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42556) + Memória Contínua • Aprendido com o Analista (MEM-#42285)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.\n  2. [MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).\n  3. [MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.\n  4. [MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.\n  5. [MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).\n  6. [MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
   "42556": {
     "ticket_id": 42556,
     "analyzed_at": "09/10/2026 13:04",
@@ -6451,5 +6742,174 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Thatiana Mara Valeta da Silveira** (H Ultrassom) solicita liberação de acesso ao módulo de **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12) + Memória Contínua • Aprendido com o Analista (MEM-#42179)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.\n  2. [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).\n  3. [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
     "public_reply_draft": "Olá, Thatiana! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42561": {
+    "ticket_id": 42561,
+    "analyzed_at": "09/10/2026 13:11",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitação do usuário é para obter um relatório que contenha a quantidade de pacientes por dia que estão utilizando cateteres vesicais ou venosos. O usuário também deseja informações sobre pacientes que estão em uso de sondas ou cateteres, que são preenchidas diariamente pelo enfermeiro. Este relatório é necessário para fechar indicadores. O colaborador solicitante é Leticia Martins do setor de Hospital.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > DV > Evolução de Formulários Clínicos (PEP Hospitalar / SGH Spdata)",
+    "real_urgency": "Média",
+    "urgency_reason": "O impacto operacional deste chamado é a necessidade de dados para fechar indicadores, o atraso poderia comprometer a precisão dos indicadores.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-16",
+        "title": "Solicitação de Extração de Indicadores e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de extração ou envio de indicadores de atendimento, produtividade ou relatórios gerenciais de sistemas internos (ex: WConect por recepcionista, BI, SGH), frequentemente aberta na categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).",
+          "Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.",
+          "Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-09",
+        "title": "Desenvolvimento / Ajustes em Formulários Clínicos Assistenciais (PEP Hospitalar / SGH Spdata)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Coordenação de Enfermagem ou área assistencial do Hospital Unimed (Centro Cirúrgico, UTI, Enfermagem) solicita criação/alteração de campos em formulários eletrônicos assistenciais no PEP (módulo do SGH Spdata).",
+        "steps": [
+          "Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+          "Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+          "Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42272 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > DATA DE ALTA",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, implementação concluída.\n\n\r\nData da alta\n\n\r\nReferente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.\n\n\r\nAtualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da",
+        "steps": [
+          "Bom dia, implementação concluída.",
+          "Data da alta",
+          "Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.",
+          "Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada.",
+          "Vale ressaltar que a funcionalidade verifica previamente as contas que já estão cadastradas no Controle de Contas. Dessa forma, somente as contas que ainda não possuem cadastro serão incluídas automaticamente, evitando registros duplicados.",
+          "Em relação às contas de atendimento externo, não haverá impacto nesse processo, pois elas já são criadas no SPDATA com a data de entrada e a data de alta no mesmo dia. Sendo assim, essas contas estarão aptas para serem identificadas normalmente pelo processamento automático, sem risco de ficarem pendentes por ausência da informação de alta."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41861 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+        "steps": [
+          "Prezados(as),",
+          "Informamos que o formulário foi atualizado conforme solicitado:",
+          "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+          "Nova pergunta adicionada: Tipo de procedimento",
+          "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+          "Sonda Folley 2 vias"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-16) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)",
+    "resolution_steps": [
+      "[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).",
+      "[PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.",
+      "[PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante.",
+      "[PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+      "[PB-UNI-09] Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+      "[PB-UNI-09] Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitação do usuário é para obter um relatório que contenha a quantidade de pacientes por dia que estão utilizando cateteres vesicais ou venosos. O usuário também deseja informações sobre pacientes que estão em uso de sondas ou cateteres, que são preenchidas diariamente pelo enfermeiro. Este relatório é necessário para fechar indicadores. O colaborador solicitante é Leticia Martins do setor de Hospital.\n\nClassificação Sugerida: T.I > DV > Evolução de Formulários Clínicos (PEP Hospitalar / SGH Spdata) | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-16) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).\n  2. [PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.\n  3. [PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante.\n  4. [PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.\n  5. [PB-UNI-09] Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).\n  6. [PB-UNI-09] Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção.",
+    "public_reply_draft": "Olá, Leticia! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Relatório com quantitativo de pacientes/dia com cateteres**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42584": {
+    "ticket_id": 42584,
+    "analyzed_at": "13/10/2026 08:11",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Viviane Souza** (Nucleo Passos) solicita a disponibilização e instalação de uma impressora para **neuropsicóloga** (prédio do Dr. Rodrigo). Demanda atendimento presencial da equipe de Infraestrutura e Redes para separação do equipamento em estoque, instalação física no local e configuração dos drivers na estação de trabalho.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Disponibilização e instalação física/lógica de impressora para atendimento de profissional de saúde (neuropsicóloga).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-36",
+        "title": "Solicitação, Instalação e Configuração de Nova Impressora (Hardware / Periféricos)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Setor, recepção ou consultório solicita a disponibilização, fornecimento ou instalação física e lógica de uma impressora para atender profissional de saúde, posto de trabalho ou novo ambiente (ex.: 'Precisamos de uma impressora para a neuropsicóloga que está no prédio do Dr. Rodrigo').",
+        "steps": [
+          "Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para o atendimento da demanda do setor/consultório.",
+          "Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/prédio informado (ex.: Núcleo Passos / prédio Dr. Rodrigo).",
+          "Realizar a instalação física do equipamento (cabo de força, cabo de rede ou USB e abastecimento de papel/suprimentos).",
+          "Instalar e configurar os drivers da impressora na estação de trabalho da profissional/setor e imprimir página de teste.",
+          "Colher validação do usuário no local e concluir o chamado no GLPI."
+        ],
+        "score": 0.99
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-36)",
+    "resolution_steps": [
+      "[PB-UNI-36] Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para a demanda do setor/consultório.",
+      "[PB-UNI-36] Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/local (prédio do Dr. Rodrigo) portando o equipamento e cabos de força e dados (rede/USB).",
+      "[PB-UNI-36] Realizar a instalação física e conexão do equipamento na estação de trabalho da profissional.",
+      "[PB-UNI-36] Instalar os drivers e configurar o dispositivo no sistema operacional da máquina, efetuando impressão de página de teste.",
+      "[PB-UNI-36] Coletar validação com a usuária no local e concluir o atendimento no GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) solicita a disponibilização e instalação de uma impressora para **neuropsicóloga** (prédio do Dr. Rodrigo). Demanda atendimento presencial da equipe de Infraestrutura e Redes para separação do equipamento em estoque, instalação física no local e configuração dos drivers na estação de trabalho.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-36)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-36] Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para a demanda do setor/consultório.\n  2. [PB-UNI-36] Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/local (prédio do Dr. Rodrigo) portando o equipamento e cabos de força e dados (rede/USB).\n  3. [PB-UNI-36] Realizar a instalação física e conexão do equipamento na estação de trabalho da profissional.\n  4. [PB-UNI-36] Instalar os drivers e configurar o dispositivo no sistema operacional da máquina, efetuando impressão de página de teste.\n  5. [PB-UNI-36] Coletar validação com a usuária no local e concluir o atendimento no GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a solicitação referente à disponibilização e instalação de impressora para a **neuropsicóloga** (prédio do Dr. Rodrigo).\n\nNossa equipe de Infraestrutura e Redes já está verificando a disponibilidade do equipamento compatível no estoque técnico e providenciará o deslocamento de um técnico até o local para realizar a instalação física e a configuração dos drivers na estação de trabalho.\n\nAssim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  "42585": {
+    "ticket_id": 42585,
+    "analyzed_at": "13/10/2026 07:47",
+    "provider_used": "Motor Inteligente 3 Camadas (Fallback • fetch failed)",
+    "translated_intent": "O solicitante **THATIANA MARA VALETA DA SILVEIRA** (H Ultrassom) relata falha de impressão em a **impressora do setor** localizada no setor **H Ultrassom**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - H Ultrassom).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (H Ultrassom) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.8
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02)",
+    "resolution_steps": [
+      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **THATIANA MARA VALETA DA SILVEIRA** (H Ultrassom) relata falha de impressão em a **impressora do setor** localizada no setor **H Ultrassom**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (H Ultrassom) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
+    "public_reply_draft": "Olá, Thatiana! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (H Ultrassom) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da H Ultrassom ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a H Ultrassom!"
   }
 }

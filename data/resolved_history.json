@@ -1,5 +1,50 @@
 [
   {
+    "id": "Chamado #42607 (Resolvido)",
+    "ticket_id": 42607,
+    "solution_id": 41315,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42556 (Resolvido)",
+    "ticket_id": 42556,
+    "solution_id": 41260,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Thatiana Silveira",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nLiberação do Menu realizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Liberação do Menu realizada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42553 (Resolvido)",
+    "ticket_id": 42553,
+    "solution_id": 41317,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Verificados e abastecidos",
+    "keywords": [],
+    "steps": [
+      "Verificados e abastecidos"
+    ]
+  },
+  {
     "id": "Chamado #42552 (Resolvido)",
     "ticket_id": 42552,
     "solution_id": 41257,
@@ -26,6 +71,21 @@
     ]
   },
   {
+    "id": "Chamado #42545 (Resolvido)",
+    "ticket_id": 42545,
+    "solution_id": 41258,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Liberação de Acessos",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42544 (Resolvido)",
     "ticket_id": 42544,
     "solution_id": 41254,
@@ -40,6 +100,32 @@
     ]
   },
   {
+    "id": "Chamado #42539 (Resolvido)",
+    "ticket_id": 42539,
+    "solution_id": 41271,
+    "title": "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #42538 (Resolvido)",
+    "ticket_id": 42538,
+    "solution_id": 41270,
+    "title": "Verificação do Backup [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
     "id": "Chamado #42533 (Resolvido)",
     "ticket_id": 42533,
     "solution_id": 41252,
@@ -51,6 +137,22 @@
     "steps": [
       "Prezados(as),",
       "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42532 (Resolvido)",
+    "ticket_id": 42532,
+    "solution_id": 41269,
+    "title": "Gerar Monitoramento TISS [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nArquivo gerado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Arquivo gerado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -114,6 +216,22 @@
       "Foi feita a atualização do Nextcloud.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42467 (Resolvido)",
+    "ticket_id": 42467,
+    "solution_id": 41261,
+    "title": "Banco de Dados e Análise de Dados > Integração de Fontes de Dados > RELATÓRIO DO ATIVO IMOBILIZADO SPDATA",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde, realizado o desenvolvimento do relatório.\nSegue em anexo o relatório em Excel.\n\n\r\nCaminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados\n\n\r\n\n\r\nPara exportar em formato Excel seguir os passos abaixo",
+    "keywords": [],
+    "steps": [
+      "Boa tarde, realizado o desenvolvimento do relatório.",
+      "Segue em anexo o relatório em Excel.",
+      "Caminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados",
+      "Para exportar em formato Excel seguir os passos abaixo"
     ]
   },
   {
@@ -505,6 +623,22 @@
     "keywords": [],
     "steps": [
       "Solucionado"
+    ]
+  },
+  {
+    "id": "Chamado #42357 (Resolvido)",
+    "ticket_id": 42357,
+    "solution_id": 41272,
+    "title": "Verificar Estoque de Suprimentos – Impressoras [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSolicitado ribbons e etiquetas\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Solicitado ribbons e etiquetas",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {

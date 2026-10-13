@@ -1235,5 +1235,39 @@
       "Após retorno e correção pela Federação, solicitar novo teste de gravação do contrato no HRP Unimed junto ao Cadastro e finalizar o chamado."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente ao erro no sistema **HRP Unimed** ao salvar a aba de contratos ({contrato}) no cadastro de prestadores.\n\nComo essa inconsistência envolve regras e tabelas geridas pela **Federação**, orientamos a abertura de chamado no suporte da Federação (ou ficamos no aguardo do número do protocolo federativo) para que nossa equipe de T.I. possa acompanhar a resolução em conjunto.\n\nManteremos este chamado em acompanhamento (status Pendente) até a conclusão pela Federação!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-36",
+    "title": "Solicitação, Instalação e Configuração de Nova Impressora (Hardware / Periféricos)",
+    "domain": "Infraestrutura e Rede",
+    "keywords": [
+      "precisamos de um impressora",
+      "precisamos de uma impressora",
+      "instalacao de impressora",
+      "instalação de impressora",
+      "instalar impressora",
+      "disponibilizar impressora",
+      "fornecer impressora",
+      "colocar impressora",
+      "colocar uma impressora",
+      "nova impressora",
+      "impressora nova",
+      "impressora para",
+      "solicito uma impressora",
+      "solicitamos uma impressora",
+      "solicitacao de impressora",
+      "impressora neuropsicologa",
+      "impressora neuropsicóloga"
+    ],
+    "symptoms": "Setor, recepção ou consultório solicita a disponibilização, fornecimento ou instalação física e lógica de uma impressora para atender profissional de saúde, posto de trabalho ou novo ambiente (ex.: 'Precisamos de uma impressora para a neuropsicóloga que está no prédio do Dr. Rodrigo').",
+    "required_info": [],
+    "resolution_steps": [
+      "Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para o atendimento da demanda do setor/consultório.",
+      "Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/prédio informado (ex.: Núcleo Passos / prédio Dr. Rodrigo).",
+      "Realizar a instalação física do equipamento (cabo de força, cabo de rede ou USB e abastecimento de papel/suprimentos).",
+      "Instalar e configurar os drivers da impressora na estação de trabalho da profissional/setor e imprimir página de teste.",
+      "Colher validação do usuário no local e concluir o chamado no GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente à disponibilização e instalação de impressora para o atendimento de **{beneficiario}** no setor/unidade **{setor}**.\n\nNossa equipe de Infraestrutura e Redes está verificando a disponibilidade do equipamento compatível no estoque técnico e providenciará o agendamento/deslocamento de um técnico para realização da instalação física e configuração dos drivers na estação de trabalho.\n\nAssim que o técnico estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 ]

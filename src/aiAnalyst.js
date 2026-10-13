@@ -386,7 +386,7 @@ export class AIAnalyst {
       firstName
     );
     const isFemale =
-      /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia)\b/i.test(
+      /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
         firstName
       ) || /a$/i.test(firstName);
     const solPrefix = isMale ? "O solicitante" : (isFemale ? "A solicitante" : "O(a) solicitante");
@@ -733,13 +733,73 @@ export class AIAnalyst {
         `Assim que a reposição for concluída e a impressora estiver liberada para uso, confirmaremos a finalização por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      normCore.includes("impressora") ||
+      /\b(precisamos de (?:uma? )?impressora|instala[çc][ãa]o de impressora|instalar impressora|disponibilizar impressora|fornecer impressora|colocar (?:uma? )?impressora|nova impressora|impressora nova|solicito (?:uma? )?impressora|solicitamos (?:uma? )?impressora|impressora para (?:a|o)?\s*(?:neuro|m[ée]dic|consult[oó]ri|psic[oó]log|recep[çc]|setor|sala|posto|pr[ée]dio))\b/i.test(
+        normAll
+      ) &&
+      !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila|travad)\b/i.test(
+        normAll
+      )
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+
+      // Extrai o público/profissional beneficiário (ex: "neuropsicóloga")
+      const benefMatch =
+        descText.match(/para\s+(?:a|o)?\s*([^,\n.;]+?)(?:\s+que\s+est[áa]|\s+no\s+pr[ée]dio|\s+na\s+sala|\s+no\s+consult[oó]rio|\.|$)/i) ||
+        ticket.title.match(/impressora\s+([^,\n.;]+)/i);
+      let beneficiaryStr = benefMatch ? benefMatch[1].trim() : "a profissional / setor";
+      beneficiaryStr = beneficiaryStr.replace(/^(a|o|um|uma)\s+/i, "");
+
+      // Extrai a localização/prédio (ex: "prédio do Dr. Rodrigo")
+      let locDetails = "";
+      const locMatch =
+        descText.match(/(?:est[áa]\s+no|localizada?\s+no|instalada?\s+no)\s+([^,\n.;]+)/i) ||
+        descText.match(/(?:pr[ée]dio|sala|consult[oó]ri)\s+([^,\n.;]+)/i);
+      if (locMatch) {
+        locDetails = locMatch[1] ? locMatch[1].trim() : locMatch[0].trim();
+        if (/^dr\b/i.test(locDetails) || /^(do|da)\s+dr/i.test(locDetails)) {
+          locDetails = "prédio " + locDetails;
+        }
+        locDetails = locDetails.replace(/\bdr\.?\s+/gi, "Dr. ");
+      }
+
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Disponibilização e instalação física/lógica de impressora para atendimento de profissional de saúde (${beneficiaryStr}).`;
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a disponibilização e instalação de uma impressora para **${beneficiaryStr}**` +
+        (locDetails ? ` (${locDetails})` : "") +
+        `. Demanda atendimento presencial da equipe de Infraestrutura e Redes para separação do equipamento em estoque, instalação física no local e configuração dos drivers na estação de trabalho.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-36] Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para a demanda do setor/consultório.`,
+        `[PB-UNI-36] Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/local (${locDetails || sectorName}) portando o equipamento e cabos de força e dados (rede/USB).`,
+        `[PB-UNI-36] Realizar a instalação física e conexão do equipamento na estação de trabalho da profissional.`,
+        `[PB-UNI-36] Instalar os drivers e configurar o dispositivo no sistema operacional da máquina, efetuando impressão de página de teste.`,
+        `[PB-UNI-36] Coletar validação com a usuária no local e concluir o atendimento no GLPI.`
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a solicitação referente à disponibilização e instalação de impressora para a **${beneficiaryStr}**` +
+        (locDetails ? ` (${locDetails})` : "") +
+        `.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está verificando a disponibilidade do equipamento compatível no estoque técnico e providenciará o deslocamento de um técnico até o local para realizar a instalação física e a configuração dos drivers na estação de trabalho.\n\n` +
+        `Assim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      !/\b(precisamos de (?:uma? )?impressora|instala[çc][ãa]o de impressora|instalar impressora|disponibilizar impressora|fornecer impressora|colocar (?:uma? )?impressora|nova impressora|impressora nova|solicito (?:uma? )?impressora|solicitamos (?:uma? )?impressora)\b/i.test(normAll) &&
+      (normCore.includes("impressora") ||
       normCore.includes("impressoras") ||
       normCore.includes("imprimir") ||
       normCore.includes("imprimindo") ||
       normCore.includes("samsung") ||
       normCore.includes("m4080fx") ||
-      normCore.includes("spooler")
+      normCore.includes("spooler"))
     ) {
       const explicitModel =
         formFields.ativo ||

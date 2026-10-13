@@ -446,12 +446,23 @@ export class KnowledgeEngine {
             (/\b(impressora|reposi[çc][ãa]o|suprimentos?|epson|ecotank|recarga|abastecer)\b/i.test(normTicket) ||
               normTicket.includes("suprimentos") ||
               normTicket.includes("hardware")));
+        const isPrinterInstallOrNewRequest =
+          /\b(precisamos de (?:uma? )?impressora|instala[çc][ãa]o de impressora|instalar impressora|disponibilizar impressora|fornecer impressora|colocar (?:uma? )?impressora|nova impressora|impressora nova|solicito (?:uma? )?impressora|solicitamos (?:uma? )?impressora|impressora para (?:a|o)?\s*(?:neuro|m[ée]dic|consult[oó]ri|psic[oó]log|recep[çc]|setor|sala|posto|pr[ée]dio))\b/i.test(
+            normTicket
+          ) &&
+          !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila|travad)\b/i.test(
+            normTicket
+          );
 
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest)
+          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest)
         ) {
+          continue;
+        }
+        // Evita parear PB-UNI-36 (Instalação/Disponibilização de Impressora) quando o chamado NÃO trata de instalação/pedido de impressora
+        if (pb.id === "PB-UNI-36" && !isPrinterInstallOrNewRequest) {
           continue;
         }
         // Evita parear PB-UNI-31 (Troca de Toner / Tintas) quando o chamado NÃO trata de toner/tinta/suprimentos
@@ -539,6 +550,12 @@ export class KnowledgeEngine {
           )
         ) {
           score = Math.max(score, 0.85);
+        }
+        if (
+          pb.id === "PB-UNI-36" &&
+          isPrinterInstallOrNewRequest
+        ) {
+          score = Math.max(score, 0.90);
         }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;

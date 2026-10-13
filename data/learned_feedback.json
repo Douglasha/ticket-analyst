@@ -1,5 +1,116 @@
 [
   {
+    "ticket_id": 42561,
+    "title": "Relatórios  -  Relatório com quantitativo de pacientes/dia com cateteres",
+    "category": "T.I > BD > Big Data e BI > Relatórios",
+    "keywords": [
+      "relatorios",
+      "relatorio",
+      "quantitativo",
+      "pacientes",
+      "cateteres",
+      "gostaria",
+      "saber",
+      "algum"
+    ],
+    "problem_summary": "Gostaria de saber se tem algum relatório do sistema que me direcione dados de quantitativo de paciente/dia em uso de cateter vesical de demora e cateter venoso central.\nSe não existir um relatório específico, gostaria de saber se teria como puxar essa informação da sistematização de enfermagem que é preenchida diariamente pelo enfermeiro, onde consta se o paciente está em uso de sonda ou cateter.\nSão dados que eu preciso para fechar indicadores, atualmente envio mensalmente para a ANVISA, e no momento eles solicitam esse quantitativo do hospital geral.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Relatório com quantitativo de pacientes/dia com cateteres**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).",
+      "[PB-UNI-16] Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.",
+      "[PB-UNI-16] Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante.",
+      "[PB-UNI-09] Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+      "[PB-UNI-09] Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+      "[PB-UNI-09] Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-09T16:29:19.788Z"
+  },
+  {
+    "ticket_id": 42472,
+    "title": "Novas aplicações  -  Novo Formulário",
+    "category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "keywords": [
+      "novas",
+      "aplicacoes",
+      "novo",
+      "formulario",
+      "criar",
+      "financeiro",
+      "seguinte",
+      "nome:"
+    ],
+    "problem_summary": "Criar um novo formulário para o setor financeiro com o seguinte nome: Compra de Serviços\nBasear no formulário \"Nota Avulsa\" do setor de faturamento e acrescentar os seguintes campos:\n \nCampos do formulário (caixas superiores):\nCNPJ do Prestador *\nNome do Prestador *\nBanco\nAgência\nConta corrente\nValor a Pagar *\nPix *\nAnexo *\n(O asterisco * ao lado indica campos obrigatórios).\nObservações e regras de negócio (abaixo):\nNota Avulsa (Setor do faturamento) — com uma anotação acima: copiar do setor de faturamento\nVincular Automaticamente o faturamento na abertura do chamado\nCaixa destacada no final (ligada por uma chave): Compra de serviço",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de um novo formulário/item no catálogo do **GLPI** para o setor de **Financeiro**:\n1. **Compra de Serviços**.\n\nTodos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\nNossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Compra de Serviços."
+    ],
+    "resolution_steps": [
+      "[Aprendido em MEM-#42071] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+      "[MEM-#42071] [PB-UNI-03] Conectar remotamente na estação do solicitante via HopToDesk (ou analisar os arquivos XML anexados no chamado).",
+      "[MEM-#42071] [PB-UNI-03] Verificar a estrutura das tags TISS (`<ans:epilogo><ans:hash>`) e checar se o arquivo XML foi editado manualmente em bloco de notas (o que invalida o hash MD5 do padrão ANS/TISS).",
+      "[MEM-#42071] [PB-UNI-03] Executar o validador/recalculador de Hash TISS sobre os arquivos XML do lote do convênio (ex: Aura Saúde) e validar a importação junto ao usuário.",
+      "[MEM-#42071] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-09T16:20:38.334Z"
+  },
+  {
+    "ticket_id": 42545,
+    "title": "Solicitação Diversa  -  Liberação de Acessos",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "liberacao",
+      "acessos",
+      "liberar",
+      "spdata",
+      "acesso",
+      "gerar",
+      "xml",
+      "usuarias"
+    ],
+    "problem_summary": "Bom dia.\nPor favor liberar no spdata o acesso para gerar XML, para as usuárias REGINA MITUYO MATSUO DE CARVALHO e Thatiana Mara valletta da Silveira.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+      "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+      "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+      "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-09T16:13:23.965Z"
+  },
+  {
+    "ticket_id": 42556,
+    "title": "Acesso e Permissões  -  Thatiana Silveira",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "thatiana",
+      "silveira",
+      "faturamento",
+      "eletronico",
+      "spdata",
+      "faturar"
+    ],
+    "problem_summary": "Preciso de acesso ao faturamento eletrônico no SPDATA para faturar as contas do ultrassom .",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-09T16:12:36.119Z"
+  },
+  {
     "ticket_id": 42404,
     "title": "Resolução de Problemas  -  uma pasta do nextcloud sumiu",
     "category": "T.I > ST > Resolução de Problemas",
