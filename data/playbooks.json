@@ -1288,5 +1288,50 @@
       "Colher validação do usuário no local e concluir o chamado no GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente à disponibilização e instalação de impressora para o atendimento de **{beneficiario}** no setor/unidade **{setor}**.\n\nNossa equipe de Infraestrutura e Redes está verificando a disponibilidade do equipamento compatível no estoque técnico e providenciará o agendamento/deslocamento de um técnico para realização da instalação física e configuração dos drivers na estação de trabalho.\n\nAssim que o técnico estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-37",
+    "title": "Dúvidas, Orientações de Uso e Localização de Campos/Módulos em Formulários e Sistemas",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "keywords": [
+      "dúvidas",
+      "duvidas",
+      "dúvida",
+      "duvida",
+      "orientação",
+      "orientacao",
+      "orientações",
+      "orientacoes",
+      "como fazer",
+      "onde fica",
+      "onde encontro",
+      "não encontrei",
+      "nao encontrei",
+      "não achei",
+      "nao achei",
+      "como preencher",
+      "onde anexar",
+      "campo de anexo",
+      "última seção",
+      "ultima secao",
+      "onde insiro documentos",
+      "inserir documentos",
+      "localizar campo",
+      "instrução de uso",
+      "instrucao de uso",
+      "dúvida de formulário",
+      "duvida de formulario"
+    ],
+    "symptoms": "Colaborador(a) apresenta dúvida de utilização, orientação operacional ou dificuldade para localizar campos, seções, botões ou módulos em formulários do GLPI (Formcreator) ou sistemas corporativos (SGH, HRP, PEP, Benner, etc.), onde o recurso já existe e encontra-se ativo na aplicação mas passou desapercebido pelo usuário ou requer esclarecimento.",
+    "required_info": [],
+    "resolution_steps": [
+      "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
+      "Verificar no formulário ou sistema reportado (ex.: Formcreator do GLPI, SGH Spdata, ERP HRP) se a funcionalidade, campo ou módulo já existe e está ativo.",
+      "Identificar a localização exata do recurso (ex.: última seção do formulário, menu específico, barra de ferramentas ou rodapé da tela).",
+      "Responder ao solicitante com orientação clara, didática e passo a passo indicando onde localizar e como utilizar o campo ou rotina desejada.",
+      "Caso a disposição do campo esteja gerando confusão frequente entre os usuários (questão de UX/layout), registrar sugestão de melhoria junto à equipe de Desenvolvimento para reposicionamento ou destaque do campo.",
+      "Solicitar ao usuário confirmação do teste/localização e concluir o atendimento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a sua dúvida referente à utilização e localização de recursos no formulário/sistema **{sistema}**.\n\nConfirmamos que a funcionalidade/opção solicitada **já se encontra disponível e ativa** no sistema!\n\nPara localizá-la e utilizá-la, siga a orientação abaixo:\n{orientacao}\n\nCaso tenha qualquer dificuldade ou precise de apoio durante o preenchimento, estamos à total disposição por aqui!\n\nPermanecemos à disposição!"
   }
 ]

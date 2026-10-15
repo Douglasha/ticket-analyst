@@ -532,6 +532,14 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-22" && !/\bintranet\b/i.test(normTicket)) {
           continue;
         }
+        const isDoubtOrOrientation =
+          /\b(d[uú]vidas?|orienta[cç][aã]o|orienta[cç][õo]es|como fazer|onde fica|onde encontro|n[aã]o encontrei|n[aã]o achei|como preencher|onde anexar|instru[cç][aã]o de uso|passo a passo|desapercebid[ao])\b/i.test(
+            normTicket
+          );
+        // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações
+        if (pb.id === "PB-UNI-37" && !isDoubtOrOrientation) {
+          continue;
+        }
         let score = computeRelevance(
           fullTicketText,
           ticketTokens,
@@ -569,6 +577,12 @@ export class KnowledgeEngine {
           isFormcreatorOrGlpiForm
         ) {
           score = Math.max(score, 0.92);
+        }
+        if (
+          pb.id === "PB-UNI-37" &&
+          isDoubtOrOrientation
+        ) {
+          score = Math.max(score, 0.90);
         }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
