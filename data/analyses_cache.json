@@ -6911,5 +6911,381 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **THATIANA MARA VALETA DA SILVEIRA** (H Ultrassom) relata falha de impressão em a **impressora do setor** localizada no setor **H Ultrassom**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (H Ultrassom) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
     "public_reply_draft": "Olá, Thatiana! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (H Ultrassom) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da H Ultrassom ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a H Ultrassom!"
+  },
+  "42613": {
+    "ticket_id": 42613,
+    "analyzed_at": "13/10/2026 08:21",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Rosy relatou que não vê o nome do profissional responsável pelo atendimento e a fila de espera em seu login. Ela pediu para ajustar isso. Este problema está relacionado ao setor de Laboratório > Coordenação e ao sistema de login.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > TR > Treinamento AutoLac",
+    "real_urgency": "Média",
+    "urgency_reason": "O problema afeta a eficiência operacional do setor de Laboratório.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42241",
+        "title": "Ajustes em layout/interface  -  Ajuste em agenda Oncologia",
+        "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+          "[PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+          "[PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+          "[PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+          "[PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+          "[Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42205",
+        "title": "Aplicativos  -  Ajuste web saude - Instituto Neurologico Maoliv Ltda",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000073**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "steps": [
+          "[PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-25] Acessar o módulo de controle de acessos/permissões centralizado diretamente no sistema HRP Unimed (onde é feita toda a gestão de usuários e vínculos do Web Saúde).",
+          "[PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no HRP/Web Saúde com vigência ativa.",
+          "[PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso às novas clínicas (**16000073**) no sistema **Web Saúde (HRP)** para as atendentes do **NAS (Núcleo de Atenção à Saúde - Passos)**.\n\nPara que possamos realizar a vinculação nos usuários corretos, você poderia nos informar:\n1. Quais são os **nomes completos ou logins das atendentes** do NAS que devem ter essas clínicas liberadas?\n\nAssim que nos confirmar essas informações por aqui, realizaremos a vinculação no Web Saúde imediatamente!",
+        "required_info": [
+          "Quais são os nomes completos ou logins das atendentes do NAS que devem ter essas clínicas liberadas?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41861 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+        "steps": [
+          "Prezados(as),",
+          "Informamos que o formulário foi atualizado conforme solicitado:",
+          "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+          "Nova pergunta adicionada: Tipo de procedimento",
+          "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+          "Sonda Folley 2 vias"
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41414 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Adequação Painel Acompanhamento de Pacientes",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde Diego, conclui o desenvolvimento solicitado.\n\nQuando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação.",
+        "steps": [
+          "Boa tarde Diego, conclui o desenvolvimento solicitado.",
+          "Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42241) + Memória Contínua • Aprendido com o Analista (MEM-#42205)",
+    "resolution_steps": [
+      "[MEM-#42241] [PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[MEM-#42241] [PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+      "[MEM-#42241] [PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+      "[MEM-#42241] [PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+      "[MEM-#42241] [PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+      "[MEM-#42241] [Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nRosy relatou que não vê o nome do profissional responsável pelo atendimento e a fila de espera em seu login. Ela pediu para ajustar isso. Este problema está relacionado ao setor de Laboratório > Coordenação e ao sistema de login.\n\nClassificação Sugerida: T.I > TR > Treinamento AutoLac | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42241) + Memória Contínua • Aprendido com o Analista (MEM-#42205)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42241] [PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n  2. [MEM-#42241] [PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.\n  3. [MEM-#42241] [PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).\n  4. [MEM-#42241] [PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).\n  5. [MEM-#42241] [PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.\n  6. [MEM-#42241] [Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!"
+  },
+  "42643": {
+    "ticket_id": 42643,
+    "analyzed_at": "13/10/2026 13:20",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Douglas Henrique Amaral** (Nucleo Passos) abriu o chamado: \"A colaboradora Gabriela relatou que os telefones do núcleo não estão recebendo nem realizando chamadas externas, funcionando apenas para comunicação interna entre ramais. Verificam\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42139).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "real_urgency": "Alta",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Desconectar o cabo de rede (cabo conectado atrás do telefone), aguardar cerca de 10 segundos e reconectar firmemente para que o aparelho reinicie;",
+      "O visor do telefone chega a acender ou permanece totalmente apagado?",
+      "Qual é o número do ramal desse aparelho?"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42139",
+        "title": "Resolução de Problemas  -  Telefone",
+        "category": "T.I > IR > Administração de Redes > Telefones VoIP",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!",
+        "steps": [
+          "[PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+          "[PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+          "[PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+          "[PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!",
+        "required_info": [
+          "Desconectar o cabo de rede (cabo conectado atrás do telefone), aguardar cerca de 10 segundos e reconectar firmemente para que o aparelho reinicie;",
+          "O visor do telefone chega a acender ou permanece totalmente apagado?",
+          "Qual é o número do ramal desse aparelho?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-41",
+        "title": "Guia Rápido Comandos Telefones - Flux",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "▸ Ligações Externas\n\r\nPara fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.\n\n\r\nObs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem \n\n\r\n\n▸ Ligação Local:\n\r\nDigite: 0 +...",
+        "steps": [
+          "▸ Ligações Externas",
+          "Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.",
+          "Obs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem",
+          "▸ Ligação Local:",
+          "Digite: 0 + Nº. Desejado+#",
+          "EX.: 0+35292600+#"
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-24",
+        "title": "Aparelho Telefônico VoIP Inoperante / Telefone Sem Sinal ou Mudo (Reinício e Cabo de Rede)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata de forma genérica que o aparelho de telefone VoIP do setor não está funcionando, está sem sinal, mudo ou apagado.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+          "Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+          "Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+          "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+        ],
+        "score": 0.53
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #38735 (Resolvido)",
+        "title": "Infraestrutura e Redes > Telefones VoIP > REDSET COM DEFEITO",
+        "category": "T.I • Solucionado por rbernardes",
+        "summary": "Após testes confirmamos que o sistema funciona normalmente. Peço por gentileza que solicite um fone headset USB para o setor de compras. Após a chegada, iremos fazer a instalação dele",
+        "steps": [
+          "Após testes confirmamos que o sistema funciona normalmente. Peço por gentileza que solicite um fone headset USB para o setor de compras. Após a chegada, iremos fazer a instalação dele"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42139) + 1ª Camada • Base de Conhecimento GLPI (KB-41)",
+    "resolution_steps": [
+      "[MEM-#42139] [PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "[MEM-#42139] [PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+      "[MEM-#42139] [PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+      "[MEM-#42139] [PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.",
+      "[KB-41] ▸ Ligações Externas",
+      "[KB-41] Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Douglas Henrique Amaral** (Nucleo Passos) abriu o chamado: \"A colaboradora Gabriela relatou que os telefones do núcleo não estão recebendo nem realizando chamadas externas, funcionando apenas para comunicação interna entre ramais. Verificam\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42139).\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42139) + 1ª Camada • Base de Conhecimento GLPI (KB-41)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Desconectar o cabo de rede (cabo conectado atrás do telefone), aguardar cerca de 10 segundos e reconectar firmemente para que o aparelho reinicie;\n  - O visor do telefone chega a acender ou permanece totalmente apagado?\n  - Qual é o número do ramal desse aparelho?\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42139] [PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.\n  2. [MEM-#42139] [PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.\n  3. [MEM-#42139] [PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.\n  4. [MEM-#42139] [PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.\n  5. [KB-41] ▸ Ligações Externas\n  6. [KB-41] Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.",
+    "public_reply_draft": "Olá, Douglas! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H OPME**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H OPME para checar o ponto de rede e o aparelho!"
+  },
+  "42644": {
+    "ticket_id": 42644,
+    "analyzed_at": "13/10/2026 13:22",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário, Douglas Henrique Amaral do Núcleo Passos, relatou que o ramal 2627 não está recebendo chamadas externas devido a uma regra de telefonia que aciona diversos ramais simultaneamente ou consecutivamente ao receber uma ligação. Douglas solicita a verificação dessa configuração e a inclusão do ramal 2627 no grupo de ramais que recebem as chamadas direcionadas ao número (35) 3529-2636.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "real_urgency": "Alta",
+    "urgency_reason": "O impacto operacional é significativo devido à queda de chamadas, o que pode causar problemas de comunicação e descontentamento dos usuários.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Quais números de ramais específicos do setor estão apresentando queda nas ligações",
+      "Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos",
+      "Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42293",
+        "title": "Solicitação Diversa  -  Telefones não estão transferindo",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+          "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+          "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-41",
+        "title": "Guia Rápido Comandos Telefones - Flux",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "▸ Ligações Externas\n\r\nPara fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.\n\n\r\nObs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem \n\n\r\n\n▸ Ligação Local:\n\r\nDigite: 0 +...",
+        "steps": [
+          "▸ Ligações Externas",
+          "Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.",
+          "Obs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem",
+          "▸ Ligação Local:",
+          "Digite: 0 + Nº. Desejado+#",
+          "EX.: 0+35292600+#"
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42643 (Resolvido)",
+        "title": "Infraestrutura e Redes > Telefones VoIP > Problemas ao receber e fazer ligação",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSolicitamos apoio para a Engetelp, que acessou o servidor 41.207 e realizou um reset no hardware responsável pela conexão com a operadora. Após o procedimento, as ligações foram restabelecidas.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Solicitamos apoio para a Engetelp, que acessou o servidor 41.207 e realizou um reset no hardware responsável pela conexão com a operadora. Após o procedimento, as ligações foram restabelecidas.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-24",
+        "title": "Aparelho Telefônico VoIP Inoperante / Telefone Sem Sinal ou Mudo (Reinício e Cabo de Rede)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata de forma genérica que o aparelho de telefone VoIP do setor não está funcionando, está sem sinal, mudo ou apagado.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+          "Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+          "Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+          "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+        ],
+        "score": 0.53
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42293) + 1ª Camada • Base de Conhecimento GLPI (KB-41)",
+    "resolution_steps": [
+      "[MEM-#42293] Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "[MEM-#42293] Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "[MEM-#42293] Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+      "[KB-41] ▸ Ligações Externas",
+      "[KB-41] Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.",
+      "[KB-41] Obs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário, Douglas Henrique Amaral do Núcleo Passos, relatou que o ramal 2627 não está recebendo chamadas externas devido a uma regra de telefonia que aciona diversos ramais simultaneamente ou consecutivamente ao receber uma ligação. Douglas solicita a verificação dessa configuração e a inclusão do ramal 2627 no grupo de ramais que recebem as chamadas direcionadas ao número (35) 3529-2636.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42293) + 1ª Camada • Base de Conhecimento GLPI (KB-41)\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Quais números de ramais específicos do setor estão apresentando queda nas ligações\n  - Confirmar se as quedas ocorrem apenas em chamadas externas ou também entre ramais internos\n  - Horário aproximado ou número externo de exemplo em que a chamada caiu hoje para análise no PABX\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42293] Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. [MEM-#42293] Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. [MEM-#42293] Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.\n  4. [KB-41] ▸ Ligações Externas\n  5. [KB-41] Para fazer uma chamada externa, disque o código “zero” para acessar a linha, seguido do número desejado. Apenas ramais classificados como “privilegiados” têm permissão para isso.\n  6. [KB-41] Obs.: Sempre que o “#” aparecer no final da discagem, é para acelerar a discagem",
+    "public_reply_draft": "Olá, Douglas! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!"
+  },
+  "42726": {
+    "ticket_id": 42726,
+    "analyzed_at": "15/10/2026 08:09",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Dalete Garcia de Oliveira Bartelochi** (Promoprev) solicita a inserção da opção de anexar/inserir documentos nos chamados direcionados ao setor **Regulatório** no sistema **GLPI**. A demanda requer ajuste no catálogo do plugin Formcreator pela equipe de Desenvolvimento para disponibilizar o campo de envio de arquivos na abertura do ticket. O chamado foi aberto na categoria 'T.I > ST > Acesso e Permissões' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Parametrização e ajuste no formulário do GLPI (plugin Formcreator) para inclusão do campo de anexo de documentos na abertura de chamados direcionados ao setor Regulatório.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-29",
+        "title": "Criação ou Parametrização de Formulários / Itens no GLPI (Formcreator / Demandas Intersetoriais)",
+        "category": "Desenvolvimento de Software / Aplicações Internas",
+        "summary": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, Regulatório, Promoprev, etc.) para criação, parametrização, ajuste ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, campos de envio de documentos/anexos, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' (para alterações em formulários existentes) ou 'Novas aplicações' (para novos formulários).",
+          "Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
+          "Localizar ou criar o formulário na categoria do setor competente (ex.: Regulatório, Faturamento, etc.), atribuindo o título, descrição e ícone apropriados.",
+          "Adicionar ou habilitar os campos e seções solicitadas (ex.: campo para inserção/upload de arquivos e documentos, campos de seleção ou dados textuais), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+          "Configurar na aba 'Alvos / Destinos' a criação e roteamento automático do chamado encaminhando para os grupos/setores designados e observadores indicados.",
+          "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42127 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Dalete Olivira",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42660 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Marianna Camilo de Oliveira Marques",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro realizado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42556 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Thatiana Silveira",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nLiberação do Menu realizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Liberação do Menu realizada",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-29) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42127 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-29] Reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (plugin Formcreator).",
+      "[PB-UNI-29] Localizar o formulário de abertura de chamados direcionado ao setor Regulatório / Regulação.",
+      "[PB-UNI-29] Adicionar ou habilitar o campo/seção de upload de arquivos e documentos (campo do tipo Arquivo/Anexo).",
+      "[PB-UNI-29] Salvar a parametrização e testar a abertura no catálogo para validar que a opção de anexar documentos está visível e funcional.",
+      "[PB-UNI-29] Registrar a conclusão no chamado e notificar a solicitante para conferência e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Dalete Garcia de Oliveira Bartelochi** (Promoprev) solicita a inserção da opção de anexar/inserir documentos nos chamados direcionados ao setor **Regulatório** no sistema **GLPI**. A demanda requer ajuste no catálogo do plugin Formcreator pela equipe de Desenvolvimento para disponibilizar o campo de envio de arquivos na abertura do ticket. O chamado foi aberto na categoria 'T.I > ST > Acesso e Permissões' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Muito alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-29) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42127 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-29] Reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n  2. [PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (plugin Formcreator).\n  3. [PB-UNI-29] Localizar o formulário de abertura de chamados direcionado ao setor Regulatório / Regulação.\n  4. [PB-UNI-29] Adicionar ou habilitar o campo/seção de upload de arquivos e documentos (campo do tipo Arquivo/Anexo).\n  5. [PB-UNI-29] Salvar a parametrização e testar a abertura no catálogo para validar que a opção de anexar documentos está visível e funcional.\n  6. [PB-UNI-29] Registrar a conclusão no chamado e notificar a solicitante para conferência e homologação.",
+    "public_reply_draft": "Olá, Dalete! Tudo bem?\n\nRecebemos a sua solicitação referente à inclusão da opção de anexar documentos nos chamados direcionados ao **Regulatório** no **GLPI**.\n\nA demanda já foi validada na triagem técnica e direcionada para a equipe de **Desenvolvimento** realizar o ajuste no formulário (plugin Formcreator), habilitando o campo para envio de arquivos.\n\nAssim que a opção estiver configurada e disponível no catálogo para a abertura dos chamados com anexo, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 }

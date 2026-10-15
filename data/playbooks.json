@@ -128,7 +128,6 @@
       "relatorio hrp",
       "relatorio gestantes",
       "gestantes",
-      "promoprev",
       "alteração via banco",
       "clientes 0256"
     ],
@@ -973,23 +972,43 @@
       "destino automatico do chamado",
       "opções do faturamento",
       "opcoes do faturamento",
-      "campos obrigatório opcional"
+      "campos obrigatório opcional",
+      "inserção da opção de inserir documentos",
+      "insercao da opcao de inserir documentos",
+      "inserir documentos nos chamados",
+      "anexar documentos nos chamados",
+      "opção de inserir documentos",
+      "opcao de inserir documentos",
+      "inserir documentos",
+      "anexar documentos",
+      "campo de anexo",
+      "campo de documento",
+      "upload de documentos",
+      "chamados direcionados ao regulatório",
+      "chamados direcionados ao regulatorio",
+      "regulatório",
+      "regulatorio",
+      "ajuste de formulário",
+      "ajuste de formulario",
+      "alteração de formulário",
+      "alteracao de formulario",
+      "campo de anexo no glpi"
     ],
-    "symptoms": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, etc.) para criação, parametrização ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
+    "symptoms": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, Regulatório, Promoprev, etc.) para criação, parametrização, ajuste ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, campos de envio de documentos/anexos, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
     "required_info": [
-      "Nome do(s) novo(s) formulário(s) ou item(ns) a ser(em) criado(s) no catálogo do GLPI",
-      "Relação detalhada dos campos, tipos de dados e obrigatoriedade (obrigatório ou opcional)",
+      "Nome do(s) novo(s) formulário(s) ou indicação do fluxo/setor de destino no GLPI (ex: Regulatório)",
+      "Relação detalhada dos campos a criar ou ajustar (ex: opção de inserir documentos/anexo, obrigatoriedade e opções)",
       "Setores, grupos ou observadores de destino automático dos chamados gerados"
     ],
     "resolution_steps": [
-      "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Novas aplicações'.",
+      "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' (para alterações em formulários existentes) ou 'Novas aplicações' (para novos formulários).",
       "Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
-      "Criar ou parametrizar o(s) formulário(s) na categoria do setor solicitante (ex.: Faturamento), atribuindo o título, descrição e ícone apropriados.",
-      "Adicionar as seções e os campos solicitados (Nome do prestador, Código, Tipo de solicitação com opções, Descrição, Data de vigência e Anexo), marcando os sinalizadores de obrigatoriedade conforme especificado.",
-      "Configurar na aba 'Alvos / Destinos' a criação automática do chamado encaminhando para os grupos/setores designados (ex.: Faturamento Unimed, Financeiro, Contábil, Regulação) e observadores indicados.",
+      "Localizar ou criar o formulário na categoria do setor competente (ex.: Regulatório, Faturamento, etc.), atribuindo o título, descrição e ícone apropriados.",
+      "Adicionar ou habilitar os campos e seções solicitadas (ex.: campo para inserção/upload de arquivos e documentos, campos de seleção ou dados textuais), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+      "Configurar na aba 'Alvos / Destinos' a criação e roteamento automático do chamado encaminhando para os grupos/setores designados e observadores indicados.",
       "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo(s) formulário(s)/item(ns) no **GLPI** para o setor de **{setor}**.\n\nA especificação detalhada (nomes dos itens, campos obrigatórios/opcionais, tipos de solicitação e destinos automáticos) já foi validada na triagem pela equipe de Desenvolvimento.\n\nNossa equipe já iniciou a criação e parametrização dos formulários no Formcreator do GLPI. Assim que estiverem publicados e disponíveis no catálogo para homologação, avisaremos por aqui para que você possa realizar os testes de validação!\n\nPermanecemos à disposição!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à parametrização/ajuste no **GLPI** para o setor de **{setor}**.\n\nA demanda já foi validada na triagem técnica e direcionada para a equipe de **Desenvolvimento** realizar o ajuste no formulário correspondente (plugin Formcreator).\n\nAssim que as alterações estiverem configuradas e disponíveis no catálogo de serviços para homologação e uso, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   },
   {
     "id": "PB-UNI-30",

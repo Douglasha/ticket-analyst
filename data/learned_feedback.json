@@ -1,5 +1,31 @@
 [
   {
+    "ticket_id": 42584,
+    "title": "Administração de Redes  -  Impressora neuropsicóloga",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "keywords": [
+      "administracao",
+      "impressora",
+      "neuropsicologa",
+      "precisamos",
+      "predio",
+      "dr",
+      "rodrigo"
+    ],
+    "problem_summary": "Precisamos de um impressora para a neuropsicóloga que está no prédio do dr Rodrigo",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente à disponibilização e instalação de impressora para a **neuropsicóloga** (prédio do Dr. Rodrigo).\n\nNossa equipe de Infraestrutura e Redes já está verificando a disponibilidade do equipamento compatível no estoque técnico e providenciará o deslocamento de um técnico até o local para realizar a instalação física e a configuração dos drivers na estação de trabalho.\n\nAssim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-36] Verificar no estoque de T.I. a disponibilidade de impressora compatível (laser ou jato de tinta) para a demanda do setor/consultório.",
+      "[PB-UNI-36] Agendar e deslocar técnico de Infraestrutura e Redes até a unidade/local (prédio do Dr. Rodrigo) portando o equipamento e cabos de força e dados (rede/USB).",
+      "[PB-UNI-36] Realizar a instalação física e conexão do equipamento na estação de trabalho da profissional.",
+      "[PB-UNI-36] Instalar os drivers e configurar o dispositivo no sistema operacional da máquina, efetuando impressão de página de teste.",
+      "[PB-UNI-36] Coletar validação com a usuária no local e concluir o atendimento no GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-13T11:21:55.002Z"
+  },
+  {
     "ticket_id": 42561,
     "title": "Relatórios  -  Relatório com quantitativo de pacientes/dia com cateteres",
     "category": "T.I > BD > Big Data e BI > Relatórios",

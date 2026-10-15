@@ -1057,8 +1057,9 @@ export class AIAnalyst {
       }
     } else if (
       normAll.includes("tnumm") ||
-      normAll.includes("promoprev") ||
-      normAll.includes("0256") ||
+      normAll.includes("precificacao") ||
+      normAll.includes("gestantes") ||
+      (normAll.includes("0256") && normAll.includes("relatorio")) ||
       (normAll.includes("hrp") &&
         (normAll.includes("precificacao") || normAll.includes("gestantes")))
     ) {
@@ -1074,7 +1075,7 @@ export class AIAnalyst {
         missingInfo = [];
       } else {
         translatedIntent =
-          "Solicitação da equipe Promoprev buscando o caminho/módulo no sistema HRP para extração do Relatório de Gestantes (carteira Clientes 0256).";
+          "Solicitação da equipe buscando o caminho/módulo no sistema HRP para extração do Relatório de Gestantes (carteira Clientes 0256).";
         detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
         suggestedCategory = "T.I > BD > Big Data e BI > Relatórios";
         realUrgency = "Baixa";
@@ -1297,9 +1298,16 @@ export class AIAnalyst {
         "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos",
       ];
     } else if (
-      /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|criar item no glpi)\b/i.test(
+      /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|criar item no glpi|inser[cç][aã]o da op[cç][aã]o de inserir documentos|inserir documentos nos chamados|anexar documentos nos chamados|op[cç][aã]o de anexar documentos|campo de anexo|documentos nos chamados)\b/i.test(
         normAll
       ) ||
+      (/\bglpi\b/i.test(normAll) &&
+        /\b(regulatório|regulatorio|regula[cç][aã]o|faturamento|financeiro|rh|contabil|setor)\b/i.test(
+          normAll
+        ) &&
+        /\b(documentos?|anexos?|campo|formulario|formularios|itens|item)\b/i.test(
+          normAll
+        )) ||
       (/\bglpi\b/i.test(normAll) &&
         /\b(formul[aá]rio|formul[aá]rios|item|itens)\b/i.test(normAll) &&
         /\b(criar|cria[çc][ãa]o|novo|novos|inclus[ãa]o|adicionar|parametrizar)\b/i.test(normAll))
@@ -1310,109 +1318,154 @@ export class AIAnalyst {
       );
       const solPrefix = isMale ? "O solicitante" : "A solicitante";
 
-      // Tenta extrair nomes dos formulários/itens informados
-      const itemNames = [];
-      const itemMatches = descText.matchAll(/Nome\s*:\s*([^\n\r]+)/gi);
-      for (const m of itemMatches) {
-        const nameVal = m[1].replace(/obrigat[oó]rio/i, "").trim();
-        if (
-          nameVal &&
-          !itemNames.includes(nameVal) &&
-          !/^(prestador|colaborador|usuario|secretaria)$/i.test(nameVal)
-        ) {
-          itemNames.push(nameVal);
-        }
-      }
+      const isDocAttachmentAdjustment =
+        /\b(inser[cç][aã]o da op[cç][aã]o de inserir documentos|inserir documentos nos chamados|anexar documentos nos chamados|op[cç][aã]o de anexar documentos|campo de anexo|documentos nos chamados)\b/i.test(
+          normAll
+        ) ||
+        (/\b(inserir|anexar|inclus[ãa]o|adicionar|op[cç][aã]o)\b/i.test(normAll) &&
+          /\b(documentos?|anexos?|arquivos?)\b/i.test(normAll) &&
+          /\b(regulatório|regulatorio|regula[cç][aã]o|faturamento|financeiro|rh|glpi)\b/i.test(normAll));
 
-      const hasMultipleItems =
-        itemNames.length > 1 ||
-        /\b(item 2|item\s*2|dois itens|2 itens|novos itens|novos formul[aá]rios|mais de um item|mais de um formul[aá]rio)\b/i.test(
-          descText
-        );
-      const itemsCountLabel = hasMultipleItems
-        ? itemNames.length > 1
-          ? `${itemNames.length} novos formulários/itens`
-          : "novos formulários/itens"
-        : "um novo formulário/item";
-
-      const itemsListed =
-        itemNames.length > 0
-          ? itemNames.map((n) => `**${n}**`).join(" e ")
-          : itemsCountLabel;
-
-      detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
-      suggestedCategory = "T.I > DV > Desenvolvimento > Novas aplicações";
-      realUrgency = ticket.urgency_label || "Baixa";
-      urgencyReason = hasMultipleItems
-        ? `Criação e parametrização de novos formulários no catálogo do GLPI para atender os fluxos de trabalho e demandas intersetoriais do ${sectorName}.`
-        : `Criação e parametrização de novo formulário no catálogo do GLPI para atender o fluxo de trabalho do setor ${sectorName}.`;
-
-      const hasFieldsSpecification =
-        /\b(campos?|obrigat[oó]rio|opcional|destino autom[aá]tico)\b/i.test(
-          descText
-        );
-
-      if (hasFieldsSpecification) {
-        const singularOrPluralIntent = hasMultipleItems
-          ? `solicita a criação de ${itemsCountLabel} no catálogo do sistema **GLPI** vinculados à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nomes dos formulários, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`
-          : `solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`;
-
-        translatedIntent =
-          `${solPrefix} **${ticket.requester}** (${sectorName}) ${singularOrPluralIntent} ` +
-          `O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.`;
+      if (isDocAttachmentAdjustment) {
+        const rawSectorMatch = (ticket.content || "").match(/direcionados? ao ([a-zá-úÁ-Ú]+)/i) || (ticket.content || "").match(/setor\s*:\s*([a-zá-úÁ-Ú]+)/i);
+        let targetFormSector = rawSectorMatch ? rawSectorMatch[1].trim() : "Regulatório";
+        if (/regulat[oó]rio/i.test(targetFormSector)) targetFormSector = "Regulatório";
+        else if (/regula[cç][aã]o/i.test(targetFormSector)) targetFormSector = "Regulação";
+        else if (/faturamento/i.test(targetFormSector)) targetFormSector = "Faturamento";
+        else if (/financeiro/i.test(targetFormSector)) targetFormSector = "Financeiro";
+        else if (/cont[aá]bil/i.test(targetFormSector)) targetFormSector = "Contábil";
+        detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
+        suggestedCategory = "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+        realUrgency = ticket.urgency_label && ticket.urgency_label !== "Muito baixa" ? ticket.urgency_label : "Média";
+        urgencyReason = `Parametrização e ajuste no formulário do GLPI (plugin Formcreator) para inclusão do campo de anexo de documentos na abertura de chamados direcionados ao setor ${targetFormSector}.`;
         sufficiencyStatus = "completo";
         missingInfo = [];
 
-        const itemsBullet =
-          itemNames.length > 0
-            ? itemNames
-                .map(
-                  (n, i) =>
-                    `${i + 1}. **${n}**${i === itemNames.length - 1 ? "." : ";"}`
-                )
-                .join("\n") + "\n\n"
-            : "";
-
-        const formActionPhrase = hasMultipleItems
-          ? `criação de ${itemsCountLabel} no catálogo do **GLPI** para o setor de **${sectorName}**`
-          : `criação de um novo formulário/item no catálogo do **GLPI** para o setor de **${sectorName}**`;
-
-        const devStartPhrase = hasMultipleItems
-          ? `Nossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`
-          : `Nossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`;
-
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à ${formActionPhrase}:\n` +
-          (itemsBullet || (itemNames.length === 1 ? `1. **${itemNames[0]}**.\n\n` : "")) +
-          `Todos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\n` +
-          `${devStartPhrase}\n\n` +
-          `Permanecemos à disposição!`;
-      } else {
-        const formLabelIncomplete = hasMultipleItems
-          ? "novos formulários/itens"
-          : "um novo formulário/item";
         translatedIntent =
-          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**, porém sem especificar todos os campos necessários.`;
-        sufficiencyStatus = "parcial";
-        missingInfo = [
-          hasMultipleItems
-            ? "Relação dos campos a serem criados nos formulários (indicando quais são obrigatórios e quais são opcionais)"
-            : "Relação dos campos a serem criados no formulário (indicando quais são obrigatórios e quais são opcionais)",
-          "Opções de seleção para campos do tipo lista suspensa/menu",
-          "Setores, grupos ou observadores de destino automático dos chamados gerados pelo formulário",
-        ];
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a inserção da opção de anexar/inserir documentos nos chamados direcionados ao setor **${targetFormSector}** no sistema **GLPI**. ` +
+          `A demanda requer ajuste no catálogo do plugin Formcreator pela equipe de Desenvolvimento para disponibilizar o campo de envio de arquivos na abertura do ticket. ` +
+          `O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.`;
+
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**.\n\n` +
-          `Para que possamos parametrizar ${hasMultipleItems ? "os formulários" : "o formulário"} exatamente conforme a necessidade do fluxo de trabalho, você poderia nos detalhar:\n` +
-          `1. A **relação dos campos** desejados (indicando quais devem ser obrigatórios e quais são opcionais);\n` +
-          `2. As **opções de seleção** para campos de lista/menu;\n` +
-          `3. Quais **setores, grupos ou observadores** devem receber automaticamente os chamados abertos por esse formulário?\n\n` +
-          `Assim que nos confirmar essas informações por aqui, daremos sequência imediata na configuração!`;
+          `Recebemos a sua solicitação referente à inclusão da opção de anexar documentos nos chamados direcionados ao **${targetFormSector}** no **GLPI**.\n\n` +
+          `A demanda já foi validada na triagem técnica e direcionada para a equipe de **Desenvolvimento** realizar o ajuste no formulário (plugin Formcreator), habilitando o campo para envio de arquivos.\n\n` +
+          `Assim que a opção estiver configurada e disponível no catálogo para a abertura dos chamados com anexo, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+
+        customResolutionSteps = [
+          "[PB-UNI-29] Reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+          "[PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (plugin Formcreator).",
+          `[PB-UNI-29] Localizar o formulário de abertura de chamados direcionado ao setor ${targetFormSector} / Regulação.`,
+          "[PB-UNI-29] Adicionar ou habilitar o campo/seção de upload de arquivos e documentos (campo do tipo Arquivo/Anexo).",
+          "[PB-UNI-29] Salvar a parametrização e testar a abertura no catálogo para validar que a opção de anexar documentos está visível e funcional.",
+          "[PB-UNI-29] Registrar a conclusão no chamado e notificar a solicitante para conferência e homologação."
+        ];
+      } else {
+        // Tenta extrair nomes dos formulários/itens informados
+        const itemNames = [];
+        const itemMatches = descText.matchAll(/Nome\s*:\s*([^\n\r]+)/gi);
+        for (const m of itemMatches) {
+          const nameVal = m[1].replace(/obrigat[oó]rio/i, "").trim();
+          if (
+            nameVal &&
+            !itemNames.includes(nameVal) &&
+            !/^(prestador|colaborador|usuario|secretaria)$/i.test(nameVal)
+          ) {
+            itemNames.push(nameVal);
+          }
+        }
+
+        const hasMultipleItems =
+          itemNames.length > 1 ||
+          /\b(item 2|item\s*2|dois itens|2 itens|novos itens|novos formul[aá]rios|mais de um item|mais de um formul[aá]rio)\b/i.test(
+            descText
+          );
+        const itemsCountLabel = hasMultipleItems
+          ? itemNames.length > 1
+            ? `${itemNames.length} novos formulários/itens`
+            : "novos formulários/itens"
+          : "um novo formulário/item";
+
+        const itemsListed =
+          itemNames.length > 0
+            ? itemNames.map((n) => `**${n}**`).join(" e ")
+            : itemsCountLabel;
+
+        detectedDomain = "Desenvolvimento de Software / Aplicações Internas";
+        suggestedCategory = "T.I > DV > Desenvolvimento > Novas aplicações";
+        realUrgency = ticket.urgency_label || "Baixa";
+        urgencyReason = hasMultipleItems
+          ? `Criação e parametrização de novos formulários no catálogo do GLPI para atender os fluxos de trabalho e demandas intersetoriais do ${sectorName}.`
+          : `Criação e parametrização de novo formulário no catálogo do GLPI para atender o fluxo de trabalho do setor ${sectorName}.`;
+
+        const hasFieldsSpecification =
+          /\b(campos?|obrigat[oó]rio|opcional|destino autom[aá]tico)\b/i.test(
+            descText
+          );
+
+        if (hasFieldsSpecification) {
+          const singularOrPluralIntent = hasMultipleItems
+            ? `solicita a criação de ${itemsCountLabel} no catálogo do sistema **GLPI** vinculados à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nomes dos formulários, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`
+            : `solicita a criação de **um novo formulário/item** no catálogo do sistema **GLPI** vinculado à categoria de **${sectorName}** (${itemsListed}). O solicitante detalhou toda a estrutura necessária: nome do formulário, campos obrigatórios e opcionais, opções de seleção e destino automático dos chamados.`;
+
+          translatedIntent =
+            `${solPrefix} **${ticket.requester}** (${sectorName}) ${singularOrPluralIntent} ` +
+            `O chamado foi aberto na categoria '${ticket.category}' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Novas aplicações'.`;
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+
+          const itemsBullet =
+            itemNames.length > 0
+              ? itemNames
+                  .map(
+                    (n, i) =>
+                      `${i + 1}. **${n}**${i === itemNames.length - 1 ? "." : ";"}`
+                  )
+                  .join("\n") + "\n\n"
+              : "";
+
+          const formActionPhrase = hasMultipleItems
+            ? `criação de ${itemsCountLabel} no catálogo do **GLPI** para o setor de **${sectorName}**`
+            : `criação de um novo formulário/item no catálogo do **GLPI** para o setor de **${sectorName}**`;
+
+          const devStartPhrase = hasMultipleItems
+            ? `Nossa equipe de Desenvolvimento já iniciou a parametrização dos novos formulários no Formcreator do GLPI. Assim que estiverem publicados no catálogo e disponíveis para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`
+            : `Nossa equipe de Desenvolvimento já iniciou a parametrização do novo formulário no Formcreator do GLPI. Assim que estiver publicado no catálogo e disponível para homologação, avisaremos por aqui para que você possa realizar os testes de validação!`;
+
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à ${formActionPhrase}:\n` +
+            (itemsBullet || (itemNames.length === 1 ? `1. **${itemNames[0]}**.\n\n` : "")) +
+            `Todos os requisitos informados (relação de campos obrigatórios e opcionais, opções de seleção e destinos automáticos para os setores e observadores) já foram validados na triagem técnica.\n\n` +
+            `${devStartPhrase}\n\n` +
+            `Permanecemos à disposição!`;
+        } else {
+          const formLabelIncomplete = hasMultipleItems
+            ? "novos formulários/itens"
+            : "um novo formulário/item";
+          translatedIntent =
+            `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**, porém sem especificar todos os campos necessários.`;
+          sufficiencyStatus = "parcial";
+          missingInfo = [
+            hasMultipleItems
+              ? "Relação dos campos a serem criados nos formulários (indicando quais são obrigatórios e quais são opcionais)"
+              : "Relação dos campos a serem criados no formulário (indicando quais são obrigatórios e quais são opcionais)",
+            "Opções de seleção para campos do tipo lista suspensa/menu",
+            "Setores, grupos ou observadores de destino automático dos chamados gerados pelo formulário",
+          ];
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à criação de ${formLabelIncomplete} no **GLPI** para o setor de **${sectorName}**.\n\n` +
+            `Para que possamos parametrizar ${hasMultipleItems ? "os formulários" : "o formulário"} exatamente conforme a necessidade do fluxo de trabalho, você poderia nos detalhar:\n` +
+            `1. A **relação dos campos** desejados (indicando quais devem ser obrigatórios e quais são opcionais);\n` +
+            `2. As **opções de seleção** para campos de lista/menu;\n` +
+            `3. Quais **setores, grupos ou observadores** devem receber automaticamente os chamados abertos por esse formulário?\n\n` +
+            `Assim que nos confirmar essas informações por aqui, daremos sequência imediata na configuração!`;
+        }
       }
     } else if (
-      !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
+      !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|inser[cç][aã]o da op[cç][aã]o de inserir documentos|inserir documentos nos chamados)\b/i.test(
         normAll
       ) &&
       ((/\b(clinicas?|16\d{6})\b/i.test(normAll) &&

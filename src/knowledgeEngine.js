@@ -194,15 +194,28 @@ export class KnowledgeEngine {
     const ticketTokens = extractTokens(fullTicketText);
     const matches = [];
 
+    const isFormcreatorOrGlpiForm =
+      /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|criar item no glpi|inser[cç][aã]o da op[cç][aã]o de inserir documentos|inserir documentos nos chamados|anexar documentos nos chamados|op[cç][aã]o de anexar documentos|campo de anexo|documentos nos chamados)\b/i.test(
+        normTicket
+      ) ||
+      (/\bglpi\b/i.test(normTicket) &&
+        /\b(regulatório|regulatorio|regula[cç][aã]o|faturamento|financeiro|rh|contabil|setor)\b/i.test(
+          normTicket
+        ) &&
+        /\b(documentos?|anexos?|campo|formulario|formularios|itens|item)\b/i.test(
+          normTicket
+        ));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
       const playbooks = loadPlaybooks();
       for (const pb of playbooks) {
-        // Evita parear Playbook exclusivo do HRP/TNUMM quando o chamado é de outro sistema (ex: S.G.H. / Spdata) ou unificação de cadastro
+        // Evita parear Playbook exclusivo do HRP/TNUMM quando o chamado é de outro sistema (ex: S.G.H. / Spdata), unificação de cadastro ou GLPI Formcreator
         if (
           pb.id === "PB-UNI-05" &&
-          (!/\b(hrp|tnumm|promoprev|0256)\b/i.test(normTicket) ||
+          (isFormcreatorOrGlpiForm ||
+            (!/\b(hrp|tnumm|0256)\b/i.test(normTicket) && !/\bgestantes\b/i.test(normTicket)) ||
             /\b(unifica|unificar|unificacao|mais de um cadastro|2 cadastros|dois cadastros|duplicad)\b/i.test(
               normTicket
             ))
@@ -273,7 +286,7 @@ export class KnowledgeEngine {
               normTicket
             );
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm) {
             continue;
           }
         }
@@ -287,7 +300,7 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27) ou criação de formulários no GLPI
+        // Evita parear PB-UNI-25 quando o chamado NÃO trata de clínicas, Web Saúde ou atendentes do NAS, ou quando se trata de CRIAÇÃO DE USUÁRIO de secretária (PB-UNI-27) ou criação/ajuste de formulários no GLPI
         if (
           pb.id === "PB-UNI-25" &&
           (!/\b(web\s*sa[uú]de|clinicas?|16\d{6}|atendentes?\s+do\s+nas|nas\s+passos|nas\b)\b/i.test(
@@ -295,9 +308,7 @@ export class KnowledgeEngine {
           ) ||
             /\bcria[çc][ãa]o de usu[áa]rios?\b/i.test(normTicket) ||
             /\borigem\s*:\s*acesso secret[aá]ria\b/i.test(normTicket) ||
-            /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
-              normTicket
-            ))
+            isFormcreatorOrGlpiForm)
         ) {
           continue;
         }
@@ -306,9 +317,7 @@ export class KnowledgeEngine {
           pb.id === "PB-UNI-27" &&
           (!/\b(secret[aá]ria|prestador|web\s*sa[uú]de|16\d{6})\b/i.test(normTicket) ||
             !/\b(cria[çc][ãa]o de usu[áa]rios?|cadastr(ar|o)|novo usu[áa]rio)\b/i.test(normTicket) ||
-            /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(
-              normTicket
-            ))
+            isFormcreatorOrGlpiForm)
         ) {
           continue;
         }
@@ -358,12 +367,10 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-29 (Criação de Formulários GLPI) quando o chamado não trata de itens/formulários no GLPI
+        // Evita parear PB-UNI-29 (Criação ou Parametrização de Formulários GLPI) quando o chamado não trata de itens/formulários no GLPI
         if (
           pb.id === "PB-UNI-29" &&
-          !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|op[çc][õo]es do faturamento|destino autom[aá]tico do chamado)\b/i.test(
-            normTicket
-          )
+          !isFormcreatorOrGlpiForm
         ) {
           continue;
         }
@@ -557,6 +564,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.90);
         }
+        if (
+          pb.id === "PB-UNI-29" &&
+          isFormcreatorOrGlpiForm
+        ) {
+          score = Math.max(score, 0.92);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -682,10 +695,10 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear memórias de Web Saúde / secretárias / acessos quando o chamado trata de criação de formulários no GLPI
+        // Evita parear memórias de Web Saúde / secretárias / acessos quando o chamado trata de criação ou ajuste de formulários no GLPI
         if (
-          /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(normTicket) &&
-          /\b(web\s*sa[uú]de|secret[aá]ria|prestador|16\d{6}|acesso e permiss[õo]es|cria[çc][ãa]o de usu[áa]rios?)\b/i.test(
+          isFormcreatorOrGlpiForm &&
+          /\b(web\s*sa[uú]de|secret[aá]ria|prestador|16\d{6}|acesso e permiss[õo]es|cria[çc][ãa]o de usu[áa]rios?|libera[çc][ãa]o de acesso|faturamento eletr[oô]nico|senha|bloqueada|dalete olivira)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
@@ -693,7 +706,7 @@ export class KnowledgeEngine {
         }
         // Evita parear memórias de formulários no GLPI quando o chamado NÃO trata de GLPI
         if (
-          !/\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?)\b/i.test(normTicket) &&
+          !isFormcreatorOrGlpiForm &&
           /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
