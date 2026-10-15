@@ -95,6 +95,10 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
 13. **Diagnóstico Presencial de Hardware e Monitores (`PB-UNI-07`) vs. Promessa Precipitada de Substituição:**
    - Quando o solicitante relata que o computador ou monitor não liga ou está sem vídeo (ex.: Ana Paula / SCIH na estação `DHU-0374-SCIH`), o relato do usuário frequentemente difere da causa raiz real (ex.: o usuário relata que o monitor não liga, mas fotos anexadas ou testes revelam que o monitor está ligado/energizado, e o defeito real é na inicialização da CPU, memória RAM, travamento de boot ou mau contato de cabos HDMI/DisplayPort/VGA).
    - **Distinção Crítica:** NUNCA redigir resposta pública prometendo antecipadamente a substituição física do equipamento ("já separamos o item e faremos a troca"). A resposta deve SEMPRE confirmar o deslocamento técnico presencial para inspeção e diagnóstico no local (verificação de cabos, sinal de vídeo e boot da máquina), esclarecendo que a substituição de componentes ou periféricos ocorrerá apenas se for constatado defeito irreversível no teste in loco.
+14. **Processamento Multimodal de Imagens e Anexos do GLPI (`qwen2.5vl:3b` / Gemini):**
+   - O sistema possui pipeline de ingestão automática de documentos e anexos vinculados aos chamados no GLPI (`/Ticket/:id/Document_Item` e `/Document/:id`).
+   - Imagens (`.png`, `.jpg`, `.jpeg`, `.webp`, `.bmp`) são convertidas para base64 e processadas diretamente pelo modelo de visão local (`qwen2.5vl:3b` via Ollama) ou Gemini Multimodal (`gemini-2.5-flash`), permitindo confrontar o relato textual com as evidências visuais (ex.: LEDs de energia acesos, mensagens de erro ou códigos na tela, cabos conectados).
+   - Na interface web, as imagens são exibidas em galeria de miniaturas com lightbox para visualização em tamanho real, e o badge *"Analisado por IA Multimodal (Visão)"* sinaliza a inspeção visual realizada.
 
 
 

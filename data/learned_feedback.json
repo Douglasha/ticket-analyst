@@ -1312,30 +1312,30 @@
   },
   {
     "ticket_id": 42771,
-    "title": "Hospital > SCIH > Monitor não liga / Sem vídeo (DHU-0374-SCIH)",
+    "title": "Manutenção de Computadores  -  Computador não liga o monitor DHU-0374-SCIH",
     "category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
     "keywords": [
+      "manutencao",
+      "computadores",
+      "computador",
+      "liga",
       "monitor",
-      "nao liga",
-      "não liga",
-      "sem video",
-      "sem vídeo",
       "dhu-0374-scih",
-      "dhu",
-      "troca"
+      "funcionando"
     ],
-    "problem_summary": "A colaboradora relata que o computador/monitor não está ligando, porém há imagem anexada mostrando que o monitor está energizado/ligado. O defeito real pode ser cabo de vídeo, sinal ou CPU/boot.",
+    "problem_summary": "Computador não está funcionando.",
     "custom_instruction": "Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
     "required_info": [],
     "resolution_steps": [
-      "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para diagnóstico presencial da estação DHU-0374-SCIH.",
-      "[PB-UNI-07] Inspecionar conexões físicas de cabos (HDMI/DisplayPort/VGA) e verificar se o monitor acusa 'Sem Sinal' ou ausência de vídeo.",
-      "[PB-UNI-07] Avaliar o gabinete/CPU: verificar se o computador liga normalmente (cooler, LEDs de energia/disco, POST/bipes) ou se há falha de hardware na máquina.",
-      "[PB-UNI-07] Realizar o reparo de conexão/sistema ou, apenas se confirmado defeito físico irreversível, efetuar a substituição do componente com item reserva de estoque.",
-      "[PB-UNI-07] Validar com a solicitante o retorno do vídeo e da estação de trabalho."
+      "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+      "[PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+      "[PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+      "[PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+      "[PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
     ],
     "sufficiency_status": "completo",
-    "created_at": "2026-10-15T11:15:00.000Z"
+    "created_at": "2026-10-15T11:15:00.000Z",
+    "updated_at": "2026-10-15T14:15:59.915Z"
   }
 ]

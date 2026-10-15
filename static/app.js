@@ -543,6 +543,95 @@ function renderTicketWorkspace(ticket) {
     fBox.classList.add("hidden");
     fList.innerHTML = "";
   }
+
+  // Anexos e Evidências Visuais
+  const aBox = document.getElementById("detail-attachments-box");
+  const aList = document.getElementById("detail-attachments-list");
+  const aCount = document.getElementById("detail-attachments-count");
+  const mBadge = document.getElementById("detail-multimodal-badge");
+
+  const docs = Array.isArray(ticket.documents) ? ticket.documents : [];
+  if (aBox && aList) {
+    if (docs.length > 0) {
+      aBox.classList.remove("hidden");
+      if (aCount) aCount.textContent = String(docs.length);
+
+      const hasImages = docs.some((d) => d.is_image);
+      if (mBadge) {
+        if (hasImages) {
+          mBadge.classList.remove("hidden");
+        } else {
+          mBadge.classList.add("hidden");
+        }
+      }
+
+      aList.innerHTML = docs
+        .map((d) => {
+          const docUrl = d.data_url || `/api/tickets/${ticket.id}/documents/${d.id}`;
+          if (d.is_image) {
+            return `
+              <div
+                class="group relative cursor-pointer surface-sub rounded-xl p-2 border border-white/10 hover:border-emerald-500/50 transition flex flex-col items-center gap-1.5 w-36 shrink-0 shadow-sm"
+                onclick="openImageModal('${docUrl}', '${escapeHtml(d.name || d.filename)}')"
+                title="Clique para visualizar em tamanho real"
+              >
+                <div class="w-full h-24 rounded-lg bg-black/25 flex items-center justify-center overflow-hidden border border-white/5">
+                  <img src="${docUrl}" alt="${escapeHtml(d.filename)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" loading="lazy" />
+                </div>
+                <div class="w-full text-[11px] truncate text-center font-medium" style="color: var(--text-main);" title="${escapeHtml(d.filename)}">
+                  ${escapeHtml(d.filename)}
+                </div>
+                <div class="text-[9px] opacity-70 font-mono" style="color: var(--text-muted);">
+                  ${d.size_bytes ? formatBytes(d.size_bytes) : "Imagem"}
+                </div>
+              </div>
+            `;
+          }
+          return `
+            <a
+              href="/api/tickets/${ticket.id}/documents/${d.id}"
+              target="_blank"
+              class="surface-sub rounded-xl p-2.5 border border-white/10 hover:border-emerald-500/50 transition flex items-center gap-2.5 text-xs shadow-sm"
+              title="Baixar anexo"
+            >
+              <span class="material-symbols-outlined icon-md text-emerald-400">attach_file</span>
+              <div class="min-w-0">
+                <div class="font-medium truncate max-w-[150px]" style="color: var(--text-main);">${escapeHtml(d.filename)}</div>
+                <div class="text-[10px] opacity-70 font-mono" style="color: var(--text-muted);">${d.size_bytes ? formatBytes(d.size_bytes) : "Arquivo"}</div>
+              </div>
+            </a>
+          `;
+        })
+        .join("");
+    } else {
+      aBox.classList.add("hidden");
+      aList.innerHTML = "";
+      if (mBadge) mBadge.classList.add("hidden");
+    }
+  }
+}
+
+function openImageModal(imgSrc, caption) {
+  const modal = document.getElementById("image-modal");
+  const img = document.getElementById("image-modal-img");
+  const cap = document.getElementById("image-modal-caption");
+  if (!modal || !img) return;
+  img.src = imgSrc;
+  if (cap) cap.textContent = caption || "Anexo do Chamado";
+  modal.classList.remove("hidden");
+}
+
+function closeImageModal() {
+  const modal = document.getElementById("image-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function formatBytes(bytes) {
+  if (!bytes || bytes === 0) return "0 B";
+  const k = 1024;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
 }
 
 async function analyzeCurrentTicket(forceRefresh = false) {
@@ -1581,7 +1670,9 @@ async function loadSettingsData() {
     document.getElementById("cfg-openai-key").value = s.openai_api_key || "";
     document.getElementById("cfg-openai-model").value = s.openai_model || "gpt-4o-mini";
     document.getElementById("cfg-ollama-url").value = s.ollama_base_url || "http://localhost:11434";
-    document.getElementById("cfg-ollama-model").value = s.ollama_model || "llama3.1";
+    document.getElementById("cfg-ollama-model").value = s.ollama_model || "qwen2.5:3b";
+    const visionEl = document.getElementById("cfg-ollama-vision-model");
+    if (visionEl) visionEl.value = s.ollama_vision_model || "qwen2.5vl:3b";
     document.getElementById("cfg-org-context").value = s.org_context || "";
 
     const localUserEl = document.getElementById("cfg-auth-local-user");
@@ -1596,6 +1687,7 @@ async function loadSettingsData() {
 function collectSettingsFromUI() {
   const localUserEl = document.getElementById("cfg-auth-local-user");
   const localPassEl = document.getElementById("cfg-auth-local-pass");
+  const visionEl = document.getElementById("cfg-ollama-vision-model");
 
   return {
     glpi_demo_mode: document.getElementById("cfg-demo-mode").checked,
@@ -1612,6 +1704,7 @@ function collectSettingsFromUI() {
     openai_base_url: "https://api.openai.com/v1",
     ollama_base_url: document.getElementById("cfg-ollama-url").value.trim(),
     ollama_model: document.getElementById("cfg-ollama-model").value.trim(),
+    ollama_vision_model: visionEl ? visionEl.value.trim() : (state.settings?.ollama_vision_model || "qwen2.5vl:3b"),
     org_context: document.getElementById("cfg-org-context").value.trim(),
     auth_local_user: localUserEl ? localUserEl.value.trim() || "admin" : "admin",
     auth_local_password:

@@ -508,11 +508,163 @@ export class GLPIClient {
     const idNum = Number(ticketId);
     if (this.settings.glpi_demo_mode) {
       const found = DEMO_TICKETS.find((t) => t.id === idNum);
-      return found ? structuredClone(found) : null;
+      if (!found) return null;
+      const clone = structuredClone(found);
+      clone.documents = clone.documents || [];
+      return clone;
     }
 
     const tickets = await this._fetchRealTickets(idNum);
     return tickets.length > 0 ? tickets[0] : null;
+  }
+
+  async downloadDocument(docId, externalSessionToken = null) {
+    if (this.settings.glpi_demo_mode) return null;
+    let sessionToken = externalSessionToken;
+    let ownsSession = false;
+    if (!sessionToken) {
+      sessionToken = await this._initSession();
+      ownsSession = true;
+    }
+    try {
+      const headers = this._authHeaders(sessionToken);
+      const metaRes = await fetch(`${this.baseUrl}/Document/${docId}`, { headers });
+      let filename = `document_${docId}`;
+      let mime = "application/octet-stream";
+      if (metaRes.ok) {
+        const meta = await metaRes.json();
+        filename = String(meta.filename || meta.name || filename).trim();
+        mime = String(meta.mime || mime).toLowerCase();
+      }
+      const binRes = await fetch(`${this.baseUrl}/Document/${docId}`, {
+        headers: {
+          ...headers,
+          Accept: "application/octet-stream",
+        },
+      });
+      if (!binRes.ok) return null;
+      const arrayBuf = await binRes.arrayBuffer();
+      const buffer = Buffer.from(arrayBuf);
+      if (mime === "application/octet-stream") {
+        if (/\.png$/i.test(filename)) mime = "image/png";
+        else if (/\.jpe?g$/i.test(filename)) mime = "image/jpeg";
+        else if (/\.gif$/i.test(filename)) mime = "image/gif";
+        else if (/\.webp$/i.test(filename)) mime = "image/webp";
+        else if (/\.pdf$/i.test(filename)) mime = "application/pdf";
+      }
+      return { filename, mime, buffer };
+    } finally {
+      if (ownsSession && sessionToken) {
+        await this._killSession(sessionToken);
+      }
+    }
+  }
+
+  async getTicketDocuments(ticketId, externalSessionToken = null, rawContent = "") {
+    if (this.settings.glpi_demo_mode) return [];
+    let sessionToken = externalSessionToken;
+    let ownsSession = false;
+    if (!sessionToken) {
+      sessionToken = await this._initSession();
+      ownsSession = true;
+    }
+
+    const documents = [];
+    try {
+      const headers = this._authHeaders(sessionToken);
+      const docIds = new Set();
+
+      // 1. Consulta vínculos em Document_Item do GLPI
+      try {
+        const res = await fetch(`${this.baseUrl}/Ticket/${ticketId}/Document_Item`, {
+          headers,
+        });
+        if (res.ok) {
+          const links = await res.json();
+          if (Array.isArray(links)) {
+            for (const l of links) {
+              const dId = Number(l.documents_id || 0);
+              if (dId > 0) docIds.add(dId);
+            }
+          }
+        }
+      } catch {
+        // ignora erro ao consultar Document_Item
+      }
+
+      // 2. Extrai docid de tags <img> ou links no HTML bruto do ticket
+      const rawHtml = String(rawContent || "");
+      const matches = rawHtml.matchAll(/docid=(\d+)/gi);
+      for (const m of matches) {
+        const dId = Number(m[1]);
+        if (dId > 0) docIds.add(dId);
+      }
+
+      // 3. Para cada documento, obtém metadados e faz download de imagens leves (<= 15MB)
+      for (const dId of docIds) {
+        try {
+          const metaRes = await fetch(`${this.baseUrl}/Document/${dId}`, { headers });
+          if (!metaRes.ok) continue;
+          const meta = await metaRes.json();
+          const filename = String(meta.filename || meta.name || `doc_${dId}`).trim();
+          let mime = String(meta.mime || "").toLowerCase();
+          const isImage =
+            mime.startsWith("image/") ||
+            /\.(png|jpe?g|gif|webp|bmp)$/i.test(filename);
+
+          if (!mime || mime === "application/octet-stream") {
+            if (/\.png$/i.test(filename)) mime = "image/png";
+            else if (/\.jpe?g$/i.test(filename)) mime = "image/jpeg";
+            else if (/\.gif$/i.test(filename)) mime = "image/gif";
+            else if (/\.webp$/i.test(filename)) mime = "image/webp";
+            else if (/\.pdf$/i.test(filename)) mime = "application/pdf";
+          }
+
+          const docObj = {
+            id: dId,
+            name: cleanGlpiHtml(meta.name || filename),
+            filename,
+            mime,
+            is_image: isImage,
+            size_bytes: Number(meta.filesize || 0),
+            base64: null,
+            data_url: null,
+          };
+
+          if (isImage) {
+            try {
+              const binRes = await fetch(`${this.baseUrl}/Document/${dId}`, {
+                headers: {
+                  ...headers,
+                  Accept: "application/octet-stream",
+                },
+              });
+              if (binRes.ok) {
+                const arrayBuf = await binRes.arrayBuffer();
+                const buf = Buffer.from(arrayBuf);
+                if (buf.length > 0 && buf.length <= 15 * 1024 * 1024) {
+                  const b64 = buf.toString("base64");
+                  docObj.base64 = b64;
+                  docObj.data_url = `data:${mime};base64,${b64}`;
+                  docObj.size_bytes = buf.length;
+                }
+              }
+            } catch {
+              // ignora erro ao baixar binário da imagem
+            }
+          }
+          documents.push(docObj);
+        } catch {
+          // ignora falha em documento individual
+        }
+      }
+    } finally {
+      if (ownsSession && sessionToken) {
+        await this._killSession(sessionToken);
+      }
+    }
+
+    return documents;
   }
 
   _deriveGroupFromCategory(categoryStr, rawGroupAssign) {
@@ -599,7 +751,8 @@ export class GLPIClient {
             : "Não categorizado";
 
         const followups = [];
-        // Busca acompanhamentos apenas quando consulta um chamado específico (deixa a listagem 20x mais rápida)
+        let documents = [];
+        // Busca acompanhamentos e documentos apenas quando consulta um chamado específico (deixa a listagem rápida)
         if (specificId) {
           try {
             const fRes = await fetch(
@@ -623,6 +776,12 @@ export class GLPIClient {
             }
           } catch {
             // ignora erro ao buscar followups individuais
+          }
+
+          try {
+            documents = await this.getTicketDocuments(tid, sessionToken, rt.content);
+          } catch {
+            // ignora erro ao buscar documentos
           }
         }
 
@@ -661,6 +820,8 @@ export class GLPIClient {
           created_at: String(rt.date || ""),
           updated_at: String(rt.date_mod || ""),
           followups,
+          documents,
+          has_attachments: documents.length > 0,
           has_analysis: false,
         });
       }

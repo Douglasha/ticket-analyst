@@ -44,6 +44,7 @@ export function loadSettings() {
     openai_base_url: process.env.OPENAI_BASE_URL || "https://api.openai.com/v1",
     ollama_base_url: process.env.OLLAMA_BASE_URL || "http://localhost:11434",
     ollama_model: process.env.OLLAMA_MODEL || "qwen2.5:3b",
+    ollama_vision_model: process.env.OLLAMA_VISION_MODEL || "qwen2.5vl:3b",
     org_context: DEFAULT_ORG_CONTEXT,
     auth_local_user: process.env.AUTH_LOCAL_USER || "admin",
     auth_local_password: process.env.AUTH_LOCAL_PASSWORD || "admin123",

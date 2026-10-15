@@ -182,6 +182,24 @@ app.get("/api/tickets/:ticketId", async (req, res) => {
   }
 });
 
+// Download ou visualização de anexo/imagem de um chamado
+app.get("/api/tickets/:ticketId/documents/:docId", async (req, res) => {
+  try {
+    const docId = Number(req.params.docId);
+    const settings = loadSettings();
+    const client = new GLPIClient(settings);
+    const doc = await client.downloadDocument(docId);
+    if (!doc || !doc.buffer) {
+      return res.status(404).send("Documento não encontrado");
+    }
+    res.setHeader("Content-Type", doc.mime || "application/octet-stream");
+    res.setHeader("Content-Disposition", `inline; filename="${encodeURIComponent(doc.filename)}"`);
+    res.send(doc.buffer);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // Analisa todos os chamados visíveis em lote
 app.post("/api/tickets/analyze-batch", async (req, res) => {
   try {

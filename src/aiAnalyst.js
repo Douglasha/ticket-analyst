@@ -6,7 +6,7 @@ import {
 
 const SYSTEM_PROMPT = `Você é um Analista Sênior de T.I. da Unimed (Copiloto de Triagem GLPI).
 Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil contendo:
-- translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor.
+- translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor. Se houver imagem(ns) ou foto(s) anexada(s), use a visão computacional para verificar o estado físico real exibido na imagem (ex: se o monitor ou computador está ligado/com LED aceso, mensagem de erro na tela, cabos soltos ou conectados) e integre essas evidências no diagnóstico técnico.
 - urgency_reason: explique em 1 frase curta o impacto operacional deste chamado.
 - public_reply_draft: escreva uma mensagem cordial e objetiva pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
   * Se 'Status da Triagem' for 'COMPLETO', apenas confirme que todos os dados necessários já foram recebidos e que a equipe de T.I. já está executando a solicitação (NÃO faça perguntas e NÃO peça ID do HopToDesk).
@@ -88,11 +88,24 @@ export function buildUserPrompt(
       ? `\n- Status da Triagem: PENDENTE DE INFORMAÇÕES\n- Perguntas de Triagem Pendentes para incluir na resposta ao solicitante:\n  * ${missingInfoHints.join("\n  * ")}`
       : `\n- Status da Triagem: COMPLETO (todas as informações pertinentes já constam no chamado; NÃO faça perguntas na resposta ao solicitante)`;
 
+  const docsList = Array.isArray(ticket.documents) ? ticket.documents : [];
+  const imageDocs = docsList.filter((d) => d.is_image);
+  const docsTxt =
+    docsList.length > 0
+      ? `\n- Anexos do Chamado (${docsList.length}): ${docsList
+          .map((d) => `${d.filename}${d.is_image ? " [IMAGEM/FOTO]" : ""}`)
+          .join(", ")}${
+          imageDocs.length > 0
+            ? "\n  * EVIDÊNCIA VISUAL: Foram anexadas fotos/prints ao chamado. Analise os elementos visuais da imagem (periféricos ligados/desligados, cabos, códigos de erro na tela) para apoiar o diagnóstico técnico."
+            : ""
+        }`
+      : "";
+
   return `CHAMADO #${ticket.id}:
 - Título: ${ticket.title}
 - Solicitante: ${ticket.requester} (Primeiro Nome para saudação: ${firstName} | Setor: ${ticket.requester_department || "Não informado"})
 - Categoria GLPI: ${ticket.category} | Urgência: ${ticket.urgency_label}
-${extraFields ? `- Dados do Formulário: ${extraFields}\n` : ""}- Relato do Solicitante: "${cleanRelato.slice(0, 450)}"${triageHintsTxt}
+${extraFields ? `- Dados do Formulário: ${extraFields}\n` : ""}- Relato do Solicitante: "${cleanRelato.slice(0, 450)}"${triageHintsTxt}${docsTxt}
 - Acompanhamentos: ${followupsTxt}
 - Base Técnica Consultada:
 ${matchesTxt}${extra}`;
@@ -133,16 +146,29 @@ export class AIAnalyst {
     let llmData = null;
     let providerLabel = "";
 
+    const imageDocs = (ticket.documents || []).filter(
+      (d) => d.is_image && d.base64
+    );
+    const rawBase64Images = imageDocs.map((d) => d.base64);
+    const hasImages = rawBase64Images.length > 0;
+
     try {
       if (provider === "gemini" && this.settings.gemini_api_key?.trim()) {
-        llmData = await this._callGemini(userPrompt);
-        providerLabel = `Google Gemini (${this.settings.gemini_model})`;
+        llmData = await this._callGemini(userPrompt, imageDocs);
+        providerLabel = hasImages
+          ? `Google Gemini Multimodal (${this.settings.gemini_model})`
+          : `Google Gemini (${this.settings.gemini_model})`;
       } else if (provider === "openai" && this.settings.openai_api_key?.trim()) {
-        llmData = await this._callOpenAI(userPrompt);
-        providerLabel = `OpenAI (${this.settings.openai_model})`;
+        llmData = await this._callOpenAI(userPrompt, imageDocs);
+        providerLabel = hasImages
+          ? `OpenAI Vision (${this.settings.openai_model})`
+          : `OpenAI (${this.settings.openai_model})`;
       } else if (provider === "ollama") {
-        llmData = await this._callOllama(userPrompt);
-        providerLabel = `Ollama Local (${this.settings.ollama_model})`;
+        const visionModel = (this.settings.ollama_vision_model || "qwen2.5vl:3b").trim();
+        llmData = await this._callOllama(userPrompt, rawBase64Images, visionModel);
+        providerLabel = hasImages
+          ? `Ollama Multimodal (${visionModel})`
+          : `Ollama Local (${this.settings.ollama_model})`;
       }
     } catch (err) {
       providerLabel = `Motor Inteligente 3 Camadas (Fallback • ${String(err.message).slice(0, 55)})`;
@@ -264,19 +290,35 @@ export class AIAnalyst {
       resolution_steps: llmData.resolution_steps || [],
       private_note_draft: llmData.private_note_draft || heuristic.private_note_draft,
       public_reply_draft: llmData.public_reply_draft || heuristic.public_reply_draft,
+      has_image_analysis: hasImages,
+      analyzed_images_count: rawBase64Images.length,
     };
   }
 
-  async _callGemini(userPrompt) {
+  async _callGemini(userPrompt, images = []) {
     const model = (this.settings.gemini_model || "gemini-2.5-flash").trim();
     const apiKey = this.settings.gemini_api_key.trim();
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(
       apiKey
     )}`;
 
+    const userParts = [{ text: userPrompt }];
+    if (Array.isArray(images) && images.length > 0) {
+      for (const img of images) {
+        if (img.base64) {
+          userParts.push({
+            inlineData: {
+              mimeType: img.mime || "image/jpeg",
+              data: img.base64,
+            },
+          });
+        }
+      }
+    }
+
     const payload = {
       systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+      contents: [{ role: "user", parts: userParts }],
       generationConfig: {
         temperature: 0.2,
         responseMimeType: "application/json",
@@ -297,11 +339,23 @@ export class AIAnalyst {
     return extractJsonObject(text);
   }
 
-  async _callOpenAI(userPrompt) {
+  async _callOpenAI(userPrompt, images = []) {
     const baseUrl = (this.settings.openai_base_url || "https://api.openai.com/v1").replace(
       /\/+$/,
       ""
     );
+    let userContent = userPrompt;
+    if (Array.isArray(images) && images.length > 0) {
+      userContent = [{ type: "text", text: userPrompt }];
+      for (const img of images) {
+        const url = img.data_url || `data:${img.mime || "image/jpeg"};base64,${img.base64}`;
+        userContent.push({
+          type: "image_url",
+          image_url: { url },
+        });
+      }
+    }
+
     const res = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
       headers: {
@@ -314,7 +368,7 @@ export class AIAnalyst {
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: userPrompt },
+          { role: "user", content: userContent },
         ],
       }),
     });
@@ -326,37 +380,66 @@ export class AIAnalyst {
     return extractJsonObject(text);
   }
 
-  async _callOllama(userPrompt) {
+  async _callOllama(userPrompt, images = [], visionModel = null) {
     const baseUrl = (this.settings.ollama_base_url || "http://localhost:11434").replace(
       /\/+$/,
       ""
     );
-    const res = await fetch(`${baseUrl}/api/chat`, {
+    const hasImages = Array.isArray(images) && images.length > 0;
+    const modelToUse = hasImages
+      ? (visionModel || this.settings.ollama_vision_model || "qwen2.5vl:3b").trim()
+      : (this.settings.ollama_model || "qwen2.5:3b").trim();
+
+    const userMessage = {
+      role: "user",
+      content: userPrompt,
+    };
+    if (hasImages) {
+      userMessage.images = images;
+    }
+
+    const payload = {
+      model: modelToUse,
+      stream: false,
+      format: {
+        type: "object",
+        properties: {
+          translated_intent: { type: "string" },
+          urgency_reason: { type: "string" },
+          public_reply_draft: { type: "string" },
+        },
+        required: ["translated_intent", "urgency_reason", "public_reply_draft"],
+      },
+      keep_alive: "30m",
+      options: {
+        temperature: 0.2,
+        num_ctx: hasImages ? 4096 : 2048,
+      },
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        userMessage,
+      ],
+    };
+
+    let res = await fetch(`${baseUrl}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: (this.settings.ollama_model || "qwen2.5:3b").trim(),
-        stream: false,
-        format: {
-          type: "object",
-          properties: {
-            translated_intent: { type: "string" },
-            urgency_reason: { type: "string" },
-            public_reply_draft: { type: "string" },
-          },
-          required: ["translated_intent", "urgency_reason", "public_reply_draft"],
-        },
-        keep_alive: "30m",
-        options: {
-          temperature: 0.2,
-          num_ctx: 2048,
-        },
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: userPrompt },
-        ],
-      }),
+      body: JSON.stringify(payload),
     });
+
+    // Se a chamada de visão no Ollama falhar, tenta fallback seguro para modelo de texto puro sem imagens
+    if (!res.ok && hasImages) {
+      console.warn(`[AIAnalyst] Ollama vision call failed (${res.status}). Retrying with pure text model...`);
+      delete userMessage.images;
+      payload.model = (this.settings.ollama_model || "qwen2.5:3b").trim();
+      payload.options.num_ctx = 2048;
+      res = await fetch(`${baseUrl}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    }
+
     if (!res.ok) {
       throw new Error(`Ollama HTTP ${res.status}`);
     }
