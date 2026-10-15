@@ -99,7 +99,10 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
    - O sistema possui pipeline de ingestão automática de documentos e anexos vinculados aos chamados no GLPI (`/Ticket/:id/Document_Item` e `/Document/:id`).
    - Imagens (`.png`, `.jpg`, `.jpeg`, `.webp`, `.bmp`) são convertidas para base64 e processadas diretamente pelo modelo de visão local (`qwen2.5vl:3b` via Ollama) ou Gemini Multimodal (`gemini-2.5-flash`), permitindo confrontar o relato textual com as evidências visuais (ex.: LEDs de energia acesos, mensagens de erro ou códigos na tela, cabos conectados).
    - Na interface web, as imagens são exibidas em galeria de miniaturas com lightbox para visualização em tamanho real, e o badge *"Analisado por IA Multimodal (Visão)"* sinaliza a inspeção visual realizada.
-
+15. **Novas Categorias Oficiais no GLPI: Áudio e Vídeo (ID 161) e Apoio a Eventos / Empréstimo de Equipamentos (ID 162):**
+   - `T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo` (ID 161): Criada sob a árvore de Periféricos de Hardware (ao lado de Impressoras, Monitor, Mouses, Scaners e Teclados) para acolher solicitações definitivas de fornecimento, instalação, troca ou reparo de caixas de som, microfones, headsets e webcams nos postos de trabalho da cooperativa e do hospital.
+   - `T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos` (ID 162 / `PB-UNI-10`): Criada sob a árvore do Service Desk (`T.I > ST`) para gerenciar demandas temporárias de reserva, empréstimo e suporte audiovisual presencial em eventos institucionais (Dia dos Médicos, palestras, reuniões de diretoria, SIPAT, convenções), envolvendo kits com notebook, projetor, caixa de som Bluetooth, microfones sem fio e passadores de slides.
+   - **Distinção Crítica:** NUNCA classificar uma reserva temporária para evento institucional como instalação de software em `T.I > ST > Instalação/Configuração`, nem como incidente comum. NUNCA alucinar dados de eventos passados (como "Lions Club" ou "Dia do Secretariado"); extrair fielmente do relato o evento em questão (ex.: Dia dos Médicos da Jessica Rosa no chamado `#42768`) e manter o status como `PARCIAL` para alinhamento prévio de local exato, horários de montagem/início e necessidade de acessórios complementares (extensões/pilhas).
 
 
 

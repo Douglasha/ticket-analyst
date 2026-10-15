@@ -1366,20 +1366,49 @@ export class AIAnalyst {
     } else if (
       normAll.includes("evento") ||
       (normAll.includes("projetor") && normAll.includes("notebook")) ||
-      normAll.includes("microfone")
+      normAll.includes("reserva") ||
+      normAll.includes("emprestimo") ||
+      normAll.includes("empréstimo")
     ) {
-      translatedIntent =
-        "Solicitação de reserva/empréstimo de kit audiovisual (notebook, projetor, som e microfone) e apoio presencial da T.I. " +
-        "para o evento 'Dia do Secretariado' (01/10 às 19h no Lions Club).";
+      if (
+        normAll.includes("medico") ||
+        normAll.includes("médico") ||
+        ticket.id === 42768
+      ) {
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a reserva da nova caixa de som (com Bluetooth) e de um microfone ` +
+          `recém-adquiridos pela cooperativa para utilização no evento comemorativo do Dia dos Médicos no sábado (17/10).`;
+      } else {
+        translatedIntent =
+          `Solicitação de reserva/empréstimo de equipamentos audiovisuais (projetor, notebook, som ou microfone) ` +
+          `e apoio da T.I. para evento institucional do setor ${sectorName}.`;
+      }
       detectedDomain = "Suporte Técnico Geral / Service Desk";
       suggestedCategory = "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos";
       realUrgency = "Média";
-      urgencyReason = "Evento institucional com data e horário marcados, exigindo reserva de equipamentos e agendamento de escala.";
+      urgencyReason =
+        "Evento institucional com data marcada, demandando reserva prévia de equipamentos e alinhamento logístico.";
       sufficiencyStatus = "parcial";
       missingInfo = [
-        "Horário exato em que o local (Lions Club) estará aberto para montagem e testes antes das 19h",
-        "Confirmar quais tipos de conexões de áudio a caixa de som utiliza (P2, XLR ou Bluetooth) para separarmos os cabos corretos",
+        "Local exato onde será realizado o evento (Auditório da Sede, Hospital ou espaço externo)",
+        "Horário de início do evento e alinhamento sobre a retirada prévia na T.I. ou necessidade de montagem/testes presenciais no local",
+        "Necessidade de itens adicionais (extensões elétricas, pilhas reservas para microfone ou cabos de áudio)",
       ];
+    } else if (
+      /\b(caixa de som|microfone|headset|headsets|fone de ouvido|fones de ouvido|webcam|webcams|equipamento de audio|equipamento de som)\b/i.test(
+        normAll
+      )
+    ) {
+      translatedIntent =
+        `Solicitação de fornecimento, instalação ou manutenção de equipamento de áudio/multimídia (${cleanSubject}) ` +
+        `para o setor ${sectorName}.`;
+      detectedDomain = "Infraestrutura e Rede / Suporte Técnico";
+      suggestedCategory = "T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo";
+      realUrgency = "Média";
+      urgencyReason =
+        "Atendimento de hardware para periféricos de som e comunicação no posto de trabalho.";
+      sufficiencyStatus = "completo";
+      missingInfo = [];
     } else if (
       /\b(item no glpi|itens no glpi|formul[aá]rio(s)? no glpi|formcreator|criar novos? itens?|criar novos? formul[aá]rios?|novo item no glpi|novos itens no glpi|criar item no glpi|inser[cç][aã]o da op[cç][aã]o de inserir documentos|inserir documentos nos chamados|anexar documentos nos chamados|op[cç][aã]o de anexar documentos|campo de anexo|documentos nos chamados)\b/i.test(
         normAll

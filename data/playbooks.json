@@ -270,10 +270,13 @@
       "notebook",
       "microfone",
       "caixa de som",
+      "áudio",
+      "som",
+      "bluetooth",
       "empréstimo",
+      "reserva",
       "apoio",
-      "secretariado",
-      "lions"
+      "secretariado"
     ],
     "symptoms": "Solicitação de empréstimo de equipamentos (notebook, projetor, som, microfone) e suporte presencial da TI para evento institucional.",
     "required_info": [

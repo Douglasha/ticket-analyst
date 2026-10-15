@@ -1,5 +1,52 @@
 [
   {
+    "id": "Chamado #42773 (Resolvido)",
+    "ticket_id": 42773,
+    "solution_id": 41454,
+    "title": "Segurança da Informação > Gestão de Acessos > Marcela Venancio da Costa",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcesso Liberado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acesso Liberado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42771 (Resolvido)",
+    "ticket_id": 42771,
+    "solution_id": 41456,
+    "title": "Infraestrutura e Redes > Manutenção de Computadores > Computador não liga o monitor DHU-0374-SCIH",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Computador reparado.",
+    "keywords": [],
+    "steps": [
+      "Computador reparado."
+    ]
+  },
+  {
+    "id": "Chamado #42766 (Resolvido)",
+    "ticket_id": 42766,
+    "solution_id": 41473,
+    "title": "Manutenção Preventiva - DHU-3121-ULTRA",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
     "id": "Chamado #42759 (Resolvido)",
     "ticket_id": 42759,
     "solution_id": 41444,
@@ -10,6 +57,21 @@
     "keywords": [],
     "steps": [
       "Senha alterada, a nova senha é Unimed@256!"
+    ]
+  },
+  {
+    "id": "Chamado #42756 (Resolvido)",
+    "ticket_id": 42756,
+    "solution_id": 41474,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Eliane Satie Koda liberação de acesso",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -134,6 +196,20 @@
     ]
   },
   {
+    "id": "Chamado #42659 (Resolvido)",
+    "ticket_id": 42659,
+    "solution_id": 41476,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > REGISTROS DE TESTE",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde.\n\n\r\nFoi realizada a exclusão de todos os registros vinculados ao paciente Teste, referentes aos atendimentos realizados pelo convênio 3 – Gratuito.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde.",
+      "Foi realizada a exclusão de todos os registros vinculados ao paciente Teste, referentes aos atendimentos realizados pelo convênio 3 – Gratuito."
+    ]
+  },
+  {
     "id": "Chamado #42656 (Resolvido)",
     "ticket_id": 42656,
     "solution_id": 41354,
@@ -147,6 +223,19 @@
       "Cadastro concluído com sucesso!Login: 13449835610Senha: 1344Os dados de login do(a) atendente foram enviados para o e-mail informado.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42651 (Resolvido)",
+    "ticket_id": 42651,
+    "solution_id": 41478,
+    "title": "Atualizações dos BI's [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -1309,6 +1398,21 @@
     "keywords": [],
     "steps": [
       "Bases atualizadas."
+    ]
+  },
+  {
+    "id": "Chamado #42308 (Resolvido)",
+    "ticket_id": 42308,
+    "solution_id": 41472,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Suporte app meu ponto",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {

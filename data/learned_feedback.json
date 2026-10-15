@@ -1,5 +1,88 @@
 [
   {
+    "ticket_id": 42794,
+    "title": "Resolução de Problemas  -  Unificação de cadastro",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "unificacao",
+      "cadastro",
+      "hrp",
+      "peco",
+      "sejam",
+      "unificados",
+      "dois",
+      "cadastros"
+    ],
+    "problem_summary": "Boa tarde!\nPor gentileza, peço que sejam unificados os dois cadastros, mantendo como principal o de código 14072909.\nMédica não cooperada: Mariana Camilo de Oliveira Marques.\nObrigada!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro dos registros informados no sistema **HRP Unimed**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+      "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+      "[MEM-#42061] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais)."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-15T19:02:22.960Z"
+  },
+  {
+    "ticket_id": 42659,
+    "title": "Solicitação Diversa  -  REGISTROS DE TESTE",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "registros",
+      "teste",
+      "acordo",
+      "trabalho",
+      "estamos",
+      "realizando",
+      "alinhar",
+      "abertos"
+    ],
+    "problem_summary": "Prezados, boa tarde!\nDe acordo com o trabalho que estamos realizando para alinhar os registros abertos no SPData, solicito que realizem a exclusão dos registros abertos como testes.\nSeguem alguns exemplos, porém constam mais registros, favor verificar todos e realizar a exclusão:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **REGISTROS DE TESTE**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-15T16:50:22.594Z"
+  },
+  {
+    "ticket_id": 42778,
+    "title": "Aplicativos  -  Criar agenda PEP - Dra Bianca Félix nao",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "criar",
+      "agenda",
+      "pep",
+      "dra",
+      "bianca",
+      "felix",
+      "criada",
+      "atender"
+    ],
+    "problem_summary": "Boa tarde\nSolicito que seja criada agenda no PEP para a dra Bianca atender no NAS Passos e também que seja vinculada aos usuários das atendentes. Tanto a agenda PEP quanto o HRP.\nSe possível diferenciar o tipo de atendimento pois ela realizará consultas e também Pach Test\nDesde já agradeço",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nPara o HRP, qual o código de prestador dela\n\nAssim que nos informar por aqui, já executamos a alteração!",
+    "required_info": [
+      "Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo"
+    ],
+    "resolution_steps": [
+      "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+      "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-15T16:33:38.348Z"
+  },
+  {
     "ticket_id": 42756,
     "title": "Acesso e Permissões  -  Eliane Satie Koda liberação de acesso",
     "category": "T.I > ST > Acesso e Permissões",
@@ -1337,5 +1420,37 @@
     "sufficiency_status": "completo",
     "created_at": "2026-10-15T11:15:00.000Z",
     "updated_at": "2026-10-15T14:15:59.915Z"
+  },
+  {
+    "ticket_id": 42768,
+    "title": "Reserva da nova caixa de som e um microfone",
+    "category": "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos",
+    "keywords": [
+      "reserva",
+      "caixa de som",
+      "microfone",
+      "bluetooth",
+      "evento",
+      "dia dos medicos",
+      "medicos",
+      "audiovisual",
+      "emprestimo"
+    ],
+    "problem_summary": "Reserva da nova caixa de som Bluetooth e microfone para o evento do Dia dos Médicos no sábado (17/10).",
+    "custom_instruction": "Reserva de equipamentos de áudio para eventos institucionais deve ser classificada em 'T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos'. Solicitações definitivas de periféricos de áudio (caixas de som, microfones, headsets, webcams) para postos de trabalho pertencem a 'T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo'. Em eventos, manter triagem PARCIAL para confirmar local exato, horários de montagem/início e se haverá retirada prévia na T.I. ou necessidade de apoio técnico no local.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reserva da nova caixa de som Bluetooth e do microfone para o evento do Dia dos Médicos no próximo sábado (17/10)!\n\nOs equipamentos já foram pré-reservados na escala da T.I. Para alinharmos todos os detalhes com antecedência, você poderia nos confirmar:\n1. Qual o **local exato** onde será realizado o evento (Auditório da Sede, Hospital ou espaço externo)?\n2. Qual o **horário de início** do evento e se vocês irão retirar os equipamentos na T.I. na sexta-feira ou se precisarão de apoio técnico para montagem/testes no local?\n3. Haverá necessidade de algum **acessório adicional**, como extensão elétrica, cabo auxiliar ou pilhas reservas para o microfone?\n\nSeguimos à disposição!",
+    "required_info": [
+      "Local exato onde será realizado o evento (Auditório da Sede, Hospital ou espaço externo)",
+      "Horário de início do evento e alinhamento sobre a retirada prévia na T.I. ou necessidade de montagem/testes presenciais no local",
+      "Necessidade de itens adicionais (extensões elétricas, pilhas reservas para microfone ou cabos de áudio)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-10] Bloquear na agenda da T.I. a reserva da nova caixa de som Bluetooth e do microfone sem fio para o sábado (17/10).",
+      "[PB-UNI-10] Realizar teste prévio de bancada com os equipamentos: verificar carga da bateria, pareamento Bluetooth, funcionamento e nível de pilhas do microfone sem fio e cabo de energia.",
+      "[PB-UNI-10] Alinhar com a solicitante se os equipamentos serão retirados na T.I. na sexta-feira ou entregues no local do evento, providenciando o Termo de Cautela e Empréstimo de Equipamentos."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-15T15:58:00.000Z",
+    "updated_at": "2026-10-15T16:02:00.000Z"
   }
 ]

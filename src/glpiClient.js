@@ -947,6 +947,9 @@ export class GLPIClient {
         { id: 73, name: "Erros de Sistema", completename: "T.I > ST > Resolução de Problemas > Erros de Sistema" },
         { id: 121, name: "Correção de bugs", completename: "T.I > DV > Desenvolvimento > Correção de bugs" },
         { id: 149, name: "Impressoras", completename: "T.I > IR > Suporte a Hardware > Periféricos > Impressoras" },
+        { id: 160, name: "Dúvidas e Orientações", completename: "T.I > ST > Dúvidas e Orientações" },
+        { id: 161, name: "Áudio e Vídeo", completename: "T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo" },
+        { id: 162, name: "Apoio a Eventos / Empréstimo de Equipamentos", completename: "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos" },
       ];
     }
 
