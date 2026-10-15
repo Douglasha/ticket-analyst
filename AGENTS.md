@@ -92,6 +92,10 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
 12. **Categoria Oficial no GLPI: `T.I > ST > Dúvidas e Orientações` (ID 160 / `PB-UNI-37`):**
    - Categoria criada na árvore do Service Desk / Suporte Técnico para acolher chamados informacionais, de apoio e dúvidas operacionais de uso dos sistemas e formulários.
    - **Distinção Crítica:** Impede a inflação indevida de indicadores de bugs em `Erros de Sistema` e evita que dúvidas de localização de campos fiquem sem métricas em `Solicitação Diversa` ou `Treinamentos`. Quando o recurso solicitado já existe no sistema/formulário mas o colaborador não o localizou (ex.: campo de anexo no rodapé do formulário do Regulatório), a tratativa é orientativa (`PB-UNI-37`), sugerindo a reclassificação para `T.I > ST > Dúvidas e Orientações` e acionando opcionalmente o Desenvolvimento para melhoria de UX.
+13. **Diagnóstico Presencial de Hardware e Monitores (`PB-UNI-07`) vs. Promessa Precipitada de Substituição:**
+   - Quando o solicitante relata que o computador ou monitor não liga ou está sem vídeo (ex.: Ana Paula / SCIH na estação `DHU-0374-SCIH`), o relato do usuário frequentemente difere da causa raiz real (ex.: o usuário relata que o monitor não liga, mas fotos anexadas ou testes revelam que o monitor está ligado/energizado, e o defeito real é na inicialização da CPU, memória RAM, travamento de boot ou mau contato de cabos HDMI/DisplayPort/VGA).
+   - **Distinção Crítica:** NUNCA redigir resposta pública prometendo antecipadamente a substituição física do equipamento ("já separamos o item e faremos a troca"). A resposta deve SEMPRE confirmar o deslocamento técnico presencial para inspeção e diagnóstico no local (verificação de cabos, sinal de vídeo e boot da máquina), esclarecendo que a substituição de componentes ou periféricos ocorrerá apenas se for constatado defeito irreversível no teste in loco.
+
 
 
 

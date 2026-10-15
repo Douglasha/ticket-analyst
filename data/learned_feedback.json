@@ -1,21 +1,73 @@
 [
   {
+    "ticket_id": 42756,
+    "title": "Acesso e Permissões  -  Eliane Satie Koda liberação de acesso",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "eliane",
+      "satie",
+      "koda",
+      "liberacao",
+      "poderiam",
+      "liberar"
+    ],
+    "problem_summary": "Bom dia Prezados,\nPoderiam liberar acesso do Demnstrativo de Beneficiários - Federação Minas par a colaboradora Eliane, se os acessos dela puderem ser iguais aos meus.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-15T13:03:32.736Z"
+  },
+  {
+    "ticket_id": 42650,
+    "title": "Sistemas Operacionais  -  Agenda no pep",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "agenda",
+      "pep",
+      "liberacao",
+      "nutricionista",
+      "mara",
+      "fabiola",
+      "partir",
+      "dezembro:"
+    ],
+    "problem_summary": "Boa tarde, \nSolicito por gentileza, a liberação na agenda das nutricionista Mara e Fabíola, à partir de Dezembro: \nAtendimentos toda terça feira \nDas 07:00 às 12hs \nAtendimento de 30/30 minutos \nDesde, já agradeço!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **das nutricionista Mara e Fabíola** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+      "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+      "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+      "[MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-15T12:11:34.381Z"
+  },
+  {
     "ticket_id": 42726,
-    "title": "Dúvidas e Orientações  -  Formulário Regulatório GLPI (Dalete Bartelochi)",
+    "title": "Acesso e Permissões  -  Dalete G. de O. Bartelochi",
     "category": "T.I > ST > Dúvidas e Orientações",
     "keywords": [
-      "regulatório",
-      "regulatorio",
-      "inserir documentos",
-      "anexar documentos",
-      "última seção",
-      "ultima secao",
-      "formcreator",
-      "glpi",
-      "dalete"
+      "acesso",
+      "permissoes",
+      "dalete",
+      "bartelochi",
+      "insercao",
+      "opcao",
+      "inserir",
+      "documentos"
     ],
-    "problem_summary": "Solicitação de inserção de documentos nos chamados direcionados ao Regulatório. O formulário do Regulatório no GLPI já possui campos de anexo na última seção da página, necessitando de orientação de localização para a colaboradora.",
-    "reply_template": "Olá, Dalete! Tudo bem?\n\nVerificamos a estrutura do formulário direcionado ao **Regulatório** no catálogo do **GLPI** e confirmamos que a opção para inserção de documentos **já se encontra disponível e ativa**!\n\nEla está localizada na **última seção do formulário** (basta rolar até o final da página de preenchimento para visualizar o campo de upload de arquivos/anexos).\n\nComo essa seção acabou ficando mais ao final do layout e pode passar desapercebida, já direcionamos uma sugestão de melhoria para a equipe de Desenvolvimento avaliar o reposicionamento do campo para um local de maior destaque visual, facilitando o acesso para todos os setores.\n\nVocê poderia fazer um teste acessando o formulário e rolando até a seção final? Se precisar de qualquer apoio, permanecemos à total disposição!",
+    "problem_summary": "Boa tarde!\n Prezados, solicito a inserção da opção de inserir documentos nos chamados direcionados ao Regulatório.\nJustificativa: Na abertura do chamado preciso inserir documentos.\n \nQualquer dúvida estou a disposição.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a estrutura do formulário direcionado ao **Regulatório** no catálogo do **GLPI** e confirmamos que a opção para inserção de documentos **já se encontra disponível e ativa**!\n\nEla está localizada na **última seção do formulário** (basta rolar até o final da página de preenchimento para visualizar o campo de upload de arquivos/anexos).\n\nComo essa seção acabou ficando mais ao final do layout e pode passar desapercebida, já direcionamos uma sugestão de melhoria para a equipe de Desenvolvimento avaliar o reposicionamento do campo para um local de maior destaque visual, facilitando o acesso para todos os setores.\n\nVocê poderia fazer um teste acessando o formulário e rolando até a seção final? Se precisar de qualquer apoio, permanecemos à total disposição!",
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-37] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
@@ -26,7 +78,8 @@
       "[PB-UNI-37] Notificar a solicitante no chamado e solicitar a confirmação da localização do campo."
     ],
     "sufficiency_status": "completo",
-    "created_at": "2026-10-15T11:29:45.716Z"
+    "created_at": "2026-10-15T11:29:45.716Z",
+    "updated_at": "2026-10-15T12:05:18.054Z"
   },
   {
     "ticket_id": 42584,
@@ -1256,5 +1309,33 @@
     "sufficiency_status": "completo",
     "created_at": "2026-09-28T20:19:51.384Z",
     "updated_at": "2026-09-28T20:34:06.221Z"
+  },
+  {
+    "ticket_id": 42771,
+    "title": "Hospital > SCIH > Monitor não liga / Sem vídeo (DHU-0374-SCIH)",
+    "category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+    "keywords": [
+      "monitor",
+      "nao liga",
+      "não liga",
+      "sem video",
+      "sem vídeo",
+      "dhu-0374-scih",
+      "dhu",
+      "troca"
+    ],
+    "problem_summary": "A colaboradora relata que o computador/monitor não está ligando, porém há imagem anexada mostrando que o monitor está energizado/ligado. O defeito real pode ser cabo de vídeo, sinal ou CPU/boot.",
+    "custom_instruction": "Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para diagnóstico presencial da estação DHU-0374-SCIH.",
+      "[PB-UNI-07] Inspecionar conexões físicas de cabos (HDMI/DisplayPort/VGA) e verificar se o monitor acusa 'Sem Sinal' ou ausência de vídeo.",
+      "[PB-UNI-07] Avaliar o gabinete/CPU: verificar se o computador liga normalmente (cooler, LEDs de energia/disco, POST/bipes) ou se há falha de hardware na máquina.",
+      "[PB-UNI-07] Realizar o reparo de conexão/sistema ou, apenas se confirmado defeito físico irreversível, efetuar a substituição do componente com item reserva de estoque.",
+      "[PB-UNI-07] Validar com a solicitante o retorno do vídeo e da estação de trabalho."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-15T11:15:00.000Z"
   }
 ]

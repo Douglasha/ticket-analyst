@@ -1,5 +1,80 @@
 [
   {
+    "id": "Chamado #42759 (Resolvido)",
+    "ticket_id": 42759,
+    "solution_id": 41444,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Karina Maciel Pádua Esquecimento de Senha",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Senha alterada, a nova senha é Unimed@256!",
+    "keywords": [],
+    "steps": [
+      "Senha alterada, a nova senha é Unimed@256!"
+    ]
+  },
+  {
+    "id": "Chamado #42753 (Resolvido)",
+    "ticket_id": 42753,
+    "solution_id": 41436,
+    "title": "Infraestrutura e Redes > Internet e WiFi > Senha Wi-Fi",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Segue abaixo os vouchers, lembre-se de desabilitar aquela função de rotatividade.\n\n\r\ngbatista\n90880-01064\n\n\r\nrsilva\n10568-24868\n\n\r\nbsena\n43813-47977\n\n\r\nasilva\n68644-40087\n\n\r\nssantos\n42409-66873\n\n\r\npsantos\n53362-30457\n\n\r\nmsilva\n14842-14768\n\n\r\nacampos\n18730-41413\n\n\r\ntramos\n03028-44987\n\n\r\nmoliveira\n68490-81205\n\n\r\nvrodrigues\n01770-59907\n\n\r\nmmartins\n497",
+    "keywords": [],
+    "steps": [
+      "Segue abaixo os vouchers, lembre-se de desabilitar aquela função de rotatividade.",
+      "gbatista",
+      "90880-01064",
+      "rsilva",
+      "10568-24868",
+      "bsena"
+    ]
+  },
+  {
+    "id": "Chamado #42749 (Resolvido)",
+    "ticket_id": 42749,
+    "solution_id": 41433,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > ATUALIZAÇÃO",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
+    ]
+  },
+  {
+    "id": "Chamado #42747 (Resolvido)",
+    "ticket_id": 42747,
+    "solution_id": 41440,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado, sem novos cadastros\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado, sem novos cadastros",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42726 (Resolvido)",
+    "ticket_id": 42726,
+    "solution_id": 41439,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Dalete G. de O. Bartelochi",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42723 (Resolvido)",
     "ticket_id": 42723,
     "solution_id": 41400,
@@ -70,6 +145,21 @@
     "steps": [
       "Prezados(as),",
       "Cadastro concluído com sucesso!Login: 13449835610Senha: 1344Os dados de login do(a) atendente foram enviados para o e-mail informado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42650 (Resolvido)",
+    "ticket_id": 42650,
+    "solution_id": 41445,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Agenda no pep",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -181,6 +271,24 @@
     ]
   },
   {
+    "id": "Chamado #42623 (Resolvido)",
+    "ticket_id": 42623,
+    "solution_id": 41431,
+    "title": "Manutenção Preventiva - DHU-3124-FATURA",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
     "id": "Chamado #42622 (Resolvido)",
     "ticket_id": 42622,
     "solution_id": 41337,
@@ -233,6 +341,19 @@
     "keywords": [],
     "steps": [
       "Licença ainda não atualizada, estamos aguardando para instalação nas 9 maquinas>"
+    ]
+  },
+  {
+    "id": "Chamado #42613 (Resolvido)",
+    "ticket_id": 42613,
+    "solution_id": 41452,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Fila de Espera e Rastreabilidade no meu login",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Problema solucionado.",
+    "keywords": [],
+    "steps": [
+      "Problema solucionado."
     ]
   },
   {
@@ -487,6 +608,21 @@
     "keywords": [],
     "steps": [
       "Cadastro efetuado com sucesso."
+    ]
+  },
+  {
+    "id": "Chamado #42480 (Resolvido)",
+    "ticket_id": 42480,
+    "solution_id": 41441,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Erro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nPor hora encerraremos este chamado, se necessário nos solicitar novamente, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Por hora encerraremos este chamado, se necessário nos solicitar novamente, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -1759,6 +1895,21 @@
     ]
   },
   {
+    "id": "Chamado #42169 (Resolvido)",
+    "ticket_id": 42169,
+    "solution_id": 41438,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação de documento para pequena cirurgia",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42168 (Resolvido)",
     "ticket_id": 42168,
     "solution_id": 41100,
@@ -1963,6 +2114,19 @@
       "Verificado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42112 (Resolvido)",
+    "ticket_id": 42112,
+    "solution_id": 41434,
+    "title": "Infraestrutura e Redes > Internet e WiFi > ROTEADOR WIFI",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Um repetidor de sinal foi instalado e testado, o sinal de rede no setor de faturamento do hospital está funcionando corretamente",
+    "keywords": [],
+    "steps": [
+      "Um repetidor de sinal foi instalado e testado, o sinal de rede no setor de faturamento do hospital está funcionando corretamente"
     ]
   },
   {

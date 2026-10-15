@@ -171,7 +171,7 @@
   },
   {
     "id": "PB-UNI-07",
-    "title": "Substituição / Manutenção de Teclado, Mouse ou Monitor (Patrimônio HU/Sede)",
+    "title": "Manutenção, Diagnóstico e Substituição de Periféricos e Monitores (Patrimônio HU/Sede)",
     "domain": "Suporte Técnico Geral / Service Desk",
     "keywords": [
       "teclado",
@@ -180,19 +180,23 @@
       "troca de teclado",
       "troca de mouse",
       "tecla falhando",
+      "sem video",
+      "sem vídeo",
+      "monitor não liga",
+      "monitor nao liga",
+      "dhu",
       "hu00177"
     ],
-    "symptoms": "Solicitação de troca física de teclado, mouse ou monitor com defeito informando o patrimônio do computador (ex: HU00177).",
-    "required_info": [
-      "Patrimônio do computador ou local/posto de enfermagem exato",
-      "Qual o defeito apresentado pelo teclado/mouse/monitor (teclas falhando, cabo rompido, sem vídeo)"
-    ],
+    "symptoms": "Solicitação de reparo, diagnóstico ou substituição de teclado, mouse ou monitor com defeito ou sem vídeo em estação de trabalho hospitalar ou administrativa.",
+    "required_info": [],
     "resolution_steps": [
-      "Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
-      "Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
-      "Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+      "Deslocar técnico de suporte até o setor informado para realizar o diagnóstico presencial do equipamento/periférico.",
+      "Verificar conexões físicas de cabos (energia, HDMI/DisplayPort/VGA ou USB) e testar se o equipamento liga e se o computador emite sinal de vídeo.",
+      "Isolar se o defeito decorre de mau contato, cabo rompido, falha de inicialização da CPU ou avaria física no próprio periférico/monitor.",
+      "Caso seja constatado defeito físico irreparável de hardware no teste local, providenciar a substituição imediata por item compatível do estoque técnico.",
+      "Validar o correto funcionamento do periférico/vídeo junto ao usuário no posto de trabalho e concluir o chamado."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao equipamento ({ativo}) no setor **{setor}**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local (conferindo conexões de cabos, sinal de vídeo e funcionamento geral). Caso seja identificada alguma falha de hardware, realizaremos os devidos reparos ou a substituição necessária.\n\nPermanecemos à disposição!"
   },
   {
     "id": "PB-UNI-08",
