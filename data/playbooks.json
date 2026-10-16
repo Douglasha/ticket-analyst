@@ -1340,5 +1340,41 @@
       "Solicitar ao usuário confirmação do teste/localização e concluir o atendimento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a sua dúvida referente à utilização e localização de recursos no formulário/sistema **{sistema}**.\n\nConfirmamos que a funcionalidade/opção solicitada **já se encontra disponível e ativa** no sistema!\n\nPara localizá-la e utilizá-la, siga a orientação abaixo:\n{orientacao}\n\nCaso tenha qualquer dificuldade ou precise de apoio durante o preenchimento, estamos à total disposição por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-38",
+    "title": "Gestão de E-mails Corporativos — Acesso a Caixa Departamental e Redirecionamento de Mensagens",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": [
+      "e-mail",
+      "email",
+      "e-mail institucional",
+      "email institucional",
+      "marketing@",
+      "jornalismo@",
+      "caixa de e-mail",
+      "caixa de email",
+      "caixa departamental",
+      "caixa compartilhada",
+      "redirecionamento",
+      "redirecionamento de e-mail",
+      "redirecionar",
+      "redirecionadas",
+      "encaminhamento",
+      "encaminhar",
+      "alias",
+      "webmail",
+      "webmail seguro"
+    ],
+    "symptoms": "Colaborador(a) solicita acesso ou credencial para caixa postal departamental/compartilhada de setor (ex.: marketing@unimedsudoestemg.coop.br) e/ou configuração de regra de redirecionamento/encaminhamento automático de mensagens entre contas de e-mail corporativas (ex.: mensagens de jornalismo@... redirecionadas para marketing@...).",
+    "required_info": [],
+    "resolution_steps": [
+      "Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).",
+      "Localizar a conta departamental informada (ex.: marketing@unimedsudoestemg.coop.br) e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador.",
+      "Localizar a conta de origem informada (ex.: jornalismo@unimedsudoestemg.coop.br) e criar a regra de redirecionamento automático (forwarding) para a conta de destino, assegurando que nenhuma mensagem seja perdida.",
+      "Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.",
+      "Notificar o solicitante no chamado do GLPI com as orientações de acesso e confirmar o funcionamento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à conta de e-mail departamental do setor **{setor}** e à regra de redirecionamento de mensagens.\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando as devidas configurações no painel de administração de e-mails corporativos:\n1. **Acesso à Conta:** Liberação de acesso à caixa departamental **{email_destino}** para o seu usuário.\n2. **Redirecionamento Automático:** Configuração da regra de encaminhamento das mensagens recebidas em **{email_origem}** diretamente para a conta de Marketing.\n\nAssim que as configurações forem aplicadas e validadas com e-mail de teste, confirmaremos por aqui com as instruções de acesso!\n\nPermanecemos à disposição!"
   }
 ]

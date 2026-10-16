@@ -1,5 +1,69 @@
 [
   {
+    "id": "Chamado #42812 (Resolvido)",
+    "ticket_id": 42812,
+    "solution_id": 41489,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Pedro Messias da Silva",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha excluída e informada a colaboradora Gislaine\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha excluída e informada a colaboradora Gislaine",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42795 (Resolvido)",
+    "ticket_id": 42795,
+    "solution_id": 41479,
+    "title": "Infraestrutura e Redes > Impressoras > Impressora do NAS não imprime",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "▸ Impressora Piumhi — Recepção NAS\n\r\n\n▸ Identificação\n\r\n\r\nLocal: Piumhi — Recepção NAS\n\r\nDriver: HP Laser MFP 131 133 135–138\n\r\nConexão: USB\n\r\nPorta registrada: USB002\n\r\nData do atendimento: 15/10/2026\n\r\n\r\n\n▸ Problema apresentado\n\r\nA impressora não concluía a impressão. A página de teste permanecia na fila com o status “Imprimindo, Erro”, e o Windo",
+    "keywords": [],
+    "steps": [
+      "▸ Impressora Piumhi — Recepção NAS",
+      "▸ Identificação",
+      "Local: Piumhi — Recepção NAS",
+      "Driver: HP Laser MFP 131 133 135–138",
+      "Conexão: USB",
+      "Porta registrada: USB002"
+    ]
+  },
+  {
+    "id": "Chamado #42794 (Resolvido)",
+    "ticket_id": 42794,
+    "solution_id": 41480,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Unificação de cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro unificado:\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 15/10/2026 - 15:50:51Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 15/10/2026 - 15:50:55Deleção das chaves originais deletadas com sucesso em: 15/10/2026 - 15:50:56\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, perman",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro unificado:",
+      "Início da substituição da(s) chave(s) do arquivo em: 15/10/2026 - 15:50:51Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 15/10/2026 - 15:50:55Deleção das chaves originais deletadas com sucesso em: 15/10/2026 - 15:50:56",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42792 (Resolvido)",
+    "ticket_id": 42792,
+    "solution_id": 41481,
+    "title": "Infraestrutura e Redes > Suporte a Hardware > Mudança Sala Ultrasson",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Mudança realizada, todos os dispositivos foram transferidos para a nova sala.",
+    "keywords": [],
+    "steps": [
+      "Mudança realizada, todos os dispositivos foram transferidos para a nova sala."
+    ]
+  },
+  {
     "id": "Chamado #42773 (Resolvido)",
     "ticket_id": 42773,
     "solution_id": 41454,
@@ -26,6 +90,24 @@
     "keywords": [],
     "steps": [
       "Computador reparado."
+    ]
+  },
+  {
+    "id": "Chamado #42767 (Resolvido)",
+    "ticket_id": 42767,
+    "solution_id": 41483,
+    "title": "Manutenção Preventiva - DHU-3211-ULTRAS",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
     ]
   },
   {

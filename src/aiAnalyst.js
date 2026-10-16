@@ -1864,7 +1864,73 @@ export class AIAnalyst {
         const targetSector = formFields.setorAlvo || sectorName;
         const targetUnit = formFields.unidade ? ` (${formFields.unidade})` : "";
 
-        if (isSelf) {
+        const isEmailAccountOrForwarding =
+          /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|jornalismo@|marketing@|webmail)\b/i.test(
+            normAll
+          ) ||
+          (/\b(e-mail|email)\b/i.test(normAll) &&
+            /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
+              normAll
+            ) &&
+            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normAll));
+
+        const isMale = /^(juliano|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|diego|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+          firstName
+        );
+        const colabLabel = isMale ? "o colaborador" : "a colaboradora";
+
+        if (isEmailAccountOrForwarding) {
+          const foundEmails = Array.from(
+            ticket.content.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)
+          ).map((m) => m[1].toLowerCase());
+          const destEmail =
+            foundEmails.find((e) => !e.includes("jornalismo")) ||
+            foundEmails[0] ||
+            "marketing@unimedsudoestemg.coop.br";
+          const srcEmail =
+            foundEmails.find((e) => e.includes("jornalismo") || e !== destEmail) ||
+            "jornalismo@unimedsudoestemg.coop.br";
+          const hasForwarding = /\b(redirecion|encaminh|forward)/i.test(normAll);
+
+          if (hasForwarding) {
+            translatedIntent =
+              `${solPrefix} **${formattedRequester}** (${sectorName}) solicita acesso à conta de e-mail departamental **${destEmail}** ` +
+              `e a configuração de regra de redirecionamento automático das mensagens recebidas em **${srcEmail}** para a referida conta do setor. ` +
+              `Todos os dados cadastrais e as contas de correio eletrônico constam informados no chamado.`;
+            customPublicReply =
+              `Olá, ${firstName}! Tudo bem?\n\n` +
+              `Recebemos a sua solicitação referente à conta de e-mail departamental do setor **${sectorName}** e ao redirecionamento de mensagens.\n\n` +
+              `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando as devidas configurações no painel de administração de e-mails corporativos:\n` +
+              `1. **Acesso à Conta:** Liberação de acesso à caixa departamental **${destEmail}** para o seu usuário.\n` +
+              `2. **Redirecionamento Automático:** Configuração da regra de encaminhamento automático das mensagens enviadas para **${srcEmail}** diretamente para a conta **${destEmail}**.\n\n` +
+              `Assim que as configurações forem concluídas e validadas com mensagem de teste, confirmaremos por aqui com as instruções de acesso!\n\n` +
+              `Permanecemos à disposição!`;
+            customResolutionSteps = [
+              `[PB-UNI-38] Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).`,
+              `[PB-UNI-38] Localizar a conta departamental ${destEmail} e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador ${beneficiaryName}.`,
+              `[PB-UNI-38] Localizar a conta de origem ${srcEmail} e criar a regra de redirecionamento automático (forwarding) para ${destEmail}, assegurando que nenhuma mensagem seja perdida.`,
+              `[PB-UNI-38] Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.`,
+              `[PB-UNI-38] Notificar o solicitante no chamado do GLPI com as orientações de acesso ao Webmail/Outlook e colher validação.`
+            ];
+          } else {
+            translatedIntent =
+              `${solPrefix} **${formattedRequester}** (${sectorName}) solicita concessão de acesso à conta de e-mail departamental **${destEmail}**. ` +
+              `Dados cadastrais informados no chamado.`;
+            customPublicReply =
+              `Olá, ${firstName}! Tudo bem?\n\n` +
+              `Recebemos a sua solicitação de acesso à conta de e-mail departamental **${destEmail}** (${sectorName}).\n\n` +
+              `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando a liberação/configuração das credenciais no painel de e-mails corporativos.\n\n` +
+              `Assim que o acesso for liberado, confirmaremos por aqui com as instruções de acesso!\n\n` +
+              `Permanecemos à disposição!`;
+            customResolutionSteps = [
+              `[PB-UNI-38] Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).`,
+              `[PB-UNI-38] Localizar a conta departamental ${destEmail} e conceder a permissão de acesso / configurar a credencial para o colaborador ${beneficiaryName}.`,
+              `[PB-UNI-38] Notificar o solicitante no chamado do GLPI com as orientações de acesso ao Webmail/Outlook.`
+            ];
+          }
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+        } else if (isSelf) {
           translatedIntent =
             `${solPrefix} **${formattedRequester}** (${sectorName}) solicita liberação de acesso ao módulo de **${specifiedAccessTxt}**` +
             (targetSector && targetSector.toLowerCase() !== sectorName.toLowerCase() ? ` para o setor **${targetSector}**` : "") +
@@ -1881,7 +1947,7 @@ export class AIAnalyst {
           customResolutionSteps = [
             `[PB-UNI-12] Localizar o cadastro de ${beneficiaryName} (${formFields.cpf ? `CPF: ${formFields.cpf}` : `usuário ${ticket.requester_login || firstName}`}) no sistema ${specifiedAccessTxt.includes("SPDATA") ? "SGH Spdata" : "correspondente"}.`,
             `[PB-UNI-12] Conceder e vincular as permissões do módulo de ${specifiedAccessTxt} para a unidade ${formFields.unidade || "Hospital Unimed"} (setor ${targetSector}).`,
-            `[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.`
+            `[PB-UNI-12] Validar a ativação do perfil de acesso e notificar ${colabLabel} no chamado para teste e homologação.`
           ];
         } else {
           translatedIntent =

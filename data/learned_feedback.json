@@ -1452,5 +1452,35 @@
     "sufficiency_status": "parcial",
     "created_at": "2026-10-15T15:58:00.000Z",
     "updated_at": "2026-10-15T16:02:00.000Z"
+  },
+  {
+    "ticket_id": 42813,
+    "title": "Acesso e Permissões - Juliano Melo",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "marketing@",
+      "jornalismo@",
+      "email institucional",
+      "e-mail institucional",
+      "redirecionamento",
+      "redirecionadas",
+      "encaminhamento",
+      "caixa departamental",
+      "acesso a conta"
+    ],
+    "problem_summary": "Acesso à conta de e-mail departamental marketing@unimedsudoestemg.coop.br e redirecionamento de mensagens de jornalismo@unimedsudoestemg.coop.br para marketing.",
+    "custom_instruction": "Demandas de correio eletrônico corporativo envolvendo caixas departamentais/compartilhadas e regras de redirecionamento/encaminhamento pertencem ao PB-UNI-38. Nunca tratar E-mail como módulo ERP de sistemas hospitalares, citar expressamente as contas de origem e destino e detalhar o procedimento no painel de administração de e-mails corporativos (Webmail Seguro / Locaweb).",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à conta de e-mail departamental do setor **{setor}** e ao redirecionamento de mensagens.\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando as devidas configurações no painel de administração de e-mails corporativos:\n1. **Acesso à Conta:** Liberação de acesso à caixa departamental **marketing@unimedsudoestemg.coop.br** para o seu usuário.\n2. **Redirecionamento Automático:** Configuração da regra de encaminhamento automático das mensagens enviadas para **jornalismo@unimedsudoestemg.coop.br** diretamente para a conta **marketing@unimedsudoestemg.coop.br**.\n\nAssim que as configurações forem concluídas e validadas com mensagem de teste, confirmaremos por aqui com as instruções de acesso!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-38] Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).",
+      "[PB-UNI-38] Localizar a conta departamental marketing@unimedsudoestemg.coop.br e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador Juliano Melo.",
+      "[PB-UNI-38] Localizar a conta de origem jornalismo@unimedsudoestemg.coop.br e criar a regra de redirecionamento automático (forwarding) para marketing@unimedsudoestemg.coop.br, assegurando que nenhuma mensagem seja perdida.",
+      "[PB-UNI-38] Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.",
+      "[PB-UNI-38] Notificar o solicitante no chamado do GLPI com as orientações de acesso ao Webmail/Outlook e colher validação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-16T08:50:00.000Z",
+    "updated_at": "2026-10-16T08:52:00.000Z"
   }
 ]

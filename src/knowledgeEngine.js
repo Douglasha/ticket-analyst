@@ -286,7 +286,17 @@ export class KnowledgeEngine {
               normTicket
             );
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm) {
+          const isEmailManagement =
+            /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|email marketing|marketing@|jornalismo@)\b/i.test(
+              normTicket
+            ) ||
+            (/\b(e-mail|email)\b/i.test(normTicket) &&
+              /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
+                normTicket
+              ) &&
+              /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket));
+
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement) {
             continue;
           }
         }
@@ -583,6 +593,21 @@ export class KnowledgeEngine {
           isDoubtOrOrientation
         ) {
           score = Math.max(score, 0.90);
+        }
+        const isEmailMgmt =
+          /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|email marketing|marketing@|jornalismo@)\b/i.test(
+            normTicket
+          ) ||
+          (/\b(e-mail|email)\b/i.test(normTicket) &&
+            /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
+              normTicket
+            ) &&
+            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket));
+        if (
+          pb.id === "PB-UNI-38" &&
+          isEmailMgmt
+        ) {
+          score = Math.max(score, 0.95);
         }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
