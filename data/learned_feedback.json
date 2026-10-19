@@ -1482,5 +1482,35 @@
     "sufficiency_status": "completo",
     "created_at": "2026-10-16T08:50:00.000Z",
     "updated_at": "2026-10-16T08:52:00.000Z"
+  },
+  {
+    "ticket_id": 42899,
+    "title": "Instalação e Configuração - Instalação impressora etiquetas",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "aplicativo",
+      "etiquetas",
+      "cobranca",
+      "area",
+      "trabalho",
+      "desktop",
+      "atalho",
+      "izangela"
+    ],
+    "problem_summary": "Utilizamos um aplicativo para impressão das etiquetas de identificação na cobrança, porem ele não esta aparecendo na área de trabalho, tanto em meu computador, quanto no da Izangela. Poderia verificar?",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao aplicativo de **impressão de etiquetas de identificação** da Cobrança não estar aparecendo na Área de Trabalho do seu computador e no da **Izangela**.\n\nNossa equipe de Suporte Técnico já está pronta para verificar e restaurar os atalhos nas duas máquinas. Para podermos realizar o acesso remoto, você poderia nos informar por aqui:\n1. O **ID do HopToDesk** do seu computador e o da máquina da **Izangela**;\n2. O **nome do aplicativo** que vocês utilizam para essas etiquetas (ex.: ZebraDesigner, Elgin ou outro específico), caso se recorde.\n\nAssim que nos enviar os IDs, já iniciaremos a conexão para restabelecer os atalhos e testar a impressão!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "O ID do HopToDesk do seu computador e o da máquina da Izangela",
+      "O nome do aplicativo que vocês utilizam para essas etiquetas"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-39] Reclassificar o chamado no GLPI para T.I > ST > Instalação/Configuração > Aplicativos.",
+      "[PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (Julia Vitoria Grilo Silva e Izangela) para acesso remoto.",
+      "[PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas. Caso necessário, reinstalar a aplicação.",
+      "[PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.",
+      "[PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-19T13:23:20.687Z"
   }
 ]

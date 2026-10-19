@@ -206,6 +206,18 @@ export class KnowledgeEngine {
           normTicket
         ));
 
+    const isLabelAppOrDesktopShortcut =
+      (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra)\b/i.test(
+        normTicket
+      ) &&
+        /\b(aplicativo|app|programa|software|[aá]rea de trabalho|desktop|atalho|sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|icone)\b/i.test(
+          normTicket
+        )) ||
+      (/\betiquetas?\b/i.test(normTicket) &&
+        /\b(aplicativo|app|programa|[aá]rea de trabalho|desktop|atalho)\b/i.test(
+          normTicket
+        ));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -471,15 +483,19 @@ export class KnowledgeEngine {
             normTicket
           );
 
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora ou aplicativo de etiquetas/atalho
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest)
+          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut)
         ) {
           continue;
         }
-        // Evita parear PB-UNI-36 (Instalação/Disponibilização de Impressora) quando o chamado NÃO trata de instalação/pedido de impressora
-        if (pb.id === "PB-UNI-36" && !isPrinterInstallOrNewRequest) {
+        // Evita parear PB-UNI-36 (Instalação/Disponibilização de Impressora) quando o chamado NÃO trata de instalação/pedido de impressora ou quando trata de aplicativo de etiquetas/atalho
+        if (pb.id === "PB-UNI-36" && (!isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut)) {
+          continue;
+        }
+        // Evita parear PB-UNI-39 (Aplicativo de Impressão de Etiquetas / Atalho) quando o chamado NÃO trata de aplicativo de etiquetas/atalho
+        if (pb.id === "PB-UNI-39" && !isLabelAppOrDesktopShortcut) {
           continue;
         }
         // Evita parear PB-UNI-31 (Troca de Toner / Tintas) quando o chamado NÃO trata de toner/tinta/suprimentos
@@ -606,6 +622,12 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-38" &&
           isEmailMgmt
+        ) {
+          score = Math.max(score, 0.95);
+        }
+        if (
+          pb.id === "PB-UNI-39" &&
+          isLabelAppOrDesktopShortcut
         ) {
           score = Math.max(score, 0.95);
         }
@@ -810,6 +832,15 @@ export class KnowledgeEngine {
         if (
           !/\b(impressora|impressao|imprimir|toner|tonner|tinta|tintas|cartucho|spooler|zebra|epson|samsung)\b/i.test(normTicket) &&
           /\b(impressora|impressao|toner|tonner|tinta|tintas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de hardware de impressora/remanejamento/toner/scan quando o chamado trata de aplicativo de etiquetas ou atalho na Área de Trabalho
+        if (
+          isLabelAppOrDesktopShortcut &&
+          !/\b(aplicativo|app|software|atalho|[aá]rea de trabalho|desktop)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

@@ -8156,5 +8156,307 @@
     "public_reply_draft": "Olá, Juliano! Tudo bem?\n\nRecebemos a sua solicitação referente à conta de e-mail departamental do setor **Marketing** e ao redirecionamento de mensagens.\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando as devidas configurações no painel de administração de e-mails corporativos:\n1. **Acesso à Conta:** Liberação de acesso à caixa departamental **marketing@unimedsudoestemg.coop.br** para o seu usuário.\n2. **Redirecionamento Automático:** Configuração da regra de encaminhamento automático das mensagens enviadas para **jornalismo@unimedsudoestemg.coop.br** diretamente para a conta **marketing@unimedsudoestemg.coop.br**.\n\nAssim que as configurações forem concluídas e validadas com mensagem de teste, confirmaremos por aqui com as instruções de acesso!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
+  },
+  "42814": {
+    "ticket_id": 42814,
+    "analyzed_at": "16/10/2026 09:10",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Viviane Souza solicitou a instalação de programas de teste de neuropsicologia em um computador localizado no Núcleo Passos. Ela solicitou que o serviço fosse realizado mais cedo, preferencialmente no horário do Dr. Rodrigo, que está na frente da sede. A equipe de TI já recebeu todas as informações necessárias para processar a solicitação.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "Atraso no atendimento compromete o prazo de realização dos testes.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Viviane Souza solicitou a instalação de programas de teste de neuropsicologia em um computador localizado no Núcleo Passos. Ela solicitou que o serviço fosse realizado mais cedo, preferencialmente no horário do Dr. Rodrigo, que está na frente da sede. A equipe de TI já recebeu todas as informações necessárias para processar a solicitação.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Instalar Programas**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "42829": {
+    "ticket_id": 42829,
+    "analyzed_at": "16/10/2026 10:21",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O solicitante, Diego Torres da Silva, do setor de Hospital, está solicitando ajustes no formulário de passagem de plantão. Ele deseja incluir campos adicionais no formulário, como motivo da internação, dispositivos, infusões contínuas e evacuações, para melhorar a interface do formulário. As imagens anexadas fornecem evidências visuais do estado atual do sistema, incluindo cabos soltos, códigos de erro na tela e outros detalhes técnicos.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "real_urgency": "Média",
+    "urgency_reason": "O formulário de passagem de plantão está inoperante e precisa ser ajustado para garantir a segurança e a eficiência do processo.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42241",
+        "title": "Ajustes em layout/interface  -  Ajuste em agenda Oncologia",
+        "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+          "[PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+          "[PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+          "[PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+          "[PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+          "[Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-09",
+        "title": "Desenvolvimento / Ajustes em Formulários Clínicos Assistenciais (PEP Hospitalar / SGH Spdata)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Coordenação de Enfermagem ou área assistencial do Hospital Unimed (Centro Cirúrgico, UTI, Enfermagem) solicita criação/alteração de campos em formulários eletrônicos assistenciais no PEP (módulo do SGH Spdata).",
+        "steps": [
+          "Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+          "Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+          "Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42545",
+        "title": "Solicitação Diversa  -  Liberação de Acessos",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+          "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+          "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41861 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Atualização Checklist Inserção Sonda Vesical de Demora",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nInformamos que o formulário foi atualizado conforme solicitado:\n\n\r\n\r\nNome alterado para: CHECKLIST DE CATETERISMO VESICAL\n\r\nNova pergunta adicionada: Tipo de procedimento\n\r\nNovas respostas adicionadas à pergunta \"Tipo de Sonda\":\n\r\n\r\nSonda Folley 2 vias\n\n\r\n\r\nNº 6\n\r\nNº 8\n\r\nNº 10\n\r\nNº 12\n\r\nNº 14\n\r\nNº 16\n\r\nNº 18\n\r\nNº 20\n\r\nNº 22\n\r\nNº 24",
+        "steps": [
+          "Prezados(as),",
+          "Informamos que o formulário foi atualizado conforme solicitado:",
+          "Nome alterado para: CHECKLIST DE CATETERISMO VESICAL",
+          "Nova pergunta adicionada: Tipo de procedimento",
+          "Novas respostas adicionadas à pergunta \"Tipo de Sonda\":",
+          "Sonda Folley 2 vias"
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42241) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)",
+    "resolution_steps": [
+      "[MEM-#42241] [PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[MEM-#42241] [PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.",
+      "[MEM-#42241] [PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).",
+      "[MEM-#42241] [PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).",
+      "[MEM-#42241] [PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.",
+      "[MEM-#42241] [Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante, Diego Torres da Silva, do setor de Hospital, está solicitando ajustes no formulário de passagem de plantão. Ele deseja incluir campos adicionais no formulário, como motivo da internação, dispositivos, infusões contínuas e evacuações, para melhorar a interface do formulário. As imagens anexadas fornecem evidências visuais do estado atual do sistema, incluindo cabos soltos, códigos de erro na tela e outros detalhes técnicos.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42241) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-09)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42241] [PB-UNI-30] Manter ou direcionar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n  2. [MEM-#42241] [PB-UNI-30] Identificar a regra de validação e o componente de interface responsável pela duração do agendamento no código-fonte do Sistema de Agendamento de Oncologia.\n  3. [MEM-#42241] [PB-UNI-30] Alterar a parametrização do tempo mínimo de preenchimento (ex.: reduzir de 60 minutos para 15 minutos na seleção de duração).\n  4. [MEM-#42241] [PB-UNI-30] Realizar testes de homologação criando agendamentos fracionados de 15 minutos no calendário semanal da Oncologia para validar a consistência das faixas de horário (07h às 19h).\n  5. [MEM-#42241] [PB-UNI-30] Publicar a nova versão da aplicação em produção e notificar o(a) enfermeiro(a) / solicitante no chamado para validação operacional.\n  6. [MEM-#42241] [Chamado #41414 (Resolvido)] Quando estiver com o status \"Encaminhado\" será calculado o tempo de espera referente aquela movimentação.",
+    "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste no **Sistema de Agendamento de Oncologia**.\n\nA especificação para alteração do tempo mínimo de preenchimento da duração dos agendamentos para **15 minutos** (atualmente configurado em 60 minutos), visando viabilizar a marcação de procedimentos rápidos como medicação subcutânea, já foi validada na triagem técnica e está em tratativa com a equipe de Desenvolvimento (Moisés).\n\nAssim que o ajuste for implementado e publicado no sistema, confirmaremos a liberação por aqui para que a equipe da Oncologia possa realizar a validação!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 3
+  },
+  "42834": {
+    "ticket_id": 42834,
+    "analyzed_at": "16/10/2026 10:17",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **ANA LUIZA TEODORO CAMPOS** (H Faturamento) solicita a reabertura do registro **1413408** no sistema **Controle de Contas**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Sistemas Internos",
+    "real_urgency": "Média",
+    "urgency_reason": "Reabertura de registro/conta no sistema Controle de Contas solicitada pelo setor H Faturamento para continuidade do faturamento/auditoria.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42249",
+        "title": "Solicitação Diversa  -  ativar conta no controle de contas",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "steps": [
+          "[MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+          "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42198",
+        "title": "Solicitação Diversa  -  ABRIR CONTAS",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "steps": [
+          "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41992",
+        "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
+          "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-28",
+        "title": "Reabertura de Registro ou Conta Encerrada Erroneamente (Controle de Contas / SGH / Faturamento)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro ou conta hospitalar que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH), permitindo novos lançamentos, estornos e conferência.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+        ],
+        "score": 0.53
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42249) + Memória Contínua • Aprendido com o Analista (MEM-#42198)",
+    "resolution_steps": [
+      "[MEM-#42249] [MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+      "[MEM-#42249] [MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+      "[MEM-#42249] [MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+      "[MEM-#42249] [MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+      "[MEM-#42249] [MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+      "[MEM-#42249] [MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **ANA LUIZA TEODORO CAMPOS** (H Faturamento) solicita a reabertura do registro **1413408** no sistema **Controle de Contas**, informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Sistemas Internos | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42249) + Memória Contínua • Aprendido com o Analista (MEM-#42198)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42249] [MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').\n  2. [MEM-#42249] [MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.\n  3. [MEM-#42249] [MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.\n  4. [MEM-#42249] [MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.\n  5. [MEM-#42249] [MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).\n  6. [MEM-#42249] [MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+    "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1413408** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "42899": {
+    "ticket_id": 42899,
+    "analyzed_at": "19/10/2026 10:22",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Julia Vitoria Grilo Silva** (Financeiro) relata que o aplicativo utilizado para impressão das etiquetas de identificação no setor de Cobrança não está aparecendo na Área de Trabalho (desktop), tanto na máquina dela quanto na da colaboradora **Izangela**. Demanda atendimento de Suporte Técnico para localizar o executável/instalação do aplicativo (ex.: ZebraDesigner, Elgin ou atalho de rede), restaurar os atalhos no desktop e Menu Iniciar e validar o funcionamento da impressora de etiquetas via acesso remoto.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "Restauração de atalho/aplicativo de impressão de etiquetas na Área de Trabalho para continuidade das atividades operacionais (Financeiro).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Informar o ID do HopToDesk (ou AnyDesk) dos computadores afetados (Julia Vitoria Grilo Silva e Izangela) para que a equipe de T.I. possa realizar o acesso remoto",
+      "Confirmar o nome do aplicativo de etiquetas utilizado (ex.: ZebraDesigner, Elgin ou sistema interno), caso se recordem"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-39",
+        "title": "Instalação, Restauração de Atalho e Configuração de Aplicativo de Impressão de Etiquetas (Cobrança / Financeiro / Zebra / Elgin)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Colaborador(a) relata que o aplicativo ou atalho para impressão de etiquetas (ex.: etiquetas de identificação da cobrança, financeiro ou hospitalar) não está aparecendo na Área de Trabalho (desktop) de uma ou mais estações de trabalho, demandando restauração de atalho, reinstalação ou reconfiguração do software.",
+        "steps": [
+          "Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em Hardware/Impressoras.",
+          "Solicitar os IDs do HopToDesk das colaboradoras afetadas (ex.: Julia e Izangela no Financeiro) para realizar o acesso remoto às estações.",
+          "Conectar nas estações de trabalho e verificar se os arquivos executáveis do aplicativo de etiquetas constam instalados localmente (em Program Files, AppData ou pasta de rede da cobrança). Caso necessário, efetuar a reinstalação do aplicativo.",
+          "Recriar e fixar o atalho de inicialização do aplicativo na Área de Trabalho (Desktop) e no menu Iniciar de ambas as estações.",
+          "Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42795 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora do NAS não imprime",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "▸ Impressora Piumhi — Recepção NAS\n\r\n\n▸ Identificação\n\r\n\r\nLocal: Piumhi — Recepção NAS\n\r\nDriver: HP Laser MFP 131 133 135–138\n\r\nConexão: USB\n\r\nPorta registrada: USB002\n\r\nData do atendimento: 15/10/2026\n\r\n\r\n\n▸ Problema apresentado\n\r\nA impressora não concluía a impressão. A página de teste permanecia na fila com o status “Imprimindo, Erro”, e o Windo",
+        "steps": [
+          "▸ Impressora Piumhi — Recepção NAS",
+          "▸ Identificação",
+          "Local: Piumhi — Recepção NAS",
+          "Driver: HP Laser MFP 131 133 135–138",
+          "Conexão: USB",
+          "Porta registrada: USB002"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41515 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora Etiquetas",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós reiniciar computador impressora voltou a funcionar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após reiniciar computador impressora voltou a funcionar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-39) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42795 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-39] Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (Julia Vitoria Grilo Silva e Izangela) para acesso remoto.",
+      "[PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas (ex.: Arquivos de Programas, AppData ou pasta de rede da cobrança). Caso necessário, reinstalar a aplicação.",
+      "[PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.",
+      "[PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Julia Vitoria Grilo Silva** (Financeiro) relata que o aplicativo utilizado para impressão das etiquetas de identificação no setor de Cobrança não está aparecendo na Área de Trabalho (desktop), tanto na máquina dela quanto na da colaboradora **Izangela**. Demanda atendimento de Suporte Técnico para localizar o executável/instalação do aplicativo (ex.: ZebraDesigner, Elgin ou atalho de rede), restaurar os atalhos no desktop e Menu Iniciar e validar o funcionamento da impressora de etiquetas via acesso remoto.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-39) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42795 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o ID do HopToDesk (ou AnyDesk) dos computadores afetados (Julia Vitoria Grilo Silva e Izangela) para que a equipe de T.I. possa realizar o acesso remoto\n  - Confirmar o nome do aplicativo de etiquetas utilizado (ex.: ZebraDesigner, Elgin ou sistema interno), caso se recordem\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-39] Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (Julia Vitoria Grilo Silva e Izangela) para acesso remoto.\n  3. [PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas (ex.: Arquivos de Programas, AppData ou pasta de rede da cobrança). Caso necessário, reinstalar a aplicação.\n  4. [PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.\n  5. [PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação.",
+    "public_reply_draft": "Olá, Julia! Tudo bem?\n\nRecebemos a solicitação referente ao aplicativo de **impressão de etiquetas de identificação** da Cobrança não estar aparecendo na Área de Trabalho do seu computador e no da **Izangela**.\n\nNossa equipe de Suporte Técnico já está pronta para verificar e restaurar os atalhos nas duas máquinas. Para podermos realizar o acesso remoto, você poderia nos informar por aqui:\n1. O **ID do HopToDesk** do seu computador e o da máquina da **Izangela**;\n2. O **nome do aplicativo** que vocês utilizam para essas etiquetas (ex.: ZebraDesigner, Elgin ou outro específico), caso se recorde.\n\nAssim que nos enviar os IDs, já iniciaremos a conexão para restabelecer os atalhos e testar a impressão!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
   }
 }

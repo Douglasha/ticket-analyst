@@ -1376,5 +1376,45 @@
       "Notificar o solicitante no chamado do GLPI com as orientações de acesso e confirmar o funcionamento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à conta de e-mail departamental do setor **{setor}** e à regra de redirecionamento de mensagens.\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando as devidas configurações no painel de administração de e-mails corporativos:\n1. **Acesso à Conta:** Liberação de acesso à caixa departamental **{email_destino}** para o seu usuário.\n2. **Redirecionamento Automático:** Configuração da regra de encaminhamento das mensagens recebidas em **{email_origem}** diretamente para a conta de Marketing.\n\nAssim que as configurações forem aplicadas e validadas com e-mail de teste, confirmaremos por aqui com as instruções de acesso!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-39",
+    "title": "Instalação, Restauração de Atalho e Configuração de Aplicativo de Impressão de Etiquetas (Cobrança / Financeiro / Zebra / Elgin)",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "keywords": [
+      "etiquetas",
+      "etiqueta",
+      "impressão de etiquetas",
+      "impressao de etiquetas",
+      "aplicativo de etiquetas",
+      "aplicativo para impressão",
+      "atalho",
+      "área de trabalho",
+      "area de trabalho",
+      "desktop",
+      "não está aparecendo",
+      "nao esta aparecendo",
+      "cobrança",
+      "cobranca",
+      "izangela",
+      "zebra",
+      "elgin",
+      "argox",
+      "bartender",
+      "zebradesigner"
+    ],
+    "symptoms": "Colaborador(a) relata que o aplicativo ou atalho para impressão de etiquetas (ex.: etiquetas de identificação da cobrança, financeiro ou hospitalar) não está aparecendo na Área de Trabalho (desktop) de uma ou mais estações de trabalho, demandando restauração de atalho, reinstalação ou reconfiguração do software.",
+    "required_info": [
+      "ID do HopToDesk (ou patrimônio/nome das máquinas) dos computadores que necessitam de intervenção técnica para acesso remoto",
+      "Nome do aplicativo de etiquetas utilizado (caso não identificado)"
+    ],
+    "resolution_steps": [
+      "Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em Hardware/Impressoras.",
+      "Solicitar os IDs do HopToDesk das colaboradoras afetadas (ex.: Julia e Izangela no Financeiro) para realizar o acesso remoto às estações.",
+      "Conectar nas estações de trabalho e verificar se os arquivos executáveis do aplicativo de etiquetas constam instalados localmente (em Program Files, AppData ou pasta de rede da cobrança). Caso necessário, efetuar a reinstalação do aplicativo.",
+      "Recriar e fixar o atalho de inicialização do aplicativo na Área de Trabalho (Desktop) e no menu Iniciar de ambas as estações.",
+      "Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao aplicativo de impressão de etiquetas de identificação da cobrança para o seu computador e o da Izangela (setor {setor}).\n\nComo o problema decorre do aplicativo/atalho não estar visível na Área de Trabalho, nossa equipe técnica precisa realizar o acesso remoto nas duas estações para restaurar o atalho e validar a inicialização do software. Você poderia nos informar:\n1. O **ID do HopToDesk** do seu computador e o **ID do HopToDesk** do computador da **Izangela**?\n2. Caso saiba, qual é o **nome do aplicativo de etiquetas** que vocês utilizavam?\n\nAssim que nos enviar os IDs, já conectaremos remotamente nas máquinas para normalizar o acesso e validar a impressão!\n\nPermanecemos à disposição!"
   }
 ]

@@ -1,5 +1,219 @@
 [
   {
+    "id": "Chamado #42893 (Resolvido)",
+    "ticket_id": 42893,
+    "solution_id": 41577,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > Site Service Desk",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\npor favor, acessar o seguinte link: https://servicedesk.unimedmg.coop.br/login.x\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "por favor, acessar o seguinte link: https://servicedesk.unimedmg.coop.br/login.x",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42889 (Resolvido)",
+    "ticket_id": 42889,
+    "solution_id": 41567,
+    "title": "IR > Verificar Computadores para Manutenção Preventiva [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado, segue lista\n\n\r\n\r\n\r\n\r\nID\r\nComputador\r\nUsuário\r\nInstalação\r\nÚltima manutenção\r\nPróxima preventiva\r\nTécnico\r\nSituação\r\nAção\r\n\r\n\r\n\r\n\r\n262\r\nDHU-3233-UTINEO\r\nUTINEO@UNIMED256\r\n15/12/2025 12:33\r\n-\r\n\r\n\r\n15/12/2026 12:3384%\r\n\r\n \r\n\r\n\r\n\r\n-\r\nPendente\r\n\r\nNotasSolicitar\r\n\r\n\r\n\r\n266\r\nDHU-3235-FATURA\r\nbsena@UNIMED256\r\n17/12/2025 11:23\r\n",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado, segue lista",
+      "ID",
+      "Computador",
+      "Usuário",
+      "Instalação"
+    ]
+  },
+  {
+    "id": "Chamado #42860 (Resolvido)",
+    "ticket_id": 42860,
+    "solution_id": 41531,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Convi",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Atalho da pasta CONV foi introduzido na área de trabalho de todos os computadores.",
+    "keywords": [],
+    "steps": [
+      "Atalho da pasta CONV foi introduzido na área de trabalho de todos os computadores."
+    ]
+  },
+  {
+    "id": "Chamado #42858 (Resolvido)",
+    "ticket_id": 42858,
+    "solution_id": 41552,
+    "title": "Infraestrutura e Redes > Administração de Redes > impressora",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Defeito corrigido.",
+    "keywords": [],
+    "steps": [
+      "Defeito corrigido."
+    ]
+  },
+  {
+    "id": "Chamado #42847 (Resolvido)",
+    "ticket_id": 42847,
+    "solution_id": 41514,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suprimentos verificados e recarregados.",
+    "keywords": [],
+    "steps": [
+      "Suprimentos verificados e recarregados."
+    ]
+  },
+  {
+    "id": "Chamado #42843 (Resolvido)",
+    "ticket_id": 42843,
+    "solution_id": 41500,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Reverter processo de encerramento de contas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nContas reabertas\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Contas reabertas",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42839 (Resolvido)",
+    "ticket_id": 42839,
+    "solution_id": 41512,
+    "title": "Infraestrutura e Redes > Impressoras > impressora",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Toner da cor preto, da impressora foi trocado, foi testado e a imagem saiu corretamente.",
+    "keywords": [],
+    "steps": [
+      "Toner da cor preto, da impressora foi trocado, foi testado e a imagem saiu corretamente."
+    ]
+  },
+  {
+    "id": "Chamado #42838 (Resolvido)",
+    "ticket_id": 42838,
+    "solution_id": 41498,
+    "title": "Infraestrutura e Redes > Internet e WiFi > Impressora , aparelho de ultrassom",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Foi refeita a reconexão da impressora a rede.",
+    "keywords": [],
+    "steps": [
+      "Foi refeita a reconexão da impressora a rede."
+    ]
+  },
+  {
+    "id": "Chamado #42835 (Resolvido)",
+    "ticket_id": 42835,
+    "solution_id": 41499,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Configurar Celular",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nO aparelho foi configurado, etiquetado e entregue pessoalmente à colaboradora Isabel.\n\n\r\nApós as tratativas, encerramos este chamado. Permanecemos à disposição caso necessário.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "O aparelho foi configurado, etiquetado e entregue pessoalmente à colaboradora Isabel.",
+      "Após as tratativas, encerramos este chamado. Permanecemos à disposição caso necessário.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42834 (Resolvido)",
+    "ticket_id": 42834,
+    "solution_id": 41496,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Abrir conta",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConta reaberta\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Conta reaberta",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42828 (Resolvido)",
+    "ticket_id": 42828,
+    "solution_id": 41505,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 13,4 VTemperatura da água do Radiador: 74° CNível do óleo motor: BaixoNível do óleo combustível: okLigar o Motor 15 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 13,4 VTemperatura da água do Radiador: 74° CNível do óleo motor: BaixoNível do óleo combustível: okLigar o Motor 15 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #42827 (Resolvido)",
+    "ticket_id": 42827,
+    "solution_id": 41503,
+    "title": "Infraestrutura e Redes > Internet e WiFi > Computador da sala 3 não conecta na internet",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Conexão realizada.",
+    "keywords": [],
+    "steps": [
+      "Conexão realizada."
+    ]
+  },
+  {
+    "id": "Chamado #42822 (Resolvido)",
+    "ticket_id": 42822,
+    "solution_id": 41491,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Nicollas Nunes Rabelo",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Senha alterada.",
+    "keywords": [],
+    "steps": [
+      "Senha alterada."
+    ]
+  },
+  {
+    "id": "Chamado #42814 (Resolvido)",
+    "ticket_id": 42814,
+    "solution_id": 41504,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Instalar Programas",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Programa instalado.",
+    "keywords": [],
+    "steps": [
+      "Programa instalado."
+    ]
+  },
+  {
+    "id": "Chamado #42813 (Resolvido)",
+    "ticket_id": 42813,
+    "solution_id": 41493,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Juliano Melo",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42812 (Resolvido)",
     "ticket_id": 42812,
     "solution_id": 41489,
@@ -61,6 +275,19 @@
     "keywords": [],
     "steps": [
       "Mudança realizada, todos os dispositivos foram transferidos para a nova sala."
+    ]
+  },
+  {
+    "id": "Chamado #42791 (Resolvido)",
+    "ticket_id": 42791,
+    "solution_id": 41494,
+    "title": "Desenvolvimento e Qualidade > Atualização de versão/sistema > Atualizar o Adobe do computador da salas de reuniões",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Atualização feita pelo @Felipe Rodrigues Silva",
+    "keywords": [],
+    "steps": [
+      "Atualização feita pelo @Felipe Rodrigues Silva"
     ]
   },
   {
@@ -247,6 +474,20 @@
     ]
   },
   {
+    "id": "Chamado #42695 (Resolvido)",
+    "ticket_id": 42695,
+    "solution_id": 41572,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Referenciamento Brasídice",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #42661 (Resolvido)",
     "ticket_id": 42661,
     "solution_id": 41359,
@@ -351,6 +592,19 @@
     ]
   },
   {
+    "id": "Chamado #42646 (Resolvido)",
+    "ticket_id": 42646,
+    "solution_id": 41571,
+    "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização das Tabelas do IPSM",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia, importação realizada.",
+    "keywords": [],
+    "steps": [
+      "Bom dia, importação realizada."
+    ]
+  },
+  {
     "id": "Chamado #42644 (Resolvido)",
     "ticket_id": 42644,
     "solution_id": 41365,
@@ -442,6 +696,24 @@
     ]
   },
   {
+    "id": "Chamado #42624 (Resolvido)",
+    "ticket_id": 42624,
+    "solution_id": 41574,
+    "title": "Manutenção Preventiva - DHU-3120-TRIAGE",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
     "id": "Chamado #42623 (Resolvido)",
     "ticket_id": 42623,
     "solution_id": 41431,
@@ -512,6 +784,22 @@
     "keywords": [],
     "steps": [
       "Licença ainda não atualizada, estamos aguardando para instalação nas 9 maquinas>"
+    ]
+  },
+  {
+    "id": "Chamado #42615 (Resolvido)",
+    "ticket_id": 42615,
+    "solution_id": 41524,
+    "title": "Atualizar Simpro [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nTabela atualizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Tabela atualizada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -2143,6 +2431,19 @@
     ]
   },
   {
+    "id": "Chamado #42158 (Resolvido)",
+    "ticket_id": 42158,
+    "solution_id": 41513,
+    "title": "Manutenção Eletrônica | NOBREAK COMPUTADOR DR RAFAEL RICK NO PREDIO AZUL SALA 402",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Nobreak foi substituído, o antigo necessita de reparo.",
+    "keywords": [],
+    "steps": [
+      "Nobreak foi substituído, o antigo necessita de reparo."
+    ]
+  },
+  {
     "id": "Chamado #42156 (Resolvido)",
     "ticket_id": 42156,
     "solution_id": 40873,
@@ -2907,6 +3208,20 @@
     "keywords": [],
     "steps": [
       "Bloqueio feito novamente."
+    ]
+  },
+  {
+    "id": "Chamado #41932 (Resolvido)",
+    "ticket_id": 41932,
+    "solution_id": 41573,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Mudança de Versão - Mapa de Utilização de Hemocomponentes",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -4342,6 +4657,19 @@
     "keywords": [],
     "steps": [
       "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+    ]
+  },
+  {
+    "id": "Chamado #40594 (Resolvido)",
+    "ticket_id": 40594,
+    "solution_id": 41492,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > BI dimensionamento da rede",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi apresentado ao BI e atende às demandas. O mesmo entrega os resultados.",
+    "keywords": [],
+    "steps": [
+      "Foi apresentado ao BI e atende às demandas. O mesmo entrega os resultados."
     ]
   },
   {
