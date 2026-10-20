@@ -982,12 +982,47 @@ export class AIAnalyst {
         `3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\n` +
         `Caso a impressora esteja inacessível na rede, já deslocaremos um técnico até a ${sectorName}!`;
     } else if (
-      normAll.includes("bloqueio de conta") ||
+      /\b(desbloqueio|desbloquear|desbloqueie|conta bloqueada|usuario bloqueado|usuário bloqueado)\b/i.test(normAll)
+    ) {
+      const colabNome = formFields.nomeColaborador || ticket.requester;
+      const cpfTxt = formFields.cpf ? ` (CPF: ${formFields.cpf})` : "";
+      const rawAcessos = (formFields.acessos || "").trim();
+      const sistemaAlvo = rawAcessos || "GIU / Portal Unimed";
+
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Acesso e Permissões > Desbloqueio de Contas";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = `Desbloqueio de credencial de acesso no sistema ${sistemaAlvo} para o colaborador ${colabNome}, restabelecendo o acesso às ferramentas de trabalho.`;
+
+      translatedIntent =
+        `O colaborador **${colabNome}**${cpfTxt} (${sectorName}) solicita o desbloqueio de sua conta no **${sistemaAlvo}**` +
+        (ticket.has_attachments ? `, anexando evidência do erro ("Usuário bloqueado")` : "") +
+        `. Solicitação completa com todos os dados cadastrais (Nome, CPF e sistema) já informados, demandando atuação no console administrativo do GIU/AD para liberação da conta.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-40] Acessar o console de administração do ${sistemaAlvo} (ex.: GIU / Gestão de Identidades Unimed ou Active Directory).`,
+        `[PB-UNI-40] Localizar a conta do colaborador ${colabNome}${cpfTxt} e verificar o status de bloqueio da credencial.`,
+        `[PB-UNI-40] Realizar o desbloqueio da conta no console e, se necessário, reenviar e-mail de redefinição de senha para o endereço cadastrado.`,
+        `[PB-UNI-40] Responder ao colaborador orientando nova tentativa de login no portal e validar a normalização do acesso.`
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao **desbloqueio da sua conta** no **${sistemaAlvo}**.\n\n` +
+        `Todos os dados cadastrais necessários (Nome, CPF e setor) já constam informados e nossa equipe de Suporte Técnico já está acessando o console administrativo para realizar o desbloqueio da sua credencial.\n\n` +
+        `Assim que o desbloqueio for concluído no sistema, avisaremos por aqui para que você possa efetuar o login!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      !/\b(desbloque|desbloquear|desbloqueio)\b/i.test(normAll) &&
+      (normAll.includes("bloqueio de conta") ||
       normAll.includes("bloqueio de acesso") ||
       normAll.includes("desligamento") ||
       normAll.includes("quadro funcional") ||
       (normAll.includes("bloquear") &&
-        (normAll.includes("colaborador") || normAll.includes("acesso")))
+        (normAll.includes("colaborador") || normAll.includes("acesso"))))
     ) {
       const colabNome =
         formFields.nomeColaborador ||
@@ -1923,22 +1958,68 @@ export class AIAnalyst {
         const targetSector = formFields.setorAlvo || sectorName;
         const targetUnit = formFields.unidade ? ` (${formFields.unidade})` : "";
 
+        const isExternalAgencyOrPortal =
+          (/\b(urucum|ag[eê]ncia|marketing digital)\b/i.test(normAll) &&
+           /\b(portal unimed|gerenciador|site|plataforma do nosso site)\b/i.test(normAll)) ||
+          (/\bportal unimed\b/i.test(normAll) &&
+           /\b(site|gerenciador|landing pages?|google tag manager|pixel meta)\b/i.test(normAll) &&
+           /\b(empresa|ag[eê]ncia|terceir|extern[ao])\b/i.test(normAll));
+
         const isEmailAccountOrForwarding =
-          /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|jornalismo@|marketing@|webmail)\b/i.test(
+          !isExternalAgencyOrPortal &&
+          !/\b(e-?mail marketing|ferramenta de e-?mail marketing)\b/i.test(normAll) &&
+          (/\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|jornalismo@|marketing@|webmail)\b/i.test(
             normAll
           ) ||
           (/\b(e-mail|email)\b/i.test(normAll) &&
             /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
               normAll
             ) &&
-            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normAll));
+            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normAll)));
 
         const isMale = /^(juliano|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|diego|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
           firstName
         );
         const colabLabel = isMale ? "o colaborador" : "a colaboradora";
 
-        if (isEmailAccountOrForwarding) {
+        if (isExternalAgencyOrPortal) {
+          const agencyName = "Urucum Digital";
+          const agencyEmail = "contato@urucumdigital.com.br";
+          const requestedSys = "Portal Unimed (Gerenciador do Site / CMS)";
+
+          detectedDomain = "Acessos, Permissões e Contas";
+          suggestedCategory = "T.I > ST > Acesso e Permissões";
+          realUrgency = ticket.urgency_label || "Alta";
+          urgencyReason = `Liberação de acesso de gestão do Portal Unimed para agência externa (${agencyName}), demandando validação de governança para domínios corporativos (@unimed).`;
+
+          const hasFollowup = (ticket.followups || []).some(
+            (f) => !f.is_private && /\b(raphael|dom[ií]nios?\s*["']?unimed|f[eé]rias)\b/i.test(f.content || "")
+          );
+
+          translatedIntent =
+            `O solicitante **${ticket.requester}** (${sectorName}) solicita liberação de acesso ao **${requestedSys}** para a agência terceirizada **${agencyName}** (${agencyEmail}) para desenvolvimento de Landing Pages, integração de CRM, Google Tag Manager e campanhas de tráfego pago.` +
+            (hasFollowup
+              ? ` A equipe de T.I. (Luiz Fernando Piantino) já realizou alinhamento inicial pontuando que o portal exige domínios institucionais "@unimed", mantendo o ticket em status Pendente aguardando retorno do gestor da plataforma (Raphael) para definir a viabilidade de credencial corporativa.`
+              : ` Demanda alinhamento de segurança e governança sobre a restrição de domínio corporativo "@unimed" para terceiros.`);
+
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+
+          customResolutionSteps = [
+            `[PB-UNI-41] Avaliar o escopo de serviços de marketing digital contratados junto à agência ${agencyName} (${agencyEmail}).`,
+            `[PB-UNI-41] Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil), que restringe contas administrativas a domínios institucionais '@unimed'.`,
+            `[PB-UNI-41] Alinhar com o administrador da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de terceiro para a agência ou perfil restrito de edição.`,
+            `[PB-UNI-41] Manter o chamado em status 'Pendente' aguardando o retorno e direcionamento da gestão do portal.`,
+            `[PB-UNI-41] Após a deliberação, efetuar o provisionamento das credenciais e notificar o solicitante e a agência.`
+          ];
+
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **${agencyName}** (${agencyEmail}).\n\n` +
+            `Conforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos '@unimed'. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\n` +
+            `O ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\n` +
+            `Permanecemos à disposição!`;
+        } else if (isEmailAccountOrForwarding) {
           const foundEmails = Array.from(
             ticket.content.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)
           ).map((m) => m[1].toLowerCase());

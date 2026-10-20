@@ -8382,6 +8382,155 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "42886": {
+    "ticket_id": 42886,
+    "analyzed_at": "19/10/2026 10:35",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita liberação de acesso ao módulo de **Sistema SGH Spdata** para o setor **Faturamento**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42096",
+        "title": "Redefinição de Senhas  -  Izabel Heloisa Duarte da Silva",
+        "category": "T.I > ST > Acesso e Permissões > Redefinição de Senhas",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **{solicitante} Heloisa Duarte da Silva** (Intranet).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[Diretriz do Analista] Verifique em alguma base de conhecimento do glpi",
+          "[Chamado #41941 (Resolvido)] Senha redefinida para Unimed@256!",
+          "[Chamado #41615 (Resolvido)] login: tatiane.carvalho",
+          "[Chamado #41615 (Resolvido)] senha: 1234@unimed"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **{solicitante} Heloisa Duarte da Silva** (Intranet).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Verifique em alguma base de conhecimento do glpi",
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-28",
+        "title": "Atualizar Registros do Faturamento no Sistema de Gestão Hospitalar",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "1. Objetivo\n\n\r\nDescrever como realizar a atualização de dados no módulo de faturamento de convênios do SGH. Esse procedimento é importante quando ocorre uma modificação em outro módulo que, por alguma razão, não foi sincronizada automaticamente.\n\n\r\n \n\n\r\n2. Âmbito de aplicação\n\n\r\nEste documento aplica-se a todos que ten...",
+        "steps": [
+          "1. Objetivo",
+          "Descrever como realizar a atualização de dados no módulo de faturamento de convênios do SGH. Esse procedimento é importante quando ocorre uma modificação em outro módulo que, por alguma razão, não foi sincronizada automaticamente.",
+          "2. Âmbito de aplicação",
+          "Este documento aplica-se a todos que tenham permissão para acessar o processo no SGH.",
+          "3. Definições e siglas",
+          "SGH: Sistema de Gestão Hospitalar"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42822 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Nicollas Nunes Rabelo",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Senha alterada.",
+        "steps": [
+          "Senha alterada."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42812 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Pedro Messias da Silva",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nSenha excluída e informada a colaboradora Gislaine\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Senha excluída e informada a colaboradora Gislaine",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42096) + 1ª Camada • Base de Conhecimento GLPI (KB-28)",
+    "resolution_steps": [
+      "[Aprendido em MEM-#42096] Verifique em alguma base de conhecimento do glpi",
+      "[PB-UNI-12] Localizar o cadastro de Priscila Roque Santos (CPF: 08112760667) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de Sistema SGH Spdata para a unidade Hospital Unimed (setor Faturamento).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita liberação de acesso ao módulo de **Sistema SGH Spdata** para o setor **Faturamento**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42096) + 1ª Camada • Base de Conhecimento GLPI (KB-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#42096] Verifique em alguma base de conhecimento do glpi\n  2. [PB-UNI-12] Localizar o cadastro de Priscila Roque Santos (CPF: 08112760667) no sistema correspondente.\n  3. [PB-UNI-12] Conceder e vincular as permissões do módulo de Sistema SGH Spdata para a unidade Hospital Unimed (setor Faturamento).\n  4. [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Sistema SGH Spdata** para o setor **Faturamento** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "42898": {
+    "ticket_id": 42898,
+    "analyzed_at": "19/10/2026 10:46",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Felipe Rodrigues Silva solicitou manutenção preventiva no dispositivo NUN-1522-COMERC, com ID 270, que foi instalado em 19/12/2025. O chamado foi classificado como de baixa urgência. A manutenção preventiva será realizada conforme as rotinas descritas no KB-26. O chamado foi classificado como 'COMPLETO', indicando que todos os dados pertinentes já foram recebidos e que a equipe de TI já está executando a solicitação.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Manutenção Preventiva",
+    "real_urgency": "Baixa",
+    "urgency_reason": "A manutenção preventiva não afeta diretamente a operação do sistema, mas é importante para garantir a funcionalidade do equipamento no longo prazo.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-26",
+        "title": "Realizar manutenção preventiva e teste no Gerador.",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "1. Objetivo\n\n\r\nDescrever as rotinas de como realizar manutenção preventiva no gerador.\n\n\r\n \n\n\r\n2. Âmbito de aplicação\n\n\r\nEste documento aplica-se ao setor de tecnologia da informação e manutenção hospitalar.\n\n\r\n \n\n\r\n3. Definições e siglas \n\n\r\nTI: Tecnologia da Informação.\n\n\r\nUSCA: Unidade de Supervisão de Corrente Alte...",
+        "steps": [
+          "1. Objetivo",
+          "Descrever as rotinas de como realizar manutenção preventiva no gerador.",
+          "2. Âmbito de aplicação",
+          "Este documento aplica-se ao setor de tecnologia da informação e manutenção hospitalar.",
+          "3. Definições e siglas",
+          "TI: Tecnologia da Informação."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42889 (Resolvido)",
+        "title": "IR > Verificar Computadores para Manutenção Preventiva [R]",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nVerificado, segue lista\n\n\r\n\r\n\r\n\r\nID\r\nComputador\r\nUsuário\r\nInstalação\r\nÚltima manutenção\r\nPróxima preventiva\r\nTécnico\r\nSituação\r\nAção\r\n\r\n\r\n\r\n\r\n262\r\nDHU-3233-UTINEO\r\nUTINEO@UNIMED256\r\n15/12/2025 12:33\r\n-\r\n\r\n\r\n15/12/2026 12:3384%\r\n\r\n \r\n\r\n\r\n\r\n-\r\nPendente\r\n\r\nNotasSolicitar\r\n\r\n\r\n\r\n266\r\nDHU-3235-FATURA\r\nbsena@UNIMED256\r\n17/12/2025 11:23\r\n",
+        "steps": [
+          "Prezados(as),",
+          "Verificado, segue lista",
+          "ID",
+          "Computador",
+          "Usuário",
+          "Instalação"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "1ª Camada • Base de Conhecimento GLPI (KB-26) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42889 (Resolvido))",
+    "resolution_steps": [
+      "[KB-26] Descrever as rotinas de como realizar manutenção preventiva no gerador.",
+      "[KB-26] Âmbito de aplicação",
+      "[KB-26] Este documento aplica-se ao setor de tecnologia da informação e manutenção hospitalar.",
+      "[KB-26] Definições e siglas",
+      "[KB-26] TI: Tecnologia da Informação.",
+      "[Chamado #42889 (Resolvido)] Verificado, segue lista"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Felipe Rodrigues Silva solicitou manutenção preventiva no dispositivo NUN-1522-COMERC, com ID 270, que foi instalado em 19/12/2025. O chamado foi classificado como de baixa urgência. A manutenção preventiva será realizada conforme as rotinas descritas no KB-26. O chamado foi classificado como 'COMPLETO', indicando que todos os dados pertinentes já foram recebidos e que a equipe de TI já está executando a solicitação.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Manutenção Preventiva | Prioridade Real: Baixa\nBase Consultada: 1ª Camada • Base de Conhecimento GLPI (KB-26) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42889 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [KB-26] Descrever as rotinas de como realizar manutenção preventiva no gerador.\n  2. [KB-26] Âmbito de aplicação\n  3. [KB-26] Este documento aplica-se ao setor de tecnologia da informação e manutenção hospitalar.\n  4. [KB-26] Definições e siglas\n  5. [KB-26] TI: Tecnologia da Informação.\n  6. [Chamado #42889 (Resolvido)] Verificado, segue lista",
+    "public_reply_draft": "Olá, Felipe! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Manutenção Preventiva - NUN-1522-COMERC**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "42899": {
     "ticket_id": 42899,
     "analyzed_at": "19/10/2026 10:22",
@@ -8456,6 +8605,222 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Julia Vitoria Grilo Silva** (Financeiro) relata que o aplicativo utilizado para impressão das etiquetas de identificação no setor de Cobrança não está aparecendo na Área de Trabalho (desktop), tanto na máquina dela quanto na da colaboradora **Izangela**. Demanda atendimento de Suporte Técnico para localizar o executável/instalação do aplicativo (ex.: ZebraDesigner, Elgin ou atalho de rede), restaurar os atalhos no desktop e Menu Iniciar e validar o funcionamento da impressora de etiquetas via acesso remoto.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-39) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42795 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o ID do HopToDesk (ou AnyDesk) dos computadores afetados (Julia Vitoria Grilo Silva e Izangela) para que a equipe de T.I. possa realizar o acesso remoto\n  - Confirmar o nome do aplicativo de etiquetas utilizado (ex.: ZebraDesigner, Elgin ou sistema interno), caso se recordem\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-39] Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (Julia Vitoria Grilo Silva e Izangela) para acesso remoto.\n  3. [PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas (ex.: Arquivos de Programas, AppData ou pasta de rede da cobrança). Caso necessário, reinstalar a aplicação.\n  4. [PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.\n  5. [PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação.",
     "public_reply_draft": "Olá, Julia! Tudo bem?\n\nRecebemos a solicitação referente ao aplicativo de **impressão de etiquetas de identificação** da Cobrança não estar aparecendo na Área de Trabalho do seu computador e no da **Izangela**.\n\nNossa equipe de Suporte Técnico já está pronta para verificar e restaurar os atalhos nas duas máquinas. Para podermos realizar o acesso remoto, você poderia nos informar por aqui:\n1. O **ID do HopToDesk** do seu computador e o da máquina da **Izangela**;\n2. O **nome do aplicativo** que vocês utilizam para essas etiquetas (ex.: ZebraDesigner, Elgin ou outro específico), caso se recorde.\n\nAssim que nos enviar os IDs, já iniciaremos a conexão para restabelecer os atalhos e testar a impressão!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "42903": {
+    "ticket_id": 42903,
+    "analyzed_at": "19/10/2026 10:34",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Liege Caroline Silva** (Laboratório) relata falha de impressão em a **impressora do setor** localizada no setor **Laboratório**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - Laboratório).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Laboratório) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42105",
+        "title": "Solicitação Diversa  -  Cadastrar meu e-mail na impressora",
+        "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail (**vsouza@unimedsudoestemg.coop.br**) na impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que concluirmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!",
+        "steps": [
+          "[PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+          "[PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+          "[PB-UNI-23] Acessar o painel web da impressora (SyncThru Web Service) e autenticar-se como administrador.",
+          "[PB-UNI-23] Navegar até Catálogo de Endereços / Address Book e adicionar novo contato com o Nome e E-mail institucional informado.",
+          "[PB-UNI-23] Salvar as configurações e registrar a conclusão no chamado, orientando o(a) colaborador(a) a selecionar seu nome no painel 'Digitalizar para E-mail' da impressora para realizar um teste.",
+          "[Chamado #41656 (Resolvido)] Segue credenciais de acessos"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para cadastrar o seu e-mail (**vsouza@unimedsudoestemg.coop.br**) na impressora **Samsung M4080** (Recepção do Nucleo Passos) para envio direto de digitalizações (Scan to E-mail), em conformidade com a LGPD.\n\nTodos os dados necessários já foram informados e nossa equipe de Infraestrutura e Redes já está realizando a inclusão do seu contato no catálogo de endereços do equipamento via painel administrativo (SyncThru).\n\nAssim que concluirmos o cadastro, avisaremos por aqui para que você possa realizar o primeiro teste no painel da impressora!",
+        "required_info": [],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42795 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora do NAS não imprime",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "▸ Impressora Piumhi — Recepção NAS\n\r\n\n▸ Identificação\n\r\n\r\nLocal: Piumhi — Recepção NAS\n\r\nDriver: HP Laser MFP 131 133 135–138\n\r\nConexão: USB\n\r\nPorta registrada: USB002\n\r\nData do atendimento: 15/10/2026\n\r\n\r\n\n▸ Problema apresentado\n\r\nA impressora não concluía a impressão. A página de teste permanecia na fila com o status “Imprimindo, Erro”, e o Windo",
+        "steps": [
+          "▸ Impressora Piumhi — Recepção NAS",
+          "▸ Identificação",
+          "Local: Piumhi — Recepção NAS",
+          "Driver: HP Laser MFP 131 133 135–138",
+          "Conexão: USB",
+          "Porta registrada: USB002"
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02) + Memória Contínua • Aprendido com o Analista (MEM-#42105)",
+    "resolution_steps": [
+      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
+      "[MEM-#42105] [PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.",
+      "[MEM-#42105] [PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Liege Caroline Silva** (Laboratório) relata falha de impressão em a **impressora do setor** localizada no setor **Laboratório**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02) + Memória Contínua • Aprendido com o Analista (MEM-#42105)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Laboratório) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.\n  5. [MEM-#42105] [PB-UNI-23] Reclassificar o chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Impressoras' caso tenha sido aberto em 'Solicitação Diversa'.\n  6. [MEM-#42105] [PB-UNI-23] Identificar o endereço IP da impressora multifuncional Samsung M4080FX do setor indicado (ex: Recepção do Núcleo Passos) no servidor DHCP/serviço de impressão.",
+    "public_reply_draft": "Olá, Liege! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (Laboratório) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Laboratório ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Laboratório!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "42953": {
+    "ticket_id": 42953,
+    "analyzed_at": "20/10/2026 10:44",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O colaborador **TARCISIO LARA COELHO** (CPF: 08036823608) (Marketing) solicita o desbloqueio de sua conta no **GIU**, anexando evidência do erro (\"Usuário bloqueado\"). Solicitação completa com todos os dados cadastrais (Nome, CPF e sistema) já informados, demandando atuação no console administrativo do GIU/AD para liberação da conta.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões > Desbloqueio de Contas",
+    "real_urgency": "Alta",
+    "urgency_reason": "Desbloqueio de credencial de acesso no sistema GIU para o colaborador TARCISIO LARA COELHO, restabelecendo o acesso às ferramentas de trabalho.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-40",
+        "title": "Desbloqueio de Contas e Reset de Senha (GIU / Portal Unimed / AD / Sistemas Corporativos)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Colaborador(a) relata que sua conta/credencial de acesso está bloqueada (com mensagem de usuário bloqueado ao tentar login no GIU, Portal Unimed, Active Directory ou outros sistemas), demandando intervenção no console administrativo para desbloqueio ou redefinição de senha.",
+        "steps": [
+          "Manter a categoria no GLPI em T.I > ST > Acesso e Permissões > Desbloqueio de Contas (ID 76).",
+          "Acessar o console de administração do sistema indicado (ex.: GIU / Gestão de Identidades Unimed ou Active Directory - AD).",
+          "Localizar a conta do colaborador pelo CPF ou login informado no formulário do chamado.",
+          "Verificar a flag de bloqueio da credencial (Account is locked out / Usuário bloqueado) e aplicar o desbloqueio imediato da conta.",
+          "Caso necessário, gerar senha temporária ou disparar link de redefinição de senha para o e-mail cadastrado.",
+          "Responder ao colaborador no GLPI confirmando o desbloqueio e solicitando que realize um novo teste de autenticação."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-40)",
+    "resolution_steps": [
+      "[PB-UNI-40] Acessar o console de administração do GIU (ex.: GIU / Gestão de Identidades Unimed ou Active Directory).",
+      "[PB-UNI-40] Localizar a conta do colaborador TARCISIO LARA COELHO (CPF: 08036823608) e verificar o status de bloqueio da credencial.",
+      "[PB-UNI-40] Realizar o desbloqueio da conta no console e, se necessário, reenviar e-mail de redefinição de senha para o endereço cadastrado.",
+      "[PB-UNI-40] Responder ao colaborador orientando nova tentativa de login no portal e validar a normalização do acesso."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO colaborador **TARCISIO LARA COELHO** (CPF: 08036823608) (Marketing) solicita o desbloqueio de sua conta no **GIU**, anexando evidência do erro (\"Usuário bloqueado\"). Solicitação completa com todos os dados cadastrais (Nome, CPF e sistema) já informados, demandando atuação no console administrativo do GIU/AD para liberação da conta.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Desbloqueio de Contas | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-40)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-40] Acessar o console de administração do GIU (ex.: GIU / Gestão de Identidades Unimed ou Active Directory).\n  2. [PB-UNI-40] Localizar a conta do colaborador TARCISIO LARA COELHO (CPF: 08036823608) e verificar o status de bloqueio da credencial.\n  3. [PB-UNI-40] Realizar o desbloqueio da conta no console e, se necessário, reenviar e-mail de redefinição de senha para o endereço cadastrado.\n  4. [PB-UNI-40] Responder ao colaborador orientando nova tentativa de login no portal e validar a normalização do acesso.",
+    "public_reply_draft": "Olá, Tarcisio! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desbloqueio da sua conta** no **GIU**.\n\nTodos os dados cadastrais necessários (Nome, CPF e setor) já constam informados e nossa equipe de Suporte Técnico já está acessando o console administrativo para realizar o desbloqueio da sua credencial.\n\nAssim que o desbloqueio for concluído no sistema, avisaremos por aqui para que você possa efetuar o login!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "42956": {
+    "ticket_id": 42956,
+    "analyzed_at": "20/10/2026 10:44",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Juliano Augusto de Melo** (Marketing) solicita liberação de acesso ao **Portal Unimed (Gerenciador do Site / CMS)** para a agência terceirizada **Urucum Digital** (contato@urucumdigital.com.br) para desenvolvimento de Landing Pages, integração de CRM, Google Tag Manager e campanhas de tráfego pago. A equipe de T.I. (Luiz Fernando Piantino) já realizou alinhamento inicial pontuando que o portal exige domínios institucionais \"@unimed\", mantendo o ticket em status Pendente aguardando retorno do gestor da plataforma (Raphael) para definir a viabilidade de credencial corporativa.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Liberação de acesso de gestão do Portal Unimed para agência externa (Urucum Digital), demandando validação de governança para domínios corporativos (@unimed).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-41",
+        "title": "Acesso de Agência Externa / Prestador Terceirizado ao Gerenciador do Portal Unimed / Site Institucional",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Setor de Marketing ou área de negócio solicita acesso para agência de publicidade/marketing digital terceira (ex.: Urucum Digital) ao gerenciador/CMS da plataforma do site institucional (Portal Unimed / Liferay), esbarrando na restrição de segurança e governança que exige contas vinculadas a domínios @unimed institucionais.",
+        "steps": [
+          "Avaliar o escopo de serviços de marketing digital contratados junto à agência externa (Landing Pages, Google Tag Manager, Pixel Meta, Google Analytics, etc.).",
+          "Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil / Federação), que restringe contas de gestão a domínios oficiais @unimed.",
+          "Alinhar com o administrador/gestor da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de prestador para a agência ou autorização de perfil restrito.",
+          "Manter o chamado em status Pendente aguardando o retorno e direcionamento da gestão do portal.",
+          "Após a deliberação técnica, efetuar o provisionamento das credenciais e notificar o solicitante (Marketing) e a agência."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-37",
+        "title": "Dúvidas, Orientações de Uso e Localização de Campos/Módulos em Formulários e Sistemas",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Colaborador(a) apresenta dúvida de utilização, orientação operacional ou dificuldade para localizar campos, seções, botões ou módulos em formulários do GLPI (Formcreator) ou sistemas corporativos (SGH, HRP, PEP, Benner, etc.), onde o recurso já existe e encontra-se ativo na aplicação mas passou desapercebido pelo usuário ou requer esclarecimento.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
+          "Verificar no formulário ou sistema reportado (ex.: Formcreator do GLPI, SGH Spdata, ERP HRP) se a funcionalidade, campo ou módulo já existe e está ativo.",
+          "Identificar a localização exata do recurso (ex.: última seção do formulário, menu específico, barra de ferramentas ou rodapé da tela).",
+          "Responder ao solicitante com orientação clara, didática e passo a passo indicando onde localizar e como utilizar o campo ou rotina desejada.",
+          "Caso a disposição do campo esteja gerando confusão frequente entre os usuários (questão de UX/layout), registrar sugestão de melhoria junto à equipe de Desenvolvimento para reposicionamento ou destaque do campo.",
+          "Solicitar ao usuário confirmação do teste/localização e concluir o atendimento."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42813 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Juliano Melo",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42272 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > DATA DE ALTA",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, implementação concluída.\n\n\r\nData da alta\n\n\r\nReferente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.\n\n\r\nAtualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da",
+        "steps": [
+          "Bom dia, implementação concluída.",
+          "Data da alta",
+          "Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.",
+          "Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada.",
+          "Vale ressaltar que a funcionalidade verifica previamente as contas que já estão cadastradas no Controle de Contas. Dessa forma, somente as contas que ainda não possuem cadastro serão incluídas automaticamente, evitando registros duplicados.",
+          "Em relação às contas de atendimento externo, não haverá impacto nesse processo, pois elas já são criadas no SPDATA com a data de entrada e a data de alta no mesmo dia. Sendo assim, essas contas estarão aptas para serem identificadas normalmente pelo processamento automático, sem risco de ficarem pendentes por ausência da informação de alta."
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-41) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-37)",
+    "resolution_steps": [
+      "[PB-UNI-41] Avaliar o escopo de serviços de marketing digital contratados junto à agência Urucum Digital (contato@urucumdigital.com.br).",
+      "[PB-UNI-41] Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil), que restringe contas administrativas a domínios institucionais '@unimed'.",
+      "[PB-UNI-41] Alinhar com o administrador da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de terceiro para a agência ou perfil restrito de edição.",
+      "[PB-UNI-41] Manter o chamado em status 'Pendente' aguardando o retorno e direcionamento da gestão do portal.",
+      "[PB-UNI-41] Após a deliberação, efetuar o provisionamento das credenciais e notificar o solicitante e a agência."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Juliano Augusto de Melo** (Marketing) solicita liberação de acesso ao **Portal Unimed (Gerenciador do Site / CMS)** para a agência terceirizada **Urucum Digital** (contato@urucumdigital.com.br) para desenvolvimento de Landing Pages, integração de CRM, Google Tag Manager e campanhas de tráfego pago. A equipe de T.I. (Luiz Fernando Piantino) já realizou alinhamento inicial pontuando que o portal exige domínios institucionais \"@unimed\", mantendo o ticket em status Pendente aguardando retorno do gestor da plataforma (Raphael) para definir a viabilidade de credencial corporativa.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-41) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-37)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-41] Avaliar o escopo de serviços de marketing digital contratados junto à agência Urucum Digital (contato@urucumdigital.com.br).\n  2. [PB-UNI-41] Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil), que restringe contas administrativas a domínios institucionais '@unimed'.\n  3. [PB-UNI-41] Alinhar com o administrador da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de terceiro para a agência ou perfil restrito de edição.\n  4. [PB-UNI-41] Manter o chamado em status 'Pendente' aguardando o retorno e direcionamento da gestão do portal.\n  5. [PB-UNI-41] Após a deliberação, efetuar o provisionamento das credenciais e notificar o solicitante e a agência.",
+    "public_reply_draft": "Olá, Juliano! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **Urucum Digital** (contato@urucumdigital.com.br).\n\nConforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos '@unimed'. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\nO ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   }

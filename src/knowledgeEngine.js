@@ -218,6 +218,18 @@ export class KnowledgeEngine {
           normTicket
         ));
 
+    const isUnlockAccount =
+      /\b(desbloque|desbloquear|desbloqueio|conta bloqueada|usuario bloqueado|usuário bloqueado)\b/i.test(
+        normTicket
+      );
+
+    const isExternalAgencyOrPortal =
+      (/\b(urucum|ag[eê]ncia|marketing digital)\b/i.test(normTicket) &&
+       /\b(portal unimed|gerenciador|site|plataforma do nosso site)\b/i.test(normTicket)) ||
+      (/\bportal unimed\b/i.test(normTicket) &&
+       /\b(site|gerenciador|landing pages?|google tag manager|pixel meta)\b/i.test(normTicket) &&
+       /\b(empresa|ag[eê]ncia|terceir|extern[ao])\b/i.test(normTicket));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -299,18 +311,42 @@ export class KnowledgeEngine {
             );
 
           const isEmailManagement =
-            /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|email marketing|marketing@|jornalismo@)\b/i.test(
+            !isExternalAgencyOrPortal &&
+            (/\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|marketing@|jornalismo@)\b/i.test(
               normTicket
             ) ||
             (/\b(e-mail|email)\b/i.test(normTicket) &&
+              !/\b(e-?mail marketing|ferramenta de e-?mail marketing)\b/i.test(normTicket) &&
               /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
                 normTicket
               ) &&
-              /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket));
+              /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket)));
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal) {
             continue;
           }
+        }
+        // Evita parear PB-UNI-11 (Bloqueio de Contas) quando o chamado trata de DESBLOQUEIO ou não trata de bloqueio/desligamento
+        if (
+          pb.id === "PB-UNI-11" &&
+          (isUnlockAccount ||
+            !/\b(bloquear|bloqueio|desligamento|desligada|afastamento|ferias)\b/i.test(normTicket))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-40 (Desbloqueio de Contas) quando o chamado NÃO trata de desbloqueio
+        if (
+          pb.id === "PB-UNI-40" &&
+          !isUnlockAccount
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-41 (Acesso Agência / Portal Unimed) quando o chamado NÃO trata de agência externa ou gerenciador do portal
+        if (
+          pb.id === "PB-UNI-41" &&
+          !isExternalAgencyOrPortal
+        ) {
+          continue;
         }
         // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
         if (
@@ -611,14 +647,16 @@ export class KnowledgeEngine {
           score = Math.max(score, 0.90);
         }
         const isEmailMgmt =
-          /\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|email marketing|marketing@|jornalismo@)\b/i.test(
+          !isExternalAgencyOrPortal &&
+          (/\b(redirecion|redirecionamento|redirecionar|redirecionadas|encaminh|encaminhamento|encaminhar|caixa departamental|caixa compartilhada|marketing@|jornalismo@)\b/i.test(
             normTicket
           ) ||
           (/\b(e-mail|email)\b/i.test(normTicket) &&
+            !/\b(e-?mail marketing|ferramenta de e-?mail marketing)\b/i.test(normTicket) &&
             /\b(marketing|jornalismo|financeiro|compras|faturamento|recurso|ouvidoria|contato|recepcao|secretaria)\b/i.test(
               normTicket
             ) &&
-            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket));
+            /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket)));
         if (
           pb.id === "PB-UNI-38" &&
           isEmailMgmt
@@ -628,6 +666,18 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-39" &&
           isLabelAppOrDesktopShortcut
+        ) {
+          score = Math.max(score, 0.95);
+        }
+        if (
+          pb.id === "PB-UNI-40" &&
+          isUnlockAccount
+        ) {
+          score = Math.max(score, 0.95);
+        }
+        if (
+          pb.id === "PB-UNI-41" &&
+          isExternalAgencyOrPortal
         ) {
           score = Math.max(score, 0.95);
         }
@@ -720,6 +770,24 @@ export class KnowledgeEngine {
       const learnedList = loadLearnedFeedback();
       for (const mem of learnedList) {
         if (String(mem.ticket_id) === String(ticket.id)) continue;
+        // Evita parear memórias de onboarding interno ou acessos genéricos quando o chamado trata de agência externa / gerenciador do portal
+        if (
+          isExternalAgencyOrPortal &&
+          !/\b(urucum|ag[eê]ncia|portal unimed|gerenciador do site)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de onboarding ou bloqueio quando o chamado trata de desbloqueio de contas
+        if (
+          isUnlockAccount &&
+          !/\b(desbloque|desbloquear|desbloqueio)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
         // Evita parear memórias de outros sistemas (ex: PEP / Dalete) quando o chamado é de clínicas / Web Saúde
         if (
           /\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(normTicket) &&

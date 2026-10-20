@@ -1416,5 +1416,67 @@
       "Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao aplicativo de impressão de etiquetas de identificação da cobrança para o seu computador e o da Izangela (setor {setor}).\n\nComo o problema decorre do aplicativo/atalho não estar visível na Área de Trabalho, nossa equipe técnica precisa realizar o acesso remoto nas duas estações para restaurar o atalho e validar a inicialização do software. Você poderia nos informar:\n1. O **ID do HopToDesk** do seu computador e o **ID do HopToDesk** do computador da **Izangela**?\n2. Caso saiba, qual é o **nome do aplicativo de etiquetas** que vocês utilizavam?\n\nAssim que nos enviar os IDs, já conectaremos remotamente nas máquinas para normalizar o acesso e validar a impressão!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-40",
+    "title": "Desbloqueio de Contas e Reset de Senha (GIU / Portal Unimed / AD / Sistemas Corporativos)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": [
+      "desbloqueio",
+      "desbloquear",
+      "conta bloqueada",
+      "usuario bloqueado",
+      "usuário bloqueado",
+      "giu",
+      "portal unimed",
+      "desbloqueio de conta",
+      "desbloqueio de contas",
+      "reset de senha",
+      "redefinir senha",
+      "entre em contato com o administrador"
+    ],
+    "symptoms": "Colaborador(a) relata que sua conta/credencial de acesso está bloqueada (com mensagem de usuário bloqueado ao tentar login no GIU, Portal Unimed, Active Directory ou outros sistemas), demandando intervenção no console administrativo para desbloqueio ou redefinição de senha.",
+    "required_info": [],
+    "resolution_steps": [
+      "Manter a categoria no GLPI em T.I > ST > Acesso e Permissões > Desbloqueio de Contas (ID 76).",
+      "Acessar o console de administração do sistema indicado (ex.: GIU / Gestão de Identidades Unimed ou Active Directory - AD).",
+      "Localizar a conta do colaborador pelo CPF ou login informado no formulário do chamado.",
+      "Verificar a flag de bloqueio da credencial (Account is locked out / Usuário bloqueado) e aplicar o desbloqueio imediato da conta.",
+      "Caso necessário, gerar senha temporária ou disparar link de redefinição de senha para o e-mail cadastrado.",
+      "Responder ao colaborador no GLPI confirmando o desbloqueio e solicitando que realize um novo teste de autenticação."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desbloqueio da sua conta** no **{sistema}**.\n\nTodos os dados cadastrais necessários (Nome, CPF e setor) já constam informados e nossa equipe de Suporte Técnico já está acessando o console administrativo para realizar o desbloqueio da sua credencial.\n\nAssim que o desbloqueio for concluído no sistema, avisaremos por aqui para que você possa efetuar o login!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-41",
+    "title": "Acesso de Agência Externa / Prestador Terceirizado ao Gerenciador do Portal Unimed / Site Institucional",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": [
+      "portal unimed",
+      "gerenciador do site",
+      "site institucional",
+      "agencia",
+      "agência",
+      "marketing digital",
+      "urucum",
+      "terceiro",
+      "prestador",
+      "landing pages",
+      "google tag manager",
+      "pixel meta",
+      "google analytics",
+      "dominio unimed",
+      "domínio unimed"
+    ],
+    "symptoms": "Setor de Marketing ou área de negócio solicita acesso para agência de publicidade/marketing digital terceira (ex.: Urucum Digital) ao gerenciador/CMS da plataforma do site institucional (Portal Unimed / Liferay), esbarrando na restrição de segurança e governança que exige contas vinculadas a domínios @unimed institucionais.",
+    "required_info": [],
+    "resolution_steps": [
+      "Avaliar o escopo de serviços de marketing digital contratados junto à agência externa (Landing Pages, Google Tag Manager, Pixel Meta, Google Analytics, etc.).",
+      "Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil / Federação), que restringe contas de gestão a domínios oficiais @unimed.",
+      "Alinhar com o administrador/gestor da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de prestador para a agência ou autorização de perfil restrito.",
+      "Manter o chamado em status Pendente aguardando o retorno e direcionamento da gestão do portal.",
+      "Após a deliberação técnica, efetuar o provisionamento das credenciais e notificar o solicitante (Marketing) e a agência."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **{agencia}** ({email_agencia}).\n\nConforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos @unimed. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\nO ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\nPermanecemos à disposição!"
   }
 ]

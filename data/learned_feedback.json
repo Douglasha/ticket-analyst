@@ -1512,5 +1512,27 @@
     ],
     "sufficiency_status": "parcial",
     "created_at": "2026-10-19T13:23:20.687Z"
+  },
+  {
+    "ticket_id": 42956,
+    "title": "Acesso e Permissões  -  Juliano Melo",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "urucum",
+      "portal",
+      "marketing"
+    ],
+    "problem_summary": "O solicitante **Juliano Augusto de Melo** (Marketing) solicita liberação de acesso ao **Portal Unimed (Gerenciador do Site / CMS)** para a agência terceirizada **Urucum Digital** (contato@urucumdigital.com.br) para desenvolvimento de Landing Pages, integração de CRM, Google Tag Manager e campanhas de tráfego pago. A equipe de T.I. (Luiz Fernando Piantino) já realizou alinhamento inicial pontuando que o portal exige domínios institucionais \"@unimed\", mantendo o ticket em status Pendente aguardando retorno do gestor da plataforma (Raphael) para definir a viabilidade de credencial corporativa.",
+    "reply_template": "Olá, Juliano! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **Urucum Digital** (contato@urucumdigital.com.br).\n\nConforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos '@unimed'. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\nO ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-41] Avaliar o escopo de serviços de marketing digital contratados junto à agência Urucum Digital (contato@urucumdigital.com.br).",
+      "[PB-UNI-41] Validar a política de segurança do Portal Unimed (Liferay / Unimed do Brasil), que restringe contas administrativas a domínios institucionais '@unimed'.",
+      "[PB-UNI-41] Alinhar com o administrador da plataforma do portal (Raphael) a viabilidade de provisionar conta corporativa de terceiro para a agência ou perfil restrito de edição.",
+      "[PB-UNI-41] Manter o chamado em status 'Pendente' aguardando o retorno e direcionamento da gestão do portal.",
+      "[PB-UNI-41] Após a deliberação, efetuar o provisionamento das credenciais e notificar o solicitante e a agência."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-20T13:44:26.111Z"
   }
 ]

@@ -1,5 +1,157 @@
 [
   {
+    "id": "Chamado #42930 (Resolvido)",
+    "ticket_id": 42930,
+    "solution_id": 41618,
+    "title": "Manutenção Eletrônica | INSTALAR TELEFONE DA RECEPÇÃO",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Telefone foi instalado e testado.",
+    "keywords": [],
+    "steps": [
+      "Telefone foi instalado e testado."
+    ]
+  },
+  {
+    "id": "Chamado #42926 (Resolvido)",
+    "ticket_id": 42926,
+    "solution_id": 41597,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Auxilio para acesso ao nextcloud",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nFoi orientada a colaboradora a acessar a aplicação pela web. Além disso, configuramos o acesso ao SPdata na estação de trabalho.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Foi orientada a colaboradora a acessar a aplicação pela web. Além disso, configuramos o acesso ao SPdata na estação de trabalho.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42923 (Resolvido)",
+    "ticket_id": 42923,
+    "solution_id": 41595,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > NATALIA DA SILVA OLIVEIRA",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde, acessos bloqueados.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde, acessos bloqueados."
+    ]
+  },
+  {
+    "id": "Chamado #42919 (Resolvido)",
+    "ticket_id": 42919,
+    "solution_id": 41592,
+    "title": "Infraestrutura e Redes > Impressoras > Instalar Impressora no Autolac",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
+    ]
+  },
+  {
+    "id": "Chamado #42912 (Resolvido)",
+    "ticket_id": 42912,
+    "solution_id": 41593,
+    "title": "Suporte Técnico e Service Desk > Apoio a Eventos / Empréstimo de Equipamentos > Heineken",
+    "category": "T.I • Solucionado por anicolau",
+    "is_ti_group": true,
+    "summary": "Retirado.\n\n\r\nAt. te",
+    "keywords": [],
+    "steps": [
+      "Retirado.",
+      "At. te"
+    ]
+  },
+  {
+    "id": "Chamado #42903 (Resolvido)",
+    "ticket_id": 42903,
+    "solution_id": 41586,
+    "title": "Infraestrutura e Redes > Impressoras > IMPRESSORA NAO FUNCIONA",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora foi reconectada ao cabo de rede, foi testada e está funcionando.",
+    "keywords": [],
+    "steps": [
+      "Impressora foi reconectada ao cabo de rede, foi testada e está funcionando."
+    ]
+  },
+  {
+    "id": "Chamado #42899 (Resolvido)",
+    "ticket_id": 42899,
+    "solution_id": 41579,
+    "title": "Infraestrutura e Redes > Instalação e Configuração > Instalação impressora etiquetas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAplicativo restaurado da lixeira\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Aplicativo restaurado da lixeira",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42898 (Resolvido)",
+    "ticket_id": 42898,
+    "solution_id": 41623,
+    "title": "Manutenção Preventiva - NUN-1522-COMERC",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
+    "id": "Chamado #42897 (Resolvido)",
+    "ticket_id": 42897,
+    "solution_id": 41591,
+    "title": "Manutenção Preventiva - DHU-3235-FATURA",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
+    "id": "Chamado #42896 (Resolvido)",
+    "ticket_id": 42896,
+    "solution_id": 41587,
+    "title": "Manutenção Preventiva - DHU-3233-UTINEO",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
     "id": "Chamado #42893 (Resolvido)",
     "ticket_id": 42893,
     "solution_id": 41577,
@@ -31,6 +183,53 @@
       "Computador",
       "Usuário",
       "Instalação"
+    ]
+  },
+  {
+    "id": "Chamado #42886 (Resolvido)",
+    "ticket_id": 42886,
+    "solution_id": 41585,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > PRISCILA ROQUE SANTOS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42885 (Resolvido)",
+    "ticket_id": 42885,
+    "solution_id": 41581,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42873 (Resolvido)",
+    "ticket_id": 42873,
+    "solution_id": 41588,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > ARQGED",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha resetada: Eminas@0256\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha resetada: Eminas@0256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -317,6 +516,21 @@
     "keywords": [],
     "steps": [
       "Computador reparado."
+    ]
+  },
+  {
+    "id": "Chamado #42768 (Resolvido)",
+    "ticket_id": 42768,
+    "solution_id": 41624,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Reserva da nova caixa de som e um microfone nao",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -1081,6 +1295,23 @@
     "steps": [
       "Prezados(as),",
       "Por hora encerraremos este chamado, se necessário nos solicitar novamente, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42472 (Resolvido)",
+    "ticket_id": 42472,
+    "solution_id": 41582,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Novo Formulário",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nFormulário criado, por gentileza validar\n\n\r\nCatálogo de serviços > Financeiro > Compra de Serviço\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Formulário criado, por gentileza validar",
+      "Catálogo de serviços > Financeiro > Compra de Serviço",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
   },
