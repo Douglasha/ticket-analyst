@@ -1478,5 +1478,43 @@
       "Após a deliberação técnica, efetuar o provisionamento das credenciais e notificar o solicitante (Marketing) e a agência."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **{agencia}** ({email_agencia}).\n\nConforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos @unimed. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\nO ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-42",
+    "title": "Duplicidade de Arquivos e Conflitos de Sincronização no Nextcloud (Edição Simultânea / Extensões Concorrentes .xlsx e .ods)",
+    "domain": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+    "keywords": [
+      "nextcloud",
+      "duplicando",
+      "duplicadas",
+      "duplicados",
+      "duplicação",
+      "duplicacao",
+      "planilhas duplicando",
+      "arquivos duplicando",
+      "conflito de sincronização",
+      "conflito",
+      "conflitos",
+      "extensão diferente",
+      "extensao diferente",
+      "ods",
+      "xlsx",
+      "simultaneamente",
+      "simultânea",
+      "simultanea",
+      "abertura simultânea",
+      "educação continuada",
+      "educacao continuada"
+    ],
+    "symptoms": "Colaborador(a) relata que planilhas ou documentos em pasta compartilhada do Nextcloud (ex.: pasta Educação Continuada do RH) estão se multiplicando/duplicando automaticamente (aparecendo cópias com (1), (2) ou versões idênticas com extensões diferentes como .xlsx e .ods), gerando receio de perda de dados.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-42] Acessar a pasta compartilhada no Nextcloud (ex.: Educação Continuada) e inspecionar a listagem dos arquivos duplicados.",
+      "[PB-UNI-42] Identificar arquivos com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) originados pelo uso de programas diferentes pelos colaboradores com o mesmo nome de arquivo.",
+      "[PB-UNI-42] Identificar arquivos de conflito de sincronização gerados pelo Nextcloud Desktop Client (identificados com sufixos (1), (2) ou (conflito)), causados por abertura e salvamento simultâneo do mesmo arquivo em estações locais distintas.",
+      "[PB-UNI-42] Apoiar os colaboradores na identificação da versão mais recente/completa, consolidar as informações e remover com segurança os arquivos redundantes de conflito.",
+      "[PB-UNI-42] Orientar as equipes do setor sobre boas práticas: padronizar o salvamento no formato .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente sem aviso prévio e, caso necessário, utilizar a trava de bloqueio de arquivo (File Locking) ou edição web colaborativa."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à duplicação de planilhas na pasta **{pasta}** do Nextcloud.\n\nAnalisamos a ocorrência e identificamos as duas causas dessa duplicação automática:\n1. **Formatos e Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam softwares diferentes (como Microsoft Excel e LibreOffice Calc), ao salvar a planilha o sistema pode gerar uma nova versão com extensão diferente (ex.: uma em *.xlsx* e outra em *.ods*). Como o nome base é o mesmo, visualmente parecem duplicadas.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e salvam o mesmo arquivo simultaneamente em suas estações pelo atalho sincronizado, o Nextcloud gera cópias de segurança com numeração como *(1)* e *(2)* para evitar que uma alteração sobrescreva e apague os dados da outra.\n\nNossa equipe técnica já está à disposição para auxiliar na limpeza e consolidação dessas versões. Recomendamos:\n- Padronizar o salvamento sempre no formato **.xlsx**;\n- Verificar se outro colega do setor está com a planilha aberta antes de realizar alterações prolongadas ou fechar o arquivo assim que terminar.\n\nPermanecemos à disposição para qualquer apoio técnico no setor!"
   }
 ]

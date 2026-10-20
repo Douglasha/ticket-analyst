@@ -1178,20 +1178,80 @@ export class AIAnalyst {
       suggestedCategory = "T.I > ST > Criação de Usuário / Acessos";
       realUrgency = "Média";
       urgencyReason = "Admissão/onboarding de colaborador aguardando liberação de registro de ponto e portal RH.";
-    } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
+    } else if (
+      (normAll.includes("nextcloud") || normAll.includes("nextclaud") || normAll.includes("nuvem")) &&
+      (/\b(duplic|duplicando|duplicadas|duplicam|duplicaram|duplica[çc][ãa]o|conflito|conflitos|aparecer at[ée] quatro vezes|4 vezes|quatro vezes)\b/i.test(
+        normAll
+      ) ||
+      (/\b(planilha|planilhas|arquivo|arquivos|documento|documentos)\b/i.test(normAll) &&
+       /\b(extens[aã]o|extens[õo]es|ods|xlsx|simultaneamente|simult[aâ]nea|abertura simult[aâ]nea)\b/i.test(normAll)))
+    ) {
+      let folderName = "Educação Continuada";
+      const folderMatch =
+        formFields.descricao?.match(/pasta\s+([A-Za-zÀ-ÖØ-öø-ÿ0-9_\s-]+?)(?:,|\.|\s+no\s+nextcloud|\s+est[aã]o|\n)/i) ||
+        formFields.problema?.match(/pasta\s+([A-Za-zÀ-ÖØ-öø-ÿ0-9_\s-]+?)(?:,|\.|\s+no\s+nextcloud|\s+est[aã]o|\n)/i);
+      if (folderMatch && folderMatch[1]) {
+        folderName = folderMatch[1].trim();
+      }
+      const cleanFolderName = folderName
+        .replace(/\b(?:no nextcloud|est[aã]o.*|se duplicando.*)\b/gi, "")
+        .trim() || "Educação Continuada";
+
+      detectedDomain = "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = `Multiplicação e duplicação de planilhas na pasta compartilhada (${cleanFolderName}) do Nextcloud por conflitos de sincronização e salvamento em extensões concorrentes (.xlsx e .ods).`;
+
       translatedIntent =
-        "Usuária do setor de Auditoria Hospitalar relata falha genérica ao tentar acessar pasta compartilhada no Nextcloud, " +
-        "sem especificar o nome da pasta, se o acesso ocorre via navegador ou cliente de sincronização Desktop, nem a mensagem de erro ou ID do HopToDesk.";
-      detectedDomain = "Acessos, Permissões e Contas";
-      suggestedCategory = "T.I > ST > Acesso a Pastas / Nextcloud";
-      realUrgency = "Média";
-      urgencyReason = "Impacta a rotina individual da colaboradora na Auditoria, mas requer dados básicos para diagnóstico.";
-      sufficiencyStatus = "incompleto";
-      missingInfo = [
-        "Nome exato da pasta compartilhada no Nextcloud que está tentando acessar",
-        "Se o erro ocorre pelo navegador web ou pelo aplicativo Nextcloud sincronizado no Windows",
-        "ID do HopToDesk para acesso remoto e print/texto da mensagem de erro exibida",
+        `A solicitante **${ticket.requester}** (${sectorName}) relata que planilhas da pasta **${cleanFolderName}** no Nextcloud estão se duplicando automaticamente (chegando a aparecer até quatro versões de um mesmo arquivo), gerando receio de corrupção ou perda de informações da equipe. ` +
+        `O diagnóstico técnico identifica duas causas principais: (1) salvamento de planilhas com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) por colaboradores que utilizam suítes diferentes, e (2) geração de versões de conflito pelo Nextcloud Desktop Client (identificadas como '(1)' e '(2)') em decorrência de abertura e edição simultânea dos mesmos arquivos em estações distintas.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-42] Acessar a pasta compartilhada ${cleanFolderName} no Nextcloud e inspecionar os arquivos duplicados.`,
+        `[PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).`,
+        `[PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.`,
+        `[PB-UNI-42] Alinhar com a equipe do setor (${sectorName}) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.`,
+        `[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking).`
       ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu chamado referente à duplicação de planilhas na pasta **${cleanFolderName}** no Nextcloud.\n\n` +
+        `Analisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n` +
+        `1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n` +
+        `2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\n` +
+        `Nossa equipe de T.I. já está à disposição para auxiliar na verificação e remoção das cópias sobressalentes junto ao setor. Como boas práticas para prevenir novos conflitos, recomendamos:\n` +
+        `- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n` +
+        `- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\n` +
+        `Permanecemos à total disposição!`;
+    } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
+      const explicitFolder =
+        formFields.problema?.match(/pasta\s+([^,]+)/i)?.[1]?.trim() ||
+        formFields.descricao?.match(/pasta\s+([^,.\n]+)/i)?.[1]?.trim() ||
+        formFields.aplicacao ||
+        "Nextcloud";
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) relata dificuldade de acesso ou sincronização na pasta **${explicitFolder}** do Nextcloud.`;
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Falha de acesso ou sincronização no serviço de arquivos em nuvem (Nextcloud - ${sectorName}).`;
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Confirmar se o acesso ocorre pelo navegador web (IP/URL) ou pelo aplicativo Nextcloud sincronizado no Windows Explorer",
+        "Informar o ID do HopToDesk da máquina para diagnóstico da sincronização"
+      ];
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu relato referente ao **Nextcloud** (${sectorName}).\n\n` +
+        `Para agilizarmos o diagnóstico, você poderia nos confirmar rapidamente:\n` +
+        `1. O acesso está sendo feito pelo **navegador web** ou pelo **atalho/pasta sincronizada no Windows**?\n` +
+        `2. Qual é o seu **ID do HopToDesk** para conectarmos remotamente e verificarmos a sincronização da estação?\n\n` +
+        `Ficamos no aguardo para apoiar na regularização!`;
     } else if (normAll.includes("xml") && normAll.includes("hash")) {
       const hasAsset = Boolean(formFields.ativo) || /hu\d{3,}|patrimonio\s*:\s*\w+/i.test(normAll);
       translatedIntent =

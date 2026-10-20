@@ -8823,5 +8823,90 @@
     "public_reply_draft": "Olá, Juliano! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso ao **gerenciador do site institucional (Portal Unimed)** para a agência **Urucum Digital** (contato@urucumdigital.com.br).\n\nConforme alinhado pelo técnico Luiz Fernando, as diretrizes de governança e segurança do Portal Unimed restringem a concessão de acessos administrativos exclusivamente a domínios corporativos '@unimed'. O chamado já está em acompanhamento junto ao administrador da plataforma (Raphael) para definirmos a melhor forma de provisionamento (como a criação de um e-mail institucional de prestador ou autorização excepcional).\n\nO ticket permanecerá com o status **Pendente** enquanto finalizamos esse alinhamento técnico interno. Assim que tivermos a definição, confirmaremos imediatamente por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
+  },
+  "42983": {
+    "ticket_id": 42983,
+    "analyzed_at": "20/10/2026 14:58",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) relata que planilhas da pasta **Educação Continuada** no Nextcloud estão se duplicando automaticamente (chegando a aparecer até quatro versões de um mesmo arquivo), gerando receio de corrupção ou perda de informações da equipe. O diagnóstico técnico identifica duas causas principais: (1) salvamento de planilhas com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) por colaboradores que utilizam suítes diferentes, e (2) geração de versões de conflito pelo Nextcloud Desktop Client (identificadas como '(1)' e '(2)') em decorrência de abertura e edição simultânea dos mesmos arquivos em estações distintas.",
+    "detected_domain": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Alta",
+    "urgency_reason": "Multiplicação e duplicação de planilhas na pasta compartilhada (Educação Continuada) do Nextcloud por conflitos de sincronização e salvamento em extensões concorrentes (.xlsx e .ods).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-42",
+        "title": "Duplicidade de Arquivos e Conflitos de Sincronização no Nextcloud (Edição Simultânea / Extensões Concorrentes .xlsx e .ods)",
+        "category": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+        "summary": "Colaborador(a) relata que planilhas ou documentos em pasta compartilhada do Nextcloud (ex.: pasta Educação Continuada do RH) estão se multiplicando/duplicando automaticamente (aparecendo cópias com (1), (2) ou versões idênticas com extensões diferentes como .xlsx e .ods), gerando receio de perda de dados.",
+        "steps": [
+          "[PB-UNI-42] Acessar a pasta compartilhada no Nextcloud (ex.: Educação Continuada) e inspecionar a listagem dos arquivos duplicados.",
+          "[PB-UNI-42] Identificar arquivos com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) originados pelo uso de programas diferentes pelos colaboradores com o mesmo nome de arquivo.",
+          "[PB-UNI-42] Identificar arquivos de conflito de sincronização gerados pelo Nextcloud Desktop Client (identificados com sufixos (1), (2) ou (conflito)), causados por abertura e salvamento simultâneo do mesmo arquivo em estações locais distintas.",
+          "[PB-UNI-42] Apoiar os colaboradores na identificação da versão mais recente/completa, consolidar as informações e remover com segurança os arquivos redundantes de conflito.",
+          "[PB-UNI-42] Orientar as equipes do setor sobre boas práticas: padronizar o salvamento no formato .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente sem aviso prévio e, caso necessário, utilizar a trava de bloqueio de arquivo (File Locking) ou edição web colaborativa."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-54",
+        "title": "O Windows pode bloquear a pré-visualização de PDFs no Explorer",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Às vezes, o Windows pode bloquear a visualização de PDFs no Windows Explorer.\n\n\r\n\n\r\nNesses casos, há duas opções: a primeira é desbloquear arquivo por arquivo, acessando as propriedades do documento e clicando em “Desbloquear”.\n\n\r\n\n\r\n A segunda é desbloquear todos os PDFs da pasta de uma só vez. Para isso, vá até o dir...",
+        "steps": [
+          "Às vezes, o Windows pode bloquear a visualização de PDFs no Windows Explorer.",
+          "Nesses casos, há duas opções: a primeira é desbloquear arquivo por arquivo, acessando as propriedades do documento e clicando em “Desbloquear”.",
+          "A segunda é desbloquear todos os PDFs da pasta de uma só vez. Para isso, vá até o diretório da pasta, clique com o botão direito do mouse e selecione “Abrir no Terminal”.",
+          "Em seguida, cole o comando: Get-ChildItem -Recurse *.pdf | Unblock-File",
+          "Pressione Enter, aguarde um segundo e feche o terminal. Pronto, todos os arquivos estarão desbloqueados para pré-visualização no Windows Explorer.",
+          "🔹 Problema: O Windows pode bloquear a pré-visualização de PDFs no Explorer."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-ACC-01",
+        "title": "Liberação de Acesso a Pastas de Rede / Espelhamento de Perfil (AD)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Usuário solicita acesso a pastas na rede ou pede 'acesso igual ao de outro colaborador'.",
+        "steps": [
+          "Verificar se o chamado possui aprovação do gestor responsável pela área (nunca conceder acesso por 'espelhamento' sem validar grupos sensíveis).",
+          "No Active Directory (dsa.msc), localizar o usuário solicitante e verificar os grupos de segurança atuais na aba 'Membro de' (Member Of).",
+          "Adicionar o usuário ao grupo de segurança correspondente da pasta e orientar o usuário a fazer logoff/login no Windows."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42846 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Compartilhar pasta no nextcloud do computador do laboratório para a SCIH",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "feito por @Moises Conte",
+        "steps": [
+          "feito por @Moises Conte"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-42) + 1ª Camada • Base de Conhecimento GLPI (KB-54)",
+    "resolution_steps": [
+      "[PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.",
+      "[PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).",
+      "[PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.",
+      "[PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.",
+      "[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking)."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) relata que planilhas da pasta **Educação Continuada** no Nextcloud estão se duplicando automaticamente (chegando a aparecer até quatro versões de um mesmo arquivo), gerando receio de corrupção ou perda de informações da equipe. O diagnóstico técnico identifica duas causas principais: (1) salvamento de planilhas com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) por colaboradores que utilizam suítes diferentes, e (2) geração de versões de conflito pelo Nextcloud Desktop Client (identificadas como '(1)' e '(2)') em decorrência de abertura e edição simultânea dos mesmos arquivos em estações distintas.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-42) + 1ª Camada • Base de Conhecimento GLPI (KB-54)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.\n  2. [PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).\n  3. [PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.\n  4. [PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.\n  5. [PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking).",
+    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nNossa equipe de T.I. já está à disposição para auxiliar na verificação e remoção das cópias sobressalentes junto ao setor. Como boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
   }
 }

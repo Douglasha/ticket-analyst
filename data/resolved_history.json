@@ -1,5 +1,39 @@
 [
   {
+    "id": "Chamado #42953 (Resolvido)",
+    "ticket_id": 42953,
+    "solution_id": 41630,
+    "title": "Suporte Técnico e Service Desk > Desbloqueio de Contas > TARCISIO LARA COELHO",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro desbloqueado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro desbloqueado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42950 (Resolvido)",
+    "ticket_id": 42950,
+    "solution_id": 41625,
+    "title": "Verificação do Portal Transparência [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\n\r\n\r\n\r\nExibindo 19 transações... 19 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos\r\n\r\n\r\n \r\n\r\nNr. Solicitação\r\n\r\n \r\n\r\n\r\nNr Transação\r\nTipo de transação\r\nVersão TISS\r\nPrestador\r\nCarteira\r\nPrestador\r\nOperadora\r\nData\r\nDuração(s)\r\nStatus\r\n\r\n\r\n\r\n\r\n\r\n\r",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Exibindo 19 transações... 19 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos",
+      "Nr. Solicitação",
+      "Nr Transação",
+      "Tipo de transação",
+      "Versão TISS"
+    ]
+  },
+  {
     "id": "Chamado #42930 (Resolvido)",
     "ticket_id": 42930,
     "solution_id": 41618,
@@ -29,6 +63,19 @@
     ]
   },
   {
+    "id": "Chamado #42925 (Resolvido)",
+    "ticket_id": 42925,
+    "solution_id": 41644,
+    "title": "Atualizações dos BI's [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
+    ]
+  },
+  {
     "id": "Chamado #42923 (Resolvido)",
     "ticket_id": 42923,
     "solution_id": 41595,
@@ -39,6 +86,19 @@
     "keywords": [],
     "steps": [
       "Boa tarde, acessos bloqueados."
+    ]
+  },
+  {
+    "id": "Chamado #42920 (Resolvido)",
+    "ticket_id": 42920,
+    "solution_id": 41647,
+    "title": "Verificar Atualizações e Submissão da PNGPPD [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Aguardando as novas etapas.",
+    "keywords": [],
+    "steps": [
+      "Aguardando as novas etapas."
     ]
   },
   {
@@ -186,6 +246,19 @@
     ]
   },
   {
+    "id": "Chamado #42888 (Resolvido)",
+    "ticket_id": 42888,
+    "solution_id": 41646,
+    "title": "T.I > SI > Monitoramento e Análise de Segurança > Monitoramento de Antivírus [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "As licenças foram atualizadas.",
+    "keywords": [],
+    "steps": [
+      "As licenças foram atualizadas."
+    ]
+  },
+  {
     "id": "Chamado #42886 (Resolvido)",
     "ticket_id": 42886,
     "solution_id": 41585,
@@ -269,6 +342,19 @@
     "keywords": [],
     "steps": [
       "Suprimentos verificados e recarregados."
+    ]
+  },
+  {
+    "id": "Chamado #42846 (Resolvido)",
+    "ticket_id": 42846,
+    "solution_id": 41650,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Compartilhar pasta no nextcloud do computador do laboratório para a SCIH",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "feito por @Moises Conte",
+    "keywords": [],
+    "steps": [
+      "feito por @Moises Conte"
     ]
   },
   {
@@ -426,6 +512,19 @@
       "Senha excluída e informada a colaboradora Gislaine",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42811 (Resolvido)",
+    "ticket_id": 42811,
+    "solution_id": 41645,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > Erros do Sistema",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Att",
+    "keywords": [],
+    "steps": [
+      "Att"
     ]
   },
   {
@@ -1567,27 +1666,28 @@
   {
     "id": "Chamado #42410 (Resolvido)",
     "ticket_id": 42410,
-    "solution_id": 41134,
+    "solution_id": 41338,
     "title": "Suporte Técnico e Service Desk > Acesso e Permissões > REGINA MITUYO MATSUO DE CARVALHO",
     "category": "T.I • Solucionado por lpiantino",
     "is_ti_group": true,
-    "summary": "caso tenha duvida oriente ela a buscar o setor de TI",
+    "summary": "Feito",
     "keywords": [],
     "steps": [
-      "caso tenha duvida oriente ela a buscar o setor de TI"
+      "Feito"
     ]
   },
   {
     "id": "Chamado #42409 (Resolvido)",
     "ticket_id": 42409,
-    "solution_id": 41135,
+    "solution_id": 41154,
     "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Thatiana Mara valletta da Silveira",
     "category": "T.I • Solucionado por lpiantino",
     "is_ti_group": true,
-    "summary": "caso tenha duvida oriente ela a buscar o setor de TI",
+    "summary": "Nome: TSILVEIRA\n\r\nSenha: audnezcvin",
     "keywords": [],
     "steps": [
-      "caso tenha duvida oriente ela a buscar o setor de TI"
+      "Nome: TSILVEIRA",
+      "Senha: audnezcvin"
     ]
   },
   {

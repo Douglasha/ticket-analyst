@@ -230,6 +230,14 @@ export class KnowledgeEngine {
        /\b(site|gerenciador|landing pages?|google tag manager|pixel meta)\b/i.test(normTicket) &&
        /\b(empresa|ag[eê]ncia|terceir|extern[ao])\b/i.test(normTicket));
 
+    const isNextcloudDuplicationOrConflict =
+      /\bnext\s*cloud\b/i.test(normTicket) &&
+      (/\b(duplic|duplicando|duplicadas|duplicam|duplicaram|duplica[çc][ãa]o|conflito|conflitos|aparecer at[ée] quatro vezes|4 vezes|quatro vezes)\b/i.test(
+        normTicket
+      ) ||
+      (/\b(planilha|planilhas|arquivo|arquivos|documento|documentos)\b/i.test(normTicket) &&
+       /\b(duplic|conflito|extens[aã]o|extens[õo]es|simultaneamente|simult[aâ]nea)\b/i.test(normTicket)));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -346,6 +354,14 @@ export class KnowledgeEngine {
           pb.id === "PB-UNI-41" &&
           !isExternalAgencyOrPortal
         ) {
+          continue;
+        }
+        // Evita parear PB-UNI-02 (Falha de Acesso ao Nextcloud) quando o chamado trata de duplicação/conflito de arquivos no Nextcloud
+        if (pb.id === "PB-UNI-02" && isNextcloudDuplicationOrConflict) {
+          continue;
+        }
+        // Evita parear PB-UNI-42 (Duplicação e Conflitos no Nextcloud) quando o chamado NÃO trata de duplicação/conflito
+        if (pb.id === "PB-UNI-42" && !isNextcloudDuplicationOrConflict) {
           continue;
         }
         // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
@@ -681,6 +697,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.95);
         }
+        if (
+          pb.id === "PB-UNI-42" &&
+          isNextcloudDuplicationOrConflict
+        ) {
+          score = Math.max(score, 0.95);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -783,6 +805,15 @@ export class KnowledgeEngine {
         if (
           isUnlockAccount &&
           !/\b(desbloque|desbloquear|desbloqueio)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de falha de acesso/pasta sumida do Nextcloud (ex.: MEM-#42404, MEM-#42159) quando o chamado trata de duplicação/conflito de arquivos
+        if (
+          isNextcloudDuplicationOrConflict &&
+          !/\b(duplic|conflito|extens[aã]o)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
