@@ -2687,27 +2687,42 @@ export class AIAnalyst {
         `Assim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o|reverter contas)\b/i.test(
+      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|abertura de (?:uma\s+)?contas?|abertura de registros?|ativar (?:a\s+)?contas?|reativar (?:a\s+)?contas?|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o|reverter contas)\b/i.test(
         normAll
       ) ||
-      (normAll.includes("controle de contas") && /\b(remessa|revers[aã]o|reverter)\b/i.test(normAll))) &&
+      (normAll.includes("controle de contas") && /\b(remessa|revers[aã]o|reverter|abertura de|abrir|ativar)\b/i.test(normAll))) &&
       (normAll.includes("controle de contas") ||
         /\b(registro|conta|remessa|atendimento|faturamento)\b/i.test(normCore) ||
         /\b(faturamento|auditoria)\b/i.test(sectorName))
     ) {
       const descText = formFields.descricao || ticket.content || "";
       const appName =
-        formFields.aplicacao ||
-        (normAll.includes("controle de contas")
-          ? "Controle de Contas"
-          : "sistema interno");
+        formFields.aplicacao
+          ? formatPersonName(formFields.aplicacao)
+          : normAll.includes("controle de contas")
+            ? "Controle de Contas"
+            : "sistema interno";
       const isRemessa = /\bremessa\b/i.test(normAll);
       const isConta = !isRemessa && /\bconta\b/i.test(normAll);
       const regMatch =
         descText.match(
-          /(?:registro|conta|remessa|atendimento|n[º°]?)\s*[:#-]?\s*(\d{2,12})/i
+          /(?:registro|conta|remessa|paciente|atendimento|n[º°]?)\s*[:#-]?\s*(\d{2,12})/i
         ) || descText.match(/\b(\d{3,12})\b/);
       const recordNum = regMatch ? regMatch[1] : "";
+      let patientName = "";
+      if (recordNum) {
+        const patMatch = descText.match(
+          new RegExp(`\\b${recordNum}\\s*[-–:]?\\s*([A-ZÀ-Úa-zà-ú]+(?:\\s+[A-ZÀ-Úa-zà-ú]+){1,6})`)
+        );
+        if (patMatch && patMatch[1]) {
+          const candPat = patMatch[1].replace(/\s*[,.\n\r].*$/, "").trim();
+          if (!/\b(no controle|cadastrad|encerrad|favor|obrigad)\b/i.test(candPat)) {
+            patientName = formatPersonName(candPat);
+          }
+        }
+      }
+      const patientInfo = patientName ? ` (Paciente: **${patientName}**)` : "";
+      const patientShort = patientName ? ` - ${patientName}` : "";
       const itemPrep = isRemessa ? "da remessa" : isConta ? "da conta" : "do registro";
       const itemArt = isRemessa ? "a remessa" : isConta ? "a conta" : "o registro";
       const itemLabel = isRemessa ? "remessa" : isConta ? "conta" : "registro";
@@ -2719,22 +2734,22 @@ export class AIAnalyst {
 
       if (recordNum) {
         translatedIntent =
-          `A solicitante **${ticket.requester}** (${sectorName}) solicita a reversão de encerramento / reabertura ${itemPrep} **${recordNum}** no sistema **${appName}**, ` +
+          `A solicitante **${formatPersonName(ticket.requester)}** (${sectorName}) solicita a reversão de encerramento / reabertura ${itemPrep} **${recordNum}**${patientInfo} no sistema **${appName}**, ` +
           `para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.`;
         sufficiencyStatus = "completo";
         missingInfo = [];
         customResolutionSteps = [
           `[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).`,
           `[PB-UNI-28] Acessar o sistema ${appName} com perfil de administração do Faturamento / Service Desk.`,
-          `[PB-UNI-28] Localizar ${itemArt} informad${isRemessa || isConta ? "a" : "o"} (${itemLabel} ${recordNum}) e verificar o status atual de encerramento/fechamento.`,
+          `[PB-UNI-28] Localizar ${itemArt} informad${isRemessa || isConta ? "a" : "o"} (${itemLabel} ${recordNum}${patientShort}) e verificar o status atual de encerramento/fechamento.`,
           `[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no ${appName} para retornar ao status em aberto / em digitação.`,
           `[PB-UNI-28] Confirmar que ${itemArt} está liberad${isRemessa || isConta ? "a" : "o"} para movimentação pelo setor de ${sectorName}.`,
-          `[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido.`
+          `[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída.`
         ];
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à reversão de encerramento ${itemPrep} **${recordNum}** no sistema **${appName}** (${sectorName}).\n\n` +
-          `Os dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\n` +
+          `Recebemos a sua solicitação referente à reabertura / reversão de encerramento ${itemPrep} **${recordNum}**${patientInfo} no sistema **${appName}** (${sectorName}).\n\n` +
+          `Os dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\n` +
           `Assim que o processo for concluído, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       } else {
@@ -3410,8 +3425,8 @@ export class AIAnalyst {
             /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
-          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
-            /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181|revers[aã]o)\b/i.test(
+          (!/\b(reabrir|reabertura|abertura de (?:uma\s+)?contas?|abertura de registros?|abrir conta|abrir contas|abrir registro|ativar (?:a\s+)?contas?|reativar (?:a\s+)?contas?|encerrad[ao] erroneamente|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
+            /\b(reabrir|reabertura|abertura de (?:uma\s+)?contas?|abrir conta|abrir contas|abrir registro|1411181|revers[aã]o)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
           (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&

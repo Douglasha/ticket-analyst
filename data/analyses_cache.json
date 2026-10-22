@@ -9448,75 +9448,69 @@
   },
   "43103": {
     "ticket_id": 43103,
-    "analyzed_at": "22/10/2026 15:09",
+    "analyzed_at": "22/10/2026 15:47",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O solicitante **ANA LUIZA TEODORO CAMPOS** (H Faturamento) abriu o chamado: \"Boa tarde, gostaria solicitar a abertura de uma conta no controle de contas, Paciente: 1414064 - ZILDA CANDIDA DE JESUS BELMIRO\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#43047).",
-    "detected_domain": "Suporte Técnico Geral / Service Desk",
-    "suggested_category": "T.I > ST > Solicitação Diversa",
+    "translated_intent": "A solicitante **Ana Luiza Teodoro Campos** (H Faturamento) solicita a reversão de encerramento / reabertura da conta **1414064** (Paciente: **Zilda Candida de Jesus Belmiro**) no sistema **Controle de Contas**, para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
     "real_urgency": "Média",
-    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
-    "sufficiency_status": "parcial",
-    "missing_info": [
-      "O ID do HopToDesk da nova máquina de Weberson;",
-      "Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?"
-    ],
+    "urgency_reason": "Reversão de encerramento / reabertura da conta no sistema Controle de Contas solicitada pelo setor H Faturamento para continuidade do faturamento/auditoria.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
     "knowledge_matches": [
       {
         "layer": "learned_memory",
         "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#43047",
-        "title": "Sistemas Operacionais  -  Pasta Compartilhada - Unidrive",
-        "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+        "source_id": "MEM-#42249",
+        "title": "Solicitação Diversa  -  ativar conta no controle de contas",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
         "steps": [
-          "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
-          "[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.",
-          "[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
-          "[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.",
-          "[PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
-          "[PB-UNI-44] Validar o acesso aos arquivos com o colaborador e concluir o chamado no GLPI."
+          "[MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+          "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
         ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
-        "required_info": [
-          "O ID do HopToDesk da nova máquina de Weberson;",
-          "Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?"
-        ],
-        "sufficiency_status": "parcial",
-        "custom_instruction": "Quando o solicitante pedir para instalar o Unidrive (Nextcloud Desktop Client) em computador novo ou após troca de máquina, sugerir reclassificação de Sistemas Operacionais para Aplicativos, identificar o colaborador e solicitar o ID do HopToDesk da nova máquina e disponibilidade.",
-        "score": 0.85
-      },
-      {
-        "layer": "learned_memory",
-        "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#42953",
-        "title": "Desbloqueio de Contas  -  TARCISIO LARA COELHO",
-        "category": "T.I > ST > Acesso e Permissões > Desbloqueio de Contas",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desbloqueio da sua conta** no **GIU**.\n\nTodos os dados cadastrais necessários (Nome, CPF e setor) já constam informados e nossa equipe de Suporte Técnico já está acessando o console administrativo para realizar o desbloqueio da sua credencial.\n\nAssim que o desbloqueio for concluído no sistema, avisaremos por aqui para que você possa efetuar o login!\n\nPermanecemos à disposição!",
-        "steps": [
-          "[PB-UNI-40] Acessar o console de administração do GIU (ex.: GIU / Gestão de Identidades Unimed ou Active Directory).",
-          "[PB-UNI-40] Localizar a conta do colaborador TARCISIO LARA COELHO (CPF: 08036823608) e verificar o status de bloqueio da credencial.",
-          "[PB-UNI-40] Realizar o desbloqueio da conta no console e, se necessário, reenviar e-mail de redefinição de senha para o endereço cadastrado.",
-          "[PB-UNI-40] Responder ao colaborador orientando nova tentativa de login no portal e validar a normalização do acesso."
-        ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desbloqueio da sua conta** no **GIU**.\n\nTodos os dados cadastrais necessários (Nome, CPF e setor) já constam informados e nossa equipe de Suporte Técnico já está acessando o console administrativo para realizar o desbloqueio da sua credencial.\n\nAssim que o desbloqueio for concluído no sistema, avisaremos por aqui para que você possa efetuar o login!\n\nPermanecemos à disposição!",
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
         "required_info": [],
         "sufficiency_status": "completo",
         "custom_instruction": "",
-        "score": 0.85
+        "score": 0.9
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-28",
+        "title": "Reabertura de Registro, Conta ou Remessa Encerrada Erroneamente — Reversão de Encerramento (Controle de Contas / SGH / Faturamento)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro, conta hospitalar ou remessa que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH) ou para reversão de processo de encerramento, permitindo novos lançamentos, estornos e conferência.",
+        "steps": [
+          "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+          "[PB-UNI-28] Acessar o sistema Controle de Contas (ou SGH) com perfil de administração do Faturamento / Service Desk.",
+          "[PB-UNI-28] Localizar o registro, conta ou remessa informada pelo solicitante e verificar o status atual de encerramento/fechamento.",
+          "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no sistema para retornar ao status em aberto / em digitação.",
+          "[PB-UNI-28] Confirmar que o item (registro, conta ou remessa) está liberado para movimentação e conferência pelo setor solicitante.",
+          "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
+        ],
+        "score": 0.95
       },
       {
         "layer": "learned_memory",
         "layer_label": "Memória Contínua • Aprendido com o Analista",
-        "source_id": "MEM-#41992",
-        "title": "Aplicativos  -  ACESSOS CONTROLE DE CONTAS",
-        "category": "T.I > ST > Acesso e Permissões",
-        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "source_id": "MEM-#42198",
+        "title": "Solicitação Diversa  -  ABRIR CONTAS",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
         "steps": [
-          "[PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
-          "[PB-UNI-15] Acessar o painel administrativo de permissões do sistema solicitado (ex: Controle de Contas) e localizar o login/usuário do(a) solicitante.",
-          "[PB-UNI-15] Vincular a unidade/perfil solicitado (ex: unidade Piumhi) ao usuário do(a) colaborador(a) conforme atribuição do setor (ex: H Faturamento / Auditoria) e confirmar a liberação no chamado."
+          "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
         ],
-        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para vincular o sistema **Controle de Contas (unidade Piumhi)** ao seu usuário.\n\nNossa equipe técnica já está realizando a vinculação da permissão no seu perfil e, assim que concluído, confirmaremos por aqui!",
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
         "required_info": [],
         "sufficiency_status": "completo",
         "custom_instruction": "",
@@ -9538,17 +9532,17 @@
         "score": 0.51
       }
     ],
-    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#43047) + Memória Contínua • Aprendido com o Analista (MEM-#42953)",
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42249) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)",
     "resolution_steps": [
-      "[Aprendido em MEM-#43047] Quando o solicitante pedir para instalar o Unidrive (Nextcloud Desktop Client) em computador novo ou após troca de máquina, sugerir reclassificação de Sistemas Operacionais para Aplicativos, identificar o colaborador e solicitar o ID do HopToDesk da nova máquina e disponibilidade.",
-      "[MEM-#43047] [PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
-      "[MEM-#43047] [PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.",
-      "[MEM-#43047] [PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
-      "[MEM-#43047] [PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.",
-      "[MEM-#43047] [PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer."
+      "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar a conta informada (conta 1414064 - Zilda Candida de Jesus Belmiro) e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que a conta está liberada para movimentação pelo setor de H Faturamento.",
+      "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **ANA LUIZA TEODORO CAMPOS** (H Faturamento) abriu o chamado: \"Boa tarde, gostaria solicitar a abertura de uma conta no controle de contas, Paciente: 1414064 - ZILDA CANDIDA DE JESUS BELMIRO\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#43047).\n\nClassificação Sugerida: T.I > ST > Solicitação Diversa | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#43047) + Memória Contínua • Aprendido com o Analista (MEM-#42953)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - O ID do HopToDesk da nova máquina de Weberson;\n  - Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#43047] Quando o solicitante pedir para instalar o Unidrive (Nextcloud Desktop Client) em computador novo ou após troca de máquina, sugerir reclassificação de Sistemas Operacionais para Aplicativos, identificar o colaborador e solicitar o ID do HopToDesk da nova máquina e disponibilidade.\n  2. [MEM-#43047] [PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.\n  3. [MEM-#43047] [PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.\n  4. [MEM-#43047] [PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.\n  5. [MEM-#43047] [PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.\n  6. [MEM-#43047] [PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
-    "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ana Luiza Teodoro Campos** (H Faturamento) solicita a reversão de encerramento / reabertura da conta **1414064** (Paciente: **Zilda Candida de Jesus Belmiro**) no sistema **Controle de Contas**, para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Reversão de Processos / Ajustes Operacionais | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42249) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-28)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).\n  2. [PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.\n  3. [PB-UNI-28] Localizar a conta informada (conta 1414064 - Zilda Candida de Jesus Belmiro) e verificar o status atual de encerramento/fechamento.\n  4. [PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.\n  5. [PB-UNI-28] Confirmar que a conta está liberada para movimentação pelo setor de H Faturamento.\n  6. [PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída.",
+    "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura / reversão de encerramento da conta **1414064** (Paciente: **Zilda Candida de Jesus Belmiro**) no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   }

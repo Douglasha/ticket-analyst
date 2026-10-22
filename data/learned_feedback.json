@@ -1,5 +1,32 @@
 [
   {
+    "ticket_id": 43103,
+    "title": "Solicita??o Diversa - Abertura de conta",
+    "category": "T.I > ST > Revers?o de Processos / Ajustes Operacionais",
+    "keywords": [
+      "controle de contas",
+      "abertura de conta",
+      "abertura de uma conta",
+      "reabertura",
+      "faturamento",
+      "paciente"
+    ],
+    "problem_summary": "Solicitante Ana Luiza Teodoro Campos (H Faturamento) solicita a abertura (reabertura/revers?o de encerramento) da conta 1414064 da paciente Zilda Candida de Jesus Belmiro no sistema Controle de Contas.",
+    "custom_instruction": "Pedidos do H Faturamento solicitando 'abertura de conta' ou 'abertura de uma conta' no Controle de Contas com n?mero de conta/registro e nome do paciente referem-se ? reabertura/revers?o de encerramento de conta (PB-UNI-28). Sugerir reclassifica??o para 'T.I > ST > Revers?o de Processos / Ajustes Operacionais' (ID 163), classificar como COMPLETO e confirmar a libera??o da conta informada.",
+    "reply_template": "Ol?, {solicitante}! Tudo bem?\n\nRecebemos a sua solicita??o referente ? abertura/reabertura da conta **1414064** da paciente **Zilda Candida de Jesus Belmiro** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados j? foram validados na triagem e nossa equipe t?cnica est? realizando a revers?o do encerramento / reabertura da conta no sistema para que volte a ficar dispon?vel para movimenta??o e confer?ncia no setor.\n\nAssim que o processo for conclu?do, confirmaremos por aqui!\n\nPermanecemos ? disposi??o!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar a conta informada (conta 1414064 - Zilda Candida de Jesus Belmiro) e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que a conta está liberada para movimentação pelo setor de H Faturamento.",
+      "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-22T18:47:29.272Z"
+  },
+  {
     "ticket_id": 43019,
     "title": "Aplicativos  -  Etiquetas",
     "category": "T.I > ST > Instalação/Configuração > Aplicativos",
@@ -36,9 +63,9 @@
       "pasta",
       "compartilhada",
       "unidrive",
-      "gostaria",
-      "solicitar",
+      "nextcloud",
       "instalem",
+      "instalar",
       "computador",
       "weberson"
     ],
@@ -834,7 +861,7 @@
   {
     "ticket_id": 42249,
     "title": "Solicitação Diversa  -  ativar conta no controle de contas",
-    "category": "T.I > ST > Solicitação Diversa",
+    "category": "T.I > ST > Revers?o de Processos / Ajustes Operacionais",
     "keywords": [
       "ativar",
       "conta",
@@ -948,7 +975,7 @@
   {
     "ticket_id": 42198,
     "title": "Solicitação Diversa  -  ABRIR CONTAS",
-    "category": "T.I > ST > Solicitação Diversa",
+    "category": "T.I > ST > Revers?o de Processos / Ajustes Operacionais",
     "keywords": [
       "abrir",
       "contas",
@@ -1724,11 +1751,11 @@
       "duvidas",
       "orientacoes",
       "senha",
-      "gostaria",
+      "trafegando",
       "orientacao",
       "lancando",
-      "alguns",
-      "dias"
+      "intercambio",
+      "procedimento"
     ],
     "problem_summary": "Boa tarde, por gentileza gostaria de uma orientação, estou lançando a alguns dias um procedimento no qual a senha não está trafegando, poderia verificar por gentileza. \nSenha: 206867125",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos a análise, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",

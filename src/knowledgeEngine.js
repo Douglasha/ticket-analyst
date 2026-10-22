@@ -26,7 +26,7 @@ const STOPWORDS = new Set([
   "resolucao", "problemas", "problema", "prezados", "prezado", "prezada", "gentileza",
   "compreensao", "agradeco", "atencao", "presteza", "atenciosamente", "att", "obrigado",
   "obrigada", "segue", "hoje", "data", "colaboradora", "colaborador", "devido", "certa",
-  "certo", "vossa", "arquivos", "arquivo", "print"
+  "certo", "vossa", "arquivos", "arquivo", "print", "gostaria", "solicitar", "poderia", "poderiam"
 ]);
 
 export function normalizeText(text) {
@@ -269,10 +269,10 @@ export class KnowledgeEngine {
       (/\b(procedimento|guia)\b/i.test(normTicket) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normTicket));
 
     const isReopenOrRevertAccount =
-      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o da remessa|revers[aã]o no controle de contas|reverter contas|contas reabertas|processo revertido)\b/i.test(
+      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|abertura de (?:uma\s+)?contas?|abertura de registros?|ativar (?:a\s+)?contas?|reativar (?:a\s+)?contas?|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o da remessa|revers[aã]o no controle de contas|reverter contas|contas reabertas|processo revertido)\b/i.test(
         normTicket
       ) ||
-      (/\bcontrole de contas\b/i.test(normTicket) && /\b(remessa|revers[aã]o|reverter|voltar remessa)\b/i.test(normTicket))) &&
+      (/\bcontrole de contas\b/i.test(normTicket) && /\b(remessa|revers[aã]o|reverter|voltar remessa|abertura de|abrir|ativar)\b/i.test(normTicket))) &&
       !/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|encaminhamento autom[aá]tico)\b/i.test(
         normTicket
       );
@@ -943,6 +943,24 @@ export class KnowledgeEngine {
         if (
           isNextcloudInstallOrUnidrive &&
           !/\b(instalar|instala[çc][ãa]o|unidrive)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Unidrive / Nextcloud (ex: MEM-#43047) quando o chamado NÃO cita Unidrive ou Nextcloud
+        if (
+          !/\b(unidrive|uni\s*drive|nextcloud|nextclaud|next\s*cloud)\b/i.test(normTicket) &&
+          /\b(unidrive|uni\s*drive|nextcloud|nextclaud|next\s*cloud)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Desbloqueio de Contas (ex: MEM-#42953) quando o chamado NÃO trata de desbloqueio
+        if (
+          !isUnlockAccount &&
+          /\b(desbloqueio|desbloquear|conta bloqueada|usuario bloqueado)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
