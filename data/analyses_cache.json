@@ -9003,5 +9003,98 @@
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },
-  "undefined": 43051
+  "43051": {
+    "ticket_id": 43051,
+    "analyzed_at": "22/10/2026 08:07",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Viviane Souza** (Nucleo Passos) solicita cadastro e liberação de acesso ao **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)** para 4 profissionais de saúde (Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis) devido à demanda assistencial da unidade. O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência). A equipe de T.I. já adicionou andamento solicitando essas informações e o ticket permanece como Pendente aguardando retorno.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "real_urgency": "Média",
+    "urgency_reason": "Cadastro de profissionais de saúde no Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar) para atendimento assistencial.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata",
+      "Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)",
+      "Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)",
+      "Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-43",
+        "title": "Cadastro de Profissionais de Saúde no Prontuário do Hospital (Sistema SPdata / PEP Hospitalar)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro de um ou mais profissionais de saúde (médicos, fisioterapeutas, terapeutas, psicólogos, enfermeiros) para atuação e evolução clínica no Prontuário do Hospital (sistema SPdata / PEP Hospitalar), frequentemente enviada de forma agrupada por setores/núcleos externos apenas com nome e CPF, faltando os dados cadastrais clínicos obrigatórios.",
+        "steps": [
+          "[PB-UNI-43] Identificar todos os profissionais listados no chamado (tanto no formulário principal quanto nas observações) para cadastro no sistema hospitalar.",
+          "[PB-UNI-43] Verificar se o sistema indicado como Prontuário do hospital refere-se ao SGH Spdata (módulo assistencial / PEP Hospitalar).",
+          "[PB-UNI-43] Solicitar os dados cadastrais clínicos faltantes para cada profissional: Nome completo, Data de nascimento, Especialidade/Função, Conselho Profissional (CRM/COREN/CREFITO/CRP com UF) e profissional de referência.",
+          "[PB-UNI-43] Manter o chamado com status Pendente aguardando o retorno com os dados clínicos obrigatórios.",
+          "[PB-UNI-43] Após o recebimento, acessar o sistema SPdata, efetuar o cadastro profissional/operador de cada pessoa e replicar as permissões de atendimento hospitalar."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42179 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Liliane Alves de Souza",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41945 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Maria Alves Andrade",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nCadastro realizado conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Cadastro realizado conforme solicitado",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-29",
+        "title": "Solicitar Certificado SafeWeb",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "1. Objetivo\n\n\r\nDescrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.\n\n\r\n \n\n\r\n2. Âmbito de aplicação\n\n\r\nEste documento aplica-se a todos que precisem...",
+        "steps": [
+          "1. Objetivo",
+          "Descrever o procedimento para solicitação certificado digital SafeWeb para os profissionais (Médicos, Enfermeiros, Técnicos em Enfermagem, fisioterapeutas, psicólogos, etc) que utilizam o prontuário eletrônico PEP SGH Spdata.",
+          "2. Âmbito de aplicação",
+          "Este documento aplica-se a todos que precisem utilizar a ferramenta.",
+          "3. Definições e siglas",
+          "PEP: Prontuário Eletrônico do Paciente"
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-43) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).",
+      "[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.",
+      "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).",
+      "[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.",
+      "[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) solicita cadastro e liberação de acesso ao **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)** para 4 profissionais de saúde (Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis) devido à demanda assistencial da unidade. O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência). A equipe de T.I. já adicionou andamento solicitando essas informações e o ticket permanece como Pendente aguardando retorno.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Criação de Usuários | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-43) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata\n  - Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)\n  - Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)\n  - Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).\n  2. [PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.\n  3. [PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).\n  4. [PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.\n  5. [PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional** (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM);\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  }
 }
