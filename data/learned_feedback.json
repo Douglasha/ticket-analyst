@@ -1,23 +1,54 @@
 [
   {
-    "ticket_id": 43047,
-    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Pasta Compartilhada - Unidrive",
+    "ticket_id": 43019,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Etiquetas",
     "category": "T.I > ST > Instalação/Configuração > Aplicativos",
     "keywords": [
-      "unidrive",
-      "nextcloud",
-      "instalacao",
-      "aplicativo",
-      "weberson",
-      "departamento pessoal",
-      "pasta compartilhada",
+      "etiquetas",
+      "arquivo etiquetas",
+      "aplicativo etiquetas",
+      "imprimir",
+      "nao consigo imprimir",
+      "edilea",
+      "cadastro",
       "hoptodesk"
     ],
-    "problem_summary": "Solicitação de instalação e configuração do Unidrive (Nextcloud Desktop Client) no computador do colaborador Weberson (Departamento Pessoal) após troca de computador.",
-    "reply_template": "Olá, Joyce! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "problem_summary": "Problema no arquivo/aplicativo de Etiquetas no setor de Cadastro, impedindo a colaboradora Ediléa de imprimir etiquetas.",
+    "reply_template": "Olá, Ediléa! Tudo bem?\n\nRecebemos o seu relato referente ao problema no arquivo/aplicativo de **Etiquetas** (Cadastro) e à impossibilidade de imprimir.\n\nNossa equipe de Suporte Técnico já está pronta para verificar a situação e restabelecer o funcionamento do arquivo/aplicativo. Para que possamos nos conectar à sua estação de trabalho, você poderia nos informar:\n1. O seu **ID do HopToDesk** para acesso remoto;\n2. Aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na verificação e teste de impressão!\n\nPermanecemos à disposição!",
     "required_info": [
-      "ID do HopToDesk da nova estação de trabalho de Weberson para conexão remota da T.I.",
-      "Confirmação de disponibilidade na máquina para realizarmos a instalação do aplicativo e sincronização das pastas do setor (Departamento Pessoal)"
+      "ID do HopToDesk do computador de Ediléa para conexão remota da equipe de T.I.",
+      "Informar se aparece alguma mensagem de erro ao tentar imprimir ou qual comportamento o arquivo/aplicativo de etiquetas apresenta"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-39] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-39] Solicitar o ID do HopToDesk da colaboradora Ediléa Almeida (Cadastro) para acesso remoto.",
+      "[PB-UNI-39] Conectar na estação de trabalho e verificar o arquivo/aplicativo de Etiquetas (checar integridade do arquivo, modelo de layout ou bloqueio em modo somente leitura).",
+      "[PB-UNI-39] Verificar o driver e a porta de comunicação da impressora de etiquetas vinculada ao software (Zebra, Elgin ou impressora padrão).",
+      "[PB-UNI-39] Realizar uma impressão de teste assistida junto à colaboradora e homologar o funcionamento."
+    ],
+    "sufficiency_status": "parcial",
+    "custom_instruction": "Quando o colaborador relatar problema no aplicativo ou arquivo de etiquetas (não consegue imprimir ou deu um probleminha), manter a categoria em Aplicativos, não transferir para Hardware de impressora, e solicitar o ID do HopToDesk e a mensagem de erro para suporte técnico remoto.",
+    "created_at": "2026-10-22T13:32:24.102Z"
+  },
+  {
+    "ticket_id": 43047,
+    "title": "Sistemas Operacionais  -  Pasta Compartilhada - Unidrive",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "pasta",
+      "compartilhada",
+      "unidrive",
+      "gostaria",
+      "solicitar",
+      "instalem",
+      "computador",
+      "weberson"
+    ],
+    "problem_summary": "Gostaria de solicitar que instalem o Unidrive no computador do Weberson. Ele ficava em uma pasta, quando trocou o computador, não foi instalado.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "O ID do HopToDesk da nova máquina de Weberson;",
+      "Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?"
     ],
     "resolution_steps": [
       "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
@@ -29,7 +60,8 @@
     ],
     "sufficiency_status": "parcial",
     "custom_instruction": "Quando o solicitante pedir para instalar o Unidrive (Nextcloud Desktop Client) em computador novo ou após troca de máquina, sugerir reclassificação de Sistemas Operacionais para Aplicativos, identificar o colaborador e solicitar o ID do HopToDesk da nova máquina e disponibilidade.",
-    "created_at": "2026-10-22T13:19:37.300Z"
+    "created_at": "2026-10-22T13:19:37.300Z",
+    "updated_at": "2026-10-22T13:23:57.603Z"
   },
   {
     "ticket_id": 43078,

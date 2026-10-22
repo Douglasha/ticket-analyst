@@ -9005,45 +9005,46 @@
   },
   "43019": {
     "ticket_id": 43019,
-    "analyzed_at": "22/10/2026 09:00",
+    "analyzed_at": "22/10/2026 10:32",
     "provider_used": "Ollama Local (qwen2.5:3b)",
-    "translated_intent": "O solicitante **Ediléa Almeida** (Cadastro) relata falha de impressão em a **impressora do setor** localizada no setor **Cadastro**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
-    "detected_domain": "Infraestrutura e Rede",
-    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
-    "real_urgency": "Média",
-    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - Cadastro).",
+    "translated_intent": "A colaboradora **Ediléa Almeida** (Cadastro) relata problema no arquivo/aplicativo de **Etiquetas**, não conseguindo realizar impressões no setor. Demanda suporte técnico via acesso remoto para verificar o arquivo/aplicativo (modelo de etiquetas, integridade do arquivo, driver ou comunicação com a impressora de etiquetas).",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Falha de impressão no arquivo/aplicativo de etiquetas (Cadastro).",
     "sufficiency_status": "parcial",
     "missing_info": [
-      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Cadastro) ou apenas na sua estação",
-      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
-      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+      "ID do HopToDesk do computador de Ediléa para conexão remota da equipe de T.I.",
+      "Informar se aparece alguma mensagem de erro ao tentar imprimir ou qual comportamento o arquivo/aplicativo de etiquetas apresenta"
     ],
     "knowledge_matches": [
       {
         "layer": "local_playbook",
         "layer_label": "3ª Camada • Playbook Local de Processos TI",
-        "source_id": "PB-SD-02",
-        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
-        "category": "Infraestrutura e Rede",
-        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "source_id": "PB-UNI-39",
+        "title": "Aplicativo ou Arquivo de Impressão de Etiquetas — Falha de Impressão, Restauração de Atalho e Configuração (Cadastro / Cobrança / Financeiro / Zebra / Elgin)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Colaborador(a) relata falha de impressão, erro, travamento ou ausência de atalho no aplicativo ou arquivo de impressão de etiquetas (ex.: etiquetas de cadastro de beneficiários, identificação da cobrança, financeiro ou hospitalar), demandando diagnóstico no arquivo/aplicativo, configuração de driver de etiquetas ou restauração de atalho via acesso remoto.",
         "steps": [
-          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
-          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
-          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
-          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+          "[PB-UNI-39] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (não transferir para Hardware quando a falha for no aplicativo/arquivo de etiquetas).",
+          "[PB-UNI-39] Solicitar o ID do HopToDesk do(a) colaborador(a) para acesso remoto.",
+          "[PB-UNI-39] Conectar na estação de trabalho e inspecionar o arquivo/aplicativo de etiquetas (verificar integridade do arquivo, modelo, permissões e diretório de instalação).",
+          "[PB-UNI-39] Verificar as configurações de driver, porta e fila da impressora de etiquetas vinculada ao aplicativo.",
+          "[PB-UNI-39] Realizar impressão de teste assistida junto ao usuário para validar a normalização do serviço."
         ],
-        "score": 0.75
+        "score": 0.95
       }
     ],
-    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02)",
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-39)",
     "resolution_steps": [
-      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
-      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
-      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
-      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+      "[PB-UNI-39] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+      "[PB-UNI-39] Solicitar o ID do HopToDesk da colaboradora Ediléa Almeida (Cadastro) para acesso remoto.",
+      "[PB-UNI-39] Conectar na estação de trabalho e verificar o arquivo/aplicativo de Etiquetas (checar integridade do arquivo, modelo de layout ou bloqueio em modo somente leitura).",
+      "[PB-UNI-39] Verificar o driver e a porta de comunicação da impressora de etiquetas vinculada ao software (Zebra, Elgin ou impressora padrão).",
+      "[PB-UNI-39] Realizar uma impressão de teste assistida junto à colaboradora e homologar o funcionamento."
     ],
-    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Ediléa Almeida** (Cadastro) relata falha de impressão em a **impressora do setor** localizada no setor **Cadastro**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Cadastro) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
-    "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (Cadastro) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Cadastro ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Cadastro!",
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA colaboradora **Ediléa Almeida** (Cadastro) relata problema no arquivo/aplicativo de **Etiquetas**, não conseguindo realizar impressões no setor. Demanda suporte técnico via acesso remoto para verificar o arquivo/aplicativo (modelo de etiquetas, integridade do arquivo, driver ou comunicação com a impressora de etiquetas).\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-39)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador de Ediléa para conexão remota da equipe de T.I.\n  - Informar se aparece alguma mensagem de erro ao tentar imprimir ou qual comportamento o arquivo/aplicativo de etiquetas apresenta\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-39] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração > Aplicativos'.\n  2. [PB-UNI-39] Solicitar o ID do HopToDesk da colaboradora Ediléa Almeida (Cadastro) para acesso remoto.\n  3. [PB-UNI-39] Conectar na estação de trabalho e verificar o arquivo/aplicativo de Etiquetas (checar integridade do arquivo, modelo de layout ou bloqueio em modo somente leitura).\n  4. [PB-UNI-39] Verificar o driver e a porta de comunicação da impressora de etiquetas vinculada ao software (Zebra, Elgin ou impressora padrão).\n  5. [PB-UNI-39] Realizar uma impressão de teste assistida junto à colaboradora e homologar o funcionamento.",
+    "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nRecebemos o seu relato referente ao problema no arquivo/aplicativo de **Etiquetas** (Cadastro) e à impossibilidade de imprimir.\n\nNossa equipe de Suporte Técnico já está pronta para verificar a situação e restabelecer o funcionamento do arquivo/aplicativo. Para que possamos nos conectar à sua estação de trabalho, você poderia nos informar:\n1. O seu **ID do HopToDesk** para acesso remoto;\n2. Aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na verificação e teste de impressão!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },

@@ -1379,23 +1379,32 @@
   },
   {
     "id": "PB-UNI-39",
-    "title": "Instalação, Restauração de Atalho e Configuração de Aplicativo de Impressão de Etiquetas (Cobrança / Financeiro / Zebra / Elgin)",
+    "title": "Aplicativo ou Arquivo de Impressão de Etiquetas — Falha de Impressão, Restauração de Atalho e Configuração (Cadastro / Cobrança / Financeiro / Zebra / Elgin)",
     "domain": "Suporte Técnico Geral / Service Desk",
     "keywords": [
       "etiquetas",
       "etiqueta",
+      "arquivo etiquetas",
+      "arquivo de etiquetas",
+      "aplicativo etiquetas",
+      "aplicativo de etiquetas",
+      "app de etiquetas",
       "impressão de etiquetas",
       "impressao de etiquetas",
-      "aplicativo de etiquetas",
       "aplicativo para impressão",
+      "não consigo imprimir",
+      "nao consigo imprimir",
+      "deu um probleminha",
       "atalho",
       "área de trabalho",
       "area de trabalho",
       "desktop",
       "não está aparecendo",
       "nao esta aparecendo",
+      "cadastro",
       "cobrança",
       "cobranca",
+      "edilea",
       "izangela",
       "zebra",
       "elgin",
@@ -1403,19 +1412,19 @@
       "bartender",
       "zebradesigner"
     ],
-    "symptoms": "Colaborador(a) relata que o aplicativo ou atalho para impressão de etiquetas (ex.: etiquetas de identificação da cobrança, financeiro ou hospitalar) não está aparecendo na Área de Trabalho (desktop) de uma ou mais estações de trabalho, demandando restauração de atalho, reinstalação ou reconfiguração do software.",
+    "symptoms": "Colaborador(a) relata falha de impressão, erro, travamento ou ausência de atalho no aplicativo ou arquivo de impressão de etiquetas (ex.: etiquetas de cadastro de beneficiários, identificação da cobrança, financeiro ou hospitalar), demandando diagnóstico no arquivo/aplicativo, configuração de driver de etiquetas ou restauração de atalho via acesso remoto.",
     "required_info": [
-      "ID do HopToDesk (ou patrimônio/nome das máquinas) dos computadores que necessitam de intervenção técnica para acesso remoto",
-      "Nome do aplicativo de etiquetas utilizado (caso não identificado)"
+      "ID do HopToDesk da estação de trabalho para conexão remota da equipe de T.I.",
+      "Mensagem de erro exibida ao tentar imprimir ou se o arquivo/aplicativo de etiquetas trava ao ser aberto"
     ],
     "resolution_steps": [
-      "Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em Hardware/Impressoras.",
-      "Solicitar os IDs do HopToDesk das colaboradoras afetadas (ex.: Julia e Izangela no Financeiro) para realizar o acesso remoto às estações.",
-      "Conectar nas estações de trabalho e verificar se os arquivos executáveis do aplicativo de etiquetas constam instalados localmente (em Program Files, AppData ou pasta de rede da cobrança). Caso necessário, efetuar a reinstalação do aplicativo.",
-      "Recriar e fixar o atalho de inicialização do aplicativo na Área de Trabalho (Desktop) e no menu Iniciar de ambas as estações.",
-      "Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
+      "[PB-UNI-39] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (não transferir para Hardware quando a falha for no aplicativo/arquivo de etiquetas).",
+      "[PB-UNI-39] Solicitar o ID do HopToDesk do(a) colaborador(a) para acesso remoto.",
+      "[PB-UNI-39] Conectar na estação de trabalho e inspecionar o arquivo/aplicativo de etiquetas (verificar integridade do arquivo, modelo, permissões e diretório de instalação).",
+      "[PB-UNI-39] Verificar as configurações de driver, porta e fila da impressora de etiquetas vinculada ao aplicativo.",
+      "[PB-UNI-39] Realizar impressão de teste assistida junto ao usuário para validar a normalização do serviço."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao aplicativo de impressão de etiquetas de identificação da cobrança para o seu computador e o da Izangela (setor {setor}).\n\nComo o problema decorre do aplicativo/atalho não estar visível na Área de Trabalho, nossa equipe técnica precisa realizar o acesso remoto nas duas estações para restaurar o atalho e validar a inicialização do software. Você poderia nos informar:\n1. O **ID do HopToDesk** do seu computador e o **ID do HopToDesk** do computador da **Izangela**?\n2. Caso saiba, qual é o **nome do aplicativo de etiquetas** que vocês utilizavam?\n\nAssim que nos enviar os IDs, já conectaremos remotamente nas máquinas para normalizar o acesso e validar a impressão!\n\nPermanecemos à disposição!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente ao aplicativo/arquivo de **Etiquetas** ({setor}) e à impossibilidade de imprimir.\n\nPara que nossa equipe de Suporte Técnico possa se conectar remotamente à sua máquina e verificar o problema, você poderia nos informar:\n1. O seu **ID do HopToDesk** para acesso remoto;\n2. Se aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato no atendimento!\n\nPermanecemos à disposição!"
   },
   {
     "id": "PB-UNI-40",

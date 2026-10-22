@@ -207,16 +207,17 @@ export class KnowledgeEngine {
         ));
 
     const isLabelAppOrDesktopShortcut =
-      (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra)\b/i.test(
+      (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra|arquivo\s+(?:de\s+)?etiquetas?)\b/i.test(
         normTicket
       ) &&
-        /\b(aplicativo|app|programa|software|[aá]rea de trabalho|desktop|atalho|sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|icone)\b/i.test(
+        /\b(aplicativo|aplicativos|app|programa|software|arquivo|[aá]rea de trabalho|desktop|atalho|sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|icone|n[aã]o consigo imprimir|imprimir|probleminha|erro)\b/i.test(
           normTicket
         )) ||
       (/\betiquetas?\b/i.test(normTicket) &&
-        /\b(aplicativo|app|programa|[aá]rea de trabalho|desktop|atalho)\b/i.test(
+        (/\b(aplicativo|aplicativos|app|programa|software|arquivo|[aá]rea de trabalho|desktop|atalho)\b/i.test(
           normTicket
-        ));
+        ) ||
+        /\b(n[aã]o consigo imprimir|probleminha|erro|imprimir)\b/i.test(normTicket)));
 
     const isUnlockAccount =
       /\b(desbloque|desbloquear|desbloqueio|conta bloqueada|usuario bloqueado|usuário bloqueado)\b/i.test(

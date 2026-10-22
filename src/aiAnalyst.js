@@ -919,66 +919,109 @@ export class AIAnalyst {
         `Assim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra)\b/i.test(
+      (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra|arquivo\s+(?:de\s+)?etiquetas?)\b/i.test(
         normAll
       ) &&
-        /\b(aplicativo|app|programa|software|[aá]rea de trabalho|desktop|atalho|sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|icone)\b/i.test(
+        /\b(aplicativo|aplicativos|app|programa|software|arquivo|[aá]rea de trabalho|desktop|atalho|sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|icone|n[aã]o consigo imprimir|imprimir|probleminha|erro)\b/i.test(
           normAll
         )) ||
       (/\betiquetas?\b/i.test(normAll) &&
-        /\b(aplicativo|app|programa|[aá]rea de trabalho|desktop|atalho)\b/i.test(
+        (/\b(aplicativo|aplicativos|app|programa|software|arquivo|[aá]rea de trabalho|desktop|atalho)\b/i.test(
           normAll
-        ))
+        ) ||
+        /\b(n[aã]o consigo imprimir|probleminha|erro|imprimir)\b/i.test(normAll)))
     ) {
       detectedDomain = "Suporte Técnico Geral / Service Desk";
       suggestedCategory = "T.I > ST > Instalação/Configuração > Aplicativos";
-      realUrgency = ticket.urgency_label || "Média";
-      urgencyReason = `Restauração de atalho/aplicativo de impressão de etiquetas na Área de Trabalho para continuidade das atividades operacionais (${sectorName}).`;
+      realUrgency = ticket.urgency_label || "Baixa";
 
-      const colleagues = [];
-      if (/\bizangela\b/i.test(normAll)) colleagues.push("Izangela");
-
-      const colabStr = colleagues.length > 0
-        ? `tanto na máquina dela quanto na da colaboradora **${colleagues.join(", ")}**`
-        : "em sua estação de trabalho";
-
-      translatedIntent =
-        `${solPrefix} **${ticket.requester}** (${sectorName}) relata que o aplicativo utilizado para impressão das etiquetas de identificação no setor de Cobrança não está aparecendo na Área de Trabalho (desktop), ${colabStr}. Demanda atendimento de Suporte Técnico para localizar o executável/instalação do aplicativo (ex.: ZebraDesigner, Elgin ou atalho de rede), restaurar os atalhos no desktop e Menu Iniciar e validar o funcionamento da impressora de etiquetas via acesso remoto.`;
+      const isMissingShortcut =
+        /\b(sumiu|n[aã]o est[aá] aparecendo|aparecendo na [aá]rea de trabalho|atalho|desktop)\b/i.test(normAll) &&
+        !/\b(n[aã]o consigo imprimir|probleminha|erro|travou)\b/i.test(normAll);
 
       const hasHopToDesk = /\b\d{3}\s*\d{3}\s*\d{3}\b/i.test(normAll) || /\bhoptodesk\b/i.test(normAll);
-      if (hasHopToDesk) {
-        sufficiencyStatus = "completo";
-        missingInfo = [];
-      } else {
-        sufficiencyStatus = "parcial";
-        missingInfo = [
-          `Informar o ID do HopToDesk (ou AnyDesk) dos computadores afetados (${ticket.requester}${colleagues.length > 0 ? " e " + colleagues.join(", ") : ""}) para que a equipe de T.I. possa realizar o acesso remoto`,
-          "Confirmar o nome do aplicativo de etiquetas utilizado (ex.: ZebraDesigner, Elgin ou sistema interno), caso se recordem"
+
+      if (isMissingShortcut) {
+        urgencyReason = `Restauração de atalho/aplicativo de impressão de etiquetas na Área de Trabalho para continuidade das atividades operacionais (${sectorName}).`;
+
+        const colleagues = [];
+        if (/\bizangela\b/i.test(normAll)) colleagues.push("Izangela");
+
+        const colabStr = colleagues.length > 0
+          ? `tanto na máquina dela quanto na da colaboradora **${colleagues.join(", ")}**`
+          : "em sua estação de trabalho";
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) relata que o aplicativo utilizado para impressão das etiquetas de identificação no setor de ${sectorName} não está aparecendo na Área de Trabalho (desktop), ${colabStr}. Demanda atendimento de Suporte Técnico para localizar o executável/instalação do aplicativo (ex.: ZebraDesigner, Elgin ou atalho de rede), restaurar os atalhos no desktop e Menu Iniciar e validar o funcionamento da impressora de etiquetas via acesso remoto.`;
+
+        if (hasHopToDesk) {
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+        } else {
+          sufficiencyStatus = "parcial";
+          missingInfo = [
+            `Informar o ID do HopToDesk (ou AnyDesk) dos computadores afetados (${ticket.requester}${colleagues.length > 0 ? " e " + colleagues.join(", ") : ""}) para que a equipe de T.I. possa realizar o acesso remoto`,
+            "Confirmar o nome do aplicativo de etiquetas utilizado (ex.: ZebraDesigner, Elgin ou sistema interno), caso se recordem"
+          ];
+        }
+
+        customResolutionSteps = [
+          "[PB-UNI-39] Manter ou reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+          `[PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (${ticket.requester}${colleagues.length > 0 ? " e " + colleagues.join(", ") : ""}) para acesso remoto.`,
+          `[PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas (ex.: Arquivos de Programas, AppData ou pasta de rede do setor ${sectorName}). Caso necessário, reinstalar a aplicação.`,
+          "[PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.",
+          "[PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
         ];
+
+        const colabReplyStr = colleagues.length > 0 ? ` e no da **${colleagues.join(", ")}**` : "";
+        const colabIdsStr = colleagues.length > 0 ? ` e o da máquina da **${colleagues.join(", ")}**` : "";
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a solicitação referente ao aplicativo de **impressão de etiquetas de identificação** (${sectorName}) não estar aparecendo na Área de Trabalho do seu computador${colabReplyStr}.\n\n` +
+          `Nossa equipe de Suporte Técnico já está pronta para verificar e restaurar os atalhos nas máquinas. Para podermos realizar o acesso remoto, você poderia nos informar por aqui:\n` +
+          `1. O **ID do HopToDesk** do seu computador${colabIdsStr};\n` +
+          `2. O **nome do aplicativo** que vocês utilizam para essas etiquetas (ex.: ZebraDesigner, Elgin ou outro específico), caso se recorde.\n\n` +
+          `Assim que nos enviar os IDs, já iniciaremos a conexão para restabelecer os atalhos e testar a impressão!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        urgencyReason = `Falha de impressão no arquivo/aplicativo de etiquetas (${sectorName}).`;
+
+        translatedIntent =
+          `A colaboradora **${ticket.requester}** (${sectorName}) relata problema no arquivo/aplicativo de **Etiquetas**, não conseguindo realizar impressões no setor. ` +
+          `Demanda suporte técnico via acesso remoto para verificar o arquivo/aplicativo (modelo de etiquetas, integridade do arquivo, driver ou comunicação com a impressora de etiquetas).`;
+
+        if (hasHopToDesk) {
+          sufficiencyStatus = "completo";
+          missingInfo = [];
+        } else {
+          sufficiencyStatus = "parcial";
+          missingInfo = [
+            `ID do HopToDesk do computador de ${firstName} para conexão remota da equipe de T.I.`,
+            "Informar se aparece alguma mensagem de erro ao tentar imprimir ou qual comportamento o arquivo/aplicativo de etiquetas apresenta"
+          ];
+        }
+
+        customResolutionSteps = [
+          "[PB-UNI-39] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+          `[PB-UNI-39] Solicitar o ID do HopToDesk da colaboradora ${ticket.requester} (${sectorName}) para acesso remoto.`,
+          `[PB-UNI-39] Conectar na estação de trabalho e verificar o arquivo/aplicativo de Etiquetas (checar integridade do arquivo, modelo de layout ou bloqueio em modo somente leitura).`,
+          `[PB-UNI-39] Verificar o driver e a porta de comunicação da impressora de etiquetas vinculada ao software (Zebra, Elgin ou impressora padrão).`,
+          `[PB-UNI-39] Realizar uma impressão de teste assistida junto à colaboradora e homologar o funcionamento.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos o seu relato referente ao problema no arquivo/aplicativo de **Etiquetas** (${sectorName}) e à impossibilidade de imprimir.\n\n` +
+          `Nossa equipe de Suporte Técnico já está pronta para verificar a situação e restabelecer o funcionamento do arquivo/aplicativo. Para que possamos nos conectar à sua estação de trabalho, você poderia nos informar:\n` +
+          `1. O seu **ID do HopToDesk** para acesso remoto;\n` +
+          `2. Aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\n` +
+          `Assim que nos enviar essas informações por aqui, daremos andamento imediato na verificação e teste de impressão!\n\n` +
+          `Permanecemos à disposição!`;
       }
-
-      customResolutionSteps = [
-        "[PB-UNI-39] Reclassificar o chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos'.",
-        `[PB-UNI-39] Solicitar os IDs do HopToDesk das colaboradoras afetadas (${ticket.requester}${colleagues.length > 0 ? " e " + colleagues.join(", ") : ""}) para acesso remoto.`,
-        "[PB-UNI-39] Conectar nas estações e localizar os arquivos executáveis/diretório de instalação do aplicativo de etiquetas (ex.: Arquivos de Programas, AppData ou pasta de rede da cobrança). Caso necessário, reinstalar a aplicação.",
-        "[PB-UNI-39] Recriar e fixar o atalho do aplicativo na Área de Trabalho (Desktop) e no Menu Iniciar de ambas as estações.",
-        "[PB-UNI-39] Validar a comunicação do aplicativo com a impressora de etiquetas conectada e solicitar que as colaboradoras realizem uma impressão de teste para homologação."
-      ];
-
-      const colabReplyStr = colleagues.length > 0 ? ` e no da **${colleagues.join(", ")}**` : "";
-      const colabIdsStr = colleagues.length > 0 ? ` e o da máquina da **${colleagues.join(", ")}**` : "";
-
-      customPublicReply =
-        `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a solicitação referente ao aplicativo de **impressão de etiquetas de identificação** da Cobrança não estar aparecendo na Área de Trabalho do seu computador${colabReplyStr}.\n\n` +
-        `Nossa equipe de Suporte Técnico já está pronta para verificar e restaurar os atalhos nas duas máquinas. Para podermos realizar o acesso remoto, você poderia nos informar por aqui:\n` +
-        `1. O **ID do HopToDesk** do seu computador${colabIdsStr};\n` +
-        `2. O **nome do aplicativo** que vocês utilizam para essas etiquetas (ex.: ZebraDesigner, Elgin ou outro específico), caso se recorde.\n\n` +
-        `Assim que nos enviar os IDs, já iniciaremos a conexão para restabelecer os atalhos e testar a impressão!\n\n` +
-        `Permanecemos à disposição!`;
     } else if (
       !/\b(precisamos de (?:uma? )?impressora|instala[çc][ãa]o de impressora|instalar impressora|disponibilizar impressora|fornecer impressora|colocar (?:uma? )?impressora|nova impressora|impressora nova|solicito (?:uma? )?impressora|solicitamos (?:uma? )?impressora)\b/i.test(normAll) &&
-      !/\b(aplicativo|app|software|atalho|[aá]rea de trabalho|desktop)\b/i.test(normAll) &&
+      !/\b(aplicativo|app|software|atalho|[aá]rea de trabalho|desktop|etiquetas?)\b/i.test(normAll) &&
       (normCore.includes("impressora") ||
       normCore.includes("impressoras") ||
       normCore.includes("imprimir") ||
