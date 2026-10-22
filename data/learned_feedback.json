@@ -1,5 +1,41 @@
 [
   {
+    "ticket_id": 43051,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Pereira",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "prontuario",
+      "hospital",
+      "spdata",
+      "cadastro",
+      "profissionais",
+      "sara pereira",
+      "fabiola bueno",
+      "lohana ferreira",
+      "glaucia reis"
+    ],
+    "problem_summary": "Solicitação de cadastro de profissionais de saúde no Prontuário do Hospital (SPdata / PEP Hospitalar) para Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis.",
+    "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional** (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM);\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata",
+      "Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)",
+      "Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)",
+      "Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).",
+      "[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.",
+      "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).",
+      "[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.",
+      "[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login."
+    ],
+    "sufficiency_status": "parcial",
+    "custom_instruction": "Quando solicitarem cadastro ou acesso no prontuário do hospital para profissionais de saúde, identificar todos os profissionais na descrição, manter em Criação de Usuários e solicitar os dados clínicos para o SPdata (Nome completo, Data de nascimento, Especialidade, Conselho Profissional e usuário de referência).",
+    "created_at": "2026-10-22T10:58:38.066Z"
+  },
+  {
     "ticket_id": 42953,
     "title": "Desbloqueio de Contas  -  TARCISIO LARA COELHO",
     "category": "T.I > ST > Acesso e Permissões > Desbloqueio de Contas",
@@ -1564,17 +1600,23 @@
     "title": "Erros de Sistema  -  As planilhas da pasta Educação Continuada estão se duplicando constantemente",
     "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
     "keywords": [
-      "nextcloud",
+      "erros",
       "planilhas",
-      "duplicando",
-      "ods",
-      "xlsx",
+      "pasta",
       "educacao",
-      "continuada"
+      "continuada",
+      "duplicando",
+      "constantemente",
+      "next"
     ],
-    "problem_summary": "A solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) relata que planilhas da pasta **Educação Continuada** no Nextcloud estão se duplicando automaticamente (chegando a aparecer até quatro versões de um mesmo arquivo), gerando receio de corrupção ou perda de informações da equipe. O diagnóstico técnico identifica duas causas principais: (1) salvamento de planilhas com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) por colaboradores que utilizam suítes diferentes, e (2) geração de versões de conflito pelo Nextcloud Desktop Client (identificadas como '(1)' e '(2)') em decorrência de abertura e edição simultânea dos mesmos arquivos em estações distintas.",
-    "reply_template": "Olá, Carla! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nNossa equipe de T.I. já está à disposição para auxiliar na verificação e remoção das cópias sobressalentes junto ao setor. Como boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
-    "required_info": [],
+    "problem_summary": "Estamos enfrentando alguns problemas recorrentes com os documentos da pasta Educação Continuada, no Nextcloud. Desta vez, percebemos que algumas planilhas estão se duplicando e, em alguns casos, chegando a aparecer até quatro vezes, sem que ninguém tenha realizado essa ação.\nConversei com todos que possuem acesso à pasta e ninguém fez cópias ou duplicou os arquivos.\nEstamos preocupados com essas ocorrências, principalmente pelo receio de que esses problemas possam comprometer os documentos ou ocasionar a perda de informações importantes.\nPoderiam, por gentileza, verificar o que pode estar acontecendo e nos ajudar a resolver essa situação?",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+    "required_info": [
+      "Salvamento em Extensões Diferentes (.xlsx e .ods): Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.",
+      "Edição Concorrente / Abertura Simultânea: Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).",
+      "Padronizar o salvamento de todas as planilhas sempre no formato .xlsx;",
+      "Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição."
+    ],
     "resolution_steps": [
       "[PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.",
       "[PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).",
@@ -1582,7 +1624,8 @@
       "[PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.",
       "[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking)."
     ],
-    "sufficiency_status": "completo",
-    "created_at": "2026-10-20T17:58:53.496Z"
+    "sufficiency_status": "parcial",
+    "created_at": "2026-10-20T17:58:53.496Z",
+    "updated_at": "2026-10-20T18:24:16.907Z"
   }
 ]

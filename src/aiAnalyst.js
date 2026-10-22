@@ -26,6 +26,50 @@ export function formatPersonName(rawName) {
     .join(" ");
 }
 
+export function extractHealthProfessionals(formFields, descText) {
+  const professionals = [];
+  const seenCpfs = new Set();
+  const seenNames = new Set();
+
+  if (formFields && formFields.nomeColaborador) {
+    const pName = formatPersonName(formFields.nomeColaborador);
+    const pCpf = formFields.cpf || "";
+    seenNames.add(pName.toLowerCase());
+    if (pCpf) seenCpfs.add(pCpf.replace(/\D/g, ""));
+    professionals.push({ name: pName, cpf: pCpf });
+  }
+
+  if (descText) {
+    const lines = descText.split(/[\r\n]+/);
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      const match = trimmed.match(
+        /^([A-Za-zÀ-ÖØ-öø-ÿ\s]+?)[,:\s-]+(?:cpf[:\s]*)?(\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\d{11})\b/i
+      );
+      if (match) {
+        const candName = formatPersonName(
+          match[1].replace(/^(?:nome|profissional)[:\s]*/i, "").trim()
+        );
+        const candCpf = match[2].trim();
+        const rawCpf = candCpf.replace(/\D/g, "");
+        if (
+          candName.length >= 3 &&
+          !seenNames.has(candName.toLowerCase()) &&
+          !seenCpfs.has(rawCpf) &&
+          !/\b(prontu[aá]rio|hospital|observa|demanda|alta demanda)\b/i.test(candName)
+        ) {
+          seenNames.add(candName.toLowerCase());
+          seenCpfs.add(rawCpf);
+          professionals.push({ name: candName, cpf: candCpf });
+        }
+      }
+    }
+  }
+
+  return professionals;
+}
+
 export function buildUserPrompt(
   ticket,
   matches,
@@ -1891,14 +1935,16 @@ export class AIAnalyst {
         .replace(/outros\s*\(?descrever em observa[çc][õo]es\)?,?\s*/gi, "")
         .trim();
       const mentionsSpecificSystem =
-        /\b(spdata|sgh|wifi|wi-fi|lgpd|faculdade|email|e-mail|nextcloud|rede|active directory|totvs|hrp|autolac|myplace|pacs|biometria|facial|catraca|porta|portas)\b/i.test(
+        /\b(prontu[aá]rio|spdata|sgh|wifi|wi-fi|lgpd|faculdade|email|e-mail|nextcloud|rede|active directory|totvs|hrp|autolac|myplace|pacs|biometria|facial|catraca|porta|portas)\b/i.test(
           normDesc
         );
       const hasSpecifiedAccesses = Boolean(rawAcessos) || mentionsSpecificSystem;
 
       let specifiedAccessTxt = rawAcessos;
       if (!specifiedAccessTxt) {
-        if (/\bfaturamento\s+eletr[oô]nico\b/i.test(descText) && /\bspdata\b/i.test(descText)) {
+        if (/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|pep\s+hospitalar)\b/i.test(descText)) {
+          specifiedAccessTxt = "Prontuário do Hospital (SGH Spdata)";
+        } else if (/\bfaturamento\s+eletr[oô]nico\b/i.test(descText) && /\bspdata\b/i.test(descText)) {
           specifiedAccessTxt = "Faturamento Eletrônico no SPDATA";
         } else if (/\bfaturamento\s+eletr[oô]nico\b/i.test(descText)) {
           specifiedAccessTxt = "Faturamento Eletrônico";
@@ -1941,7 +1987,90 @@ export class AIAnalyst {
         );
       const hasPhotoAttached = /\.(jpg|jpeg|png|webp|bmp)\b/i.test(ticket.content);
 
-      if (filledOwnData && !hasSpecifiedAccesses) {
+      const isHospitalMedicalRecordRegistration =
+        (/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(
+          normAll
+        ) ||
+          (/\bprontu[aá]rio\b/i.test(normAll) && /\bhospital\b/i.test(normAll))) &&
+        (/\b(cadastro|libera[çc][ãa]o|acesso|profissional|profissionais|mandei tudo junto|alta demanda|vai mais de um profissional)\b/i.test(
+          normAll
+        ) ||
+          /\bcpf\b/i.test(normAll));
+
+      if (isHospitalMedicalRecordRegistration) {
+        const healthProfessionals = extractHealthProfessionals(formFields, descText);
+        const hasStaffFollowup = (ticket.followups || []).some(
+          (f) =>
+            !f.is_private &&
+            /\b(spdata|dados adicionais|especialidade|conselho profissional|replicar)\b/i.test(
+              f.content || ""
+            )
+        );
+
+        let profNamesFormatted = "";
+        let profSummaryList = "";
+        if (healthProfessionals.length > 0) {
+          const names = healthProfessionals.map((p) => p.name);
+          if (names.length === 1) {
+            profNamesFormatted = names[0];
+          } else if (names.length === 2) {
+            profNamesFormatted = `${names[0]} e ${names[1]}`;
+          } else {
+            profNamesFormatted = `${names.slice(0, -1).join(", ")} e ${names[names.length - 1]}`;
+          }
+          profSummaryList = healthProfessionals
+            .map((p) => `${p.name}${p.cpf ? ` (CPF: ${p.cpf})` : ""}`)
+            .join(", ");
+        } else {
+          profNamesFormatted = beneficiaryName;
+          profSummaryList = `${beneficiaryName}${formFields.cpf ? ` (CPF: ${formFields.cpf})` : ""}`;
+        }
+
+        const countText =
+          healthProfessionals.length > 1
+            ? `${healthProfessionals.length} profissionais de saúde (${profNamesFormatted})`
+            : `o(a) profissional de saúde **${profNamesFormatted}**`;
+
+        detectedDomain = "Acessos, Permissões e Contas";
+        suggestedCategory = "T.I > ST > Acesso e Permissões > Criação de Usuários";
+        realUrgency = "Média";
+        urgencyReason =
+          "Cadastro de profissionais de saúde no Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar) para atendimento assistencial.";
+
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata`,
+          `Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)`,
+          `Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)`,
+          `Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata`
+        ];
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita cadastro e liberação de acesso ao **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)** para ${countText} devido à demanda assistencial da unidade. ` +
+          `O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).` +
+          (hasStaffFollowup
+            ? ` A equipe de T.I. já adicionou andamento solicitando essas informações e o ticket permanece como Pendente aguardando retorno.`
+            : ` Demanda solicitação desses dados complementares para viabilizar os cadastros.`);
+
+        customResolutionSteps = [
+          `[PB-UNI-43] Analisar a relação de profissionais solicitadas: ${profSummaryList}.`,
+          `[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.`,
+          `[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).`,
+          `[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.`,
+          `[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente ao cadastro ${healthProfessionals.length > 1 ? "das profissionais" : "do(a) profissional"} no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **${profNamesFormatted}**.\n\n` +
+          `Para que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n` +
+          `1. **Nome completo** e **Data de nascimento**;\n` +
+          `2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n` +
+          `3. **Conselho Profissional** (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM);\n` +
+          `4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\n` +
+          `Assim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\n` +
+          `Permanecemos à disposição!`;
+      } else if (filledOwnData && !hasSpecifiedAccesses) {
         translatedIntent =
           `A solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando acesso para **${beneficiaryName}**, ` +
           `porém preencheu os campos do formulário (Nome e CPF) com os **próprios dados dela (${formFields.nomeColaborador})** em vez dos dados de **${beneficiaryName}**, ` +
@@ -3116,6 +3245,11 @@ export class AIAnalyst {
             /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
+          ((/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(normAll) ||
+            (/\bprontu[aá]rio\b/i.test(normAll) && /\bhospital\b/i.test(normAll))) &&
+           !/\b(prontu[aá]rio|spdata|pep\s+hospitalar)\b/i.test(
+             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+           )) ||
           (/\b(taxa|taxas)\b/i.test(normAll) &&
             !/\b(taxa|taxas)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
@@ -3255,6 +3389,11 @@ export class AIAnalyst {
           /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           )) ||
+        ((/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(normAll) ||
+          (/\bprontu[aá]rio\b/i.test(normAll) && /\bhospital\b/i.test(normAll))) &&
+         !/\b(prontu[aá]rio|spdata|pep\s+hospitalar)\b/i.test(
+           normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+         )) ||
         (/\b(taxa|taxas)\b/i.test(normAll) &&
           !/\b(taxa|taxas)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)

@@ -8824,6 +8824,100 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "42982": {
+    "ticket_id": 42982,
+    "analyzed_at": "20/10/2026 15:26",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Isabel Cristina dos Santos Teodoro Nepomuceno** (H Recepção) abriu o chamado: \"Boa tarde, teria a possibilidade de montagem de um computador no terceiro consultório para atendimento médico. Thais e Mércia cientes. Um exemplo: Gargalo no atendimento, a possibi\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42771).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42771",
+        "title": "Manutenção de Computadores  -  Computador não liga o monitor DHU-0374-SCIH",
+        "category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+          "[PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+          "[PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+          "[PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+          "[PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42659",
+        "title": "Solicitação Diversa  -  REGISTROS DE TESTE",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **REGISTROS DE TESTE**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+          "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+          "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **REGISTROS DE TESTE**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42275 (Resolvido)",
+        "title": "Infraestrutura e Redes > Manutenção de Computadores > notebook",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nFoi realizada a manutenção no computador, o que resultou em uma melhora significativa ao pressionar a tecla M. Recomendamos que a colaboradora observe se ocorrerão novas falhas e nos informe.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Foi realizada a manutenção no computador, o que resultou em uma melhora significativa ao pressionar a tecla M. Recomendamos que a colaboradora observe se ocorrerão novas falhas e nos informe.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-20",
+        "title": "Remanejamento Físico de Equipamentos (Impressora / Computador) e Instalação de Ponto de Telefone / Rede",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de mudança física / remanejamento de equipamentos de T.I. (ex: trocar impressora Zebra ou computador de um local/bancada para outro ambiente, como Almoxarifado) e/ou instalação de ponto de telefone (linha/ramal e aparelho) ou ponto de rede.",
+        "steps": [
+          "Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+          "Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+          "Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+        ],
+        "score": 0.63
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42771) + Memória Contínua • Aprendido com o Analista (MEM-#42659)",
+    "resolution_steps": [
+      "[Aprendido em MEM-#42771] Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+      "[MEM-#42771] [PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+      "[MEM-#42771] [PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+      "[MEM-#42771] [PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+      "[MEM-#42771] [PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+      "[MEM-#42771] [PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Isabel Cristina dos Santos Teodoro Nepomuceno** (H Recepção) abriu o chamado: \"Boa tarde, teria a possibilidade de montagem de um computador no terceiro consultório para atendimento médico. Thais e Mércia cientes. Um exemplo: Gargalo no atendimento, a possibi\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42771).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Manutenção de Computadores | Prioridade Real: Muito baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42771) + Memória Contínua • Aprendido com o Analista (MEM-#42659)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#42771] Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.\n  2. [MEM-#42771] [PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.\n  3. [MEM-#42771] [PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.\n  4. [MEM-#42771] [PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.\n  5. [MEM-#42771] [PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.\n  6. [MEM-#42771] [PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado.",
+    "public_reply_draft": "Olá, Isabel! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "42983": {
     "ticket_id": 42983,
     "analyzed_at": "20/10/2026 14:58",
@@ -8905,8 +8999,9 @@
       "[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking)."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) relata que planilhas da pasta **Educação Continuada** no Nextcloud estão se duplicando automaticamente (chegando a aparecer até quatro versões de um mesmo arquivo), gerando receio de corrupção ou perda de informações da equipe. O diagnóstico técnico identifica duas causas principais: (1) salvamento de planilhas com extensões concorrentes (.xlsx do Microsoft Excel vs. .ods do LibreOffice Calc) por colaboradores que utilizam suítes diferentes, e (2) geração de versões de conflito pelo Nextcloud Desktop Client (identificadas como '(1)' e '(2)') em decorrência de abertura e edição simultânea dos mesmos arquivos em estações distintas.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-42) + 1ª Camada • Base de Conhecimento GLPI (KB-54)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.\n  2. [PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).\n  3. [PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.\n  4. [PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.\n  5. [PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking).",
-    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nNossa equipe de T.I. já está à disposição para auxiliar na verificação e remoção das cópias sobressalentes junto ao setor. Como boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
     "has_image_analysis": true,
     "analyzed_images_count": 1
-  }
+  },
+  "undefined": 43051
 }

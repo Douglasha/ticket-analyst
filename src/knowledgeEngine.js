@@ -238,6 +238,16 @@ export class KnowledgeEngine {
       (/\b(planilha|planilhas|arquivo|arquivos|documento|documentos)\b/i.test(normTicket) &&
        /\b(duplic|conflito|extens[aã]o|extens[õo]es|simultaneamente|simult[aâ]nea)\b/i.test(normTicket)));
 
+    const isHospitalMedicalRecordRegistration =
+      (/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(
+        normTicket
+      ) ||
+        (/\bprontu[aá]rio\b/i.test(normTicket) && /\bhospital\b/i.test(normTicket))) &&
+      (/\b(cadastro|libera[çc][ãa]o|acesso|profissional|profissionais|mandei tudo junto|alta demanda|vai mais de um profissional)\b/i.test(
+        normTicket
+      ) ||
+        /\bcpf\b/i.test(normTicket));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -330,7 +340,7 @@ export class KnowledgeEngine {
               ) &&
               /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket)));
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal || isHospitalMedicalRecordRegistration) {
             continue;
           }
         }
@@ -362,6 +372,10 @@ export class KnowledgeEngine {
         }
         // Evita parear PB-UNI-42 (Duplicação e Conflitos no Nextcloud) quando o chamado NÃO trata de duplicação/conflito
         if (pb.id === "PB-UNI-42" && !isNextcloudDuplicationOrConflict) {
+          continue;
+        }
+        // Evita parear PB-UNI-43 (Cadastro no Prontuário do Hospital - SPdata / PEP) quando o chamado NÃO trata de prontuário hospitalar / SPdata
+        if (pb.id === "PB-UNI-43" && !isHospitalMedicalRecordRegistration) {
           continue;
         }
         // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
@@ -703,6 +717,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.95);
         }
+        if (
+          pb.id === "PB-UNI-43" &&
+          isHospitalMedicalRecordRegistration
+        ) {
+          score = Math.max(score, 0.95);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -850,6 +870,15 @@ export class KnowledgeEngine {
         if (
           /\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|encaminhamento autom[aá]tico)\b/i.test(normTicket) &&
           /\b(reabertura|reabrir|vincular|vinculacao|senha|acesso|cancelar|ativar conta)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de faturamento, XML ou acessos comuns quando o chamado é de cadastro de profissionais no Prontuário do Hospital / PEP Hospitalar
+        if (
+          isHospitalMedicalRecordRegistration &&
+          !/\b(prontu[aá]rio|pep\s+hospitalar)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

@@ -1516,5 +1516,45 @@
       "[PB-UNI-42] Orientar as equipes do setor sobre boas práticas: padronizar o salvamento no formato .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente sem aviso prévio e, caso necessário, utilizar a trava de bloqueio de arquivo (File Locking) ou edição web colaborativa."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à duplicação de planilhas na pasta **{pasta}** do Nextcloud.\n\nAnalisamos a ocorrência e identificamos as duas causas dessa duplicação automática:\n1. **Formatos e Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam softwares diferentes (como Microsoft Excel e LibreOffice Calc), ao salvar a planilha o sistema pode gerar uma nova versão com extensão diferente (ex.: uma em *.xlsx* e outra em *.ods*). Como o nome base é o mesmo, visualmente parecem duplicadas.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e salvam o mesmo arquivo simultaneamente em suas estações pelo atalho sincronizado, o Nextcloud gera cópias de segurança com numeração como *(1)* e *(2)* para evitar que uma alteração sobrescreva e apague os dados da outra.\n\nNossa equipe técnica já está à disposição para auxiliar na limpeza e consolidação dessas versões. Recomendamos:\n- Padronizar o salvamento sempre no formato **.xlsx**;\n- Verificar se outro colega do setor está com a planilha aberta antes de realizar alterações prolongadas ou fechar o arquivo assim que terminar.\n\nPermanecemos à disposição para qualquer apoio técnico no setor!"
+  },
+  {
+    "id": "PB-UNI-43",
+    "title": "Cadastro de Profissionais de Saúde no Prontuário do Hospital (Sistema SPdata / PEP Hospitalar)",
+    "domain": "Acessos, Permissões e Contas",
+    "keywords": [
+      "prontuário do hospital",
+      "prontuario do hospital",
+      "prontuário hospitalar",
+      "spdata",
+      "sgh spdata",
+      "pep hospitalar",
+      "cadastro de profissional",
+      "cadastro de profissionais",
+      "alta demanda",
+      "vai mais de um profissional",
+      "conselho profissional",
+      "especialidade",
+      "sara pereira",
+      "fabiola bueno",
+      "lohana ferreira",
+      "glaucia reis",
+      "mandei tudo junto"
+    ],
+    "symptoms": "Solicitação de cadastro de um ou mais profissionais de saúde (médicos, fisioterapeutas, terapeutas, psicólogos, enfermeiros) para atuação e evolução clínica no Prontuário do Hospital (sistema SPdata / PEP Hospitalar), frequentemente enviada de forma agrupada por setores/núcleos externos apenas com nome e CPF, faltando os dados cadastrais clínicos obrigatórios.",
+    "required_info": [
+      "Nome completo de cada profissional",
+      "Data de nascimento",
+      "Especialidade / Função de atuação",
+      "Conselho Profissional com número e UF (CRM, COREN, CREFITO, CRP, etc.)",
+      "Profissional de referência que já atue na mesma função no hospital para espelhamento/replicação de permissões no SPdata"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-43] Identificar todos os profissionais listados no chamado (tanto no formulário principal quanto nas observações) para cadastro no sistema hospitalar.",
+      "[PB-UNI-43] Verificar se o sistema indicado como Prontuário do hospital refere-se ao SGH Spdata (módulo assistencial / PEP Hospitalar).",
+      "[PB-UNI-43] Solicitar os dados cadastrais clínicos faltantes para cada profissional: Nome completo, Data de nascimento, Especialidade/Função, Conselho Profissional (CRM/COREN/CREFITO/CRP com UF) e profissional de referência.",
+      "[PB-UNI-43] Manter o chamado com status Pendente aguardando o retorno com os dados clínicos obrigatórios.",
+      "[PB-UNI-43] Após o recebimento, acessar o sistema SPdata, efetuar o cadastro profissional/operador de cada pessoa e replicar as permissões de atendimento hospitalar."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente ao cadastro das profissionais para acesso ao **Prontuário do Hospital (sistema SPdata)**:\n{lista_profissionais}\n\nPara prosseguirmos com a criação dos usuários e permissões de atendimento no SPdata, precisamos de alguns dados cadastrais adicionais de cada profissional:\n1. **Nome completo**;\n2. **Data de nascimento**;\n3. **Especialidade / Função**;\n4. **Conselho Profissional** (número e UF do CRM, COREN, CREFITO, CRP, etc.);\n5. **Profissional de referência:** Caso haja algum profissional que já desempenhe a mesma função no hospital, por gentileza nos informe o nome para que possamos replicar o perfil de permissões.\n\nO chamado permanecerá com status **Pendente** enquanto aguardamos esses dados. Assim que nos enviar, já daremos andamento imediato aos cadastros!\n\nPermanecemos à disposição!"
   }
 ]

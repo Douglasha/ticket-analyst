@@ -1,5 +1,191 @@
 [
   {
+    "id": "Chamado #43071 (Resolvido)",
+    "ticket_id": 43071,
+    "solution_id": 41754,
+    "title": "Infraestrutura e Redes > Administração de Redes > Telefone continua tocando",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Reiniciei o telefone e normalizou.",
+    "keywords": [],
+    "steps": [
+      "Reiniciei o telefone e normalizou."
+    ]
+  },
+  {
+    "id": "Chamado #43070 (Resolvido)",
+    "ticket_id": 43070,
+    "solution_id": 41753,
+    "title": "Manutenção Preventiva - PABX",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
+    "id": "Chamado #43037 (Resolvido)",
+    "ticket_id": 43037,
+    "solution_id": 41722,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Wallace Santana Vilela",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n-------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 125@Wsv608\n------------------------------------------------------------- \nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: wallaceconts2@gmail.com\nsenha: 125@Wsv608\n--------",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "-------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
+    "id": "Chamado #43031 (Resolvido)",
+    "ticket_id": 43031,
+    "solution_id": 41716,
+    "title": "Segurança da Informação > Gestão de Acessos > Leticia Cristina Martins",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Cadastro efetuado com sucesso.",
+    "keywords": [],
+    "steps": [
+      "Cadastro efetuado com sucesso."
+    ]
+  },
+  {
+    "id": "Chamado #43017 (Resolvido)",
+    "ticket_id": 43017,
+    "solution_id": 41723,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Painel parou de fucionar",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Painel reestabelecido.",
+    "keywords": [],
+    "steps": [
+      "Painel reestabelecido."
+    ]
+  },
+  {
+    "id": "Chamado #43016 (Resolvido)",
+    "ticket_id": 43016,
+    "solution_id": 41721,
+    "title": "Desenvolvimento e Qualidade > Correção de bugs > Verificação de checklist preenchidos",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde!\n\n\r\nRecentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações.\n\n\r\nO ajuste já foi realizado e, a partir de agora, o relatório buscará as informações corretamente.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde!",
+      "Recentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações.",
+      "O ajuste já foi realizado e, a partir de agora, o relatório buscará as informações corretamente."
+    ]
+  },
+  {
+    "id": "Chamado #43003 (Resolvido)",
+    "ticket_id": 43003,
+    "solution_id": 41701,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42998 (Resolvido)",
+    "ticket_id": 42998,
+    "solution_id": 41671,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > GISLAINE ALVES DOS REIS",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Acessos bloqueados.",
+    "keywords": [],
+    "steps": [
+      "Acessos bloqueados."
+    ]
+  },
+  {
+    "id": "Chamado #42994 (Resolvido)",
+    "ticket_id": 42994,
+    "solution_id": 41718,
+    "title": "Banco de Dados e Análise de Dados > Relatórios > Criação de relatório com dados de cirurgias",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi orientada como proceder.",
+    "keywords": [],
+    "steps": [
+      "Foi orientada como proceder."
+    ]
+  },
+  {
+    "id": "Chamado #42983 (Resolvido)",
+    "ticket_id": 42983,
+    "solution_id": 41662,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > As planilhas da pasta Educação Continuada estão se duplicando constantemente",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42971 (Resolvido)",
+    "ticket_id": 42971,
+    "solution_id": 41668,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar Bobinas REP [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suplementos verificados e recarregados.",
+    "keywords": [],
+    "steps": [
+      "Suplementos verificados e recarregados."
+    ]
+  },
+  {
+    "id": "Chamado #42970 (Resolvido)",
+    "ticket_id": 42970,
+    "solution_id": 41672,
+    "title": "Atualizar BI [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #42956 (Resolvido)",
+    "ticket_id": 42956,
+    "solution_id": 41752,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Juliano Melo",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Usuário: evandro.pachecoE-mail: contato@urucumdigital.com.brSenha provisória: Unimed@2026",
+    "keywords": [],
+    "steps": [
+      "Usuário: evandro.pachecoE-mail: contato@urucumdigital.com.brSenha provisória: Unimed@2026"
+    ]
+  },
+  {
     "id": "Chamado #42953 (Resolvido)",
     "ticket_id": 42953,
     "solution_id": 41630,
@@ -31,6 +217,35 @@
       "Nr Transação",
       "Tipo de transação",
       "Versão TISS"
+    ]
+  },
+  {
+    "id": "Chamado #42949 (Resolvido)",
+    "ticket_id": 42949,
+    "solution_id": 41724,
+    "title": "Atualizar Simpro [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nTabela atualizada.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Tabela atualizada.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42948 (Resolvido)",
+    "ticket_id": 42948,
+    "solution_id": 41675,
+    "title": "Atualizar HRP [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
     ]
   },
   {
@@ -228,6 +443,24 @@
     ]
   },
   {
+    "id": "Chamado #42891 (Resolvido)",
+    "ticket_id": 42891,
+    "solution_id": 41666,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Letícia Cristina Martins",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n----------------------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 081@Lcm608\n----------------------------------------------------------------------------\nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: lecrismartins92@gmail",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "----------------------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
     "id": "Chamado #42889 (Resolvido)",
     "ticket_id": 42889,
     "solution_id": 41567,
@@ -256,6 +489,24 @@
     "keywords": [],
     "steps": [
       "As licenças foram atualizadas."
+    ]
+  },
+  {
+    "id": "Chamado #42887 (Resolvido)",
+    "ticket_id": 42887,
+    "solution_id": 41673,
+    "title": "Atualizar Benner [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Bloqueio de acesso\nDownload da Atualizacao\nAplicação dos Pacotes\nAtualização do WES\nInstalação dos Artefatos\nliberação do acesso\n\nTudo OK",
+    "keywords": [],
+    "steps": [
+      "Bloqueio de acesso",
+      "Download da Atualizacao",
+      "Aplicação dos Pacotes",
+      "Atualização do WES",
+      "Instalação dos Artefatos",
+      "liberação do acesso"
     ]
   },
   {
@@ -374,6 +625,19 @@
     ]
   },
   {
+    "id": "Chamado #42840 (Resolvido)",
+    "ticket_id": 42840,
+    "solution_id": 41700,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > ELAINE",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Acesso liberado",
+    "keywords": [],
+    "steps": [
+      "Acesso liberado"
+    ]
+  },
+  {
     "id": "Chamado #42839 (Resolvido)",
     "ticket_id": 42839,
     "solution_id": 41512,
@@ -468,6 +732,19 @@
     "keywords": [],
     "steps": [
       "Senha alterada."
+    ]
+  },
+  {
+    "id": "Chamado #42815 (Resolvido)",
+    "ticket_id": 42815,
+    "solution_id": 41674,
+    "title": "Verificação do Backup [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "verificado ok",
+    "keywords": [],
+    "steps": [
+      "verificado ok"
     ]
   },
   {
@@ -586,6 +863,23 @@
     "keywords": [],
     "steps": [
       "Atualização feita pelo @Felipe Rodrigues Silva"
+    ]
+  },
+  {
+    "id": "Chamado #42778 (Resolvido)",
+    "ticket_id": 42778,
+    "solution_id": 41667,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Criar agenda PEP - Dra Bianca Félix nao",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAgenda criada e vinculadas com as recepcionistas do núcleo para a localidade: NAS Consultórios Médicos e Equipe Multidisciplinar\n\n\r\nNo HRP, secretárias vinculadas ao prestador 11101992 \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Agenda criada e vinculadas com as recepcionistas do núcleo para a localidade: NAS Consultórios Médicos e Equipe Multidisciplinar",
+      "No HRP, secretárias vinculadas ao prestador 11101992",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -1009,6 +1303,24 @@
     ]
   },
   {
+    "id": "Chamado #42625 (Resolvido)",
+    "ticket_id": 42625,
+    "solution_id": 41682,
+    "title": "Manutenção Preventiva - DHU-3122-PEDIAT",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "▸ Checklist de Manutenção Preventiva\n\r\n\r\n[X] Realizada limpeza interna e externa do gabinete.\n\r\n[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).\n\r\n[X] Sistema Operacional atualizado para a versão mais recente disponível.\n\r\n[X] Softwares instalados atualizados e aplicado correções de segurança.\n\r\n[X] Removidos cookies de",
+    "keywords": [],
+    "steps": [
+      "▸ Checklist de Manutenção Preventiva",
+      "[X] Realizada limpeza interna e externa do gabinete.",
+      "[X] Verificado estado físico dos componentes (cabos, conectores, ventoinhas).",
+      "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
+      "[X] Softwares instalados atualizados e aplicado correções de segurança.",
+      "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
     "id": "Chamado #42624 (Resolvido)",
     "ticket_id": 42624,
     "solution_id": 41574,
@@ -1068,6 +1380,19 @@
     "keywords": [],
     "steps": [
       "Senha alterada"
+    ]
+  },
+  {
+    "id": "Chamado #42619 (Resolvido)",
+    "ticket_id": 42619,
+    "solution_id": 41720,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Solicitações advindas da Oncologia",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Ajuste efetuado com sucesso.",
+    "keywords": [],
+    "steps": [
+      "Ajuste efetuado com sucesso."
     ]
   },
   {
@@ -1679,15 +2004,14 @@
   {
     "id": "Chamado #42409 (Resolvido)",
     "ticket_id": 42409,
-    "solution_id": 41154,
+    "solution_id": 41203,
     "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Thatiana Mara valletta da Silveira",
     "category": "T.I • Solucionado por lpiantino",
     "is_ti_group": true,
-    "summary": "Nome: TSILVEIRA\n\r\nSenha: audnezcvin",
+    "summary": "Ajustado por @Douglas Henrique Amaral",
     "keywords": [],
     "steps": [
-      "Nome: TSILVEIRA",
-      "Senha: audnezcvin"
+      "Ajustado por @Douglas Henrique Amaral"
     ]
   },
   {
