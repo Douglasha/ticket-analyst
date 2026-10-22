@@ -9003,6 +9003,97 @@
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },
+  "43019": {
+    "ticket_id": 43019,
+    "analyzed_at": "22/10/2026 09:00",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Ediléa Almeida** (Cadastro) relata falha de impressão em a **impressora do setor** localizada no setor **Cadastro**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "real_urgency": "Média",
+    "urgency_reason": "Falha de impressão no equipamento (impressora do setor - Cadastro).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Cadastro) ou apenas na sua estação",
+      "Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)",
+      "Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-SD-02",
+        "title": "Falha de Impressão / Impressora Inoperante na Rede ou Fila Travada (Samsung M4080FX / Laser / Térmica)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata que a impressora do setor (ex: Samsung M4080FX da Farmácia/Recepção) não está imprimindo, está com fila presa ou alerta no visor.",
+        "steps": [
+          "Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+          "Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+          "Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+          "Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+        ],
+        "score": 0.75
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-SD-02)",
+    "resolution_steps": [
+      "[PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).",
+      "[PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).",
+      "[PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).",
+      "[PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Ediléa Almeida** (Cadastro) relata falha de impressão em a **impressora do setor** localizada no setor **Cadastro**. O relato não especifica se a falha afeta todas as estações do setor (queda de rede/alerta físico na impressora) ou apenas um computador específico (fila do Spooler travada).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Impressoras | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-SD-02)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar se a impressora do setor parou de imprimir para todos os computadores do setor (Cadastro) ou apenas na sua estação\n  - Verificar se aparece alguma mensagem de erro ou LED vermelho/laranja aceso no visor da impressora do setor (ex: papel preso, bandeja, falta de toner ou cabo de rede desconectado)\n  - Caso ocorra apenas no seu computador, informar o seu ID do HopToDesk para destravarmos a fila de impressão remotamente\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-SD-02] Identificar o IP da impressora do setor (ex: Samsung M4080FX) no servidor de impressão/DHCP e testar conectividade (`ping`) e acesso ao painel web (`SyncThru Web Service`).\n  2. [PB-SD-02] Verificar remotamente via painel web/SNMP se há alerta físico no equipamento (atolamento de papel na bandeja/fusor, tampa aberta, falta de papel/toner ou conflito de tamanho de papel Carta vs A4).\n  3. [PB-SD-02] Caso a impressora responda 'Pronta/Online' na rede, conectar na estação do solicitante via HopToDesk e reiniciar o serviço `Spooler` do Windows (`net stop spooler && del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\" && net start spooler`).\n  4. [PB-SD-02] Se a impressora estiver offline na rede, deslocar técnico até o setor para checar cabo/ponto de rede e realizar teste físico de impressão no painel do equipamento.",
+    "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nJá estamos verificando o status da **impressora do setor** (Cadastro) na rede.\n\nPara agilizarmos o destravamento das impressões, você poderia nos confirmar rapidamente:\n1. A falha ocorre em **todos os computadores** da Cadastro ou apenas na **sua máquina**?\n2. Aparece alguma **mensagem de erro ou luz de alerta** no visor da impressora do setor (como atolamento de papel, bandeja aberta ou falha de rede)?\n3. Se for apenas no seu computador, qual é o seu **ID do HopToDesk** para reiniciarmos a fila de impressão remotamente?\n\nCaso a impressora esteja inacessível na rede, já deslocaremos um técnico até a Cadastro!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43047": {
+    "ticket_id": 43047,
+    "analyzed_at": "22/10/2026 10:19",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Joyce Aparecida dos Santos** (Departamento Pessoal) solicita a instalação e configuração do aplicativo **Nextcloud Desktop Client (popularmente conhecido como Unidrive na organização)** na estação de trabalho do colaborador **Weberson**, que teve o computador substituído recentemente e está sem o aplicativo instalado para acessar as pastas sincronizadas do setor. O chamado foi aberto na categoria genérica de Sistemas Operacionais e recomenda-se reclassificar para 'T.I > ST > Instalação/Configuração > Aplicativos'.",
+    "detected_domain": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+    "suggested_category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "real_urgency": "Média",
+    "urgency_reason": "Instalação e sincronização do Nextcloud Desktop Client (Unidrive) em nova estação de trabalho (Departamento Pessoal).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk da nova estação de trabalho de Weberson para conexão remota da T.I.",
+      "Confirmação de disponibilidade na máquina para realizarmos a instalação do aplicativo e sincronização das pastas do setor (Departamento Pessoal)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-44",
+        "title": "Instalação e Configuração do Nextcloud Desktop Client / Unidrive (Pasta Sincronizada)",
+        "category": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+        "summary": "Solicitação de instalação e configuração do aplicativo Nextcloud Desktop Client (popularmente denominado na organização como 'Unidrive') na estação de trabalho de colaborador, frequentemente após troca, formatação ou substituição do computador.",
+        "steps": [
+          "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho do colaborador para acesso remoto.",
+          "[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
+          "[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da Unimed e autenticar com as credenciais de rede do colaborador.",
+          "[PB-UNI-44] Selecionar e sincronizar as pastas departamentais do setor (Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
+          "[PB-UNI-44] Testar a abertura dos arquivos e validação do fluxo de sincronização junto ao colaborador antes de concluir o atendimento."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-44)",
+    "resolution_steps": [
+      "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.",
+      "[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
+      "[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.",
+      "[PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
+      "[PB-UNI-44] Validar o acesso aos arquivos com o colaborador e concluir o chamado no GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Joyce Aparecida dos Santos** (Departamento Pessoal) solicita a instalação e configuração do aplicativo **Nextcloud Desktop Client (popularmente conhecido como Unidrive na organização)** na estação de trabalho do colaborador **Weberson**, que teve o computador substituído recentemente e está sem o aplicativo instalado para acessar as pastas sincronizadas do setor. O chamado foi aberto na categoria genérica de Sistemas Operacionais e recomenda-se reclassificar para 'T.I > ST > Instalação/Configuração > Aplicativos'.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração > Aplicativos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-44)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk da nova estação de trabalho de Weberson para conexão remota da T.I.\n  - Confirmação de disponibilidade na máquina para realizarmos a instalação do aplicativo e sincronização das pastas do setor (Departamento Pessoal)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.\n  2. [PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.\n  3. [PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.\n  4. [PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.\n  5. [PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.\n  6. [PB-UNI-44] Validar o acesso aos arquivos com o colaborador e concluir o chamado no GLPI.",
+    "public_reply_draft": "Olá, Joyce! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43051": {
     "ticket_id": 43051,
     "analyzed_at": "22/10/2026 08:14",
@@ -9094,6 +9185,119 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) solicita cadastro e liberação de acesso ao **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)** para 4 profissionais de saúde (Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis) devido à demanda assistencial da unidade. O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência). A equipe de T.I. já adicionou andamento solicitando essas informações e o ticket permanece como Pendente aguardando retorno.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Criação de Usuários | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-43) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42179 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata\n  - Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)\n  - Conselho Profissional e Número de Registro (órgão de classe com respectivo número e UF, ex.: CREFITO, CRP, COREN, CRM)\n  - Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).\n  2. [PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.\n  3. [PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).\n  4. [PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.\n  5. [PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login.",
     "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43077": {
+    "ticket_id": 43077,
+    "analyzed_at": "22/10/2026 09:59",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Diego Torres da Silva** (H Coordenação Enfermagem) abriu o chamado: \"Bom dia Solicito avaliação para mudança de computador na UTI Adulto. Estamos adequando o posto de enfermagem e necessitamos de mudar o computador utilizado pela Fisioterapia. A pro\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42771).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > IR > Suporte a Hardware",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42771",
+        "title": "Manutenção de Computadores  -  Computador não liga o monitor DHU-0374-SCIH",
+        "category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+          "[PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+          "[PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+          "[PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+          "[PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42275 (Resolvido)",
+        "title": "Infraestrutura e Redes > Manutenção de Computadores > notebook",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nFoi realizada a manutenção no computador, o que resultou em uma melhora significativa ao pressionar a tecla M. Recomendamos que a colaboradora observe se ocorrerão novas falhas e nos informe.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Foi realizada a manutenção no computador, o que resultou em uma melhora significativa ao pressionar a tecla M. Recomendamos que a colaboradora observe se ocorrerão novas falhas e nos informe.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-09",
+        "title": "Desenvolvimento / Ajustes em Formulários Clínicos Assistenciais (PEP Hospitalar / SGH Spdata)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Coordenação de Enfermagem ou área assistencial do Hospital Unimed (Centro Cirúrgico, UTI, Enfermagem) solicita criação/alteração de campos em formulários eletrônicos assistenciais no PEP (módulo do SGH Spdata).",
+        "steps": [
+          "Analisar os requisitos enviados pela Coordenação de Enfermagem e verificar impactos nas tabelas/relatórios de indicadores assistenciais.",
+          "Implementar os novos campos/regras no construtor de formulários clínicos (ambiente de Homologação).",
+          "Disponibilizar para validação da solicitante e, após o 'De acordo', publicar em Produção."
+        ],
+        "score": 0.47
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42300 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Computador e nobreak da recepção",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42771) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42275 (Resolvido))",
+    "resolution_steps": [
+      "[Aprendido em MEM-#42771] Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+      "[MEM-#42771] [PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+      "[MEM-#42771] [PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+      "[MEM-#42771] [PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+      "[MEM-#42771] [PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+      "[MEM-#42771] [PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Diego Torres da Silva** (H Coordenação Enfermagem) abriu o chamado: \"Bom dia Solicito avaliação para mudança de computador na UTI Adulto. Estamos adequando o posto de enfermagem e necessitamos de mudar o computador utilizado pela Fisioterapia. A pro\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42771).\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42771) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42275 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#42771] Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.\n  2. [MEM-#42771] [PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.\n  3. [MEM-#42771] [PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.\n  4. [MEM-#42771] [PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.\n  5. [MEM-#42771] [PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.\n  6. [MEM-#42771] [PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado.",
+    "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43078": {
+    "ticket_id": 43078,
+    "analyzed_at": "22/10/2026 09:32",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Isabel Cristina dos Santos Teodoro Nepomuceno solicitou a instalação do software autentique e uniSing em um computador da Valéria, localizado na unidade de recepção. A equipe de TI já está trabalhando nessa solicitação, conforme consta no chamado.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Instalação/Configuração",
+    "real_urgency": "Média",
+    "urgency_reason": "A instalação do software afeta a capacidade de realizar atendimentos na unidade de recepção.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Isabel Cristina dos Santos Teodoro Nepomuceno solicitou a instalação do software autentique e uniSing em um computador da Valéria, localizado na unidade de recepção. A equipe de TI já está trabalhando nessa solicitação, conforme consta no chamado.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Isabel! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Instalação Autentique**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   }

@@ -1,5 +1,60 @@
 [
   {
+    "ticket_id": 43047,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Pasta Compartilhada - Unidrive",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "unidrive",
+      "nextcloud",
+      "instalacao",
+      "aplicativo",
+      "weberson",
+      "departamento pessoal",
+      "pasta compartilhada",
+      "hoptodesk"
+    ],
+    "problem_summary": "Solicitação de instalação e configuração do Unidrive (Nextcloud Desktop Client) no computador do colaborador Weberson (Departamento Pessoal) após troca de computador.",
+    "reply_template": "Olá, Joyce! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **Weberson** (Departamento Pessoal).\n\nComo a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de Weberson;\n2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "ID do HopToDesk da nova estação de trabalho de Weberson para conexão remota da T.I.",
+      "Confirmação de disponibilidade na máquina para realizarmos a instalação do aplicativo e sincronização das pastas do setor (Departamento Pessoal)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho de Weberson (Departamento Pessoal) para acesso remoto.",
+      "[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
+      "[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede de Weberson.",
+      "[PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (Departamento Pessoal / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
+      "[PB-UNI-44] Validar o acesso aos arquivos com o colaborador e concluir o chamado no GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "custom_instruction": "Quando o solicitante pedir para instalar o Unidrive (Nextcloud Desktop Client) em computador novo ou após troca de máquina, sugerir reclassificação de Sistemas Operacionais para Aplicativos, identificar o colaborador e solicitar o ID do HopToDesk da nova máquina e disponibilidade.",
+    "created_at": "2026-10-22T13:19:37.300Z"
+  },
+  {
+    "ticket_id": 43078,
+    "title": "Instalação/Configuração  -  Instalação Autentique",
+    "category": "T.I > ST > Instalação/Configuração",
+    "keywords": [
+      "autentique",
+      "unising",
+      "computador",
+      "valeria",
+      "liberacao",
+      "atendimentos"
+    ],
+    "problem_summary": "Bom dia, solicito por gentileza a instalação do autentique e \"uniSing\" no computador da Valéria para liberação dos atendimentos.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Instalação Autentique**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-22T12:32:45.505Z"
+  },
+  {
     "ticket_id": 43051,
     "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Pereira",
     "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",

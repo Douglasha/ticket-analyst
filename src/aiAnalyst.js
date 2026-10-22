@@ -1271,6 +1271,59 @@ export class AIAnalyst {
         `- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n` +
         `- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\n` +
         `Permanecemos à total disposição!`;
+    } else if (
+      (/\b(unidrive|uni\s*drive)\b/i.test(normAll) ||
+       /\b(nextcloud|nextclaud)\b/i.test(normAll)) &&
+      (/\b(instalar|instala[çc][ãa]o|instalem|instale|novo computador|trocou o computador|troca de computador|formatou|computador novo|est[aá] sem o|n[aã]o foi instalado|n[aã]o est[aá] instalado)\b/i.test(
+        normAll
+      ) ||
+       normAll.includes("pasta compartilhada - unidrive"))
+    ) {
+      const descOnly = formFields.descricao || ticket.content || "";
+      const targetUserMatch =
+        descOnly.match(/\bcomputador\s+(?:d[oe]|para\s+o|para\s+a)\s+([A-ZÀ-Ú][a-zà-ú]+(?:\s+[A-ZÀ-Ú][a-zà-ú]+)*)\b/i) ||
+        descOnly.match(/\b(?:para|do|da)\s+([A-ZÀ-Ú][a-zà-ú]+(?:\s+[A-ZÀ-Ú][a-zà-ú]+)*)\b/i);
+      let targetUserName = targetUserMatch ? targetUserMatch[1].trim() : "";
+      if (/\b(unidrive|nextcloud|computador|pasta|setor|solicitar|instalem|ele|ficava)\b/i.test(targetUserName)) {
+        targetUserName = "";
+      }
+      const formattedTarget = targetUserName ? formatPersonName(targetUserName) : "";
+      const targetSector = formFields.setor || sectorName || "Departamento Pessoal";
+
+      detectedDomain = "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)";
+      suggestedCategory = "T.I > ST > Instalação/Configuração > Aplicativos";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Instalação e sincronização do Nextcloud Desktop Client (Unidrive) em nova estação de trabalho (${targetSector}).`;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        `ID do HopToDesk da nova estação de trabalho ${formattedTarget ? `de ${formattedTarget}` : "do colaborador"} para conexão remota da T.I.`,
+        `Confirmação de disponibilidade na máquina para realizarmos a instalação do aplicativo e sincronização das pastas do setor (${targetSector})`
+      ];
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) solicita a instalação e configuração do aplicativo **Nextcloud Desktop Client (popularmente conhecido como Unidrive na organização)** ` +
+        `na estação de trabalho ${formattedTarget ? `do colaborador **${formattedTarget}**` : "do colaborador"}, ` +
+        `que teve o computador substituído recentemente e está sem o aplicativo instalado para acessar as pastas sincronizadas do setor. ` +
+        `O chamado foi aberto na categoria genérica de Sistemas Operacionais e recomenda-se reclassificar para 'T.I > ST > Instalação/Configuração > Aplicativos'.`;
+
+      customResolutionSteps = [
+        `[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.`,
+        `[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho ${formattedTarget ? `de ${formattedTarget}` : "do colaborador"} (${targetSector}) para acesso remoto.`,
+        `[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.`,
+        `[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da cooperativa e autenticar com as credenciais de rede ${formattedTarget ? `de ${formattedTarget}` : "do colaborador"}.`,
+        `[PB-UNI-44] Selecionar e sincronizar as pastas de rede departamentais do setor (${targetSector} / Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.`,
+        `[PB-UNI-44] Validar o acesso aos arquivos com o colaborador e concluir o chamado no GLPI.`
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador ${formattedTarget ? `do colaborador **${formattedTarget}**` : "do colaborador"} (${targetSector}).\n\n` +
+        `Como a máquina foi substituída recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e configurar a sincronização das pastas departamentais. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n` +
+        `1. O **ID do HopToDesk** da nova máquina ${formattedTarget ? `de ${formattedTarget}` : "onde o Unidrive deve ser instalado"};\n` +
+        `2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\n` +
+        `Assim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\n` +
+        `Permanecemos à disposição!`;
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =
         formFields.problema?.match(/pasta\s+([^,]+)/i)?.[1]?.trim() ||
@@ -3229,7 +3282,7 @@ export class AIAnalyst {
           smartCat = "T.I > ST > Resolução de Problemas > Erros de Sistema";
         } else if (
           /\bsistemas operacionais\b/i.test(normalizeText(ticket.category || "")) &&
-          /\b(pep|sgh|spdata|wconect|benner|hrp|autolac|sistema|agenda)\b/i.test(normAll)
+          /\b(pep|sgh|spdata|wconect|benner|hrp|autolac|sistema|agenda|unidrive|nextcloud)\b/i.test(normAll)
         ) {
           smartCat = "T.I > ST > Instalação/Configuração > Aplicativos";
         }
@@ -3245,6 +3298,11 @@ export class AIAnalyst {
             /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
+          ((/\b(unidrive|uni\s*drive)\b/i.test(normAll) ||
+            (/\bnextcloud\b/i.test(normAll) && /\b(instalar|instala[çc][ãa]o|trocou o computador|computador novo)\b/i.test(normAll))) &&
+           !/\b(instalar|instala[çc][ãa]o|unidrive)\b/i.test(
+             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+           )) ||
           ((/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(normAll) ||
             (/\bprontu[aá]rio\b/i.test(normAll) && /\bhospital\b/i.test(normAll))) &&
            !/\b(prontu[aá]rio|spdata|pep\s+hospitalar)\b/i.test(
@@ -3389,6 +3447,11 @@ export class AIAnalyst {
           /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           )) ||
+        ((/\b(unidrive|uni\s*drive)\b/i.test(normAll) ||
+          (/\bnextcloud\b/i.test(normAll) && /\b(instalar|instala[çc][ãa]o|trocou o computador|computador novo)\b/i.test(normAll))) &&
+         !/\b(instalar|instala[çc][ãa]o|unidrive)\b/i.test(
+           normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
+         )) ||
         ((/\b(prontu[aá]rio\s+do\s+hospital|prontu[aá]rio\s+hospitalar|spdata|sgh\s+spdata|pep\s+hospitalar)\b/i.test(normAll) ||
           (/\bprontu[aá]rio\b/i.test(normAll) && /\bhospital\b/i.test(normAll))) &&
          !/\b(prontu[aá]rio|spdata|pep\s+hospitalar)\b/i.test(

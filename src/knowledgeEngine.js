@@ -248,6 +248,14 @@ export class KnowledgeEngine {
       ) ||
         /\bcpf\b/i.test(normTicket));
 
+    const isNextcloudInstallOrUnidrive =
+      (/\b(unidrive|uni\s*drive)\b/i.test(normTicket) ||
+       /\b(nextcloud|nextclaud)\b/i.test(normTicket)) &&
+      (/\b(instalar|instala[çc][ãa]o|instalem|instale|novo computador|trocou o computador|troca de computador|formatou|computador novo|est[aá] sem o|n[aã]o foi instalado|n[aã]o est[aá] instalado)\b/i.test(
+        normTicket
+      ) ||
+       normTicket.includes("pasta compartilhada - unidrive"));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -366,8 +374,8 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-02 (Falha de Acesso ao Nextcloud) quando o chamado trata de duplicação/conflito de arquivos no Nextcloud
-        if (pb.id === "PB-UNI-02" && isNextcloudDuplicationOrConflict) {
+        // Evita parear PB-UNI-02 (Falha de Acesso ao Nextcloud) quando o chamado trata de duplicação/conflito de arquivos no Nextcloud ou instalação do Unidrive/Nextcloud
+        if (pb.id === "PB-UNI-02" && (isNextcloudDuplicationOrConflict || isNextcloudInstallOrUnidrive)) {
           continue;
         }
         // Evita parear PB-UNI-42 (Duplicação e Conflitos no Nextcloud) quando o chamado NÃO trata de duplicação/conflito
@@ -376,6 +384,10 @@ export class KnowledgeEngine {
         }
         // Evita parear PB-UNI-43 (Cadastro no Prontuário do Hospital - SPdata / PEP) quando o chamado NÃO trata de prontuário hospitalar / SPdata
         if (pb.id === "PB-UNI-43" && !isHospitalMedicalRecordRegistration) {
+          continue;
+        }
+        // Evita parear PB-UNI-44 (Instalação do Nextcloud / Unidrive) quando o chamado NÃO trata de instalação do Unidrive / Nextcloud
+        if (pb.id === "PB-UNI-44" && !isNextcloudInstallOrUnidrive) {
           continue;
         }
         // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
@@ -723,6 +735,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.95);
         }
+        if (
+          pb.id === "PB-UNI-44" &&
+          isNextcloudInstallOrUnidrive
+        ) {
+          score = Math.max(score, 0.95);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -879,6 +897,15 @@ export class KnowledgeEngine {
         if (
           isHospitalMedicalRecordRegistration &&
           !/\b(prontu[aá]rio|pep\s+hospitalar)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de "pasta sumiu" ou falha de leitura (ex: MEM-#42404, MEM-#42159) quando o chamado é de INSTALAÇÃO do Unidrive / Nextcloud em nova máquina
+        if (
+          isNextcloudInstallOrUnidrive &&
+          !/\b(instalar|instala[çc][ãa]o|unidrive)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

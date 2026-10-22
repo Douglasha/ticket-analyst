@@ -1556,5 +1556,42 @@
       "[PB-UNI-43] Após o recebimento, acessar o sistema SPdata, efetuar o cadastro profissional/operador de cada pessoa e replicar as permissões de atendimento hospitalar."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente ao cadastro das profissionais para acesso ao **Prontuário do Hospital (sistema SPdata)**:\n{lista_profissionais}\n\nPara prosseguirmos com a criação dos usuários e permissões de atendimento no SPdata, precisamos de alguns dados cadastrais adicionais de cada profissional:\n1. **Nome completo**;\n2. **Data de nascimento**;\n3. **Especialidade / Função**;\n4. **Conselho Profissional e Número de Registro:** Informar o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n5. **Profissional de referência:** Caso haja algum profissional que já desempenhe a mesma função no hospital, por gentileza nos informe o nome para que possamos replicar o perfil de permissões.\n\nO chamado permanecerá com status **Pendente** enquanto aguardamos esses dados. Assim que nos enviar, já daremos andamento imediato aos cadastros!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-44",
+    "title": "Instalação e Configuração do Nextcloud Desktop Client / Unidrive (Pasta Sincronizada)",
+    "domain": "Sistemas Internos / Armazenamento e Compartilhamento (Nextcloud)",
+    "keywords": [
+      "unidrive",
+      "uni drive",
+      "instalar unidrive",
+      "instalem o unidrive",
+      "instalação do unidrive",
+      "nextcloud",
+      "nextclaud",
+      "instalar nextcloud",
+      "cliente nextcloud",
+      "desktop client",
+      "trocou o computador",
+      "troca de computador",
+      "pasta compartilhada - unidrive",
+      "sincronizar pasta",
+      "departamento pessoal",
+      "weberson"
+    ],
+    "symptoms": "Solicitação de instalação e configuração do aplicativo Nextcloud Desktop Client (popularmente denominado na organização como 'Unidrive') na estação de trabalho de colaborador, frequentemente após troca, formatação ou substituição do computador.",
+    "required_info": [
+      "ID do HopToDesk da nova máquina do colaborador para conexão remota da equipe de T.I.",
+      "Confirmação de disponibilidade do colaborador na estação ou melhor horário para realização da instalação e sincronização das pastas"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-44] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' caso tenha sido aberto em 'Sistemas Operacionais'.",
+      "[PB-UNI-44] Obter o ID do HopToDesk da nova estação de trabalho do colaborador para acesso remoto.",
+      "[PB-UNI-44] Conectar remotamente via HopToDesk e efetuar o download/instalação do instalador oficial do Nextcloud Desktop Client.",
+      "[PB-UNI-44] Configurar a conta corporativa no Nextcloud apontando para o servidor institucional da Unimed e autenticar com as credenciais de rede do colaborador.",
+      "[PB-UNI-44] Selecionar e sincronizar as pastas departamentais do setor (Unidrive), validando a criação da pasta local e do atalho de acesso rápido no Windows Explorer.",
+      "[PB-UNI-44] Testar a abertura dos arquivos e validação do fluxo de sincronização junto ao colaborador antes de concluir o atendimento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **{beneficiario}** ({setor}).\n\nComo o equipamento foi substituído recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e sincronizar as pastas locais do setor. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de {beneficiario};\n2. Se ele(a) já está utilizando a máquina ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!"
   }
 ]
