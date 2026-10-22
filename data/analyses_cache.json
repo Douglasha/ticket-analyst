@@ -9048,6 +9048,50 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43041": {
+    "ticket_id": 43041,
+    "analyzed_at": "22/10/2026 13:41",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Bianca Silva** (Autorização) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **206867125** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.",
+    "detected_domain": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Média",
+    "urgency_reason": "Procedimento com senha/guia retida sem trafegar no Intercâmbio do sistema HRP Unimed (Autorização).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-45",
+        "title": "Processo de Autorização de Procedimento no Sistema HRP Unimed — Falha no Tráfego de Senha e Guia de Intercâmbio",
+        "category": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+        "summary": "Solicitante (frequentemente do setor de Autorização ou Recepção) relata que um procedimento não está autorizando no sistema HRP Unimed ou que a senha (número de guia gerado no processo de autorização do Intercâmbio entre Unimeds) não está trafegando/transmitindo via mensageria/PTU Online, impedindo a liberação do atendimento.",
+        "steps": [
+          "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+          "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+          "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+          "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+          "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+          "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando que a verificação e o reprocessamento da senha no HRP foram iniciados, orientando a checagem do retorno no sistema."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-45)",
+    "resolution_steps": [
+      "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+      "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+      "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+      "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+      "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Bianca Silva** (Autorização) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **206867125** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-45)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).\n  2. [PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).\n  3. [PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.\n  4. [PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.\n  5. [PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.\n  6. [PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema.",
+    "public_reply_draft": "Olá, Bianca! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43047": {
     "ticket_id": 43047,
     "analyzed_at": "22/10/2026 10:19",

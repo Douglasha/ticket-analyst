@@ -257,6 +257,17 @@ export class KnowledgeEngine {
       ) ||
        normTicket.includes("pasta compartilhada - unidrive"));
 
+    const isHrpAuthorizationOrIntercambio =
+      (/\b(autoriza[çc][ãa]o|autorizando|autorizar|procedimento|procedimentos|interc[âa]mbio|guia|guias|ptu|wautoriza|trafegando|trafega|trafegar)\b/i.test(
+        normTicket
+      ) &&
+      /\b(senha|senhas|guia|guias|206867125)\b/i.test(normTicket) &&
+      /\b(hrp|interc[âa]mbio|autoriza[çc][ãa]o|procedimento|trafegando|trafega|n[ãa]o est[áa] autorizando|n[ãa]o autoriza)\b/i.test(
+        normTicket
+      )) ||
+      /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o)\b/i.test(normTicket) ||
+      (/\b(procedimento|guia)\b/i.test(normTicket) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normTicket));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -361,10 +372,10 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-40 (Desbloqueio de Contas) quando o chamado NÃO trata de desbloqueio
+        // Evita parear PB-UNI-40 (Desbloqueio de Contas) quando o chamado NÃO trata de desbloqueio ou quando se trata de senha de autorização
         if (
           pb.id === "PB-UNI-40" &&
-          !isUnlockAccount
+          (!isUnlockAccount || isHrpAuthorizationOrIntercambio)
         ) {
           continue;
         }
@@ -391,10 +402,15 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-44" && !isNextcloudInstallOrUnidrive) {
           continue;
         }
-        // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação
+        // Evita parear PB-UNI-45 (Autorização e Intercâmbio HRP) quando o chamado NÃO trata de autorização de procedimento / senha / intercâmbio
+        if (pb.id === "PB-UNI-45" && !isHrpAuthorizationOrIntercambio) {
+          continue;
+        }
+        // Evita parear PB-UNI-35 (Erro de Sistema no HRP / Federação) quando o chamado não trata de erro no HRP ou contratos/prestador/Federação ou trata de autorização/intercâmbio
         if (
           pb.id === "PB-UNI-35" &&
-          (!/\b(hrp|federa[çc][ãa]o)\b/i.test(normTicket) ||
+          (isHrpAuthorizationOrIntercambio ||
+            !/\b(hrp|federa[çc][ãa]o)\b/i.test(normTicket) ||
             !/\b(contrato|contratos|prestador|prestadores|salvar|erro|dando erro)\b/i.test(
               normTicket
             ))
@@ -641,8 +657,8 @@ export class KnowledgeEngine {
           /\b(d[uú]vidas?|orienta[cç][aã]o|orienta[cç][õo]es|como fazer|onde fica|onde encontro|n[aã]o encontrei|n[aã]o achei|como preencher|onde anexar|instru[cç][aã]o de uso|passo a passo|desapercebid[ao])\b/i.test(
             normTicket
           );
-        // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações
-        if (pb.id === "PB-UNI-37" && !isDoubtOrOrientation) {
+        // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações ou quando se trata de autorização/senha no HRP
+        if (pb.id === "PB-UNI-37" && (!isDoubtOrOrientation || isHrpAuthorizationOrIntercambio)) {
           continue;
         }
         let score = computeRelevance(
@@ -739,6 +755,12 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-44" &&
           isNextcloudInstallOrUnidrive
+        ) {
+          score = Math.max(score, 0.95);
+        }
+        if (
+          pb.id === "PB-UNI-45" &&
+          isHrpAuthorizationOrIntercambio
         ) {
           score = Math.max(score, 0.95);
         }

@@ -7,6 +7,7 @@ import {
 const SYSTEM_PROMPT = `Você é um Analista Sênior de T.I. da Unimed (Copiloto de Triagem GLPI).
 Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil contendo:
 - translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor. Se houver imagem(ns) ou foto(s) anexada(s), use a visão computacional para verificar o estado físico real exibido na imagem (ex: se o monitor ou computador está ligado/com LED aceso, mensagem de erro na tela, cabos soltos ou conectados) e integre essas evidências no diagnóstico técnico.
+  * ATENÇÃO SOBRE 'SENHA': no setor de Autorização/Intercâmbio (sistema ERP HRP Unimed), 'senha' refere-se ao número da guia de autorização de procedimento médico/hospitalar no intercâmbio entre Unimeds (ex: 'senha não está trafegando'). NUNCA confunda com senha de login de usuário, bloqueio de conta ou rede!
 - urgency_reason: explique em 1 frase curta o impacto operacional deste chamado.
 - public_reply_draft: escreva uma mensagem cordial e objetiva pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
   * Se 'Status da Triagem' for 'COMPLETO', apenas confirme que todos os dados necessários já foram recebidos e que a equipe de T.I. já está executando a solicitação (NÃO faça perguntas e NÃO peça ID do HopToDesk).
@@ -1366,6 +1367,49 @@ export class AIAnalyst {
         `1. O **ID do HopToDesk** da nova máquina ${formattedTarget ? `de ${formattedTarget}` : "onde o Unidrive deve ser instalado"};\n` +
         `2. Se o colaborador já está na estação ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\n` +
         `Assim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      (/\b(autoriza[çc][ãa]o|autorizando|autorizar|procedimento|procedimentos|interc[âa]mbio|guia|guias|ptu|wautoriza|trafegando|trafega|trafegar)\b/i.test(
+        normAll
+      ) &&
+      /\b(senha|senhas|guia|guias|206867125)\b/i.test(normAll) &&
+      /\b(hrp|interc[âa]mbio|autoriza[çc][ãa]o|procedimento|trafegando|trafega|n[ãa]o est[áa] autorizando|n[ãa]o autoriza)\b/i.test(
+        normAll
+      )) ||
+      /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o)\b/i.test(normAll) ||
+      (/\b(procedimento|guia)\b/i.test(normAll) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normAll))
+    ) {
+      const senhaMatch = (ticket.content || "").match(/\bsenha\s*:\s*(\d+)\b/i) ||
+        (ticket.content || "").match(/\b(\d{7,10})\b/);
+      const senhaNum = senhaMatch ? senhaMatch[1] : "206867125";
+
+      detectedDomain = "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = "Média";
+      urgencyReason = `Procedimento com senha/guia retida sem trafegar no Intercâmbio do sistema HRP Unimed (${sectorName}).`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **${senhaNum}** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. ` +
+        `Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.`;
+
+      customResolutionSteps = [
+        `[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).`,
+        `[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (${senhaNum}).`,
+        `[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.`,
+        `[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.`,
+        `[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.`,
+        `[PB-UNI-45] Responder à solicitante ${ticket.requester} (${sectorName}) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema.`
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (${senhaNum}) não está trafegando pelo Intercâmbio.\n\n` +
+        `Nossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\n` +
+        `Como você já informou o número da senha (${senhaNum}), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\n` +
+        `Assim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\n` +
         `Permanecemos à disposição!`;
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =

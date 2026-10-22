@@ -1339,7 +1339,7 @@
       "Caso a disposição do campo esteja gerando confusão frequente entre os usuários (questão de UX/layout), registrar sugestão de melhoria junto à equipe de Desenvolvimento para reposicionamento ou destaque do campo.",
       "Solicitar ao usuário confirmação do teste/localização e concluir o atendimento."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a sua dúvida referente à utilização e localização de recursos no formulário/sistema **{sistema}**.\n\nConfirmamos que a funcionalidade/opção solicitada **já se encontra disponível e ativa** no sistema!\n\nPara localizá-la e utilizá-la, siga a orientação abaixo:\n{orientacao}\n\nCaso tenha qualquer dificuldade ou precise de apoio durante o preenchimento, estamos à total disposição por aqui!\n\nPermanecemos à disposição!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua dúvida operacional referente a **{titulo}** ({setor}).\n\nNossa equipe técnica já está verificando as orientações necessárias sobre o fluxo e a utilização do recurso solicitado. Em instantes encaminharemos o passo a passo detalhado por aqui para auxiliá-lo(a).\n\nPermanecemos à disposição!"
   },
   {
     "id": "PB-UNI-38",
@@ -1602,5 +1602,55 @@
       "[PB-UNI-44] Testar a abertura dos arquivos e validação do fluxo de sincronização junto ao colaborador antes de concluir o atendimento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à instalação do **Unidrive (Nextcloud Desktop Client)** no computador do colaborador **{beneficiario}** ({setor}).\n\nComo o equipamento foi substituído recentemente, nossa equipe de T.I. precisa realizar a instalação do aplicativo e sincronizar as pastas locais do setor. Para que possamos nos conectar e realizar a configuração, você poderia nos informar:\n1. O **ID do HopToDesk** da nova máquina de {beneficiario};\n2. Se ele(a) já está utilizando a máquina ou qual o melhor horário para realizarmos a conexão remota e a sincronização?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-45",
+    "title": "Processo de Autorização de Procedimento no Sistema HRP Unimed — Falha no Tráfego de Senha e Guia de Intercâmbio",
+    "domain": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+    "keywords": [
+      "senha",
+      "senhas",
+      "autorização",
+      "autorizacao",
+      "autorizando",
+      "autorizar",
+      "procedimento",
+      "procedimentos",
+      "não está autorizando",
+      "nao esta autorizando",
+      "não autoriza",
+      "nao autoriza",
+      "senha não está trafegando",
+      "senha nao esta trafegando",
+      "não está trafegando",
+      "nao esta trafegando",
+      "não trafega",
+      "nao trafega",
+      "trafegando",
+      "guia",
+      "guias",
+      "número de guia",
+      "numero de guia",
+      "intercâmbio",
+      "intercambio",
+      "hrp",
+      "ptu",
+      "wautoriza",
+      "206867125"
+    ],
+    "symptoms": "Solicitante (frequentemente do setor de Autorização ou Recepção) relata que um procedimento não está autorizando no sistema HRP Unimed ou que a senha (número de guia gerado no processo de autorização do Intercâmbio entre Unimeds) não está trafegando/transmitindo via mensageria/PTU Online, impedindo a liberação do atendimento.",
+    "required_info": [
+      "Número da senha / guia de autorização gerada no HRP (já informado: 206867125)",
+      "Código do procedimento ou carteirinha do beneficiário (caso necessário para conferência de elegibilidade/cadastro no Intercâmbio)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+      "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+      "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+      "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+      "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando que a verificação e o reprocessamento da senha no HRP foram iniciados, orientando a checagem do retorno no sistema."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização ({senha}) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha ({senha}), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!"
   }
 ]

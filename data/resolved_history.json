@@ -29,6 +29,19 @@
     ]
   },
   {
+    "id": "Chamado #43077 (Resolvido)",
+    "ticket_id": 43077,
+    "solution_id": 41779,
+    "title": "Infraestrutura e Redes > Instalação e Configuração > Mudança de Computador na UTI Adulto",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente.",
+    "keywords": [],
+    "steps": [
+      "Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente."
+    ]
+  },
+  {
     "id": "Chamado #43076 (Resolvido)",
     "ticket_id": 43076,
     "solution_id": 41761,
@@ -70,6 +83,19 @@
       "[X] Sistema Operacional atualizado para a versão mais recente disponível.",
       "[X] Softwares instalados atualizados e aplicado correções de segurança.",
       "[X] Removidos cookies desnecessários e arquivos temporários do sistema."
+    ]
+  },
+  {
+    "id": "Chamado #43047 (Resolvido)",
+    "ticket_id": 43047,
+    "solution_id": 41780,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Pasta Compartilhada - Unidrive",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Nextcloud instalado.",
+    "keywords": [],
+    "steps": [
+      "Nextcloud instalado."
     ]
   },
   {
@@ -116,6 +142,22 @@
     "keywords": [],
     "steps": [
       "Cadastro efetuado com sucesso."
+    ]
+  },
+  {
+    "id": "Chamado #43019 (Resolvido)",
+    "ticket_id": 43019,
+    "solution_id": 41770,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Etiquetas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConfirmamos que o antivírus Bitdefender estava bloqueando o executável do aplicativo, identificando-o como Gen:Variant.Yogi.97117 e movendo-o para a quarentena. Criamos uma regra de exclusão e o atalho reapareceu na área de trabalho.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAten",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Confirmamos que o antivírus Bitdefender estava bloqueando o executável do aplicativo, identificando-o como Gen:Variant.Yogi.97117 e movendo-o para a quarentena. Criamos uma regra de exclusão e o atalho reapareceu na área de trabalho.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {

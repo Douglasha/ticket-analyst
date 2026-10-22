@@ -1,23 +1,20 @@
 [
   {
     "ticket_id": 43019,
-    "title": "Suporte Técnico e Service Desk > Aplicativos > Etiquetas",
+    "title": "Aplicativos  -  Etiquetas",
     "category": "T.I > ST > Instalação/Configuração > Aplicativos",
     "keywords": [
       "etiquetas",
-      "arquivo etiquetas",
-      "aplicativo etiquetas",
-      "imprimir",
-      "nao consigo imprimir",
-      "edilea",
-      "cadastro",
-      "hoptodesk"
+      "deu",
+      "probleminha",
+      "consigo",
+      "imprimir"
     ],
-    "problem_summary": "Problema no arquivo/aplicativo de Etiquetas no setor de Cadastro, impedindo a colaboradora Ediléa de imprimir etiquetas.",
-    "reply_template": "Olá, Ediléa! Tudo bem?\n\nRecebemos o seu relato referente ao problema no arquivo/aplicativo de **Etiquetas** (Cadastro) e à impossibilidade de imprimir.\n\nNossa equipe de Suporte Técnico já está pronta para verificar a situação e restabelecer o funcionamento do arquivo/aplicativo. Para que possamos nos conectar à sua estação de trabalho, você poderia nos informar:\n1. O seu **ID do HopToDesk** para acesso remoto;\n2. Aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na verificação e teste de impressão!\n\nPermanecemos à disposição!",
+    "problem_summary": "Bom dia!\nO meu arquivo etiquetas deu um probleminha . \nNão consigo imprimir \nFavor verificar",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente ao problema no arquivo/aplicativo de **Etiquetas** (Cadastro) e à impossibilidade de imprimir.\n\nNossa equipe de Suporte Técnico já está pronta para verificar a situação e restabelecer o funcionamento do arquivo/aplicativo. Para que possamos nos conectar à sua estação de trabalho, você poderia nos informar:\n1. O seu **ID do HopToDesk** para acesso remoto;\n2. Aparece alguma **mensagem de erro** na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?\n\nAssim que nos enviar essas informações por aqui, daremos andamento imediato na verificação e teste de impressão!\n\nPermanecemos à disposição!",
     "required_info": [
-      "ID do HopToDesk do computador de Ediléa para conexão remota da equipe de T.I.",
-      "Informar se aparece alguma mensagem de erro ao tentar imprimir ou qual comportamento o arquivo/aplicativo de etiquetas apresenta"
+      "O seu ID do HopToDesk para acesso remoto;",
+      "Aparece alguma mensagem de erro na tela ao tentar imprimir ou qual comportamento o aplicativo apresenta?"
     ],
     "resolution_steps": [
       "[PB-UNI-39] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração > Aplicativos'.",
@@ -28,7 +25,8 @@
     ],
     "sufficiency_status": "parcial",
     "custom_instruction": "Quando o colaborador relatar problema no aplicativo ou arquivo de etiquetas (não consegue imprimir ou deu um probleminha), manter a categoria em Aplicativos, não transferir para Hardware de impressora, e solicitar o ID do HopToDesk e a mensagem de erro para suporte técnico remoto.",
-    "created_at": "2026-10-22T13:32:24.102Z"
+    "created_at": "2026-10-22T13:32:24.102Z",
+    "updated_at": "2026-10-22T13:40:48.350Z"
   },
   {
     "ticket_id": 43047,
@@ -1717,5 +1715,34 @@
     "sufficiency_status": "parcial",
     "created_at": "2026-10-20T17:58:53.496Z",
     "updated_at": "2026-10-20T18:24:16.907Z"
+  },
+  {
+    "ticket_id": 43041,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > SENHA",
+    "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "keywords": [
+      "hrp",
+      "autorizacao",
+      "senha",
+      "procedimento",
+      "intercambio",
+      "trafegando",
+      "guia",
+      "206867125"
+    ],
+    "problem_summary": "Solicitante Bianca Silva (Autorização) relata que está lançando um procedimento no ERP HRP Unimed cuja senha de autorização (guia nº 206867125 no Intercâmbio Nacional entre Unimeds) não está trafegando/transmitindo via webservice/PTU, impedindo a liberação do atendimento.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+      "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+      "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+      "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+      "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-22T16:42:25.939Z",
+    "updated_at": "2026-10-22T16:42:25.942Z"
   }
 ]
