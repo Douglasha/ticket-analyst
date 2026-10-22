@@ -14,26 +14,29 @@
       "sara pereira",
       "fabiola bueno",
       "lohana ferreira",
-      "glaucia reis"
+      "glaucia reis",
+      "numero do conselho",
+      "conselho profissional"
     ],
     "problem_summary": "Solicitação de cadastro de profissionais de saúde no Prontuário do Hospital (SPdata / PEP Hospitalar) para Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis.",
-    "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional** (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM);\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+    "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
     "required_info": [
       "Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata",
       "Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)",
-      "Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)",
+      "Conselho Profissional e Número de Registro (órgão de classe com respectivo número e UF, ex.: CREFITO, CRP, COREN, CRM)",
       "Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata"
     ],
     "resolution_steps": [
       "[PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).",
       "[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.",
-      "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).",
+      "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
       "[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.",
       "[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login."
     ],
     "sufficiency_status": "parcial",
-    "custom_instruction": "Quando solicitarem cadastro ou acesso no prontuário do hospital para profissionais de saúde, identificar todos os profissionais na descrição, manter em Criação de Usuários e solicitar os dados clínicos para o SPdata (Nome completo, Data de nascimento, Especialidade, Conselho Profissional e usuário de referência).",
-    "created_at": "2026-10-22T10:58:38.066Z"
+    "custom_instruction": "Quando solicitarem cadastro ou acesso no prontuário do hospital para profissionais de saúde, identificar todos os profissionais na descrição, manter em Criação de Usuários e solicitar os dados clínicos para o SPdata (Nome completo, Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
+    "created_at": "2026-10-22T10:58:38.066Z",
+    "updated_at": "2026-10-22T11:14:50.045Z"
   },
   {
     "ticket_id": 42953,

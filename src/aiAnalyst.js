@@ -2041,13 +2041,13 @@ export class AIAnalyst {
         missingInfo = [
           `Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata`,
           `Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)`,
-          `Conselho Profissional (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM)`,
+          `Conselho Profissional e Número de Registro (órgão de classe com respectivo número e UF, ex.: CREFITO, CRP, COREN, CRM)`,
           `Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata`
         ];
 
         translatedIntent =
           `A solicitante **${ticket.requester}** (${sectorName}) solicita cadastro e liberação de acesso ao **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)** para ${countText} devido à demanda assistencial da unidade. ` +
-          `O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).` +
+          `O chamado foi classificado como **PARCIAL** pois, embora os nomes e CPFs tenham sido informados, o cadastro clínico no SPdata exige dados complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).` +
           (hasStaffFollowup
             ? ` A equipe de T.I. já adicionou andamento solicitando essas informações e o ticket permanece como Pendente aguardando retorno.`
             : ` Demanda solicitação desses dados complementares para viabilizar os cadastros.`);
@@ -2055,7 +2055,7 @@ export class AIAnalyst {
         customResolutionSteps = [
           `[PB-UNI-43] Analisar a relação de profissionais solicitadas: ${profSummaryList}.`,
           `[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.`,
-          `[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional com UF e usuário de referência).`,
+          `[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).`,
           `[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.`,
           `[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login.`
         ];
@@ -2066,7 +2066,7 @@ export class AIAnalyst {
           `Para que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n` +
           `1. **Nome completo** e **Data de nascimento**;\n` +
           `2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n` +
-          `3. **Conselho Profissional** (número de registro e UF do conselho, ex.: CREFITO, CRP, COREN, CRM);\n` +
+          `3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n` +
           `4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\n` +
           `Assim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\n` +
           `Permanecemos à disposição!`;

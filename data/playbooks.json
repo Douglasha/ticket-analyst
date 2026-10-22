@@ -1545,16 +1545,16 @@
       "Nome completo de cada profissional",
       "Data de nascimento",
       "Especialidade / Função de atuação",
-      "Conselho Profissional com número e UF (CRM, COREN, CREFITO, CRP, etc.)",
+      "Conselho Profissional e Número de Registro (com UF) de cada profissional (CRM, COREN, CREFITO, CRP, etc.)",
       "Profissional de referência que já atue na mesma função no hospital para espelhamento/replicação de permissões no SPdata"
     ],
     "resolution_steps": [
       "[PB-UNI-43] Identificar todos os profissionais listados no chamado (tanto no formulário principal quanto nas observações) para cadastro no sistema hospitalar.",
       "[PB-UNI-43] Verificar se o sistema indicado como Prontuário do hospital refere-se ao SGH Spdata (módulo assistencial / PEP Hospitalar).",
-      "[PB-UNI-43] Solicitar os dados cadastrais clínicos faltantes para cada profissional: Nome completo, Data de nascimento, Especialidade/Função, Conselho Profissional (CRM/COREN/CREFITO/CRP com UF) e profissional de referência.",
+      "[PB-UNI-43] Solicitar os dados cadastrais clínicos faltantes para cada profissional: Nome completo, Data de nascimento, Especialidade/Função, Conselho Profissional e Número de Registro (com UF) e profissional de referência.",
       "[PB-UNI-43] Manter o chamado com status Pendente aguardando o retorno com os dados clínicos obrigatórios.",
       "[PB-UNI-43] Após o recebimento, acessar o sistema SPdata, efetuar o cadastro profissional/operador de cada pessoa e replicar as permissões de atendimento hospitalar."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente ao cadastro das profissionais para acesso ao **Prontuário do Hospital (sistema SPdata)**:\n{lista_profissionais}\n\nPara prosseguirmos com a criação dos usuários e permissões de atendimento no SPdata, precisamos de alguns dados cadastrais adicionais de cada profissional:\n1. **Nome completo**;\n2. **Data de nascimento**;\n3. **Especialidade / Função**;\n4. **Conselho Profissional** (número e UF do CRM, COREN, CREFITO, CRP, etc.);\n5. **Profissional de referência:** Caso haja algum profissional que já desempenhe a mesma função no hospital, por gentileza nos informe o nome para que possamos replicar o perfil de permissões.\n\nO chamado permanecerá com status **Pendente** enquanto aguardamos esses dados. Assim que nos enviar, já daremos andamento imediato aos cadastros!\n\nPermanecemos à disposição!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação referente ao cadastro das profissionais para acesso ao **Prontuário do Hospital (sistema SPdata)**:\n{lista_profissionais}\n\nPara prosseguirmos com a criação dos usuários e permissões de atendimento no SPdata, precisamos de alguns dados cadastrais adicionais de cada profissional:\n1. **Nome completo**;\n2. **Data de nascimento**;\n3. **Especialidade / Função**;\n4. **Conselho Profissional e Número de Registro:** Informar o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n5. **Profissional de referência:** Caso haja algum profissional que já desempenhe a mesma função no hospital, por gentileza nos informe o nome para que possamos replicar o perfil de permissões.\n\nO chamado permanecerá com status **Pendente** enquanto aguardamos esses dados. Assim que nos enviar, já daremos andamento imediato aos cadastros!\n\nPermanecemos à disposição!"
   }
 ]
