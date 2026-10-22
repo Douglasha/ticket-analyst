@@ -9088,7 +9088,7 @@
       "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Bianca Silva** (Autorização) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **206867125** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-45)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).\n  2. [PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).\n  3. [PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.\n  4. [PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.\n  5. [PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.\n  6. [PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema.",
-    "public_reply_draft": "Olá, Bianca! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+    "public_reply_draft": "Olá, Bianca! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos a análise, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
@@ -9343,6 +9343,104 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Isabel Cristina dos Santos Teodoro Nepomuceno solicitou a instalação do software autentique e uniSing em um computador da Valéria, localizado na unidade de recepção. A equipe de TI já está trabalhando nessa solicitação, conforme consta no chamado.\n\nClassificação Sugerida: T.I > ST > Instalação/Configuração | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
     "public_reply_draft": "Olá, Isabel! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Instalação Autentique**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43097": {
+    "ticket_id": 43097,
+    "analyzed_at": "22/10/2026 15:05",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Sarah Victoria Soares Santos** (H Faturamento) solicita a reversão de encerramento / reabertura da remessa **350** no sistema **Controle de Contas**, para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas",
+    "real_urgency": "Alta",
+    "urgency_reason": "Reversão de encerramento / reabertura da remessa no sistema Controle de Contas solicitada pelo setor H Faturamento para continuidade do faturamento/auditoria.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-28",
+        "title": "Reabertura de Registro, Conta ou Remessa Encerrada Erroneamente — Reversão de Encerramento (Controle de Contas / SGH / Faturamento)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro, conta hospitalar ou remessa que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH) ou para reversão de processo de encerramento, permitindo novos lançamentos, estornos e conferência.",
+        "steps": [
+          "[PB-UNI-28] Acessar o sistema Controle de Contas (ou SGH) com perfil de administração do Faturamento / Service Desk.",
+          "[PB-UNI-28] Localizar o registro, conta ou remessa informada pelo solicitante e verificar o status atual de encerramento/fechamento.",
+          "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no sistema para retornar ao status em aberto / em digitação.",
+          "[PB-UNI-28] Confirmar que o item (registro, conta ou remessa) está liberado para movimentação e conferência pelo setor solicitante.",
+          "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42249",
+        "title": "Solicitação Diversa  -  ativar conta no controle de contas",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "steps": [
+          "[MEM-#42198] [PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[MEM-#42198] [PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[MEM-#42198] [PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[MEM-#42198] [PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a).",
+          "[MEM-#41992] [PB-UNI-15] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42198",
+        "title": "Solicitação Diversa  -  ABRIR CONTAS",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "steps": [
+          "[PB-UNI-28] Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
+          "[PB-UNI-28] Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
+          "[PB-UNI-28] Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
+          "[PB-UNI-28] Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
+          "[PB-UNI-28] Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **1411181** no sistema **Controle de Contas**, que foi encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no H Faturamento.\n\nAssim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42843 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Reverter processo de encerramento de contas",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nContas reabertas\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Contas reabertas",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-28) + Memória Contínua • Aprendido com o Analista (MEM-#42249)",
+    "resolution_steps": [
+      "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar a remessa informada (remessa 350) e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que a remessa está liberada para movimentação pelo setor de H Faturamento.",
+      "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Sarah Victoria Soares Santos** (H Faturamento) solicita a reversão de encerramento / reabertura da remessa **350** no sistema **Controle de Contas**, para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-28) + Memória Contínua • Aprendido com o Analista (MEM-#42249)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.\n  2. [PB-UNI-28] Localizar a remessa informada (remessa 350) e verificar o status atual de encerramento/fechamento.\n  3. [PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.\n  4. [PB-UNI-28] Confirmar que a remessa está liberada para movimentação pelo setor de H Faturamento.\n  5. [PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido.",
+    "public_reply_draft": "Olá, Sarah! Tudo bem?\n\nRecebemos a sua solicitação referente à reversão de encerramento da remessa **350** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   }

@@ -268,6 +268,15 @@ export class KnowledgeEngine {
       /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o)\b/i.test(normTicket) ||
       (/\b(procedimento|guia)\b/i.test(normTicket) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normTicket));
 
+    const isReopenOrRevertAccount =
+      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o da remessa|revers[aã]o no controle de contas|reverter contas|contas reabertas|processo revertido)\b/i.test(
+        normTicket
+      ) ||
+      (/\bcontrole de contas\b/i.test(normTicket) && /\b(remessa|revers[aã]o|reverter|voltar remessa)\b/i.test(normTicket))) &&
+      !/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es|encaminhamento autom[aá]tico)\b/i.test(
+        normTicket
+      );
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -462,12 +471,10 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-28 (Reabertura de Registro) quando o chamado não trata de reabertura de conta/registro ou quando trata de desenvolvimento/parametrização
+        // Evita parear PB-UNI-28 (Reabertura de Registro / Reversão de Encerramento) quando o chamado não trata de reabertura/reversão ou trata de desenvolvimento
         if (
           pb.id === "PB-UNI-28" &&
-          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
-            normTicket
-          ) ||
+          (!isReopenOrRevertAccount ||
             /\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(
               normTicket
             ))
@@ -764,6 +771,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.95);
         }
+        if (
+          pb.id === "PB-UNI-28" &&
+          isReopenOrRevertAccount
+        ) {
+          score = Math.max(score, 0.95);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -889,19 +902,20 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear memórias de vinculação de unidade/perfil (ex: MEM-#41992) quando o chamado trata de reabertura ou cancelamento de registro no Controle de Contas
+        // Evita parear memórias de vinculação de unidade/perfil (ex: MEM-#41992) quando o chamado trata de reabertura, reversão de encerramento ou cancelamento de registro no Controle de Contas
         if (
-          /\b(reabrir|reabertura|cancelar|cancelamento|excluir|exclusao|estornar)\b/i.test(normTicket) &&
+          (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|exclusao|estornar|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normTicket) ||
+            isReopenOrRevertAccount) &&
           /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
           continue;
         }
-        // Evita parear memórias de reabertura/ativação de contas quando o chamado NÃO trata de reabrir/ativar conta
+        // Evita parear memórias de reabertura/ativação de contas quando o chamado NÃO trata de reabrir/ativar/reverter conta
         if (
-          !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|encerrad[ao] erroneamente)\b/i.test(normTicket) &&
-          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|1411181)\b/i.test(
+          (!isReopenOrRevertAccount && !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|encerrad[ao] erroneamente)\b/i.test(normTicket)) &&
+          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|ativar conta|reativar conta|1411181|revers[aã]o)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
           )
         ) {

@@ -2655,7 +2655,7 @@ export class AIAnalyst {
       ) ||
         ticket.category.includes("Desenvolvimento") ||
         ticket.category.includes("DV")) &&
-      !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|cancelar|cancelamento|excluir)\b/i.test(
+      !/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o|reverter|voltar remessa|remessa|cancelar|cancelamento|excluir)\b/i.test(
         normAll
       )
     ) {
@@ -2692,24 +2692,30 @@ export class AIAnalyst {
         `Assim que tivermos o parecer técnico da equipe de Desenvolvimento ou os ajustes estiverem disponíveis para homologação com o Faturamento, atualizaremos você por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(
+      (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o|reverter contas)\b/i.test(
         normAll
-      ) &&
+      ) ||
+      (normAll.includes("controle de contas") && /\b(remessa|revers[aã]o|reverter)\b/i.test(normAll))) &&
       (normAll.includes("controle de contas") ||
-        /\b(registro|conta|atendimento|faturamento)\b/i.test(normCore) ||
+        /\b(registro|conta|remessa|atendimento|faturamento)\b/i.test(normCore) ||
         /\b(faturamento|auditoria)\b/i.test(sectorName))
     ) {
-      const descText = formFields.descricao || "";
+      const descText = formFields.descricao || ticket.content || "";
       const appName =
         formFields.aplicacao ||
         (normAll.includes("controle de contas")
           ? "Controle de Contas"
           : "sistema interno");
+      const isRemessa = /\bremessa\b/i.test(normAll);
+      const isConta = !isRemessa && /\bconta\b/i.test(normAll);
       const regMatch =
         descText.match(
-          /(?:registro|conta|atendimento|n[º°]?)\s*[:#-]?\s*(\d{3,12})/i
-        ) || descText.match(/\b(\d{4,12})\b/);
+          /(?:registro|conta|remessa|atendimento|n[º°]?)\s*[:#-]?\s*(\d{2,12})/i
+        ) || descText.match(/\b(\d{3,12})\b/);
       const recordNum = regMatch ? regMatch[1] : "";
+      const itemPrep = isRemessa ? "da remessa" : isConta ? "da conta" : "do registro";
+      const itemArt = isRemessa ? "a remessa" : isConta ? "a conta" : "o registro";
+      const itemLabel = isRemessa ? "remessa" : isConta ? "conta" : "registro";
 
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
       suggestedCategory =
@@ -2717,33 +2723,42 @@ export class AIAnalyst {
         ticket.category.includes("Acesso")
           ? "T.I > ST > Resolução de Problemas > Sistemas Internos"
           : ticket.category;
-      realUrgency = ticket.urgency_label || "Média";
-      urgencyReason = `Reabertura de registro/conta no sistema ${appName} solicitada pelo setor ${sectorName} para continuidade do faturamento/auditoria.`;
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = `Reversão de encerramento / reabertura ${itemPrep} no sistema ${appName} solicitada pelo setor ${sectorName} para continuidade do faturamento/auditoria.`;
 
       if (recordNum) {
         translatedIntent =
-          `A solicitante **${ticket.requester}** (${sectorName}) solicita a reabertura do registro **${recordNum}** no sistema **${appName}**, ` +
-          `informando que foi encerrado erroneamente. Todos os dados necessários para o atendimento já constam no chamado.`;
+          `A solicitante **${ticket.requester}** (${sectorName}) solicita a reversão de encerramento / reabertura ${itemPrep} **${recordNum}** no sistema **${appName}**, ` +
+          `para que volte a ficar disponível no setor para movimentação e conferência. Todos os dados necessários para o atendimento já constam no chamado.`;
         sufficiencyStatus = "completo";
         missingInfo = [];
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à reabertura do registro **${recordNum}** no sistema **${appName}**, que foi encerrado erroneamente.\n\n` +
-          `Os dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no ${sectorName}.\n\n` +
-          `Assim que o registro estiver liberado para movimentação, confirmaremos a conclusão por aqui!`;
-      } else {
-        translatedIntent =
-          `Solicitação do setor **${sectorName}** (**${ticket.requester}**) para reabertura de registro/conta no sistema **${appName}**, ` +
-          `porém sem informar o número do registro afetado.`;
-        sufficiencyStatus = "incompleto";
-        missingInfo = [
-          `Informar o número do registro/conta no sistema ${appName} que precisa ser reaberto`,
+        customResolutionSteps = [
+          `[PB-UNI-28] Acessar o sistema ${appName} com perfil de administração do Faturamento / Service Desk.`,
+          `[PB-UNI-28] Localizar ${itemArt} informad${isRemessa || isConta ? "a" : "o"} (${itemLabel} ${recordNum}) e verificar o status atual de encerramento/fechamento.`,
+          `[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no ${appName} para retornar ao status em aberto / em digitação.`,
+          `[PB-UNI-28] Confirmar que ${itemArt} está liberad${isRemessa || isConta ? "a" : "o"} para movimentação pelo setor de ${sectorName}.`,
+          `[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido.`
         ];
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação de reabertura de conta no sistema **${appName}**.\n\n` +
-          `Para localizarmos e reabrirmos o registro correto no sistema, você poderia nos informar o **número do registro/conta**?\n\n` +
-          `Assim que nos confirmar o número por aqui, já efetuamos a reabertura!`;
+          `Recebemos a sua solicitação referente à reversão de encerramento ${itemPrep} **${recordNum}** no sistema **${appName}** (${sectorName}).\n\n` +
+          `Os dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\n` +
+          `Assim que o processo for concluído, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `Solicitação do setor **${sectorName}** (**${ticket.requester}**) para reversão de encerramento / reabertura de conta, registro ou remessa no sistema **${appName}**, ` +
+          `porém sem informar o número específico afetado.`;
+        sufficiencyStatus = "incompleto";
+        missingInfo = [
+          `Informar o número do registro, conta ou remessa no sistema ${appName} que precisa ser reaberto(a)`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação de reversão de encerramento / reabertura no sistema **${appName}**.\n\n` +
+          `Para localizarmos e reabrirmos o item correto no sistema, você poderia nos informar o **número do registro, conta ou remessa**?\n\n` +
+          `Assim que nos confirmar o número por aqui, já efetuamos a reversão do encerramento!\n\n` +
+          `Permanecemos à disposição!`;
       }
     } else if (
       (/\b(vincular|vinculacao|habilitar|atribuir)\b/i.test(normAll) &&
@@ -3399,12 +3414,12 @@ export class AIAnalyst {
             !/\b(taxa|taxas)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
-          (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+          (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
             /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
-          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(normAll) &&
-            /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181)\b/i.test(
+          (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
+            /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181|revers[aã]o)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             )) ||
           (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&
@@ -3548,12 +3563,12 @@ export class AIAnalyst {
           !/\b(taxa|taxas)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           )) ||
-        (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar)\b/i.test(normAll) &&
+        (/\b(reabrir|reabertura|cancelar|cancelamento|excluir|estornar|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
           /\b(vincular|vinculacao|unidade piumhi|acesso ao meu usuario)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           )) ||
-        (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente)\b/i.test(normAll) &&
-          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181)\b/i.test(
+        (!/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|encerrad[ao] erroneamente|revers[aã]o|reverter|voltar remessa|remessa)\b/i.test(normAll) &&
+          /\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|1411181|revers[aã]o)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
           )) ||
         (/\b(parametrizar|parametriza[çc][ãa]o|viabilidade|melhoria|novas aplica[çc][õo]es)\b/i.test(normAll) &&

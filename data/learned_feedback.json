@@ -1718,20 +1718,20 @@
   },
   {
     "ticket_id": 43041,
-    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > SENHA",
-    "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "title": "Dúvidas e Orientações  -  SENHA",
+    "category": "T.I > ST > Dúvidas e Orientações",
     "keywords": [
-      "hrp",
-      "autorizacao",
+      "duvidas",
+      "orientacoes",
       "senha",
-      "procedimento",
-      "intercambio",
-      "trafegando",
-      "guia",
-      "206867125"
+      "gostaria",
+      "orientacao",
+      "lancando",
+      "alguns",
+      "dias"
     ],
-    "problem_summary": "Solicitante Bianca Silva (Autorização) relata que está lançando um procedimento no ERP HRP Unimed cuja senha de autorização (guia nº 206867125 no Intercâmbio Nacional entre Unimeds) não está trafegando/transmitindo via webservice/PTU, impedindo a liberação do atendimento.",
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+    "problem_summary": "Boa tarde, por gentileza gostaria de uma orientação, estou lançando a alguns dias um procedimento no qual a senha não está trafegando, poderia verificar por gentileza. \nSenha: 206867125",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos a análise, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
@@ -1743,6 +1743,32 @@
     ],
     "sufficiency_status": "completo",
     "created_at": "2026-10-22T16:42:25.939Z",
-    "updated_at": "2026-10-22T16:42:25.942Z"
+    "updated_at": "2026-10-22T16:47:29.046Z"
+  },
+  {
+    "ticket_id": 43097,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Voltar remessa para o controle de contas",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "controle de contas",
+      "remessa",
+      "reversao",
+      "encerramento",
+      "voltar remessa",
+      "remessa 350"
+    ],
+    "problem_summary": "Solicitante Sarah Victoria Soares Santos (H Faturamento) solicita fazer reversão de encerramento da remessa 350 no sistema Controle de Contas para que as contas associadas retornem ao status aberto/em digitação para movimentação pelo setor.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reversão de encerramento da remessa **350** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar a remessa informada (remessa 350) e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que a remessa está liberada para movimentação pelo setor de H Faturamento.",
+      "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-22T18:05:49.411Z",
+    "updated_at": "2026-10-22T18:05:49.412Z"
   }
 ]

@@ -927,7 +927,7 @@
   {
     "id": "PB-UNI-28",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "title": "Reabertura de Registro ou Conta Encerrada Erroneamente (Controle de Contas / SGH / Faturamento)",
+    "title": "Reabertura de Registro, Conta ou Remessa Encerrada Erroneamente — Reversão de Encerramento (Controle de Contas / SGH / Faturamento)",
     "keywords": [
       "reabrir registro",
       "reabertura de registro",
@@ -939,20 +939,34 @@
       "encerrado erroneamente",
       "fechada por engano",
       "reabertura controle de contas",
-      "controle de contas reabrir"
+      "controle de contas reabrir",
+      "voltar remessa",
+      "voltar remessa para o controle de contas",
+      "reversão de encerramento",
+      "reversao de encerramento",
+      "reversão no controle de contas",
+      "reversao no controle de contas",
+      "reverter processo de encerramento",
+      "reverter encerramento",
+      "reverter encerramento de contas",
+      "reverter contas",
+      "contas reabertas",
+      "processo revertido",
+      "remessa 350",
+      "remessa"
     ],
-    "symptoms": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro ou conta hospitalar que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH), permitindo novos lançamentos, estornos e conferência.",
+    "symptoms": "Solicitação do setor de Faturamento (H Faturamento), Recepção ou Auditoria para reabrir um registro, conta hospitalar ou remessa que foi finalizada/encerrada erroneamente no sistema (ex: Controle de Contas / SGH) ou para reversão de processo de encerramento, permitindo novos lançamentos, estornos e conferência.",
     "required_info": [
-      "Número do registro/conta no sistema que deve ser reaberto (caso não conste informado na descrição)"
+      "Número do registro, conta ou remessa no sistema que deve ser reaberto/revertido (já informado quando constar na descrição)"
     ],
     "resolution_steps": [
-      "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Sistemas Internos' (ou 'Solicitação Diversa').",
-      "Acessar o módulo de faturamento/auditoria do sistema informado (ex: Controle de Contas) e localizar o registro numérico informado pelo solicitante.",
-      "Verificar o status atual do registro (Encerrado/Fechado) e executar a rotina de reabertura/estorno de encerramento.",
-      "Confirmar que o registro voltou para o status Em Aberto / Em Digitação e está disponível para movimentação pelo setor solicitante.",
-      "Registrar a conclusão da reabertura no chamado e notificar o(a) colaborador(a)."
+      "[PB-UNI-28] Acessar o sistema Controle de Contas (ou SGH) com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar o registro, conta ou remessa informada pelo solicitante e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no sistema para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que o item (registro, conta ou remessa) está liberado para movimentação e conferência pelo setor solicitante.",
+      "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
     ],
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura do registro **{registro}** no sistema **Controle de Contas**, encerrado erroneamente.\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reabertura do registro no sistema para que você possa dar andamento no {setor}.\n\nAssim que o registro for reaberto e estiver liberado para movimentação, confirmaremos a conclusão por aqui!"
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reversão de encerramento / reabertura no sistema **Controle de Contas** ({setor}).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!"
   },
   {
     "id": "PB-UNI-29",
