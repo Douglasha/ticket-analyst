@@ -2478,12 +2478,7 @@ export class AIAnalyst {
       }
 
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
-      suggestedCategory =
-        ticket.category.includes("Solicitação Diversa") ||
-        ticket.category.includes("Aplicativos") ||
-        ticket.category.includes("Sistemas Operacionais")
-          ? "T.I > ST > Resolução de Problemas > Sistemas Internos"
-          : ticket.category;
+      suggestedCategory = "T.I > ST > Reversão de Processos / Ajustes Operacionais";
       realUrgency = ticket.urgency_label || "Média";
       urgencyReason =
         `Exclusão de taxa lançada indevidamente em conta hospitalar no módulo de Faturamento de Convênios do sistema ${appName} para continuidade da auditoria e faturamento.`;
@@ -2613,7 +2608,7 @@ export class AIAnalyst {
       }
 
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
-      suggestedCategory = "T.I > ST > Resolução de Problemas > Sistemas Internos";
+      suggestedCategory = "T.I > ST > Reversão de Processos / Ajustes Operacionais";
       realUrgency = ticket.urgency_label || "Alta";
       urgencyReason = `Regularização de registro/conta no sistema ${appName} solicitado pelo setor ${sectorName}.`;
 
@@ -2718,11 +2713,7 @@ export class AIAnalyst {
       const itemLabel = isRemessa ? "remessa" : isConta ? "conta" : "registro";
 
       detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
-      suggestedCategory =
-        ticket.category.includes("Solicitação Diversa") ||
-        ticket.category.includes("Acesso")
-          ? "T.I > ST > Resolução de Problemas > Sistemas Internos"
-          : ticket.category;
+      suggestedCategory = "T.I > ST > Reversão de Processos / Ajustes Operacionais";
       realUrgency = ticket.urgency_label || "Alta";
       urgencyReason = `Reversão de encerramento / reabertura ${itemPrep} no sistema ${appName} solicitada pelo setor ${sectorName} para continuidade do faturamento/auditoria.`;
 
@@ -2733,6 +2724,7 @@ export class AIAnalyst {
         sufficiencyStatus = "completo";
         missingInfo = [];
         customResolutionSteps = [
+          `[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).`,
           `[PB-UNI-28] Acessar o sistema ${appName} com perfil de administração do Faturamento / Service Desk.`,
           `[PB-UNI-28] Localizar ${itemArt} informad${isRemessa || isConta ? "a" : "o"} (${itemLabel} ${recordNum}) e verificar o status atual de encerramento/fechamento.`,
           `[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no ${appName} para retornar ao status em aberto / em digitação.`,

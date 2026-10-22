@@ -1748,7 +1748,7 @@
   {
     "ticket_id": 43097,
     "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Voltar remessa para o controle de contas",
-    "category": "T.I > ST > Resolução de Problemas",
+    "category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
     "keywords": [
       "controle de contas",
       "remessa",
@@ -1761,6 +1761,7 @@
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reversão de encerramento da remessa **350** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "required_info": [],
     "resolution_steps": [
+      "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
       "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
       "[PB-UNI-28] Localizar a remessa informada (remessa 350) e verificar o status atual de encerramento/fechamento.",
       "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",

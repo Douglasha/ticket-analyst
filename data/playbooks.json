@@ -443,9 +443,10 @@
       "Número do registro/conta/atendimento e nome do(a) paciente/beneficiário(a) (caso não tenham sido informados na descrição)"
     ],
     "resolution_steps": [
-      "Localizar no sistema indicado (ex: Controle de Contas) o número do registro e o nome do(a) paciente/beneficiário(a) informados pelo solicitante.",
-      "Verificar o status de tramitação do registro (ex: encaminhado à recepção/auditoria) e efetuar o cancelamento/inativação conforme solicitado.",
-      "Confirmar a conclusão do cancelamento no chamado junto ao setor solicitante."
+      "[PB-UNI-13] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-13] Localizar no sistema indicado (ex: Controle de Contas) o número do registro e o nome do(a) paciente/beneficiário(a) informados pelo solicitante.",
+      "[PB-UNI-13] Verificar o status de tramitação do registro (ex: encaminhado à recepção/auditoria) e efetuar o cancelamento/inativação conforme solicitado.",
+      "[PB-UNI-13] Confirmar a conclusão do cancelamento no chamado junto ao setor solicitante."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de cancelamento do registro no sistema **Controle de Contas**. Todos os dados necessários já foram informados e nossa equipe já está executando o cancelamento.\n\nAssim que concluído, confirmaremos por aqui!"
   },
@@ -960,6 +961,7 @@
       "Número do registro, conta ou remessa no sistema que deve ser reaberto/revertido (já informado quando constar na descrição)"
     ],
     "resolution_steps": [
+      "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
       "[PB-UNI-28] Acessar o sistema Controle de Contas (ou SGH) com perfil de administração do Faturamento / Service Desk.",
       "[PB-UNI-28] Localizar o registro, conta ou remessa informada pelo solicitante e verificar o status atual de encerramento/fechamento.",
       "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no sistema para retornar ao status em aberto / em digitação.",
@@ -1232,11 +1234,12 @@
       "Identificação ou código da taxa/item a ser excluído (ex.: taxa de registro ambulatorial código 3028)"
     ],
     "resolution_steps": [
-      "Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.",
-      "Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.",
-      "Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).",
-      "Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.",
-      "Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
+      "[PB-UNI-34] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-34] Acessar o sistema SGH (Spdata) no módulo de Faturamento de Convênios / Contas Hospitalares.",
+      "[PB-UNI-34] Localizar a conta externa pelo Número de Registro, Prontuário e Nome do Paciente informados.",
+      "[PB-UNI-34] Identificar o lançamento indevido da taxa (ex.: código 3028 - taxa de registro ambulatorial lançada em serviço hospitalar).",
+      "[PB-UNI-34] Verificar se há bloqueios/travas de tela no faturamento ou executar o procedimento operacional de exclusão/estorno do item na conta hospitalar.",
+      "[PB-UNI-34] Validar se a conta permaneceu íntegra para continuidade da auditoria e faturamento de convênios e confirmar a exclusão da taxa no chamado GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à exclusão da {taxa} lançada equivocadamente no módulo de Faturamento de Convênios do sistema **SGH (Spdata)**.\n\nTodos os dados da conta externa (Registro **{registro}**, Paciente: **{paciente}**, Prontuário: **{prontuario}**) foram validados e nossa equipe técnica já está verificando o procedimento para exclusão/estorno da taxa no sistema.\n\nAssim que o lançamento for excluído e a conta liberada no SGH, confirmaremos a conclusão por aqui!\n\nPermanecemos à disposição!"
   },
