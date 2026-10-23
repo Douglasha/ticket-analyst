@@ -611,6 +611,9 @@ export class GLPIClient {
           const isImage =
             mime.startsWith("image/") ||
             /\.(png|jpe?g|gif|webp|bmp)$/i.test(filename);
+          const isXml =
+            mime.includes("xml") ||
+            /\.xml$/i.test(filename);
 
           if (!mime || mime === "application/octet-stream") {
             if (/\.png$/i.test(filename)) mime = "image/png";
@@ -618,6 +621,7 @@ export class GLPIClient {
             else if (/\.gif$/i.test(filename)) mime = "image/gif";
             else if (/\.webp$/i.test(filename)) mime = "image/webp";
             else if (/\.pdf$/i.test(filename)) mime = "application/pdf";
+            else if (/\.xml$/i.test(filename)) mime = "text/xml";
           }
 
           const docObj = {
@@ -626,12 +630,14 @@ export class GLPIClient {
             filename,
             mime,
             is_image: isImage,
+            is_xml: isXml,
             size_bytes: Number(meta.filesize || 0),
             base64: null,
             data_url: null,
+            xml_content: null,
           };
 
-          if (isImage) {
+          if (isImage || isXml) {
             try {
               const binRes = await fetch(`${this.baseUrl}/Document/${dId}`, {
                 headers: {
@@ -642,15 +648,20 @@ export class GLPIClient {
               if (binRes.ok) {
                 const arrayBuf = await binRes.arrayBuffer();
                 const buf = Buffer.from(arrayBuf);
-                if (buf.length > 0 && buf.length <= 15 * 1024 * 1024) {
+                if (isImage && buf.length > 0 && buf.length <= 15 * 1024 * 1024) {
                   const b64 = buf.toString("base64");
                   docObj.base64 = b64;
                   docObj.data_url = `data:${mime};base64,${b64}`;
                   docObj.size_bytes = buf.length;
+                } else if (isXml && buf.length > 0 && buf.length <= 10 * 1024 * 1024) {
+                  const headAscii = buf.subarray(0, 200).toString("latin1");
+                  const isIso = /encoding=["'](?:ISO-8859-1|latin1|windows-1252)["']/i.test(headAscii);
+                  docObj.xml_content = buf.toString(isIso ? "latin1" : "utf8");
+                  docObj.size_bytes = buf.length;
                 }
               }
             } catch {
-              // ignora erro ao baixar binário da imagem
+              // ignora erro ao baixar binário do anexo
             }
           }
           documents.push(docObj);

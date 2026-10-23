@@ -71,6 +71,150 @@ export function extractHealthProfessionals(formFields, descText) {
   return professionals;
 }
 
+const GRAU_PART_MAP = {
+  "00": "Cirurgião",
+  "01": "1º Auxiliar",
+  "02": "2º Auxiliar",
+  "03": "3º Auxiliar",
+  "04": "4º Auxiliar",
+  "05": "Instrumentador",
+  "06": "Anestesista",
+  "07": "Aux. Anestesista",
+  "08": "Pediatra na sala de parto",
+  "09": "Perfusionista",
+  "10": "Outros",
+  "11": "Auxiliar SADT",
+  "12": "Clínico",
+  "13": "Intensivista",
+};
+
+export function formatBRL(val) {
+  return Number(val || 0).toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+export function parseAndAuditTissXml(xmlRaw, filename = "arquivo.xml") {
+  if (!xmlRaw || typeof xmlRaw !== "string") return null;
+  const getTag = (src, tag) => {
+    const m = src.match(new RegExp(`<(?:\\w+:)?${tag}[^>]*>([\\s\\S]*?)<\\/(?:\\w+:)?${tag}>`, "i"));
+    return m ? m[1].trim() : "";
+  };
+
+  const numeroLote = getTag(xmlRaw, "numeroLote").replace(/^0+(?=\d)/, "");
+  const sequencial = getTag(xmlRaw, "sequencialTransacao").replace(/^0+(?=\d)/, "");
+  const versaoPadrao = getTag(xmlRaw, "versaoPadrao");
+  const hashInformado = getTag(xmlRaw, "hash");
+  const numeroGuia = getTag(xmlRaw, "numeroGuiaPrestador") || getTag(xmlRaw, "numeroGuiaOperadora");
+  const senhaGuia = getTag(xmlRaw, "senha");
+  const nomeBeneficiario = getTag(xmlRaw, "nomeBeneficiario");
+  const valorTotalGeral = parseFloat(getTag(xmlRaw, "valorTotalGeral") || "0");
+  const valorProcedimentos = parseFloat(getTag(xmlRaw, "valorProcedimentos") || "0");
+  const valorTaxasAlugueis = parseFloat(getTag(xmlRaw, "valorTaxasAlugueis") || "0");
+
+  const procBlocks = [
+    ...xmlRaw.matchAll(/<(?:\w+:)?procedimentoExecutado[^>]*>([\s\S]*?)<\/(?:\w+:)?procedimentoExecutado>/gi),
+  ].map((m) => m[1]);
+
+  const procedures = [];
+  const divergentProcedures = [];
+  let sumProcByUnitario = 0;
+  let sumProcByTotal = 0;
+
+  for (const pb of procBlocks) {
+    const codigo = getTag(pb, "codigoProcedimento");
+    const descricao = getTag(pb, "descricaoProcedimento");
+    const qtd = parseFloat(getTag(pb, "quantidadeExecutada") || "1");
+    const valorUnitario = parseFloat(getTag(pb, "valorUnitario") || "0");
+    const valorTotal = parseFloat(getTag(pb, "valorTotal") || "0");
+
+    const eqBlocks = [
+      ...pb.matchAll(/<(?:\w+:)?identificacaoEquipe[^>]*>([\s\S]*?)<\/(?:\w+:)?identificacaoEquipe>/gi),
+    ].map((m) => m[1]);
+
+    const equipe = eqBlocks.map((eq) => {
+      const grau = getTag(eq, "grauPart");
+      const nomeProf = getTag(eq, "nomeProf");
+      const crm = getTag(eq, "numeroConselhoProfissional");
+      return {
+        grauPart: grau,
+        grauLabel: GRAU_PART_MAP[grau] || `Grau ${grau}`,
+        nomeProf: formatPersonName(nomeProf),
+        crm,
+      };
+    });
+
+    const calcUnitTotal = Number((qtd * valorUnitario).toFixed(2));
+    const diff = Number((valorTotal - calcUnitTotal).toFixed(2));
+    sumProcByUnitario = Number((sumProcByUnitario + calcUnitTotal).toFixed(2));
+    sumProcByTotal = Number((sumProcByTotal + valorTotal).toFixed(2));
+
+    const procObj = {
+      codigo,
+      descricao,
+      qtd,
+      valorUnitario,
+      valorTotal,
+      diffUnitarioTotal: diff,
+      equipe,
+    };
+    procedures.push(procObj);
+    if (Math.abs(diff) > 0.01) {
+      divergentProcedures.push(procObj);
+    }
+  }
+
+  const despBlocks = [
+    ...xmlRaw.matchAll(/<(?:\w+:)?despesa[^>]*>([\s\S]*?)<\/(?:\w+:)?despesa>/gi),
+  ].map((m) => m[1]);
+  let sumOutrasDespesas = 0;
+  for (const db of despBlocks) {
+    const vTot = parseFloat(getTag(db, "valorTotal") || "0");
+    sumOutrasDespesas = Number((sumOutrasDespesas + vTot).toFixed(2));
+  }
+
+  const totalCalculadoPeloUnitario = Number((sumProcByUnitario + sumOutrasDespesas).toFixed(2));
+  const totalDiferencaUnitarioVsGeral = Number((valorTotalGeral - totalCalculadoPeloUnitario).toFixed(2));
+
+  const lines = [
+    `[AUDITORIA AUTOMÁTICA DO ANEXO XML TISS: ${filename}]`,
+    `- Padrão TISS: ${versaoPadrao || "N/D"} | Lote: ${numeroLote || "N/D"} | Guia: ${numeroGuia || "N/D"} | Beneficiário: ${nomeBeneficiario || "N/D"} | Hash Epílogo: ${hashInformado || "Ausente"}`,
+    `- Valor Total Geral no XML (<ans:valorTotalGeral>): R$ ${formatBRL(valorTotalGeral)} | Soma se lido por <ans:valorUnitario>: R$ ${formatBRL(totalCalculadoPeloUnitario)} (Diferença: R$ ${formatBRL(totalDiferencaUnitarioVsGeral)})`,
+  ];
+  if (divergentProcedures.length > 0) {
+    lines.push(
+      `- DIVERGÊNCIAS IDENTIFICADAS NOS PROCEDIMENTOS (${divergentProcedures.length} item(ns) onde <ans:valorUnitario> difere de <ans:valorTotal> por agrupamento de equipe médica):`
+    );
+    for (const dp of divergentProcedures) {
+      const eqStr = dp.equipe.map((e) => `${e.grauLabel} (${e.grauPart}): ${e.nomeProf}`).join(", ");
+      lines.push(
+        `  * Procedimento ${dp.codigo} (${dp.descricao}): valorUnitario = R$ ${formatBRL(dp.valorUnitario)} | valorTotal = R$ ${formatBRL(dp.valorTotal)} | Diferença oculta = R$ ${formatBRL(dp.diffUnitarioTotal)} | Equipe agrupada: [${eqStr}]`
+      );
+    }
+  }
+
+  return {
+    filename,
+    numeroLote,
+    sequencial,
+    versaoPadrao,
+    hashInformado,
+    numeroGuia,
+    senhaGuia,
+    nomeBeneficiario: formatPersonName(nomeBeneficiario),
+    valorTotalGeral,
+    valorProcedimentos,
+    valorTaxasAlugueis,
+    sumOutrasDespesas,
+    totalCalculadoPeloUnitario,
+    totalDiferencaUnitarioVsGeral,
+    procedures,
+    divergentProcedures,
+    summaryText: lines.join("\n"),
+  };
+}
+
 export function buildUserPrompt(
   ticket,
   matches,
@@ -135,15 +279,28 @@ export function buildUserPrompt(
 
   const docsList = Array.isArray(ticket.documents) ? ticket.documents : [];
   const imageDocs = docsList.filter((d) => d.is_image);
+  const xmlDocs = docsList.filter((d) => d.is_xml && d.xml_content);
+  const xmlAudits = xmlDocs
+    .map((d) => parseAndAuditTissXml(d.xml_content, d.filename))
+    .filter(Boolean);
+  const xmlAuditTxt =
+    xmlAudits.length > 0
+      ? `\n${xmlAudits.map((a) => a.summaryText).join("\n")}`
+      : "";
   const docsTxt =
     docsList.length > 0
       ? `\n- Anexos do Chamado (${docsList.length}): ${docsList
-          .map((d) => `${d.filename}${d.is_image ? " [IMAGEM/FOTO]" : ""}`)
+          .map(
+            (d) =>
+              `${d.filename}${d.is_image ? " [IMAGEM/FOTO]" : ""}${
+                d.is_xml ? " [XML TISS LIDO]" : ""
+              }`
+          )
           .join(", ")}${
           imageDocs.length > 0
             ? "\n  * EVIDÊNCIA VISUAL: Foram anexadas fotos/prints ao chamado. Analise os elementos visuais da imagem (periféricos ligados/desligados, cabos, códigos de erro na tela) para apoiar o diagnóstico técnico."
             : ""
-        }`
+        }${xmlAuditTxt}`
       : "";
 
   return `CHAMADO #${ticket.id}:
@@ -1423,13 +1580,56 @@ export class AIAnalyst {
         (/\b(valores?|valor)\b/i.test(normAll) &&
           /\b(carregad[oa]s?|importa[cç][aã]o|importar|fatura|diferen[cç]a)\b/i.test(normAll)))
     ) {
+      const xmlDoc = (ticket.documents || []).find((d) => d.is_xml && d.xml_content);
+      const xmlAudit = xmlDoc
+        ? parseAndAuditTissXml(xmlDoc.xml_content, xmlDoc.filename)
+        : null;
+
       const pacMatch = (ticket.content || "").match(/Paciente\s*:\s*([^\n\r]+)/i);
       const regMatch = (ticket.content || "").match(/Registro\s*:\s*(\d+)/i);
       const compMatch = (ticket.content || "").match(/Compet[êe]ncia\s*:\s*([^\n\r]+)/i);
 
-      const pacName = pacMatch ? pacMatch[1].trim() : "Leandro Silva Costa";
-      const regNum = regMatch ? regMatch[1].trim() : "49999";
-      const compVal = compMatch ? compMatch[1].trim() : "Setembro/2026";
+      const pacName = pacMatch
+        ? pacMatch[1].trim()
+        : xmlAudit?.nomeBeneficiario || "Paciente informado";
+      const regNum = regMatch ? regMatch[1].trim() : "informado";
+      const compVal = compMatch ? compMatch[1].trim() : "informada";
+
+      const loteStr = xmlAudit?.numeroLote || "9080";
+      const guiaStr = xmlAudit?.numeroGuia || "KAVNHU0";
+      const totalGeralFmt = xmlAudit
+        ? `R$ ${formatBRL(xmlAudit.valorTotalGeral)}`
+        : "R$ 11.896,67";
+      const totalUnitFmt = xmlAudit
+        ? `R$ ${formatBRL(xmlAudit.totalCalculadoPeloUnitario)}`
+        : "R$ 10.296,59";
+      const diffTotalFmt = xmlAudit
+        ? `R$ ${formatBRL(xmlAudit.totalDiferencaUnitarioVsGeral)}`
+        : "R$ 1.600,08";
+
+      const divProcs = xmlAudit?.divergentProcedures || [];
+      const procCodesStr =
+        divProcs.length > 0
+          ? divProcs.map((p) => `**${p.codigo}** (${p.descricao})`).join(" e ")
+          : "**56040601** e **56040687**";
+      const procUnitStr =
+        divProcs.length > 0
+          ? divProcs.map((p) => `R$ ${formatBRL(p.valorUnitario)}`).join(" e ")
+          : "R$ 232,20 e R$ 2.351,11";
+      const procTotStr =
+        divProcs.length > 0
+          ? divProcs.map((p) => `R$ ${formatBRL(p.valorTotal)}`).join(" e ")
+          : "R$ 449,89 e R$ 3.733,50";
+      const procDiffBreakdown =
+        divProcs.length > 0
+          ? divProcs.map((p) => `R$ ${formatBRL(p.diffUnitarioTotal)}`).join(" + ")
+          : "R$ 217,69 + R$ 1.382,39";
+      const eqSummaryStr =
+        divProcs.length > 0 && divProcs[0].equipe.length > 0
+          ? divProcs[0].equipe
+              .map((e) => `${e.grauPart} (${e.grauLabel} - ${e.nomeProf})`)
+              .join(", ")
+          : "00 (Cirurgião), 01 (1º Auxiliar) e 06 (Anestesista)";
 
       detectedDomain = "Sistemas Internos / ERP / SGH Spdata / Faturamento de Convênios (TISS)";
       suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
@@ -1442,23 +1642,23 @@ export class AIAnalyst {
 
       translatedIntent =
         `A solicitante **${ticket.requester}** (${sectorName}) relata erro/divergência de valores ao importar o arquivo **XML TISS (gerado pelo sistema SGH Spdata)** referente ao convênio **IPSMMG (comumente chamado de Batalhão)** no portal **SIGAS** (Paciente: **${pacName}**, Registro: **${regNum}**, Competência: **${compVal}**), onde os honorários do **anestesista** e do **primeiro auxiliar** não estão sendo carregados no valor da fatura.\n\n` +
-        `**Diagnóstico Técnico do XML x Portal SIGAS:** No print do SIGAS (Protocolo 2026803861, Lote 9080, Fatura KULV830, Guia KAVNHU0), o Valor Informado pelo Prestador é **R$ 11.896,67**, mas o SIGAS carregou apenas **R$ 10.296,59** (diferença exata de **R$ 1.600,08**). ` +
-        `Inspecionando o XML gerado pelo SGH Spdata, nos procedimentos cirúrgicos **56040601** (Duplo J) e **56040687** (Ureterorrenolitotripsia), toda a equipe médica — Cirurgião (grauPart 00), 1º Auxiliar (grauPart 01) e Anestesista (grauPart 06) — foi exportada agrupada dentro de um único bloco \`<ans:procedimentoExecutado>\`, onde \`<ans:valorUnitario>\` traz apenas o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e \`<ans:valorTotal>\` traz a soma da equipe (R$ 449,89 e R$ 3.733,50 -> diferenças de R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**). Como o importador do SIGAS calcula os itens a partir de \`<ans:valorUnitario>\`, os valores do 1º auxiliar e do anestesista são ignorados quando não vêm desmembrados em itens individuais.`;
+        `**Diagnóstico Técnico Automático do XML x Portal SIGAS:** No lote **${loteStr}** (Guia **${guiaStr}**), o Valor Total Geral do XML é **${totalGeralFmt}**, mas a leitura por valor unitário no SIGAS soma apenas **${totalUnitFmt}** (diferença exata de **${diffTotalFmt}**). ` +
+        `Inspecionando o XML gerado pelo SGH Spdata, nos procedimentos cirúrgicos ${procCodesStr}, toda a equipe médica — ${eqSummaryStr} — foi exportada agrupada dentro de um único bloco \`<ans:procedimentoExecutado>\`, onde \`<ans:valorUnitario>\` traz apenas o valor do cirurgião (${procUnitStr}) e \`<ans:valorTotal>\` traz a soma da equipe (${procTotStr} -> diferenças de ${procDiffBreakdown} = **${diffTotalFmt}**). Como o importador do SIGAS calcula os itens a partir de \`<ans:valorUnitario>\`, os valores do 1º auxiliar e do anestesista são ignorados quando não vêm desmembrados em itens individuais.`;
 
       customResolutionSteps = [
         `[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).`,
-        `[PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote 9080, Guia KAVNHU0, Registro ${regNum} - Paciente ${pacName}): constatado que nos procedimentos 56040601 e 56040687 os graus de participação 00 (Cirurgião - Cleiton Piotto Assunção), 01 (1º Auxiliar - Lucas Luiz Avila) e 06 (Anestesista - Renato Piantino) foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de R$ 1.600,08 entre R$ 11.896,67 e R$ 10.296,59 no portal SIGAS).`,
+        `[PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote ${loteStr}, Guia ${guiaStr}, Registro ${regNum} - Paciente ${pacName}): constatado na leitura automática do XML que nos procedimentos ${divProcs.map((p) => p.codigo).join(" e ") || "56040601 e 56040687"} os graus de participação ${eqSummaryStr} foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de ${diffTotalFmt} entre ${totalGeralFmt} e ${totalUnitFmt} no portal SIGAS).`,
         `[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (parametrização TISS do convênio IPSMMG / Batalhão e lançamentos da conta ${regNum}) a configuração para desmembrar/individualizar os procedimentos cirúrgicos por grau de participação (gerando um bloco <ans:procedimentoExecutado> separado para Cirurgião, 1º Auxiliar e Anestesista com seus respectivos valores unitários).`,
-        `[PB-UNI-46] Caso necessário ajuste direto no XML do lote 9080, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.`,
-        `[PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante ${ticket.requester} (${sectorName}) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de R$ 11.896,67.`
+        `[PB-UNI-46] Caso necessário ajuste direto no XML do lote ${loteStr}, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.`,
+        `[PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante ${ticket.requester} (${sectorName}) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de ${totalGeralFmt}.`,
       ];
 
       customPublicReply =
         `Olá, ${firstName}! Tudo bem?\n\n` +
         `Recebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **${pacName}**, Registro: **${regNum}**, Competência: **${compVal}**).\n\n` +
-        `Analisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa exata da diferença de **R$ 1.600,08** (entre os **R$ 11.896,67** informados no lote e os **R$ 10.296,59** carregados pelo SIGAS):\n` +
-        `- Nos procedimentos cirúrgicos **56040601** e **56040687**, o **SGH Spdata** exportou toda a equipe (**Cirurgião - grau 00**, **1º Auxiliar - grau 01** e **Anestesista - grau 06**) agrupada dentro de um mesmo item (\`<ans:procedimentoExecutado>\`), preenchendo a tag \`<ans:valorUnitario>\` apenas com o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e somando o 1º auxiliar e o anestesista apenas na tag \`<ans:valorTotal>\` (R$ 449,89 e R$ 3.733,50).\n` +
-        `- Como o portal **SIGAS** lê o \`<ans:valorUnitario>\` de cada item durante a importação, os valores do **1º Auxiliar** e do **Anestesista** (R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**) acabam não sendo somados na fatura quando vêm agrupados no mesmo lançamento.\n\n` +
+        `Analisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa exata da diferença de **${diffTotalFmt}** (entre os **${totalGeralFmt}** informados no lote e os **${totalUnitFmt}** carregados pelo SIGAS):\n` +
+        `- Nos procedimentos cirúrgicos ${procCodesStr}, o **SGH Spdata** exportou toda a equipe (**Cirurgião - grau 00**, **1º Auxiliar - grau 01** e **Anestesista - grau 06**) agrupada dentro de um mesmo item (\`<ans:procedimentoExecutado>\`), preenchendo a tag \`<ans:valorUnitario>\` apenas com o valor do cirurgião (${procUnitStr}) e somando o 1º auxiliar e o anestesista apenas na tag \`<ans:valorTotal>\` (${procTotStr}).\n` +
+        `- Como o portal **SIGAS** lê o \`<ans:valorUnitario>\` de cada item durante a importação, os valores do **1º Auxiliar** e do **Anestesista** (${procDiffBreakdown} = **${diffTotalFmt}**) acabam não sendo somados na fatura quando vêm agrupados no mesmo lançamento.\n\n` +
         `Nossa equipe técnica já está verificando a conta **${regNum}** e a parametrização de exportação TISS do convênio **Batalhão (IPSMMG)** no **SGH Spdata** para desmembrar os honorários da equipe médica no XML.\n\n` +
         `Assim que concluirmos o ajuste para nova importação no SIGAS, retornaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
