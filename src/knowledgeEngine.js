@@ -285,6 +285,21 @@ export class KnowledgeEngine {
         (/\b(valores?|valor)\b/i.test(normTicket) &&
           /\b(carregad[oa]s?|importa[cç][aã]o|importar|fatura|diferen[cç]a)\b/i.test(normTicket)));
 
+    const isSystemTableParameterization =
+      !isXmlBatalhaoOrSghValueMismatch &&
+      !isFormcreatorOrGlpiForm &&
+      !isReopenOrRevertAccount &&
+      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?)\b/i.test(
+        normTicket
+      ) ||
+        (/\btabela\b/i.test(normTicket) &&
+          /\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
+            normTicket
+          ) &&
+          !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
+            normTicket
+          )));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -647,6 +662,10 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-46" && !isXmlBatalhaoOrSghValueMismatch) {
           continue;
         }
+        // Evita parear PB-UNI-47 (Criação/Parametrização de Tabelas e Regras em Sistemas) quando não trata de criação/parametrização de tabelas
+        if (pb.id === "PB-UNI-47" && !isSystemTableParameterization) {
+          continue;
+        }
         // Evita parear Playbook de Remanejamento / Ponto de Telefone (PB-UNI-20) quando não há solicitação de mudança de local ou ponto físico
         if (pb.id === "PB-UNI-20" && !isRelocationOrPhoneInstall) {
           continue;
@@ -799,6 +818,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.96);
         }
+        if (
+          pb.id === "PB-UNI-47" &&
+          isSystemTableParameterization
+        ) {
+          score = Math.max(score, 0.96);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -922,6 +947,15 @@ export class KnowledgeEngine {
         if (
           isXmlBatalhaoOrSghValueMismatch &&
           !/\b(xml|batalh[aã]o|ipsm|ipsmmg|sigas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas (ex.: exclusão de taxa ou desenvolvimento controle de contas) quando o chamado trata de criação/parametrização de tabela (ex.: DTH - PADRAO)
+        if (
+          isSystemTableParameterization &&
+          !/\b(criar\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias|faixa\s+(?:de\s+)?998|parametriza[cç][aã]o\s+de\s+sistemas\s+e\s+tabelas)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

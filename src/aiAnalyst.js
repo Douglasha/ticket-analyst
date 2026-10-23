@@ -1660,6 +1660,80 @@ export class AIAnalyst {
         `Nossa equipe técnica já realizou o gerenciamento do parâmetro **\"Discriminar médicos por procedimento\"** dentro das configurações do convênio **Batalhão (IPSMMG)** no **SGH Spdata**.\n\n` +
         `Por gentileza, gere novamente o arquivo XML no sistema e realize a importação no portal SIGAS para validar!\n\n` +
         `Permanecemos à disposição!`;
+    } else if (
+      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?)\b/i.test(
+        normAll
+      ) ||
+        (/\btabela\b/i.test(normAll) &&
+          /\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
+            normAll
+          ))) &&
+      !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
+        normAll
+      )
+    ) {
+      const descOnly = formFields.descricao || ticket.content || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const sysName =
+        formFields.aplicacao && !/outros/i.test(formFields.aplicacao)
+          ? /spdata|sgh/i.test(formFields.aplicacao)
+            ? "SGH Spdata"
+            : formFields.aplicacao.trim()
+          : /\b(spdata|sgh)\b/i.test(normAll)
+          ? "SGH Spdata"
+          : /\bhrp\b/i.test(normAll)
+          ? "HRP Unimed"
+          : "SGH Spdata";
+
+      const tableMatch =
+        descOnly.match(/como\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
+        (ticket.title || "").match(/tabela\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
+        descOnly.match(/tabela\s+([A-Z0-9À-Ú]+\s*[-–]\s*[A-Z0-9À-Ú]+)/i);
+      const tableName = tableMatch ? tableMatch[1].trim().toUpperCase() : "DTH - PADRAO";
+
+      const faixaMatch = descOnly.match(/faixa\s+(?:de\s+)?(\d{2,5})/i);
+      const faixaCode = faixaMatch ? faixaMatch[1].trim() : "998";
+
+      const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
+      const tableTypeDesc = isDiariasTaxas
+        ? "tabela de Diárias e Taxas Hospitalares (DTH)"
+        : "tabela operacional";
+
+      detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
+      suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Solicitação do setor ${sectorName} para criação/parametrização da ${tableTypeDesc} (${tableName}) no sistema ${sysName}, necessária para o vínculo contratual e faturamento de contas hospitalares.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 164).*`
+        : "";
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação e parametrização de uma **${tableTypeDesc}** no sistema **${sysName}**, configurada na **faixa de ${faixaCode}** com a nomenclatura **${tableName}** (direcionada ao analista/desenvolvedor Moisés Conte). ` +
+        `Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.` +
+        reclassNote;
+
+      customResolutionSteps = [
+        `[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).`,
+        `[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema ${sysName} e criar a ${tableTypeDesc} na faixa ${faixaCode} sob a nomenclatura '${tableName}'.`,
+        `[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**, na **faixa de ${faixaCode}**, com a descrição **${tableName}**.\n\n` +
+        `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
+        `Assim que a tabela **${tableName}** (faixa **${faixaCode}**) estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =
         formFields.problema?.match(/pasta\s+([^,]+)/i)?.[1]?.trim() ||

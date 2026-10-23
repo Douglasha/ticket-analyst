@@ -962,6 +962,7 @@ export class GLPIClient {
         { id: 161, name: "Áudio e Vídeo", completename: "T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo" },
         { id: 162, name: "Apoio a Eventos / Empréstimo de Equipamentos", completename: "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos" },
         { id: 163, name: "Reversão de Processos / Ajustes Operacionais", completename: "T.I > ST > Reversão de Processos / Ajustes Operacionais" },
+        { id: 164, name: "Parametrização de Sistemas e Tabelas", completename: "T.I > ST > Parametrização de Sistemas e Tabelas" },
       ];
     }
 

@@ -1,5 +1,96 @@
 [
   {
+    "id": "Chamado #43134 (Resolvido)",
+    "ticket_id": 43134,
+    "solution_id": 41818,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Mercia",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\nLogin: gmariano\nsenha: cadastrada no primeiro acesso\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "Login: gmariano",
+      "senha: cadastrada no primeiro acesso",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43119 (Resolvido)",
+    "ticket_id": 43119,
+    "solution_id": 41814,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43118 (Resolvido)",
+    "ticket_id": 43118,
+    "solution_id": 41813,
+    "title": "T.I > IR > Administração de Redes > Telefones VoIP > Verificar gravador (ligações) [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Gravações OK.",
+    "keywords": [],
+    "steps": [
+      "Gravações OK."
+    ]
+  },
+  {
+    "id": "Chamado #43110 (Resolvido)",
+    "ticket_id": 43110,
+    "solution_id": 41810,
+    "title": "Infraestrutura e Redes > Administração de Redes > Impressora 703",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora realinhada e testada.",
+    "keywords": [],
+    "steps": [
+      "Impressora realinhada e testada."
+    ]
+  },
+  {
+    "id": "Chamado #43103 (Resolvido)",
+    "ticket_id": 43103,
+    "solution_id": 41787,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Abertura de conta",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43097 (Resolvido)",
+    "ticket_id": 43097,
+    "solution_id": 41786,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Voltar remessa para o controle de contas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nProcesso revertido\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Processo revertido",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43080 (Resolvido)",
     "ticket_id": 43080,
     "solution_id": 41763,
@@ -86,6 +177,21 @@
     ]
   },
   {
+    "id": "Chamado #43051 (Resolvido)",
+    "ticket_id": 43051,
+    "solution_id": 41788,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Pereira",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43047 (Resolvido)",
     "ticket_id": 43047,
     "solution_id": 41780,
@@ -96,6 +202,21 @@
     "keywords": [],
     "steps": [
       "Nextcloud instalado."
+    ]
+  },
+  {
+    "id": "Chamado #43041 (Resolvido)",
+    "ticket_id": 43041,
+    "solution_id": 41815,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > SENHA",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -901,6 +1022,19 @@
     "keywords": [],
     "steps": [
       "Att"
+    ]
+  },
+  {
+    "id": "Chamado #42808 (Resolvido)",
+    "ticket_id": 42808,
+    "solution_id": 41812,
+    "title": "T.I > IR > Administração de Redes > Telefones VoIP > Verificar gravador (ligações) [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Gravações OK.",
+    "keywords": [],
+    "steps": [
+      "Gravações OK."
     ]
   },
   {

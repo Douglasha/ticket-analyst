@@ -9828,5 +9828,49 @@
     "public_reply_draft": "Olá, Rebeca! Tudo bem?\n\nRecebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **Leandro Silva Costa**, Registro: **49999**, Competência: **Setembro/2026**).\n\nAnalisamos o arquivo XML e o print do portal SIGAS anexados e identificamos a causa da diferença de **R$ 1.600,08** (entre os **R$ 11.896,67** informados no lote e os **R$ 10.296,59** carregados pelo SIGAS):\n- Nos parâmetros de geração do arquivo XML do convênio no **SGH Spdata**, estava desmarcada a opção **\"Discriminar médicos por procedimento\"**, fazendo com que nos procedimentos **56040601** e **56040687** a equipe (**Cirurgião**, **1º Auxiliar** e **Anestesista**) saísse agrupada num único item sem informar individualmente o valor para os demais médicos da equipe.\n\nNossa equipe técnica já realizou o gerenciamento do parâmetro **\"Discriminar médicos por procedimento\"** dentro das configurações do convênio **Batalhão (IPSMMG)** no **SGH Spdata**.\n\nPor gentileza, gere novamente o arquivo XML no sistema e realize a importação no portal SIGAS para validar!\n\nPermanecemos à disposição!",
     "has_image_analysis": true,
     "analyzed_images_count": 1
+  },
+  "43129": {
+    "updated_at": "2026-10-23T16:38:16.897Z",
+    "ticket_date_mod": "",
+    "analysis": {
+      "ticket_id": 43129,
+      "analyzed_at": "23/10/2026 13:38",
+      "provider_used": "Ollama Local (qwen2.5:3b)",
+      "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita a criação e parametrização de uma **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, configurada na **faixa de 998** com a nomenclatura **DTH - PADRAO** (direcionada ao analista/desenvolvedor Moisés Conte). Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.",
+      "detected_domain": "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas",
+      "suggested_category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+      "real_urgency": "Média",
+      "urgency_reason": "Solicitação do setor H Faturamento para criação/parametrização da tabela de Diárias e Taxas Hospitalares (DTH) (DTH - PADRAO) no sistema SGH Spdata, necessária para o vínculo contratual e faturamento de contas hospitalares.",
+      "sufficiency_status": "completo",
+      "missing_info": [],
+      "knowledge_matches": [
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-47",
+          "title": "Criação, Importação e Parametrização de Tabelas e Regras em Sistemas Corporativos (SGH Spdata / HRP / DTH / Simpro / Brasíndice / IPSM)",
+          "category": "Sistemas Internos / ERP / SGH Spdata / Parametrização de Sistemas e Tabelas",
+          "summary": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM) ou vínculos de convênios nos sistemas SGH Spdata e HRP Unimed.",
+          "steps": [
+            "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+            "[PB-UNI-47] Acessar o módulo de Tabelas / Faturamento de Convênios no sistema informado (ex.: SGH Spdata ou HRP Unimed).",
+            "[PB-UNI-47] Executar a criação, importação de vigência ou parametrização da tabela solicitada (ex.: criar tabela de diárias e taxas na faixa 998 como 'DTH - PADRAO' no SGH Spdata).",
+            "[PB-UNI-47] Validar se a faixa de código, descrição, vigência e vínculos com os convênios estão ativos e disponíveis para o setor solicitante.",
+            "[PB-UNI-47] Confirmar a conclusão da parametrização no chamado do GLPI."
+          ],
+          "score": 0.99
+        }
+      ],
+      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-47)",
+      "resolution_steps": [
+        "[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+        "[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema SGH Spdata e criar a tabela de Diárias e Taxas Hospitalares (DTH) na faixa 998 sob a nomenclatura 'DTH - PADRAO'.",
+        "[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (H Faturamento) e confirmar a disponibilização da tabela 'DTH - PADRAO' para a solicitante Priscila Santos."
+      ],
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a criação e parametrização de uma **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, configurada na **faixa de 998** com a nomenclatura **DTH - PADRAO** (direcionada ao analista/desenvolvedor Moisés Conte). Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.\n\nClassificação Sugerida: T.I > ST > Parametrização de Sistemas e Tabelas | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-47)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).\n  2. [PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema SGH Spdata e criar a tabela de Diárias e Taxas Hospitalares (DTH) na faixa 998 sob a nomenclatura 'DTH - PADRAO'.\n  3. [PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (H Faturamento) e confirmar a disponibilização da tabela 'DTH - PADRAO' para a solicitante Priscila Santos.",
+      "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação para criação da **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, na **faixa de 998**, com a descrição **DTH - PADRAO**.\n\nOs parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\nAssim que a tabela **DTH - PADRAO** (faixa **998**) estiver criada e liberada para uso no SGH Spdata, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+      "has_image_analysis": false,
+      "analyzed_images_count": 0
+    }
   }
 }

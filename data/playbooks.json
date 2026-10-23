@@ -1720,5 +1720,54 @@
       "[PB-UNI-46] Solicitar ao H Faturamento a reemissão do arquivo XML no SGH Spdata e validar a nova importação no portal SIGAS."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **{paciente}**, Registro: **{registro}**, Competência: **{competencia}**).\n\nAnalisamos o arquivo XML e o print do portal SIGAS anexados e identificamos a causa técnica da diferença de valores: nos parâmetros de geração do arquivo XML do convênio no **SGH Spdata**, estava desmarcada a opção **\"Discriminar médicos por procedimento\"**. Com isso, o sistema agrupava a equipe cirúrgica (**Cirurgião**, **1º Auxiliar** e **Anestesista**) num mesmo item preenchendo `<ans:valorUnitario>` apenas com o valor do cirurgião, fazendo com que os valores dos demais médicos da equipe não fossem carregados pelo SIGAS.\n\nNossa equipe técnica já está realizando o gerenciamento desse parâmetro (**\"Discriminar médicos por procedimento\"**) dentro das configurações do convênio **Batalhão (IPSMMG)** no **SGH Spdata**.\n\nAssim que o parâmetro estiver ajustado para que você possa gerar novamente o XML e importar no SIGAS, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-47",
+    "title": "Criação, Importação e Parametrização de Tabelas e Regras em Sistemas Corporativos (SGH Spdata / HRP / DTH / Simpro / Brasíndice / IPSM)",
+    "domain": "Sistemas Internos / ERP / SGH Spdata / Parametrização de Sistemas e Tabelas",
+    "keywords": [
+      "criar tabela",
+      "criação de tabela",
+      "criacao de tabela",
+      "tabela dth",
+      "dth - padrao",
+      "dth - padrão",
+      "tabela de diárias e taxas",
+      "tabela de diarias e taxas",
+      "diárias e taxas",
+      "diarias e taxas",
+      "faixa de 998",
+      "faixa 998",
+      "parametrização de tabela",
+      "parametrizacao de tabela",
+      "parametrização das tabelas",
+      "parametrizacao das tabelas",
+      "parametrização tabela",
+      "parametrizacao tabela",
+      "tabela ipsm",
+      "tabelas do ipsm",
+      "tabela batalhão",
+      "tabela batalhao",
+      "referenciamento brasíndice",
+      "referenciamento brasindice",
+      "brasíndice",
+      "brasindice",
+      "simpro",
+      "atualizar simpro",
+      "vínculo do convênio",
+      "vinculo do convenio",
+      "alteração de convênio",
+      "alteracao de convenio"
+    ],
+    "symptoms": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM) ou vínculos de convênios nos sistemas SGH Spdata e HRP Unimed.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+      "[PB-UNI-47] Acessar o módulo de Tabelas / Faturamento de Convênios no sistema informado (ex.: SGH Spdata ou HRP Unimed).",
+      "[PB-UNI-47] Executar a criação, importação de vigência ou parametrização da tabela solicitada (ex.: criar tabela de diárias e taxas na faixa 998 como 'DTH - PADRAO' no SGH Spdata).",
+      "[PB-UNI-47] Validar se a faixa de código, descrição, vigência e vínculos com os convênios estão ativos e disponíveis para o setor solicitante.",
+      "[PB-UNI-47] Confirmar a conclusão da parametrização no chamado do GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação/parametrização da tabela **{tabela}** no sistema **{sistema}**.\n\nTodos os parâmetros necessários já constam informados no chamado e nossa equipe técnica já iniciou a configuração no sistema.\n\nAssim que a tabela estiver criada e parametrizada para uso no setor, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 ]
