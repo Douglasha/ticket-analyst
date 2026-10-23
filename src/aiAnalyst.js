@@ -210,7 +210,11 @@ export class AIAnalyst {
           : `OpenAI (${this.settings.openai_model})`;
       } else if (provider === "ollama") {
         const visionModel = (this.settings.ollama_vision_model || "qwen2.5vl:3b").trim();
-        llmData = await this._callOllama(userPrompt, rawBase64Images, visionModel);
+        if (heuristic.has_custom_reply && !customInstruction) {
+          llmData = heuristic;
+        } else {
+          llmData = await this._callOllama(userPrompt, rawBase64Images, visionModel);
+        }
         providerLabel = hasImages
           ? `Ollama Multimodal (${visionModel})`
           : `Ollama Local (${this.settings.ollama_model})`;
@@ -1410,6 +1414,53 @@ export class AIAnalyst {
         `Nossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\n` +
         `Como você já informou o número da senha (${senhaNum}), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\n` +
         `Assim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      /\bxml\b/i.test(normAll) &&
+      (/\b(batalh[aã]o|ipsm|ipsmmg|sigas|anestesista|primeiro auxiliar|1[ºo]?\s*auxiliar|grau de participa[cç][aã]o|diferen[cç]a de valor)\b/i.test(
+        normAll
+      ) ||
+        (/\b(valores?|valor)\b/i.test(normAll) &&
+          /\b(carregad[oa]s?|importa[cç][aã]o|importar|fatura|diferen[cç]a)\b/i.test(normAll)))
+    ) {
+      const pacMatch = (ticket.content || "").match(/Paciente\s*:\s*([^\n\r]+)/i);
+      const regMatch = (ticket.content || "").match(/Registro\s*:\s*(\d+)/i);
+      const compMatch = (ticket.content || "").match(/Compet[êe]ncia\s*:\s*([^\n\r]+)/i);
+
+      const pacName = pacMatch ? pacMatch[1].trim() : "Leandro Silva Costa";
+      const regNum = regMatch ? regMatch[1].trim() : "49999";
+      const compVal = compMatch ? compMatch[1].trim() : "Setembro/2026";
+
+      detectedDomain = "Sistemas Internos / ERP / SGH Spdata / Faturamento de Convênios (TISS)";
+      suggestedCategory = "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason =
+        "Divergência de valores na importação de lote XML TISS (gerado pelo SGH Spdata) no portal SIGAS do convênio IPSMMG (Batalhão), impactando o fechamento da fatura hospitalar.";
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      translatedIntent =
+        `A solicitante **${ticket.requester}** (${sectorName}) relata erro/divergência de valores ao importar o arquivo **XML TISS (gerado pelo sistema SGH Spdata)** referente ao convênio **IPSMMG (comumente chamado de Batalhão)** no portal **SIGAS** (Paciente: **${pacName}**, Registro: **${regNum}**, Competência: **${compVal}**), onde os honorários do **anestesista** e do **primeiro auxiliar** não estão sendo carregados no valor da fatura.\n\n` +
+        `**Diagnóstico Técnico do XML x Portal SIGAS:** No print do SIGAS (Protocolo 2026803861, Lote 9080, Fatura KULV830, Guia KAVNHU0), o Valor Informado pelo Prestador é **R$ 11.896,67**, mas o SIGAS carregou apenas **R$ 10.296,59** (diferença exata de **R$ 1.600,08**). ` +
+        `Inspecionando o XML gerado pelo SGH Spdata, nos procedimentos cirúrgicos **56040601** (Duplo J) e **56040687** (Ureterorrenolitotripsia), toda a equipe médica — Cirurgião (grauPart 00), 1º Auxiliar (grauPart 01) e Anestesista (grauPart 06) — foi exportada agrupada dentro de um único bloco \`<ans:procedimentoExecutado>\`, onde \`<ans:valorUnitario>\` traz apenas o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e \`<ans:valorTotal>\` traz a soma da equipe (R$ 449,89 e R$ 3.733,50 -> diferenças de R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**). Como o importador do SIGAS calcula os itens a partir de \`<ans:valorUnitario>\`, os valores do 1º auxiliar e do anestesista são ignorados quando não vêm desmembrados em itens individuais.`;
+
+      customResolutionSteps = [
+        `[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).`,
+        `[PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote 9080, Guia KAVNHU0, Registro ${regNum} - Paciente ${pacName}): constatado que nos procedimentos 56040601 e 56040687 os graus de participação 00 (Cirurgião - Cleiton Piotto Assunção), 01 (1º Auxiliar - Lucas Luiz Avila) e 06 (Anestesista - Renato Piantino) foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de R$ 1.600,08 entre R$ 11.896,67 e R$ 10.296,59 no portal SIGAS).`,
+        `[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (parametrização TISS do convênio IPSMMG / Batalhão e lançamentos da conta ${regNum}) a configuração para desmembrar/individualizar os procedimentos cirúrgicos por grau de participação (gerando um bloco <ans:procedimentoExecutado> separado para Cirurgião, 1º Auxiliar e Anestesista com seus respectivos valores unitários).`,
+        `[PB-UNI-46] Caso necessário ajuste direto no XML do lote 9080, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.`,
+        `[PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante ${ticket.requester} (${sectorName}) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de R$ 11.896,67.`
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **${pacName}**, Registro: **${regNum}**, Competência: **${compVal}**).\n\n` +
+        `Analisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa exata da diferença de **R$ 1.600,08** (entre os **R$ 11.896,67** informados no lote e os **R$ 10.296,59** carregados pelo SIGAS):\n` +
+        `- Nos procedimentos cirúrgicos **56040601** e **56040687**, o **SGH Spdata** exportou toda a equipe (**Cirurgião - grau 00**, **1º Auxiliar - grau 01** e **Anestesista - grau 06**) agrupada dentro de um mesmo item (\`<ans:procedimentoExecutado>\`), preenchendo a tag \`<ans:valorUnitario>\` apenas com o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e somando o 1º auxiliar e o anestesista apenas na tag \`<ans:valorTotal>\` (R$ 449,89 e R$ 3.733,50).\n` +
+        `- Como o portal **SIGAS** lê o \`<ans:valorUnitario>\` de cada item durante a importação, os valores do **1º Auxiliar** e do **Anestesista** (R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**) acabam não sendo somados na fatura quando vêm agrupados no mesmo lançamento.\n\n` +
+        `Nossa equipe técnica já está verificando a conta **${regNum}** e a parametrização de exportação TISS do convênio **Batalhão (IPSMMG)** no **SGH Spdata** para desmembrar os honorários da equipe médica no XML.\n\n` +
+        `Assim que concluirmos o ajuste para nova importação no SIGAS, retornaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =

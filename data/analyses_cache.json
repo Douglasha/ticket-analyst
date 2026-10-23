@@ -9346,6 +9346,108 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43080": {
+    "ticket_id": 43080,
+    "analyzed_at": "22/10/2026 15:54",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) abriu o chamado: \"▸ Seção 1) Tipo de Solicitação: Gestão de Acessos 2) Observador: 3) Setor Solicitante: Recursos Humanos 4) Localização: Farmacia 5) Colaborador: Wallace Santana Vilela 6) Solicitaç\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42756).",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > SI > Gestão de Acessos",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42756",
+        "title": "Acesso e Permissões  -  Eliane Satie Koda liberação de acesso",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+          "[PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+          "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42545",
+        "title": "Solicitação Diversa  -  Liberação de Acessos",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+          "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+          "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42197",
+        "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+          "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+          "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+          "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+          "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+          "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-01",
+        "title": "Onboarding / Criação de Usuário (AD, Relógio de Ponto, MyPlace e Wi-Fi)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "RH solicita cadastro de novo colaborador no relógio de ponto, portal MyPlace, rede/AD ou Wi-Fi.",
+        "steps": [
+          "Conferir se o RH informou o Nome Completo, Número de Matrícula e PIS no chamado.",
+          "Cadastrar o colaborador no sistema de controle de ponto (REP) vinculando PIS e Matrícula para coleta de biometria.",
+          "Liberar o acesso ao portal de autoatendimento RH (MyPlace) e criar conta no Active Directory se utilizar estação de trabalho.",
+          "Caso solicitado Wi-Fi corporativo, registrar a liberação mediante política de dispositivos móveis da Unimed."
+        ],
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42756) + Memória Contínua • Aprendido com o Analista (MEM-#42545)",
+    "resolution_steps": [
+      "[MEM-#42756] [PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+      "[MEM-#42756] [PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+      "[MEM-#42756] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+      "[MEM-#42545] [MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+      "[MEM-#42545] [MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+      "[MEM-#42545] [MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) abriu o chamado: \"▸ Seção 1) Tipo de Solicitação: Gestão de Acessos 2) Observador: 3) Setor Solicitante: Recursos Humanos 4) Localização: Farmacia 5) Colaborador: Wallace Santana Vilela 6) Solicitaç\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42756).\n\nClassificação Sugerida: T.I > SI > Gestão de Acessos | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42756) + Memória Contínua • Aprendido com o Analista (MEM-#42545)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42756] [PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.\n  2. [MEM-#42756] [PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).\n  3. [MEM-#42756] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.\n  4. [MEM-#42545] [MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.\n  5. [MEM-#42545] [MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).\n  6. [MEM-#42545] [MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
   "43097": {
     "ticket_id": 43097,
     "analyzed_at": "22/10/2026 15:27",
@@ -9545,5 +9647,141 @@
     "public_reply_draft": "Olá, Ana! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura / reversão de encerramento da conta **1414064** (Paciente: **Zilda Candida de Jesus Belmiro**) no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
+  },
+  "43113": {
+    "ticket_id": 43113,
+    "analyzed_at": "23/10/2026 07:18",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitação do usuário, Mayra Morais, está relacionada à parametrização de tabelas de medicamentos no sistema de Auditoria. Ela anexou uma tabela de medicamentos vigente até 20/10/2026. Não há evidências de problemas técnicos ou solicitações de reparo relacionadas a esta tabela. O impacto operacional é considerado baixo, pois a parametrização de tabelas de medicamentos é uma tarefa de manutenção do sistema e não afeta diretamente operações críticas.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Integração entre sistemas",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Impacto operacional baixo",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42089 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Erro no valor do medicamento",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n\n\r\nRealizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n\n\r\nApós o ajuste, os valores passaram a ser apresentados corretamente.",
+        "steps": [
+          "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+          "Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+          "Após o ajuste, os valores passaram a ser apresentados corretamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42646 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização das Tabelas do IPSM",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, importação realizada.",
+        "steps": [
+          "Bom dia, importação realizada."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42465 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização Tabela IPSM",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, importação realizada.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Bom dia, importação realizada.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41960 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização das tabelas IPSM",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia. \n\n\r\nRealizado as importações solicitadas.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Bom dia.",
+          "Realizado as importações solicitadas.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #42089 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42646 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #42089 (Resolvido)] Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+      "[Chamado #42089 (Resolvido)] Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+      "[Chamado #42089 (Resolvido)] Após o ajuste, os valores passaram a ser apresentados corretamente.",
+      "[Chamado #41960 (Resolvido)] Realizado as importações solicitadas."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitação do usuário, Mayra Morais, está relacionada à parametrização de tabelas de medicamentos no sistema de Auditoria. Ela anexou uma tabela de medicamentos vigente até 20/10/2026. Não há evidências de problemas técnicos ou solicitações de reparo relacionadas a esta tabela. O impacto operacional é considerado baixo, pois a parametrização de tabelas de medicamentos é uma tarefa de manutenção do sistema e não afeta diretamente operações críticas.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Integração entre sistemas | Prioridade Real: Muito baixa\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42089 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42646 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #42089 (Resolvido)] Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n  2. [Chamado #42089 (Resolvido)] Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n  3. [Chamado #42089 (Resolvido)] Após o ajuste, os valores passaram a ser apresentados corretamente.\n  4. [Chamado #41960 (Resolvido)] Realizado as importações solicitadas.",
+    "public_reply_draft": "Olá, Mayra! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Parametrização das Tabelas**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43123": {
+    "translated_intent": "A solicitante **Rebeca Gonçalves de Freitas Silva** (H Faturamento) relata erro/divergência de valores ao importar o arquivo **XML TISS (gerado pelo sistema SGH Spdata)** referente ao convênio **IPSMMG (comumente chamado de Batalhão)** no portal **SIGAS** (Paciente: **Leandro Silva Costa**, Registro: **49999**, Competência: **Setembro/2026**), onde os honorários do **anestesista** e do **primeiro auxiliar** não estão sendo carregados no valor da fatura.\n\n**Diagnóstico Técnico do XML x Portal SIGAS:** No print do SIGAS (Protocolo 2026803861, Lote 9080, Fatura KULV830, Guia KAVNHU0), o Valor Informado pelo Prestador é **R$ 11.896,67**, mas o SIGAS carregou apenas **R$ 10.296,59** (diferença exata de **R$ 1.600,08**). Inspecionando o XML gerado pelo SGH Spdata, nos procedimentos cirúrgicos **56040601** (Duplo J) e **56040687** (Ureterorrenolitotripsia), toda a equipe médica — Cirurgião (grauPart 00), 1º Auxiliar (grauPart 01) e Anestesista (grauPart 06) — foi exportada agrupada dentro de um único bloco `<ans:procedimentoExecutado>`, onde `<ans:valorUnitario>` traz apenas o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e `<ans:valorTotal>` traz a soma da equipe (R$ 449,89 e R$ 3.733,50 -> diferenças de R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**). Como o importador do SIGAS calcula os itens a partir de `<ans:valorUnitario>`, os valores do 1º auxiliar e do anestesista são ignorados quando não vêm desmembrados em itens individuais.",
+    "detected_domain": "Sistemas Internos / ERP / SGH Spdata / Faturamento de Convênios (TISS)",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Alta",
+    "urgency_reason": "Divergência de valores na importação de lote XML TISS (gerado pelo SGH Spdata) no portal SIGAS do convênio IPSMMG (Batalhão), impactando o fechamento da fatura hospitalar.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-46) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42089 (Resolvido))",
+    "resolution_steps": [
+      "[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote 9080, Guia KAVNHU0, Registro 49999 - Paciente Leandro Silva Costa): constatado que nos procedimentos 56040601 e 56040687 os graus de participação 00 (Cirurgião - Cleiton Piotto Assunção), 01 (1º Auxiliar - Lucas Luiz Avila) e 06 (Anestesista - Renato Piantino) foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de R$ 1.600,08 entre R$ 11.896,67 e R$ 10.296,59 no portal SIGAS).",
+      "[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (parametrização TISS do convênio IPSMMG / Batalhão e lançamentos da conta 49999) a configuração para desmembrar/individualizar os procedimentos cirúrgicos por grau de participação (gerando um bloco <ans:procedimentoExecutado> separado para Cirurgião, 1º Auxiliar e Anestesista com seus respectivos valores unitários).",
+      "[PB-UNI-46] Caso necessário ajuste direto no XML do lote 9080, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.",
+      "[PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante Rebeca Gonçalves de Freitas Silva (H Faturamento) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de R$ 11.896,67."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Rebeca Gonçalves de Freitas Silva** (H Faturamento) relata erro/divergência de valores ao importar o arquivo **XML TISS (gerado pelo sistema SGH Spdata)** referente ao convênio **IPSMMG (comumente chamado de Batalhão)** no portal **SIGAS** (Paciente: **Leandro Silva Costa**, Registro: **49999**, Competência: **Setembro/2026**), onde os honorários do **anestesista** e do **primeiro auxiliar** não estão sendo carregados no valor da fatura.\n\n**Diagnóstico Técnico do XML x Portal SIGAS:** No print do SIGAS (Protocolo 2026803861, Lote 9080, Fatura KULV830, Guia KAVNHU0), o Valor Informado pelo Prestador é **R$ 11.896,67**, mas o SIGAS carregou apenas **R$ 10.296,59** (diferença exata de **R$ 1.600,08**). Inspecionando o XML gerado pelo SGH Spdata, nos procedimentos cirúrgicos **56040601** (Duplo J) e **56040687** (Ureterorrenolitotripsia), toda a equipe médica — Cirurgião (grauPart 00), 1º Auxiliar (grauPart 01) e Anestesista (grauPart 06) — foi exportada agrupada dentro de um único bloco `<ans:procedimentoExecutado>`, onde `<ans:valorUnitario>` traz apenas o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e `<ans:valorTotal>` traz a soma da equipe (R$ 449,89 e R$ 3.733,50 -> diferenças de R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**). Como o importador do SIGAS calcula os itens a partir de `<ans:valorUnitario>`, os valores do 1º auxiliar e do anestesista são ignorados quando não vêm desmembrados em itens individuais.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-46) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42089 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).\n  2. [PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote 9080, Guia KAVNHU0, Registro 49999 - Paciente Leandro Silva Costa): constatado que nos procedimentos 56040601 e 56040687 os graus de participação 00 (Cirurgião - Cleiton Piotto Assunção), 01 (1º Auxiliar - Lucas Luiz Avila) e 06 (Anestesista - Renato Piantino) foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de R$ 1.600,08 entre R$ 11.896,67 e R$ 10.296,59 no portal SIGAS).\n  3. [PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (parametrização TISS do convênio IPSMMG / Batalhão e lançamentos da conta 49999) a configuração para desmembrar/individualizar os procedimentos cirúrgicos por grau de participação (gerando um bloco <ans:procedimentoExecutado> separado para Cirurgião, 1º Auxiliar e Anestesista com seus respectivos valores unitários).\n  4. [PB-UNI-46] Caso necessário ajuste direto no XML do lote 9080, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.\n  5. [PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante Rebeca Gonçalves de Freitas Silva (H Faturamento) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de R$ 11.896,67.",
+    "public_reply_draft": "Olá, Rebeca! Tudo bem?\n\nRecebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **Leandro Silva Costa**, Registro: **49999**, Competência: **Setembro/2026**).\n\nAnalisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa exata da diferença de **R$ 1.600,08** (entre os **R$ 11.896,67** informados no lote e os **R$ 10.296,59** carregados pelo SIGAS):\n- Nos procedimentos cirúrgicos **56040601** e **56040687**, o **SGH Spdata** exportou toda a equipe (**Cirurgião - grau 00**, **1º Auxiliar - grau 01** e **Anestesista - grau 06**) agrupada dentro de um mesmo item (`<ans:procedimentoExecutado>`), preenchendo a tag `<ans:valorUnitario>` apenas com o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e somando o 1º auxiliar e o anestesista apenas na tag `<ans:valorTotal>` (R$ 449,89 e R$ 3.733,50).\n- Como o portal **SIGAS** lê o `<ans:valorUnitario>` de cada item durante a importação, os valores do **1º Auxiliar** e do **Anestesista** (R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**) acabam não sendo somados na fatura quando vêm agrupados no mesmo lançamento.\n\nNossa equipe técnica já está verificando a conta **49999** e a parametrização de exportação TISS do convênio **Batalhão (IPSMMG)** no **SGH Spdata** para desmembrar os honorários da equipe médica no XML.\n\nAssim que concluirmos o ajuste para nova importação no SIGAS, retornaremos por aqui!\n\nPermanecemos à disposição!",
+    "ticket_id": 43123,
+    "analyzed_at": "23/10/2026 08:51",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-46",
+        "title": "Erro ou Divergência de Valores na Importação de Arquivo XML TISS (SGH Spdata) — Convênio IPSMMG / Batalhão (Portal SIGAS)",
+        "category": "Sistemas Internos / ERP / SGH Spdata / Faturamento de Convênios (TISS)",
+        "summary": "Colaborador(a) do Faturamento (H Faturamento) relata erro ou divergência de valores ao importar arquivo XML de faturamento TISS (gerado pelo sistema SGH Spdata) no portal SIGAS do convênio IPSMMG (Instituto de Previdência dos Servidores Militares de MG, comumente chamado de 'Batalhão'), onde os honorários correspondentes ao anestesista (grauPart 06) e ao primeiro auxiliar (grauPart 01) ou outros membros da equipe médica não são carregados no valor total da fatura no SIGAS.",
+        "steps": [
+          "[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+          "[PB-UNI-46] Analisar o arquivo XML TISS gerado pelo sistema SGH Spdata e o print do portal SIGAS (convênio IPSMMG / Batalhão) anexados ao chamado.",
+          "[PB-UNI-46] Inspecionar os blocos <ans:procedimentoExecutado> no XML: verificar se o SGH Spdata agrupou toda a equipe cirúrgica (grauPart 00 Cirurgião, grauPart 01 1º Auxiliar e grauPart 06 Anestesista) dentro de um único item onde <ans:valorUnitario> contém apenas o valor do cirurgião e <ans:valorTotal> contém a soma da equipe (causando a diferença no portal SIGAS, que calcula os itens pelo valorUnitario).",
+          "[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (cadastro do convênio IPSMMG/Batalhão e conta hospitalar informada) a parametrização de geração do XML TISS para desmembrar/individualizar os procedimentos por grau de participação (Cirurgião, 1º Auxiliar e Anestesista em blocos <ans:procedimentoExecutado> separados com seus respectivos valores unitários) ou ajustar o vínculo na conta.",
+          "[PB-UNI-46] Reemitir/ajustar o arquivo XML no SGH Spdata (garantindo a atualização do hash MD5 em <ans:epilogo><ans:hash>) e validar a nova importação no portal SIGAS junto à colaboradora do H Faturamento."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42089 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Erro no valor do medicamento",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n\n\r\nRealizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n\n\r\nApós o ajuste, os valores passaram a ser apresentados corretamente.",
+        "steps": [
+          "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+          "Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+          "Após o ajuste, os valores passaram a ser apresentados corretamente."
+        ],
+        "score": 0.68
+      }
+    ],
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
   }
 }

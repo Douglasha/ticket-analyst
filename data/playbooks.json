@@ -1674,5 +1674,49 @@
       "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando que a verificação e o reprocessamento da senha no HRP foram iniciados, orientando a checagem do retorno no sistema."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização ({senha}) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha ({senha}), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-46",
+    "title": "Erro ou Divergência de Valores na Importação de Arquivo XML TISS (SGH Spdata) — Convênio IPSMMG / Batalhão (Portal SIGAS)",
+    "domain": "Sistemas Internos / ERP / SGH Spdata / Faturamento de Convênios (TISS)",
+    "keywords": [
+      "batalhão",
+      "batalhao",
+      "ipsm",
+      "ipsmmg",
+      "sigas",
+      "site sigas",
+      "importação do xml",
+      "importacao do xml",
+      "erro na importação do xml",
+      "erro na importacao do xml",
+      "importar o xml",
+      "importar xml",
+      "anestesista",
+      "primeiro auxiliar",
+      "1º auxiliar",
+      "auxiliar",
+      "grau de participação",
+      "grau de participacao",
+      "graupart",
+      "valores correspondentes",
+      "não estão sendo carregados",
+      "nao estao sendo carregados",
+      "diferença de valor xml",
+      "diferenca de valor xml",
+      "sgh",
+      "spdata",
+      "49999"
+    ],
+    "symptoms": "Colaborador(a) do Faturamento (H Faturamento) relata erro ou divergência de valores ao importar arquivo XML de faturamento TISS (gerado pelo sistema SGH Spdata) no portal SIGAS do convênio IPSMMG (Instituto de Previdência dos Servidores Militares de MG, comumente chamado de 'Batalhão'), onde os honorários correspondentes ao anestesista (grauPart 06) e ao primeiro auxiliar (grauPart 01) ou outros membros da equipe médica não são carregados no valor total da fatura no SIGAS.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-46] Analisar o arquivo XML TISS gerado pelo sistema SGH Spdata e o print do portal SIGAS (convênio IPSMMG / Batalhão) anexados ao chamado.",
+      "[PB-UNI-46] Inspecionar os blocos <ans:procedimentoExecutado> no XML: verificar se o SGH Spdata agrupou toda a equipe cirúrgica (grauPart 00 Cirurgião, grauPart 01 1º Auxiliar e grauPart 06 Anestesista) dentro de um único item onde <ans:valorUnitario> contém apenas o valor do cirurgião e <ans:valorTotal> contém a soma da equipe (causando a diferença no portal SIGAS, que calcula os itens pelo valorUnitario).",
+      "[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (cadastro do convênio IPSMMG/Batalhão e conta hospitalar informada) a parametrização de geração do XML TISS para desmembrar/individualizar os procedimentos por grau de participação (Cirurgião, 1º Auxiliar e Anestesista em blocos <ans:procedimentoExecutado> separados com seus respectivos valores unitários) ou ajustar o vínculo na conta.",
+      "[PB-UNI-46] Reemitir/ajustar o arquivo XML no SGH Spdata (garantindo a atualização do hash MD5 em <ans:epilogo><ans:hash>) e validar a nova importação no portal SIGAS junto à colaboradora do H Faturamento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **{paciente}**, Registro: **{registro}**, Competência: **{competencia}**).\n\nAnalisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa técnica da diferença de valores: nos procedimentos cirúrgicos da guia, o SGH Spdata exportou a equipe médica (**Cirurgião**, **1º Auxiliar** e **Anestesista**) agrupada dentro de um mesmo item (`<ans:procedimentoExecutado>`), preenchendo a tag `<ans:valorUnitario>` apenas com o valor do cirurgião e somando o 1º auxiliar e o anestesista apenas na tag `<ans:valorTotal>`. Como o portal SIGAS lê o `<ans:valorUnitario>` de cada item na importação, os valores do anestesista e do 1º auxiliar acabam não sendo somados na fatura.\n\nNossa equipe técnica já está verificando a conta **{registro}** e a parametrização de exportação TISS do convênio **Batalhão (IPSMMG)** no **SGH Spdata** para desmembrar/individualizar os lançamentos da equipe médica no XML.\n\nAssim que gerarmos o ajuste para reimportação no SIGAS, retornaremos por aqui!\n\nPermanecemos à disposição!"
   }
 ]

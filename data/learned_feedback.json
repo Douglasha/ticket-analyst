@@ -1,19 +1,76 @@
 [
   {
-    "ticket_id": 43103,
-    "title": "Solicita??o Diversa - Abertura de conta",
-    "category": "T.I > ST > Revers?o de Processos / Ajustes Operacionais",
+    "ticket_id": 43123,
+    "title": "Erros de Sistema - Erro na importa??o do XML - Batalh?o",
+    "category": "T.I > ST > Resolu??o de Problemas > Erros de Sistema",
     "keywords": [
-      "controle de contas",
-      "abertura de conta",
-      "abertura de uma conta",
-      "reabertura",
-      "faturamento",
-      "paciente"
+      "batalhao",
+      "ipsmmg",
+      "ipsm",
+      "sigas",
+      "xml",
+      "anestesista",
+      "primeiro auxiliar",
+      "sgh",
+      "spdata"
     ],
-    "problem_summary": "Solicitante Ana Luiza Teodoro Campos (H Faturamento) solicita a abertura (reabertura/revers?o de encerramento) da conta 1414064 da paciente Zilda Candida de Jesus Belmiro no sistema Controle de Contas.",
+    "problem_summary": "Ao importar o XML gerado no sistema SGH Spdata referente ao conv?nio IPSMMG (comumente chamado de Batalh?o) no site SIGAS, os valores correspondentes ao anestesista e ao primeiro auxiliar n?o est?o sendo carregados corretamente (Paciente: Leandro Silva Costa, Registro: 49999, Compet?ncia: Setembro/2026).",
+    "custom_instruction": "Quando o H Faturamento relatar erro ou diverg?ncia de valores ao importar arquivo XML (gerado no SGH Spdata) no portal SIGAS do conv?nio IPSMMG (comumente chamado de Batalh?o), identificar que o SGH Spdata agrupa a equipe cir?rgica (grauPart 00 Cirurgi?o, 01 1? Auxiliar e 06 Anestesista) num ?nico <ans:procedimentoExecutado> mantendo apenas o valor do cirurgi?o em <ans:valorUnitario> e a soma em <ans:valorTotal>, fazendo com que o SIGAS ignore os valores do auxiliar e anestesista. Manter categoria em Erros de Sistema, classificar como COMPLETO e orientar o desmembramento por grau de participa??o no SGH Spdata / XML.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à divergência de valores na importação do arquivo **XML (gerado no SGH Spdata)** para o convênio **IPSMMG / Batalhão** no portal **SIGAS** (Paciente: **Leandro Silva Costa**, Registro: **49999**, Competência: **Setembro/2026**).\n\nAnalisamos o arquivo XML e o print do portal SIGAS anexados e já identificamos a causa exata da diferença de **R$ 1.600,08** (entre os **R$ 11.896,67** informados no lote e os **R$ 10.296,59** carregados pelo SIGAS):\n- Nos procedimentos cirúrgicos **56040601** e **56040687**, o **SGH Spdata** exportou toda a equipe (**Cirurgião - grau 00**, **1º Auxiliar - grau 01** e **Anestesista - grau 06**) agrupada dentro de um mesmo item (`<ans:procedimentoExecutado>`), preenchendo a tag `<ans:valorUnitario>` apenas com o valor do cirurgião (R$ 232,20 e R$ 2.351,11) e somando o 1º auxiliar e o anestesista apenas na tag `<ans:valorTotal>` (R$ 449,89 e R$ 3.733,50).\n- Como o portal **SIGAS** lê o `<ans:valorUnitario>` de cada item durante a importação, os valores do **1º Auxiliar** e do **Anestesista** (R$ 217,69 + R$ 1.382,39 = **R$ 1.600,08**) acabam não sendo somados na fatura quando vêm agrupados no mesmo lançamento.\n\nNossa equipe técnica já está verificando a conta **49999** e a parametrização de exportação TISS do convênio **Batalhão (IPSMMG)** no **SGH Spdata** para desmembrar os honorários da equipe médica no XML.\n\nAssim que concluirmos o ajuste para nova importação no SIGAS, retornaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-46] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+      "[PB-UNI-46] Auditar o arquivo XML TISS gerado pelo SGH Spdata (Lote 9080, Guia KAVNHU0, Registro 49999 - Paciente Leandro Silva Costa): constatado que nos procedimentos 56040601 e 56040687 os graus de participação 00 (Cirurgião - Cleiton Piotto Assunção), 01 (1º Auxiliar - Lucas Luiz Avila) e 06 (Anestesista - Renato Piantino) foram agrupados num único <ans:procedimentoExecutado>, mantendo apenas o honorário do cirurgião em <ans:valorUnitario> (gerando a diferença exata de R$ 1.600,08 entre R$ 11.896,67 e R$ 10.296,59 no portal SIGAS).",
+      "[PB-UNI-46] Verificar no módulo de Faturamento de Convênios do SGH Spdata (parametrização TISS do convênio IPSMMG / Batalhão e lançamentos da conta 49999) a configuração para desmembrar/individualizar os procedimentos cirúrgicos por grau de participação (gerando um bloco <ans:procedimentoExecutado> separado para Cirurgião, 1º Auxiliar e Anestesista com seus respectivos valores unitários).",
+      "[PB-UNI-46] Caso necessário ajuste direto no XML do lote 9080, desmembrar os itens de grauPart 01 e 06 em blocos <ans:procedimentoExecutado> individuais (ou ajustar os lançamentos no SGH Spdata e reexportar o lote) e recalcular o hash MD5 na tag <ans:epilogo><ans:hash>.",
+      "[PB-UNI-46] Disponibilizar o arquivo XML corrigido para a solicitante Rebeca Gonçalves de Freitas Silva (H Faturamento) reimportar no portal SIGAS (IPSMMG / Batalhão) e validar o carregamento integral de R$ 11.896,67."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-23T11:51:26.846Z"
+  },
+  {
+    "ticket_id": 43113,
+    "title": "Integração entre sistemas  -  Parametrização das Tabelas",
+    "category": "T.I > DV > Desenvolvimento > Integração entre sistemas",
+    "keywords": [
+      "integracao",
+      "parametrizacao",
+      "tabelas",
+      "tabela",
+      "medicamentos",
+      "batalhao",
+      "parametrizada",
+      "medicamentos-"
+    ],
+    "problem_summary": "Boa Tarde!\nSegue em anexo a tabela de medicamentos do batalhão para ser parametrizada no sistema.\nMedicamentos- Vigência - 20/10/2026\nDesde já agradeço.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Parametrização das Tabelas**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "required_info": [],
+    "resolution_steps": [
+      "[Chamado #42089 (Resolvido)] Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+      "[Chamado #42089 (Resolvido)] Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+      "[Chamado #42089 (Resolvido)] Após o ajuste, os valores passaram a ser apresentados corretamente.",
+      "[Chamado #41960 (Resolvido)] Realizado as importações solicitadas."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-10-23T10:19:14.610Z"
+  },
+  {
+    "ticket_id": 43103,
+    "title": "Solicitação Diversa  -  Abertura de conta",
+    "category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
+    "keywords": [
+      "abertura",
+      "conta",
+      "controle",
+      "contas",
+      "paciente:",
+      "zilda",
+      "candida",
+      "jesus"
+    ],
+    "problem_summary": "Boa tarde, gostaria solicitar a abertura de uma conta no controle de contas, Paciente: 1414064 - ZILDA CANDIDA DE JESUS BELMIRO",
     "custom_instruction": "Pedidos do H Faturamento solicitando 'abertura de conta' ou 'abertura de uma conta' no Controle de Contas com n?mero de conta/registro e nome do paciente referem-se ? reabertura/revers?o de encerramento de conta (PB-UNI-28). Sugerir reclassifica??o para 'T.I > ST > Revers?o de Processos / Ajustes Operacionais' (ID 163), classificar como COMPLETO e confirmar a libera??o da conta informada.",
-    "reply_template": "Ol?, {solicitante}! Tudo bem?\n\nRecebemos a sua solicita??o referente ? abertura/reabertura da conta **1414064** da paciente **Zilda Candida de Jesus Belmiro** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados j? foram validados na triagem e nossa equipe t?cnica est? realizando a revers?o do encerramento / reabertura da conta no sistema para que volte a ficar dispon?vel para movimenta??o e confer?ncia no setor.\n\nAssim que o processo for conclu?do, confirmaremos por aqui!\n\nPermanecemos ? disposi??o!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura / reversão de encerramento da conta **1414064** (Paciente: **Zilda Candida de Jesus Belmiro**) no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
@@ -24,7 +81,8 @@
       "[PB-UNI-28] Notificar o(a) colaborador(a) no chamado confirmando o processo revertido / reabertura concluída."
     ],
     "sufficiency_status": "completo",
-    "created_at": "2026-10-22T18:47:29.272Z"
+    "created_at": "2026-10-22T18:47:29.272Z",
+    "updated_at": "2026-10-22T18:51:16.430Z"
   },
   {
     "ticket_id": 43019,
@@ -1774,17 +1832,18 @@
   },
   {
     "ticket_id": 43097,
-    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Voltar remessa para o controle de contas",
+    "title": "Resolução de Problemas  -  Voltar remessa para o controle de contas",
     "category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
     "keywords": [
-      "controle de contas",
+      "voltar",
       "remessa",
+      "controle",
+      "contas",
+      "fazer",
       "reversao",
-      "encerramento",
-      "voltar remessa",
-      "remessa 350"
+      "encerramento"
     ],
-    "problem_summary": "Solicitante Sarah Victoria Soares Santos (H Faturamento) solicita fazer reversão de encerramento da remessa 350 no sistema Controle de Contas para que as contas associadas retornem ao status aberto/em digitação para movimentação pelo setor.",
+    "problem_summary": "Boa tarde!\nFavor fazer reversão de encerramento no controle de contas da remessa 350",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reversão de encerramento da remessa **350** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando a reversão do processo de encerramento no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "required_info": [],
     "resolution_steps": [
@@ -1797,6 +1856,6 @@
     ],
     "sufficiency_status": "completo",
     "created_at": "2026-10-22T18:05:49.411Z",
-    "updated_at": "2026-10-22T18:05:49.412Z"
+    "updated_at": "2026-10-22T18:51:51.237Z"
   }
 ]

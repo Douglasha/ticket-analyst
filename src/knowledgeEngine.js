@@ -277,6 +277,14 @@ export class KnowledgeEngine {
         normTicket
       );
 
+    const isXmlBatalhaoOrSghValueMismatch =
+      /\bxml\b/i.test(normTicket) &&
+      (/\b(batalh[aã]o|ipsm|ipsmmg|sigas|anestesista|primeiro auxiliar|1[ºo]?\s*auxiliar|grau de participa[cç][aã]o|diferen[cç]a de valor)\b/i.test(
+        normTicket
+      ) ||
+        (/\b(valores?|valor)\b/i.test(normTicket) &&
+          /\b(carregad[oa]s?|importa[cç][aã]o|importar|fatura|diferen[cç]a)\b/i.test(normTicket)));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -627,8 +635,16 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-23" && !isScanToEmail) {
           continue;
         }
-        // Evita parear Playbook de XML TISS (PB-UNI-03) quando o chamado não trata de XML, TISS ou Hash
-        if (pb.id === "PB-UNI-03" && !/\b(xml|tiss|hash)\b/i.test(normTicket)) {
+        // Evita parear Playbook de XML TISS Hash (PB-UNI-03) quando o chamado não trata de XML/TISS/Hash ou quando trata de divergência de valores no Batalhão/SIGAS (PB-UNI-46)
+        if (
+          pb.id === "PB-UNI-03" &&
+          (!/\b(xml|tiss|hash)\b/i.test(normTicket) ||
+            (isXmlBatalhaoOrSghValueMismatch && !/\bhash\b/i.test(normTicket)))
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-46 (Importação XML SGH Spdata / Batalhão / SIGAS) quando não trata de XML com Batalhão/IPSM/SIGAS ou divergência de valores de equipe
+        if (pb.id === "PB-UNI-46" && !isXmlBatalhaoOrSghValueMismatch) {
           continue;
         }
         // Evita parear Playbook de Remanejamento / Ponto de Telefone (PB-UNI-20) quando não há solicitação de mudança de local ou ponto físico
@@ -776,6 +792,12 @@ export class KnowledgeEngine {
           isReopenOrRevertAccount
         ) {
           score = Math.max(score, 0.95);
+        }
+        if (
+          pb.id === "PB-UNI-46" &&
+          isXmlBatalhaoOrSghValueMismatch
+        ) {
+          score = Math.max(score, 0.96);
         }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
