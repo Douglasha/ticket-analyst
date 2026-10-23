@@ -832,13 +832,16 @@ export class KnowledgeEngine {
         continue;
       }
 
-      const score = computeRelevance(
+      let score = computeRelevance(
         fullTicketText,
         ticketTokens,
         kb.title || "",
         kb.summary || "",
         kb.keywords || []
       );
+      if (isXmlBatalhaoOrSghValueMismatch && /\b(batalh[aã]o|ipsmmg|sigas)\b/i.test(normKbTitle)) {
+        score = Math.max(score, 0.96);
+      }
       const minKbScore = isRoutine ? 0.65 : bestPlaybookScore >= 0.75 ? 0.55 : 0.45;
       if (score >= minKbScore) {
         matches.push({
@@ -915,7 +918,15 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear memórias de outros sistemas (ex: PEP / Dalete) quando o chamado é de clínicas / Web Saúde
+        // Evita parear memórias de outros temas quando o chamado trata de importação/divergência de XML TISS no Batalhão/SIGAS
+        if (
+          isXmlBatalhaoOrSghValueMismatch &&
+          !/\b(xml|batalh[aã]o|ipsm|ipsmmg|sigas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
         if (
           /\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(normTicket) &&
           !/\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(

@@ -1088,7 +1088,7 @@ export class GLPIClient {
     const headers = this._authHeaders(sessionToken);
     const articles = [];
     try {
-      const res = await fetch(`${this.baseUrl}/KnowbaseItem?range=0-80&expand_dropdowns=true`, {
+      const res = await fetch(`${this.baseUrl}/KnowbaseItem?range=0-250&sort=id&order=DESC&expand_dropdowns=true`, {
         headers,
       });
       if (res.ok) {
