@@ -888,6 +888,9 @@ export class KnowledgeEngine {
       if (isXmlBatalhaoOrSghValueMismatch && /\b(batalh[aã]o|ipsmmg|sigas)\b/i.test(normKbTitle)) {
         score = Math.max(score, 0.96);
       }
+      if (isDocusignAccessOrShared && /\b(docusign|acesso compartilhado)\b/i.test(normKbTitle)) {
+        score = Math.max(score, 0.96);
+      }
       const minKbScore = isRoutine ? 0.65 : bestPlaybookScore >= 0.75 ? 0.55 : 0.45;
       if (score >= minKbScore) {
         matches.push({

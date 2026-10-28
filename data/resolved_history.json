@@ -13,6 +13,24 @@
     ]
   },
   {
+    "id": "Chamado #43324 (Resolvido)",
+    "ticket_id": 43324,
+    "solution_id": 42034,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > CONFERÊNCIA PATRIMONIAL - ADMISSÃO E DESLIGAMENTO",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\n\r\nPara otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a reali",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Para otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a realização da conferência patrimonial, atualização dos responsáveis pelos bens e tratamento de eventuais pendências.",
+      "Com isso, a comunicação entre os setores passa a ocorrer de forma padronizada e rastreável, garantindo maior controle sobre os ativos vinculados aos colaboradores.",
+      "Permanecemos à disposição para eventuais ajustes ou esclarecimentos.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43311 (Resolvido)",
     "ticket_id": 43311,
     "solution_id": 42013,

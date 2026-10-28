@@ -1790,10 +1790,9 @@
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
-      "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários / Acesso Compartilhado - Shared Access).",
-      "[PB-UNI-48] Localizar a conta de origem dos contratos/envelopes informada no chamado (ex.: claudiofelix@unimedsudoestemg.coop.br) e a conta da solicitante/setor (ex.: Ediléa Almeida - Cadastro).",
-      "[PB-UNI-48] Configurar a regra de Acesso Compartilhado (Permissão para visualizar/gerenciar/enviar envelopes em nome do usuário) para que os contratos enviados à conta informada fiquem visíveis para a solicitante no DocuSign.",
-      "[PB-UNI-48] Orientar a solicitante sobre como alternar a visualização no DocuSign ('Gerenciar > Acesso Compartilhado / Mudar para outro usuário') e confirmar a liberação no chamado."
+      "[PB-UNI-48] Acessar o DocuSign com uma conta de Administrador, clicar na aba 'Admin' e, no menu lateral 'USUÁRIOS E GRUPOS', clicar em 'Usuários' (conforme documentado na Base de Conhecimento KB #88).",
+      "[PB-UNI-48] Clicar no usuário titular cujos contratos serão compartilhados (ex.: Claudio Antonio Felix de Oliveira - claudiofelix@unimedsudoestemg.coop.br) e selecionar a aba 'Acesso compartilhado'.",
+      "[PB-UNI-48] Clicar no botão 'Compartilhar o acesso com outros', selecionar os usuários (ex.: Ediléa Almeida - Cadastro), definir a Data de início e selecionar o tipo de permissão (ou clicar em 'Editar' na coluna 'Permissões')."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **{email_alvo}**.\n\nConforme alinhado previamente, os dados necessários já foram validados e nossa equipe técnica está realizando a liberação de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a permissão estiver ativa para o seu usuário, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }

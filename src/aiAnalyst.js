@@ -1782,9 +1782,9 @@ export class AIAnalyst {
 
         customResolutionSteps = [
           `[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de '${ticket.category}' para 'T.I > ST > Acesso e Permissões' (ID 67).`,
-          `[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).`,
-          `[PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta '${targetEmail || "origem"}' para a usuária ${ticket.requester} (${sectorName}), permitindo visualizar e gerenciar os contratos enviados a esse endereço.`,
-          `[PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado.`,
+          `[PB-UNI-48] Acessar o DocuSign com uma conta de Administrador, clicar na aba 'Admin' e, no menu lateral 'USUÁRIOS E GRUPOS', clicar em 'Usuários' (conforme documentado na Base de Conhecimento KB #88).`,
+          `[PB-UNI-48] Clicar no usuário titular da conta '${targetEmail || "origem"}' e acessar a aba 'Acesso compartilhado'.`,
+          `[PB-UNI-48] Clicar em 'Compartilhar o acesso com outros', selecionar a usuária ${ticket.requester} (${sectorName}), definir a Data de início e o tipo de permissão (ou ajustar em 'Editar' na coluna 'Permissões').`,
         ];
 
         customPublicReply =

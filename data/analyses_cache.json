@@ -9965,11 +9965,11 @@
     "analyzed_images_count": 4
   },
   "43336": {
-    "updated_at": "2026-10-28T12:30:42.865Z",
-    "ticket_date_mod": "2026-10-28 08:59:37",
+    "updated_at": "2026-10-28T13:10:44.138Z",
+    "ticket_date_mod": "2026-10-28 09:44:32",
     "analysis": {
       "ticket_id": 43336,
-      "analyzed_at": "28/10/2026 09:30",
+      "analyzed_at": "28/10/2026 10:10",
       "provider_used": "Ollama Local (qwen2.5:3b)",
       "translated_intent": "A solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*",
       "detected_domain": "Acessos, Permissões e Contas (DocuSign)",
@@ -9988,28 +9988,28 @@
           "summary": "Solicitação de colaboradores (ex.: setor de Cadastro, Jurídico, Contratos ou Comercial, como Ediléa Almeida no chamado #43336) para configurar Acesso Compartilhado (Shared Access) ou permissão de visualização/gerenciamento na plataforma DocuSign, de modo que os contratos/envelopes enviados ou recebidos por outra conta institucional (ex.: claudiofelix@unimedsudoestemg.coop.br) apareçam no painel do(a) solicitante.",
           "steps": [
             "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
-            "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários / Acesso Compartilhado - Shared Access).",
-            "[PB-UNI-48] Localizar a conta de origem dos contratos/envelopes informada no chamado (ex.: claudiofelix@unimedsudoestemg.coop.br) e a conta da solicitante/setor (ex.: Ediléa Almeida - Cadastro).",
-            "[PB-UNI-48] Configurar a regra de Acesso Compartilhado (Permissão para visualizar/gerenciar/enviar envelopes em nome do usuário) para que os contratos enviados à conta informada fiquem visíveis para a solicitante no DocuSign.",
-            "[PB-UNI-48] Orientar a solicitante sobre como alternar a visualização no DocuSign ('Gerenciar > Acesso Compartilhado / Mudar para outro usuário') e confirmar a liberação no chamado."
+            "[PB-UNI-48] Acessar o DocuSign com uma conta de Administrador, clicar na aba 'Admin' e, no menu lateral 'USUÁRIOS E GRUPOS', clicar em 'Usuários' (conforme documentado na Base de Conhecimento KB #88).",
+            "[PB-UNI-48] Clicar no usuário titular cujos contratos serão compartilhados (ex.: Claudio Antonio Felix de Oliveira - claudiofelix@unimedsudoestemg.coop.br) e selecionar a aba 'Acesso compartilhado'.",
+            "[PB-UNI-48] Clicar no botão 'Compartilhar o acesso com outros', selecionar os usuários (ex.: Ediléa Almeida - Cadastro), definir a Data de início e selecionar o tipo de permissão (ou clicar em 'Editar' na coluna 'Permissões')."
           ],
           "score": 0.99
         },
         {
-          "layer": "local_playbook",
-          "layer_label": "3ª Camada • Playbook Local de Processos TI",
-          "source_id": "PB-UNI-38",
-          "title": "Gestão de E-mails Corporativos — Acesso a Caixa Departamental e Redirecionamento de Mensagens",
-          "category": "Acessos, Permissões e Contas",
-          "summary": "Colaborador(a) solicita acesso ou credencial para caixa postal departamental/compartilhada de setor (ex.: marketing@unimedsudoestemg.coop.br) e/ou configuração de regra de redirecionamento/encaminhamento automático de mensagens entre contas de e-mail corporativas (ex.: mensagens de jornalismo@... redirecionadas para marketing@...).",
+          "layer": "glpi_kb",
+          "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+          "source_id": "KB-88",
+          "title": "Apps Externos > DocuSign > Como configurar Acesso Compartilhado (Shared Access) de contratos e envelopes no DocuSign",
+          "category": "Base de Conhecimento GLPI",
+          "summary": "▸ Configuração de Acesso Compartilhado (Shared Access) de Envelopes e Contratos no DocuSign\n\r\n\n▸ 1. Identificação e Contexto\n\r\n\r\nPlataforma: DocuSign (Conta Corporativa: UNIMED SUDOESTE DE MINAS COOPERATIVA DE TRABALHO MEDICO — ID 131339366)\n\r\nCategoria no GLPI: T.I > ST > Acesso e Permissões (ID 67)\n\r\nSetores Solicita...",
           "steps": [
-            "Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).",
-            "Localizar a conta departamental informada (ex.: marketing@unimedsudoestemg.coop.br) e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador.",
-            "Localizar a conta de origem informada (ex.: jornalismo@unimedsudoestemg.coop.br) e criar a regra de redirecionamento automático (forwarding) para a conta de destino, assegurando que nenhuma mensagem seja perdida.",
-            "Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.",
-            "Notificar o solicitante no chamado do GLPI com as orientações de acesso e confirmar o funcionamento."
+            "▸ Configuração de Acesso Compartilhado (Shared Access) de Envelopes e Contratos no DocuSign",
+            "▸ 1. Identificação e Contexto",
+            "Plataforma: DocuSign (Conta Corporativa: UNIMED SUDOESTE DE MINAS COOPERATIVA DE TRABALHO MEDICO — ID 131339366)",
+            "Categoria no GLPI: T.I > ST > Acesso e Permissões (ID 67)",
+            "Setores Solicitantes Comuns: Cadastro, Jurídico, Contratos, Comercial, Diretoria",
+            "Chamado de Referência: #43336 (28/10/2026 — Compartilhamento dos contratos enviados a claudiofelix@unimedsudoestemg.coop.br com a colaboradora Ediléa Almeida)"
           ],
-          "score": 0.47
+          "score": 0.96
         },
         {
           "layer": "glpi_history",
@@ -10046,14 +10046,14 @@
           "score": 0.51
         }
       ],
-      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-38)",
+      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 1ª Camada • Base de Conhecimento GLPI (KB-88)",
       "resolution_steps": [
         "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
-        "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).",
-        "[PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta 'claudiofelix@unimedsudoestemg.coop.br' para a usuária Ediléa Almeida (Cadastro), permitindo visualizar e gerenciar os contratos enviados a esse endereço.",
-        "[PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado."
+        "[PB-UNI-48] Acessar o DocuSign com uma conta de Administrador, clicar na aba 'Admin' e, no menu lateral 'USUÁRIOS E GRUPOS', clicar em 'Usuários' (conforme documentado na Base de Conhecimento KB #88).",
+        "[PB-UNI-48] Clicar no usuário titular da conta 'claudiofelix@unimedsudoestemg.coop.br' e acessar a aba 'Acesso compartilhado'.",
+        "[PB-UNI-48] Clicar em 'Compartilhar o acesso com outros', selecionar a usuária Ediléa Almeida (Cadastro), definir a Data de início e o tipo de permissão (ou ajustar em 'Editar' na coluna 'Permissões')."
       ],
-      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-38)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).\n  2. [PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).\n  3. [PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta 'claudiofelix@unimedsudoestemg.coop.br' para a usuária Ediléa Almeida (Cadastro), permitindo visualizar e gerenciar os contratos enviados a esse endereço.\n  4. [PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado.",
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 1ª Camada • Base de Conhecimento GLPI (KB-88)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).\n  2. [PB-UNI-48] Acessar o DocuSign com uma conta de Administrador, clicar na aba 'Admin' e, no menu lateral 'USUÁRIOS E GRUPOS', clicar em 'Usuários' (conforme documentado na Base de Conhecimento KB #88).\n  3. [PB-UNI-48] Clicar no usuário titular da conta 'claudiofelix@unimedsudoestemg.coop.br' e acessar a aba 'Acesso compartilhado'.\n  4. [PB-UNI-48] Clicar em 'Compartilhar o acesso com outros', selecionar a usuária Ediléa Almeida (Cadastro), definir a Data de início e o tipo de permissão (ou ajustar em 'Editar' na coluna 'Permissões').",
       "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br**.\n\nConforme alinhado previamente, os dados informados já foram validados e nossa equipe técnica está configurando a permissão de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a visualização dos contratos da conta **claudiofelix@unimedsudoestemg.coop.br** estiver liberada para o seu acesso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
       "has_image_analysis": false,
       "analyzed_images_count": 0
