@@ -1734,6 +1734,79 @@ export class AIAnalyst {
         `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
         `Assim que a tabela **${tableName}** (faixa **${faixaCode}**) estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
+    } else if (
+      /\b(docusign|docu\s*sign)\b/i.test(normAll) ||
+      (/\bacesso\s+compartilhado\b/i.test(normAll) &&
+        /\b(contratos?|envelopes?)\b/i.test(normAll))
+    ) {
+      const descOnly = formFields.descricao || ticket.content || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const emailMatch = descOnly.match(
+        /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i
+      );
+      const targetEmail = emailMatch
+        ? emailMatch[1].trim().toLowerCase()
+        : "";
+      const hasSharedAccess =
+        /\b(acesso\s+compartilhado|compartilh|aparecesse?\s+os\s+contratos|visualizar\s+os\s+contratos|contratos\s+enviados)\b/i.test(
+          normAll
+        );
+
+      detectedDomain = "Acessos, Permissões e Contas (DocuSign)";
+      suggestedCategory = "T.I > ST > Acesso e Permissões";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Configuração de Acesso Compartilhado (Shared Access) e permissões de visualização de contratos/envelopes na plataforma DocuSign para o setor ${sectorName}.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 67).*`
+        : "";
+
+      if (targetEmail || hasSharedAccess) {
+        const emailLabel = targetEmail
+          ? `enviados ao e-mail **${targetEmail}**`
+          : "da conta solicitada";
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes ${emailLabel} passem a aparecer e possam ser acompanhados pelo seu usuário no setor **${sectorName}**. ` +
+          `Todas as informações necessárias (usuária solicitante e conta de origem dos contratos \`${targetEmail || "informada"}\`) já constam descritas no chamado.` +
+          reclassNote;
+
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        customResolutionSteps = [
+          `[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de '${ticket.category}' para 'T.I > ST > Acesso e Permissões' (ID 67).`,
+          `[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).`,
+          `[PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta '${targetEmail || "origem"}' para a usuária ${ticket.requester} (${sectorName}), permitindo visualizar e gerenciar os contratos enviados a esse endereço.`,
+          `[PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado.`,
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos ${emailLabel}.\n\n` +
+          `Conforme alinhado previamente, os dados informados já foram validados e nossa equipe técnica está configurando a permissão de compartilhamento de envelopes no painel administrativo do DocuSign.\n\n` +
+          `Assim que a visualização dos contratos da conta **${targetEmail || "solicitada"}** estiver liberada para o seu acesso, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita suporte ou liberação de permissão na plataforma **DocuSign**, pendente de especificação da conta de e-mail ou tipo de acesso desejado.` +
+          reclassNote;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Confirmar o endereço de e-mail da conta cujos contratos/envelopes precisam ser compartilhados ou liberados no DocuSign",
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente ao **DocuSign** (${sectorName}).\n\n` +
+          `Para prosseguirmos com a configuração, você poderia nos confirmar qual é o **e-mail da conta** que precisa ter o acesso ou visualização de contratos configurado?\n\n` +
+          `Assim que nos informar por aqui, já realizamos a liberação!`;
+      }
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =
         formFields.problema?.match(/pasta\s+([^,]+)/i)?.[1]?.trim() ||
@@ -3764,9 +3837,13 @@ export class AIAnalyst {
             !/\b(google\s*meet|meet|teams|zoom|videoconfer[eê]ncia|reuni[aã]o)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
             ));
+        const isFallbackMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|carlos|jose|antonio|francisco|paulo|luiz|luis|renato|sergio|eduardo|fabio|flavio|guilherme|henrique|igor|leandro|marcelo|marcio|mauricio|murilo|otavio|ricardo|roberto|rogério|rogerio|samuel|sandro|vinicius|wagner|wanderson|weberson|wellington|wesley|willian|william)\b/i.test(
+          firstName
+        );
+        const fallbackSolPrefix = isFallbackMale ? "O solicitante" : "A solicitante";
         if (!isMemActionMismatch) {
           translatedIntent =
-            `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
+            `${fallbackSolPrefix} **${ticket.requester}** (${sectorName}) abriu o chamado: "${resumoDesc}". ` +
             `Triagem orientada pelo padrão aprendido anteriormente com o analista (${matchedMemory.source_id}).`;
           sufficiencyStatus = matchedMemory.sufficiency_status || "parcial";
           missingInfo = Array.isArray(matchedMemory.required_info)
@@ -3779,19 +3856,27 @@ export class AIAnalyst {
           }
         } else {
           translatedIntent =
-            `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}".`;
+            `${fallbackSolPrefix} **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}".`;
           sufficiencyStatus = hasConcreteIdentifiers ? "completo" : "parcial";
           missingInfo = hasConcreteIdentifiers ? [] : ["Informar os dados complementares para atendimento"];
         }
       } else if (!looksLikeError && hasConcreteIdentifiers && !matchedPb) {
+        const isFallbackMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|carlos|jose|antonio|francisco|paulo|luiz|luis|renato|sergio|eduardo|fabio|flavio|guilherme|henrique|igor|leandro|marcelo|marcio|mauricio|murilo|otavio|ricardo|roberto|rogério|rogerio|samuel|sandro|vinicius|wagner|wanderson|weberson|wellington|wesley|willian|william)\b/i.test(
+          firstName
+        );
+        const fallbackSolPrefix = isFallbackMale ? "O solicitante" : "A solicitante";
         translatedIntent =
-          `O solicitante **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}". ` +
+          `${fallbackSolPrefix} **${ticket.requester}** (${sectorName}) abriu o chamado solicitando: "${resumoDesc}". ` +
           "As informações necessárias para atendimento já constam descritas no chamado.";
         sufficiencyStatus = "completo";
         missingInfo = [];
       } else {
+        const isFallbackMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|carlos|jose|antonio|francisco|paulo|luiz|luis|renato|sergio|eduardo|fabio|flavio|guilherme|henrique|igor|leandro|marcelo|marcio|mauricio|murilo|otavio|ricardo|roberto|rogério|rogerio|samuel|sandro|vinicius|wagner|wanderson|weberson|wellington|wesley|willian|william)\b/i.test(
+          firstName
+        );
+        const fallbackSolPrefix = isFallbackMale ? "O solicitante" : "A solicitante";
         translatedIntent =
-          `O solicitante ${ticket.requester} (${sectorName}) abriu o chamado relatando: "${resumoDesc}". ` +
+          `${fallbackSolPrefix} ${ticket.requester} (${sectorName}) abriu o chamado relatando: "${resumoDesc}". ` +
           "A solicitação requer validação técnica inicial para atendimento.";
         sufficiencyStatus = "parcial";
         missingInfo = matchedPb

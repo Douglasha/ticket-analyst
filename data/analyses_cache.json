@@ -9872,5 +9872,236 @@
       "has_image_analysis": false,
       "analyzed_images_count": 0
     }
+  },
+  "43136": {
+    "ticket_id": 43136,
+    "analyzed_at": "23/10/2026 13:48",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitação do solicitante é sobre problemas de integração entre os exames solicitados no PEP e os exames realizados pelo laboratório. Esses exames estão sendo lançados incorretamente no faturamento. O solicitante anexou quatro imagens para fornecer evidências visuais dos problemas encontrados. O impacto operacional deste chamado é a ineficiência no lançamento correto dos exames no faturamento.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > TR > Treinamento AutoLac",
+    "real_urgency": "Média",
+    "urgency_reason": "A integração incorreta dos exames está causando atrasos no faturamento, o que pode afetar financeiramente a Unimed.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41961",
+        "title": "Correção de bugs  -  Não recebimento diário de Relatório",
+        "category": "T.I > DV > Desenvolvimento > Correção de bugs",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+        "steps": [
+          "[PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+          "[PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+          "[PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+          "[Chamado #41783 (Resolvido)] Sistema reiniciado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43016 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Correção de bugs > Verificação de checklist preenchidos",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde!\n\n\r\nRecentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações.\n\n\r\nO ajuste já foi realizado e, a partir de agora, o relatório buscará as informações corretamente.",
+        "steps": [
+          "Boa tarde!",
+          "Recentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações.",
+          "O ajuste já foi realizado e, a partir de agora, o relatório buscará as informações corretamente."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42089 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Erro no valor do medicamento",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.\n\n\r\nRealizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.\n\n\r\nApós o ajuste, os valores passaram a ser apresentados corretamente.",
+        "steps": [
+          "Após análise, identificamos que as tabelas importadas com as vigências 01/09 e 18/09 estavam com valores incorretos.",
+          "Realizei a exclusão dessas vigências e, em seguida, efetuei uma nova importação da tabela com os valores corretos, utilizando a vigência 01/09.",
+          "Após o ajuste, os valores passaram a ser apresentados corretamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41290 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criar Mensagem de Alerta para Alergias",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde.\n\nRealizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Boa tarde.",
+          "Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#41961) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43016 (Resolvido))",
+    "resolution_steps": [
+      "[Aprendido em MEM-#41961] A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+      "[MEM-#41961] [PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+      "[MEM-#41961] [PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+      "[MEM-#41961] [PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+      "[MEM-#41961] [Chamado #41783 (Resolvido)] Sistema reiniciado.",
+      "[Chamado #43016 (Resolvido)] Recentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitação do solicitante é sobre problemas de integração entre os exames solicitados no PEP e os exames realizados pelo laboratório. Esses exames estão sendo lançados incorretamente no faturamento. O solicitante anexou quatro imagens para fornecer evidências visuais dos problemas encontrados. O impacto operacional deste chamado é a ineficiência no lançamento correto dos exames no faturamento.\n\nClassificação Sugerida: T.I > TR > Treinamento AutoLac | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#41961) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43016 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Aprendido em MEM-#41961] A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível\n  2. [MEM-#41961] [PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.\n  3. [MEM-#41961] [PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.\n  4. [MEM-#41961] [PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.\n  5. [MEM-#41961] [Chamado #41783 (Resolvido)] Sistema reiniciado.\n  6. [Chamado #43016 (Resolvido)] Recentemente, houve uma alteração no formulário, que precisou ser recriado. No entanto, o script do relatório ainda não havia sido atualizado para considerar o novo formulário, o que impactou a consulta das informações.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos o seu relato sobre o não recebimento do envio diário do relatório agendado no sistema **S.G.H. (Spdata)** (**RELATÓRIO PREENCHIMENTO DE CHECK-LIST NAS 24 HORAS**).\n\nNossa equipe técnica já está verificando o problema no serviço de agendamento/disparo do relatório e retornaremos o mais breve possível por aqui!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 4
+  },
+  "43336": {
+    "updated_at": "2026-10-28T12:30:42.865Z",
+    "ticket_date_mod": "2026-10-28 08:59:37",
+    "analysis": {
+      "ticket_id": 43336,
+      "analyzed_at": "28/10/2026 09:30",
+      "provider_used": "Ollama Local (qwen2.5:3b)",
+      "translated_intent": "A solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*",
+      "detected_domain": "Acessos, Permissões e Contas (DocuSign)",
+      "suggested_category": "T.I > ST > Acesso e Permissões",
+      "real_urgency": "Média",
+      "urgency_reason": "Configuração de Acesso Compartilhado (Shared Access) e permissões de visualização de contratos/envelopes na plataforma DocuSign para o setor Cadastro.",
+      "sufficiency_status": "completo",
+      "missing_info": [],
+      "knowledge_matches": [
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-48",
+          "title": "Configuração de Acesso Compartilhado (Shared Access) e Permissões de Envelopes/Contratos no DocuSign",
+          "category": "Acessos, Permissões e Contas",
+          "summary": "Solicitação de colaboradores (ex.: setor de Cadastro, Jurídico, Contratos ou Comercial, como Ediléa Almeida no chamado #43336) para configurar Acesso Compartilhado (Shared Access) ou permissão de visualização/gerenciamento na plataforma DocuSign, de modo que os contratos/envelopes enviados ou recebidos por outra conta institucional (ex.: claudiofelix@unimedsudoestemg.coop.br) apareçam no painel do(a) solicitante.",
+          "steps": [
+            "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
+            "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários / Acesso Compartilhado - Shared Access).",
+            "[PB-UNI-48] Localizar a conta de origem dos contratos/envelopes informada no chamado (ex.: claudiofelix@unimedsudoestemg.coop.br) e a conta da solicitante/setor (ex.: Ediléa Almeida - Cadastro).",
+            "[PB-UNI-48] Configurar a regra de Acesso Compartilhado (Permissão para visualizar/gerenciar/enviar envelopes em nome do usuário) para que os contratos enviados à conta informada fiquem visíveis para a solicitante no DocuSign.",
+            "[PB-UNI-48] Orientar a solicitante sobre como alternar a visualização no DocuSign ('Gerenciar > Acesso Compartilhado / Mudar para outro usuário') e confirmar a liberação no chamado."
+          ],
+          "score": 0.99
+        },
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-38",
+          "title": "Gestão de E-mails Corporativos — Acesso a Caixa Departamental e Redirecionamento de Mensagens",
+          "category": "Acessos, Permissões e Contas",
+          "summary": "Colaborador(a) solicita acesso ou credencial para caixa postal departamental/compartilhada de setor (ex.: marketing@unimedsudoestemg.coop.br) e/ou configuração de regra de redirecionamento/encaminhamento automático de mensagens entre contas de e-mail corporativas (ex.: mensagens de jornalismo@... redirecionadas para marketing@...).",
+          "steps": [
+            "Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).",
+            "Localizar a conta departamental informada (ex.: marketing@unimedsudoestemg.coop.br) e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador.",
+            "Localizar a conta de origem informada (ex.: jornalismo@unimedsudoestemg.coop.br) e criar a regra de redirecionamento automático (forwarding) para a conta de destino, assegurando que nenhuma mensagem seja perdida.",
+            "Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.",
+            "Notificar o solicitante no chamado do GLPI com as orientações de acesso e confirmar o funcionamento."
+          ],
+          "score": 0.47
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #43182 (Resolvido)",
+          "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > Dalete Garcia de Oliveira Bartelochi",
+          "category": "T.I • Solucionado por damaral",
+          "summary": "Prezados(as),\n\n\r\nAcessos bloqueados:\n\n\r\nE-mail Institucional\nDocusign - não possui acesso\nGIU - não possui acesso\nGLPI\nHRP Unimed\nIntranet\nNext Cloud,\nSGH Spdata\nSafeWeb (Certificado Digital Hospital) Solicitado revogação\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+          "steps": [
+            "Prezados(as),",
+            "Acessos bloqueados:",
+            "E-mail Institucional",
+            "Docusign - não possui acesso",
+            "GIU - não possui acesso",
+            "GLPI"
+          ],
+          "score": 0.51
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #42210 (Resolvido)",
+          "title": "Suporte Técnico e Service Desk > Criação de Usuários > Luiza Barros Maciel",
+          "category": "T.I • Solucionado por damaral",
+          "summary": "Prezados(as),\n\n\r\nAcesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.\n\n\r\nCadastro concluído com sucesso!\n\n\r\nLogin: CPFSenha: 1253\nlink: hrp.unimedsudoestemg.coop.br\n\n\r\nOs dados de login do(a) atendente foram enviados para o e-mail informado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos ",
+          "steps": [
+            "Prezados(as),",
+            "Acesso criado e vinculado aos prestadores 16000056, 16000057, 16000067 e 16000028.",
+            "Cadastro concluído com sucesso!",
+            "Login: CPFSenha: 1253",
+            "link: hrp.unimedsudoestemg.coop.br",
+            "Os dados de login do(a) atendente foram enviados para o e-mail informado."
+          ],
+          "score": 0.51
+        }
+      ],
+      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-38)",
+      "resolution_steps": [
+        "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
+        "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).",
+        "[PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta 'claudiofelix@unimedsudoestemg.coop.br' para a usuária Ediléa Almeida (Cadastro), permitindo visualizar e gerenciar os contratos enviados a esse endereço.",
+        "[PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado."
+      ],
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-48) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-38)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).\n  2. [PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).\n  3. [PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta 'claudiofelix@unimedsudoestemg.coop.br' para a usuária Ediléa Almeida (Cadastro), permitindo visualizar e gerenciar os contratos enviados a esse endereço.\n  4. [PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado.",
+      "public_reply_draft": "Olá, Ediléa! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br**.\n\nConforme alinhado previamente, os dados informados já foram validados e nossa equipe técnica está configurando a permissão de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a visualização dos contratos da conta **claudiofelix@unimedsudoestemg.coop.br** estiver liberada para o seu acesso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+      "has_image_analysis": false,
+      "analyzed_images_count": 0
+    }
+  },
+  "undefined": {
+    "updated_at": "2026-10-23T16:38:16.897Z",
+    "ticket_date_mod": "",
+    "analysis": {
+      "ticket_id": 43129,
+      "analyzed_at": "23/10/2026 13:38",
+      "provider_used": "Ollama Local (qwen2.5:3b)",
+      "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) solicita a criação e parametrização de uma **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, configurada na **faixa de 998** com a nomenclatura **DTH - PADRAO** (direcionada ao analista/desenvolvedor Moisés Conte). Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.",
+      "detected_domain": "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas",
+      "suggested_category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+      "real_urgency": "Média",
+      "urgency_reason": "Solicitação do setor H Faturamento para criação/parametrização da tabela de Diárias e Taxas Hospitalares (DTH) (DTH - PADRAO) no sistema SGH Spdata, necessária para o vínculo contratual e faturamento de contas hospitalares.",
+      "sufficiency_status": "completo",
+      "missing_info": [],
+      "knowledge_matches": [
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-47",
+          "title": "Criação, Importação e Parametrização de Tabelas e Regras em Sistemas Corporativos (SGH Spdata / HRP / DTH / Simpro / Brasíndice / IPSM)",
+          "category": "Sistemas Internos / ERP / SGH Spdata / Parametrização de Sistemas e Tabelas",
+          "summary": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM) ou vínculos de convênios nos sistemas SGH Spdata e HRP Unimed.",
+          "steps": [
+            "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+            "[PB-UNI-47] Acessar o módulo de Tabelas / Faturamento de Convênios no sistema informado (ex.: SGH Spdata ou HRP Unimed).",
+            "[PB-UNI-47] Executar a criação, importação de vigência ou parametrização da tabela solicitada (ex.: criar tabela de diárias e taxas na faixa 998 como 'DTH - PADRAO' no SGH Spdata).",
+            "[PB-UNI-47] Validar se a faixa de código, descrição, vigência e vínculos com os convênios estão ativos e disponíveis para o setor solicitante.",
+            "[PB-UNI-47] Confirmar a conclusão da parametrização no chamado do GLPI."
+          ],
+          "score": 0.99
+        }
+      ],
+      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-47)",
+      "resolution_steps": [
+        "[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+        "[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema SGH Spdata e criar a tabela de Diárias e Taxas Hospitalares (DTH) na faixa 998 sob a nomenclatura 'DTH - PADRAO'.",
+        "[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (H Faturamento) e confirmar a disponibilização da tabela 'DTH - PADRAO' para a solicitante Priscila Santos."
+      ],
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) solicita a criação e parametrização de uma **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, configurada na **faixa de 998** com a nomenclatura **DTH - PADRAO** (direcionada ao analista/desenvolvedor Moisés Conte). Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.\n\nClassificação Sugerida: T.I > ST > Parametrização de Sistemas e Tabelas | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-47)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).\n  2. [PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema SGH Spdata e criar a tabela de Diárias e Taxas Hospitalares (DTH) na faixa 998 sob a nomenclatura 'DTH - PADRAO'.\n  3. [PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (H Faturamento) e confirmar a disponibilização da tabela 'DTH - PADRAO' para a solicitante Priscila Santos.",
+      "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos a sua solicitação para criação da **tabela de Diárias e Taxas Hospitalares (DTH)** no sistema **SGH Spdata**, na **faixa de 998**, com a descrição **DTH - PADRAO**.\n\nOs parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\nAssim que a tabela **DTH - PADRAO** (faixa **998**) estiver criada e liberada para uso no SGH Spdata, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+      "has_image_analysis": false,
+      "analyzed_images_count": 0
+    },
+    "suggested_category": "T.I > ST > Parametrização de Sistemas e Tabelas"
   }
 }

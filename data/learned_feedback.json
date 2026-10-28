@@ -1,5 +1,32 @@
 [
   {
+    "ticket_id": 43336,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Docusign",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "docusign",
+      "acesso compartilhado",
+      "contratos enviados",
+      "claudiofelix@unimedsudoestemg.coop.br",
+      "claudiofelix",
+      "cadastro",
+      "edilea almeida"
+    ],
+    "problem_summary": "A solicitante **Ediléa Almeida** (Cadastro) solicita a configuração de **Acesso Compartilhado (*Shared Access*)** na plataforma **DocuSign** (conforme alinhado previamente com o analista Douglas), para que os contratos/envelopes enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br** passem a aparecer e possam ser acompanhados pelo seu usuário no setor **Cadastro**. Todas as informações necessárias (usuária solicitante e conta de origem dos contratos `claudiofelix@unimedsudoestemg.coop.br`) já constam descritas no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Instalação/Configuração > Aplicativos\", recomenda-se reclassificar para \"T.I > ST > Acesso e Permissões\" — ID 67).*",
+    "resolution_steps": [
+      "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
+      "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários > Acesso Compartilhado / Shared Access).",
+      "[PB-UNI-48] Vincular a permissão de Acesso Compartilhado de envelopes da conta 'claudiofelix@unimedsudoestemg.coop.br' para a usuária Ediléa Almeida (Cadastro), permitindo visualizar e gerenciar os contratos enviados a esse endereço.",
+      "[PB-UNI-48] Validar a exibição dos contratos na aba 'Gerenciar > Acesso Compartilhado' do DocuSign e confirmar a conclusão no chamado."
+    ],
+    "reply_template": "Olá, Ediléa! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **claudiofelix@unimedsudoestemg.coop.br**.\n\nConforme alinhado previamente, os dados informados já foram validados e nossa equipe técnica está configurando a permissão de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a visualização dos contratos da conta **claudiofelix@unimedsudoestemg.coop.br** estiver liberada para o seu acesso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "sufficiency_status": "completo",
+    "custom_instruction": "Em solicitações de Acesso Compartilhado (Shared Access) no DocuSign (ex.: Ediléa Almeida do Cadastro solicitando visualizar os contratos enviados ao e-mail claudiofelix@unimedsudoestemg.coop.br), sugerir reclassificação de 'Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67), classificar como COMPLETO quando o e-mail de origem constar informado e confirmar a configuração do compartilhamento de envelopes no painel administrativo do DocuSign.",
+    "saved_at": "2026-10-28T12:30:42.958Z",
+    "created_at": "2026-10-28T12:30:42.961Z"
+  },
+  {
     "ticket_id": 43129,
     "title": "Suporte Técnico e Service Desk > Solicitação Diversa > CRIAR TABELA DTH - PADRAO",
     "category": "T.I > ST > Parametrização de Sistemas e Tabelas",

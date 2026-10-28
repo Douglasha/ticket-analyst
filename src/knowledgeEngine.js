@@ -26,7 +26,9 @@ const STOPWORDS = new Set([
   "resolucao", "problemas", "problema", "prezados", "prezado", "prezada", "gentileza",
   "compreensao", "agradeco", "atencao", "presteza", "atenciosamente", "att", "obrigado",
   "obrigada", "segue", "hoje", "data", "colaboradora", "colaborador", "devido", "certa",
-  "certo", "vossa", "arquivos", "arquivo", "print", "gostaria", "solicitar", "poderia", "poderiam"
+  "certo", "vossa", "arquivos", "arquivo", "print", "gostaria", "solicitar", "poderia", "poderiam",
+  "unimedsudoestemg", "unimed256", "coop", "br", "com", "gov", "org", "net", "http", "https", "www",
+  "link", "login", "webmail", "seguro"
 ]);
 
 export function normalizeText(text) {
@@ -299,6 +301,11 @@ export class KnowledgeEngine {
           !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
             normTicket
           )));
+
+    const isDocusignAccessOrShared =
+      /\b(docusign|docu\s*sign)\b/i.test(normTicket) ||
+      (/\bacesso\s+compartilhado\b/i.test(normTicket) &&
+        /\b(contratos?|envelopes?)\b/i.test(normTicket));
 
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
@@ -666,6 +673,14 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-47" && !isSystemTableParameterization) {
           continue;
         }
+        // Evita parear PB-UNI-48 (DocuSign - Acesso Compartilhado e Permissões de Contratos) quando não trata de DocuSign
+        if (pb.id === "PB-UNI-48" && !isDocusignAccessOrShared) {
+          continue;
+        }
+        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos / Redirecionamento) quando o chamado trata de DocuSign
+        if (pb.id === "PB-UNI-38" && isDocusignAccessOrShared) {
+          continue;
+        }
         // Evita parear Playbook de Remanejamento / Ponto de Telefone (PB-UNI-20) quando não há solicitação de mudança de local ou ponto físico
         if (pb.id === "PB-UNI-20" && !isRelocationOrPhoneInstall) {
           continue;
@@ -824,6 +839,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.96);
         }
+        if (
+          pb.id === "PB-UNI-48" &&
+          isDocusignAccessOrShared
+        ) {
+          score = Math.max(score, 0.96);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -956,6 +977,15 @@ export class KnowledgeEngine {
         if (
           isSystemTableParameterization &&
           !/\b(criar\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias|faixa\s+(?:de\s+)?998|parametriza[cç][aã]o\s+de\s+sistemas\s+e\s+tabelas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de DocuSign / Acesso Compartilhado de Contratos
+        if (
+          isDocusignAccessOrShared &&
+          !/\b(docusign|docu\s*sign|acesso\s+compartilhado)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

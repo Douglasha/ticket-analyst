@@ -1769,5 +1769,32 @@
       "[PB-UNI-47] Confirmar a conclusão da parametrização no chamado do GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação/parametrização da tabela **{tabela}** no sistema **{sistema}**.\n\nTodos os parâmetros necessários já constam informados no chamado e nossa equipe técnica já iniciou a configuração no sistema.\n\nAssim que a tabela estiver criada e parametrizada para uso no setor, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-48",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Configuração de Acesso Compartilhado (Shared Access) e Permissões de Envelopes/Contratos no DocuSign",
+    "keywords": [
+      "docusign",
+      "docu sign",
+      "acesso compartilhado",
+      "contratos enviados",
+      "envelopes docusign",
+      "visualizar contratos",
+      "compartilhar envelopes",
+      "claudiofelix@unimedsudoestemg.coop.br",
+      "claudiofelix",
+      "delegação docusign"
+    ],
+    "symptoms": "Solicitação de colaboradores (ex.: setor de Cadastro, Jurídico, Contratos ou Comercial, como Ediléa Almeida no chamado #43336) para configurar Acesso Compartilhado (Shared Access) ou permissão de visualização/gerenciamento na plataforma DocuSign, de modo que os contratos/envelopes enviados ou recebidos por outra conta institucional (ex.: claudiofelix@unimedsudoestemg.coop.br) apareçam no painel do(a) solicitante.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-48] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões' (ID 67).",
+      "[PB-UNI-48] Acessar o painel administrativo do DocuSign (DocuSign Admin > Usuários / Acesso Compartilhado - Shared Access).",
+      "[PB-UNI-48] Localizar a conta de origem dos contratos/envelopes informada no chamado (ex.: claudiofelix@unimedsudoestemg.coop.br) e a conta da solicitante/setor (ex.: Ediléa Almeida - Cadastro).",
+      "[PB-UNI-48] Configurar a regra de Acesso Compartilhado (Permissão para visualizar/gerenciar/enviar envelopes em nome do usuário) para que os contratos enviados à conta informada fiquem visíveis para a solicitante no DocuSign.",
+      "[PB-UNI-48] Orientar a solicitante sobre como alternar a visualização no DocuSign ('Gerenciar > Acesso Compartilhado / Mudar para outro usuário') e confirmar a liberação no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **{email_alvo}**.\n\nConforme alinhado previamente, os dados necessários já foram validados e nossa equipe técnica está realizando a liberação de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a permissão estiver ativa para o seu usuário, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 ]

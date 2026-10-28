@@ -1,5 +1,539 @@
 [
   {
+    "id": "Chamado #43332 (Resolvido)",
+    "ticket_id": 43332,
+    "solution_id": 42032,
+    "title": "Infraestrutura e Redes > Impressoras > IMPRESSORA PAROU DE FUNCIONAR",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora reajustada!",
+    "keywords": [],
+    "steps": [
+      "Impressora reajustada!"
+    ]
+  },
+  {
+    "id": "Chamado #43311 (Resolvido)",
+    "ticket_id": 43311,
+    "solution_id": 42013,
+    "title": "Infraestrutura e Redes > Telefones VoIP > Telefone sem funcionar",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nDepois de reiniciar o dispositivo, ele voltou a funcionar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Depois de reiniciar o dispositivo, ele voltou a funcionar.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43292 (Resolvido)",
+    "ticket_id": 43292,
+    "solution_id": 41992,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Tarles Lopes Costa",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "_________________________________________\n\nNEA\n\nhttp://192.168.41.9/nea\n\nUsuário: tlopes\n\nSenha: Unimed@256! \n\n_________________________________________\n\nSPdata\n\nUsuário: TLOPES\n\n_________________________________________\n\n LGPD\n\nhttps://lgpd.unisulmg.com.br/?pag=acesso\n\nE-mail: tarlesk@hotmail.com\n\nSenha: Unimed@256!\n\n______________________________",
+    "keywords": [],
+    "steps": [
+      "_________________________________________",
+      "NEA",
+      "http://192.168.41.9/nea",
+      "Usuário: tlopes",
+      "Senha: Unimed@256!",
+      "_________________________________________"
+    ]
+  },
+  {
+    "id": "Chamado #43291 (Resolvido)",
+    "ticket_id": 43291,
+    "solution_id": 41968,
+    "title": "Segurança da Informação > Gestão de Acessos > Talita Monteiro Gaiotti",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Acesso Liberado.",
+    "keywords": [],
+    "steps": [
+      "Acesso Liberado."
+    ]
+  },
+  {
+    "id": "Chamado #43284 (Resolvido)",
+    "ticket_id": 43284,
+    "solution_id": 41961,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Impressão de Recibos",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora padrão resetada.",
+    "keywords": [],
+    "steps": [
+      "Impressora padrão resetada."
+    ]
+  },
+  {
+    "id": "Chamado #43282 (Resolvido)",
+    "ticket_id": 43282,
+    "solution_id": 41946,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Criação de Usuário no NEA",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "____________________________\n\n\r\nLogin NEA\n\n\r\nhttp://192.168.41.9/nea\n\n\r\nUsuário: inepomuceno\n\n\r\nSenha: Unimed@256! \n\n\r\n_____________________________",
+    "keywords": [],
+    "steps": [
+      "____________________________",
+      "Login NEA",
+      "http://192.168.41.9/nea",
+      "Usuário: inepomuceno",
+      "Senha: Unimed@256!",
+      "_____________________________"
+    ]
+  },
+  {
+    "id": "Chamado #43276 (Resolvido)",
+    "ticket_id": 43276,
+    "solution_id": 41998,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > HABILITAÇÃO",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Pasta \"Escaneados\" foi colocada e Impressora \"Farmacia\" conectada, em ambas as maquinas.",
+    "keywords": [],
+    "steps": [
+      "Pasta \"Escaneados\" foi colocada e Impressora \"Farmacia\" conectada, em ambas as maquinas."
+    ]
+  },
+  {
+    "id": "Chamado #43275 (Resolvido)",
+    "ticket_id": 43275,
+    "solution_id": 41941,
+    "title": "Infraestrutura e Redes > Manutenção de Computadores > computador não está funcionando",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Cabo reconectado.",
+    "keywords": [],
+    "steps": [
+      "Cabo reconectado."
+    ]
+  },
+  {
+    "id": "Chamado #43263 (Resolvido)",
+    "ticket_id": 43263,
+    "solution_id": 41959,
+    "title": "Infraestrutura e Redes > Lentidão e Quedas de Rede > Sem acesso ao site",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Acesso normalizado as 11:57",
+    "keywords": [],
+    "steps": [
+      "Acesso normalizado as 11:57"
+    ]
+  },
+  {
+    "id": "Chamado #43257 (Resolvido)",
+    "ticket_id": 43257,
+    "solution_id": 41937,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Isabel Cristina dos Santos Teodoro Nepomuceno",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Permissão foi dada com sucesso. Foi explicado a maneira de uso...",
+    "keywords": [],
+    "steps": [
+      "Permissão foi dada com sucesso. Foi explicado a maneira de uso..."
+    ]
+  },
+  {
+    "id": "Chamado #43255 (Resolvido)",
+    "ticket_id": 43255,
+    "solution_id": 41964,
+    "title": "Verificação do Portal Transparência [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\n\r\n\r\n\r\nExibindo 2 transações... 2 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos\r\n\r\n\r\n \r\n\r\nNr. Solicitação\r\n\r\n \r\n\r\n\r\nNr Transação\r\nTipo de transação\r\nVersão TISS\r\nPrestador\r\nCarteira\r\nPrestador\r\nOperadora\r\nData\r\nDuração(s)\r\nStatus\r\n\r\n\r\n\r\n\r\n\r\n\r\n2",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Exibindo 2 transações... 2 transação(ões) processada(s) com sucesso 0 erro(s) ao processar a transação 0 transação(ões) com tempo de resposta acima de 60 segundos",
+      "Nr. Solicitação",
+      "Nr Transação",
+      "Tipo de transação",
+      "Versão TISS"
+    ]
+  },
+  {
+    "id": "Chamado #43250 (Resolvido)",
+    "ticket_id": 43250,
+    "solution_id": 41963,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43225 (Resolvido)",
+    "ticket_id": 43225,
+    "solution_id": 41902,
+    "title": "Infraestrutura e Redes > Telefones VoIP > Trocar os telefones",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Realocado.",
+    "keywords": [],
+    "steps": [
+      "Realocado."
+    ]
+  },
+  {
+    "id": "Chamado #43224 (Resolvido)",
+    "ticket_id": 43224,
+    "solution_id": 41901,
+    "title": "Infraestrutura e Redes > Scaners > scanner",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Realocado.",
+    "keywords": [],
+    "steps": [
+      "Realocado."
+    ]
+  },
+  {
+    "id": "Chamado #43219 (Resolvido)",
+    "ticket_id": 43219,
+    "solution_id": 41881,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Gustavo Barbosa Carvalho",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n-------------------------------------------------------------\nE-mail Institucional\nlink: https://webmail-seguro.com.br/unimedsudoestemg.coop.br\ne-mail: gcarvalho@unimedsudoestemg.coop.br\nsenha: 127@Gbc669\n-------------------------------------------------------------\nPEP (Colaboradores do Núcleo)\nlink: https://pep",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "-------------------------------------------------------------",
+      "E-mail Institucional",
+      "link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+      "e-mail: gcarvalho@unimedsudoestemg.coop.br"
+    ]
+  },
+  {
+    "id": "Chamado #43217 (Resolvido)",
+    "ticket_id": 43217,
+    "solution_id": 41936,
+    "title": "Atualizações dos BI's [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Atualizados.",
+    "keywords": [],
+    "steps": [
+      "Atualizados."
+    ]
+  },
+  {
+    "id": "Chamado #43215 (Resolvido)",
+    "ticket_id": 43215,
+    "solution_id": 41883,
+    "title": "Infraestrutura e Redes > Administração de Redes > Nobreak",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Nobreak Reiniciado, problema resolvido.",
+    "keywords": [],
+    "steps": [
+      "Nobreak Reiniciado, problema resolvido."
+    ]
+  },
+  {
+    "id": "Chamado #43210 (Resolvido)",
+    "ticket_id": 43210,
+    "solution_id": 41864,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > Maria Vitoria Lima de Paulo",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcessos bloqueados:\n\n\r\nE-mail Institucional\nIntranet\nUsuário Computador\nBiometria Facial\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acessos bloqueados:",
+      "E-mail Institucional",
+      "Intranet",
+      "Usuário Computador",
+      "Biometria Facial"
+    ]
+  },
+  {
+    "id": "Chamado #43209 (Resolvido)",
+    "ticket_id": 43209,
+    "solution_id": 41865,
+    "title": "Verificar Atualizações e Submissão da PNGPPD [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Publicação como evidencia, para submissão da etapa 2027",
+    "keywords": [],
+    "steps": [
+      "Publicação como evidencia, para submissão da etapa 2027"
+    ]
+  },
+  {
+    "id": "Chamado #43203 (Resolvido)",
+    "ticket_id": 43203,
+    "solution_id": 41863,
+    "title": "Infraestrutura e Redes > Impressoras > Conectar impressora nova no sistema Autolac do computador para impressão de exames.",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora conectada ao autolac",
+    "keywords": [],
+    "steps": [
+      "Impressora conectada ao autolac"
+    ]
+  },
+  {
+    "id": "Chamado #43199 (Resolvido)",
+    "ticket_id": 43199,
+    "solution_id": 41862,
+    "title": "Segurança da Informação > Gestão de Acessos > Wallace Santana Vilela - 125.282.556-08",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Acessos Liberados.",
+    "keywords": [],
+    "steps": [
+      "Acessos Liberados."
+    ]
+  },
+  {
+    "id": "Chamado #43198 (Resolvido)",
+    "ticket_id": 43198,
+    "solution_id": 41861,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > João Luiz",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcesso liberado conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acesso liberado conforme solicitado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43192 (Resolvido)",
+    "ticket_id": 43192,
+    "solution_id": 41857,
+    "title": "Infraestrutura e Redes > Telefones VoIP > TELEFONE DA RECEPÇÃO NÃO ESTA FUNCIONANDO",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Telefone foi reiniciado e voltou a funcionar.",
+    "keywords": [],
+    "steps": [
+      "Telefone foi reiniciado e voltou a funcionar."
+    ]
+  },
+  {
+    "id": "Chamado #43191 (Resolvido)",
+    "ticket_id": 43191,
+    "solution_id": 41866,
+    "title": "Suporte Técnico e Service Desk > Parametrização de Sistemas e Tabelas > Auxilio para visualizar a tabela SAAE",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde.\n\n\r\nVerifiquei que o item 10021 está referenciado com o código 90184378, no valor de R$ 7,44. Por isso, o sistema está respeitando esse valor em vez de utilizar o valor do Brasíndice.\n\n\r\nNesse caso, tem duas opções:\n\n\r\nZerar o valor da referência: assim, o sistema vai manter o código 90184378, mas utilizar o valor de R$ 9,84 do Brasíndice",
+    "keywords": [],
+    "steps": [
+      "Boa tarde.",
+      "Verifiquei que o item 10021 está referenciado com o código 90184378, no valor de R$ 7,44. Por isso, o sistema está respeitando esse valor em vez de utilizar o valor do Brasíndice.",
+      "Nesse caso, tem duas opções:",
+      "Zerar o valor da referência: assim, o sistema vai manter o código 90184378, mas utilizar o valor de R$ 9,84 do Brasíndice.",
+      "Excluir a referência: dessa forma, o sistema vai utilizar tanto o código quanto o valor do Brasíndice."
+    ]
+  },
+  {
+    "id": "Chamado #43186 (Resolvido)",
+    "ticket_id": 43186,
+    "solution_id": 41858,
+    "title": "Manutenção Eletrônica | TELEFONE RECEPÇÃO NÃO ESTA FUNCIONANDO",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Telefone foi reiniciado e voltou a funcionar.",
+    "keywords": [],
+    "steps": [
+      "Telefone foi reiniciado e voltou a funcionar."
+    ]
+  },
+  {
+    "id": "Chamado #43183 (Resolvido)",
+    "ticket_id": 43183,
+    "solution_id": 41853,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Joyce Marques Nascimento",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "A senha foi alterada",
+    "keywords": [],
+    "steps": [
+      "A senha foi alterada"
+    ]
+  },
+  {
+    "id": "Chamado #43182 (Resolvido)",
+    "ticket_id": 43182,
+    "solution_id": 41856,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > Dalete Garcia de Oliveira Bartelochi",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcessos bloqueados:\n\n\r\nE-mail Institucional\nDocusign - não possui acesso\nGIU - não possui acesso\nGLPI\nHRP Unimed\nIntranet\nNext Cloud,\nSGH Spdata\nSafeWeb (Certificado Digital Hospital) Solicitado revogação\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acessos bloqueados:",
+      "E-mail Institucional",
+      "Docusign - não possui acesso",
+      "GIU - não possui acesso",
+      "GLPI"
+    ]
+  },
+  {
+    "id": "Chamado #43180 (Resolvido)",
+    "ticket_id": 43180,
+    "solution_id": 41852,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > GUSTAVO KIRCHNER FERREIRA",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAcessos pertinentes a T.I bloqueados:\n\n\r\nPEP (Colaboradores do Núcleo)\nE-mail Institucional\nSGH Spdata\nSafe Web - solicitar revogação\nIntranet\nFaceId\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Acessos pertinentes a T.I bloqueados:",
+      "PEP (Colaboradores do Núcleo)",
+      "E-mail Institucional",
+      "SGH Spdata",
+      "Safe Web - solicitar revogação"
+    ]
+  },
+  {
+    "id": "Chamado #43179 (Resolvido)",
+    "ticket_id": 43179,
+    "solution_id": 41850,
+    "title": "Infraestrutura e Redes > Lentidão e Quedas de Rede > Queda link externo Avançar/Vivo",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Equipe da Eversafe está verificando porque não foi feita a troca do link automaticamente.\nE na Avançar teve um bloqueio por financeiro, que foi indevido.",
+    "keywords": [],
+    "steps": [
+      "Equipe da Eversafe está verificando porque não foi feita a troca do link automaticamente.",
+      "E na Avançar teve um bloqueio por financeiro, que foi indevido."
+    ]
+  },
+  {
+    "id": "Chamado #43177 (Resolvido)",
+    "ticket_id": 43177,
+    "solution_id": 41889,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Erro para cadastrar o prestador",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43174 (Resolvido)",
+    "ticket_id": 43174,
+    "solution_id": 41867,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Izabel Heloisa Duarte da Silva",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "_______________________________________\nNext Cloud\nhttp://192.168.41.23\nUsuário: iduarte\nSenha: Unimed@256!\n_______________________________________\n_______________________________________\nSPdata\nUsuário: iduarte\nPermissões de usuário do SPdata foram \nalteradas\n_______________________________________\n_______________________________________\nE-mail in",
+    "keywords": [],
+    "steps": [
+      "_______________________________________",
+      "Next Cloud",
+      "http://192.168.41.23",
+      "Usuário: iduarte",
+      "Senha: Unimed@256!",
+      "_______________________________________"
+    ]
+  },
+  {
+    "id": "Chamado #43172 (Resolvido)",
+    "ticket_id": 43172,
+    "solution_id": 41860,
+    "title": "IR > Verificar Computadores para Manutenção Preventiva [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Todas as manutenções preventivas em dia.",
+    "keywords": [],
+    "steps": [
+      "Todas as manutenções preventivas em dia."
+    ]
+  },
+  {
+    "id": "Chamado #43170 (Resolvido)",
+    "ticket_id": 43170,
+    "solution_id": 41932,
+    "title": "T.I > SI > Monitoramento e Análise de Segurança > Monitoramento de Antivírus [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Analise de Malware na rede, porém todo falso positivo?",
+    "keywords": [],
+    "steps": [
+      "Analise de Malware na rede, porém todo falso positivo?"
+    ]
+  },
+  {
+    "id": "Chamado #43168 (Resolvido)",
+    "ticket_id": 43168,
+    "solution_id": 41844,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43146 (Resolvido)",
+    "ticket_id": 43146,
+    "solution_id": 41836,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Talita Monteiro Gaiotti",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n---------------------------------------------------------------\nE-mail Institucional\nlink: https://webmail-seguro.com.br/unimedsudoestemg.coop.br\nlogin: tgaiotti@unimedsudoestemg.coop.br\nsenha: 125@Tmg601\n---------------------------------------------------------------\nGLPI\nlink: https://glpi.unimed256.coop.br/",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "---------------------------------------------------------------",
+      "E-mail Institucional",
+      "link: https://webmail-seguro.com.br/unimedsudoestemg.coop.br",
+      "login: tgaiotti@unimedsudoestemg.coop.br"
+    ]
+  },
+  {
+    "id": "Chamado #43143 (Resolvido)",
+    "ticket_id": 43143,
+    "solution_id": 41825,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Fabiola Silva Bueno",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nOpção inclusa\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Opção inclusa",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43134 (Resolvido)",
     "ticket_id": 43134,
     "solution_id": 41818,
@@ -15,6 +549,87 @@
       "senha: cadastrada no primeiro acesso",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43133 (Resolvido)",
+    "ticket_id": 43133,
+    "solution_id": 41833,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suprimentos Verificados e Reabastecidos.",
+    "keywords": [],
+    "steps": [
+      "Suprimentos Verificados e Reabastecidos."
+    ]
+  },
+  {
+    "id": "Chamado #43129 (Resolvido)",
+    "ticket_id": 43129,
+    "solution_id": 41826,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > CRIAR TABELA DTH - PADRAO",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde.\n\n\r\nTabela criada.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde.",
+      "Tabela criada."
+    ]
+  },
+  {
+    "id": "Chamado #43125 (Resolvido)",
+    "ticket_id": 43125,
+    "solution_id": 41834,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 13,2 VTemperatura da água do Radiador: 74° CNível do óleo motor: OkNível do óleo combustível: okLigar o Motor 15 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 13,2 VTemperatura da água do Radiador: 74° CNível do óleo motor: OkNível do óleo combustível: okLigar o Motor 15 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #43123 (Resolvido)",
+    "ticket_id": 43123,
+    "solution_id": 41842,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Erro na importação do XML - Batalhão",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43121 (Resolvido)",
+    "ticket_id": 43121,
+    "solution_id": 41840,
+    "title": "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #43120 (Resolvido)",
+    "ticket_id": 43120,
+    "solution_id": 41838,
+    "title": "Verificação do Backup [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
     ]
   },
   {
@@ -44,6 +659,21 @@
     "keywords": [],
     "steps": [
       "Gravações OK."
+    ]
+  },
+  {
+    "id": "Chamado #43113 (Resolvido)",
+    "ticket_id": 43113,
+    "solution_id": 41871,
+    "title": "Desenvolvimento e Qualidade > Integração entre sistemas > Parametrização das Tabelas",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Boa tarde, importação realizada.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Boa tarde, importação realizada.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -101,6 +731,19 @@
     "keywords": [],
     "steps": [
       "Cadastro efetuado..."
+    ]
+  },
+  {
+    "id": "Chamado #43079 (Resolvido)",
+    "ticket_id": 43079,
+    "solution_id": 41839,
+    "title": "T.I > ST > Registro de Chamados > Alinhamento de Chamados ServiceDesk [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
     ]
   },
   {
@@ -310,6 +953,19 @@
     ]
   },
   {
+    "id": "Chamado #43011 (Resolvido)",
+    "ticket_id": 43011,
+    "solution_id": 41841,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
     "id": "Chamado #43003 (Resolvido)",
     "ticket_id": 43003,
     "solution_id": 41701,
@@ -356,6 +1012,21 @@
     "ticket_id": 42983,
     "solution_id": 41662,
     "title": "Suporte Técnico e Service Desk > Erros de Sistema > As planilhas da pasta Educação Continuada estão se duplicando constantemente",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42972 (Resolvido)",
+    "ticket_id": 42972,
+    "solution_id": 41845,
+    "title": "Verificar Estoque de Suprimentos – Impressoras [R]",
     "category": "T.I • Solucionado por damaral",
     "is_ti_group": true,
     "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
@@ -547,6 +1218,19 @@
     "keywords": [],
     "steps": [
       "Feito"
+    ]
+  },
+  {
+    "id": "Chamado #42914 (Resolvido)",
+    "ticket_id": 42914,
+    "solution_id": 42000,
+    "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > Erro XML Batalhao",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Problema está na versão da TISS",
+    "keywords": [],
+    "steps": [
+      "Problema está na versão da TISS"
     ]
   },
   {
@@ -911,6 +1595,22 @@
     "steps": [
       "Prezados(as),",
       "Conta reaberta",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42829 (Resolvido)",
+    "ticket_id": 42829,
+    "solution_id": 42028,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Ajustes Formulário Passagem de Plantão",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAdequações realizadas por gentileza validar\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Adequações realizadas por gentileza validar",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -1361,15 +2061,14 @@
   {
     "id": "Chamado #42659 (Resolvido)",
     "ticket_id": 42659,
-    "solution_id": 41476,
+    "solution_id": 41596,
     "title": "Suporte Técnico e Service Desk > Solicitação Diversa > REGISTROS DE TESTE",
     "category": "T.I • Solucionado por mconte",
     "is_ti_group": true,
-    "summary": "Boa tarde.\n\n\r\nFoi realizada a exclusão de todos os registros vinculados ao paciente Teste, referentes aos atendimentos realizados pelo convênio 3 – Gratuito.",
+    "summary": "solucionado",
     "keywords": [],
     "steps": [
-      "Boa tarde.",
-      "Foi realizada a exclusão de todos os registros vinculados ao paciente Teste, referentes aos atendimentos realizados pelo convênio 3 – Gratuito."
+      "solucionado"
     ]
   },
   {
@@ -1713,6 +2412,19 @@
     "keywords": [],
     "steps": [
       "Impressora corrigida, testada e está funcionando."
+    ]
+  },
+  {
+    "id": "Chamado #42584 (Resolvido)",
+    "ticket_id": 42584,
+    "solution_id": 41938,
+    "title": "Infraestrutura e Redes > Administração de Redes > Impressora neuropsicóloga",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora instalada.",
+    "keywords": [],
+    "steps": [
+      "Impressora instalada."
     ]
   },
   {
