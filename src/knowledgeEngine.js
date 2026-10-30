@@ -1010,6 +1010,24 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear memórias de outros temas quando o chamado trata de autorização de procedimento / senha / intercâmbio no HRP
+        if (
+          isHrpAuthorizationOrIntercambio &&
+          !/\b(senha|interc[âa]mbio|autoriza[çc][ãa]o|guia|ptu)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de formulários do GLPI / Formcreator (ex: MEM-#42472) quando o chamado NÃO trata de itens/formulários no GLPI
+        if (
+          !isFormcreatorOrGlpiForm &&
+          /\b(novo formul[aá]rio|cria[cç][aã]o de formul[aá]rio|formcreator|novo item no glpi)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
         if (
           /\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(normTicket) &&
           !/\b(web\s*sa[uú]de|clinicas?|16\d{6})\b/i.test(

@@ -10126,6 +10126,97 @@
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },
+  "43370": {
+    "ticket_id": 43370,
+    "analyzed_at": "30/10/2026 15:01",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Tainara Souza** (Contabilidade) solicita a inserção da opção de anexar/inserir documentos nos chamados direcionados ao setor **GED** no sistema **GLPI**. A demanda requer ajuste no catálogo do plugin Formcreator pela equipe de Desenvolvimento para disponibilizar o campo de envio de arquivos na abertura do ticket. O chamado foi aberto na categoria 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+    "detected_domain": "Desenvolvimento de Software / Aplicações Internas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Parametrização e ajuste no formulário do GLPI (plugin Formcreator) para inclusão do campo de anexo de documentos na abertura de chamados direcionados ao setor GED.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-38",
+        "title": "Gestão de E-mails Corporativos — Acesso a Caixa Departamental e Redirecionamento de Mensagens",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Colaborador(a) solicita acesso ou credencial para caixa postal departamental/compartilhada de setor (ex.: marketing@unimedsudoestemg.coop.br) e/ou configuração de regra de redirecionamento/encaminhamento automático de mensagens entre contas de e-mail corporativas (ex.: mensagens de jornalismo@... redirecionadas para marketing@...).",
+        "steps": [
+          "Acessar o painel administrativo de e-mails corporativos da cooperativa (Webmail Seguro / Locaweb).",
+          "Localizar a conta departamental informada (ex.: marketing@unimedsudoestemg.coop.br) e liberar a permissão de acesso / fornecer as credenciais ou configurar o acesso no cliente de e-mail do colaborador.",
+          "Localizar a conta de origem informada (ex.: jornalismo@unimedsudoestemg.coop.br) e criar a regra de redirecionamento automático (forwarding) para a conta de destino, assegurando que nenhuma mensagem seja perdida.",
+          "Realizar envio de mensagem de teste para validar o correto recebimento e o encaminhamento automático entre as contas.",
+          "Notificar o solicitante no chamado do GLPI com as orientações de acesso e confirmar o funcionamento."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-29",
+        "title": "Criação ou Parametrização de Formulários / Itens no GLPI (Formcreator / Demandas Intersetoriais)",
+        "category": "Desenvolvimento de Software / Aplicações Internas",
+        "summary": "Solicitação de setor interno (ex.: Faturamento, Financeiro, RH, Regulatório, Promoprev, etc.) para criação, parametrização, ajuste ou inclusão de novos formulários/itens de atendimento no catálogo do GLPI (plugin Formcreator), definindo nomes, campos obrigatórios/opcionais, campos de envio de documentos/anexos, listas de opções e regras de direcionamento/destino automático para setores ou observadores.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' (para alterações em formulários existentes) ou 'Novas aplicações' (para novos formulários).",
+          "Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (Formcreator).",
+          "Localizar ou criar o formulário na categoria do setor competente (ex.: Regulatório, Faturamento, etc.), atribuindo o título, descrição e ícone apropriados.",
+          "Adicionar ou habilitar os campos e seções solicitadas (ex.: campo para inserção/upload de arquivos e documentos, campos de seleção ou dados textuais), marcando os sinalizadores de obrigatoriedade conforme especificado.",
+          "Configurar na aba 'Alvos / Destinos' a criação e roteamento automático do chamado encaminhando para os grupos/setores designados e observadores indicados.",
+          "Ativar o formulário no catálogo para os perfis autorizados e solicitar ao solicitante/responsável do setor a validação e homologação do fluxo."
+        ],
+        "score": 0.92
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-37",
+        "title": "Dúvidas, Orientações de Uso e Localização de Campos/Módulos em Formulários e Sistemas",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Colaborador(a) apresenta dúvida de utilização, orientação operacional ou dificuldade para localizar campos, seções, botões ou módulos em formulários do GLPI (Formcreator) ou sistemas corporativos (SGH, HRP, PEP, Benner, etc.), onde o recurso já existe e encontra-se ativo na aplicação mas passou desapercebido pelo usuário ou requer esclarecimento.",
+        "steps": [
+          "Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
+          "Verificar no formulário ou sistema reportado (ex.: Formcreator do GLPI, SGH Spdata, ERP HRP) se a funcionalidade, campo ou módulo já existe e está ativo.",
+          "Identificar a localização exata do recurso (ex.: última seção do formulário, menu específico, barra de ferramentas ou rodapé da tela).",
+          "Responder ao solicitante com orientação clara, didática e passo a passo indicando onde localizar e como utilizar o campo ou rotina desejada.",
+          "Caso a disposição do campo esteja gerando confusão frequente entre os usuários (questão de UX/layout), registrar sugestão de melhoria junto à equipe de Desenvolvimento para reposicionamento ou destaque do campo.",
+          "Solicitar ao usuário confirmação do teste/localização e concluir o atendimento."
+        ],
+        "score": 0.9
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-16",
+        "title": "Solicitação de Extração de Indicadores e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de extração ou envio de indicadores de atendimento, produtividade ou relatórios gerenciais de sistemas internos (ex: WConect por recepcionista, BI, SGH), frequentemente aberta na categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade).",
+          "Confirmar o período de referência (data inicial e final) e acessar o módulo gerencial do sistema solicitado (ex: WConect / painel de BI / HRP / PEP / ou demais) para extrair os indicadores de atendimento por recepcionista/setor.",
+          "Gerar a planilha/relatório consolidado (PDF/Excel) e anexar no chamado para validação do(a) solicitante."
+        ],
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-38) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-29)",
+    "resolution_steps": [
+      "[PB-UNI-29] Reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (plugin Formcreator).",
+      "[PB-UNI-29] Localizar o formulário de abertura de chamados direcionado ao setor GED / Regulação.",
+      "[PB-UNI-29] Adicionar ou habilitar o campo/seção de upload de arquivos e documentos (campo do tipo Arquivo/Anexo).",
+      "[PB-UNI-29] Salvar a parametrização e testar a abertura no catálogo para validar que a opção de anexar documentos está visível e funcional.",
+      "[PB-UNI-29] Registrar a conclusão no chamado e notificar a solicitante para conferência e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Tainara Souza** (Contabilidade) solicita a inserção da opção de anexar/inserir documentos nos chamados direcionados ao setor **GED** no sistema **GLPI**. A demanda requer ajuste no catálogo do plugin Formcreator pela equipe de Desenvolvimento para disponibilizar o campo de envio de arquivos na abertura do ticket. O chamado foi aberto na categoria 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' e recomenda-se reclassificar para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Ajustes em layout/interface | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-38) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-29)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-29] Reclassificar a categoria do chamado no GLPI para 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.\n  2. [PB-UNI-29] Acessar o painel administrativo do GLPI com perfil técnico/desenvolvimento e navegar até Administração > Formulários (plugin Formcreator).\n  3. [PB-UNI-29] Localizar o formulário de abertura de chamados direcionado ao setor GED / Regulação.\n  4. [PB-UNI-29] Adicionar ou habilitar o campo/seção de upload de arquivos e documentos (campo do tipo Arquivo/Anexo).\n  5. [PB-UNI-29] Salvar a parametrização e testar a abertura no catálogo para validar que a opção de anexar documentos está visível e funcional.\n  6. [PB-UNI-29] Registrar a conclusão no chamado e notificar a solicitante para conferência e homologação.",
+    "public_reply_draft": "Olá, Tainara! Tudo bem?\n\nRecebemos a sua solicitação referente à inclusão da opção de anexar documentos nos chamados direcionados ao **GED** no **GLPI**.\n\nA demanda já foi validada na triagem técnica e direcionada para a equipe de **Desenvolvimento** realizar o ajuste no formulário (plugin Formcreator), habilitando o campo para envio de arquivos.\n\nAssim que a opção estiver configurada e disponível no catálogo para a abertura dos chamados com anexo, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43373": {
     "ticket_id": 43373,
     "analyzed_at": "28/10/2026 14:53",
@@ -10235,6 +10326,153 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43394": {
+    "ticket_id": 43394,
+    "analyzed_at": "30/10/2026 15:01",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Solicitação aberta por **Viviane Souza** (Nucleo Passos) para unificação de cadastros duplicados no sistema **sistema**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer. *(Observação de triagem: chamado aberto na categoria \"T.I > DV > Desenvolvimento > Integração entre sistemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Administração de Banco de Dados",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Duplicidade de cadastro no sistema sistema, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) beneficiário(a)/paciente.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Nome completo e códigos/chaves dos dois cadastros no sistema sistema",
+      "Confirmar qual dos cadastros deve prevalecer como principal após a unificação"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42794",
+        "title": "Resolução de Problemas  -  Unificação de cadastro",
+        "category": "T.I > ST > Resolução de Problemas",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro dos registros informados no sistema **HRP Unimed**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+          "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+          "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+          "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+          "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+          "[MEM-#42061] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro dos registros informados no sistema **HRP Unimed**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42794)",
+    "resolution_steps": [
+      "[MEM-#42794] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+      "[MEM-#42794] [PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "[MEM-#42794] [PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "[MEM-#42794] [PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+      "[MEM-#42794] [PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+      "[MEM-#42794] [MEM-#42061] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais)."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação aberta por **Viviane Souza** (Nucleo Passos) para unificação de cadastros duplicados no sistema **sistema**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer. *(Observação de triagem: chamado aberto na categoria \"T.I > DV > Desenvolvimento > Integração entre sistemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*\n\nClassificação Sugerida: T.I > BD > Administração de Banco de Dados | Prioridade Real: Muito baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42794)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Nome completo e códigos/chaves dos dois cadastros no sistema sistema\n  - Confirmar qual dos cadastros deve prevalecer como principal após a unificação\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42794] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).\n  2. [MEM-#42794] [PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.\n  3. [MEM-#42794] [PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.\n  4. [MEM-#42794] [PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.\n  5. [MEM-#42794] [PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.\n  6. [MEM-#42794] [MEM-#42061] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação de unificação de cadastro no sistema **sistema**.\n\nPara realizarmos o procedimento com segurança, você poderia nos informar:\n- O **nome completo** (ou códigos/chaves) dos cadastros duplicados;\n- Qual dos cadastros deve **prevalecer como principal**?\n\nAssim que nos confirmar por aqui, já executamos a unificação!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43472": {
+    "updated_at": "2026-10-30T18:14:24.989Z",
+    "ticket_date_mod": "2026-10-30 13:51:27",
+    "analysis": {
+      "ticket_id": 43472,
+      "analyzed_at": "30/10/2026 15:14",
+      "provider_used": "Ollama Local (qwen2.5:3b)",
+      "translated_intent": "A solicitante **Bianca Silva** (Autorização) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **207150140** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.",
+      "detected_domain": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+      "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+      "real_urgency": "Média",
+      "urgency_reason": "Procedimento com senha/guia retida sem trafegar no Intercâmbio do sistema HRP Unimed (Autorização).",
+      "sufficiency_status": "completo",
+      "missing_info": [],
+      "knowledge_matches": [
+        {
+          "layer": "learned_memory",
+          "layer_label": "Memória Contínua • Aprendido com o Analista",
+          "source_id": "MEM-#43041",
+          "title": "Dúvidas e Orientações  -  SENHA",
+          "category": "T.I > ST > Dúvidas e Orientações",
+          "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos a análise, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+          "steps": [
+            "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+            "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+            "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+            "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+            "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+            "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema."
+          ],
+          "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (206867125) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (206867125), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos a análise, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+          "required_info": [],
+          "sufficiency_status": "completo",
+          "custom_instruction": "",
+          "score": 0.9
+        },
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-45",
+          "title": "Processo de Autorização de Procedimento no Sistema HRP Unimed — Falha no Tráfego de Senha e Guia de Intercâmbio",
+          "category": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+          "summary": "Solicitante (frequentemente do setor de Autorização ou Recepção) relata que um procedimento não está autorizando no sistema HRP Unimed ou que a senha (número de guia gerado no processo de autorização do Intercâmbio entre Unimeds) não está trafegando/transmitindo via mensageria/PTU Online, impedindo a liberação do atendimento.",
+          "steps": [
+            "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+            "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+            "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+            "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+            "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+            "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando que a verificação e o reprocessamento da senha no HRP foram iniciados, orientando a checagem do retorno no sistema."
+          ],
+          "score": 0.95
+        },
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-05",
+          "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
+          "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+          "summary": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
+          "steps": [
+            "Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+            "Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+          ],
+          "score": 0.9
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #43041 (Resolvido)",
+          "title": "Suporte Técnico e Service Desk > Dúvidas e Orientações > SENHA",
+          "category": "T.I • Solucionado por damaral",
+          "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+          "steps": [
+            "Prezados(as),",
+            "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+            "Atenciosamente."
+          ],
+          "score": 0.68
+        }
+      ],
+      "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#43041) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-45)",
+      "resolution_steps": [
+        "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+        "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (207150140).",
+        "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+        "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+        "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+        "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema."
+      ],
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Bianca Silva** (Autorização) relata que está lançando um procedimento no sistema ERP HRP Unimed e a senha de autorização (número da guia **207150140** no processo de Intercâmbio entre Unimeds) não está trafegando/transmitindo há alguns dias, impedindo a liberação do atendimento. Demanda verificação técnica da T.I. no módulo de Autorização e na mensageria do Intercâmbio (PTU Online / WAutoriza / Webservice) do HRP para destravar a transmissão e concluir a autorização do procedimento.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#43041) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-45)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).\n  2. [PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (207150140).\n  3. [PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.\n  4. [PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.\n  5. [PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.\n  6. [PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando o reprocessamento da senha no HRP e orientando a checagem do retorno no sistema.",
+      "public_reply_draft": "Olá, Bianca! Tudo bem?\n\nRecebemos a sua solicitação referente ao procedimento no sistema HRP cuja senha/guia de autorização (207150140) não está trafegando pelo Intercâmbio.\n\nNossa equipe técnica já iniciou a verificação da transação diretamente no módulo de Autorização e na fila de mensageria do Intercâmbio (PTU/Webservice) do HRP para identificar o motivo da retenção e realizar o reprocessamento da transmissão junto à Unimed responsável.\n\nComo você já informou o número da senha (207150140), temos todos os dados necessários para o diagnóstico e tratativa no sistema. Caso seja necessária alguma validação cadastral complementar (como a carteirinha do beneficiário ou código do procedimento), solicitaremos por aqui.\n\nAssim que concluirmos o reprocessamento da guia ou tivermos o retorno da transmissão, atualizaremos este chamado para que você possa conferir no HRP!\n\nPermanecemos à disposição!",
+      "has_image_analysis": false,
+      "analyzed_images_count": 0
+    }
+  },
   "43490": {
     "updated_at": "2026-10-30T14:26:50.549Z",
     "ticket_date_mod": "2026-10-30 11:19:41",
@@ -10319,6 +10557,83 @@
       "has_image_analysis": false,
       "analyzed_images_count": 0
     }
+  },
+  "43507": {
+    "ticket_id": 43507,
+    "analyzed_at": "30/10/2026 15:01",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário, Fernanda Cristina da Costa Padua, do setor de Hospital > Centro Cirurgico, está solicitando a criação de uma ficha de anestesia para a avaliação pré-anestésica no sistema SPdata/PEP. O problema específico é a localização adequada para incluir a informação sobre protusão mandibular. A solicitação foi acompanhada por um anexo chamado 'Ficha anestesia.pdf'. Não há evidências de que o colaborador ou equipamento estejam apresentando problemas técnicos. O impacto operacional é moderado, pois a ficha de anestesia é uma parte importante do processo de cuidados médicos.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "O chamado afeta o fluxo de trabalho do setor de Autorização/Intercâmbio (ERP HRP Unimed) e pode causar atrasos no processo de autorização de procedimentos médicos/hospitalares (senha não está trafegando).",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42307 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação de Link – Google Meet",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Instruída a como criar o link",
+        "steps": [
+          "Instruída a como criar o link"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42169 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação de documento para pequena cirurgia",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41290 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criar Mensagem de Alerta para Alergias",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde.\n\nRealizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Boa tarde.",
+          "Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #40855 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação e configuração de pastas compartilhadas – Documentos da Qualidade",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado.",
+        "steps": [
+          "Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #42307 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42169 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #42307 (Resolvido)] Instruída a como criar o link",
+      "[Chamado #41290 (Resolvido)] Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.",
+      "[Chamado #40855 (Resolvido)] Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário, Fernanda Cristina da Costa Padua, do setor de Hospital > Centro Cirurgico, está solicitando a criação de uma ficha de anestesia para a avaliação pré-anestésica no sistema SPdata/PEP. O problema específico é a localização adequada para incluir a informação sobre protusão mandibular. A solicitação foi acompanhada por um anexo chamado 'Ficha anestesia.pdf'. Não há evidências de que o colaborador ou equipamento estejam apresentando problemas técnicos. O impacto operacional é moderado, pois a ficha de anestesia é uma parte importante do processo de cuidados médicos.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42307 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42169 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #42307 (Resolvido)] Instruída a como criar o link\n  2. [Chamado #41290 (Resolvido)] Realizado os ajustes solicitados. Abaixo segue o exemplo de como deve aparecer ao selecionar o paciente no PEP, caso queira alterar a mensagem é só me avisar.\n  3. [Chamado #40855 (Resolvido)] Foi feito e estava aguardando confirmação, devido ao tempo sem confirmação, chamado fechado.",
+    "public_reply_draft": "Olá, Fernanda! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Ficha de anestesia**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
   },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",

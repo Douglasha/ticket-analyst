@@ -1,5 +1,31 @@
 [
   {
+    "id": "Chamado #43518 (Resolvido)",
+    "ticket_id": 43518,
+    "solution_id": 42265,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Ivi Gabriela",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Usuário criado>",
+    "keywords": [],
+    "steps": [
+      "Usuário criado>"
+    ]
+  },
+  {
+    "id": "Chamado #43505 (Resolvido)",
+    "ticket_id": 43505,
+    "solution_id": 42251,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suprimentos verificados e reabastecidos.",
+    "keywords": [],
+    "steps": [
+      "Suprimentos verificados e reabastecidos."
+    ]
+  },
+  {
     "id": "Chamado #43503 (Resolvido)",
     "ticket_id": 43503,
     "solution_id": 42246,
@@ -32,6 +58,19 @@
     ]
   },
   {
+    "id": "Chamado #43499 (Resolvido)",
+    "ticket_id": 43499,
+    "solution_id": 42252,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Mudança de salas",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Mudanças realizadas.",
+    "keywords": [],
+    "steps": [
+      "Mudanças realizadas."
+    ]
+  },
+  {
     "id": "Chamado #43493 (Resolvido)",
     "ticket_id": 43493,
     "solution_id": 42237,
@@ -59,6 +98,19 @@
       "Dessa forma, não será necessária a instalação do aplicativo Nextcloud na estação Ala 3384, uma vez que o acesso poderá ser realizado diretamente via navegador web. A criação dos usuários será solicitada pelo gestor da área conforme necessidade.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43490 (Resolvido)",
+    "ticket_id": 43490,
+    "solution_id": 42260,
+    "title": "Infraestrutura e Redes > Telefones VoIP > Mudança de local do telefone",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Local de telefone alterado.",
+    "keywords": [],
+    "steps": [
+      "Local de telefone alterado."
     ]
   },
   {
@@ -547,6 +599,23 @@
     "keywords": [],
     "steps": [
       "Foi solucionado pelo usuario."
+    ]
+  },
+  {
+    "id": "Chamado #43305 (Resolvido)",
+    "ticket_id": 43305,
+    "solution_id": 42262,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Acrescentar o Responsável",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nBoa tarde,\n\n\r\nCampo criado conforme solicitado.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Boa tarde,",
+      "Campo criado conforme solicitado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -1292,14 +1361,14 @@
   {
     "id": "Chamado #43080 (Resolvido)",
     "ticket_id": 43080,
-    "solution_id": 41763,
+    "solution_id": 41811,
     "title": "Segurança da Informação > Gestão de Acessos > Wallace Santana Vilela",
-    "category": "T.I • Solucionado por lpiantino",
+    "category": "T.I • Solucionado por fsilva",
     "is_ti_group": true,
-    "summary": "Cadastro efetuado...",
+    "summary": "Colaborador cadastrado.",
     "keywords": [],
     "steps": [
-      "Cadastro efetuado..."
+      "Colaborador cadastrado."
     ]
   },
   {
