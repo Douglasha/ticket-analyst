@@ -739,19 +739,32 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
-      /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede)\b/i.test(
+      /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede|trocar o ramal de mesa|mudar o ramal de mesa|trocar ramal|mudanca de local do telefone|trocar telefone de mesa)\b/i.test(
         normAll
       ) ||
       /\b(trocar|mudar|transferir|levar|passar|colocar)\b[\s\S]{0,60}\b(do|da)\b[\s\S]{0,50}\bpara\b/i.test(
         normAll
-      )
+      ) ||
+      (/\b(telefone|ramal)\b/i.test(normAll) && /\b(trocar|mudar|transferir|remanejar|mesa|local)\b/i.test(normAll))
     ) {
       const descOnly = formFields.descricao || "";
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
       const mentionsPrinterReloc = /\bimpressora\b/i.test(normAll);
       const isZebra = /\bzebra\b/i.test(normAll);
       const printerName = isZebra ? "impressora Zebra" : "impressora";
       const mentionsPhoneInstall =
         /\b(ponto de telefone|linha e aparelho|telefone|ramal|aparelho)\b/i.test(
+          normAll
+        );
+
+      const isPhoneMoveOnly =
+        mentionsPhoneInstall &&
+        !mentionsPrinterReloc &&
+        /\b(trocar\s+(?:o\s+)?ramal\s+de\s+mesa|mudar\s+(?:o\s+)?ramal\s+de\s+mesa|mudar\s+(?:o\s+)?telefone\s+de\s+mesa|trocar\s+de\s+mesa|mudan[çc]a\s+de\s+local\s+do\s+telefone|trocar\s+o\s+ramal)\b/i.test(
           normAll
         );
 
@@ -773,64 +786,100 @@ export class AIAnalyst {
       urgencyReason =
         "Solicitação de remanejamento físico de equipamento e/ou instalação de ponto de telefonia/rede, demandando atendimento presencial da equipe de Infraestrutura.";
 
-      const actionsRequested = [];
-      if (mentionsPrinterReloc) {
-        actionsRequested.push(
-          `**remanejar a ${printerName}** (d${
-            originLoc.toLowerCase().startsWith("a") ? "a" : "o"
-          } ${originLoc} para ${destLoc})`
-        );
-      }
-      if (mentionsPhoneInstall) {
-        actionsRequested.push(
-          `**instalar um ponto de telefone (linha/ramal e aparelho)** n${
-            destLoc.toLowerCase().startsWith("a") && !destLoc.toLowerCase().startsWith("almox")
-              ? "a"
-              : "o"
-          } ${destLoc}`
-        );
-      }
-      const actionsTxt =
-        actionsRequested.length > 0
-          ? actionsRequested.join(" e ")
-          : `realizar a mudança/instalação física solicitada (${descOnly
-              .replace(/\s+/g, " ")
-              .trim()})`;
+      if (isPhoneMoveOnly) {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a mudança de local / troca de mesa de um ramal telefônico VoIP no setor **${sectorName}**. ` +
+          `Demanda atendimento presencial da equipe de Infraestrutura e Redes para remanejamento físico do aparelho e validação da tomada de rede no destino.`;
 
-      translatedIntent =
-        `O solicitante **${ticket.requester}** (${sectorName}) solicita atendimento presencial da equipe de Infraestrutura e Redes para ${actionsTxt}. ` +
-        `Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Informar o número do ramal que será trocado de mesa",
+          `Confirmar para qual mesa/posto dentro d${sectorName.toLowerCase().startsWith("a") ? "a" : "o"} ${sectorName} o telefone será transferido, e se a nova mesa já possui ponto de rede (tomada RJ-45) disponível`,
+        ];
 
-      sufficiencyStatus = "parcial";
-      missingInfo = [];
-      if (mentionsPrinterReloc) {
-        missingInfo.push(
-          `Confirmar se no local de destino (${destLoc}) já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a ${printerName} seja conectada via USB)`
-        );
+        customResolutionSteps = [
+          `[PB-UNI-20] Manter a categoria do chamado no GLPI em '${ticket.category}'.`,
+          `[PB-UNI-20] Confirmar com a solicitante ${ticket.requester} (${sectorName}) o número do ramal e a mesa/posto exato de destino.`,
+          `[PB-UNI-20] Deslocar técnico de Infraestrutura e Redes até o setor ${sectorName} para remanejar o aparelho telefônico VoIP, conectar na tomada de rede PoE da nova mesa e testar o funcionamento (tom de discagem, chamadas internas e externas).`,
+          `[PB-UNI-20] Caso a nova mesa não possua porta ativa, realizar a manobra necessária no switch/patch panel da Ala 1.`,
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para **trocar o ramal de mesa** no setor **${sectorName}**.\n\n` +
+          `Nossa equipe de Infraestrutura e Redes já está programando o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n` +
+          `1. Qual é o **número do ramal** do aparelho que será trocado de mesa?\n` +
+          `2. Para qual **mesa/posto** dentro d${sectorName.toLowerCase().startsWith("a") ? "a" : "o"} ${sectorName} o telefone será transferido, e se a nova mesa já possui ponto de rede (tomada de rede) disponível?\n\n` +
+          `Assim que nos confirmar por aqui, já enviamos um técnico ao setor para realizar a mudança e os testes!\n\n` +
+          `Permanecemos à disposição!`;
       } else {
-        missingInfo.push(
-          `Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (${destLoc})`
-        );
-      }
-      if (mentionsPhoneInstall) {
-        missingInfo.push(
-          `Informar se para o ponto de telefone (${destLoc}) deve ser configurado um novo número de ramal ou transferido um ramal já existente`
-        );
-      }
+        const actionsRequested = [];
+        if (mentionsPrinterReloc) {
+          actionsRequested.push(
+            `**remanejar a ${printerName}** (d${
+              originLoc.toLowerCase().startsWith("a") ? "a" : "o"
+            } ${originLoc} para ${destLoc})`
+          );
+        }
+        if (mentionsPhoneInstall) {
+          actionsRequested.push(
+            `**instalar um ponto de telefone (linha/ramal e aparelho)** n${
+              destLoc.toLowerCase().startsWith("a") && !destLoc.toLowerCase().startsWith("almox")
+                ? "a"
+                : "o"
+            } ${destLoc}`
+          );
+        }
+        const actionsTxt =
+          actionsRequested.length > 0
+            ? actionsRequested.join(" e ")
+            : `realizar a mudança/instalação física solicitada (${descOnly
+                .replace(/\s+/g, " ")
+                .trim()})`;
 
-      const questionsBul = missingInfo
-        .map((q, idx) => `${idx + 1}. ${q}?`)
-        .join("\n");
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita atendimento presencial da equipe de Infraestrutura e Redes para ${actionsTxt}. ` +
+          `Requer validação prévia de infraestrutura física (pontos de rede/energia no destino e definição de ramal telefônico) para execução no local.`;
 
-      customPublicReply =
-        `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a sua solicitação para ${actionsTxt}.\n\n` +
-        `Nossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n` +
-        (mentionsPrinterReloc && mentionsPhoneInstall
-          ? `1. No local onde os equipamentos ficarão (${destLoc}), já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a ${printerName} será conectada)?\n` +
-            `2. Sobre o ponto de telefone, será necessário configurar um **novo número de ramal** para o ${destLoc} ou transferir algum ramal já existente?`
-          : questionsBul) +
-        `\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!`;
+        sufficiencyStatus = "parcial";
+        missingInfo = [];
+        if (mentionsPrinterReloc) {
+          missingInfo.push(
+            `Confirmar se no local de destino (${destLoc}) já existem tomadas elétricas e pontos de rede/cabeamento disponíveis (ou computador próximo, caso a ${printerName} seja conectada via USB)`
+          );
+        } else {
+          missingInfo.push(
+            `Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (${destLoc})`
+          );
+        }
+        if (mentionsPhoneInstall) {
+          missingInfo.push(
+            `Informar se para o ponto de telefone (${destLoc}) deve ser configurado um novo número de ramal ou transferido um ramal já existente`
+          );
+        }
+
+        customResolutionSteps = [
+          `[PB-UNI-20] Manter a categoria do chamado no GLPI em '${ticket.category}'.`,
+          `[PB-UNI-20] Verificar presencialmente no local de destino (${destLoc}) a disponibilidade de ponto de rede/patch panel e tomadas elétricas.`,
+          `[PB-UNI-20] Executar o remanejamento físico e as devidas conexões/manobras de cabeamento estruturado e PABX/rede.`,
+          `[PB-UNI-20] Realizar os testes operacionais junto ao setor ${sectorName} e validar a conclusão no chamado.`,
+        ];
+
+        const questionsBul = missingInfo
+          .map((q, idx) => `${idx + 1}. ${q}?`)
+          .join("\n");
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para ${actionsTxt}.\n\n` +
+          `Nossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n` +
+          (mentionsPrinterReloc && mentionsPhoneInstall
+            ? `1. No local onde os equipamentos ficarão (${destLoc}), já existem **pontos de rede/cabeamento e tomadas elétricas** próximos (ou computador onde a ${printerName} será conectada)?\n` +
+              `2. Sobre o ponto de telefone, será necessário configurar um **novo número de ramal** para o ${destLoc} ou transferir algum ramal já existente?`
+            : questionsBul) +
+          `\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!\n\n` +
+          `Permanecemos à disposição!`;
+      }
     } else if (
       /\b(nobreak|no-break|\bups\b)\b/i.test(normAll) ||
       (/\benergia\b/i.test(normAll) &&

@@ -1,5 +1,482 @@
 [
   {
+    "id": "Chamado #43503 (Resolvido)",
+    "ticket_id": 43503,
+    "solution_id": 42246,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Leticia Cristina Martins",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha resetada. Para criar uma nova, insira o nome de usuário, deixe o campo de senha em branco, clique em OK e siga o passo a passo para definir a nova senha.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha resetada. Para criar uma nova, insira o nome de usuário, deixe o campo de senha em branco, clique em OK e siga o passo a passo para definir a nova senha.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43500 (Resolvido)",
+    "ticket_id": 43500,
+    "solution_id": 42247,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > TV",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nPainel habilitado para o setor H_Farmacia\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Painel habilitado para o setor H_Farmacia",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43493 (Resolvido)",
+    "ticket_id": 43493,
+    "solution_id": 42237,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 13,4 VTemperatura da água do Radiador: 74° CNível do óleo motor: OkNível do óleo combustível: okLigar o Motor 15 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 13,4 VTemperatura da água do Radiador: 74° CNível do óleo motor: OkNível do óleo combustível: okLigar o Motor 15 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #43491 (Resolvido)",
+    "ticket_id": 43491,
+    "solution_id": 42220,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Instalar Nextcloud",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nEm alinhamento com o coordenador Diego, foi definido que o acesso ao Nextcloud será realizado por meio de logins individuais para cada enfermeiro, visando garantir a rastreabilidade das operações e o controle adequado de acessos.\n\n\r\nDessa forma, não será necessária a instalação do aplicativo Nextcloud na estação Ala 3384, uma vez q",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Em alinhamento com o coordenador Diego, foi definido que o acesso ao Nextcloud será realizado por meio de logins individuais para cada enfermeiro, visando garantir a rastreabilidade das operações e o controle adequado de acessos.",
+      "Dessa forma, não será necessária a instalação do aplicativo Nextcloud na estação Ala 3384, uma vez que o acesso poderá ser realizado diretamente via navegador web. A criação dos usuários será solicitada pelo gestor da área conforme necessidade.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43488 (Resolvido)",
+    "ticket_id": 43488,
+    "solution_id": 42243,
+    "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > Alteração via HRP - Guia operadora : 206938046",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAjuste realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Ajuste realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43487 (Resolvido)",
+    "ticket_id": 43487,
+    "solution_id": 42216,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > SAFEWEB",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Bom dia, a SAFEWEB está com falha no serviço, já abrimos um chamado.",
+    "keywords": [],
+    "steps": [
+      "Bom dia, a SAFEWEB está com falha no serviço, já abrimos um chamado."
+    ]
+  },
+  {
+    "id": "Chamado #43486 (Resolvido)",
+    "ticket_id": 43486,
+    "solution_id": 42245,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Pep das técnicas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nA colaboradora relatou dificuldades para acessar o sistema PEP do Núcleo devido a falha no processo de autenticação. Durante a verificação, foi identificado que o acesso é realizado por meio de certificado digital SafeWeb e que a plataforma certificadora apresentava instabilidades momentâneas no momento da tentativa de acesso.\n\n\r\nA",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "A colaboradora relatou dificuldades para acessar o sistema PEP do Núcleo devido a falha no processo de autenticação. Durante a verificação, foi identificado que o acesso é realizado por meio de certificado digital SafeWeb e que a plataforma certificadora apresentava instabilidades momentâneas no momento da tentativa de acesso.",
+      "Após alguns minutos, o serviço foi normalizado. Realizamos novo contato com a colaboradora para validar o acesso, sendo confirmado que a autenticação no sistema foi concluída com sucesso e o funcionamento restabelecido.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43477 (Resolvido)",
+    "ticket_id": 43477,
+    "solution_id": 42208,
+    "title": "T.I > IR > Administração de Redes > Telefones VoIP > Verificar gravador (ligações) [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Gravações verificadas.",
+    "keywords": [],
+    "steps": [
+      "Gravações verificadas."
+    ]
+  },
+  {
+    "id": "Chamado #43461 (Resolvido)",
+    "ticket_id": 43461,
+    "solution_id": 42170,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Mudança de Acomodação",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43447 (Resolvido)",
+    "ticket_id": 43447,
+    "solution_id": 42219,
+    "title": "Infraestrutura e Redes > Instalação e Configuração > Instalação de aplicativo em celulares dos setores",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43445 (Resolvido)",
+    "ticket_id": 43445,
+    "solution_id": 42147,
+    "title": "Infraestrutura e Redes > Impressoras > Impressora não puxando papel EPSON L3250 Series",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Caneta removida do compartimento de recarga de folhas.",
+    "keywords": [],
+    "steps": [
+      "Caneta removida do compartimento de recarga de folhas."
+    ]
+  },
+  {
+    "id": "Chamado #43435 (Resolvido)",
+    "ticket_id": 43435,
+    "solution_id": 42148,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > instalação do sistema SPDATA",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Instalação feita.",
+    "keywords": [],
+    "steps": [
+      "Instalação feita."
+    ]
+  },
+  {
+    "id": "Chamado #43433 (Resolvido)",
+    "ticket_id": 43433,
+    "solution_id": 42139,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Carolina da Silva Melo",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais:\n\n\r\n------------------------------------------------------------\nFaculdade Unimed\nlink: https://www.faculdadeunimed.edu.br/\nlogin: CPF\nsenha: 075@Csm696\n\n\r\n------------------------------------------------------------\nLGPD\nlink: https://lgpd.unisulmg.com.br/\nlogin: smelocarolina@gmail.com\nsenha: 075@Csm696\n\n\r\n-----",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "------------------------------------------------------------",
+      "Faculdade Unimed",
+      "link: https://www.faculdadeunimed.edu.br/",
+      "login: CPF"
+    ]
+  },
+  {
+    "id": "Chamado #43430 (Resolvido)",
+    "ticket_id": 43430,
+    "solution_id": 42132,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Marciene Aparecida Rodrigues",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCredenciais enviadas para o e-mail informado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Credenciais enviadas para o e-mail informado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43429 (Resolvido)",
+    "ticket_id": 43429,
+    "solution_id": 42133,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Sobrenome do paciente errado em Faturamento de convênios.",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43426 (Resolvido)",
+    "ticket_id": 43426,
+    "solution_id": 42146,
+    "title": "T.I > ST > Registro de Chamados > Alinhamento de Chamados ServiceDesk [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #43425 (Resolvido)",
+    "ticket_id": 43425,
+    "solution_id": 42134,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Cancelamento de Registro Teste",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia, realizado a exclusão do registro conforme solicitado.",
+    "keywords": [],
+    "steps": [
+      "Bom dia, realizado a exclusão do registro conforme solicitado."
+    ]
+  },
+  {
+    "id": "Chamado #43416 (Resolvido)",
+    "ticket_id": 43416,
+    "solution_id": 42140,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Computador não está imprimindo etiquetas",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora configurada.",
+    "keywords": [],
+    "steps": [
+      "Impressora configurada."
+    ]
+  },
+  {
+    "id": "Chamado #43414 (Resolvido)",
+    "ticket_id": 43414,
+    "solution_id": 42121,
+    "title": "Infraestrutura e Redes > Manutenção de Computadores > Computador Farmácia Satélite",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Limpeza na memoria RAM.",
+    "keywords": [],
+    "steps": [
+      "Limpeza na memoria RAM."
+    ]
+  },
+  {
+    "id": "Chamado #43412 (Resolvido)",
+    "ticket_id": 43412,
+    "solution_id": 42123,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado, sem novos cadastros\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado, sem novos cadastros",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43391 (Resolvido)",
+    "ticket_id": 43391,
+    "solution_id": 42113,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Hellem Dimas",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Acessos Liberados.",
+    "keywords": [],
+    "steps": [
+      "Acessos Liberados."
+    ]
+  },
+  {
+    "id": "Chamado #43388 (Resolvido)",
+    "ticket_id": 43388,
+    "solution_id": 42122,
+    "title": "Infraestrutura e Redes > Telefones VoIP > Aparelho telefonico com defeito",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Cabo Reconectado.",
+    "keywords": [],
+    "steps": [
+      "Cabo Reconectado."
+    ]
+  },
+  {
+    "id": "Chamado #43384 (Resolvido)",
+    "ticket_id": 43384,
+    "solution_id": 42096,
+    "title": "Segurança da Informação > Gestão de Acessos > IZABEL HELOISA DUARTE DA SILVA - 036.905.866-66",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro Realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro Realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43383 (Resolvido)",
+    "ticket_id": 43383,
+    "solution_id": 42098,
+    "title": "Segurança da Informação > Gestão de Acessos > Tarles Lopes Costa - 078.631.436-24",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro Realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro Realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43381 (Resolvido)",
+    "ticket_id": 43381,
+    "solution_id": 42097,
+    "title": "Segurança da Informação > Gestão de Acessos > Carolina da Silva Melo - 075.456.996-96",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43379 (Resolvido)",
+    "ticket_id": 43379,
+    "solution_id": 42100,
+    "title": "Infraestrutura e Redes > Administração de Redes > Impressora sala 703",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Toner Limpo",
+    "keywords": [],
+    "steps": [
+      "Toner Limpo"
+    ]
+  },
+  {
+    "id": "Chamado #43376 (Resolvido)",
+    "ticket_id": 43376,
+    "solution_id": 42101,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Head Set",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Head set instalado.",
+    "keywords": [],
+    "steps": [
+      "Head set instalado."
+    ]
+  },
+  {
+    "id": "Chamado #43374 (Resolvido)",
+    "ticket_id": 43374,
+    "solution_id": 42065,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Talita Gaiotti",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nE-mail adicionado ao grupo geralunimed\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "E-mail adicionado ao grupo geralunimed",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43373 (Resolvido)",
+    "ticket_id": 43373,
+    "solution_id": 42099,
+    "title": "Segurança da Informação > Gestão de Acessos > Elisabete Sandra",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Cadastro atualizado.",
+    "keywords": [],
+    "steps": [
+      "Cadastro atualizado."
+    ]
+  },
+  {
+    "id": "Chamado #43355 (Resolvido)",
+    "ticket_id": 43355,
+    "solution_id": 42054,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Sistema SGH - Erro ao finalizar o atendimento",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi feita a alteração de um parâmetro pelo setor de faturamento, que implicou para que o sistema não iniciasse o fluxo do atendimento, ao salvar o registro.",
+    "keywords": [],
+    "steps": [
+      "Foi feita a alteração de um parâmetro pelo setor de faturamento, que implicou para que o sistema não iniciasse o fluxo do atendimento, ao salvar o registro."
+    ]
+  },
+  {
+    "id": "Chamado #43354 (Resolvido)",
+    "ticket_id": 43354,
+    "solution_id": 42092,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > Instalação de Impressora de Etiquetas",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora reinstalada.",
+    "keywords": [],
+    "steps": [
+      "Impressora reinstalada."
+    ]
+  },
+  {
+    "id": "Chamado #43345 (Resolvido)",
+    "ticket_id": 43345,
+    "solution_id": 42038,
+    "title": "Infraestrutura e Redes > Administração de Redes > Impresora Neuropsicologia",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Drivers reinstalados.",
+    "keywords": [],
+    "steps": [
+      "Drivers reinstalados."
+    ]
+  },
+  {
+    "id": "Chamado #43336 (Resolvido)",
+    "ticket_id": 43336,
+    "solution_id": 42037,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Docusign",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43332 (Resolvido)",
     "ticket_id": 43332,
     "solution_id": 42032,
@@ -10,6 +487,19 @@
     "keywords": [],
     "steps": [
       "Impressora reajustada!"
+    ]
+  },
+  {
+    "id": "Chamado #43326 (Resolvido)",
+    "ticket_id": 43326,
+    "solution_id": 42129,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
     ]
   },
   {
@@ -44,6 +534,19 @@
       "Depois de reiniciar o dispositivo, ele voltou a funcionar.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43309 (Resolvido)",
+    "ticket_id": 43309,
+    "solution_id": 42163,
+    "title": "Treinamento e Capacitação > Ferramentas Corporativas",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Foi solucionado pelo usuario.",
+    "keywords": [],
+    "steps": [
+      "Foi solucionado pelo usuario."
     ]
   },
   {
@@ -176,6 +679,36 @@
       "Nr Transação",
       "Tipo de transação",
       "Versão TISS"
+    ]
+  },
+  {
+    "id": "Chamado #43253 (Resolvido)",
+    "ticket_id": 43253,
+    "solution_id": 42060,
+    "title": "Atualizar Simpro [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nAtualizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Atualizada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43252 (Resolvido)",
+    "ticket_id": 43252,
+    "solution_id": 42164,
+    "title": "Atualizar HRP [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Atualizado conforme as regras previstas em POP\nSetor envolvido informado",
+    "keywords": [],
+    "steps": [
+      "Atualizado conforme as regras previstas em POP",
+      "Setor envolvido informado"
     ]
   },
   {
@@ -500,6 +1033,24 @@
     "keywords": [],
     "steps": [
       "Analise de Malware na rede, porém todo falso positivo?"
+    ]
+  },
+  {
+    "id": "Chamado #43169 (Resolvido)",
+    "ticket_id": 43169,
+    "solution_id": 42210,
+    "title": "Atualizar Benner [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Bloqueio de acesso\nDownload da Atualizacao\nAplicação dos Pacotes\nAtualização do WES\nInstalação dos Artefatos\nliberação do acesso\n\nTudo OK",
+    "keywords": [],
+    "steps": [
+      "Bloqueio de acesso",
+      "Download da Atualizacao",
+      "Aplicação dos Pacotes",
+      "Atualização do WES",
+      "Instalação dos Artefatos",
+      "liberação do acesso"
     ]
   },
   {
@@ -1108,6 +1659,21 @@
       "Cadastro desbloqueado.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42952 (Resolvido)",
+    "ticket_id": 42952,
+    "solution_id": 42043,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Adicionar filtro",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia.\n\n\r\nRealizado a implementação do filtro solicitado.\n\n\r\nUma observação: inicialmente, realize o filtro com a opção “Todos”. Dessa forma, ao acessar novamente o campo “Filtro por Local”, serão listados todos os locais disponíveis dentro do período filtrado. Depois, basta selecionar o local desejado.",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Realizado a implementação do filtro solicitado.",
+      "Uma observação: inicialmente, realize o filtro com a opção “Todos”. Dessa forma, ao acessar novamente o campo “Filtro por Local”, serão listados todos os locais disponíveis dentro do período filtrado. Depois, basta selecionar o local desejado."
     ]
   },
   {
@@ -5140,6 +5706,19 @@
       "Nível do óleo motor: ok",
       "Nível do óleo combustível: ok",
       "Ligar o Motor 10 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #41831 (Resolvido)",
+    "ticket_id": 41831,
+    "solution_id": 42167,
+    "title": "Treinamento e Capacitação > Treinamentos Técnicos",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Alterado",
+    "keywords": [],
+    "steps": [
+      "Alterado"
     ]
   },
   {

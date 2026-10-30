@@ -10059,6 +10059,267 @@
       "analyzed_images_count": 0
     }
   },
+  "43342": {
+    "ticket_id": 43342,
+    "analyzed_at": "28/10/2026 10:35",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Rosy Ellen Freire Viana solicitou a instalação de mais duas câmeras nos novos setores de bioquímica e microbiologia no laboratório de análises. A solicitação é para melhorar a segurança do setor e o controle de fluxo de pessoas. O chamado foi classificado como de baixa urgência pois não há problemas técnicos detectados no sistema de câmeras.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > IR > Câmeras e Monitoramento",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "A solicitação não apresenta problemas técnicos imediatos.",
+    "sufficiency_status": "parcial",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-07",
+        "title": "Manutenção, Diagnóstico e Substituição de Periféricos e Monitores (Patrimônio HU/Sede)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de reparo, diagnóstico ou substituição de teclado, mouse ou monitor com defeito ou sem vídeo em estação de trabalho hospitalar ou administrativa.",
+        "steps": [
+          "Deslocar técnico de suporte até o setor informado para realizar o diagnóstico presencial do equipamento/periférico.",
+          "Verificar conexões físicas de cabos (energia, HDMI/DisplayPort/VGA ou USB) e testar se o equipamento liga e se o computador emite sinal de vídeo.",
+          "Isolar se o defeito decorre de mau contato, cabo rompido, falha de inicialização da CPU ou avaria física no próprio periférico/monitor.",
+          "Caso seja constatado defeito físico irreparável de hardware no teste local, providenciar a substituição imediata por item compatível do estoque técnico.",
+          "Validar o correto funcionamento do periférico/vídeo junto ao usuário no posto de trabalho e concluir o chamado."
+        ],
+        "score": 0.38
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-07)",
+    "resolution_steps": [
+      "[PB-UNI-07] Deslocar técnico de suporte até o setor informado para realizar o diagnóstico presencial do equipamento/periférico.",
+      "[PB-UNI-07] Verificar conexões físicas de cabos (energia, HDMI/DisplayPort/VGA ou USB) e testar se o equipamento liga e se o computador emite sinal de vídeo.",
+      "[PB-UNI-07] Isolar se o defeito decorre de mau contato, cabo rompido, falha de inicialização da CPU ou avaria física no próprio periférico/monitor.",
+      "[PB-UNI-07] Caso seja constatado defeito físico irreparável de hardware no teste local, providenciar a substituição imediata por item compatível do estoque técnico.",
+      "[PB-UNI-07] Validar o correto funcionamento do periférico/vídeo junto ao usuário no posto de trabalho e concluir o chamado."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nRosy Ellen Freire Viana solicitou a instalação de mais duas câmeras nos novos setores de bioquímica e microbiologia no laboratório de análises. A solicitação é para melhorar a segurança do setor e o controle de fluxo de pessoas. O chamado foi classificado como de baixa urgência pois não há problemas técnicos detectados no sistema de câmeras.\n\nClassificação Sugerida: T.I > IR > Câmeras e Monitoramento | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-07)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-07] Deslocar técnico de suporte até o setor informado para realizar o diagnóstico presencial do equipamento/periférico.\n  2. [PB-UNI-07] Verificar conexões físicas de cabos (energia, HDMI/DisplayPort/VGA ou USB) e testar se o equipamento liga e se o computador emite sinal de vídeo.\n  3. [PB-UNI-07] Isolar se o defeito decorre de mau contato, cabo rompido, falha de inicialização da CPU ou avaria física no próprio periférico/monitor.\n  4. [PB-UNI-07] Caso seja constatado defeito físico irreparável de hardware no teste local, providenciar a substituição imediata por item compatível do estoque técnico.\n  5. [PB-UNI-07] Validar o correto funcionamento do periférico/vídeo junto ao usuário no posto de trabalho e concluir o chamado.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação referente ao equipamento ({ativo}) no setor **Laboratório**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local (conferindo conexões de cabos, sinal de vídeo e funcionamento geral). Caso seja identificada alguma falha de hardware, realizaremos os devidos reparos ou a substituição necessária.\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43345": {
+    "ticket_id": 43345,
+    "analyzed_at": "28/10/2026 10:28",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A colaboradora Alcione Clara informou que a impressora foi instalada e testada, mas agora não está imprimindo. Aparece uma mensagem de erro na configuração. Ela tentou verificar as configurações e reiniciar o computador, mas o problema persiste.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > IR > Administração de Redes",
+    "real_urgency": "Alta",
+    "urgency_reason": "O erro na impressora está causando problemas operacionais, pois a equipe precisa garantir a eficiência do processo de autorização de procedimentos médicos.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Detalhar os dados específicos necessários para execução da solicitação"
+    ],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA colaboradora Alcione Clara informou que a impressora foi instalada e testada, mas agora não está imprimindo. Aparece uma mensagem de erro na configuração. Ela tentou verificar as configurações e reiniciar o computador, mas o problema persiste.\n\nClassificação Sugerida: T.I > IR > Administração de Redes | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Detalhar os dados específicos necessários para execução da solicitação\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nJá estamos analisando o seu chamado #43345 (**Impresora Neuropsicologia**). Para avançarmos com a solução o mais rápido possível, você poderia nos confirmar as seguintes informações?\n\n- Detalhar os dados específicos necessários para execução da solicitação\n\nAssim que nos responder aqui no chamado, daremos sequência imediata!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "43373": {
+    "ticket_id": 43373,
+    "analyzed_at": "28/10/2026 14:53",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Isabel Cristina dos Santos Teodoro Nepomuceno** (H Recepção) abriu o chamado: \"▸ Seção 1) Tipo de Solicitação: Gestão de Acessos 2) Observador: Thais Ramos, Mercia Oliveira 3) Setor Solicitante: H Recepção 4) Localização: Recepção 5) Colaborador: Elisabete Sa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42197).",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > SI > Gestão de Acessos",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-12",
+        "title": "Acesso e Permissões — Cadastro / Liberação de Acesso para Médico, Prestador ou Colaborador",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso para médico plantonista, prestador terceiro ou colaborador, frequentemente aberta por terceiro (recepção/coordenação) sem especificar quais sistemas liberar ou preenchendo o formulário com os próprios dados do solicitante.",
+        "steps": [
+          "Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42197",
+        "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+          "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+          "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+          "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+          "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+          "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42273",
+        "title": "Criação de Usuários  -  Tatiane Batista Cardoso Veras",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "steps": [
+          "[MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado.",
+          "[MEM-#42184] [PB-UNI-25] Vincular os códigos das clínicas indicadas (ex: 16000070, 16000068) ao cadastro das atendentes no Web Saúde com vigência ativa.",
+          "[MEM-#42184] [PB-UNI-25] Orientar as colaboradoras a efetuarem logout e novo login no Web Saúde para que as novas clínicas fiquem disponíveis na rotina de atendimento.",
+          "[MEM-#42184] [Chamado #42179 (Resolvido)] Cadastro da secretária vinculado com a nova clínica 16000068 - Marcelo Pereira Servicos Medicos Ltda a partir de 01/10/2026"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a solicitação de acesso referente a **Tatiane Batista Cardoso Veras** (Faculdade Unimed, LGPD).\n\nTodas as informações necessárias já constam no chamado e nossa equipe já iniciou a liberação. Assim que concluído, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#43051",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Pereira",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).",
+          "[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.",
+          "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
+          "[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.",
+          "[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login."
+        ],
+        "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+        "required_info": [
+          "Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata",
+          "Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)",
+          "Conselho Profissional e Número de Registro (órgão de classe com respectivo número e UF, ex.: CREFITO, CRP, COREN, CRM)",
+          "Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "Quando solicitarem cadastro ou acesso no prontuário do hospital para profissionais de saúde, identificar todos os profissionais na descrição, manter em Criação de Usuários e solicitar os dados clínicos para o SPdata (Nome completo, Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
+        "score": 0.8
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-12) + Memória Contínua • Aprendido com o Analista (MEM-#42197)",
+    "resolution_steps": [
+      "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+      "[MEM-#42197] [PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+      "[MEM-#42197] [PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde)."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Isabel Cristina dos Santos Teodoro Nepomuceno** (H Recepção) abriu o chamado: \"▸ Seção 1) Tipo de Solicitação: Gestão de Acessos 2) Observador: Thais Ramos, Mercia Oliveira 3) Setor Solicitante: H Recepção 4) Localização: Recepção 5) Colaborador: Elisabete Sa\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42197).\n\nClassificação Sugerida: T.I > SI > Gestão de Acessos | Prioridade Real: Muito alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-12) + Memória Contínua • Aprendido com o Analista (MEM-#42197)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.\n  5. [MEM-#42197] [PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.\n  6. [MEM-#42197] [PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+    "public_reply_draft": "Olá, Isabel! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43490": {
+    "updated_at": "2026-10-30T14:26:50.549Z",
+    "ticket_date_mod": "2026-10-30 11:19:41",
+    "analysis": {
+      "ticket_id": 43490,
+      "analyzed_at": "30/10/2026 11:26",
+      "provider_used": "Ollama Local (qwen2.5:3b)",
+      "translated_intent": "A solicitante **Daniela Duarte Cabral** (H Ala 1) solicita a mudança de local / troca de mesa de um ramal telefônico VoIP no setor **H Ala 1**. Demanda atendimento presencial da equipe de Infraestrutura e Redes para remanejamento físico do aparelho e validação da tomada de rede no destino.",
+      "detected_domain": "Infraestrutura e Rede",
+      "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+      "real_urgency": "Baixa",
+      "urgency_reason": "Solicitação de remanejamento físico de equipamento e/ou instalação de ponto de telefonia/rede, demandando atendimento presencial da equipe de Infraestrutura.",
+      "sufficiency_status": "parcial",
+      "missing_info": [
+        "Informar o número do ramal que será trocado de mesa",
+        "Confirmar para qual mesa/posto dentro do H Ala 1 o telefone será transferido, e se a nova mesa já possui ponto de rede (tomada RJ-45) disponível"
+      ],
+      "knowledge_matches": [
+        {
+          "layer": "local_playbook",
+          "layer_label": "3ª Camada • Playbook Local de Processos TI",
+          "source_id": "PB-UNI-20",
+          "title": "Remanejamento Físico de Equipamentos (Impressora / Computador) e Instalação de Ponto de Telefone / Rede",
+          "category": "Infraestrutura e Rede",
+          "summary": "Solicitação de mudança física / remanejamento de equipamentos de T.I. (ex: trocar impressora Zebra ou computador de um local/bancada para outro ambiente, como Almoxarifado) e/ou instalação de ponto de telefone (linha/ramal e aparelho) ou ponto de rede.",
+          "steps": [
+            "Verificar presencialmente no local de destino (ex: Almoxarifado) a disponibilidade de ponto de rede/patch panel, tomadas elétricas e computador de apoio para conexão do equipamento remanejado (ex: impressora Zebra).",
+            "Caso envolva instalação de ponto de telefone (linha e aparelho), identificar a porta/par disponível no bloco/switch PoE, provisionar ou transferir o ramal na central PABX/VoIP e instalar o aparelho telefônico.",
+            "Realizar o remanejamento físico da impressora/equipamento, ajustar o compartilhamento ou IP nos computadores do setor e efetuar testes de impressão e de chamadas telefônicas junto ao solicitante."
+          ],
+          "score": 0.96
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #43311 (Resolvido)",
+          "title": "Infraestrutura e Redes > Telefones VoIP > Telefone sem funcionar",
+          "category": "T.I • Solucionado por damaral",
+          "summary": "Prezados(as),\n\n\r\nDepois de reiniciar o dispositivo, ele voltou a funcionar.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+          "steps": [
+            "Prezados(as),",
+            "Depois de reiniciar o dispositivo, ele voltou a funcionar.",
+            "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+            "Atenciosamente."
+          ],
+          "score": 0.51
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #43225 (Resolvido)",
+          "title": "Infraestrutura e Redes > Telefones VoIP > Trocar os telefones",
+          "category": "T.I • Solucionado por fsilva",
+          "summary": "Realocado.",
+          "steps": [
+            "Realocado."
+          ],
+          "score": 0.51
+        },
+        {
+          "layer": "glpi_history",
+          "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+          "source_id": "Chamado #43192 (Resolvido)",
+          "title": "Infraestrutura e Redes > Telefones VoIP > TELEFONE DA RECEPÇÃO NÃO ESTA FUNCIONANDO",
+          "category": "T.I • Solucionado por fsilva",
+          "summary": "Telefone foi reiniciado e voltou a funcionar.",
+          "steps": [
+            "Telefone foi reiniciado e voltou a funcionar."
+          ],
+          "score": 0.51
+        }
+      ],
+      "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-20) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43311 (Resolvido))",
+      "resolution_steps": [
+        "[PB-UNI-20] Manter a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+        "[PB-UNI-20] Confirmar com a solicitante Daniela Duarte Cabral (H Ala 1) o número do ramal e a mesa/posto exato de destino.",
+        "[PB-UNI-20] Deslocar técnico de Infraestrutura e Redes até o setor H Ala 1 para remanejar o aparelho telefônico VoIP, conectar na tomada de rede PoE da nova mesa e testar o funcionamento (tom de discagem, chamadas internas e externas).",
+        "[PB-UNI-20] Caso a nova mesa não possua porta ativa, realizar a manobra necessária no switch/patch panel da Ala 1."
+      ],
+      "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Daniela Duarte Cabral** (H Ala 1) solicita a mudança de local / troca de mesa de um ramal telefônico VoIP no setor **H Ala 1**. Demanda atendimento presencial da equipe de Infraestrutura e Redes para remanejamento físico do aparelho e validação da tomada de rede no destino.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-20) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43311 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar o número do ramal que será trocado de mesa\n  - Confirmar para qual mesa/posto dentro do H Ala 1 o telefone será transferido, e se a nova mesa já possui ponto de rede (tomada RJ-45) disponível\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-20] Manter a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.\n  2. [PB-UNI-20] Confirmar com a solicitante Daniela Duarte Cabral (H Ala 1) o número do ramal e a mesa/posto exato de destino.\n  3. [PB-UNI-20] Deslocar técnico de Infraestrutura e Redes até o setor H Ala 1 para remanejar o aparelho telefônico VoIP, conectar na tomada de rede PoE da nova mesa e testar o funcionamento (tom de discagem, chamadas internas e externas).\n  4. [PB-UNI-20] Caso a nova mesa não possua porta ativa, realizar a manobra necessária no switch/patch panel da Ala 1.",
+      "public_reply_draft": "Olá, Daniela! Tudo bem?\n\nRecebemos a sua solicitação para **trocar o ramal de mesa** no setor **H Ala 1**.\n\nNossa equipe de Infraestrutura e Redes já está programando o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Qual é o **número do ramal** do aparelho que será trocado de mesa?\n2. Para qual **mesa/posto** dentro do H Ala 1 o telefone será transferido, e se a nova mesa já possui ponto de rede (tomada de rede) disponível?\n\nAssim que nos confirmar por aqui, já enviamos um técnico ao setor para realizar a mudança e os testes!\n\nPermanecemos à disposição!",
+      "has_image_analysis": false,
+      "analyzed_images_count": 0
+    }
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",

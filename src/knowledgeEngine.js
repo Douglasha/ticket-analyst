@@ -307,6 +307,15 @@ export class KnowledgeEngine {
       (/\bacesso\s+compartilhado\b/i.test(normTicket) &&
         /\b(contratos?|envelopes?)\b/i.test(normTicket));
 
+    const isRelocationOrPhoneInstall =
+      /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede|trocar o ramal de mesa|mudar o ramal de mesa|trocar ramal|mudanca de local do telefone|trocar telefone de mesa)\b/i.test(
+        normTicket
+      ) ||
+      /\b(trocar|mudar|transferir|levar|passar|colocar)\b[\s\S]{0,60}\b(do|da)\b[\s\S]{0,50}\bpara\b/i.test(
+        normTicket
+      ) ||
+      (/\b(telefone|ramal)\b/i.test(normTicket) && /\b(trocar|mudar|transferir|remanejar|mesa|local)\b/i.test(normTicket));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -647,7 +656,8 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-24" &&
           (!/\b(telefone|ramal|voip)\b/i.test(normTicket) ||
-            /\b(caindo|quedas?|interromp|ligacoes caindo|ligações caindo)\b/i.test(
+            isRelocationOrPhoneInstall ||
+            /\b(caindo|quedas?|interromp|ligacoes caindo|ligações caindo|remanej|mudan[çc]a|trocar (?:o\s+)?ramal|mesa)\b/i.test(
               normTicket
             ))
         ) {
@@ -842,6 +852,12 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-48" &&
           isDocusignAccessOrShared
+        ) {
+          score = Math.max(score, 0.96);
+        }
+        if (
+          pb.id === "PB-UNI-20" &&
+          isRelocationOrPhoneInstall
         ) {
           score = Math.max(score, 0.96);
         }
@@ -1133,6 +1149,15 @@ export class KnowledgeEngine {
         if (
           !/\b(telefone|telefonia|voip|ramal|pabx|ligac|discagem|mudo|sem sinal|sem tom)\b/i.test(normTicket) &&
           /\b(telefone|telefonia|voip|ramal|pabx)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de telefonia com defeito/transferência (ex: MEM-#42293) quando o chamado é de remanejamento/mudança de local
+        if (
+          isRelocationOrPhoneInstall &&
+          /\b(transferindo|transferir|caindo|quedas?|mudo|sem sinal|chiado|inoperante|trocar os telefones)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
