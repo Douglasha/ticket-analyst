@@ -169,3 +169,29 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
 26. **Nova Categoria Oficial no GLPI: `T.I > ST > Parametrização de Sistemas e Tabelas` (ID 164 / Código `ST.08.P3`):**
     - Criada diretamente abaixo de `T.I > ST` (ID 67) para concentrar todas as solicitações recorrentes de criação, importação, atualização e parametrização de tabelas operacionais e regras de negócio nos sistemas corporativos (**SGH Spdata**, **HRP Unimed**, etc.), tais como tabelas de Diárias e Taxas Hospitalares (`DTH - PADRAO` na faixa `998`, chamado `#43129`), Simpro, Brasíndice, TNUMM, TUSS, CBHPM e configurações de convênios.
     - Retira essas demandas técnicas de negócio da vala genérica de `Solicitação Diversa` (ID 78) sem misturá-las com instalação de programas em computadores (`Instalação/Configuração > Aplicativos`) nem com desenvolvimento de código-fonte próprio (`T.I > DV > Desenvolvimento`).
+
+27. **Configuração de Acesso Compartilhado (Shared Access) no DocuSign (`PB-UNI-48`):**
+    - Trata solicitações de colaboradores (ex.: Cadastro, Jurídico, Comercial) para visualizar contratos e envelopes enviados/recebidos por outra conta institucional (ex.: `claudiofelix@unimedsudoestemg.coop.br`).
+    - Procedimento documentado na Base de Conhecimento do GLPI (Artigo KB #88): login de Administrador no DocuSign > aba Admin > Usuários e Grupos > Usuários > clicar no usuário titular dos contratos > aba 'Acesso compartilhado' > 'Compartilhar o acesso com outros' > selecionar os colaboradores, data de início e permissão de visualização/edição.
+
+28. **Controle de Acesso por Biometria Facial (iDFace / Control iD) — Cadastro Facial e Portas (`PB-UNI-49`):**
+    - Quando um chamado de "Gestão de Acessos" ou "Acesso e Permissões" é aberto acompanhado de fotografia facial em anexo (ex.: Carla Eduarda / RH solicitando acesso para o colaborador Gustavo Barbosa Carvalho com a foto `Gustavo Carvalho - Psicólogo.jpeg` no chamado `#43569`), a demanda subentende o **cadastro de biometria facial nos terminais de controle de acesso físico (Control iD / iDFace)**.
+    - **Topologia Oficial de Terminais de Reconhecimento Facial (12 Pontos):**
+      - **Sede Administrativa (Passos):**
+        1. `Administração` (`http://192.168.41.115`)
+      - **Hospital Unimed:**
+        2. `RX - Interno` (`http://192.168.40.113`)
+        3. `RX - Externo` (`http://192.168.40.114`)
+        4. `UTI NEO - Rampa` (`http://192.168.40.111`)
+        5. `UTI NEO - Farmácia` (`http://192.168.40.112`)
+        6. `Corredor Principal Entrada` (`http://192.168.40.10`)
+        7. `Corredor Principal Saída` (`http://192.168.40.11`)
+        8. `Corredor Elevador Entrada` (`http://192.168.40.13`)
+        9. `Corredor Elevador Saída` (`http://192.168.40.14`)
+        10. `Corredor Centro Cirúrgico` (`http://192.168.40.12`)
+        11. `Centro Cirúrgico` (`http://192.168.40.116`)
+        12. `UTI Adulto` (`http://192.168.40.15`)
+    - **Distinção Crítica e Regra de Triagem:**
+      - A triagem deve ser classificada como **`PARCIAL`** quando o solicitante anexar a foto mas NÃO especificar em qual unidade (Sede ou Hospital) nem em quais portas/setores o acesso deve ser liberado.
+      - A resposta pública deve acolher cordialmente a solicitação, confirmar o recebimento da fotografia facial para cadastro nos terminais iDFace e apresentar expressamente a lista das portas/setores disponíveis (dividida entre Sede e Hospital) para que o solicitante indique onde o colaborador deve circular, além de questionar se há necessidade de outros acessos de T.I. (SGH Spdata, Prontu+, Rede/Windows, E-mail).
+      - NUNCA confundir cadastro facial com onboarding interno de ponto (`PB-UNI-01`), nem com agência externa (`PB-UNI-41`), e NUNCA solicitar ID do HopToDesk.

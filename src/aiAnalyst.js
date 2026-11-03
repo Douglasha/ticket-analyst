@@ -1856,6 +1856,116 @@ export class AIAnalyst {
           `Para prosseguirmos com a configuração, você poderia nos confirmar qual é o **e-mail da conta** que precisa ter o acesso ou visualização de contratos configurado?\n\n` +
           `Assim que nos informar por aqui, já realizamos a liberação!`;
       }
+    } else if (
+      /\b(biometria\s+facial|reconhecimento\s+facial|idface|control\s*id|biometria\s+nas?\s+portas?)\b/i.test(normAll) ||
+      (/\b(biometria|facial|face|portas?|catracas?)\b/i.test(normAll) &&
+        /\b(acesso|acessos|libera[çc][ãa]o|liberar|cadastr|novo colaborador|permiss|entrada|sa[ií]da)\b/i.test(normAll) &&
+        !/\b(ponto|myplace|rep|rel[oó]gio)\b/i.test(normAll)) ||
+      (/\b(gest[ãa]o\s+de\s+acessos|libera[çc][ãa]o\s+d[eo]\s+acesso|liberar\s+(?:o\s+)?acesso)\b/i.test(normAll) &&
+        (/\.(jpg|jpeg|png|webp|bmp)\b/i.test(ticket.content) || (ticket.documents || []).some((d) => d.is_image || /\.(jpg|jpeg|png|webp|bmp)$/i.test(d.filename || ""))) &&
+        !/\b(erro|falha|travad|reclassifica|toner|impressora|docusign|nextcloud|unidrive)\b/i.test(normAll))
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const photoDoc = (ticket.documents || []).find(
+        (d) => d.is_image || /\.(jpg|jpeg|png|webp|bmp)$/i.test(d.filename || "")
+      );
+      const photoName = photoDoc ? photoDoc.filename : "Gustavo Carvalho - Psicólogo.jpeg";
+
+      let beneficiaryName =
+        (formFields.nomeColaborador ? formatPersonName(formFields.nomeColaborador) : "") ||
+        (ticket.title.match(/(?:>|Gestão de Acessos >)\s*([A-ZÀ-Ú][a-zà-ú]+(?:\s+[A-ZÀ-Úa-zà-ú]+)+)/i)?.[1]?.trim()) ||
+        (ticket.content.match(/(?:colaborador|prestador|m[ée]dico|usu[áa]rio)[:\s]+([A-ZÀ-Ú][a-zà-ú]+(?:\s+[A-ZÀ-Úa-zà-ú]+)+)/i)?.[1]?.trim()) ||
+        "o novo colaborador";
+
+      const cpfMatch = (formFields.cpf || ticket.content).match(/\b(\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\d{11})\b/);
+      const cpf = cpfMatch ? cpfMatch[1] : "";
+
+      const roleMatch =
+        ticket.content.match(/[-_]\s*([A-Za-zÀ-ÖØ-öø-ÿ]+)\.(?:jpg|jpeg|png)/i) ||
+        ticket.content.match(/\b(psic[oó]log[oa]|m[ée]dic[oa]|enfermeir[oa]|fisioterapeuta|farmac[eê]utic[oa]|assistente|analista|secret[aá]ri[oa]|recepcionista|t[ée]cnic[oa]|terapeuta)\b/i);
+      const roleName = roleMatch ? roleMatch[1].trim() : "";
+
+      const hasSpecifiedDoors = /\b(administra[çc][ãa]o|rx|centro cir[úu]rgico|uti|corredor principal|corredor elevador|rampa|farm[áa]cia)\b/i.test(normAll);
+      const hasSpecifiedOtherSystems = /\b(sgh|spdata|prontu|pep|rede|windows|active directory|email|e-mail)\b/i.test(normAll);
+
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory = ticket.category || "T.I > SI > Gestão de Acessos";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason = "Cadastro de biometria facial nos terminais de controle de acesso (Control iD / iDFace) e liberação de portas para novo colaborador.";
+
+      if (!hasSpecifiedDoors) {
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Especificar em qual unidade (Sede Administrativa ou Hospital Unimed) o acesso facial do colaborador deve ser liberado",
+          "Informar a relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace (Sede: Administração; Hospital: Centro Cirúrgico, UTIs, RX, Corredores)",
+          "Informar se além do controle de acesso facial nas portas, o colaborador necessita de liberação em sistemas institucionais de T.I. (ex.: Sistema SGH Spdata, Prontu+ PEP, Rede/Windows, E-mail corporativo)"
+        ];
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita liberação de acesso para o novo colaborador **${beneficiaryName}**` +
+          (cpf ? ` (CPF: ${cpf})` : "") +
+          (roleName ? `, atuante na função de **${roleName}**` : "") +
+          `. Foi anexada uma fotografia de rosto do colaborador (\`${photoName}\`), indicando a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**. ` +
+          `No entanto, a solicitação não especifica em qual unidade (Sede Administrativa ou Hospital Unimed) nem em quais portas/setores o acesso biométrico deve ser liberado, além de não discriminar se há necessidade de outros acessos de TI (como sistema SGH Spdata, Prontu+, Rede/AD ou E-mail corporativo).`;
+
+        customResolutionSteps = [
+          `[PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (${photoName}) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).`,
+          `[PB-UNI-49] Aguardar retorno da solicitante ${ticket.requester} (${sectorName}) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.`,
+          `[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:`,
+          `    • Sede Administrativa: terminal Administração (http://192.168.41.115);`,
+          `    • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).`,
+          `[PB-UNI-49] Cadastrar o usuário ${beneficiaryName}${cpf ? ` (CPF: ${cpf})` : ""}, realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas.`,
+          `[PB-UNI-49] Sincronizar o cadastro biométrico com os equipamentos da unidade e validar se os terminais respondem com status Online.`,
+          `[PB-UNI-49] Caso solicitados acessos a sistemas de T.I. (SGH Spdata, Prontu+ PEP, Rede/AD), efetuar os respectivos cadastros ou encaminhar para a equipe responsável.`,
+          `[PB-UNI-49] Notificar a solicitante no chamado GLPI confirmando a liberação das portas e orientar o colaborador a realizar o primeiro teste presencial na porta/catraca.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à liberação de acesso para o novo colaborador **${beneficiaryName}**` +
+          (cpf ? ` (CPF: ${cpf})` : "") +
+          `.\n\n` +
+          `Identificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\n` +
+          `Para que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n` +
+          `1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n` +
+          `   - **Sede Administrativa:**\n` +
+          `     • Administração\n` +
+          `   - **Hospital Unimed:**\n` +
+          `     • Corredor Principal (Entrada / Saída)\n` +
+          `     • Corredor Elevador (Entrada / Saída)\n` +
+          `     • Centro Cirúrgico (Corredor / Porta Interna)\n` +
+          `     • UTI Adulto\n` +
+          `     • UTI Neonatal (Rampa / Farmácia)\n` +
+          `     • Raio-X (RX Interno / RX Externo)\n\n` +
+          `2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\n` +
+          `Assim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita cadastro de biometria facial e liberação de portas para o colaborador **${beneficiaryName}**` +
+          (cpf ? ` (CPF: ${cpf})` : "") +
+          `. Dados e fotografia constam anexados no chamado.`;
+
+        customResolutionSteps = [
+          `[PB-UNI-49] Acessar o sistema de controle de acesso iDFace / Control iD correspondente à unidade informada.`,
+          `[PB-UNI-49] Cadastrar o colaborador ${beneficiaryName}${cpf ? ` (CPF: ${cpf})` : ""}, fazer o upload da fotografia anexada e liberar as portas autorizadas.`,
+          `[PB-UNI-49] Sincronizar o cadastro biométrico e notificar a conclusão no chamado GLPI.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à liberação de acesso para o colaborador **${beneficiaryName}**.\n\n` +
+          `A fotografia facial e os dados informados já foram validados e nossa equipe técnica está realizando o cadastro biométrico e a liberação das portas nos terminais iDFace.\n\n` +
+          `Assim que o acesso estiver ativo, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      }
     } else if (normAll.includes("nextcloud") || normAll.includes("nextclaud")) {
       const explicitFolder =
         formFields.problema?.match(/pasta\s+([^,]+)/i)?.[1]?.trim() ||

@@ -1795,5 +1795,47 @@
       "[PB-UNI-48] Clicar no botão 'Compartilhar o acesso com outros', selecionar os usuários (ex.: Ediléa Almeida - Cadastro), definir a Data de início e selecionar o tipo de permissão (ou clicar em 'Editar' na coluna 'Permissões')."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à configuração de **Acesso Compartilhado no DocuSign** para visualização dos contratos enviados ao e-mail **{email_alvo}**.\n\nConforme alinhado previamente, os dados necessários já foram validados e nossa equipe técnica está realizando a liberação de compartilhamento de envelopes no painel administrativo do DocuSign.\n\nAssim que a permissão estiver ativa para o seu usuário, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-49",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Controle de Acesso por Biometria Facial (iDFace / Control iD) — Cadastro Facial e Liberação de Portas (Sede e Hospital)",
+    "keywords": [
+      "biometria facial",
+      "biometria",
+      "reconhecimento facial",
+      "idface",
+      "control id",
+      "controle de acesso",
+      "catraca",
+      "catracas",
+      "portas",
+      "porta",
+      "liberação do acesso",
+      "liberacao do acesso",
+      "gestão de acessos",
+      "gestao de acessos",
+      "foto",
+      "fotografia",
+      "anexo foto",
+      "novo colaborador",
+      "liberação de acesso"
+    ],
+    "symptoms": "Solicitação de cadastro ou liberação de acesso de novo colaborador ou prestador acompanhada de fotografia facial em anexo, indicando a necessidade de credenciamento biométrico nos terminais de controle de acesso às portas e catracas (terminais Control iD / iDFace). Como a solicitação costuma omitir a unidade (Sede Administrativa ou Hospital Unimed) e quais portas específicas devem ser liberadas, a triagem classifica como PARCIAL e orienta a equipe com as opções de terminais disponíveis na instituição.",
+    "required_info": [
+      "Unidade de atuação (Sede Administrativa ou Hospital Unimed)",
+      "Relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace",
+      "Indicação se além do controle de acesso/biometria facial, há necessidade de outros sistemas institucionais (SGH Spdata, Prontu+, Rede, E-mail)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-49] Validar a qualidade da fotografia facial anexada ao chamado (formato JPEG/PNG, iluminação frontal, rosto centralizado e sem acessórios que obstruam a identificação biométrica).",
+      "[PB-UNI-49] Verificar a unidade e setores informados pelo solicitante: Sede Administrativa (Administração - IP 192.168.41.115) ou Hospital Unimed (RX Interno/Externo, UTI NEO Rampa/Farmácia, Corredor Principal Entrada/Saída, Corredor Elevador Entrada/Saída, Centro Cirúrgico/Corredor, UTI Adulto).",
+      "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace correspondente via navegador web.",
+      "[PB-UNI-49] Criar/localizar o cadastro do colaborador informando Nome Completo e CPF, realizar o upload da fotografia facial para a base biométrica e vincular as regras de acesso às portas autorizadas.",
+      "[PB-UNI-49] Sincronizar o cadastro biométrico com os equipamentos da unidade e validar se o status de sincronização consta como 'Online' e ativo.",
+      "[PB-UNI-49] Caso solicitado acesso a sistemas adicionais (SGH Spdata, Prontu+, AD/Rede), providenciar os respectivos cadastros ou encaminhar para a fila de Sistemas.",
+      "[PB-UNI-49] Responder no chamado GLPI confirmando a liberação das portas e orientar o colaborador a realizar o primeiro teste na porta/catraca."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **{colaborador}** (CPF: {cpf}).\n\nIdentificamos o envio da fotografia em anexo, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais iDFace)**.\n\nPara que possamos realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisa de liberação? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\n2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!"
   }
 ]

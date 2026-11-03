@@ -316,6 +316,29 @@ export class KnowledgeEngine {
       ) ||
       (/\b(telefone|ramal)\b/i.test(normTicket) && /\b(trocar|mudar|transferir|remanejar|mesa|local)\b/i.test(normTicket));
 
+    const hasPhotoOrImageAttachment =
+      /\.(jpg|jpeg|png|webp|bmp)\b/i.test(ticket.content) ||
+      (ticket.documents || []).some(
+        (d) => d.is_image || /\.(jpg|jpeg|png|webp|bmp)$/i.test(d.filename || "")
+      );
+
+    const isFacialBiometricOrDoorAccess =
+      /\b(biometria\s+facial|reconhecimento\s+facial|idface|control\s*id|biometria\s+nas?\s+portas?)\b/i.test(
+        normTicket
+      ) ||
+      (/\b(biometria|facial|face|portas?|catracas?)\b/i.test(normTicket) &&
+        /\b(acesso|acessos|libera[çc][ãa]o|liberar|cadastr|novo colaborador|permiss|entrada|sa[ií]da)\b/i.test(
+          normTicket
+        ) &&
+        !/\b(ponto|myplace|rep|rel[oó]gio)\b/i.test(normTicket)) ||
+      (/\b(gest[ãa]o\s+de\s+acessos|libera[çc][ãa]o\s+d[eo]\s+acesso|liberar\s+(?:o\s+)?acesso)\b/i.test(
+        normTicket
+      ) &&
+        hasPhotoOrImageAttachment &&
+        !/\b(erro|falha|travad|reclassifica|toner|impressora|docusign|nextcloud|unidrive)\b/i.test(
+          normTicket
+        ));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -408,9 +431,13 @@ export class KnowledgeEngine {
               ) &&
               /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket)));
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal || isHospitalMedicalRecordRegistration) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal || isHospitalMedicalRecordRegistration || isFacialBiometricOrDoorAccess) {
             continue;
           }
+        }
+        // Evita parear PB-UNI-49 (Biometria Facial / Portas) quando o chamado NÃO trata de biometria facial ou controle de acesso às portas
+        if (pb.id === "PB-UNI-49" && !isFacialBiometricOrDoorAccess) {
+          continue;
         }
         // Evita parear PB-UNI-11 (Bloqueio de Contas) quando o chamado trata de DESBLOQUEIO ou não trata de bloqueio/desligamento
         if (
@@ -707,7 +734,8 @@ export class KnowledgeEngine {
         // Evita parear Playbook de Onboarding/Ponto/MyPlace (PB-UNI-01) quando o chamado trata de Intranet, permissões de usuário já existente ou secretária externa no Web Saúde
         if (
           pb.id === "PB-UNI-01" &&
-          (/\bintranet\b/i.test(normTicket) ||
+          (isFacialBiometricOrDoorAccess ||
+            /\bintranet\b/i.test(normTicket) ||
             /\b(acesso secret[aá]ria|web\s*sa[uú]de|c[oó]digo do prestador|16\d{6})\b/i.test(
               normTicket
             ) ||
@@ -854,6 +882,12 @@ export class KnowledgeEngine {
           isDocusignAccessOrShared
         ) {
           score = Math.max(score, 0.96);
+        }
+        if (
+          pb.id === "PB-UNI-49" &&
+          isFacialBiometricOrDoorAccess
+        ) {
+          score = Math.max(score, 0.98);
         }
         if (
           pb.id === "PB-UNI-20" &&

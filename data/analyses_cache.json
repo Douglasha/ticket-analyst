@@ -10635,6 +10635,238 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43561": {
+    "ticket_id": 43561,
+    "analyzed_at": "03/11/2026 07:40",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia!\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42983).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Alta",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Salvamento em Extensões Diferentes (.xlsx e .ods): Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.",
+      "Edição Concorrente / Abertura Simultânea: Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).",
+      "Padronizar o salvamento de todas as planilhas sempre no formato .xlsx;",
+      "Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição."
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42983",
+        "title": "Erros de Sistema  -  As planilhas da pasta Educação Continuada estão se duplicando constantemente",
+        "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+        "steps": [
+          "[PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.",
+          "[PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).",
+          "[PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.",
+          "[PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.",
+          "[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+        "required_info": [
+          "Salvamento em Extensões Diferentes (.xlsx e .ods): Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.",
+          "Edição Concorrente / Abertura Simultânea: Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).",
+          "Padronizar o salvamento de todas as planilhas sempre no formato .xlsx;",
+          "Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição."
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42159",
+        "title": "Erros de Sistema  -  Sincronização Nextcloud",
+        "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "steps": [
+          "[PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "[PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "[PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+          "[Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+          "[Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+          "[Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n3. Qual mensagem de erro aparece na tela e qual o seu **ID do HopToDesk** para acessarmos remotamente?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "required_info": [
+          "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+          "Você está tentando acessar pelo navegador ou pelo atalho no computador?",
+          "Qual mensagem de erro aparece na tela e qual o seu ID do HopToDesk para acessarmos remotamente?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.8
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42404",
+        "title": "Resolução de Problemas  -  uma pasta do nextcloud sumiu",
+        "category": "T.I > ST > Resolução de Problemas",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "steps": [
+          "[MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "[MEM-#42159] [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "[MEM-#42159] [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+          "[MEM-#42159] [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+          "[MEM-#42159] [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+          "[MEM-#42159] [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n\nFicamos no aguardo para regularizar seu acesso!",
+        "required_info": [
+          "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+          "Você está tentando acessar pelo navegador ou pelo atalho no computador?"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.75
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43182 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > Dalete Garcia de Oliveira Bartelochi",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nAcessos bloqueados:\n\n\r\nE-mail Institucional\nDocusign - não possui acesso\nGIU - não possui acesso\nGLPI\nHRP Unimed\nIntranet\nNext Cloud,\nSGH Spdata\nSafeWeb (Certificado Digital Hospital) Solicitado revogação\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "Acessos bloqueados:",
+          "E-mail Institucional",
+          "Docusign - não possui acesso",
+          "GIU - não possui acesso",
+          "GLPI"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42983) + Memória Contínua • Aprendido com o Analista (MEM-#42159)",
+    "resolution_steps": [
+      "[MEM-#42983] [PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.",
+      "[MEM-#42983] [PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).",
+      "[MEM-#42983] [PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.",
+      "[MEM-#42983] [PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.",
+      "[MEM-#42983] [PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking).",
+      "[MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Priscila Santos** (H Faturamento) abriu o chamado: \"Bom dia!\". Triagem orientada pelo padrão aprendido anteriormente com o analista (MEM-#42983).\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42983) + Memória Contínua • Aprendido com o Analista (MEM-#42159)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Salvamento em Extensões Diferentes (.xlsx e .ods): Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n  - Edição Concorrente / Abertura Simultânea: Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n  - Padronizar o salvamento de todas as planilhas sempre no formato .xlsx;\n  - Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42983] [PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.\n  2. [MEM-#42983] [PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).\n  3. [MEM-#42983] [PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.\n  4. [MEM-#42983] [PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.\n  5. [MEM-#42983] [PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking).\n  6. [MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+    "public_reply_draft": "Olá, Priscila! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "43569": {
+    "ticket_id": 43569,
+    "analyzed_at": "03/11/2026 10:04",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) solicita liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69), atuante na função de **Psicólogo**. Foi anexada uma fotografia de rosto do colaborador (`Gustavo Carvalho - Psicólogo.jpeg`), indicando a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**. No entanto, a solicitação não especifica em qual unidade (Sede Administrativa ou Hospital Unimed) nem em quais portas/setores o acesso biométrico deve ser liberado, além de não discriminar se há necessidade de outros acessos de TI (como sistema SGH Spdata, Prontu+, Rede/AD ou E-mail corporativo).",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > SI > Gestão de Acessos",
+    "real_urgency": "Média",
+    "urgency_reason": "Cadastro de biometria facial nos terminais de controle de acesso (Control iD / iDFace) e liberação de portas para novo colaborador.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Especificar em qual unidade (Sede Administrativa ou Hospital Unimed) o acesso facial do colaborador deve ser liberado",
+      "Informar a relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace (Sede: Administração; Hospital: Centro Cirúrgico, UTIs, RX, Corredores)",
+      "Informar se além do controle de acesso facial nas portas, o colaborador necessita de liberação em sistemas institucionais de T.I. (ex.: Sistema SGH Spdata, Prontu+ PEP, Rede/Windows, E-mail corporativo)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-49",
+        "title": "Controle de Acesso por Biometria Facial (iDFace / Control iD) — Cadastro Facial e Liberação de Portas (Sede e Hospital)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro ou liberação de acesso de novo colaborador ou prestador acompanhada de fotografia facial em anexo, indicando a necessidade de credenciamento biométrico nos terminais de controle de acesso às portas e catracas (terminais Control iD / iDFace). Como a solicitação costuma omitir a unidade (Sede Administrativa ou Hospital Unimed) e quais portas específicas devem ser liberadas, a triagem classifica como PARCIAL e orienta a equipe com as opções de terminais disponíveis na instituição.",
+        "steps": [
+          "[PB-UNI-49] Validar a qualidade da fotografia facial anexada ao chamado (formato JPEG/PNG, iluminação frontal, rosto centralizado e sem acessórios que obstruam a identificação biométrica).",
+          "[PB-UNI-49] Verificar a unidade e setores informados pelo solicitante: Sede Administrativa (Administração - IP 192.168.41.115) ou Hospital Unimed (RX Interno/Externo, UTI NEO Rampa/Farmácia, Corredor Principal Entrada/Saída, Corredor Elevador Entrada/Saída, Centro Cirúrgico/Corredor, UTI Adulto).",
+          "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace correspondente via navegador web.",
+          "[PB-UNI-49] Criar/localizar o cadastro do colaborador informando Nome Completo e CPF, realizar o upload da fotografia facial para a base biométrica e vincular as regras de acesso às portas autorizadas.",
+          "[PB-UNI-49] Sincronizar o cadastro biométrico com os equipamentos da unidade e validar se o status de sincronização consta como 'Online' e ativo.",
+          "[PB-UNI-49] Caso solicitado acesso a sistemas adicionais (SGH Spdata, Prontu+, AD/Rede), providenciar os respectivos cadastros ou encaminhar para a fila de Sistemas.",
+          "[PB-UNI-49] Responder no chamado GLPI confirmando a liberação das portas e orientar o colaborador a realizar o primeiro teste na porta/catraca."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42545",
+        "title": "Solicitação Diversa  -  Liberação de Acessos",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+          "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+          "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' caso tenha sido aberto em 'Instalação/Configuração > Aplicativos'.",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Acessar o painel/módulo de controle de acessos do Sistema Web Saúde (subsistema do HRP Unimed).",
+          "[MEM-#42285] [MEM-#42278] [MEM-#42273] [MEM-#42184] [PB-UNI-25] Localizar os usuários/logins das atendentes do NAS (Núcleo de Atenção à Saúde) informadas no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42197",
+        "title": "Criação de Usuários  -  Adriana Balduino Yashinishi",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.",
+          "[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita toda a governança de usuários do Web Saúde).",
+          "[PB-UNI-27] Cadastrar o novo usuário com Nome completo, CPF, data de nascimento e e-mail informados no chamado.",
+          "[PB-UNI-27] Vincular o código do prestador credenciado (ex.: 16000071 - DIAS SAUDE LTDA) ao usuário da secretária com vigência ativa.",
+          "[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado da secretária, comunicando a conclusão no chamado.",
+          "[MEM-#42179] [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **Adriana Balduino Yashinishi**, vinculada ao prestador **16000071 - DIAS SAUDE LTDA**.\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\nAssim que o acesso for liberado e os dados de primeiro acesso encaminhados para o e-mail informado (**balduinoadriana51@gmail.com**), confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42756",
+        "title": "Acesso e Permissões  -  Eliane Satie Koda liberação de acesso",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+          "[PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+          "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-49) + Memória Contínua • Aprendido com o Analista (MEM-#42545)",
+    "resolution_steps": [
+      "[PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).",
+      "[PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.",
+      "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:",
+      "    • Sede Administrativa: terminal Administração (http://192.168.41.115);",
+      "    • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).",
+      "[PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) solicita liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69), atuante na função de **Psicólogo**. Foi anexada uma fotografia de rosto do colaborador (`Gustavo Carvalho - Psicólogo.jpeg`), indicando a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**. No entanto, a solicitação não especifica em qual unidade (Sede Administrativa ou Hospital Unimed) nem em quais portas/setores o acesso biométrico deve ser liberado, além de não discriminar se há necessidade de outros acessos de TI (como sistema SGH Spdata, Prontu+, Rede/AD ou E-mail corporativo).\n\nClassificação Sugerida: T.I > SI > Gestão de Acessos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-49) + Memória Contínua • Aprendido com o Analista (MEM-#42545)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Especificar em qual unidade (Sede Administrativa ou Hospital Unimed) o acesso facial do colaborador deve ser liberado\n  - Informar a relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace (Sede: Administração; Hospital: Centro Cirúrgico, UTIs, RX, Corredores)\n  - Informar se além do controle de acesso facial nas portas, o colaborador necessita de liberação em sistemas institucionais de T.I. (ex.: Sistema SGH Spdata, Prontu+ PEP, Rede/Windows, E-mail corporativo)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).\n  2. [PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.\n  3. [PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:\n  4.     • Sede Administrativa: terminal Administração (http://192.168.41.115);\n  5.     • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).\n  6. [PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas.",
+    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\n2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",
