@@ -1919,39 +1919,72 @@
   },
   {
     "ticket_id": 43569,
-    "title": "Segurança da Informação > Gestão de Acessos > Gustavo Barbosa Carvalho",
+    "title": "Gestão de Acessos  -  Gustavo Barbosa Carvalho",
     "category": "T.I > SI > Gestão de Acessos",
     "keywords": [
-      "gestao de acessos",
-      "liberacao do acesso",
-      "gustavo barbosa carvalho",
-      "psicologo",
-      "biometria facial",
-      "reconhecimento facial",
-      "idface",
-      "control id",
-      "portas",
-      "hospital unimed",
-      "sede"
+      "gestao",
+      "acessos",
+      "gustavo",
+      "barbosa",
+      "carvalho",
+      "secao",
+      "solicitacao:",
+      "observador:"
     ],
-    "problem_summary": "Solicito a liberação do acesso do novo colaborador Gustavo Barbosa Carvalho (127.720.136-69) com anexo de fotografia facial (Gustavo Carvalho - Psicólogo.jpeg)",
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **{colaborador}** (CPF: {cpf}).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\n2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+    "problem_summary": "▸ Seção\n1) Tipo de Solicitação: Gestão de Acessos\n2) Observador: \n3) Setor Solicitante: Recursos Humanos\n4) Localização: Núcleo Passos\n5) Colaborador: Gustavo Barbosa Carvalho \n6) Solicitação: Prezados, bom dia. \n\nSolicito a liberação do acesso do novo colaborador Gustavo Barbosa Carvalho (127.720.136-69)\n\n \n\n7) Anexo: Gustavo Carvalho - Psicólogo.jpeg\n8) Urgência: Alta",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
     "required_info": [
-      "Unidade de atuação (Sede Administrativa ou Hospital Unimed)",
-      "Relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace",
-      "Indicação se além da biometria facial nas portas, há necessidade de sistemas de TI (SGH Spdata, Prontu+, Rede/AD, E-mail)"
+      "Unidade e Portas / Setores de Acesso: Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:",
+      "Sede Administrativa:",
+      "Administração",
+      "Hospital Unimed:",
+      "Corredor Principal (Entrada / Saída)",
+      "Corredor Elevador (Entrada / Saída)",
+      "Centro Cirúrgico (Corredor / Porta Interna)",
+      "UTI Adulto",
+      "UTI Neonatal (Rampa / Farmácia)",
+      "Raio-X (RX Interno / RX Externo)"
     ],
     "resolution_steps": [
       "[PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).",
       "[PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.",
-      "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada (Sede: Administração - 192.168.41.115; Hospital: RX Interno/Externo, UTI NEO Rampa/Farmácia, Corredor Principal Entrada/Saída, Corredor Elevador Entrada/Saída, Centro Cirúrgico/Corredor, UTI Adulto).",
-      "[PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas.",
-      "[PB-UNI-49] Sincronizar o cadastro biométrico com os equipamentos da unidade e validar status Online.",
-      "[PB-UNI-49] Caso solicitados acessos a sistemas de T.I. (SGH Spdata, Prontu+ PEP, Rede/AD), efetuar os respectivos cadastros ou encaminhar para a equipe responsável.",
-      "[PB-UNI-49] Notificar a solicitante no chamado GLPI confirmando a liberação das portas e orientar o colaborador a realizar o primeiro teste presencial na porta/catraca."
+      "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:",
+      "    • Sede Administrativa: terminal Administração (http://192.168.41.115);",
+      "    • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).",
+      "[PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas."
     ],
     "sufficiency_status": "parcial",
     "created_at": "2026-11-03T13:04:49.487Z",
-    "updated_at": "2026-11-03T13:04:49.489Z"
+    "updated_at": "2026-11-03T13:19:14.092Z"
+  },
+  {
+    "ticket_id": 43589,
+    "title": "Suporte Técnico e Service Desk > Parametrização de Sistemas e Tabelas >",
+    "category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+    "keywords": [
+      "min",
+      "regras do min",
+      "manual de intercambio nacional",
+      "prazo de cobranca",
+      "intercambio nacional",
+      "110 dias pra 90 dias",
+      "hrp unimed",
+      "faturamento",
+      "taxa de custeio administrativo"
+    ],
+    "problem_summary": "Em adequação as regras do MIN, favor alterar de 110 dias pra 90 dias no HRP Unimed",
+    "reply_template": "Olá, Frederico! Tudo bem?\n\nRecebemos a sua solicitação referente à adequação dos parâmetros de **prazo de cobrança do Intercâmbio Nacional (MIN)** no sistema **HRP Unimed**.\n\nAs regras e os prazos informados já foram validados na triagem técnica:\n- **Cobrança sem taxa de custeio administrativo:** alteração de **110 dias para 90 dias** (com vigência a partir de 01/11/2026);\n- Validação dos prazos correlatos divulgados no comunicado oficial do MIN (Cobrança de recurso de glosa do prestador para 150 dias e cobrança com taxa de custeio mantida em 70 dias).\n\nNossa equipe técnica já iniciou a parametrização dessa regra no módulo de Faturamento / Intercâmbio do HRP Unimed. Assim que a alteração for concluída e estiver em vigor no sistema, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-47] Manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+      "[PB-UNI-47] Acessar o ERP HRP Unimed com perfil de parametrização de Faturamento e Intercâmbio Nacional.",
+      "[PB-UNI-47] Localizar as configurações de Prazos de Cobrança / PTU do Intercâmbio Nacional e identificar a regra 'Cobrança sem taxa de custeio administrativo'.",
+      "[PB-UNI-47] Atualizar o prazo limite de cobrança de 110 dias para 90 dias com vigência a partir de 01/11/2026, conforme aprovado no Manual de Intercâmbio Nacional (MIN).",
+      "[PB-UNI-47] Verificar adicionalmente os prazos correlatos previstos na mesma norma (Cobrança de recurso de glosa do prestador para 150 dias; Cobrança com taxa de custeio mantida em 70 dias) para certificar a consistência integral das regras.",
+      "[PB-UNI-47] Validar as novas regras no sistema e notificar o solicitante Frederico Roosevelt no chamado do GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-03T14:23:37.021Z",
+    "updated_at": "2026-11-03T14:23:37.021Z"
   }
 ]

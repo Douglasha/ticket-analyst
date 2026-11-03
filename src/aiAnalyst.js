@@ -1738,51 +1738,88 @@ export class AIAnalyst {
           ? "HRP Unimed"
           : "SGH Spdata";
 
-      const tableMatch =
-        descOnly.match(/como\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
-        (ticket.title || "").match(/tabela\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
-        descOnly.match(/tabela\s+([A-Z0-9À-Ú]+\s*[-–]\s*[A-Z0-9À-Ú]+)/i);
-      const tableName = tableMatch ? tableMatch[1].trim().toUpperCase() : "DTH - PADRAO";
+      const isMinIntercambio =
+        /\b(min|interc[aâ]mbio|prazo\s+de\s+cobranc?a|110\s+dias|90\s+dias|taxa\s+de\s+custeio|custeio\s+administrativo)\b/i.test(
+          normAll
+        );
 
-      const faixaMatch = descOnly.match(/faixa\s+(?:de\s+)?(\d{2,5})/i);
-      const faixaCode = faixaMatch ? faixaMatch[1].trim() : "998";
+      if (isMinIntercambio) {
+        detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
+        suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+        realUrgency = ticket.urgency_label || "Baixa";
+        urgencyReason = `Adequação das regras e prazos de cobrança do Intercâmbio Nacional (MIN / Unimed do Brasil) no ERP HRP Unimed para o setor de Faturamento.`;
 
-      const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
-      const tableTypeDesc = isDiariasTaxas
-        ? "tabela de Diárias e Taxas Hospitalares (DTH)"
-        : "tabela operacional";
+        sufficiencyStatus = "completo";
+        missingInfo = [];
 
-      detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
-      suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
-      realUrgency = ticket.urgency_label || "Média";
-      urgencyReason = `Solicitação do setor ${sectorName} para criação/parametrização da ${tableTypeDesc} (${tableName}) no sistema ${sysName}, necessária para o vínculo contratual e faturamento de contas hospitalares.`;
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a alteração do parâmetro de **prazo de cobrança do Intercâmbio Nacional sem taxa de custeio administrativo** no sistema **${sysName}**, reduzindo o prazo de **110 dias para 90 dias** (vigência a partir de **01/11/2026**), em conformidade com as diretrizes do **Manual de Intercâmbio Nacional (MIN / Unimed do Brasil)** divulgadas nos comunicados oficiais anexados. ` +
+          `Todos os parâmetros e regras necessários constam informados com clareza no chamado.`;
 
-      const categoryMismatch =
-        normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
-      const reclassNote = categoryMismatch
-        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 164).*`
-        : "";
+        customResolutionSteps = [
+          `[PB-UNI-47] Manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).`,
+          `[PB-UNI-47] Acessar o ERP ${sysName} com perfil de parametrização de Faturamento e Intercâmbio Nacional.`,
+          `[PB-UNI-47] Localizar as configurações de Prazos de Cobrança / PTU do Intercâmbio Nacional e identificar a regra 'Cobrança sem taxa de custeio administrativo'.`,
+          `[PB-UNI-47] Atualizar o prazo limite de cobrança de 110 dias para 90 dias com vigência a partir de 01/11/2026, conforme aprovado no Manual de Intercâmbio Nacional (MIN).`,
+          `[PB-UNI-47] Verificar adicionalmente os prazos correlatos previstos na mesma norma (Cobrança de recurso de glosa do prestador para 150 dias; Cobrança com taxa de custeio mantida em 70 dias) para certificar a consistência integral das regras.`,
+          `[PB-UNI-47] Validar as novas regras no sistema e notificar o solicitante ${ticket.requester} no chamado do GLPI.`
+        ];
 
-      sufficiencyStatus = "completo";
-      missingInfo = [];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à adequação dos parâmetros de **prazo de cobrança do Intercâmbio Nacional (MIN)** no sistema **${sysName}**.\n\n` +
+          `As regras e os prazos informados já foram validados na triagem técnica:\n` +
+          `- **Cobrança sem taxa de custeio administrativo:** alteração de **110 dias para 90 dias** (com vigência a partir de 01/11/2026);\n` +
+          `- Validação dos prazos correlatos divulgados no comunicado oficial do MIN (Cobrança de recurso de glosa do prestador para 150 dias e cobrança com taxa de custeio mantida em 70 dias).\n\n` +
+          `Nossa equipe técnica já iniciou a parametrização dessa regra no módulo de Faturamento / Intercâmbio do ${sysName}. Assim que a alteração for concluída e estiver em vigor no sistema, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        const tableMatch =
+          descOnly.match(/como\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
+          (ticket.title || "").match(/tabela\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
+          descOnly.match(/tabela\s+([A-Z0-9À-Ú]+\s*[-–]\s*[A-Z0-9À-Ú]+)/i);
+        const tableName = tableMatch ? tableMatch[1].trim().toUpperCase() : "DTH - PADRAO";
 
-      translatedIntent =
-        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação e parametrização de uma **${tableTypeDesc}** no sistema **${sysName}**, configurada na **faixa de ${faixaCode}** com a nomenclatura **${tableName}** (direcionada ao analista/desenvolvedor Moisés Conte). ` +
-        `Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.` +
-        reclassNote;
+        const faixaMatch = descOnly.match(/faixa\s+(?:de\s+)?(\d{2,5})/i);
+        const faixaCode = faixaMatch ? faixaMatch[1].trim() : "998";
 
-      customResolutionSteps = [
-        `[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).`,
-        `[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema ${sysName} e criar a ${tableTypeDesc} na faixa ${faixaCode} sob a nomenclatura '${tableName}'.`,
-        `[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
-      ];
+        const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
+        const tableTypeDesc = isDiariasTaxas
+          ? "tabela de Diárias e Taxas Hospitalares (DTH)"
+          : "tabela operacional";
 
-      customPublicReply =
-        `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**, na **faixa de ${faixaCode}**, com a descrição **${tableName}**.\n\n` +
-        `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
-        `Assim que a tabela **${tableName}** (faixa **${faixaCode}**) estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
-        `Permanecemos à disposição!`;
+        detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
+        suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+        realUrgency = ticket.urgency_label || "Média";
+        urgencyReason = `Solicitação do setor ${sectorName} para criação/parametrização da ${tableTypeDesc} (${tableName}) no sistema ${sysName}, necessária para o vínculo contratual e faturamento de contas hospitalares.`;
+
+        const categoryMismatch =
+          normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+        const reclassNote = categoryMismatch
+          ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 164).*`
+          : "";
+
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação e parametrização de uma **${tableTypeDesc}** no sistema **${sysName}**, configurada na **faixa de ${faixaCode}** com a nomenclatura **${tableName}** (direcionada ao analista/desenvolvedor Moisés Conte). ` +
+          `Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.` +
+          reclassNote;
+
+        customResolutionSteps = [
+          `[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).`,
+          `[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema ${sysName} e criar a ${tableTypeDesc} na faixa ${faixaCode} sob a nomenclatura '${tableName}'.`,
+          `[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**, na **faixa de ${faixaCode}**, com a descrição **${tableName}**.\n\n` +
+          `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
+          `Assim que a tabela **${tableName}** (faixa **${faixaCode}**) estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      }
     } else if (
       /\b(docusign|docu\s*sign)\b/i.test(normAll) ||
       (/\bacesso\s+compartilhado\b/i.test(normAll) &&

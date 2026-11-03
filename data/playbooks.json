@@ -1757,9 +1757,20 @@
       "vínculo do convênio",
       "vinculo do convenio",
       "alteração de convênio",
-      "alteracao de convenio"
+      "alteracao de convenio",
+      "regras do min",
+      "regras min",
+      "manual de intercâmbio nacional",
+      "manual de intercambio nacional",
+      "prazo de cobrança",
+      "prazo de cobranca",
+      "taxa de custeio administrativo",
+      "110 dias pra 90 dias",
+      "110 para 90 dias",
+      "intercâmbio nacional",
+      "intercambio nacional"
     ],
-    "symptoms": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM) ou vínculos de convênios nos sistemas SGH Spdata e HRP Unimed.",
+    "symptoms": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM), ou adequação de regras operacionais e prazos de cobrança do Intercâmbio Nacional (MIN — Manual de Intercâmbio Nacional) nos sistemas SGH Spdata e ERP HRP Unimed.",
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",

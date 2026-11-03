@@ -10863,7 +10863,179 @@
       "[PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Carla Eduarda Machado Oliveira** (Recursos Humanos) solicita liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69), atuante na função de **Psicólogo**. Foi anexada uma fotografia de rosto do colaborador (`Gustavo Carvalho - Psicólogo.jpeg`), indicando a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**. No entanto, a solicitação não especifica em qual unidade (Sede Administrativa ou Hospital Unimed) nem em quais portas/setores o acesso biométrico deve ser liberado, além de não discriminar se há necessidade de outros acessos de TI (como sistema SGH Spdata, Prontu+, Rede/AD ou E-mail corporativo).\n\nClassificação Sugerida: T.I > SI > Gestão de Acessos | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-49) + Memória Contínua • Aprendido com o Analista (MEM-#42545)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Especificar em qual unidade (Sede Administrativa ou Hospital Unimed) o acesso facial do colaborador deve ser liberado\n  - Informar a relação de portas e setores que devem ter o acesso facial liberado nos terminais iDFace (Sede: Administração; Hospital: Centro Cirúrgico, UTIs, RX, Corredores)\n  - Informar se além do controle de acesso facial nas portas, o colaborador necessita de liberação em sistemas institucionais de T.I. (ex.: Sistema SGH Spdata, Prontu+ PEP, Rede/Windows, E-mail corporativo)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).\n  2. [PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.\n  3. [PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:\n  4.     • Sede Administrativa: terminal Administração (http://192.168.41.115);\n  5.     • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).\n  6. [PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas.",
-    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\n2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+    "public_reply_draft": "Olá, Carla! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "43589": {
+    "ticket_id": 43589,
+    "analyzed_at": "03/11/2026 11:23",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O solicitante **Frederico Roosevelt** (Faturamento) solicita a alteração do parâmetro de **prazo de cobrança do Intercâmbio Nacional sem taxa de custeio administrativo** no sistema **HRP Unimed**, reduzindo o prazo de **110 dias para 90 dias** (vigência a partir de **01/11/2026**), em conformidade com as diretrizes do **Manual de Intercâmbio Nacional (MIN / Unimed do Brasil)** divulgadas nos comunicados oficiais anexados. Todos os parâmetros e regras necessários constam informados com clareza no chamado.",
+    "detected_domain": "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas",
+    "suggested_category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Adequação das regras e prazos de cobrança do Intercâmbio Nacional (MIN / Unimed do Brasil) no ERP HRP Unimed para o setor de Faturamento.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-47",
+        "title": "Criação, Importação e Parametrização de Tabelas e Regras em Sistemas Corporativos (SGH Spdata / HRP / DTH / Simpro / Brasíndice / IPSM)",
+        "category": "Sistemas Internos / ERP / SGH Spdata / Parametrização de Sistemas e Tabelas",
+        "summary": "Solicitação dos setores de Faturamento (H Faturamento), Auditoria (H Auditoria) ou Cadastro para criação, importação, atualização de vigência, referenciamento ou parametrização de tabelas de faturamento/convênios (ex.: tabela de Diárias e Taxas Hospitalares DTH - PADRAO na faixa 998, tabelas do IPSM/Batalhão, Simpro, Brasíndice, TNUMM), ou adequação de regras operacionais e prazos de cobrança do Intercâmbio Nacional (MIN — Manual de Intercâmbio Nacional) nos sistemas SGH Spdata e ERP HRP Unimed.",
+        "steps": [
+          "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+          "[PB-UNI-47] Acessar o módulo de Tabelas / Faturamento de Convênios no sistema informado (ex.: SGH Spdata ou HRP Unimed).",
+          "[PB-UNI-47] Executar a criação, importação de vigência ou parametrização da tabela solicitada (ex.: criar tabela de diárias e taxas na faixa 998 como 'DTH - PADRAO' no SGH Spdata).",
+          "[PB-UNI-47] Validar se a faixa de código, descrição, vigência e vínculos com os convênios estão ativos e disponíveis para o setor solicitante.",
+          "[PB-UNI-47] Confirmar a conclusão da parametrização no chamado do GLPI."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-05",
+        "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
+        "steps": [
+          "Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+          "Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+        ],
+        "score": 0.47
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-47) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-05)",
+    "resolution_steps": [
+      "[PB-UNI-47] Manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).",
+      "[PB-UNI-47] Acessar o ERP HRP Unimed com perfil de parametrização de Faturamento e Intercâmbio Nacional.",
+      "[PB-UNI-47] Localizar as configurações de Prazos de Cobrança / PTU do Intercâmbio Nacional e identificar a regra 'Cobrança sem taxa de custeio administrativo'.",
+      "[PB-UNI-47] Atualizar o prazo limite de cobrança de 110 dias para 90 dias com vigência a partir de 01/11/2026, conforme aprovado no Manual de Intercâmbio Nacional (MIN).",
+      "[PB-UNI-47] Verificar adicionalmente os prazos correlatos previstos na mesma norma (Cobrança de recurso de glosa do prestador para 150 dias; Cobrança com taxa de custeio mantida em 70 dias) para certificar a consistência integral das regras.",
+      "[PB-UNI-47] Validar as novas regras no sistema e notificar o solicitante Frederico Roosevelt no chamado do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Frederico Roosevelt** (Faturamento) solicita a alteração do parâmetro de **prazo de cobrança do Intercâmbio Nacional sem taxa de custeio administrativo** no sistema **HRP Unimed**, reduzindo o prazo de **110 dias para 90 dias** (vigência a partir de **01/11/2026**), em conformidade com as diretrizes do **Manual de Intercâmbio Nacional (MIN / Unimed do Brasil)** divulgadas nos comunicados oficiais anexados. Todos os parâmetros e regras necessários constam informados com clareza no chamado.\n\nClassificação Sugerida: T.I > ST > Parametrização de Sistemas e Tabelas | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-47) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-05)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-47] Manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).\n  2. [PB-UNI-47] Acessar o ERP HRP Unimed com perfil de parametrização de Faturamento e Intercâmbio Nacional.\n  3. [PB-UNI-47] Localizar as configurações de Prazos de Cobrança / PTU do Intercâmbio Nacional e identificar a regra 'Cobrança sem taxa de custeio administrativo'.\n  4. [PB-UNI-47] Atualizar o prazo limite de cobrança de 110 dias para 90 dias com vigência a partir de 01/11/2026, conforme aprovado no Manual de Intercâmbio Nacional (MIN).\n  5. [PB-UNI-47] Verificar adicionalmente os prazos correlatos previstos na mesma norma (Cobrança de recurso de glosa do prestador para 150 dias; Cobrança com taxa de custeio mantida em 70 dias) para certificar a consistência integral das regras.\n  6. [PB-UNI-47] Validar as novas regras no sistema e notificar o solicitante Frederico Roosevelt no chamado do GLPI.",
+    "public_reply_draft": "Olá, Frederico! Tudo bem?\n\nRecebemos a sua solicitação referente à adequação dos parâmetros de **prazo de cobrança do Intercâmbio Nacional (MIN)** no sistema **HRP Unimed**.\n\nAs regras e os prazos informados já foram validados na triagem técnica:\n- **Cobrança sem taxa de custeio administrativo:** alteração de **110 dias para 90 dias** (com vigência a partir de 01/11/2026);\n- Validação dos prazos correlatos divulgados no comunicado oficial do MIN (Cobrança de recurso de glosa do prestador para 150 dias e cobrança com taxa de custeio mantida em 70 dias).\n\nNossa equipe técnica já iniciou a parametrização dessa regra no módulo de Faturamento / Intercâmbio do HRP Unimed. Assim que a alteração for concluída e estiver em vigor no sistema, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 2
+  },
+  "43594": {
+    "ticket_id": 43594,
+    "analyzed_at": "03/11/2026 10:18",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O solicitante, Diego Torres da Silva, está se referindo a uma adequação de acesso ao Next Cloud. Ele menciona que precisa compartilhar documentos com enfermeiros assistenciais e que esses enfermeiros alimentam planilhas para contabilização de indicadores. O solicitante afirma que Nayara, Silvana e Aline estão afastadas devido a gestação e que precisam de acesso ao Next Cloud.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Big Data e BI > Relatórios",
+    "real_urgency": "Baixa",
+    "urgency_reason": "A solicitação de acesso ao Next Cloud é urgente para garantir a continuidade da contabilização de indicadores e a segurança da informação.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42756",
+        "title": "Acesso e Permissões  -  Eliane Satie Koda liberação de acesso",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+          "[PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+          "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42726",
+        "title": "Acesso e Permissões  -  Dalete G. de O. Bartelochi",
+        "category": "T.I > ST > Dúvidas e Orientações",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a estrutura do formulário direcionado ao **Regulatório** no catálogo do **GLPI** e confirmamos que a opção para inserção de documentos **já se encontra disponível e ativa**!\n\nEla está localizada na **última seção do formulário** (basta rolar até o final da página de preenchimento para visualizar o campo de upload de arquivos/anexos).\n\nComo essa seção acabou ficando mais ao final do layout e pode passar desapercebida, já direcionamos uma sugestão de melhoria para a equipe de Desenvolvimento avaliar o reposicionamento do campo para um local de maior destaque visual, facilitando o acesso para todos os setores.\n\nVocê poderia fazer um teste acessando o formulário e rolando até a seção final? Se precisar de qualquer apoio, permanecemos à total disposição!",
+        "steps": [
+          "[PB-UNI-37] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
+          "[PB-UNI-37] Verificar a estrutura do formulário do setor Regulatório no catálogo do GLPI (plugin Formcreator).",
+          "[PB-UNI-37] Constatar que os campos de anexo/upload de documentos já se encontram ativos na última seção do formulário.",
+          "[PB-UNI-37] Orientar a solicitante Dalete sobre a localização exata do campo ao final da página de abertura.",
+          "[PB-UNI-37] Alinhar com a equipe de Desenvolvimento (Formcreator) a viabilidade de reposicionar a seção de anexos para maior destaque visual no layout.",
+          "[PB-UNI-37] Notificar a solicitante no chamado e solicitar a confirmação da localização do campo."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nVerificamos a estrutura do formulário direcionado ao **Regulatório** no catálogo do **GLPI** e confirmamos que a opção para inserção de documentos **já se encontra disponível e ativa**!\n\nEla está localizada na **última seção do formulário** (basta rolar até o final da página de preenchimento para visualizar o campo de upload de arquivos/anexos).\n\nComo essa seção acabou ficando mais ao final do layout e pode passar desapercebida, já direcionamos uma sugestão de melhoria para a equipe de Desenvolvimento avaliar o reposicionamento do campo para um local de maior destaque visual, facilitando o acesso para todos os setores.\n\nVocê poderia fazer um teste acessando o formulário e rolando até a seção final? Se precisar de qualquer apoio, permanecemos à total disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42983",
+        "title": "Erros de Sistema  -  As planilhas da pasta Educação Continuada estão se duplicando constantemente",
+        "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+        "steps": [
+          "[PB-UNI-42] Acessar a pasta compartilhada Educação Continuada no Nextcloud e inspecionar os arquivos duplicados.",
+          "[PB-UNI-42] Identificar as versões geradas com extensões concorrentes (.xlsx e .ods) resultantes de suítes de escritório distintas (Excel vs LibreOffice).",
+          "[PB-UNI-42] Identificar as versões de conflito de sincronização geradas pelo Nextcloud Client (sufixos '(1)' e '(2)') devido à abertura/edição simultânea pelos colaboradores.",
+          "[PB-UNI-42] Alinhar com a equipe do setor (Recursos Humanos) para consolidar as alterações mais recentes na planilha oficial e remover as cópias redundantes de conflito.",
+          "[PB-UNI-42] Orientar as boas práticas de uso: padronizar o salvamento sempre em .xlsx, evitar manter planilhas compartilhadas abertas simultaneamente ou utilizar a trava de bloqueio de arquivo (File Locking)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à duplicação de planilhas na pasta **Educação Continuada** no Nextcloud.\n\nAnalisamos o caso e a evidência anexada, e identificamos as duas razões para a ocorrência dessas cópias automáticas:\n1. **Salvamento em Extensões Diferentes (.xlsx e .ods):** Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.\n2. **Edição Concorrente / Abertura Simultânea:** Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).\n\nComo boas práticas para prevenir novos conflitos, recomendamos:\n- Padronizar o salvamento de todas as planilhas sempre no formato **.xlsx**;\n- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\nPermanecemos à total disposição!",
+        "required_info": [
+          "Salvamento em Extensões Diferentes (.xlsx e .ods): Quando colaboradores utilizam programas de escritório distintos (como o Microsoft Excel e o LibreOffice Calc), o sistema pode salvar o mesmo arquivo em formatos diferentes (um em *.xlsx* e outro em *.ods*). Como possuem o mesmo nome base, visualmente aparentam ser o mesmo documento duplicado.",
+          "Edição Concorrente / Abertura Simultânea: Quando duas ou mais pessoas abrem e alteram a mesma planilha ao mesmo tempo pelo atalho sincronizado em seus computadores, o aplicativo do Nextcloud gera cópias numeradas como *(1)* e *(2)* para evitar que o salvamento de um colega apague ou sobrescreva o trabalho do outro (conflito de sincronização).",
+          "Padronizar o salvamento de todas as planilhas sempre no formato .xlsx;",
+          "Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição."
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#43051",
+        "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Sara Pereira",
+        "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+        "summary": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-43] Analisar a relação de profissionais solicitadas: Sara Pereira (CPF: 13093890632), Fabiola Bueno (CPF: 104.786.956-08), Lohana Ferreira (CPF: 127.087.156-07), Glaucia Reis (CPF: 113.885.986-98).",
+          "[PB-UNI-43] Verificar no ERP HRP e no SGH Spdata se as profissionais já possuem cadastro prévio utilizando os CPFs fornecidos.",
+          "[PB-UNI-43] Aguardar o retorno da solicitante com os dados clínicos complementares (Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
+          "[PB-UNI-43] Efetuar o cadastro das usuárias no sistema SGH Spdata (módulo Prontuário / PEP Hospitalar) vinculando o conselho de classe e configurando as permissões assistenciais replicadas da referência.",
+          "[PB-UNI-43] Testar a ativação dos acessos e responder à solicitante no chamado do GLPI com as orientações de primeiro login."
+        ],
+        "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente ao cadastro das profissionais no **Prontuário do Hospital (sistema SGH Spdata / PEP Hospitalar)**: **Sara Pereira, Fabiola Bueno, Lohana Ferreira e Glaucia Reis**.\n\nPara que nossa equipe de T.I. possa realizar o cadastro no sistema SPdata com os devidos perfis assistenciais de evolução clínica, precisamos das seguintes informações complementares de cada uma delas:\n1. **Nome completo** e **Data de nascimento**;\n2. **Especialidade / Função** desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.);\n3. **Conselho Profissional e Número de Registro:** Informar qual o conselho (CRM, COREN, CREFITO, CRP, etc.) e o respectivo **número de registro com a UF**;\n4. **Profissional de referência** que já desempenhe a mesma função no hospital (para que possamos replicar exatamente o perfil de permissões no SPdata).\n\nAssim que nos enviar esses dados por aqui, daremos andamento imediato na liberação dos acessos!\n\nPermanecemos à disposição!",
+        "required_info": [
+          "Nome completo e Data de nascimento das profissionais para localização/cadastro no sistema SPdata",
+          "Especialidade ou função assistencial desempenhada no hospital (ex.: Fisioterapia, Terapia Ocupacional, Enfermagem, etc.)",
+          "Conselho Profissional e Número de Registro (órgão de classe com respectivo número e UF, ex.: CREFITO, CRP, COREN, CRM)",
+          "Profissional de referência no Hospital Unimed para espelhamento do perfil de permissões de evolução clínica no SPdata"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "Quando solicitarem cadastro ou acesso no prontuário do hospital para profissionais de saúde, identificar todos os profissionais na descrição, manter em Criação de Usuários e solicitar os dados clínicos para o SPdata (Nome completo, Data de nascimento, Especialidade, Conselho Profissional e Número de Registro com UF, e usuário de referência).",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42756) + Memória Contínua • Aprendido com o Analista (MEM-#42726)",
+    "resolution_steps": [
+      "[MEM-#42756] [PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.",
+      "[MEM-#42756] [PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).",
+      "[MEM-#42756] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+      "[MEM-#42726] [PB-UNI-37] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.",
+      "[MEM-#42726] [PB-UNI-37] Verificar a estrutura do formulário do setor Regulatório no catálogo do GLPI (plugin Formcreator).",
+      "[MEM-#42726] [PB-UNI-37] Constatar que os campos de anexo/upload de documentos já se encontram ativos na última seção do formulário."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante, Diego Torres da Silva, está se referindo a uma adequação de acesso ao Next Cloud. Ele menciona que precisa compartilhar documentos com enfermeiros assistenciais e que esses enfermeiros alimentam planilhas para contabilização de indicadores. O solicitante afirma que Nayara, Silvana e Aline estão afastadas devido a gestação e que precisam de acesso ao Next Cloud.\n\nClassificação Sugerida: T.I > BD > Big Data e BI > Relatórios | Prioridade Real: Baixa\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42756) + Memória Contínua • Aprendido com o Analista (MEM-#42726)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42756] [PB-UNI-12] Localizar o cadastro de Eliane Satie Koda (CPF: 22232786803) no sistema correspondente.\n  2. [MEM-#42756] [PB-UNI-12] Conceder e vincular as permissões do módulo de HRP Unimed para a unidade Unimed (setor Comercial).\n  3. [MEM-#42756] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.\n  4. [MEM-#42726] [PB-UNI-37] Confirmar ou reclassificar a categoria do chamado no GLPI para 'T.I > ST > Dúvidas e Orientações'.\n  5. [MEM-#42726] [PB-UNI-37] Verificar a estrutura do formulário do setor Regulatório no catálogo do GLPI (plugin Formcreator).\n  6. [MEM-#42726] [PB-UNI-37] Constatar que os campos de anexo/upload de documentos já se encontram ativos na última seção do formulário.",
+    "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },

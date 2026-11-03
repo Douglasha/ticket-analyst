@@ -291,7 +291,7 @@ export class KnowledgeEngine {
       !isXmlBatalhaoOrSghValueMismatch &&
       !isFormcreatorOrGlpiForm &&
       !isReopenOrRevertAccount &&
-      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?)\b/i.test(
+      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|regras?\s+do\s+min|manual\s+de\s+interc[aâ]mbio|prazo\s+de\s+cobranc?a)\b/i.test(
         normTicket
       ) ||
         (/\btabela\b/i.test(normTicket) &&
