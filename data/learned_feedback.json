@@ -1986,5 +1986,41 @@
     "sufficiency_status": "completo",
     "created_at": "2026-11-03T14:23:37.021Z",
     "updated_at": "2026-11-03T14:23:37.021Z"
+  },
+  {
+    "ticket_id": 43498,
+    "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Internet",
+    "category": "T.I > IR > Conectividade > Internet e WiFi",
+    "keywords": [
+      "internet",
+      "wifi",
+      "wi-fi",
+      "salas",
+      "medicos",
+      "médicos",
+      "clinica",
+      "nucleo passos",
+      "internet fixa",
+      "sinal de internet",
+      "reclamações de médicos"
+    ],
+    "problem_summary": "Precisamos de uma internet fixas para as salas, estou com muitas reclamações de médicos referente a internet",
+    "reply_template": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente à instabilidade da internet e às reclamações dos médicos nas salas de atendimento da **Clínica (Nucleo Passos)**.\n\nNossa equipe de Infraestrutura e Redes já está ciente e analisando a conectividade da unidade. Para que possamos direcionar os testes técnicos e planejar a melhoria no local exato, você poderia nos informar:\n1. **Quais são as salas ou consultórios médicos** (números ou identificação) onde o sinal está ruim ou ocorrendo quedas?\n2. Os computadores dos médicos estão conectados via **cabo de rede (RJ-45)** ou estão utilizando apenas a **rede sem fio (Wi-Fi)**?\n3. Nas salas afetadas, já existem **pontos de rede físicos (tomadas RJ-45) disponíveis na parede** para conectar os computadores por cabo?\n\nAssim que nos confirmar esses detalhes por aqui, daremos andamento imediato no diagnóstico e no envio de um técnico para vistoria presencial nas salas!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável",
+      "Informar se os computadores dos médicos estão conectados via cabo de rede (RJ-45) ou utilizando exclusivamente a rede Wi-Fi",
+      "Informar se nas salas reclamadas já existem pontos de rede físicos disponíveis na parede para ligação cabeada das estações"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.",
+      "[PB-UNI-21] Aguardar retorno da solicitante Viviane Souza (Nucleo Passos) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se utilizam cabo ou Wi-Fi.",
+      "[PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.",
+      "[PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.",
+      "[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes com testador de cabos e medidor de sinal Wi-Fi para vistoria in loco nas salas apontadas e cabeamento ou reforço de AP se necessário.",
+      "[PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-06T13:12:41.538Z",
+    "updated_at": "2026-11-06T13:12:41.545Z"
   }
 ]

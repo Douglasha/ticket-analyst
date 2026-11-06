@@ -690,12 +690,21 @@
       "sinal wifi",
       "access point",
       "ap wifi",
-      "internet lenta"
+      "internet lenta",
+      "internet fixas para as salas",
+      "internet para as salas",
+      "internet nas salas",
+      "reclamações de médicos referente a internet",
+      "reclamações de médicos",
+      "internet nos consultórios",
+      "internet nos consultorios",
+      "sinal de internet nas salas"
     ],
-    "symptoms": "Setor relata lentidão, oscilação ou quedas na conexão de internet (especialmente em ligações do WhatsApp ou estações móveis) e solicita a instalação de roteador ou Access Point Wi-Fi adicional.",
+    "symptoms": "Setor ou clínica relata lentidão, oscilação ou quedas na conexão de internet/Wi-Fi (em chamadas de WhatsApp ou em consultórios/salas de atendimento com reclamações de médicos/profissionais) e solicita reforço de sinal Wi-Fi, roteador ou pontos de internet fixa para as salas.",
     "required_info": [
-      "Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede",
-      "Confirmar se a falha nas ligações do WhatsApp afeta aparelhos específicos ou todos os celulares utilizados no setor"
+      "Identificação das salas ou consultórios médicos específicos onde o sinal está ruim ou ocorrendo quedas",
+      "Confirmar se os computadores utilizam cabo de rede (RJ-45) ou sinal Wi-Fi",
+      "Confirmar se nas salas existem pontos de rede físicos disponíveis na parede"
     ],
     "resolution_steps": [
       "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",

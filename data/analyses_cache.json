@@ -10558,6 +10558,53 @@
       "analyzed_images_count": 0
     }
   },
+  "43498": {
+    "ticket_id": 43498,
+    "analyzed_at": "06/11/2026 10:12",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Viviane Souza** (Nucleo Passos) relata constantes reclamações de médicos referente à qualidade e instabilidade da internet e sinal Wi-Fi nas salas de atendimento da Clínica (Núcleo Passos), solicitando internet fixa para as salas. O chamado foi classificado como **PARCIAL** pois não especifica em quais salas ou consultórios médicos o sinal está ruim, nem se os computadores utilizam cabo de rede ou apenas conexão sem fio.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Conectividade > Internet e WiFi",
+    "real_urgency": "Baixa",
+    "urgency_reason": "Reclamação de instabilidade e falta de internet fixa nas salas de atendimento e consultórios médicos da Clínica (Nucleo Passos).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável",
+      "Informar se os computadores dos médicos estão conectados via cabo de rede (RJ-45) ou utilizando exclusivamente a rede Wi-Fi",
+      "Informar se nas salas reclamadas já existem pontos de rede físicos disponíveis na parede para ligação cabeada das estações"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-21",
+        "title": "Instabilidade de Internet / Solicitação de Instalação de Roteador ou Access Point Wi-Fi",
+        "category": "Infraestrutura e Rede",
+        "summary": "Setor ou clínica relata lentidão, oscilação ou quedas na conexão de internet/Wi-Fi (em chamadas de WhatsApp ou em consultórios/salas de atendimento com reclamações de médicos/profissionais) e solicita reforço de sinal Wi-Fi, roteador ou pontos de internet fixa para as salas.",
+        "steps": [
+          "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+          "Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+          "Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
+          "Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
+          "Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+        ],
+        "score": 0.98
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-21)",
+    "resolution_steps": [
+      "[PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.",
+      "[PB-UNI-21] Aguardar retorno da solicitante Viviane Souza (Nucleo Passos) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se utilizam cabo ou Wi-Fi.",
+      "[PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.",
+      "[PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.",
+      "[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes com testador de cabos e medidor de sinal Wi-Fi para vistoria in loco nas salas apontadas e cabeamento ou reforço de AP se necessário.",
+      "[PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Viviane Souza** (Nucleo Passos) relata constantes reclamações de médicos referente à qualidade e instabilidade da internet e sinal Wi-Fi nas salas de atendimento da Clínica (Núcleo Passos), solicitando internet fixa para as salas. O chamado foi classificado como **PARCIAL** pois não especifica em quais salas ou consultórios médicos o sinal está ruim, nem se os computadores utilizam cabo de rede ou apenas conexão sem fio.\n\nClassificação Sugerida: T.I > IR > Conectividade > Internet e WiFi | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-21)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável\n  - Informar se os computadores dos médicos estão conectados via cabo de rede (RJ-45) ou utilizando exclusivamente a rede Wi-Fi\n  - Informar se nas salas reclamadas já existem pontos de rede físicos disponíveis na parede para ligação cabeada das estações\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.\n  2. [PB-UNI-21] Aguardar retorno da solicitante Viviane Souza (Nucleo Passos) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se utilizam cabo ou Wi-Fi.\n  3. [PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.\n  4. [PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.\n  5. [PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes com testador de cabos e medidor de sinal Wi-Fi para vistoria in loco nas salas apontadas e cabeamento ou reforço de AP se necessário.\n  6. [PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI.",
+    "public_reply_draft": "Olá, Viviane! Tudo bem?\n\nRecebemos a sua solicitação referente à instabilidade da internet e às reclamações dos médicos nas salas de atendimento da **Clínica (Nucleo Passos)**.\n\nNossa equipe de Infraestrutura e Redes já está ciente e analisando a conectividade da unidade. Para que possamos direcionar os testes técnicos e planejar a melhoria no local exato, você poderia nos informar:\n1. **Quais são as salas ou consultórios médicos** (números ou identificação) onde o sinal está ruim ou ocorrendo quedas?\n2. Os computadores dos médicos estão conectados via **cabo de rede (RJ-45)** ou estão utilizando apenas a **rede sem fio (Wi-Fi)**?\n3. Nas salas afetadas, já existem **pontos de rede físicos (tomadas RJ-45) disponíveis na parede** para conectar os computadores por cabo?\n\nAssim que nos confirmar esses detalhes por aqui, daremos andamento imediato no diagnóstico e no envio de um técnico para vistoria presencial nas salas!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43507": {
     "ticket_id": 43507,
     "analyzed_at": "30/10/2026 15:01",
@@ -11038,6 +11085,405 @@
     "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **HRP Unimed** para o setor **Comercial** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": true,
     "analyzed_images_count": 1
+  },
+  "43740": {
+    "ticket_id": 43740,
+    "analyzed_at": "05/11/2026 13:52",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Elaine Cristina Silva Floresta, do setor GED, relatou um problema técnico onde ele está tendo dificuldade em salvar as imagens scaneadas em um computador do jovem aprendiz Eduardo. O problema está relacionado ao sistema de scaneamento de imagens. A equipe de TI está sendo solicitada para investigar e resolver este problema.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Resolução de Problemas",
+    "real_urgency": "Alta",
+    "urgency_reason": "O problema afeta a eficiência operacional do setor de GED.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk do computador para acesso remoto",
+      "Print da tela ou mensagem exata do erro enfrentado"
+    ],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Elaine Cristina Silva Floresta, do setor GED, relatou um problema técnico onde ele está tendo dificuldade em salvar as imagens scaneadas em um computador do jovem aprendiz Eduardo. O problema está relacionado ao sistema de scaneamento de imagens. A equipe de TI está sendo solicitada para investigar e resolver este problema.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador para acesso remoto\n  - Print da tela ou mensagem exata do erro enfrentado\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Elaine! Tudo bem?\n\nJá estamos analisando o seu chamado #43740 (**Erro ao salvar as imagens scaneadas**). Para avançarmos com a solução o mais rápido possível, você poderia nos confirmar as seguintes informações?\n\n- ID do HopToDesk do computador para acesso remoto\n- Print da tela ou mensagem exata do erro enfrentado\n\nAssim que nos responder aqui no chamado, daremos sequência imediata!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43743": {
+    "ticket_id": 43743,
+    "analyzed_at": "05/11/2026 14:18",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante, Christian Dominiquini Deleposte, do setor de Contabilidade, relatou que o processo de RATEIO GRUPO 46, atualmente realizado de forma manual, precisa ser analisado para a implementação de uma automatização. O objetivo é tornar o processo mais rápido e seguro. O chamado foi completado, e a equipe de TI já está trabalhando nessa solicitação.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "real_urgency": "Muito baixa",
+    "urgency_reason": "Impacto operacional: Atraso no processo de RATEIO GRUPO 46 pode causar atrasos na contabilidade e interrupções no fluxo de trabalho.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43324 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > CONFERÊNCIA PATRIMONIAL - ADMISSÃO E DESLIGAMENTO",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\n\r\nPara otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a reali",
+        "steps": [
+          "Prezados(as),",
+          "Para otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a realização da conferência patrimonial, atualização dos responsáveis pelos bens e tratamento de eventuais pendências.",
+          "Com isso, a comunicação entre os setores passa a ocorrer de forma padronizada e rastreável, garantindo maior controle sobre os ativos vinculados aos colaboradores.",
+          "Permanecemos à disposição para eventuais ajustes ou esclarecimentos.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43206 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > Cadastro de solicitação de teste rápido",
+        "category": "T.I • Solucionado por lpiantino",
+        "summary": "Chamado não compete ao setor, foi orientado a procurar o Faturamento e o Laboratório.",
+        "steps": [
+          "Chamado não compete ao setor, foi orientado a procurar o Faturamento e o Laboratório."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42272 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Novas aplicações > DATA DE ALTA",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia, implementação concluída.\n\n\r\nData da alta\n\n\r\nReferente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.\n\n\r\nAtualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da",
+        "steps": [
+          "Bom dia, implementação concluída.",
+          "Data da alta",
+          "Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.",
+          "Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada.",
+          "Vale ressaltar que a funcionalidade verifica previamente as contas que já estão cadastradas no Controle de Contas. Dessa forma, somente as contas que ainda não possuem cadastro serão incluídas automaticamente, evitando registros duplicados.",
+          "Em relação às contas de atendimento externo, não haverá impacto nesse processo, pois elas já são criadas no SPDATA com a data de entrada e a data de alta no mesmo dia. Sendo assim, essas contas estarão aptas para serem identificadas normalmente pelo processamento automático, sem risco de ficarem pendentes por ausência da informação de alta."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #43324 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43206 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #43324 (Resolvido)] Para otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a realização da conferência patrimonial, atualização dos responsáveis pelos bens e tratamento de eventuais pendências.",
+      "[Chamado #43324 (Resolvido)] Com isso, a comunicação entre os setores passa a ocorrer de forma padronizada e rastreável, garantindo maior controle sobre os ativos vinculados aos colaboradores.",
+      "[Chamado #43324 (Resolvido)] Permanecemos à disposição para eventuais ajustes ou esclarecimentos.",
+      "[Chamado #43206 (Resolvido)] Chamado não compete ao setor, foi orientado a procurar o Faturamento e o Laboratório.",
+      "[Chamado #42272 (Resolvido)] Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.",
+      "[Chamado #42272 (Resolvido)] Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante, Christian Dominiquini Deleposte, do setor de Contabilidade, relatou que o processo de RATEIO GRUPO 46, atualmente realizado de forma manual, precisa ser analisado para a implementação de uma automatização. O objetivo é tornar o processo mais rápido e seguro. O chamado foi completado, e a equipe de TI já está trabalhando nessa solicitação.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Novas aplicações | Prioridade Real: Muito baixa\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43324 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43206 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #43324 (Resolvido)] Para otimizar o processo e manter o fluxo já existente entre RH e TI para admissões e desligamentos, foi implementada uma automatização no GLPI. Dessa forma, sempre que o RH registrar uma solicitação de novo colaborador ou desligamento de colaborador, será gerado automaticamente um chamado para a Contabilidade, permitindo a realização da conferência patrimonial, atualização dos responsáveis pelos bens e tratamento de eventuais pendências.\n  2. [Chamado #43324 (Resolvido)] Com isso, a comunicação entre os setores passa a ocorrer de forma padronizada e rastreável, garantindo maior controle sobre os ativos vinculados aos colaboradores.\n  3. [Chamado #43324 (Resolvido)] Permanecemos à disposição para eventuais ajustes ou esclarecimentos.\n  4. [Chamado #43206 (Resolvido)] Chamado não compete ao setor, foi orientado a procurar o Faturamento e o Laboratório.\n  5. [Chamado #42272 (Resolvido)] Referente ao encaminhamento automático, a partir de agora serão encaminhadas somente as contas que já possuírem alta.\n  6. [Chamado #42272 (Resolvido)] Atualmente, o agendamento está configurado para ser executado diariamente às 00:00h. Nesse horário, o sistema realizará uma busca pelas contas que tiveram alta até o momento da execução, considerando também um período retroativo de 30 dias. Essa margem foi definida para reduzir o risco de alguma conta deixar de ser processada.",
+    "public_reply_draft": "Olá, Christian! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **AUTOMATIZAÇÃO RATEIO GRUPO 46**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43748": {
+    "ticket_id": 43748,
+    "analyzed_at": "05/11/2026 16:19",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O usuário Elaine Cristina Silva Floresta, do setor GED, relatou que está com problemas com o arqclient. Ela solicitou que o software seja desinstalado e reinstalado para resolver um erro no arqged. A equipe de TI está aguardando mais informações, incluindo a ID do HopToDesk do computador para acesso remoto e uma tela ou mensagem exata do erro enfrentado.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Média",
+    "urgency_reason": "Ocorreram problemas técnicos que podem afetar o funcionamento do sistema de TI.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk do computador para acesso remoto",
+      "Print da tela ou mensagem exata do erro enfrentado"
+    ],
+    "knowledge_matches": [],
+    "primary_knowledge_source": "3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO usuário Elaine Cristina Silva Floresta, do setor GED, relatou que está com problemas com o arqclient. Ela solicitou que o software seja desinstalado e reinstalado para resolver um erro no arqged. A equipe de TI está aguardando mais informações, incluindo a ID do HopToDesk do computador para acesso remoto e uma tela ou mensagem exata do erro enfrentado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Média\nBase Consultada: 3ª Camada • Conhecimento Técnico de TI (Sem artigo prévio na KB do GLPI)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador para acesso remoto\n  - Print da tela ou mensagem exata do erro enfrentado\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Elaine! Tudo bem?\n\nJá estamos analisando o seu chamado #43748 (**Arqclient**). Para avançarmos com a solução o mais rápido possível, você poderia nos confirmar as seguintes informações?\n\n- ID do HopToDesk do computador para acesso remoto\n- Print da tela ou mensagem exata do erro enfrentado\n\nAssim que nos responder aqui no chamado, daremos sequência imediata!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43755": {
+    "ticket_id": 43755,
+    "analyzed_at": "05/11/2026 16:05",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Lucelia Fernanda** (Recursos Humanos) solicita liberação de acesso ao módulo de **PEP (Colaboradores do Núcleo)** para o setor **Núcleo Passos**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#43569",
+        "title": "Gestão de Acessos  -  Gustavo Barbosa Carvalho",
+        "category": "T.I > SI > Gestão de Acessos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).",
+          "[PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.",
+          "[PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:",
+          "    • Sede Administrativa: terminal Administração (http://192.168.41.115);",
+          "    • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).",
+          "[PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **Gustavo Barbosa Carvalho** (CPF: 127.720.136-69).\n\nIdentificamos que foi enviada em anexo a fotografia do colaborador, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais Control iD / iDFace)**.\n\nPara que nossa equipe de T.I. possa realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!",
+        "required_info": [
+          "Unidade e Portas / Setores de Acesso: Em qual unidade e em quais portas o colaborador precisará de acesso? Nossos terminais biométricos estão distribuídos da seguinte forma:",
+          "Sede Administrativa:",
+          "Administração",
+          "Hospital Unimed:",
+          "Corredor Principal (Entrada / Saída)",
+          "Corredor Elevador (Entrada / Saída)",
+          "Centro Cirúrgico (Corredor / Porta Interna)",
+          "UTI Adulto",
+          "UTI Neonatal (Rampa / Farmácia)",
+          "Raio-X (RX Interno / RX Externo)"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42310",
+        "title": "Sistemas Operacionais  -  Alteração agenda PEP Ângela Tayná e Jéssica Lima",
+        "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42650",
+        "title": "Sistemas Operacionais  -  Agenda no pep",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **das nutricionista Mara e Fabíola** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **das nutricionista Mara e Fabíola** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42778",
+        "title": "Aplicativos  -  Criar agenda PEP - Dra Bianca Félix nao",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nPara o HRP, qual o código de prestador dela\n\nAssim que nos informar por aqui, já executamos a alteração!",
+        "steps": [
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nPara o HRP, qual o código de prestador dela\n\nAssim que nos informar por aqui, já executamos a alteração!",
+        "required_info": [
+          "Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#43569) + Memória Contínua • Aprendido com o Analista (MEM-#42310)",
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Gustavo Barbosa Carvalho (CPF: 12772013669) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de PEP (Colaboradores do Núcleo) para a unidade Núcleo Passos (setor Núcleo Passos).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Lucelia Fernanda** (Recursos Humanos) solicita liberação de acesso ao módulo de **PEP (Colaboradores do Núcleo)** para o setor **Núcleo Passos**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#43569) + Memória Contínua • Aprendido com o Analista (MEM-#42310)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Localizar o cadastro de Gustavo Barbosa Carvalho (CPF: 12772013669) no sistema correspondente.\n  2. [PB-UNI-12] Conceder e vincular as permissões do módulo de PEP (Colaboradores do Núcleo) para a unidade Núcleo Passos (setor Núcleo Passos).\n  3. [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **PEP (Colaboradores do Núcleo)** para o setor **Núcleo Passos** (Núcleo Passos).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43757": {
+    "ticket_id": 43757,
+    "analyzed_at": "05/11/2026 15:52",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Lucelia Fernanda** (Recursos Humanos) solicita liberação de acesso ao módulo de **PEP (Colaboradores do Núcleo)** para o setor **Clinica**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Muito alta",
+    "urgency_reason": "Solicitação de concessão/cadastro de acessos e permissões.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42650",
+        "title": "Sistemas Operacionais  -  Agenda no pep",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **das nutricionista Mara e Fabíola** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **das nutricionista Mara e Fabíola** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42778",
+        "title": "Aplicativos  -  Criar agenda PEP - Dra Bianca Félix nao",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nPara o HRP, qual o código de prestador dela\n\nAssim que nos informar por aqui, já executamos a alteração!",
+        "steps": [
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42650] [MEM-#42310] [MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42650] [MEM-#42310] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nPara o HRP, qual o código de prestador dela\n\nAssim que nos informar por aqui, já executamos a alteração!",
+        "required_info": [
+          "Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42310",
+        "title": "Sistemas Operacionais  -  Alteração agenda PEP Ângela Tayná e Jéssica Lima",
+        "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[MEM-#42034] [PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[MEM-#42034] [PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[MEM-#42034] [PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[MEM-#42034] [PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado.",
+          "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema Prontu+ (PEP do Núcleo / Consultórios) e localizar o cadastro do(a) profissional informado(a) no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração nas agendas das colaboradoras **Ângela Tayná e Jéssica Lima** no sistema **Prontu+ (PEP do Núcleo)**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração das agendas no sistema.\n\nAssim que a alteração estiver concluída e disponível no Prontu+ (PEP do Núcleo), confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42034",
+        "title": "Sistemas Operacionais  -  Alteração agenda Jéssica Lima",
+        "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!",
+        "steps": [
+          "[PB-UNI-18] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Instalação/Configuração > Aplicativos' (ou 'T.I > ST > Solicitação Diversa') caso tenha sido aberto em 'Sistemas Operacionais'.",
+          "[PB-UNI-18] Acessar o módulo de Gestão de Agendas / Cadastros no sistema PEP (SGH) e localizar o cadastro do(a) profissional informado(a) no chamado.",
+          "[PB-UNI-18] Parametrizar a grade de horários conforme solicitado (dias de atendimento, horário inicial e final, tempo de duração da consulta/sessão e intervalo entre atendimentos), verificando se não há pacientes já agendados conflitando no período.",
+          "[PB-UNI-18] Salvar a nova configuração de agenda no PEP e confirmar a conclusão ao(à) solicitante no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração na agenda da fisioterapeuta **Jéssica Lima Costa** no sistema **PEP**.\n\nTodos os parâmetros informados (faixa de horário, tempo de atendimento e intervalo) já foram validados e nossa equipe técnica está realizando a configuração da agenda no sistema.\n\nAssim que a alteração estiver concluída e disponível no PEP, confirmaremos por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42650) + Memória Contínua • Aprendido com o Analista (MEM-#42778)",
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Geovana Silva Marques (CPF: 07120043609) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de PEP (Colaboradores do Núcleo) para a unidade Núcleo Passos (setor Clinica).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Lucelia Fernanda** (Recursos Humanos) solicita liberação de acesso ao módulo de **PEP (Colaboradores do Núcleo)** para o setor **Clinica**. Todos os dados cadastrais (Nome e CPF) e a especificação do sistema foram devidamente informados no chamado.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Muito alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42650) + Memória Contínua • Aprendido com o Analista (MEM-#42778)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-12] Localizar o cadastro de Geovana Silva Marques (CPF: 07120043609) no sistema correspondente.\n  2. [PB-UNI-12] Conceder e vincular as permissões do módulo de PEP (Colaboradores do Núcleo) para a unidade Núcleo Passos (setor Clinica).\n  3. [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+    "public_reply_draft": "Olá, Lucelia! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **PEP (Colaboradores do Núcleo)** para o setor **Clinica** (Núcleo Passos).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43785": {
+    "ticket_id": 43785,
+    "analyzed_at": "06/11/2026 10:00",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A colaboradora Mayra Morais relatou que, ao enviar uma mensagem no intranet da Unimed, a mensagem é enviada para a última pessoa com quem ela conversou. Ela solicitou ajuda para entender por que isso está acontecendo. A equipe de TI está sendo solicitada para investigar e resolver este problema. Além disso, ela mencionou que a mensagem de erro ou restrição de perfil não está aparecendo na tela, e ela solicitou que sejam incluídas essas informações no chamado.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > DV > Desenvolvimento > Correção de bugs",
+    "real_urgency": "Baixa",
+    "urgency_reason": "A colaboradora está enfrentando problemas de comunicação interna, o que pode causar atrasos e erros operacionais.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet",
+      "Informar se é exibida mensagem de erro/restrição de perfil ou se as opções simplesmente não constam no menu (se possível, anexar print da tela)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-22",
+        "title": "Permissão e Visualização de Conteúdos/Módulos na Intranet Corporativa",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Colaborador(a) possui acesso liberado à Intranet, porém não consegue visualizar determinadas informações, páginas, documentos ou menus específicos dentro da ferramenta, frequentemente sem especificar quais módulos estão faltando.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).",
+          "Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.",
+          "Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.",
+          "Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.",
+          "Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos."
+        ],
+        "score": 0.42
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-22)",
+    "resolution_steps": [
+      "[PB-UNI-22] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).",
+      "[PB-UNI-22] Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.",
+      "[PB-UNI-22] Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.",
+      "[PB-UNI-22] Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.",
+      "[PB-UNI-22] Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA colaboradora Mayra Morais relatou que, ao enviar uma mensagem no intranet da Unimed, a mensagem é enviada para a última pessoa com quem ela conversou. Ela solicitou ajuda para entender por que isso está acontecendo. A equipe de TI está sendo solicitada para investigar e resolver este problema. Além disso, ela mencionou que a mensagem de erro ou restrição de perfil não está aparecendo na tela, e ela solicitou que sejam incluídas essas informações no chamado.\n\nClassificação Sugerida: T.I > DV > Desenvolvimento > Correção de bugs | Prioridade Real: Baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-22)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Informar quais informações, páginas, documentos ou módulos específicos a colaboradora precisa visualizar e não estão aparecendo na Intranet\n  - Informar se é exibida mensagem de erro/restrição de perfil ou se as opções simplesmente não constam no menu (se possível, anexar print da tela)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-22] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões' (usuário já criado; trata-se de permissão de visualização de conteúdo).\n  2. [PB-UNI-22] Localizar o usuário da colaboradora no painel administrativo / gerenciador de usuários e perfis da Intranet.\n  3. [PB-UNI-22] Verificar as permissões do grupo/setor da colaboradora e checar se o perfil possui acesso de leitura aos módulos solicitados.\n  4. [PB-UNI-22] Vincular o usuário ao grupo de permissões adequado na Intranet ou liberar a visualização das páginas solicitadas.\n  5. [PB-UNI-22] Orientar a colaboradora a reiniciar a sessão no navegador (logout e login) para validar a exibição dos módulos.",
+    "public_reply_draft": "Olá, Mayra! Tudo bem?\n\nRecebemos a sua solicitação referente ao acesso da colaboradora **colaborador(a)** na **Intranet**.\n\nComo o acesso básico já foi liberado, para que possamos ajustar o perfil e liberar a visualização correta, você poderia nos informar:\n1. **Quais informações, páginas ou módulos específicos** ela precisa visualizar que não estão aparecendo?\n2. É exibida alguma **mensagem de erro ou restrição de perfil**, ou as opções simplesmente não constam na tela?\n3. Se possível, você poderia anexar aqui um **print da tela** de como a Intranet está sendo exibida para ela?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com o ajuste das permissões imediatamente!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
   },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",

@@ -2099,31 +2099,80 @@ export class AIAnalyst {
     } else if (
       /\b(roteador|access point|ap wifi)\b/i.test(normAll) ||
       (/\b(wifi|wi-fi|internet)\b/i.test(normAll) &&
-        /\b(lentid[aã]o|oscila[cç][aã]o|instabilidade|quedas?|whatsapp)\b/i.test(
+        /\b(lentid[aã]o|oscila[cç][aã]o|instabilidade|quedas?|whatsapp|fixa|salas?|m[ée]dicos?|reclama[cç][õo]es|sinal|ruim|fraco)\b/i.test(
           normAll
         ))
     ) {
       detectedDomain = "Infraestrutura e Rede";
       suggestedCategory = "T.I > IR > Conectividade > Internet e WiFi";
       realUrgency = ticket.urgency_label && ticket.urgency_label !== "Muito baixa" ? ticket.urgency_label : "Média";
-      urgencyReason = `Instabilidade e oscilação na conexão de internet afetando a rotina e chamadas de WhatsApp do setor ${sectorName}.`;
 
-      translatedIntent =
-        `A solicitante **${ticket.requester}** (${sectorName}) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. ` +
-        `Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.`;
+      const isRoomsOrMedicalStaff =
+        /\b(salas?|consult[oó]rios?|m[ée]dicos?|clinica|n[uú]cleo)\b/i.test(normAll) &&
+        /\b(internet|wifi|wi-fi|sinal)\b/i.test(normAll);
 
-      sufficiencyStatus = "parcial";
-      missingInfo = [
-        `Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (${sectorName})`,
-        "Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor",
-      ];
-      customPublicReply =
-        `Olá, ${firstName}! Tudo bem?\n\n` +
-        `Recebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **${sectorName}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\n` +
-        `Nossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n` +
-        `1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n` +
-        `2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\n` +
-        `Assim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!`;
+      if (isRoomsOrMedicalStaff) {
+        urgencyReason = `Reclamação de instabilidade e falta de internet fixa nas salas de atendimento e consultórios médicos da Clínica (${sectorName}).`;
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) relata constantes reclamações de médicos referente à qualidade e instabilidade da internet e sinal Wi-Fi nas salas de atendimento da Clínica (Núcleo Passos), solicitando internet fixa para as salas. ` +
+          `O chamado foi classificado como **PARCIAL** pois não especifica em quais salas ou consultórios médicos o sinal está ruim, nem se os computadores utilizam cabo de rede ou apenas conexão sem fio.`;
+
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          "Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável",
+          "Informar se os computadores dos médicos estão conectados via cabo de rede (RJ-45) ou utilizando exclusivamente a rede Wi-Fi",
+          "Informar se nas salas reclamadas já existem pontos de rede físicos disponíveis na parede para ligação cabeada das estações",
+        ];
+
+        customResolutionSteps = [
+          `[PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.`,
+          `[PB-UNI-21] Aguardar retorno da solicitante ${ticket.requester} (${sectorName}) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se utilizam cabo ou Wi-Fi.`,
+          `[PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.`,
+          `[PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.`,
+          `[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes com testador de cabos e medidor de sinal Wi-Fi para vistoria in loco nas salas apontadas e cabeamento ou reforço de AP se necessário.`,
+          `[PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à instabilidade da internet e às reclamações dos médicos nas salas de atendimento da **Clínica (${sectorName})**.\n\n` +
+          `Nossa equipe de Infraestrutura e Redes já está ciente e analisando a conectividade da unidade. Para que possamos direcionar os testes técnicos e planejar a melhoria no local exato, você poderia nos informar:\n` +
+          `1. **Quais são as salas ou consultórios médicos** (números ou identificação) onde o sinal está ruim ou ocorrendo quedas?\n` +
+          `2. Os computadores dos médicos estão conectados via **cabo de rede (RJ-45)** ou estão utilizando apenas a **rede sem fio (Wi-Fi)**?\n` +
+          `3. Nas salas afetadas, já existem **pontos de rede físicos (tomadas RJ-45) disponíveis na parede** para conectar os computadores por cabo?\n\n` +
+          `Assim que nos confirmar esses detalhes por aqui, daremos andamento imediato no diagnóstico e no envio de um técnico para vistoria presencial nas salas!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        urgencyReason = `Instabilidade e oscilação na conexão de internet afetando a rotina e chamadas de WhatsApp do setor ${sectorName}.`;
+
+        translatedIntent =
+          `A solicitante **${ticket.requester}** (${sectorName}) relata lentidão e oscilação na conexão de internet do setor (com impacto principalmente em ligações do WhatsApp) e solicita a instalação de um roteador Wi-Fi. ` +
+          `Demanda vistoria presencial e testes de cobertura/estabilidade de sinal de rede sem fio pela equipe de Infraestrutura e Redes.`;
+
+        sufficiencyStatus = "parcial";
+        missingInfo = [
+          `Confirmar se a lentidão e oscilação ocorrem apenas no sinal Wi-Fi (celulares e notebooks) ou também nos computadores conectados via cabo de rede no setor (${sectorName})`,
+          "Confirmar se as falhas nas ligações do WhatsApp afetam aparelhos específicos ou todos os celulares utilizados no setor",
+        ];
+
+        customResolutionSteps = [
+          `[PB-UNI-21] Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (${sectorName}).`,
+          `[PB-UNI-21] Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.`,
+          `[PB-UNI-21] Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.`,
+          `[PB-UNI-21] Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.`,
+          `[PB-UNI-21] Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **${sectorName}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\n` +
+          `Nossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n` +
+          `1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n` +
+          `2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\n` +
+          `Assim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!\n\n` +
+          `Permanecemos à disposição!`;
+      }
     } else if (
       (normAll.includes("wifi") || normAll.includes("wi fi")) &&
       (normAll.includes("celular") || normAll.includes("aparelho") || normAll.includes("telefone"))

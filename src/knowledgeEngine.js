@@ -895,6 +895,12 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.96);
         }
+        if (
+          pb.id === "PB-UNI-21" &&
+          /\b(internet|wifi|wi-fi|roteador|access point|sinal|salas?|m[ée]dicos?)\b/i.test(normTicket)
+        ) {
+          score = Math.max(score, 0.98);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -961,6 +967,14 @@ export class KnowledgeEngine {
     for (const hist of resolvedTickets) {
       // Nunca pareia o próprio chamado consigo mesmo no histórico
       if (String(hist.id || "").includes(String(ticket.id))) {
+        continue;
+      }
+      if (
+        /\b(internet|wi-?fi|wifi|sinal|roteador|access point)\b/i.test(normTicket) &&
+        /\b(desenvolvimento|layout|interface|painel acompanhamento|banner|confer[eê]ncia patrimonial|adequa[cç][aã]o painel)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
         continue;
       }
       const score = computeRelevance(
@@ -1228,6 +1242,15 @@ export class KnowledgeEngine {
         if (
           isLabelAppOrDesktopShortcut &&
           !/\b(aplicativo|app|software|atalho|[aá]rea de trabalho|desktop)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Desenvolvimento/Oncologia/Agenda quando o chamado trata de Internet/Wi-Fi/Redes
+        if (
+          /\b(internet|wi-?fi|wifi|sinal|roteador|access point)\b/i.test(normTicket) &&
+          /\b(oncologia|agenda|duracao|tempo minimo|medica[çc][aã]o|subcutanea|desenvolvimento|layout|interface)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
