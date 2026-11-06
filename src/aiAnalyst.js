@@ -2121,27 +2121,25 @@ export class AIAnalyst {
         sufficiencyStatus = "parcial";
         missingInfo = [
           "Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável",
-          "Informar se os computadores dos médicos estão conectados via cabo de rede (RJ-45) ou utilizando exclusivamente a rede Wi-Fi",
-          "Informar se nas salas reclamadas já existem pontos de rede físicos disponíveis na parede para ligação cabeada das estações",
+          "Informar se as quedas e lentidão afetam os computadores das salas ou principalmente dispositivos móveis (notebooks/celulares)",
         ];
 
         customResolutionSteps = [
           `[PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.`,
-          `[PB-UNI-21] Aguardar retorno da solicitante ${ticket.requester} (${sectorName}) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se utilizam cabo ou Wi-Fi.`,
+          `[PB-UNI-21] Aguardar retorno da solicitante ${ticket.requester} (${sectorName}) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se o impacto é nos computadores ou aparelhos móveis.`,
           `[PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.`,
           `[PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.`,
-          `[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes com testador de cabos e medidor de sinal Wi-Fi para vistoria in loco nas salas apontadas e cabeamento ou reforço de AP se necessário.`,
+          `[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes para vistoriar in loco as salas apontadas, inspecionar a presença e integridade das tomadas de rede RJ-45 na parede, testar o cabeamento e medir a cobertura de sinal Wi-Fi, providenciando conexão cabeada fixa ou reforço de AP se necessário.`,
           `[PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI.`
         ];
 
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
           `Recebemos a sua solicitação referente à instabilidade da internet e às reclamações dos médicos nas salas de atendimento da **Clínica (${sectorName})**.\n\n` +
-          `Nossa equipe de Infraestrutura e Redes já está ciente e analisando a conectividade da unidade. Para que possamos direcionar os testes técnicos e planejar a melhoria no local exato, você poderia nos informar:\n` +
-          `1. **Quais são as salas ou consultórios médicos** (números ou identificação) onde o sinal está ruim ou ocorrendo quedas?\n` +
-          `2. Os computadores dos médicos estão conectados via **cabo de rede (RJ-45)** ou estão utilizando apenas a **rede sem fio (Wi-Fi)**?\n` +
-          `3. Nas salas afetadas, já existem **pontos de rede físicos (tomadas RJ-45) disponíveis na parede** para conectar os computadores por cabo?\n\n` +
-          `Assim que nos confirmar esses detalhes por aqui, daremos andamento imediato no diagnóstico e no envio de um técnico para vistoria presencial nas salas!\n\n` +
+          `Nossa equipe de Infraestrutura e Redes já está ciente e programando o atendimento. Para direcionarmos os testes e o deslocamento do técnico exatamente para os locais com problema, você poderia nos informar:\n` +
+          `1. **Quais são as salas ou consultórios médicos** (números ou identificação das salas/médicos) onde a internet está oscilando ou apresentando quedas?\n` +
+          `2. As falhas afetam os **computadores das salas** ou principalmente **dispositivos móveis** (notebooks/celulares)?\n\n` +
+          `Com essas salas mapeadas, nosso técnico de Infraestrutura irá presencialmente ao local para vistoriar os pontos de rede nas paredes, testar as tomadas RJ-45 e realizar a medição de sinal Wi-Fi para normalizar a conexão!\n\n` +
           `Permanecemos à disposição!`;
       } else {
         urgencyReason = `Instabilidade e oscilação na conexão de internet afetando a rotina e chamadas de WhatsApp do setor ${sectorName}.`;

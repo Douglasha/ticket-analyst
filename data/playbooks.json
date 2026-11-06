@@ -702,16 +702,15 @@
     ],
     "symptoms": "Setor ou clínica relata lentidão, oscilação ou quedas na conexão de internet/Wi-Fi (em chamadas de WhatsApp ou em consultórios/salas de atendimento com reclamações de médicos/profissionais) e solicita reforço de sinal Wi-Fi, roteador ou pontos de internet fixa para as salas.",
     "required_info": [
-      "Identificação das salas ou consultórios médicos específicos onde o sinal está ruim ou ocorrendo quedas",
-      "Confirmar se os computadores utilizam cabo de rede (RJ-45) ou sinal Wi-Fi",
-      "Confirmar se nas salas existem pontos de rede físicos disponíveis na parede"
+      "Identificação das salas ou consultórios médicos específicos onde o sinal está ruim ou ocorrendo quedas/reclamações",
+      "Confirmar se as quedas afetam os computadores desktop das salas ou principalmente dispositivos móveis (notebooks e celulares)"
     ],
     "resolution_steps": [
-      "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende o setor solicitante (ex: Faturamento).",
+      "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende a clínica/setor solicitante.",
       "Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
-      "Avaliar a viabilidade de instalação de um novo Access Point / Roteador corporativo no setor, identificando porta disponível no switch PoE e cabeamento Cat6.",
-      "Caso o problema seja apenas no tráfego de chamadas VoIP/WhatsApp, verificar as regras de QoS no firewall/roteador de borda priorizando pacotes de voz.",
-      "Programar visita técnica para medição presencial de sinal e/ou instalação e fixação do novo equipamento de rede Wi-Fi."
+      "Programar visita técnica presencial de técnico de Infraestrutura e Redes às salas e consultórios informados.",
+      "Durante a vistoria presencial no local, inspecionar fisicamente a existência e integridade de tomadas de rede RJ-45 nas paredes das salas, testar os patch cords e verificar portas disponíveis no switch/patch panel (diagnóstico físico exclusivo do técnico de campo).",
+      "Realizar medição presencial de sinal Wi-Fi (RSSI) dentro dos consultórios e avaliar a passagem de novos cabos de rede Cat6 ou instalação/reposicionamento de Access Point para garantir internet fixa e sem fio estável aos médicos."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à lentidão e oscilação da internet no setor de **{setor}** e ao pedido de instalação de um **roteador Wi-Fi**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a análise de conectividade do setor. Para direcionarmos o diagnóstico correto antes do atendimento no local, você poderia nos confirmar:\n1. A lentidão e oscilação ocorrem **apenas no sinal Wi-Fi** (celulares e notebooks) ou também nos **computadores conectados via cabo de rede**?\n2. As falhas nas ligações do WhatsApp ocorrem em aparelhos específicos ou em todos os celulares utilizados no setor?\n\nAssim que nos confirmar essas informações por aqui, daremos sequência com os testes de rede e a vistoria para instalação no local!"
   },
