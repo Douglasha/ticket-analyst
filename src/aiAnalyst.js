@@ -739,6 +739,59 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
+      /\b(desmonta|desmontar|desmontagem)\b/i.test(normAll) &&
+      /\b(remontagem|montagem|montar|m[oó]vel|mob[ií]lia|mesa|esta[cç][aã]o|substitui[cç][aã]o)\b/i.test(
+        normAll
+      )
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+      const targetLocation =
+        formFields.localizacao ||
+        formFields.local ||
+        rawLoc ||
+        sectorName ||
+        "Recepção Interna";
+
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Suporte a Hardware")
+          ? ticket.category
+          : "T.I > IR > Suporte a Hardware";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Demanda presencial de Infraestrutura e Redes para desconexão segura, acomodação temporária e posterior remontagem de equipamentos de TI durante a troca de mobília do setor.";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** solicita atendimento presencial da equipe de Infraestrutura e Redes para **desmontagem física preventiva dos equipamentos de T.I da estação de trabalho** ` +
+        `(CPU, monitor, nobreak, periféricos, cabos e ramal) na **${targetLocation}**, visando permitir a substituição da mesa/mobília pela equipe de Manutenção Predial/Montadores e, logo em seguida, a respectiva remontagem e testes operacionais.`;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Confirmar a data e horário previstos para a troca/montagem do móvel novo pela equipe responsável (ou se a nova mesa já se encontra no local pronta para montagem imediata)",
+        "Confirmar se os equipamentos podem ser desconectados de imediato ou se a desmontagem deve aguardar a chegada física da nova mobília",
+      ];
+
+      customResolutionSteps = [
+        `[PB-UNI-50] Manter a categoria do chamado no GLPI em '${suggestedCategory}'.`,
+        `[PB-UNI-50] Alinhar com o(a) solicitante ${ticket.requester} (${targetLocation}) o horário exato da entrega/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação inoperante.`,
+        `[PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até a ${targetLocation} para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).`,
+        `[PB-UNI-50] Acomodar e proteger temporariamente os equipamentos (CPU, monitores, nobreak e telefone) em local seguro para evitar acúmulo de poeira ou impactos mecânicos durante a retirada da mesa antiga e montagem do móvel novo.`,
+        `[PB-UNI-50] Após a conclusão da montagem da nova mesa pela equipe de Manutenção/Marcenaria, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.`,
+        `[PB-UNI-50] Ligar a estação de trabalho, validar a conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo a validação operacional junto ao setor antes do encerramento.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **desmontagem física e posterior remontagem da estação de trabalho** na **${targetLocation}**, para permitir a substituição da mobília/mesa.\n\n` +
+        `Nossa equipe de Infraestrutura e Redes já está programada para realizar o atendimento presencial no setor. Para alinharmos o melhor momento e evitar que a estação fique inoperante além do necessário, você poderia nos confirmar:\n` +
+        `1. A nova mesa já está no local para montagem imediata ou há uma **data e horário previstos** para a equipe de Manutenção/Montadores realizarem a troca do móvel?\n` +
+        `2. A desmontagem dos equipamentos pode ser realizada de imediato ou devemos aguardar a chegada física da nova mesa no setor?\n\n` +
+        `Assim que nos confirmar o cronograma da troca por aqui, nosso técnico comparecerá à ${targetLocation} para desconectar e resguardar os equipamentos e, tão logo o móvel novo esteja pronto, finalizar a remontagem e testes!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
       /\b(ponto de telefone|linha e aparelho|remanejar|remanejamento|mudar de lugar|mudanca de local|novo ponto de rede|trocar o ramal de mesa|mudar o ramal de mesa|trocar ramal|mudanca de local do telefone|trocar telefone de mesa)\b/i.test(
         normAll
       ) ||

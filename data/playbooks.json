@@ -1856,5 +1856,45 @@
       "[PB-UNI-49] Responder no chamado GLPI confirmando a liberação das portas e orientar o colaborador a realizar o primeiro teste na porta/catraca."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à liberação de acesso para o novo colaborador **{colaborador}** (CPF: {cpf}).\n\nIdentificamos o envio da fotografia em anexo, o que nos indica a necessidade de cadastro de **biometria facial no sistema de controle de acesso às portas (terminais iDFace)**.\n\nPara que possamos realizar a liberação correta das permissões, você poderia nos informar:\n\n1. **Unidade e Portas / Setores de Acesso:** Em qual unidade e em quais portas o colaborador precisa de liberação? Nossos terminais biométricos estão distribuídos da seguinte forma:\n   - **Sede Administrativa:**\n     • Administração\n   - **Hospital Unimed:**\n     • Corredor Principal (Entrada / Saída)\n     • Corredor Elevador (Entrada / Saída)\n     • Centro Cirúrgico (Corredor / Porta Interna)\n     • UTI Adulto\n     • UTI Neonatal (Rampa / Farmácia)\n     • Raio-X (RX Interno / RX Externo)\n\n2. **Outros Sistemas e Acessos de T.I.:** Além do controle de acesso físico às portas por biometria facial, o colaborador precisará de acesso a outros sistemas institucionais (ex.: Sistema SGH Spdata, Prontu+ PEP, login de Rede/Windows, E-mail corporativo)? Caso positivo, favor nos indicar quais.\n\nAssim que nos confirmar essas informações por aqui, daremos andamento imediato no cadastro e liberação!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-50",
+    "domain": "Infraestrutura e Rede",
+    "title": "Desmontagem e Remontagem de Estação de Trabalho — Substituição de Mesa / Mobília / Reforma",
+    "keywords": [
+      "desmontagem e montagem",
+      "desmontagem",
+      "desmontar",
+      "remontagem",
+      "remontar",
+      "troca de mesa",
+      "substituicao da mesa",
+      "substituição da mesa",
+      "troca de mobilia",
+      "troca de mobília",
+      "substituicao da mobilia",
+      "substituição da mobília",
+      "trocar mesa",
+      "trocar movel",
+      "trocar móvel",
+      "estacao de trabalho",
+      "estação de trabalho",
+      "desmontagem fisica",
+      "desmontagem física"
+    ],
+    "symptoms": "Solicitação de atendimento presencial da equipe de Infraestrutura e Redes para realizar a desmontagem física preventiva dos equipamentos de T.I de uma estação de trabalho (CPU, monitores, nobreak, periféricos, cabos e ramal telefônico) em virtude da substituição de mesa/mobília ou reforma, permitindo que a Manutenção Predial/Hotelaria troque o móvel, seguida da posterior remontagem, organização de cabeamento e testes de funcionamento na nova bancada.",
+    "required_info": [
+      "Data e horário previstos para a troca/montagem do móvel novo pela equipe de manutenção/montadores (ou confirmação se a nova mobília já está no setor)",
+      "Confirmação se os equipamentos podem ser desconectados de imediato ou se a T.I deve aguardar a chegada física da nova mobília"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-50] Manter ou definir a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware' (ou 'T.I > IR > Suporte a Hardware > Manutenção de Computadores') atribuído ao grupo 'T.I > IR (Infra & Redes)'.",
+      "[PB-UNI-50] Alinhar com o(a) solicitante o cronograma de chegada/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação de trabalho inoperante.",
+      "[PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até o local (ex.: Recepção Interna) para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).",
+      "[PB-UNI-50] Acomodar e proteger temporariamente os equipamentos em local seguro para evitar poeira e impactos mecânicos durante a retirada do móvel antigo e montagem do novo pela equipe de Manutenção/Marcenaria.",
+      "[PB-UNI-50] Após a conclusão da montagem da nova mesa, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.",
+      "[PB-UNI-50] Ligar a estação de trabalho, validar conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo o aceite operacional junto ao setor antes do encerramento."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **desmontagem física e posterior remontagem da estação de trabalho** no setor **{setor}**, para permitir a substituição da mobília/mesa.\n\nNossa equipe de Infraestrutura e Redes já está programada para realizar o atendimento presencial no setor. Para alinharmos o melhor momento e evitar que a estação fique inoperante além do necessário, você poderia nos confirmar:\n1. A nova mesa já está no local para montagem imediata ou há uma **data e horário previstos** para a equipe de Manutenção/Montadores realizarem a troca do móvel?\n2. A desmontagem dos equipamentos pode ser realizada de imediato ou devemos aguardar a chegada física da nova mesa no setor?\n\nAssim que nos confirmar o cronograma da troca por aqui, nosso técnico comparecerá ao setor para desconectar e resguardar os equipamentos e, tão logo o móvel novo esteja pronto, finalizar a remontagem e testes!\n\nPermanecemos à disposição!"
   }
 ]

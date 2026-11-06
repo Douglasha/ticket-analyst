@@ -11484,6 +11484,85 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43818": {
+    "ticket_id": 43818,
+    "analyzed_at": "06/11/2026 15:42",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "O solicitante **Douglas Henrique Amaral** solicita atendimento presencial da equipe de Infraestrutura e Redes para **desmontagem física preventiva dos equipamentos de T.I da estação de trabalho** (CPU, monitor, nobreak, periféricos, cabos e ramal) na **Recepção Interna**, visando permitir a substituição da mesa/mobília pela equipe de Manutenção Predial/Montadores e, logo em seguida, a respectiva remontagem e testes operacionais.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Suporte a Hardware",
+    "real_urgency": "Média",
+    "urgency_reason": "Demanda presencial de Infraestrutura e Redes para desconexão segura, acomodação temporária e posterior remontagem de equipamentos de TI durante a troca de mobília do setor.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Confirmar a data e horário previstos para a troca/montagem do móvel novo pela equipe responsável (ou se a nova mesa já se encontra no local pronta para montagem imediata)",
+      "Confirmar se os equipamentos podem ser desconectados de imediato ou se a desmontagem deve aguardar a chegada física da nova mobília"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-50",
+        "title": "Desmontagem e Remontagem de Estação de Trabalho — Substituição de Mesa / Mobília / Reforma",
+        "category": "Infraestrutura e Rede",
+        "summary": "Solicitação de atendimento presencial da equipe de Infraestrutura e Redes para realizar a desmontagem física preventiva dos equipamentos de T.I de uma estação de trabalho (CPU, monitores, nobreak, periféricos, cabos e ramal telefônico) em virtude da substituição de mesa/mobília ou reforma, permitindo que a Manutenção Predial/Hotelaria troque o móvel, seguida da posterior remontagem, organização de cabeamento e testes de funcionamento na nova bancada.",
+        "steps": [
+          "[PB-UNI-50] Manter ou definir a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware' (ou 'T.I > IR > Suporte a Hardware > Manutenção de Computadores') atribuído ao grupo 'T.I > IR (Infra & Redes)'.",
+          "[PB-UNI-50] Alinhar com o(a) solicitante o cronograma de chegada/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação de trabalho inoperante.",
+          "[PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até o local (ex.: Recepção Interna) para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).",
+          "[PB-UNI-50] Acomodar e proteger temporariamente os equipamentos em local seguro para evitar poeira e impactos mecânicos durante a retirada do móvel antigo e montagem do novo pela equipe de Manutenção/Marcenaria.",
+          "[PB-UNI-50] Após a conclusão da montagem da nova mesa, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.",
+          "[PB-UNI-50] Ligar a estação de trabalho, validar conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo o aceite operacional junto ao setor antes do encerramento."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-07",
+        "title": "Manutenção, Diagnóstico e Substituição de Periféricos e Monitores (Patrimônio HU/Sede)",
+        "category": "Suporte Técnico Geral / Service Desk",
+        "summary": "Solicitação de reparo, diagnóstico ou substituição de teclado, mouse ou monitor com defeito ou sem vídeo em estação de trabalho hospitalar ou administrativa.",
+        "steps": [
+          "Deslocar técnico de suporte até o setor informado para realizar o diagnóstico presencial do equipamento/periférico.",
+          "Verificar conexões físicas de cabos (energia, HDMI/DisplayPort/VGA ou USB) e testar se o equipamento liga e se o computador emite sinal de vídeo.",
+          "Isolar se o defeito decorre de mau contato, cabo rompido, falha de inicialização da CPU ou avaria física no próprio periférico/monitor.",
+          "Caso seja constatado defeito físico irreparável de hardware no teste local, providenciar a substituição imediata por item compatível do estoque técnico.",
+          "Validar o correto funcionamento do periférico/vídeo junto ao usuário no posto de trabalho e concluir o chamado."
+        ],
+        "score": 0.63
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-26",
+        "title": "Falha / Manutenção de Nobreak / UPS (Autonomia de Bateria / Não Segura Carga)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Relato de falha em Nobreak/UPS de computador ou equipamento (ex: não segura carga durante oscilações/quedas de energia elétrica ou desliga o computador imediatamente), frequentemente aberto via formulário de manutenção predial/eletrônica e escalonado para a equipe de T.I (Infraestrutura e Redes).",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI para 'T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS' (atribuído ao grupo 'T.I > IR').",
+          "Verificar no estoque de Infraestrutura/Redes a disponibilidade de nobreak reserva compatível ou bateria selada (12V 7Ah/9Ah).",
+          "Deslocar técnico de Infraestrutura e Redes até o local indicado (ex.: Prédio Azul, sala 402 - Centro de Especialidades) para aferição de tensão/desgaste com multímetro.",
+          "Realizar a substituição da bateria ou a troca física do nobreak por equipamento reserva funcional.",
+          "Realizar teste de autonomia desligando a alimentação da tomada com o computador ligado e confirmar a normalização no chamado."
+        ],
+        "score": 0.57
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-50) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-07)",
+    "resolution_steps": [
+      "[PB-UNI-50] Manter a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware'.",
+      "[PB-UNI-50] Alinhar com o(a) solicitante Douglas Henrique Amaral (Recepção Interna) o horário exato da entrega/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação inoperante.",
+      "[PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até a Recepção Interna para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).",
+      "[PB-UNI-50] Acomodar e proteger temporariamente os equipamentos (CPU, monitores, nobreak e telefone) em local seguro para evitar acúmulo de poeira ou impactos mecânicos durante a retirada da mesa antiga e montagem do móvel novo.",
+      "[PB-UNI-50] Após a conclusão da montagem da nova mesa pela equipe de Manutenção/Marcenaria, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.",
+      "[PB-UNI-50] Ligar a estação de trabalho, validar a conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo a validação operacional junto ao setor antes do encerramento."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Douglas Henrique Amaral** solicita atendimento presencial da equipe de Infraestrutura e Redes para **desmontagem física preventiva dos equipamentos de T.I da estação de trabalho** (CPU, monitor, nobreak, periféricos, cabos e ramal) na **Recepção Interna**, visando permitir a substituição da mesa/mobília pela equipe de Manutenção Predial/Montadores e, logo em seguida, a respectiva remontagem e testes operacionais.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-50) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-07)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar a data e horário previstos para a troca/montagem do móvel novo pela equipe responsável (ou se a nova mesa já se encontra no local pronta para montagem imediata)\n  - Confirmar se os equipamentos podem ser desconectados de imediato ou se a desmontagem deve aguardar a chegada física da nova mobília\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-50] Manter a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware'.\n  2. [PB-UNI-50] Alinhar com o(a) solicitante Douglas Henrique Amaral (Recepção Interna) o horário exato da entrega/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação inoperante.\n  3. [PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até a Recepção Interna para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).\n  4. [PB-UNI-50] Acomodar e proteger temporariamente os equipamentos (CPU, monitores, nobreak e telefone) em local seguro para evitar acúmulo de poeira ou impactos mecânicos durante a retirada da mesa antiga e montagem do móvel novo.\n  5. [PB-UNI-50] Após a conclusão da montagem da nova mesa pela equipe de Manutenção/Marcenaria, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.\n  6. [PB-UNI-50] Ligar a estação de trabalho, validar a conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo a validação operacional junto ao setor antes do encerramento.",
+    "public_reply_draft": "Olá, Douglas! Tudo bem?\n\nRecebemos a sua solicitação referente à **desmontagem física e posterior remontagem da estação de trabalho** na **Recepção Interna**, para permitir a substituição da mobília/mesa.\n\nNossa equipe de Infraestrutura e Redes já está programada para realizar o atendimento presencial no setor. Para alinharmos o melhor momento e evitar que a estação fique inoperante além do necessário, você poderia nos confirmar:\n1. A nova mesa já está no local para montagem imediata ou há uma **data e horário previstos** para a equipe de Manutenção/Montadores realizarem a troca do móvel?\n2. A desmontagem dos equipamentos pode ser realizada de imediato ou devemos aguardar a chegada física da nova mesa no setor?\n\nAssim que nos confirmar o cronograma da troca por aqui, nosso técnico comparecerá à Recepção Interna para desconectar e resguardar os equipamentos e, tão logo o móvel novo esteja pronto, finalizar a remontagem e testes!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",
