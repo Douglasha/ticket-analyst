@@ -1373,20 +1373,19 @@
   },
   {
     "ticket_id": 42127,
-    "title": "Acesso e Permissões  -  Dalete Olivira",
+    "title": "Acesso e Permissões  -  Dalete Oliveira",
     "category": "T.I > ST > Acesso e Permissões",
     "keywords": [
       "acesso",
       "permissoes",
       "dalete",
-      "olivira",
-      "analise",
-      "pep",
-      "passos",
-      "justificativa:"
+      "oliveira",
+      "acesso ao pep",
+      "medicos no pep",
+      "nas passos"
     ],
     "problem_summary": "Bom dia!\n \nPrezados, solicito analise do meu acesso ao PEP (NAS Passos)\nJustificativa: Hoje (01/10/2026) apenas 3 médicos apareceram no acesso.",
-    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "reply_template": "Olá, Dalete! Tudo bem?\n\nRecebemos a sua solicitação referente à análise de visualização dos médicos no sistema PEP (NAS Passos).\nNossa equipe técnica já está verificando as parametrizações do seu perfil de usuário para restabelecer a listagem completa dos profissionais.\n\nAssim que ajustado, confirmaremos por aqui para que você possa validar!",
     "required_info": [],
     "resolution_steps": [
       "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",

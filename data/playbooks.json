@@ -1933,5 +1933,39 @@
       "[PB-UNI-51] Orientar o usuário a efetuar logout e login novamente no HRP Unimed para carregar os novos escopos de segurança na sessão e testar a pesquisa por ticket de erro (ex.: wfd_...)."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nA liberação de acesso ao menu **Eventos de Erro** no sistema **HRP Unimed** foi configurada com sucesso.\n\nAlém da permissão no arquivo de menu, foi incluído no seu usuário o escopo de autorização obrigatório **`security.viewTechnicalInfo`**, que habilita a consulta e visualização técnica dos tickets de erro (`wfd_...`) e da pilha de exceções do sistema.\n\nPor gentileza, realize o logout do HRP Unimed, faça um novo login para atualizar as permissões e confirme se o acesso está funcionando normalmente.\n\nFicamos à disposição caso precise de mais algum apoio!"
+  },
+  {
+    "id": "PB-UNI-52",
+    "domain": "Infraestrutura e Rede",
+    "title": "Integração e Conectividade de Aparelhos de ECG (Eletrocardiograma) à Rede Hospitalar — Mindray BeneHeart R3 / Exportação Digital para PEP",
+    "keywords": [
+      "aparelho de ecg",
+      "aparelhos de ecg",
+      "ecg",
+      "eletrocardiograma",
+      "eletrocardiografo",
+      "beneheart",
+      "beneheart r3",
+      "mindray",
+      "rede hospitalar",
+      "exames via computador",
+      "digitalizacao de exames",
+      "eliminar arquivos digitalizados",
+      "cabo de rede ecg",
+      "integracao ecg",
+      "laudo de ecg",
+      "tracado de ecg"
+    ],
+    "symptoms": "Solicitação da Coordenação de Enfermagem ou equipes assistenciais do Hospital para avaliar a viabilidade e realizar a instalação/conexão dos aparelhos de ECG (Eletrocardiógrafo Mindray BeneHeart R3) via cabo de rede/IP à rede hospitalar, visando exportar e disponibilizar os exames e traçados em formato digital (PDF/XML) diretamente no computador para anexo/inserção no PEP (SGH Spdata / Prontuário Eletrônico), eliminando a impressão térmica e digitalização manual por scanner nos setores hospitalares (UTI Adulto, UTI Neonatal, Sala de Emergência/Medicação, Suíte e Ala de Internação).",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-52] Manter ou definir a categoria no GLPI em 'T.I > ST > Instalação/Configuração' ou 'T.I > IR > Conectividade' / 'T.I > IR > Administração de Redes', atribuindo em conjunto aos grupos 'T.I > IR (Infra & Redes)' e 'T.I > ST (Service Desk)'.",
+      "[PB-UNI-52] Analisar o manual do operador do Mindray BeneHeart R3 anexado ao chamado, identificando as capacidades de transmissão de exames via porta Ethernet RJ-45 (suporte a protocolo TCP/IP, envio para pasta compartilhada de rede Windows SMB/CIFS, servidor FTP ou software de gerenciamento Mindray ECG Viewer/DICOM).",
+      "[PB-UNI-52] Realizar alinhamento técnico conjunto com a Engenharia Clínica para inspeção física dos aparelhos nos 5 setores indicados (UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação) e conferência de licenças/firmware de conectividade de rede do fabricante.",
+      "[PB-UNI-52] A equipe de Infraestrutura e Redes deve vistoriar a infraestrutura de cabeamento estruturado nos postos de atendimento, garantir pontos de rede RJ-45 ativos e configurar uma VLAN isolada para dispositivos médicos hospitalares, definindo endereçamento IP fixo ou reserva no DHCP para cada aparelho de ECG.",
+      "[PB-UNI-52] A equipe de Sistemas/Suporte Técnico deve estruturar o diretório compartilhado seguro na rede (com permissões restritas à enfermagem/médicos) ou fluxo de integração no PEP (SGH Spdata) para arquivamento dos laudos em PDF/XML.",
+      "[PB-UNI-52] Implementar um projeto piloto em 1 setor prioritário (ex.: Sala de Emergência ou UTI Adulto) para validação prática do envio do traçado, velocidade de geração do PDF e aceite operacional pela equipe de enfermagem antes da expansão para os demais setores."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nAgradecemos pelo envio desta excelente proposta de melhoria e modernização dos processos assistenciais do Hospital Unimed!\n\nA integração dos eletrocardiógrafos **Mindray BeneHeart R3** diretamente à rede hospitalar trará ganhos substanciais de agilidade para a equipe de Enfermagem, além de garantir maior nitidez nos traçados e eliminar os riscos de extravio ou retrabalho na digitalização manual de exames para o PEP (SGH Spdata).\n\nIdentificamos que você já forneceu todas as informações essenciais, incluindo os 5 setores onde os aparelhos estão alocados (**UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação**) e o manual técnico oficial do fabricante em anexo.\n\nNossa equipe de T.I. já deu início ao **estudo de viabilidade técnica e arquitetura de conectividade**, englobando as seguintes frentes:\n1. **Infraestrutura e Redes:** Mapeamento de tomadas de rede RJ-45 nos leitos/postos dos setores e configuração de uma VLAN dedicada para equipamentos médicos com IPs reservados;\n2. **Engenharia Clínica & Fabricante:** Validação do módulo de rede LAN e protocolo de exportação suportado pelos aparelhos (pasta de rede compartilhada SMB, FTP ou formato PDF/XML);\n3. **Sistemas e PEP:** Definição do fluxo mais ágil para acesso e anexo dos arquivos digitais diretamente no prontuário do paciente (SGH Spdata).\n\nAssim que concluirmos o levantamento da infraestrutura de rede, alinharemos com você a realização de um **teste piloto** no primeiro setor (ex.: Emergência ou UTI) para validação prática da equipe de enfermagem antes da expansão geral.\n\nSeguimos à disposição e manteremos você atualizado por aqui a cada etapa!"
   }
 ]

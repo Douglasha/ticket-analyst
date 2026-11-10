@@ -739,6 +739,56 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
+      /\b(ecg|eletrocardiograma|eletrocardi[oó]grafo|beneheart)\b/i.test(normAll) ||
+      (/\baparelhos?\b/i.test(normAll) &&
+        /\b(rede hospitalar|digitaliza[cç][aã]o|digitalizados?)\b/i.test(normAll) &&
+        /\b(cabo de rede|exames?|pep)\b/i.test(normAll))
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      detectedDomain = "Infraestrutura e Rede";
+      suggestedCategory =
+        ticket.category && !ticket.category.includes("Sistemas Operacionais")
+          ? ticket.category
+          : "T.I > ST > Instalação/Configuração";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Projeto de integração tecnológica e conectividade de equipamentos médicos (ECG) à rede hospitalar, otimizando o fluxo assistencial e a segurança dos dados no PEP.";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) apresenta proposta de melhoria e modernização assistencial para **conectar os aparelhos de eletrocardiograma (ECG - Mindray BeneHeart R3) via cabo de rede/IP à rede de dados do Hospital** ` +
+        `nos setores **UTI Adulto, UTI Neonatal, Sala de Emergência/Medicação, Suíte e Ala de Internação**, permitindo a exportação e visualização direta dos traçados de ECG em meio digital (PDF/XML) via computador para inserção no PEP (SGH Spdata), ` +
+        `eliminando o processo de impressão térmica e digitalização manual por scanner e prevenindo extravios e perda de nitidez dos exames.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-52] Manter a categoria do chamado no GLPI em '${suggestedCategory}' e atribuir o atendimento conjunto aos grupos 'T.I > IR (Infra & Redes)' e 'T.I > ST (Service Desk)'.`,
+        `[PB-UNI-52] Analisar as especificações técnicas e opções de conectividade do manual do operador do Mindray BeneHeart R3 (anexado ao chamado), confirmando os protocolos de rede suportados (porta Ethernet RJ-45, TCP/IP, envio para pasta compartilhada SMB, servidor FTP ou software Mindray ECG).`,
+        `[PB-UNI-52] Realizar alinhamento com a Engenharia Clínica para inspeção física dos aparelhos de ECG nos 5 setores indicados (UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação) e checagem de ativação do módulo de rede em cada equipamento.`,
+        `[PB-UNI-52] A equipe de Infraestrutura e Redes deve mapear os pontos de rede estruturada RJ-45 nos postos de atendimento, configurar VLAN isolada para equipamentos médicos e reservar faixas de IPs fixos no servidor DHCP/switches para cada aparelho.`,
+        `[PB-UNI-52] A equipe de Sistemas/Suporte Técnico e Desenvolvimento deve estruturar o diretório compartilhado em rede (com credenciais restritas) e definir o fluxo de importação/anexo dos laudos em PDF no sistema PEP (SGH Spdata).`,
+        `[PB-UNI-52] Executar um projeto piloto no aparelho de 1 setor prioritário (ex.: Sala de Emergência ou UTI Adulto) para validação do traçado digital, tempo de resposta e facilidade operacional junto à equipe de enfermagem antes de homologar nos demais setores.`,
+        `[PB-UNI-52] Validar a conclusão da implantação junto ao solicitante ${ticket.requester} (Coordenação de Enfermagem).`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Agradecemos pelo envio desta excelente proposta de melhoria e modernização dos processos assistenciais do Hospital Unimed!\n\n` +
+        `A integração dos eletrocardiógrafos **Mindray BeneHeart R3** diretamente à rede hospitalar trará ganhos expressivos de agilidade e confiabilidade para a equipe de Enfermagem e para o corpo clínico, além de garantir maior nitidez nos traçados e eliminar os riscos de extravio ou retrabalho decorrentes da digitalização manual de exames para o PEP (SGH Spdata).\n\n` +
+        `Identificamos que a solicitação já conta com todo o detalhamento necessário, incluindo a relação dos 5 setores onde os aparelhos estão alocados (**UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação**) e o manual técnico oficial do fabricante anexado ao chamado.\n\n` +
+        `Nossa equipe de T.I. já iniciou o **estudo de viabilidade técnica e arquitetura de conectividade**, englobando as seguintes frentes:\n` +
+        `1. **Infraestrutura e Redes:** Mapeamento de tomadas de rede RJ-45 próximas aos aparelhos nos postos de atendimento e configuração de uma VLAN dedicada para dispositivos biomédicos com IPs reservados;\n` +
+        `2. **Engenharia Clínica & Fabricante:** Validação do módulo de rede LAN e protocolo de exportação suportado pelos aparelhos (pasta de rede compartilhada SMB, FTP ou formato PDF/XML);\n` +
+        `3. **Sistemas e PEP:** Definição do fluxo mais ágil para visualização, download e anexo dos arquivos digitais diretamente no prontuário do paciente (SGH Spdata).\n\n` +
+        `Assim que concluirmos o levantamento da infraestrutura física de rede, alinharemos com você a realização de um **teste piloto** no primeiro setor (ex.: Sala de Emergência ou UTI) para validação prática da equipe de enfermagem antes da expansão para as demais alas.\n\n` +
+        `Seguimos à disposição e manteremos você informado sobre cada etapa do projeto por aqui!\n\n` +
+        `Atenciosamente,\nEquipe de Tecnologia da Informação`;
+    } else if (
       /\b(desmonta|desmontar|desmontagem)\b/i.test(normAll) &&
       /\b(remontagem|montagem|montar|m[oó]vel|mob[ií]lia|mesa|esta[cç][aã]o|substitui[cç][aã]o)\b/i.test(
         normAll
