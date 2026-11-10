@@ -1896,5 +1896,42 @@
       "[PB-UNI-50] Ligar a estação de trabalho, validar conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo o aceite operacional junto ao setor antes do encerramento."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **desmontagem física e posterior remontagem da estação de trabalho** no setor **{setor}**, para permitir a substituição da mobília/mesa.\n\nNossa equipe de Infraestrutura e Redes já está programada para realizar o atendimento presencial no setor. Para alinharmos o melhor momento e evitar que a estação fique inoperante além do necessário, você poderia nos confirmar:\n1. A nova mesa já está no local para montagem imediata ou há uma **data e horário previstos** para a equipe de Manutenção/Montadores realizarem a troca do móvel?\n2. A desmontagem dos equipamentos pode ser realizada de imediato ou devemos aguardar a chegada física da nova mesa no setor?\n\nAssim que nos confirmar o cronograma da troca por aqui, nosso técnico comparecerá ao setor para desconectar e resguardar os equipamentos e, tão logo o móvel novo esteja pronto, finalizar a remontagem e testes!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-51",
+    "domain": "Sistemas Internos e ERP",
+    "title": "Liberação de Acesso ao Menu \"Eventos de Erro\" no Sistema HRP Unimed (Escopo security.viewTechnicalInfo)",
+    "keywords": [
+      "evento de erro",
+      "eventos de erro",
+      "eventos de erro.il",
+      "security.viewtechnicalinfo",
+      "viewtechnicalinfo",
+      "hrp",
+      "hrp unimed",
+      "permissao hrp",
+      "permissão hrp",
+      "menu evento de erro",
+      "erro hrp",
+      "ticket de erro hrp",
+      "escopos de autorizacao",
+      "escopos de autorização",
+      "wfd_"
+    ],
+    "symptoms": "Usuário ou técnico com permissão concedida no menu/arquivo 'Eventos de erro.il' (Menu > Administração do sistema > Auditoria > Eventos de erro.il) tenta acessar a consulta no HRP Unimed, mas o sistema bloqueia exibindo a mensagem modal: 'Apenas usuários com permissão ao escopo security.viewTechnicalInfo podem utilizar esta consulta (Ticket: wfd_...)'",
+    "required_info": [
+      "Login ou nome completo do usuário no HRP que necessita consultar os logs/eventos de erro técnicos."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-51] Acessar o sistema HRP Unimed com usuário administrador de sistemas.",
+      "[PB-UNI-51] Verificar em 'Classes e arquivos' (Menu > Administração do sistema > Auditoria > Eventos de erro.il) se o usuário ou grupo já possui as permissões básicas de 'Ver' e 'Exportar' marcadas.",
+      "[PB-UNI-51] Acessar a tela de cadastro e permissões de usuários no HRP (Menu > Administração do sistema > Usuários ou Permissões).",
+      "[PB-UNI-51] Pesquisar e abrir o cadastro do usuário que necessita do acesso (ex.: Froosvelt).",
+      "[PB-UNI-51] Na ficha do usuário, expandir a seção 'Segurança' e localizar a subseção 'Escopos de autorização'.",
+      "[PB-UNI-51] Clicar no botão '+' (Adicionar) e selecionar/inserir o escopo: security.viewTechnicalInfo (Descrição: Permite a visualização de informações técnicas nos diálogos de erro e ajuda do sistema, como a pilha do erro e os detalhes da exceção).",
+      "[PB-UNI-51] Salvar as alterações no cadastro do usuário.",
+      "[PB-UNI-51] Orientar o usuário a efetuar logout e login novamente no HRP Unimed para carregar os novos escopos de segurança na sessão e testar a pesquisa por ticket de erro (ex.: wfd_...)."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nA liberação de acesso ao menu **Eventos de Erro** no sistema **HRP Unimed** foi configurada com sucesso.\n\nAlém da permissão no arquivo de menu, foi incluído no seu usuário o escopo de autorização obrigatório **`security.viewTechnicalInfo`**, que habilita a consulta e visualização técnica dos tickets de erro (`wfd_...`) e da pilha de exceções do sistema.\n\nPor gentileza, realize o logout do HRP Unimed, faça um novo login para atualizar as permissões e confirme se o acesso está funcionando normalmente.\n\nFicamos à disposição caso precise de mais algum apoio!"
   }
 ]

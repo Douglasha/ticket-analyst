@@ -1,11 +1,38 @@
 @echo off
-title GLPI Ticket Analyst - Copiloto de Triagem T.I. (Node.js)
+chcp 65001 >nul
+title GLPI Ticket Analyst + LLM Local (Ollama)
+cls
 
-if exist "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" (
-  echo Verificando/Iniciando servico de LLM Local (Ollama)...
-  start "Ollama LLM Server" /min "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
+echo ==========================================================
+echo    INICIANDO SERVICOS: LLM (OLLAMA) + GLPI TICKET ANALYST
+echo ==========================================================
+echo.
+
+:: 1. Iniciar Ollama se nao estiver rodando
+tasklist /fi "imagename eq ollama.exe" 2>nul | find /i "ollama.exe" >nul
+if errorlevel 1 (
+    echo [...] Iniciando servico de LLM Local (Ollama)...
+    if exist "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" (
+        start "Ollama LLM Server" /min "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
+    ) else (
+        start "Ollama LLM Server" /min ollama serve
+    )
+    timeout /t 2 /nobreak >nul
+    echo [OK] Ollama iniciado em segundo plano (http://localhost:11434).
+) else (
+    echo [OK] Servico Ollama ja esta em execucao.
 )
 
-echo Iniciando GLPI Ticket Analyst (Node.js) em http://localhost:8000 ...
+echo.
+:: 2. Iniciar GLPI Ticket Analyst
+echo [...] Iniciando servidor web do GLPI Ticket Analyst...
+echo [INFO] Abrindo navegador em http://localhost:8000
 start "" http://localhost:8000
+
+echo.
+echo ==========================================================
+echo  Pressione CTRL+C para encerrar o servidor Node.
+echo ==========================================================
+echo.
+
 node src/server.js

@@ -6,10 +6,12 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
+    "start:all": "powershell -NoProfile -ExecutionPolicy Bypass -File ./start-all.ps1",
     "dev": "node --watch-path=src --watch-path=static src/server.js",
     "llm:start": "powershell -NoProfile -Command \"Start-Process -FilePath \\\"$env:LOCALAPPDATA\\Programs\\Ollama\\ollama.exe\\\" -ArgumentList 'serve' -WindowStyle Hidden; Write-Host 'Ollama iniciado em segundo plano (http://localhost:11434)'\"",
     "llm:stop": "powershell -NoProfile -Command \"Stop-Process -Name 'ollama*' -Force -ErrorAction SilentlyContinue; Write-Host 'Servico Ollama encerrado.'\"",
-    "llm:status": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Ollama\\ollama.exe\\\" ps\""
+    "llm:status": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Ollama\\ollama.exe\\\" ps\"",
+    "stop:all": "powershell -NoProfile -Command \"Stop-Process -Name 'ollama*' -Force -ErrorAction SilentlyContinue; Write-Host 'Ollama encerrado.'\""
   },
   "dependencies": {
     "cors": "^2.8.5",

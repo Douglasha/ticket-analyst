@@ -198,3 +198,14 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
       - A triagem deve ser classificada como **`PARCIAL`** quando o solicitante anexar a foto mas NÃO especificar em qual unidade (Sede ou Hospital) nem em quais portas/setores o acesso deve ser liberado.
       - A resposta pública deve acolher cordialmente a solicitação, confirmar o recebimento da fotografia facial para cadastro nos terminais iDFace e apresentar expressamente a lista das portas/setores disponíveis (dividida entre Sede e Hospital) para que o solicitante indique onde o colaborador deve circular, além de questionar se há necessidade de outros acessos de T.I. (SGH Spdata, Prontu+, Rede/Windows, E-mail).
       - NUNCA confundir cadastro facial com onboarding interno de ponto (`PB-UNI-01`), nem com agência externa (`PB-UNI-41`), e NUNCA solicitar ID do HopToDesk.
+
+29. **Desmontagem e Remontagem de Estação de Trabalho — Substituição de Mesa / Mobília / Reforma (`PB-UNI-50`):**
+    - Trata solicitações de atendimento presencial de Infraestrutura e Redes para desconectar, resguardar e posteriormente remontar os equipamentos de T.I. de um posto de trabalho (CPU, monitores, nobreak, telefone VoIP e cabos) devido à troca de móvel pela Manutenção Predial/Marcenaria. Categoria no GLPI: `T.I > IR > Suporte a Hardware`. Status: `PARCIAL` (para alinhar cronograma da chegada da mobília nova).
+
+30. **Liberação de Acesso ao Menu "Eventos de Erro" no Sistema HRP Unimed (`PB-UNI-51` / `KB-HRP-01`):**
+    - Trata solicitações de acesso para analistas e técnicos de T.I. ao menu de diagnóstico e auditoria técnica de erros do **HRP Unimed** (`Eventos de erro.il` / tickets com prefixo `wfd_`).
+    - **Causa do Erro 'security.viewTechnicalInfo':** Conceder permissão de leitura/exportação apenas em *Classes e arquivos* (`Menu > Administração do sistema > Auditoria > Eventos de erro.il`) faz a tela abrir, mas ao consultar o ticket o HRP bloqueia com o erro: *"Apenas usuários com permissão ao escopo 'security.viewTechnicalInfo' podem utilizar esta consulta."*
+    - **Solução Definitiva:** Além da permissão no arquivo `.il`, é obrigatório acessar o cadastro do usuário ou grupo no HRP (`Menu > Administração do sistema > Usuários` ou módulo de *Permissões*), expandir a seção **Segurança**, e na grade **Escopos de autorização** adicionar o escopo:
+      `security.viewTechnicalInfo` (*"Permite a visualização de informações técnicas nos diálogos de erro e ajuda do sistema, como a pilha do erro e os detalhes da exceção"*).
+    - Após salvar, orientar o usuário a efetuar logout e login novamente no HRP para atualizar a sessão.
+

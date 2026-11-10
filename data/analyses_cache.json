@@ -11484,6 +11484,43 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43812": {
+    "ticket_id": 43812,
+    "analyzed_at": "06/11/2026 16:11",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "Rosy Ellen Freire Viana, do setor de Laboratório, relatou um problema técnico relacionado à configuração do sistema de mapa de utilização de hemocomponentes. Ela informou que houve uma adição de uma bolsa de hemocomponentes que não foi realizada internamente devido a um fechamento de conta. A equipe de TI já está trabalhando nessa solicitação. A imagem anexada mostra que o monitor está ligado, mas a tela exibe uma mensagem de erro dizendo 'Bolsa de Hemocomponentes não adicionada'.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > DV > Evolução de Formulários Clínicos (PEP Hospitalar / SGH Spdata)",
+    "real_urgency": "Média",
+    "urgency_reason": "Impacto operacional significativo na precisão do sistema de mapa de utilização de hemocomponentes.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #41932 (Resolvido)",
+        "title": "Desenvolvimento e Qualidade > Ajustes em layout/interface > Mudança de Versão - Mapa de Utilização de Hemocomponentes",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #41932 (Resolvido))",
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nRosy Ellen Freire Viana, do setor de Laboratório, relatou um problema técnico relacionado à configuração do sistema de mapa de utilização de hemocomponentes. Ela informou que houve uma adição de uma bolsa de hemocomponentes que não foi realizada internamente devido a um fechamento de conta. A equipe de TI já está trabalhando nessa solicitação. A imagem anexada mostra que o monitor está ligado, mas a tela exibe uma mensagem de erro dizendo 'Bolsa de Hemocomponentes não adicionada'.\n\nClassificação Sugerida: T.I > DV > Evolução de Formulários Clínicos (PEP Hospitalar / SGH Spdata) | Prioridade Real: Média\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #41932 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  2. Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.\n  3. Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Ajuste do Mapa de Utilização de Hemocomponentes**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43818": {
     "ticket_id": 43818,
     "analyzed_at": "06/11/2026 15:42",
@@ -11560,6 +11597,268 @@
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Douglas Henrique Amaral** solicita atendimento presencial da equipe de Infraestrutura e Redes para **desmontagem física preventiva dos equipamentos de T.I da estação de trabalho** (CPU, monitor, nobreak, periféricos, cabos e ramal) na **Recepção Interna**, visando permitir a substituição da mesa/mobília pela equipe de Manutenção Predial/Montadores e, logo em seguida, a respectiva remontagem e testes operacionais.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-50) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-07)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Confirmar a data e horário previstos para a troca/montagem do móvel novo pela equipe responsável (ou se a nova mesa já se encontra no local pronta para montagem imediata)\n  - Confirmar se os equipamentos podem ser desconectados de imediato ou se a desmontagem deve aguardar a chegada física da nova mobília\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-50] Manter a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware'.\n  2. [PB-UNI-50] Alinhar com o(a) solicitante Douglas Henrique Amaral (Recepção Interna) o horário exato da entrega/montagem da nova mobília para sincronizar a atuação da T.I e minimizar o tempo da estação inoperante.\n  3. [PB-UNI-50] Deslocar técnico de Infraestrutura e Redes até a Recepção Interna para desligamento ordenado da CPU, nobreak e telefone VoIP, desconectando com segurança todos os cabos (energia, vídeo, periféricos USB, ramal e patch cord de rede RJ-45).\n  4. [PB-UNI-50] Acomodar e proteger temporariamente os equipamentos (CPU, monitores, nobreak e telefone) em local seguro para evitar acúmulo de poeira ou impactos mecânicos durante a retirada da mesa antiga e montagem do móvel novo.\n  5. [PB-UNI-50] Após a conclusão da montagem da nova mesa pela equipe de Manutenção/Marcenaria, realizar a remontagem física dos equipamentos na bancada, organizando a passagem dos cabos pelos passa-fios e conectando energia e rede.\n  6. [PB-UNI-50] Ligar a estação de trabalho, validar a conexão de rede/internet, tom de discagem do ramal VoIP e periféricos, colhendo a validação operacional junto ao setor antes do encerramento.",
     "public_reply_draft": "Olá, Douglas! Tudo bem?\n\nRecebemos a sua solicitação referente à **desmontagem física e posterior remontagem da estação de trabalho** na **Recepção Interna**, para permitir a substituição da mobília/mesa.\n\nNossa equipe de Infraestrutura e Redes já está programada para realizar o atendimento presencial no setor. Para alinharmos o melhor momento e evitar que a estação fique inoperante além do necessário, você poderia nos confirmar:\n1. A nova mesa já está no local para montagem imediata ou há uma **data e horário previstos** para a equipe de Manutenção/Montadores realizarem a troca do móvel?\n2. A desmontagem dos equipamentos pode ser realizada de imediato ou devemos aguardar a chegada física da nova mesa no setor?\n\nAssim que nos confirmar o cronograma da troca por aqui, nosso técnico comparecerá à Recepção Interna para desconectar e resguardar os equipamentos e, tão logo o móvel novo esteja pronto, finalizar a remontagem e testes!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43854": {
+    "ticket_id": 43854,
+    "analyzed_at": "09/11/2026 13:24",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Dayane Garcia Oliveira de Araujo** (H SND) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "real_urgency": "Média",
+    "urgency_reason": "Telefone do setor inoperante; demanda checagem de alimentação física, cabo de rede ou registro do ramal no PABX.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Verificar se o visor do telefone está aceso ou totalmente apagado",
+      "Informar o número do ramal desse aparelho",
+      "Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-24",
+        "title": "Aparelho Telefônico VoIP Inoperante / Telefone Sem Sinal ou Mudo (Reinício e Cabo de Rede)",
+        "category": "Infraestrutura e Rede",
+        "summary": "Usuário relata de forma genérica que o aparelho de telefone VoIP do setor não está funcionando, está sem sinal, mudo ou apagado.",
+        "steps": [
+          "Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+          "Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+          "Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+          "Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42293",
+        "title": "Solicitação Diversa  -  Telefones não estão transferindo",
+        "category": "T.I > ST > Solicitação Diversa",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+          "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+          "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Telefones não estão transferindo**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43490 (Resolvido)",
+        "title": "Infraestrutura e Redes > Telefones VoIP > Mudança de local do telefone",
+        "category": "T.I • Solucionado por fsilva",
+        "summary": "Local de telefone alterado.",
+        "steps": [
+          "Local de telefone alterado."
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43388 (Resolvido)",
+        "title": "Infraestrutura e Redes > Telefones VoIP > Aparelho telefonico com defeito",
+        "category": "T.I • Solucionado por fsilva",
+        "summary": "Cabo Reconectado.",
+        "steps": [
+          "Cabo Reconectado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-24) + Memória Contínua • Aprendido com o Analista (MEM-#42293)",
+    "resolution_steps": [
+      "[PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "[PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.",
+      "[PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.",
+      "[PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.",
+      "[MEM-#42293] Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "[MEM-#42293] Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Dayane Garcia Oliveira de Araujo** (H SND) relata que o telefone do setor não está funcionando. Demanda verificação do registro do ramal no PABX e testes de reinicialização e alimentação PoE do aparelho VoIP pela equipe de Infraestrutura e Redes.\n\nClassificação Sugerida: T.I > IR > Administração de Redes > Telefones VoIP | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-24) + Memória Contínua • Aprendido com o Analista (MEM-#42293)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Verificar se o visor do telefone está aceso ou totalmente apagado\n  - Informar o número do ramal desse aparelho\n  - Realizar o teste de desconectar e reconectar o cabo de rede atrás do aparelho (aguardar 10 segundos) para reinicializar\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-24] Manter ou reclassificar a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.\n  2. [PB-UNI-24] Orientar o usuário a realizar o teste rápido de desconectar o cabo de rede (PoE) na parte traseira do aparelho, aguardar 10 segundos e reconectar com firmeza para forçar o reinício e renovar o registro com o PABX.\n  3. [PB-UNI-24] Verificar remotamente no servidor PABX/VoIP o status de registro do ramal do setor (ex: H OPME) e checar se o equipamento responde na VLAN de Voz.\n  4. [PB-UNI-24] Caso o visor permaneça apagado ou sem tom de discagem após o reinício, checar a porta PoE no switch correspondente e deslocar técnico ao local para vistoria física do cabo/troca do aparelho.\n  5. [MEM-#42293] Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).\n  6. [MEM-#42293] Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+    "public_reply_draft": "Olá, Dayane! Tudo bem?\n\nRecebemos o seu chamado referente ao telefone do setor **H SND**.\n\nNossa equipe de Infraestrutura e Redes já iniciou a verificação do ramal na central telefônica. Como na maioria dos casos trata-se de uma falha momentânea de comunicação ou alimentação do aparelho, você poderia realizar um teste rápido:\n1. **Desconectar o cabo de rede** (cabo conectado atrás do telefone), aguardar cerca de **10 segundos** e **reconectar firmemente** para que o aparelho reinicie;\n2. O visor do telefone chega a **acender** ou permanece **totalmente apagado**?\n3. Qual é o **número do ramal** desse aparelho?\n\nCaso o reinício não restabeleça a linha, nos confirme por aqui que já enviaremos um técnico até o H SND para checar o ponto de rede e o aparelho!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43869": {
+    "ticket_id": 43869,
+    "analyzed_at": "09/11/2026 12:21",
+    "provider_used": "Motor Inteligente 3 Camadas (Fallback • fetch failed)",
+    "translated_intent": "A solicitante Valeria Fernanda (Hosp. Unimed Piumhi) abriu o chamado relatando: \"Bom dia, Solicito suporte no sistema HRP, aba para cadastro de carteirinha não está aparecendo mais no meu login. Por gentileza, verificar. Aguardo retorno.\". A solicitação requer validação técnica inicial para atendimento.",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Acesso e Permissões",
+    "real_urgency": "Média",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Detalhamento exato da regra/campo ou código da tabela/importação no HRP",
+      "Validação/aprovação da regra de negócio pelo setor responsável (Faturamento / Promoprev)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-05",
+        "title": "Sistema HRP / TNUMM — Parametrização via Banco e Extração de Relatórios",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Solicitação de ajuste massivo via banco de dados no HRP (ex: pós-importação TNUMM) ou orientação de caminho para extração de relatórios gerenciais no HRP.",
+        "steps": [
+          "Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+          "Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+        ],
+        "score": 0.42
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-05)",
+    "resolution_steps": [
+      "[PB-UNI-05] Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+      "[PB-UNI-05] Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante Valeria Fernanda (Hosp. Unimed Piumhi) abriu o chamado relatando: \"Bom dia, Solicito suporte no sistema HRP, aba para cadastro de carteirinha não está aparecendo mais no meu login. Por gentileza, verificar. Aguardo retorno.\". A solicitação requer validação técnica inicial para atendimento.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-05)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Detalhamento exato da regra/campo ou código da tabela/importação no HRP\n  - Validação/aprovação da regra de negócio pelo setor responsável (Faturamento / Promoprev)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-05] Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.\n  2. [PB-UNI-05] Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nSua solicitação referente ao **HRP** já está em análise pela equipe técnica.\n\nEstamos verificando os parâmetros no sistema e, assim que a consulta/atualização estiver concluída (ou caso precisemos validar algum filtro adicional com você), atualizaremos este chamado!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
+  "43883": {
+    "ticket_id": 43883,
+    "analyzed_at": "09/11/2026 13:25",
+    "provider_used": "Motor Inteligente 3 Camadas (Fallback • fetch failed)",
+    "translated_intent": "Solicitação de orientação/treinamento operacional sobre como pesquisar e consultar resultados de exames no sistema AutoLac (Núcleo Passos).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > TR > Treinamento AutoLac",
+    "real_urgency": "Média",
+    "urgency_reason": "Dúvida de utilização do sistema; resolução rápida via orientação remota ao usuário.",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42127",
+        "title": "Acesso e Permissões  -  Dalete Olivira",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+          "[PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+          "[PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+          "[PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **{solicitante} Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43077 (Resolvido)",
+        "title": "Infraestrutura e Redes > Instalação e Configuração > Mudança de Computador na UTI Adulto",
+        "category": "T.I • Solucionado por fsilva",
+        "summary": "Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente.",
+        "steps": [
+          "Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-70",
+        "title": "Vincular exames ao convenio",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "SADT • Procedimentos Laboratoriais \r\n\n▸ Como vincular um exame a um convênio\n\r\nTutorial para cadastrar a referência entre um exame laboratorial e o procedimento utilizado no faturamento do convênio.\n\n\r\n\r\nPor que esse cadastro é importante?\nA referência por convênio permite que o exame lançado na recepção seja integrado...",
+        "steps": [
+          "SADT • Procedimentos Laboratoriais",
+          "▸ Como vincular um exame a um convênio",
+          "Tutorial para cadastrar a referência entre um exame laboratorial e o procedimento utilizado no faturamento do convênio.",
+          "Por que esse cadastro é importante?",
+          "A referência por convênio permite que o exame lançado na recepção seja integrado corretamente ao módulo de faturamento, respeitando a tabela de Honorários Médicos utilizada por cada convênio.",
+          "Caminho: SADT › Tabelas › Procedimentos › Laboratório › Ref. Convênio"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #43582 (Resolvido)",
+        "title": "Infraestrutura e Redes > Impressoras > Impressora da sala RPA não funciona",
+        "category": "T.I • Solucionado por fsilva",
+        "summary": "Cabo de rede reconectado.",
+        "steps": [
+          "Cabo de rede reconectado."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42127) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43077 (Resolvido))",
+    "resolution_steps": [
+      "[MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.",
+      "[MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.",
+      "[MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.",
+      "[MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.",
+      "[Chamado #43077 (Resolvido)] Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente.",
+      "[KB-70] SADT • Procedimentos Laboratoriais"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação de orientação/treinamento operacional sobre como pesquisar e consultar resultados de exames no sistema AutoLac (Núcleo Passos).\n\nClassificação Sugerida: T.I > TR > Treinamento AutoLac | Prioridade Real: Média\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42127) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #43077 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - ID do HopToDesk do computador (ou ramal de contato no Núcleo Passos) para demonstração rápida no AutoLac\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42127] [PB-UNI-12] Conferir se o Nome e o CPF preenchidos no formulário pertencem efetivamente ao profissional que receberá o acesso ou se foram preenchidos com os dados de quem abriu o chamado.\n  2. [MEM-#42127] [PB-UNI-12] Solicitar a especificação exata de quais acessos/sistemas devem ser liberados (ex: SGH Spdata, Active Directory/Rede, PACS, Wi-Fi ou Reconhecimento Facial nas portas do Hospital) e o CPF/CRM do profissional.\n  3. [MEM-#42127] [PB-UNI-12] Se o acesso incluir o Controle de Acesso / Reconhecimento Facial nas portas do Hospital, exigir o envio de uma fotografia frontal e com expressão neutra do rosto da pessoa a ser cadastrada.\n  4. [MEM-#42127] [PB-UNI-12] Após confirmação dos dados, sistemas e foto facial (quando aplicável), efetuar o cadastro nos sistemas correspondentes e comunicar a conclusão no chamado.\n  5. [Chamado #43077 (Resolvido)] Computador foi realocado na sala ao lado, foi testado e está funcionando corretamente.\n  6. [KB-70] SADT • Procedimentos Laboratoriais",
+    "public_reply_draft": "Olá, Diego! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **Diego Oliveira**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 2
+  },
+  "43922": {
+    "ticket_id": 43922,
+    "analyzed_at": "10/11/2026 13:47",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Gabriela Silva Reis** (Nucleo Passos) relata constantes reclamações de médicos referente à qualidade e instabilidade da internet e sinal Wi-Fi nas salas de atendimento da Clínica (Núcleo Passos), solicitando internet fixa para as salas. O chamado foi classificado como **PARCIAL** pois não especifica em quais salas ou consultórios médicos o sinal está ruim, nem se os computadores utilizam cabo de rede ou apenas conexão sem fio.",
+    "detected_domain": "Infraestrutura e Rede",
+    "suggested_category": "T.I > IR > Conectividade > Internet e WiFi",
+    "real_urgency": "Média",
+    "urgency_reason": "Reclamação de instabilidade e falta de internet fixa nas salas de atendimento e consultórios médicos da Clínica (Nucleo Passos).",
+    "sufficiency_status": "parcial",
+    "missing_info": [
+      "Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável",
+      "Informar se as quedas e lentidão afetam os computadores das salas ou principalmente dispositivos móveis (notebooks/celulares)"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-21",
+        "title": "Instabilidade de Internet / Solicitação de Instalação de Roteador ou Access Point Wi-Fi",
+        "category": "Infraestrutura e Rede",
+        "summary": "Setor ou clínica relata lentidão, oscilação ou quedas na conexão de internet/Wi-Fi (em chamadas de WhatsApp ou em consultórios/salas de atendimento com reclamações de médicos/profissionais) e solicita reforço de sinal Wi-Fi, roteador ou pontos de internet fixa para as salas.",
+        "steps": [
+          "Realizar teste remoto de latência, perda de pacotes e consumo de banda na VLAN/switch que atende a clínica/setor solicitante.",
+          "Verificar a cobertura de sinal Wi-Fi (mapa de calor / nível RSSI) e checar se há saturação de canais 2.4GHz / 5GHz no Access Point mais próximo.",
+          "Programar visita técnica presencial de técnico de Infraestrutura e Redes às salas e consultórios informados.",
+          "Durante a vistoria presencial no local, inspecionar fisicamente a existência e integridade de tomadas de rede RJ-45 nas paredes das salas, testar os patch cords e verificar portas disponíveis no switch/patch panel (diagnóstico físico exclusivo do técnico de campo).",
+          "Realizar medição presencial de sinal Wi-Fi (RSSI) dentro dos consultórios e avaliar a passagem de novos cabos de rede Cat6 ou instalação/reposicionamento de Access Point para garantir internet fixa e sem fio estável aos médicos."
+        ],
+        "score": 0.98
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-21)",
+    "resolution_steps": [
+      "[PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.",
+      "[PB-UNI-21] Aguardar retorno da solicitante Gabriela Silva Reis (Nucleo Passos) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se o impacto é nos computadores ou aparelhos móveis.",
+      "[PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.",
+      "[PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.",
+      "[PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes para vistoriar in loco as salas apontadas, inspecionar a presença e integridade das tomadas de rede RJ-45 na parede, testar o cabeamento e medir a cobertura de sinal Wi-Fi, providenciando conexão cabeada fixa ou reforço de AP se necessário.",
+      "[PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Gabriela Silva Reis** (Nucleo Passos) relata constantes reclamações de médicos referente à qualidade e instabilidade da internet e sinal Wi-Fi nas salas de atendimento da Clínica (Núcleo Passos), solicitando internet fixa para as salas. O chamado foi classificado como **PARCIAL** pois não especifica em quais salas ou consultórios médicos o sinal está ruim, nem se os computadores utilizam cabo de rede ou apenas conexão sem fio.\n\nClassificação Sugerida: T.I > IR > Conectividade > Internet e WiFi | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-21)\n\nTRIAGEM DE INFORMAÇÕES (PARCIAL):\n  - Especificar quais são os números ou identificações das salas e consultórios médicos onde a internet/sinal Wi-Fi está ruim ou instável\n  - Informar se as quedas e lentidão afetam os computadores das salas ou principalmente dispositivos móveis (notebooks/celulares)\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-21] Manter/confirmar a categoria do chamado no GLPI em 'T.I > IR > Conectividade > Internet e WiFi'.\n  2. [PB-UNI-21] Aguardar retorno da solicitante Gabriela Silva Reis (Nucleo Passos) informando quais salas/consultórios médicos apresentam instabilidade de sinal e se o impacto é nos computadores ou aparelhos móveis.\n  3. [PB-UNI-21] Verificar no painel de gerenciamento dos Access Points (UniFi / Omada / Mikrotik) a cobertura de sinal, interferência e a quantidade de clientes conectados no setor da Clínica do Núcleo Passos.\n  4. [PB-UNI-21] Realizar teste remoto de conectividade e taxa de transferência nos switches da unidade para descartar saturação de banda ou perda de pacotes.\n  5. [PB-UNI-21] Programar visita presencial de técnico de Infraestrutura e Redes para vistoriar in loco as salas apontadas, inspecionar a presença e integridade das tomadas de rede RJ-45 na parede, testar o cabeamento e medir a cobertura de sinal Wi-Fi, providenciando conexão cabeada fixa ou reforço de AP se necessário.\n  6. [PB-UNI-21] Validar a estabilidade da conexão junto aos médicos dos consultórios e notificar a conclusão no chamado GLPI.",
+    "public_reply_draft": "Olá, Gabriela! Tudo bem?\n\nRecebemos a sua solicitação referente à instabilidade da internet e às reclamações dos médicos nas salas de atendimento da **Clínica (Nucleo Passos)**.\n\nNossa equipe de Infraestrutura e Redes já está ciente e programando o atendimento. Para direcionarmos os testes e o deslocamento do técnico exatamente para os locais com problema, você poderia nos informar:\n1. **Quais são as salas ou consultórios médicos** (números ou identificação das salas/médicos) onde a internet está oscilando ou apresentando quedas?\n2. As falhas afetam os **computadores das salas** ou principalmente **dispositivos móveis** (notebooks/celulares)?\n\nCom essas salas mapeadas, nosso técnico de Infraestrutura irá presencialmente ao local para vistoriar os pontos de rede nas paredes, testar as tomadas RJ-45 e realizar a medição de sinal Wi-Fi para normalizar a conexão!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
