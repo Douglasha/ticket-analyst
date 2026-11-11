@@ -2000,5 +2000,39 @@
       "[PB-UNI-53] Após a resposta do usuário com as informações complementares, reavaliar o chamado e dar sequência na resolução técnica."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado, porém a descrição foi informada de forma resumida apenas como **\"{descricao_resumida}\"**, sem detalhamento da situação ocorrida.\n\nPara que possamos compreender a sua necessidade e prestar o atendimento correto, você poderia nos detalhar:\n1. O que está acontecendo ou o que você precisa que seja feito? (Ex.: é uma instalação/configuração, dificuldade de login/acesso à plataforma de atendimento WhatsApp do setor como o AscSac, mensagens não enviadas ou algum erro específico?)\n2. Caso esteja aparecendo alguma mensagem de erro ou tela travada, você poderia nos enviar um print da tela?\n3. Qual o **ID do HopToDesk** do computador ({ativo}) ou ramal para contato da equipe de T.I.?\n\nAssim que nos enviar esses detalhes por aqui, daremos sequência imediata ao suporte!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-54",
+    "domain": "Acessos, Permissões e Contas",
+    "title": "Acesso, Orientações de Uso e Redefinição de Senha no Nextcloud / Unidrive",
+    "keywords": [
+      "acesso ao nextcloud",
+      "acesso ao unidrive",
+      "senha nextcloud",
+      "senha do nextcloud",
+      "senha unidrive",
+      "senha do unidrive",
+      "senha nao esta condizente",
+      "senha não está condizente",
+      "nao consigo acesso nextcloud",
+      "não consigo acesso nextcloud",
+      "orientar sobre o acesso e uso do nextcloud",
+      "esqueci a senha nextcloud",
+      "redefinir senha nextcloud",
+      "resetar senha nextcloud",
+      "login nextcloud",
+      "erro login nextcloud"
+    ],
+    "symptoms": "Colaborador(a) relata dificuldade para acessar o Nextcloud / Unidrive devido a senha inválida, esquecida ou não condizente com a cadastrada ('A senha não está condizente com a criada e não consigo acesso'), solicitando redefinição de credencial e orientações sobre como acessar e utilizar a plataforma (via navegador web ou aplicativo).",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-54] Sugerir reclassificação da categoria no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77) ou 'T.I > ST > Dúvidas e Orientações' (ID 160).",
+      "[PB-UNI-54] Acessar o painel administrativo do servidor Nextcloud corporativo da Unimed com credenciais de administrador.",
+      "[PB-UNI-54] No menu 'Usuários', pesquisar e localizar a conta do(a) colaborador(a) informado(a) no chamado (ex.: login 'rviana' / Rosy Ellen Freire Viana - Laboratório).",
+      "[PB-UNI-54] Redefinir a senha do usuário configurando uma senha temporária segura ou acionar o envio do link de redefinição para o e-mail institucional do colaborador.",
+      "[PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o endereço web oficial de acesso e as orientações para alteração obrigatória da senha no primeiro login.",
+      "[PB-UNI-54] Caso o colaborador também necessite sincronizar pastas de rede locais em sua estação de trabalho, orientar a configuração pelo aplicativo Nextcloud Desktop Client (Unidrive) ou solicitar o ID do HopToDesk para apoio remoto."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** ({setor}).\n\nNossa equipe técnica de T.I. já está verificando o seu usuário (`{login}`) no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua senha temporária de primeiro acesso juntamente com as orientações de uso e o link para login no navegador web. Caso também necessite de apoio para configurar a sincronização de pastas no seu computador pelo aplicativo (Unidrive), basta nos informar o ID do HopToDesk da sua máquina.\n\nAssim que a redefinição for concluída, avisaremos por aqui para que você possa realizar o teste de acesso!\n\nPermanecemos à disposição!"
   }
 ]

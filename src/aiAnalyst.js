@@ -1729,12 +1729,55 @@ export class AIAnalyst {
         `- Verificar com os colegas da equipe antes de iniciar alterações extensas em planilhas compartilhadas ou fechar o arquivo assim que concluir a edição.\n\n` +
         `Permanecemos à total disposição!`;
     } else if (
+      (/\b(nextcloud|nextclaud|unidrive|uni\s*drive)\b/i.test(normAll) &&
+        (/\b(senha|senhas|login|credencial|credenciais|acesso|n[aã]o consigo|n[aã]o consigo acesso|orientar|orienta[cç][aã]o|esqueci|redefinir|redefini[cç][aã]o|resetar|reset|condizente)\b/i.test(
+          normAll
+        ) ||
+          /\bsenha\s+n[aã]o\s+est[aá]\s+condizente\b/i.test(normAll))) &&
+      !/\b(instalar\s+(?:o\s+)?(?:unidrive|nextcloud)|instala[çc][ãa]o\s+d[oe]\s+(?:unidrive|nextcloud)|computador\s+novo|trocou\s+o\s+computador)\b/i.test(
+        formFields.descricao || ticket.content || ""
+      )
+    ) {
+      detectedDomain = "Acessos, Permissões e Contas";
+      suggestedCategory =
+        "T.I > ST > Acesso e Permissões > Redefinição de Senhas";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Dificuldade de autenticação / inconsistência de senha no Nextcloud, demandando redefinição de credencial e orientações de primeiro acesso.";
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      const loginCandidate = ticket.requester_login || "do seu usuário";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita orientação de uso e redefinição de senha para acesso ao **Nextcloud**, ` +
+        `relatando que a senha utilizada não confere com a cadastrada ('A senha não está condizente com a criada e não consigo acesso') e anexando a evidência do erro de autenticação em tela. ` +
+        `Recomenda-se reclassificar de Aplicativos para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas'.`;
+
+      customResolutionSteps = [
+        `[PB-UNI-54] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77).`,
+        `[PB-UNI-54] Acessar o console de administração do Nextcloud institucional da Unimed com credenciais de administrador.`,
+        `[PB-UNI-54] No menu 'Usuários', localizar a conta da colaboradora ${ticket.requester} (login: ${loginCandidate}) vinculada ao setor ${sectorName}.`,
+        `[PB-UNI-54] Redefinir a senha da usuária definindo uma senha temporária segura ou disparar o link de redefinição para o e-mail institucional corporativo da colaboradora.`,
+        `[PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o link oficial de acesso web do Nextcloud e as orientações para alteração obrigatória da senha no primeiro login.`,
+        `[PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** (${sectorName}).\n\n` +
+        `Nossa equipe técnica de T.I. já está verificando o cadastro do seu usuário no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\n` +
+        `Em breve, encaminharemos por aqui a sua **senha temporária de acesso** acompanhada do link oficial para login no navegador web e das orientações de primeiro acesso. Caso você também necessite sincronizar as pastas departamentais diretamente no seu computador pelo aplicativo (Unidrive), basta nos informar o ID do HopToDesk da sua máquina para que possamos auxiliá-la remotamente.\n\n` +
+        `Assim que a redefinição da senha for concluída no painel, confirmaremos por aqui para que você possa realizar o login!\n\n` +
+        `Permanecemos à total disposição!`;
+    } else if (
       (/\b(unidrive|uni\s*drive)\b/i.test(normAll) ||
-       /\b(nextcloud|nextclaud)\b/i.test(normAll)) &&
+        /\b(nextcloud|nextclaud)\b/i.test(normAll)) &&
       (/\b(instalar|instala[çc][ãa]o|instalem|instale|novo computador|trocou o computador|troca de computador|formatou|computador novo|est[aá] sem o|n[aã]o foi instalado|n[aã]o est[aá] instalado)\b/i.test(
-        normAll
+        formFields.descricao || ""
       ) ||
-       normAll.includes("pasta compartilhada - unidrive"))
+        normAll.includes("pasta compartilhada - unidrive"))
     ) {
       const descOnly = formFields.descricao || ticket.content || "";
       const targetUserMatch =

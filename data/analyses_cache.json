@@ -11946,6 +11946,64 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43992": {
+    "ticket_id": 43992,
+    "analyzed_at": "11/11/2026 11:48",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "O(a) solicitante **Rosy Ellen Freire Viana** (Laboratório) solicita orientação de uso e redefinição de senha para acesso ao **Nextcloud**, relatando que a senha utilizada não confere com a cadastrada ('A senha não está condizente com a criada e não consigo acesso') e anexando a evidência do erro de autenticação em tela. Recomenda-se reclassificar de Aplicativos para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas'.",
+    "detected_domain": "Acessos, Permissões e Contas",
+    "suggested_category": "T.I > ST > Acesso e Permissões > Redefinição de Senhas",
+    "real_urgency": "Média",
+    "urgency_reason": "Dificuldade de autenticação / inconsistência de senha no Nextcloud, demandando redefinição de credencial e orientações de primeiro acesso.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-54",
+        "title": "Acesso, Orientações de Uso e Redefinição de Senha no Nextcloud / Unidrive",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Colaborador(a) relata dificuldade para acessar o Nextcloud / Unidrive devido a senha inválida, esquecida ou não condizente com a cadastrada ('A senha não está condizente com a criada e não consigo acesso'), solicitando redefinição de credencial e orientações sobre como acessar e utilizar a plataforma (via navegador web ou aplicativo).",
+        "steps": [
+          "[PB-UNI-54] Sugerir reclassificação da categoria no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77) ou 'T.I > ST > Dúvidas e Orientações' (ID 160).",
+          "[PB-UNI-54] Acessar o painel administrativo do servidor Nextcloud corporativo da Unimed com credenciais de administrador.",
+          "[PB-UNI-54] No menu 'Usuários', pesquisar e localizar a conta do(a) colaborador(a) informado(a) no chamado (ex.: login 'rviana' / Rosy Ellen Freire Viana - Laboratório).",
+          "[PB-UNI-54] Redefinir a senha do usuário configurando uma senha temporária segura ou acionar o envio do link de redefinição para o e-mail institucional do colaborador.",
+          "[PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o endereço web oficial de acesso e as orientações para alteração obrigatória da senha no primeiro login.",
+          "[PB-UNI-54] Caso o colaborador também necessite sincronizar pastas de rede locais em sua estação de trabalho, orientar a configuração pelo aplicativo Nextcloud Desktop Client (Unidrive) ou solicitar o ID do HopToDesk para apoio remoto."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-02",
+        "title": "Falha de Acesso ao Nextcloud (Pastas Compartilhadas / Sincronização)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Usuário relata que não consegue acessar a pasta do Nextcloud (via navegador ou cliente de sincronização Desktop).",
+        "steps": [
+          "Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+          "Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+          "Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou."
+        ],
+        "score": 0.53
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-54) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-02)",
+    "resolution_steps": [
+      "[PB-UNI-54] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77).",
+      "[PB-UNI-54] Acessar o console de administração do Nextcloud institucional da Unimed com credenciais de administrador.",
+      "[PB-UNI-54] No menu 'Usuários', localizar a conta da colaboradora Rosy Ellen Freire Viana (login: rviana) vinculada ao setor Laboratório.",
+      "[PB-UNI-54] Redefinir a senha da usuária definindo uma senha temporária segura ou disparar o link de redefinição para o e-mail institucional corporativo da colaboradora.",
+      "[PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o link oficial de acesso web do Nextcloud e as orientações para alteração obrigatória da senha no primeiro login.",
+      "[PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO(a) solicitante **Rosy Ellen Freire Viana** (Laboratório) solicita orientação de uso e redefinição de senha para acesso ao **Nextcloud**, relatando que a senha utilizada não confere com a cadastrada ('A senha não está condizente com a criada e não consigo acesso') e anexando a evidência do erro de autenticação em tela. Recomenda-se reclassificar de Aplicativos para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas'.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Redefinição de Senhas | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-54) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-02)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-54] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77).\n  2. [PB-UNI-54] Acessar o console de administração do Nextcloud institucional da Unimed com credenciais de administrador.\n  3. [PB-UNI-54] No menu 'Usuários', localizar a conta da colaboradora Rosy Ellen Freire Viana (login: rviana) vinculada ao setor Laboratório.\n  4. [PB-UNI-54] Redefinir a senha da usuária definindo uma senha temporária segura ou disparar o link de redefinição para o e-mail institucional corporativo da colaboradora.\n  5. [PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o link oficial de acesso web do Nextcloud e as orientações para alteração obrigatória da senha no primeiro login.\n  6. [PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk.",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** (Laboratório).\n\nNossa equipe técnica de T.I. já está verificando o cadastro do seu usuário no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua **senha temporária de acesso** acompanhada do link oficial para login no navegador web e das orientações de primeiro acesso. Caso você também necessite sincronizar as pastas departamentais diretamente no seu computador pelo aplicativo (Unidrive), basta nos informar o ID do HopToDesk da sua máquina para que possamos auxiliá-la remotamente.\n\nAssim que a redefinição da senha for concluída no painel, confirmaremos por aqui para que você possa realizar o login!\n\nPermanecemos à total disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",
