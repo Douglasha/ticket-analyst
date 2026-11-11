@@ -1,5 +1,37 @@
 [
   {
+    "ticket_id": 43883,
+    "title": "Instalação/Configuração  -  Instalação de Aparelho de ECG à rede Hospitalar",
+    "category": "T.I > ST > Instalação/Configuração",
+    "keywords": [
+      "aparelho",
+      "ecg",
+      "rede",
+      "hospitalar",
+      "proposta",
+      "eliminar",
+      "digitalizados",
+      "dentro"
+    ],
+    "problem_summary": "Bom dia\nCom a proposta de eliminar arquivos digitalizados dentro do sistema.\nVenho para verificar a possibilidade de Instalação dos aparelhos de ECG via cabo de rede, para abertura dos exames via computador.\nOs exames além de impressos para avaliação do profissional médico, necessita ser digitalizado e lançado no sistema.\nNeste processo de digitalização, pode ocorrer extravio do exame, corrompimento do arquivo, baixa qualidade da digitalização para avaliação dentro do PEP.\nA idéia é ter o acesso via rede, para baixar o arquivo e anexar, sem a necessidade de digitalização.\nMelhorando o processo, qualidade e otimização de tempo.\nPossuímos aparelhos na UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de internação.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nAgradecemos pelo envio desta excelente proposta de melhoria e modernização dos processos assistenciais do Hospital Unimed!\n\nIdentificamos que a solicitação já conta com todo o detalhamento necessário, incluindo a relação dos 5 setores onde os aparelhos estão alocados (**UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação**) e o manual técnico oficial do fabricante anexado ao chamado.\n\nNossa equipe de T.I. já iniciou o **estudo de viabilidade técnica e arquitetura de conectividade**, englobando as seguintes frentes:\n1. **Infraestrutura e Redes:** Mapeamento de tomadas de rede RJ-45 próximas aos aparelhos nos postos de atendimento e configuração de uma VLAN dedicada para dispositivos biomédicos com IPs reservados;\n2. **Engenharia Clínica & Fabricante:** Validação do módulo de rede LAN e protocolo de exportação suportado pelos aparelhos (pasta de rede compartilhada SMB, FTP ou formato PDF/XML);\n3. **Sistemas e PEP:** Definição do fluxo mais ágil para visualização, download e anexo dos arquivos digitais diretamente no prontuário do paciente (SGH Spdata).\n\nAssim que concluirmos o levantamento da infraestrutura física de rede, alinharemos com você a realização de um **teste piloto** para validação prática da equipe de enfermagem antes da expansão para as demais alas.\n\nSeguimos à disposição e manteremos você informado sobre cada etapa do projeto por aqui!\n\nAtenciosamente,\nEquipe de Tecnologia da Informação",
+    "required_info": [
+      "Infraestrutura e Redes: Mapeamento de tomadas de rede RJ-45 próximas aos aparelhos nos postos de atendimento e configuração de uma VLAN dedicada para dispositivos biomédicos com IPs reservados;",
+      "Engenharia Clínica & Fabricante: Validação do módulo de rede LAN e protocolo de exportação suportado pelos aparelhos (pasta de rede compartilhada SMB, FTP ou formato PDF/XML);",
+      "Sistemas e PEP: Definição do fluxo mais ágil para visualização, download e anexo dos arquivos digitais diretamente no prontuário do paciente (SGH Spdata)."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-52] Manter a categoria do chamado no GLPI em 'T.I > ST > Instalação/Configuração' e atribuir o atendimento conjunto aos grupos 'T.I > IR (Infra & Redes)' e 'T.I > ST (Service Desk)'.",
+      "[PB-UNI-52] Analisar as especificações técnicas e opções de conectividade do manual do operador do Mindray BeneHeart R3 (anexado ao chamado), confirmando os protocolos de rede suportados (porta Ethernet RJ-45, TCP/IP, envio para pasta compartilhada SMB, servidor FTP ou software Mindray ECG).",
+      "[PB-UNI-52] Realizar alinhamento com a Engenharia Clínica para inspeção física dos aparelhos de ECG nos 5 setores indicados (UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação) e checagem de ativação do módulo de rede em cada equipamento.",
+      "[PB-UNI-52] A equipe de Infraestrutura e Redes deve mapear os pontos de rede estruturada RJ-45 nos postos de atendimento, configurar VLAN isolada para equipamentos médicos e reservar faixas de IPs fixos no servidor DHCP/switches para cada aparelho.",
+      "[PB-UNI-52] A equipe de Sistemas/Suporte Técnico e Desenvolvimento deve estruturar o diretório compartilhado em rede (com credenciais restritas) e definir o fluxo de importação/anexo dos laudos em PDF no sistema PEP (SGH Spdata).",
+      "[PB-UNI-52] Executar um projeto piloto no aparelho de 1 setor prioritário (ex.: Sala de Emergência ou UTI Adulto) para validação do traçado digital, tempo de resposta e facilidade operacional junto à equipe de enfermagem antes de homologar nos demais setores."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-10T17:15:15.653Z"
+  },
+  {
     "ticket_id": 43854,
     "title": "Telefones VoIP  -  Aparelho com mal contato",
     "category": "T.I > IR > Administração de Redes > Telefones VoIP",

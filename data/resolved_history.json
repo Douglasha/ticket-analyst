@@ -1,5 +1,55 @@
 [
   {
+    "id": "Chamado #43956 (Resolvido)",
+    "ticket_id": 43956,
+    "solution_id": 42668,
+    "title": "Suporte Técnico e Service Desk > Desbloqueio de Contas > PRISCILA CAMPOLINA SANTOS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha desbloqueada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha desbloqueada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43954 (Resolvido)",
+    "ticket_id": 43954,
+    "solution_id": 42699,
+    "title": "Suporte Técnico e Service Desk > Desbloqueio de Contas > BEATRIZ DOS REIS FONSECA",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCredenciais enviadas para o e-mail informado:\n\n\r\nLogin: CPF\r\nSenha: Unimed@#256\r\n \r\n \r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Credenciais enviadas para o e-mail informado:",
+      "Login: CPF",
+      "Senha: Unimed@#256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43953 (Resolvido)",
+    "ticket_id": 43953,
+    "solution_id": 42702,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Estela Martins dos Reis Carvalho",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro concluído com sucesso!Login: 02074227612Senha: 0207Os dados de login do(a) atendente foram enviados para o e-mail informado.\n\n\r\n\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro concluído com sucesso!Login: 02074227612Senha: 0207Os dados de login do(a) atendente foram enviados para o e-mail informado.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43946 (Resolvido)",
     "ticket_id": 43946,
     "solution_id": 42644,
@@ -71,6 +121,22 @@
     "keywords": [],
     "steps": [
       "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43919 (Resolvido)",
+    "ticket_id": 43919,
+    "solution_id": 42704,
+    "title": "Verificação do Portal Transparência [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós atualização da tiss, relatório não está retornando dados\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após atualização da tiss, relatório não está retornando dados",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -184,6 +250,24 @@
     ]
   },
   {
+    "id": "Chamado #43848 (Resolvido)",
+    "ticket_id": 43848,
+    "solution_id": 42671,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Joao Pedro Lisboa da Cruz",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "______________________________________________\n\n\r\nWeb Mail\n\n\r\nhttps://webmail-seguro.com.br\n\n\r\nEmail:jcruz@unimedsudoestemg.coop.br\n\n\r\nSenha: Unimed@256\n\n\r\n______________________________________________\n\n\r\nLGPD\n\n\r\nhttps://lgpd.unisulmg.com.br/?pag=acesso\n\n\r\nEmail:jcruz@unimedsudoestemg.coop.br\n\n\r\nSenha: Unimed@256\n\n\r\n_______________________________",
+    "keywords": [],
+    "steps": [
+      "______________________________________________",
+      "Web Mail",
+      "https://webmail-seguro.com.br",
+      "Email:jcruz@unimedsudoestemg.coop.br",
+      "Senha: Unimed@256",
+      "______________________________________________"
+    ]
+  },
+  {
     "id": "Chamado #43847 (Resolvido)",
     "ticket_id": 43847,
     "solution_id": 42570,
@@ -255,6 +339,24 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43821 (Resolvido)",
+    "ticket_id": 43821,
+    "solution_id": 42708,
+    "title": "T.I > ST > Acesso e Permissões > Revogar Certificados [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue cadastros revogados:\n\n\r\n202401 DALETE GARCIA DE OLIVEIRA BARTELOCHI 1005221281 \n202305 GISLAINE ALVES DOS REIS 1004353267 \n202305 GUSTAVO KIRCHNER FERREIRA 1004314658 \n202506 KARINA MACIEL PADUA 1008195542\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue cadastros revogados:",
+      "202401 DALETE GARCIA DE OLIVEIRA BARTELOCHI 1005221281",
+      "202305 GISLAINE ALVES DOS REIS 1004353267",
+      "202305 GUSTAVO KIRCHNER FERREIRA 1004314658",
+      "202506 KARINA MACIEL PADUA 1008195542"
     ]
   },
   {

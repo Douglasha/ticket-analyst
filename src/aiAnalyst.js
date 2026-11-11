@@ -739,6 +739,106 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
+      (() => {
+        const rawDesc = (formFields.descricao || formFields.problema || "")
+          .replace(/▸[^\n]+/g, "")
+          .replace(/\d+\)\s*[^:\n]+:[^\n]*/g, "")
+          .replace(/<[^>]+>/g, "")
+          .trim();
+        const normDesc = normalizeText(rawDesc);
+        const cleanTitle = normalizeText(ticket.title || "")
+          .split(">")
+          .pop()
+          .trim();
+        const normSector = normalizeText(sectorName || "");
+
+        if (normDesc.length === 0) return true;
+        if (normDesc.length <= 35) {
+          if (
+            normDesc === cleanTitle ||
+            normDesc === `${cleanTitle} ${normSector}`.trim() ||
+            normDesc === `${normSector} ${cleanTitle}`.trim() ||
+            /^(whatsapp|computador|sistema|ajuda|teste|urgente|verificar|nao funciona|não funciona|problema|erro|chamado|favor verificar|solicito|atendimento)$/i.test(
+              normDesc
+            )
+          ) {
+            return true;
+          }
+          const stripped = normDesc
+            .replace(new RegExp(`\\b${cleanTitle}\\b`, "g"), "")
+            .replace(new RegExp(`\\b${normSector}\\b`, "g"), "")
+            .trim();
+          if (stripped.length <= 6) return true;
+        }
+        return false;
+      })()
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const isFemale =
+        /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
+          firstName
+        ) || /a$/i.test(firstName);
+      const solPrefix = isMale
+        ? "O solicitante"
+        : isFemale
+        ? "A solicitante"
+        : "O(a) solicitante";
+
+      const rawDesc = (formFields.descricao || formFields.problema || "")
+        .replace(/<[^>]+>/g, "")
+        .trim();
+      const cleanSubject = (ticket.title || "").includes(">")
+        ? ticket.title.split(">").pop().trim()
+        : ticket.title;
+      const displayDesc = rawDesc || cleanSubject;
+      const isWhatsApp = /\bwhatsapp\b/i.test(normAll);
+      const assetInfo = formFields.ativo ? ` (${formFields.ativo})` : "";
+
+      detectedDomain = "Suporte Técnico Geral / Service Desk";
+      suggestedCategory = ticket.category;
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Chamado com descrição vaga/insuficiente, necessitando de detalhamento pelo solicitante para direcionamento e suporte técnico adequado.";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) abriu o chamado com título/descrição resumida apenas como **\"${displayDesc}\"**, sem detalhar a falha, dúvida ou procedimento desejado. ` +
+        `Demanda solicitação de informações complementares ao setor para viabilizar o diagnóstico técnico.`;
+
+      sufficiencyStatus = "incompleto";
+      missingInfo = [
+        `Descrever detalhadamente a solicitação ou o problema ocorrido (o chamado foi registrado apenas com o termo \"${displayDesc}\", sem detalhes do sintoma ou objetivo)`,
+        isWhatsApp
+          ? "Informar se trata-se de instalação/configuração do WhatsApp Web/Desktop, dificuldade de login/acesso à plataforma de atendimento via WhatsApp do setor (ex.: AscSac) ou mensagens que não estão sendo enviadas"
+          : "Informar se trata-se de instalação de aplicativo, dúvida de uso, falha de login ou erro operacional (enviar print da tela com mensagem de erro, se houver)",
+        `Informar o ID do HopToDesk da máquina${assetInfo} ou ramal para contato da equipe de T.I.`,
+      ];
+
+      customResolutionSteps = [
+        `[PB-UNI-53] Manter a categoria do chamado no GLPI em '${ticket.category}'.`,
+        `[PB-UNI-53] Responder ao(à) solicitante ${ticket.requester} (${sectorName}) solicitando o detalhamento claro da demanda e evidências visuais (prints ou mensagens de erro).`,
+        isWhatsApp
+          ? `[PB-UNI-53] Caso o setor utilize plataforma web de atendimento WhatsApp (ex.: AscSac no setor ${sectorName}), checar com a equipe se a dificuldade é de alternância de painéis (clássico vs. novo) ou conectividade de canal.`
+          : `[PB-UNI-53] Identificar se a demanda refere-se a software específico, hardware local ou permissão de acesso.`,
+        `[PB-UNI-53] Obter o ID do HopToDesk da máquina${assetInfo} para conexão remota ou alinhamento por ramal telefônico.`,
+        `[PB-UNI-53] Após a resposta do solicitante com os detalhes, reclassificar o chamado se necessário e executar a resolução técnica.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu chamado, porém a descrição foi informada de forma resumida apenas como **"${displayDesc}"**, sem maiores detalhes da situação ocorrida.\n\n` +
+        `Para que possamos compreender a sua necessidade e prestar o atendimento correto, você poderia nos detalhar:\n` +
+        (isWhatsApp
+          ? `1. O que está acontecendo ou o que você precisa que seja feito com o WhatsApp no setor d${
+              sectorName.toLowerCase().startsWith("a") ? "a" : "o"
+            } **${sectorName}**? (Ex.: é uma nova instalação/configuração, dificuldade de login ou acesso à plataforma de atendimento do setor como o **AscSac**, mensagens que não estão sendo enviadas ou algum erro específico?)\n`
+          : `1. O que está acontecendo ou o que você precisa que seja feito? (Ex.: é uma nova instalação/configuração, dificuldade de login/acesso, mensagens de erro na tela ou alguma falha específica?)\n`) +
+        `2. Caso esteja aparecendo alguma mensagem de erro ou tela travada, você poderia nos enviar um print da tela?\n` +
+        `3. Qual o **ID do HopToDesk** do computador${assetInfo} ou ramal para contato da equipe de T.I.?\n\n` +
+        `Assim que nos enviar esses detalhes por aqui, daremos sequência imediata ao seu atendimento!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
       /\b(ecg|eletrocardiograma|eletrocardi[oó]grafo|beneheart)\b/i.test(normAll) ||
       (/\baparelhos?\b/i.test(normAll) &&
         /\b(rede hospitalar|digitaliza[cç][aã]o|digitalizados?)\b/i.test(normAll) &&
@@ -4144,7 +4244,41 @@ export class AIAnalyst {
       urgencyReason = "Classificação baseada no relato e impacto operacional informados pelo solicitante.";
 
       if (matchedMemory) {
+        const isVagueDesc = (() => {
+          const rawD = (formFields.descricao || formFields.problema || "")
+            .replace(/▸[^\n]+/g, "")
+            .replace(/\d+\)\s*[^:\n]+:[^\n]*/g, "")
+            .replace(/<[^>]+>/g, "")
+            .trim();
+          const nD = normalizeText(rawD);
+          const cT = normalizeText(ticket.title || "")
+            .split(">")
+            .pop()
+            .trim();
+          const nS = normalizeText(sectorName || "");
+          if (nD.length === 0) return true;
+          if (nD.length <= 35) {
+            if (
+              nD === cT ||
+              nD === `${cT} ${nS}`.trim() ||
+              nD === `${nS} ${cT}`.trim() ||
+              /^(whatsapp|computador|sistema|ajuda|teste|urgente|verificar|nao funciona|não funciona|problema|erro|chamado|favor verificar|solicito|atendimento)$/i.test(
+                nD
+              )
+            ) {
+              return true;
+            }
+            const str = nD
+              .replace(new RegExp(`\\b${cT}\\b`, "g"), "")
+              .replace(new RegExp(`\\b${nS}\\b`, "g"), "")
+              .trim();
+            if (str.length <= 6) return true;
+          }
+          return false;
+        })();
+
         const isMemActionMismatch =
+          isVagueDesc ||
           (!/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
             /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
               normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)
@@ -4305,7 +4439,41 @@ export class AIAnalyst {
     if (customPublicReply) {
       publicReply = customPublicReply;
     } else if (matchedMemory?.reply_template) {
+      const isVagueDesc = (() => {
+        const rawD = (formFields.descricao || formFields.problema || "")
+          .replace(/▸[^\n]+/g, "")
+          .replace(/\d+\)\s*[^:\n]+:[^\n]*/g, "")
+          .replace(/<[^>]+>/g, "")
+          .trim();
+        const nD = normalizeText(rawD);
+        const cT = normalizeText(ticket.title || "")
+          .split(">")
+          .pop()
+          .trim();
+        const nS = normalizeText(sectorName || "");
+        if (nD.length === 0) return true;
+        if (nD.length <= 35) {
+          if (
+            nD === cT ||
+            nD === `${cT} ${nS}`.trim() ||
+            nD === `${nS} ${cT}`.trim() ||
+            /^(whatsapp|computador|sistema|ajuda|teste|urgente|verificar|nao funciona|não funciona|problema|erro|chamado|favor verificar|solicito|atendimento)$/i.test(
+              nD
+            )
+          ) {
+            return true;
+          }
+          const str = nD
+            .replace(new RegExp(`\\b${cT}\\b`, "g"), "")
+            .replace(new RegExp(`\\b${nS}\\b`, "g"), "")
+            .trim();
+          if (str.length <= 6) return true;
+        }
+        return false;
+      })();
+
       const isMemActionMismatch =
+        isVagueDesc ||
         (!/\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(normAll) &&
           /\b(unifica|unificar|unificacao|duplicad|duplicidade)\b/i.test(
             normalizeText(`${matchedMemory.title || ""} ${matchedMemory.summary || ""}`)

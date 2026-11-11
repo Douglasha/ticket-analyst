@@ -1967,5 +1967,38 @@
       "[PB-UNI-52] Implementar um projeto piloto em 1 setor prioritário (ex.: Sala de Emergência ou UTI Adulto) para validação prática do envio do traçado, velocidade de geração do PDF e aceite operacional pela equipe de enfermagem antes da expansão para os demais setores."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nAgradecemos pelo envio desta excelente proposta de melhoria e modernização dos processos assistenciais do Hospital Unimed!\n\nA integração dos eletrocardiógrafos **Mindray BeneHeart R3** diretamente à rede hospitalar trará ganhos substanciais de agilidade para a equipe de Enfermagem, além de garantir maior nitidez nos traçados e eliminar os riscos de extravio ou retrabalho na digitalização manual de exames para o PEP (SGH Spdata).\n\nIdentificamos que você já forneceu todas as informações essenciais, incluindo os 5 setores onde os aparelhos estão alocados (**UTI Adulto, UTI Neo, Sala de Emergência/Medicação, Suíte e Ala de Internação**) e o manual técnico oficial do fabricante em anexo.\n\nNossa equipe de T.I. já deu início ao **estudo de viabilidade técnica e arquitetura de conectividade**, englobando as seguintes frentes:\n1. **Infraestrutura e Redes:** Mapeamento de tomadas de rede RJ-45 nos leitos/postos dos setores e configuração de uma VLAN dedicada para equipamentos médicos com IPs reservados;\n2. **Engenharia Clínica & Fabricante:** Validação do módulo de rede LAN e protocolo de exportação suportado pelos aparelhos (pasta de rede compartilhada SMB, FTP ou formato PDF/XML);\n3. **Sistemas e PEP:** Definição do fluxo mais ágil para acesso e anexo dos arquivos digitais diretamente no prontuário do paciente (SGH Spdata).\n\nAssim que concluirmos o levantamento da infraestrutura de rede, alinharemos com você a realização de um **teste piloto** no primeiro setor (ex.: Emergência ou UTI) para validação prática da equipe de enfermagem antes da expansão geral.\n\nSeguimos à disposição e manteremos você atualizado por aqui a cada etapa!"
+  },
+  {
+    "id": "PB-UNI-53",
+    "domain": "Suporte Técnico Geral / Service Desk",
+    "title": "Chamado sem Descrição ou com Descrição Vaga / Genérica (Solicitação de Detalhamento ao Usuário)",
+    "keywords": [
+      "sem descricao",
+      "sem descrição",
+      "descricao vaga",
+      "descrição vaga",
+      "whatsapp autorizacao",
+      "whatsapp autorização",
+      "apenas titulo",
+      "detalhar solicitacao",
+      "detalhar solicitação",
+      "falta informacao",
+      "falta informação"
+    ],
+    "symptoms": "O solicitante abre o chamado com título isolado (ex.: 'whatsapp', 'computador', 'sistema', 'ajuda') e a descrição está em branco, muito curta (<= 25 caracteres) ou é apenas a repetição redundante do título ou setor (ex.: 'whatsapp autorização', 'sistema com problema'), sem detalhar qual é o erro, dúvida ou necessidade operacional.",
+    "required_info": [
+      "Detalhamento claro da solicitação (o que está acontecendo ou o que precisa ser feito pelo suporte)",
+      "Informar se é instalação, dificuldade de login/acesso à plataforma de mensagens (ex.: AscSac), falha no envio ou erro em tela",
+      "Mensagem de erro ou print da tela, caso haja falha ou tela travada",
+      "ID do HopToDesk da máquina informada no ativo ou ramal para contato da equipe de T.I."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-53] Manter a categoria atual do chamado no GLPI ('T.I > ST > Instalação/Configuração > Aplicativos' ou conforme o título informado) e registrar status de triagem como PARCIAL / INCOMPLETO.",
+      "[PB-UNI-53] Solicitar ao(à) solicitante o detalhamento da demanda por meio de resposta pública com perguntas direcionadas sobre o que precisa ser realizado.",
+      "[PB-UNI-53] Caso o chamado mencione WhatsApp em setores de atendimento (ex.: Autorização), checar se trata-se de dificuldade com WhatsApp Web / Desktop ou com a plataforma institucional de atendimento via WhatsApp (AscSac - alternância entre painel clássico e novo painel, fila de mensagens ou login).",
+      "[PB-UNI-53] Solicitar o ID do HopToDesk da máquina informada no ativo (ex.: DUN-0461-AUTOR) ou ramal para suporte remoto imediato.",
+      "[PB-UNI-53] Após a resposta do usuário com as informações complementares, reavaliar o chamado e dar sequência na resolução técnica."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado, porém a descrição foi informada de forma resumida apenas como **\"{descricao_resumida}\"**, sem detalhamento da situação ocorrida.\n\nPara que possamos compreender a sua necessidade e prestar o atendimento correto, você poderia nos detalhar:\n1. O que está acontecendo ou o que você precisa que seja feito? (Ex.: é uma instalação/configuração, dificuldade de login/acesso à plataforma de atendimento WhatsApp do setor como o AscSac, mensagens não enviadas ou algum erro específico?)\n2. Caso esteja aparecendo alguma mensagem de erro ou tela travada, você poderia nos enviar um print da tela?\n3. Qual o **ID do HopToDesk** do computador ({ativo}) ou ramal para contato da equipe de T.I.?\n\nAssim que nos enviar esses detalhes por aqui, daremos sequência imediata ao suporte!\n\nPermanecemos à disposição!"
   }
 ]

@@ -170,8 +170,17 @@ export class KnowledgeEngine {
   async searchAllLayers(ticket, topK = 4) {
     const isRoutine = /\[r\]\s*$/i.test(ticket.title);
     const formFields = extractFormCreatorFields(ticket.content);
-    const publicFollowups = (ticket.followups || [])
-      .filter((f) => !f.is_private)
+
+    // Apenas considera followups públicos do próprio solicitante para complementar o relato inicial
+    // (ignora andamentos e notas de técnicos/analistas de TI que investigaram o chamado posteriormente)
+    const requesterFollowups = (ticket.followups || [])
+      .filter(
+        (f) =>
+          !f.is_private &&
+          (f.author === ticket.requester ||
+            (ticket.requester_first_name &&
+              f.author?.toLowerCase().includes(ticket.requester_first_name.toLowerCase())))
+      )
       .map((f) => f.content)
       .join(" ");
 
@@ -187,7 +196,7 @@ export class KnowledgeEngine {
       formFields.motivo,
       formFields.acessos,
       formFields.descricao,
-      publicFollowups,
+      requesterFollowups,
     ]
       .filter(Boolean)
       .join(" ");
