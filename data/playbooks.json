@@ -602,12 +602,14 @@
   {
     "id": "PB-UNI-19",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "title": "Unificação de Cadastros Duplicados (Beneficiário, Paciente ou Insumos / Materiais — HRP Unimed / PEP / SGH)",
+    "title": "Unificação de Cadastros Duplicados (Profissionais de Saúde, Beneficiários, Pacientes ou Insumos / Materiais — HRP Unimed / PEP / SGH)",
     "keywords": [
       "unificacao de cadastro",
       "unificação de cadastro",
       "unificacao cadastro",
       "unificação cadastro",
+      "unificar cadastro",
+      "unificar cadastros",
       "unificar",
       "unificar as chaves",
       "unificar cadastro do insumo",
@@ -622,20 +624,28 @@
       "2 cadastros",
       "dois cadastros",
       "cadastro duplicado",
+      "cadastros duplicados",
+      "duplicidade de cadastro",
       "inconsistência no sistema",
       "inconsistencia no sistema",
       "cliente intercambio",
-      "cliente saude"
+      "cliente saude",
+      "clientes de intercâmbio",
+      "clientes de intercambio",
+      "psicóloga",
+      "psicologa",
+      "fonoaudióloga",
+      "fonoaudiologa"
     ],
-    "symptoms": "Beneficiário(a), paciente ou insumo/material possui dois ou mais cadastros/chaves no sistema (HRP Unimed, PEP ou SGH — ex: 'Cliente Intercâmbio' x 'Cliente Saúde', ou duplicidade de chaves de insumo gerando inconsistência no faturamento), sendo solicitada a unificação dos registros mantendo a chave/cadastro mais completo como principal.",
+    "symptoms": "Profissional de saúde (médico, psicólogo, fonoaudiólogo, terapeuta), beneficiário(a), paciente ou insumo/material possui dois ou mais cadastros/chaves no sistema (HRP Unimed, PEP ou SGH — ex: 'Clientes de Intercâmbio' x 'Prestadores', 'Cliente Intercâmbio' x 'Cliente Saúde', ou duplicidade de chaves de insumo gerando inconsistência no faturamento), sendo solicitada a unificação dos registros mantendo a chave/cadastro mais completo ou ativo como principal.",
     "required_info": [
       "Nome completo, código do insumo ou chaves dos cadastros a serem unificados",
-      "Indicação de qual cadastro/chave deve prevalecer como principal (ex: Cliente Saúde ou chave mais completa)"
+      "Indicação de qual cadastro/chave deve prevalecer como principal (ex: Cliente Saúde, Prestador ou chave mais completa)"
     ],
     "resolution_steps": [
       "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
-      "Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
-      "Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+      "Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (profissional de saúde, beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+      "Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.",
       "Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
       "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
     ],

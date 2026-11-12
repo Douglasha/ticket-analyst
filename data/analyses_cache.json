@@ -12098,6 +12098,259 @@
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },
+  "44058": {
+    "ticket_id": 44058,
+    "analyzed_at": "12/11/2026 10:30",
+    "provider_used": "Motor Inteligente 3 Camadas (Fallback • fetch failed)",
+    "translated_intent": "O solicitante **Gabriel Guimuzzi** (Hospital) abriu o chamado solicitando: \"Bom dia! A Nota fiscal contida no print abaixo, referente a compra efetuada para a farmácia, não foi integrada ao modulo financeiro do sistema sp data. A integração se faz necessár\". As informações necessárias para atendimento já constam descritas no chamado.",
+    "detected_domain": "Suporte Técnico Geral / Service Desk",
+    "suggested_category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "real_urgency": "Alta",
+    "urgency_reason": "Classificação baseada no relato e impacto operacional informados pelo solicitante.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #44059 (Resolvido)",
+        "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > CONTAS A RECEBER INTEGRADA INDEVIDAMENTE AO MODULO FINANCEIRO DO SP DATA",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Bom dia.\n\nRealizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro.",
+        "steps": [
+          "Bom dia.",
+          "Realizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro."
+        ],
+        "score": 0.85
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42467 (Resolvido)",
+        "title": "Banco de Dados e Análise de Dados > Integração de Fontes de Dados > RELATÓRIO DO ATIVO IMOBILIZADO SPDATA",
+        "category": "T.I • Solucionado por mconte",
+        "summary": "Boa tarde, realizado o desenvolvimento do relatório.\nSegue em anexo o relatório em Excel.\n\n\r\nCaminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados\n\n\r\n\n\r\nPara exportar em formato Excel seguir os passos abaixo",
+        "steps": [
+          "Boa tarde, realizado o desenvolvimento do relatório.",
+          "Segue em anexo o relatório em Excel.",
+          "Caminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados",
+          "Para exportar em formato Excel seguir os passos abaixo"
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "2ª Camada • Histórico de Chamados Resolvidos (Chamado #44059 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42467 (Resolvido))",
+    "resolution_steps": [
+      "[Chamado #44059 (Resolvido)] Realizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro.",
+      "[Chamado #42467 (Resolvido)] Segue em anexo o relatório em Excel.",
+      "[Chamado #42467 (Resolvido)] Caminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados",
+      "[Chamado #42467 (Resolvido)] Para exportar em formato Excel seguir os passos abaixo"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO solicitante **Gabriel Guimuzzi** (Hospital) abriu o chamado solicitando: \"Bom dia! A Nota fiscal contida no print abaixo, referente a compra efetuada para a farmácia, não foi integrada ao modulo financeiro do sistema sp data. A integração se faz necessár\". As informações necessárias para atendimento já constam descritas no chamado.\n\nClassificação Sugerida: T.I > ST > Resolução de Problemas > Erros de Sistema | Prioridade Real: Alta\nBase Consultada: 2ª Camada • Histórico de Chamados Resolvidos (Chamado #44059 (Resolvido)) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42467 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [Chamado #44059 (Resolvido)] Realizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro.\n  2. [Chamado #42467 (Resolvido)] Segue em anexo o relatório em Excel.\n  3. [Chamado #42467 (Resolvido)] Caminho: Contabilidade > Meus relatórios > Relação Geral de Bens Patrimoniais Ativos/Baixados\n  4. [Chamado #42467 (Resolvido)] Para exportar em formato Excel seguir os passos abaixo",
+    "public_reply_draft": "Olá, Gabriel! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente a **NOTA FISCAL DE COMPRA DA FARMACIA NAO INTEGRADA AO FINANCEIRO**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "44059": {
+    "ticket_id": 44059,
+    "analyzed_at": "12/11/2026 09:16",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "Solicitação do setor **Financeiro** (**Gabriel Guimuzzi**) para cancelamento de registro/conta no sistema **Controle de Contas**, porém sem informar o número do registro ou o nome do(a) paciente/beneficiário(a).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
+    "real_urgency": "Alta",
+    "urgency_reason": "Regularização de registro/conta no sistema Controle de Contas solicitado pelo setor Financeiro.",
+    "sufficiency_status": "incompleto",
+    "missing_info": [
+      "Informar o número do registro/conta e o nome completo do(a) paciente/beneficiário(a) que deve ser cancelado no Controle de Contas"
+    ],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42556",
+        "title": "Acesso e Permissões  -  Thatiana Silveira",
+        "category": "T.I > ST > Acesso e Permissões",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+          "[PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+          "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Faturamento Eletrônico no SPDATA** para o setor **Ultrassom** (Hospital Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "glpi_history",
+        "layer_label": "2ª Camada • Histórico de Chamados Resolvidos",
+        "source_id": "Chamado #42335 (Resolvido)",
+        "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Conta não encontrada no Controle de contas",
+        "category": "T.I • Solucionado por damaral",
+        "summary": "Prezados(as),\n\n\r\nA conta foi excluída do módulo de faturamento, por isso não aparecia no sistema de controle de contas.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+        "steps": [
+          "Prezados(as),",
+          "A conta foi excluída do módulo de faturamento, por isso não aparecia no sistema de controle de contas.",
+          "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+          "Atenciosamente."
+        ],
+        "score": 0.68
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-87",
+        "title": "SGH - Spdata > Faturamento SPdata > Erro na importação de valores da equipe médica (Anestesista / Auxiliar) no XML TISS — Convênio IPSMMG (Batalhão / Portal SIGAS)",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "▸ Erro na Importação de Valores da Equipe Médica no XML TISS — Convênio IPSMMG / Batalhão (Portal SIGAS)\n\r\n\n▸ 1. Identificação e Contexto\n\r\n\r\nSistema Emissor do XML: SGH Spdata (Módulo Faturamento de Convênios)\n\r\nConvênio Afetado: IPSMMG (Instituto de Previdência dos Servidores Militares de MG — comumente chamado de Ba...",
+        "steps": [
+          "▸ Erro na Importação de Valores da Equipe Médica no XML TISS — Convênio IPSMMG / Batalhão (Portal SIGAS)",
+          "▸ 1. Identificação e Contexto",
+          "Sistema Emissor do XML: SGH Spdata (Módulo Faturamento de Convênios)",
+          "Convênio Afetado: IPSMMG (Instituto de Previdência dos Servidores Militares de MG — comumente chamado de Batalhão)",
+          "Portal de Importação: SIGAS (sigas.ipsm.mg.gov.br)",
+          "Setor Solicitante: H Faturamento"
+        ],
+        "score": 0.51
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-81",
+        "title": "Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Sistema: SGH Spdata | Módulo: Faturamento\n\n\r\nProblema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)\n\n\r\n\r\n\r\n\n▸ 1. Descrição do Incidente\n\r\nAo realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incl...",
+        "steps": [
+          "Sistema: SGH Spdata | Módulo: Faturamento",
+          "Problema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+          "▸ 1. Descrição do Incidente",
+          "Ao realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incluiu uma guia extra no arquivo XML, gerando duplicidade na cobrança de procedimento.",
+          "Exemplo registrado na Conta 1407294:",
+          "Na conta hospitalar (Correto): Constando apenas a Guia 00000000000000002626 com 2 itens, somando R$ 421,55."
+        ],
+        "score": 0.51
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42556) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42335 (Resolvido))",
+    "resolution_steps": [
+      "[MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.",
+      "[MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).",
+      "[MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.",
+      "[Chamado #42335 (Resolvido)] A conta foi excluída do módulo de faturamento, por isso não aparecia no sistema de controle de contas.",
+      "[KB-87] ▸ Erro na Importação de Valores da Equipe Médica no XML TISS — Convênio IPSMMG / Batalhão (Portal SIGAS)",
+      "[KB-87] ▸ 1. Identificação e Contexto"
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nSolicitação do setor **Financeiro** (**Gabriel Guimuzzi**) para cancelamento de registro/conta no sistema **Controle de Contas**, porém sem informar o número do registro ou o nome do(a) paciente/beneficiário(a).\n\nClassificação Sugerida: T.I > ST > Reversão de Processos / Ajustes Operacionais | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42556) + 2ª Camada • Histórico de Chamados Resolvidos (Chamado #42335 (Resolvido))\n\nTRIAGEM DE INFORMAÇÕES (INCOMPLETO):\n  - Informar o número do registro/conta e o nome completo do(a) paciente/beneficiário(a) que deve ser cancelado no Controle de Contas\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [MEM-#42556] [PB-UNI-12] Localizar o cadastro de Thatiana Silveira (CPF: 11452670684) no sistema SGH Spdata.\n  2. [MEM-#42556] [PB-UNI-12] Conceder e vincular as permissões do módulo de Faturamento Eletrônico no SPDATA para a unidade Hospital Unimed (setor Ultrassom).\n  3. [MEM-#42556] [PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação.\n  4. [Chamado #42335 (Resolvido)] A conta foi excluída do módulo de faturamento, por isso não aparecia no sistema de controle de contas.\n  5. [KB-87] ▸ Erro na Importação de Valores da Equipe Médica no XML TISS — Convênio IPSMMG / Batalhão (Portal SIGAS)\n  6. [KB-87] ▸ 1. Identificação e Contexto",
+    "public_reply_draft": "Olá, Gabriel! Tudo bem?\n\nRecebemos a sua solicitação de cancelamento no sistema **Controle de Contas**.\n\nPara executarmos o cancelamento com segurança, você poderia nos informar o **número do registro/conta** e o **nome completo do(a) paciente/beneficiário(a)**?\n\nAssim que confirmar por aqui, já realizamos o cancelamento!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 1
+  },
+  "44080": {
+    "ticket_id": 44080,
+    "analyzed_at": "12/11/2026 11:42",
+    "provider_used": "Ollama Multimodal (qwen2.5vl:3b)",
+    "translated_intent": "A solicitante **Luana Tozzi** (Faturamento) solicita a **unificação de cadastro** da psicóloga **Michelle Aparecida Silva** no sistema **HRP Unimed** (conforme print de erro no sistema anexado ao chamado), devido a duplicidade de registro que impede a regularização cadastral e as rotinas do Faturamento. Os dados necessários para localização e unificação no banco de dados já constam identificados no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Corporativos",
+    "suggested_category": "T.I > BD > Administração de Banco de Dados",
+    "real_urgency": "Alta",
+    "urgency_reason": "Duplicidade de cadastro no sistema HRP Unimed, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) psicóloga.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42794",
+        "title": "Resolução de Problemas  -  Unificação de cadastro",
+        "category": "T.I > ST > Resolução de Problemas",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro dos registros informados no sistema **HRP Unimed**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+          "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+          "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+          "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+          "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+          "[MEM-#42061] [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais)."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro dos registros informados no sistema **HRP Unimed**.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42057",
+        "title": "Resolução de Problemas  -  Beneficiária com mais de um cadastro",
+        "category": "T.I > ST > Resolução de Problemas",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Emmely Aparecida Figueiredo** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "steps": [
+          "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas ou Sistemas Operacionais).",
+          "[PB-UNI-19] Localizar no sistema informado (HRP Unimed ou PEP / SGH) os cadastros duplicados do(a) beneficiário(a)/paciente e validar os vínculos de atendimentos/movimentações.",
+          "[PB-UNI-19] Executar a rotina de unificação de cadastros / substituição de chaves mantendo como principal o registro indicado pelo setor solicitante (ex: Cliente Saúde) e removendo a chave duplicada.",
+          "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à unificação de cadastro da beneficiária **Emmely Aparecida Figueiredo** no sistema **HRP Unimed**, mantendo o cadastro **Cliente Saúde** como principal.\nOs dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\nAssim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-19",
+        "title": "Unificação de Cadastros Duplicados (Profissionais de Saúde, Beneficiários, Pacientes ou Insumos / Materiais — HRP Unimed / PEP / SGH)",
+        "category": "Sistemas Internos / ERP / Sistemas Corporativos",
+        "summary": "Profissional de saúde (médico, psicólogo, fonoaudiólogo, terapeuta), beneficiário(a), paciente ou insumo/material possui dois ou mais cadastros/chaves no sistema (HRP Unimed, PEP ou SGH — ex: 'Clientes de Intercâmbio' x 'Prestadores', 'Cliente Intercâmbio' x 'Cliente Saúde', ou duplicidade de chaves de insumo gerando inconsistência no faturamento), sendo solicitada a unificação dos registros mantendo a chave/cadastro mais completo ou ativo como principal.",
+        "steps": [
+          "Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+          "Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (profissional de saúde, beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+          "Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.",
+          "Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+          "Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42303",
+        "title": "Erros de Sistema  -  Unificar cadastro do insumo - 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)",
+        "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed**.\n\nOs dados informados (unificação da chave **120083038** para a chave principal **72603080**) já foram validados na triagem técnica e nossa equipe técnica de Banco de Dados já iniciou o procedimento de unificação no sistema para resolução da inconsistência.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui para a continuidade dos lançamentos no Faturamento!\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' caso tenha sido aberto em categoria genérica (ex: Resolução de Problemas > Erros de Sistema ou Sistemas Operacionais).",
+          "[PB-UNI-19] Localizar no banco de dados do sistema informado (HRP Unimed ou PEP / SGH) os registros duplicados (beneficiário ou insumo/material) e validar os vínculos de atendimentos/movimentações.",
+          "[PB-UNI-19] Executar a rotina/script de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada.",
+          "[PB-UNI-19] Validar a integridade referencial dos dados e confirmar que a inconsistência foi solucionada.",
+          "[PB-UNI-19] Registrar o log de confirmação da unificação no chamado e comunicar a conclusão ao(à) solicitante.",
+          "[Chamado #42049 (Resolvido)] Cadastro unificado:"
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro do insumo 1900323063 (KIT DRENAGEM MEDIASTINAL SEM DRENO FRASCO SEM EXTENSAO BIO KIT 2000ML 006003)** no sistema **HRP Unimed**.\n\nOs dados informados (unificação da chave **120083038** para a chave principal **72603080**) já foram validados na triagem técnica e nossa equipe técnica de Banco de Dados já iniciou o procedimento de unificação no sistema para resolução da inconsistência.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui para a continuidade dos lançamentos no Faturamento!\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "",
+        "score": 0.95
+      }
+    ],
+    "primary_knowledge_source": "Memória Contínua • Aprendido com o Analista (MEM-#42794) + Memória Contínua • Aprendido com o Analista (MEM-#42057)",
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.",
+      "[PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema HRP Unimed os registros duplicados da psicóloga Michelle Aparecida Silva (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Intercâmbio vs. Prestadores).",
+      "[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.",
+      "[PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de Faturamento.",
+      "[PB-UNI-19] Notificar a solicitante Luana Tozzi (Faturamento) confirmando a conclusão da unificação para prosseguimento das rotinas."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Luana Tozzi** (Faturamento) solicita a **unificação de cadastro** da psicóloga **Michelle Aparecida Silva** no sistema **HRP Unimed** (conforme print de erro no sistema anexado ao chamado), devido a duplicidade de registro que impede a regularização cadastral e as rotinas do Faturamento. Os dados necessários para localização e unificação no banco de dados já constam identificados no chamado. *(Observação de triagem: chamado aberto na categoria \"T.I > ST > Resolução de Problemas\", recomenda-se reclassificar para \"T.I > BD > Administração de Banco de Dados\").*\n\nClassificação Sugerida: T.I > BD > Administração de Banco de Dados | Prioridade Real: Alta\nBase Consultada: Memória Contínua • Aprendido com o Analista (MEM-#42794) + Memória Contínua • Aprendido com o Analista (MEM-#42057)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.\n  2. [PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).\n  3. [PB-UNI-19] Localizar no banco de dados do sistema HRP Unimed os registros duplicados da psicóloga Michelle Aparecida Silva (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Intercâmbio vs. Prestadores).\n  4. [PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.\n  5. [PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de Faturamento.\n  6. [PB-UNI-19] Notificar a solicitante Luana Tozzi (Faturamento) confirmando a conclusão da unificação para prosseguimento das rotinas.",
+    "public_reply_draft": "Olá, Luana! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro** da psicóloga **Michelle Aparecida Silva** no sistema **HRP Unimed**.\n\nIdentificamos as informações e a evidência de inconsistência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do Faturamento.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "has_image_analysis": true,
+    "analyzed_images_count": 2
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",

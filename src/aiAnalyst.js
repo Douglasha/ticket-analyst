@@ -4265,14 +4265,25 @@ export class AIAnalyst {
             `Assim que nos confirmar por aqui, já executamos a unificação!`;
         }
       } else {
+        let personRole = "beneficiário(a)/paciente";
+        const rolePrefixMatch = descOnly.match(
+          /\b(psic[óo]log[ao]|fonoaudi[óo]log[ao]|m[ée]dic[ao](?:\s+n[ãa]o\s+cooperad[ao])?|fisioterapeuta|terapeuta|nutricionista|enfermeir[ao]|profissional|prestador[ao]|colaborador[ao]|benefici[áa]ri[ao]|paciente|cliente|usu[áa]ri[ao])\b/i
+        );
+        if (rolePrefixMatch) {
+          personRole = rolePrefixMatch[1].toLowerCase();
+        }
+
+        const directNameMatch = descOnly.match(
+          /(?:(?:psic[óo]log[ao]|fonoaudi[óo]log[ao]|m[ée]dic[ao]|fisioterapeuta|terapeuta|nutricionista|enfermeir[ao]|profissional|prestador[ao]|colaborador[ao]|benefici[áa]ri[ao]|paciente|cliente|usu[áa]ri[ao])(?:\s+n[ãa]o\s+cooperad[ao])?(?:\s+(?:a\s+seguir|com\s+mais\s+de\s+um\s+cadastro))?\s*[:\s]\s*)([A-ZÀ-Ú][a-zà-ú]+(?:[ \t]+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})/i
+        );
         const personMatch = descOnly.match(
-          /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/
+          /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa]|profissional|prestador[ao]|m[ée]dic[ao]|psic[óo]log[ao]|fonoaudi[óo]log[ao])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:[ \t]+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/i
         );
         const pipeTitleMatch = (ticket.title || "").match(/\|\s*([A-ZÀ-Ú\s]{5,})$/);
-        const personRole = personMatch?.[1]
-          ? personMatch[1].toLowerCase()
-          : "beneficiário(a)/paciente";
-        const targetPerson = personMatch?.[2]
+
+        const targetPerson = directNameMatch?.[1]
+          ? directNameMatch[1].trim()
+          : personMatch?.[2]
           ? personMatch[2].replace(/\s+(?:possui|tem|está|esta|com)\b.*$/i, "").trim()
           : pipeTitleMatch?.[1]
           ? pipeTitleMatch[1].trim()
@@ -4283,35 +4294,57 @@ export class AIAnalyst {
         );
         const prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
         const hasNumericKeys = /\b\d{3,}\b/.test(descOnly);
+        const hasAttachedImage = (ticket.documents || []).some(
+          (d) => d.is_image || /\.(png|jpe?g|webp|bmp)$/i.test(d.filename || "")
+        );
 
         urgencyReason = `Duplicidade de cadastro no sistema ${sysName}, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) ${personRole}.`;
 
-        if (targetPerson || hasNumericKeys) {
+        if (targetPerson || hasNumericKeys || hasAttachedImage) {
+          const isFeminineRole =
+            personRole.endsWith("a") ||
+            /^(médica|psicóloga|fonoaudióloga|enfermeira|nutricionista|beneficiária)/i.test(
+              personRole
+            );
+          const whoGender = isFeminineRole ? "da" : "do";
           const whoLabel = targetPerson
-            ? `d${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
+            ? `${whoGender} ${personRole} **${targetPerson}**`
             : "dos registros informados";
           const prevailTxt = prevailTarget
             ? `, mantendo o cadastro **${prevailTarget}** como principal`
             : "";
+          const evidenceTxt = hasAttachedImage
+            ? " (conforme print de erro no sistema anexado ao chamado)"
+            : "";
 
           translatedIntent =
-            `${solPrefix} **${ticket.requester}** (${sectorName}) relatou que ${
-              targetPerson
-                ? `${personRole.endsWith("a") ? "a" : "o"} ${personRole} **${targetPerson}**`
-                : "um(a) beneficiário(a)/paciente"
-            } possui dois cadastros no sistema **${sysName}** e solicitou a unificação dos registros${prevailTxt}. ` +
-            `Os dados necessários para a unificação já constam descritos no chamado.` +
+            `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **unificação de cadastro** ${whoLabel} no sistema **${sysName}**${evidenceTxt}${prevailTxt}, ` +
+            `devido a duplicidade de registro que impede a regularização cadastral e as rotinas do Faturamento. ` +
+            `Os dados necessários para localização e unificação no banco de dados já constam identificados no chamado.` +
             reclassNote;
           sufficiencyStatus = "completo";
           missingInfo = [];
+
+          customResolutionSteps = [
+            `[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.`,
+            `[PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).`,
+            `[PB-UNI-19] Localizar no banco de dados do sistema ${sysName} os registros duplicados ${whoLabel.replace(/\*\*/g, "")} (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Intercâmbio vs. Prestadores).`,
+            `[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.`,
+            `[PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de ${sectorName}.`,
+            `[PB-UNI-19] Notificar a solicitante ${ticket.requester} (${sectorName}) confirmando a conclusão da unificação para prosseguimento das rotinas.`
+          ];
+
           customPublicReply =
             `Olá, ${firstName}! Tudo bem?\n\n` +
-            `Recebemos e analisamos a sua solicitação referente à unificação de cadastro ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n` +
-            `Os dados necessários já foram validados na triagem e nossa equipe técnica iniciou o atendimento.\n\n` +
-            `Assim que concluído (ou caso precise testar do seu lado), atualizaremos você por aqui!`;
+            `Recebemos e analisamos a sua solicitação referente à **unificação de cadastro** ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n\n` +
+            (hasAttachedImage
+              ? `Identificamos as informações e a evidência de inconsistência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do ${sectorName}.\n\n`
+              : `Os dados informados já foram validados na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema para manter o cadastro principal ativo.\n\n`) +
+            `Assim que a unificação for concluída no ${sysName}, confirmaremos a finalização por aqui!\n\n` +
+            `Permanecemos à disposição!`;
         } else {
           translatedIntent =
-            `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastros duplicados no sistema **${sysName}**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente e de qual registro deve prevalecer.` +
+            `Solicitação aberta por **${ticket.requester}** (${sectorName}) para unificação de cadastros duplicados no sistema **${sysName}**, pendente de identificação dos códigos/chaves ou nome completo do(a) beneficiário(a)/paciente/profissional e de qual registro deve prevalecer.` +
             reclassNote;
           sufficiencyStatus = "parcial";
           missingInfo = [

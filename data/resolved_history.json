@@ -1,5 +1,41 @@
 [
   {
+    "id": "Chamado #44084 (Resolvido)",
+    "ticket_id": 44084,
+    "solution_id": 42809,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Mayara Cristine Guimarães Baptista",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credencias:\n\n\r\nlink: http://192.168.41.23\nlogin: mbaptista\nsenha: Mminas@0256 \nSetor: H_SCIH\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credencias:",
+      "link: http://192.168.41.23",
+      "login: mbaptista",
+      "senha: Mminas@0256",
+      "Setor: H_SCIH"
+    ]
+  },
+  {
+    "id": "Chamado #44076 (Resolvido)",
+    "ticket_id": 44076,
+    "solution_id": 42808,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > SOFIA RODOLFO ABREU",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nLogins bloqueados:\n\n\r\n\r\nBiometria facial\n\r\nSpdata\n\r\nNEA\n\r\nSafeWeb (Certificado Digital Hospital)\nProtocolo\n1009276370\n\r\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Logins bloqueados:",
+      "Biometria facial",
+      "Spdata",
+      "NEA",
+      "SafeWeb (Certificado Digital Hospital)"
+    ]
+  },
+  {
     "id": "Chamado #44061 (Resolvido)",
     "ticket_id": 44061,
     "solution_id": 42801,
@@ -16,6 +52,20 @@
     ]
   },
   {
+    "id": "Chamado #44059 (Resolvido)",
+    "ticket_id": 44059,
+    "solution_id": 42805,
+    "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > CONTAS A RECEBER INTEGRADA INDEVIDAMENTE AO MODULO FINANCEIRO DO SP DATA",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia.\n\nRealizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro.",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Realizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro."
+    ]
+  },
+  {
     "id": "Chamado #44044 (Resolvido)",
     "ticket_id": 44044,
     "solution_id": 42796,
@@ -29,6 +79,22 @@
     ]
   },
   {
+    "id": "Chamado #44038 (Resolvido)",
+    "ticket_id": 44038,
+    "solution_id": 42810,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > DIEGO TORRES DA S",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nRealizado a troca do perfil para Téc. de Enfermagem\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Realizado a troca do perfil para Téc. de Enfermagem",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #44035 (Resolvido)",
     "ticket_id": 44035,
     "solution_id": 42795,
@@ -39,6 +105,19 @@
     "keywords": [],
     "steps": [
       "Reconectado a rede"
+    ]
+  },
+  {
+    "id": "Chamado #44025 (Resolvido)",
+    "ticket_id": 44025,
+    "solution_id": 42803,
+    "title": "Infraestrutura e Redes > Periféricos > telefone",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Telefone reconectado a rede.",
+    "keywords": [],
+    "steps": [
+      "Telefone reconectado a rede."
     ]
   },
   {
@@ -342,6 +421,37 @@
     "keywords": [],
     "steps": [
       "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43869 (Resolvido)",
+    "ticket_id": 43869,
+    "solution_id": 42807,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Suporte HRP",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43867 (Resolvido)",
+    "ticket_id": 43867,
+    "solution_id": 42811,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Suporte sistema SPDATA",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nEm contato com a colaboradora, que nos disse que já resolveu o problema\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Em contato com a colaboradora, que nos disse que já resolveu o problema",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
     ]
@@ -1374,19 +1484,19 @@
   {
     "id": "Chamado #43545 (Resolvido)",
     "ticket_id": 43545,
-    "solution_id": 42301,
+    "solution_id": 42325,
     "title": "Suporte Técnico e Service Desk > Criação de Usuários > Flaviana Fermino Moreira",
     "category": "T.I • Solucionado por fsilva",
     "is_ti_group": true,
-    "summary": "______________________________________\n\n\r\nLGPD\n\n\r\nUSUÁRIO: flavinhafm84@hotmail.com\n\n\r\nSENHA: Unimed@256!\n\n\r\n______________________________________\n\n\r\nFACULDADE UNIMED\n\n\r\nUSUÁRIO: 08754889600\n\n\r\nSENHA: Unimed@256!\n\n\r\n_____________________________________\n\n\r\nSPdata\n\n\r\nUSUÁRIO: Ffermino\n\n\r\n____________________________________",
+    "summary": "Informações do pedido\r\n\r\nProtocolo\r\n1011887959\n\n\r\n\r\nNome\r\nFLAVIANA FERMINO MOREIRA\n\n\r\n\r\nCPF\r\n087.548.896-00",
     "keywords": [],
     "steps": [
-      "______________________________________",
-      "LGPD",
-      "USUÁRIO: flavinhafm84@hotmail.com",
-      "SENHA: Unimed@256!",
-      "______________________________________",
-      "FACULDADE UNIMED"
+      "Informações do pedido",
+      "Protocolo",
+      "1011887959",
+      "Nome",
+      "FLAVIANA FERMINO MOREIRA",
+      "CPF"
     ]
   },
   {
