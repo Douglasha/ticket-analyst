@@ -11688,6 +11688,100 @@
     "has_image_analysis": false,
     "analyzed_images_count": 0
   },
+  "43867": {
+    "ticket_id": 43867,
+    "analyzed_at": "12/11/2026 09:12",
+    "provider_used": "Ollama Local (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Valeria Fernanda** (Hosp. Unimed Piumhi) solicita a alteração/ajuste retroativo da data de cadastro do atendimento da paciente **Silva Faria de Jesus** no sistema **SGH Spdata** (de 26/10 para **22/10**). O procedimento foi realizado em 22/10, porém o cadastro no sistema ocorreu posteriormente (26/10) e fora da vigência da guia de autorização, sendo necessária a correção da data para que o faturamento hospitalar seja processado sem glosa. Sugere-se reclassificar de Sistemas Operacionais para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+    "detected_domain": "Sistemas Internos / ERP / Sistemas Hospitalares (SGH Spdata / Faturamento)",
+    "suggested_category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
+    "real_urgency": "Média",
+    "urgency_reason": "Ajuste retroativo de data de cadastro/atendimento no SGH Spdata (Hosp. Unimed Piumhi) para viabilizar faturamento da conta dentro da validade da guia de autorização.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-55",
+        "title": "Alteração de Data de Cadastro / Atendimento de Paciente no Sistema SGH Spdata — Ajuste para Faturamento / Vencimento de Guia",
+        "category": "Sistemas Internos / ERP / Sistemas Hospitalares (SGH Spdata / Faturamento)",
+        "summary": "Setor de Faturamento ou Recepção Hospitalar (ex.: Hospital Unimed Piumhi ou Hospital sede) solicita a alteração/ajuste retroativo da data de cadastro ou atendimento de paciente no sistema SGH Spdata (ex.: procedimento realizado no dia 22/10, mas cadastrado no sistema em 26/10), com o objetivo de viabilizar o faturamento da conta hospitalar dentro da vigência/vencimento da guia de autorização do convênio e evitar glosas.",
+        "steps": [
+          "[PB-UNI-55] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163) ou 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).",
+          "[PB-UNI-55] Acessar a base de dados ou módulo de faturamento/atendimento do sistema SGH Spdata da respectiva unidade (ex.: Hosp. Unimed Piumhi).",
+          "[PB-UNI-55] Localizar o registro de atendimento do(a) paciente informado(a) (ex.: Silva Faria de Jesus) cadastrado na data original (26/10/2026).",
+          "[PB-UNI-55] Verificar a amarração dos itens, taxas, diárias e procedimentos vinculados ao atendimento para garantir a consistência das datas no módulo de faturamento.",
+          "[PB-UNI-55] Executar o ajuste operacional/SQL da data de cadastro/atendimento para a nova data solicitada (ex.: 22/10/2026), alinhando a vigência com a data do procedimento médico e a validade da guia de autorização.",
+          "[PB-UNI-55] Notificar a solicitante no chamado GLPI confirmando a alteração da data e orientando a equipe de faturamento da unidade a prosseguir com o faturamento da conta."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-43",
+        "title": "Cadastro de Profissionais de Saúde no Prontuário do Hospital (Sistema SPdata / PEP Hospitalar)",
+        "category": "Acessos, Permissões e Contas",
+        "summary": "Solicitação de cadastro de um ou mais profissionais de saúde (médicos, fisioterapeutas, terapeutas, psicólogos, enfermeiros) para atuação e evolução clínica no Prontuário do Hospital (sistema SPdata / PEP Hospitalar), frequentemente enviada de forma agrupada por setores/núcleos externos apenas com nome e CPF, faltando os dados cadastrais clínicos obrigatórios.",
+        "steps": [
+          "[PB-UNI-43] Identificar todos os profissionais listados no chamado (tanto no formulário principal quanto nas observações) para cadastro no sistema hospitalar.",
+          "[PB-UNI-43] Verificar se o sistema indicado como Prontuário do hospital refere-se ao SGH Spdata (módulo assistencial / PEP Hospitalar).",
+          "[PB-UNI-43] Solicitar os dados cadastrais clínicos faltantes para cada profissional: Nome completo, Data de nascimento, Especialidade/Função, Conselho Profissional e Número de Registro (com UF) e profissional de referência.",
+          "[PB-UNI-43] Manter o chamado com status Pendente aguardando o retorno com os dados clínicos obrigatórios.",
+          "[PB-UNI-43] Após o recebimento, acessar o sistema SPdata, efetuar o cadastro profissional/operador de cada pessoa e replicar as permissões de atendimento hospitalar."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-45",
+        "title": "Processo de Autorização de Procedimento no Sistema HRP Unimed — Falha no Tráfego de Senha e Guia de Intercâmbio",
+        "category": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
+        "summary": "Solicitante (frequentemente do setor de Autorização ou Recepção) relata que um procedimento não está autorizando no sistema HRP Unimed ou que a senha (número de guia gerado no processo de autorização do Intercâmbio entre Unimeds) não está trafegando/transmitindo via mensageria/PTU Online, impedindo a liberação do atendimento.",
+        "steps": [
+          "[PB-UNI-45] Sugerir reclassificação da categoria do chamado no GLPI para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).",
+          "[PB-UNI-45] Acessar o sistema ERP HRP Unimed no módulo de Autorização / Intercâmbio Eletrônico e pesquisar a transação pelo número da senha/guia informada (206867125).",
+          "[PB-UNI-45] Inspecionar a fila de mensageria e logs do webservice de Intercâmbio (PTU Online / WAutoriza / barramento da Federação) para identificar o motivo da retenção ou falha de comunicação da transação.",
+          "[PB-UNI-45] Realizar a limpeza de pendência ou reprocessamento/retransmissão manual da guia de autorização no HRP para forçar o tráfego da senha junto à Unimed parceira/executora.",
+          "[PB-UNI-45] Caso persista erro no webservice da Unimed de destino ou indisponibilidade na Federação, registrar o log e acionar o suporte de Intercâmbio da Federação mantendo o ticket em acompanhamento.",
+          "[PB-UNI-45] Responder à solicitante Bianca Silva (Autorização) informando que a verificação e o reprocessamento da senha no HRP foram iniciados, orientando a checagem do retorno no sistema."
+        ],
+        "score": 0.95
+      },
+      {
+        "layer": "glpi_kb",
+        "layer_label": "1ª Camada • Base de Conhecimento GLPI",
+        "source_id": "KB-81",
+        "title": "Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+        "category": "Base de Conhecimento GLPI",
+        "summary": "Sistema: SGH Spdata | Módulo: Faturamento\n\n\r\nProblema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)\n\n\r\n\r\n\r\n\n▸ 1. Descrição do Incidente\n\r\nAo realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incl...",
+        "steps": [
+          "Sistema: SGH Spdata | Módulo: Faturamento",
+          "Problema: Lançamento indevido de guia adicional no arquivo XML gerado (duplicidade de valores)",
+          "▸ 1. Descrição do Incidente",
+          "Ao realizar a exportação do arquivo XML no módulo de Faturamento, identificou-se uma divergência no totalizador do lote gerado. O sistema incluiu uma guia extra no arquivo XML, gerando duplicidade na cobrança de procedimento.",
+          "Exemplo registrado na Conta 1407294:",
+          "Na conta hospitalar (Correto): Constando apenas a Guia 00000000000000002626 com 2 itens, somando R$ 421,55."
+        ],
+        "score": 0.68
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-55) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-43)",
+    "resolution_steps": [
+      "[PB-UNI-55] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163) ou 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).",
+      "[PB-UNI-55] Acessar a base de dados ou módulo de atendimento/faturamento do sistema SGH Spdata da unidade Hosp. Unimed Piumhi.",
+      "[PB-UNI-55] Localizar o registro de atendimento da paciente Silva Faria de Jesus cadastrado originalmente em 26/10.",
+      "[PB-UNI-55] Verificar as amarrações dos itens, taxas, diárias e procedimentos lançados no atendimento para assegurar a consistência dos dados.",
+      "[PB-UNI-55] Realizar o ajuste operacional/SQL do campo de data do cadastro/atendimento para 22/10, adequando-o à data de realização do procedimento e à vigência da guia.",
+      "[PB-UNI-55] Comunicar à solicitante Valeria Fernanda (Hosp. Unimed Piumhi) a conclusão do ajuste e orientar a equipe a prosseguir com o faturamento da conta hospitalar."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Valeria Fernanda** (Hosp. Unimed Piumhi) solicita a alteração/ajuste retroativo da data de cadastro do atendimento da paciente **Silva Faria de Jesus** no sistema **SGH Spdata** (de 26/10 para **22/10**). O procedimento foi realizado em 22/10, porém o cadastro no sistema ocorreu posteriormente (26/10) e fora da vigência da guia de autorização, sendo necessária a correção da data para que o faturamento hospitalar seja processado sem glosa. Sugere-se reclassificar de Sistemas Operacionais para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).\n\nClassificação Sugerida: T.I > ST > Reversão de Processos / Ajustes Operacionais | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-55) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-43)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-55] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163) ou 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).\n  2. [PB-UNI-55] Acessar a base de dados ou módulo de atendimento/faturamento do sistema SGH Spdata da unidade Hosp. Unimed Piumhi.\n  3. [PB-UNI-55] Localizar o registro de atendimento da paciente Silva Faria de Jesus cadastrado originalmente em 26/10.\n  4. [PB-UNI-55] Verificar as amarrações dos itens, taxas, diárias e procedimentos lançados no atendimento para assegurar a consistência dos dados.\n  5. [PB-UNI-55] Realizar o ajuste operacional/SQL do campo de data do cadastro/atendimento para 22/10, adequando-o à data de realização do procedimento e à vigência da guia.\n  6. [PB-UNI-55] Comunicar à solicitante Valeria Fernanda (Hosp. Unimed Piumhi) a conclusão do ajuste e orientar a equipe a prosseguir com o faturamento da conta hospitalar.",
+    "public_reply_draft": "Olá, Valeria! Tudo bem?\n\nRecebemos a sua solicitação referente à **alteração da data de cadastro da paciente Silva Faria de Jesus** no sistema **SGH Spdata** (Hosp. Unimed Piumhi).\n\nIdentificamos todas as informações necessárias no chamado: a paciente realizou o procedimento em **22/10**, porém o cadastro no sistema foi realizado em **26/10**, data posterior ao vencimento da guia de autorização, demandando a retroação da data para que a conta possa ser faturada dentro da vigência.\n\nNossa equipe de T.I. já está realizando o ajuste operacional no sistema/banco de dados do Spdata para atualizar a data de cadastro para **22/10**.\n\nAssim que o ajuste for concluído no registro da paciente, confirmaremos por aqui para que o setor de Faturamento possa dar sequência na transmissão e fechamento da conta!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0
+  },
   "43869": {
     "ticket_id": 43869,
     "analyzed_at": "09/11/2026 12:21",
@@ -12000,7 +12094,7 @@
       "[PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nO(a) solicitante **Rosy Ellen Freire Viana** (Laboratório) solicita orientação de uso e redefinição de senha para acesso ao **Nextcloud**, relatando que a senha utilizada não confere com a cadastrada ('A senha não está condizente com a criada e não consigo acesso') e anexando a evidência do erro de autenticação em tela. Recomenda-se reclassificar de Aplicativos para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas'.\n\nClassificação Sugerida: T.I > ST > Acesso e Permissões > Redefinição de Senhas | Prioridade Real: Média\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-54) + 3ª Camada • Playbook Local de Processos TI (PB-UNI-02)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-54] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77).\n  2. [PB-UNI-54] Acessar o console de administração do Nextcloud institucional da Unimed com credenciais de administrador.\n  3. [PB-UNI-54] No menu 'Usuários', localizar a conta da colaboradora Rosy Ellen Freire Viana (login: rviana) vinculada ao setor Laboratório.\n  4. [PB-UNI-54] Redefinir a senha da usuária definindo uma senha temporária segura ou disparar o link de redefinição para o e-mail institucional corporativo da colaboradora.\n  5. [PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o link oficial de acesso web do Nextcloud e as orientações para alteração obrigatória da senha no primeiro login.\n  6. [PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk.",
-    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** (Laboratório).\n\nNossa equipe técnica de T.I. já está verificando o cadastro do seu usuário no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua **senha temporária de acesso** acompanhada do link oficial para login no navegador web e das orientações de primeiro acesso. Caso você também necessite sincronizar as pastas departamentais diretamente no seu computador pelo aplicativo (Unidrive), basta nos informar o ID do HopToDesk da sua máquina para que possamos auxiliá-la remotamente.\n\nAssim que a redefinição da senha for concluída no painel, confirmaremos por aqui para que você possa realizar o login!\n\nPermanecemos à total disposição!",
+    "public_reply_draft": "Olá, Rosy! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** (Laboratório).\n\nNossa equipe técnica de T.I. já está verificando o cadastro do seu usuário no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua **senha** basta nos informar o ID do HopToDesk da sua máquina para que possamos auxiliá-la remotamente.\n\nAssim que a redefinição da senha for concluída no painel, confirmaremos por aqui para que você possa realizar o login!\n\nPermanecemos à total disposição!",
     "has_image_analysis": true,
     "analyzed_images_count": 1
   },

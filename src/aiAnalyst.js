@@ -1825,15 +1825,101 @@ export class AIAnalyst {
         `Assim que nos enviar essas informações por aqui, daremos andamento imediato na instalação!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      (/\b(autoriza[çc][ãa]o|autorizando|autorizar|procedimento|procedimentos|interc[âa]mbio|guia|guias|ptu|wautoriza|trafegando|trafega|trafegar)\b/i.test(
+      (/\b(alterar|altera[çc][aã]o|mudar|mudan[çc]a|ajustar|ajuste|corrigir|corre[cç][aã]o)\b/i.test(
         normAll
       ) &&
-      /\b(senha|senhas|guia|guias|206867125)\b/i.test(normAll) &&
-      /\b(hrp|interc[âa]mbio|autoriza[çc][ãa]o|procedimento|trafegando|trafega|n[ãa]o est[áa] autorizando|n[ãa]o autoriza)\b/i.test(
+        /\bdata\s+de\s+cadastro\b/i.test(normAll)) ||
+      (/\bdata\s+de\s+cadastro\b/i.test(normAll) &&
+        /\b(spdata|sgh|paciente|nova data|vencimento da guia|faturamento)\b/i.test(
+          normAll
+        )) ||
+      (/\b(spdata|sgh)\b/i.test(normAll) &&
+        /\b(alterar|altera[çc][aã]o|ajustar|ajuste)\b/i.test(normAll) &&
+        /\bdata\b/i.test(normAll) &&
+        /\b(paciente|cadastro|atendimento|faturamento|guia)\b/i.test(normAll))
+    ) {
+      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|juliano)\b/i.test(
+        firstName
+      );
+      const isFemale =
+        /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
+          firstName
+        ) || /a$/i.test(firstName);
+      const solPrefix = isMale
+        ? "O solicitante"
+        : isFemale
+        ? "A solicitante"
+        : "O(a) solicitante";
+
+      const pacMatch =
+        (ticket.content || "").match(
+          /paciente\s+([A-ZÀ-Úa-zà-ú\s]+?)(?:,|\.|\n|nova data)/i
+        ) || (ticket.content || "").match(/paciente\s*:\s*([^\n\r]+)/i);
+      const patientName = pacMatch ? pacMatch[1].trim() : "informada no chamado";
+
+      const novaDataMatch = (ticket.content || "").match(
+        /nova data\s*[:\s]?\s*(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)/i
+      );
+      const cadastroDataMatch =
+        (ticket.content || "").match(
+          /cadastro\s+(?:no\s+sistema\s+)?(?:foi\s+realizado\s+no\s+dia\s+|no\s+dia\s+|em\s+)?(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)/i
+        ) ||
+        (ticket.content || "").match(
+          /realizado\s+no\s+dia\s+(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)/i
+        );
+      const procDataMatch = (ticket.content || "").match(
+        /procedimento\s+(?:no\s+dia\s+|em\s+)?(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)/i
+      );
+
+      const novaData = novaDataMatch
+        ? novaDataMatch[1]
+        : procDataMatch
+        ? procDataMatch[1]
+        : "22/10";
+      const dataCadastro = cadastroDataMatch ? cadastroDataMatch[1] : "26/10";
+
+      detectedDomain =
+        "Sistemas Internos / ERP / Sistemas Hospitalares (SGH Spdata / Faturamento)";
+      suggestedCategory =
+        "T.I > ST > Reversão de Processos / Ajustes Operacionais";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Ajuste retroativo de data de cadastro/atendimento no SGH Spdata (${sectorName}) para viabilizar faturamento da conta dentro da validade da guia de autorização.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a alteração/ajuste retroativo da data de cadastro do atendimento da paciente **${patientName}** ` +
+        `no sistema **SGH Spdata** (de ${dataCadastro} para **${novaData}**). ` +
+        `O procedimento foi realizado em ${novaData}, porém o cadastro no sistema ocorreu posteriormente (${dataCadastro}) e fora da vigência da guia de autorização, ` +
+        `sendo necessária a correção da data para que o faturamento hospitalar seja processado sem glosa. ` +
+        `Sugere-se reclassificar de Sistemas Operacionais para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).`;
+
+      customResolutionSteps = [
+        `[PB-UNI-55] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163) ou 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).`,
+        `[PB-UNI-55] Acessar a base de dados ou módulo de atendimento/faturamento do sistema SGH Spdata da unidade ${sectorName}.`,
+        `[PB-UNI-55] Localizar o registro de atendimento da paciente ${patientName} cadastrado originalmente em ${dataCadastro}.`,
+        `[PB-UNI-55] Verificar as amarrações dos itens, taxas, diárias e procedimentos lançados no atendimento para assegurar a consistência dos dados.`,
+        `[PB-UNI-55] Realizar o ajuste operacional/SQL do campo de data do cadastro/atendimento para ${novaData}, adequando-o à data de realização do procedimento e à vigência da guia.`,
+        `[PB-UNI-55] Comunicar à solicitante ${ticket.requester} (${sectorName}) a conclusão do ajuste e orientar a equipe a prosseguir com o faturamento da conta hospitalar.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **alteração da data de cadastro da paciente ${patientName}** no sistema **SGH Spdata** (${sectorName}).\n\n` +
+        `Identificamos todas as informações necessárias no chamado: a paciente realizou o procedimento em **${novaData}**, porém o cadastro no sistema foi realizado em **${dataCadastro}**, data posterior ao vencimento da guia de autorização, demandando a retroação da data para que a conta possa ser faturada dentro da vigência.\n\n` +
+        `Nossa equipe de T.I. já está realizando o ajuste operacional no sistema/banco de dados do Spdata para atualizar a data de cadastro para **${novaData}**.\n\n` +
+        `Assim que o ajuste for concluído no registro da paciente, confirmaremos por aqui para que o setor de Faturamento possa dar sequência na transmissão e fechamento da conta!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      (/\b(autoriza[çc][ãa]o|interc[âa]mbio|ptu|wautoriza)\b/i.test(normAll) &&
+        /\b(trafegando|trafega|trafegar|reten[cç][aã]o|reprocessamento|retransmitir)\b/i.test(
+          normAll
+        ) &&
+        /\b(senha|guia)\b/i.test(normAll)) ||
+      /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o\s+n[ãa]o\s+trafega)\b/i.test(
         normAll
-      )) ||
-      /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o)\b/i.test(normAll) ||
-      (/\b(procedimento|guia)\b/i.test(normAll) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normAll))
+      )
     ) {
       const senhaMatch = (ticket.content || "").match(/\bsenha\s*:\s*(\d+)\b/i) ||
         (ticket.content || "").match(/\b(\d{7,10})\b/);

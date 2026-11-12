@@ -1,5 +1,59 @@
 [
   {
+    "ticket_id": 43869,
+    "title": "Sistemas Operacionais  -  Suporte HRP",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "hrp",
+      "aba",
+      "cadastro",
+      "carteirinha",
+      "aparecendo",
+      "aguardo",
+      "retorno"
+    ],
+    "problem_summary": "Bom dia, \nSolicito suporte no sistema HRP, aba para cadastro de carteirinha não está aparecendo mais no meu login. Por gentileza, verificar. \nAguardo retorno.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nSua solicitação referente ao **HRP** já está em análise pela equipe técnica.\n\nEstamos verificando os parâmetros no sistema e, assim que a consulta/atualização estiver concluída (ou caso precisemos validar algum filtro adicional com você), atualizaremos este chamado!",
+    "required_info": [
+      "Detalhamento exato da regra/campo ou código da tabela/importação no HRP",
+      "Validação/aprovação da regra de negócio pelo setor responsável (Faturamento / Promoprev)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-05] Para atualização via banco no HRP (ex: campo precificação pós-importação TNUMM): realizar `SELECT` prévio em homologação/produção identificando os registros afetados e gerar backup da tabela antes do `UPDATE`.",
+      "[PB-UNI-05] Para localização de relatórios no HRP (ex: Relatório de Gestantes / Clientes 0256): verificar no módulo correspondente do HRP ou extrator BI/Relatórios Customizados qual consulta atende os filtros solicitados e orientar o usuário."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-11T14:54:33.411Z"
+  },
+  {
+    "ticket_id": 43992,
+    "title": "Aplicativos  -  Acesso ao NextCloud",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "acesso",
+      "nextcloud",
+      "orientar",
+      "sobre",
+      "uso",
+      "senha",
+      "condinzente",
+      "criada"
+    ],
+    "problem_summary": "Bom dia, prezados.\nPoderiam, por gentileza, nos orientar sobre o acesso e uso do nextcloud?\nA senha não está condinzente com a criada e não consigo acesso:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** (Laboratório).\n\nNossa equipe técnica de T.I. já está verificando o cadastro do seu usuário no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua **senha** basta nos informar o ID do HopToDesk da sua máquina para que possamos auxiliá-la remotamente.\n\nAssim que a redefinição da senha for concluída no painel, confirmaremos por aqui para que você possa realizar o login!\n\nPermanecemos à total disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-54] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Acesso e Permissões > Redefinição de Senhas' (ID 77).",
+      "[PB-UNI-54] Acessar o console de administração do Nextcloud institucional da Unimed com credenciais de administrador.",
+      "[PB-UNI-54] No menu 'Usuários', localizar a conta da colaboradora Rosy Ellen Freire Viana (login: rviana) vinculada ao setor Laboratório.",
+      "[PB-UNI-54] Redefinir a senha da usuária definindo uma senha temporária segura ou disparar o link de redefinição para o e-mail institucional corporativo da colaboradora.",
+      "[PB-UNI-54] Responder no chamado GLPI fornecendo a senha provisória, o link oficial de acesso web do Nextcloud e as orientações para alteração obrigatória da senha no primeiro login.",
+      "[PB-UNI-54] Caso a colaboradora necessite também sincronizar pastas locais em seu computador via aplicativo (Nextcloud Desktop Client / Unidrive), disponibilizar apoio remoto via HopToDesk."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-11T14:53:49.828Z"
+  },
+  {
     "ticket_id": 43883,
     "title": "Instalação/Configuração  -  Instalação de Aparelho de ECG à rede Hospitalar",
     "category": "T.I > ST > Instalação/Configuração",

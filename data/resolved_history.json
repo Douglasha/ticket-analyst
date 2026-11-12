@@ -1,5 +1,122 @@
 [
   {
+    "id": "Chamado #44061 (Resolvido)",
+    "ticket_id": 44061,
+    "solution_id": 42801,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Mônica de Souza Batista Castro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha redefinida e passa para a colaboradora via telefone\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha redefinida e passa para a colaboradora via telefone",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44044 (Resolvido)",
+    "ticket_id": 44044,
+    "solution_id": 42796,
+    "title": "Suporte Técnico e Service Desk > Instalação/Configuração > computador das salas do PPP",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Atalho recolocado",
+    "keywords": [],
+    "steps": [
+      "Atalho recolocado"
+    ]
+  },
+  {
+    "id": "Chamado #44035 (Resolvido)",
+    "ticket_id": 44035,
+    "solution_id": 42795,
+    "title": "Infraestrutura e Redes > Administração de Redes > SEM INTERNET DNC-0352-COORD",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Reconectado a rede",
+    "keywords": [],
+    "steps": [
+      "Reconectado a rede"
+    ]
+  },
+  {
+    "id": "Chamado #44024 (Resolvido)",
+    "ticket_id": 44024,
+    "solution_id": 42751,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Suyane Costa Batista",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSenha resetada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Senha resetada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44004 (Resolvido)",
+    "ticket_id": 44004,
+    "solution_id": 42726,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar Bobinas REP [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Verificado",
+    "keywords": [],
+    "steps": [
+      "Verificado"
+    ]
+  },
+  {
+    "id": "Chamado #44002 (Resolvido)",
+    "ticket_id": 44002,
+    "solution_id": 42737,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Kauan Pereira Borges",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "_____________________________________________\n\n\r\nLGDP\n\n\r\nhttps://lgpd.unisulmg.com.br\n\n\r\nlogin: kauan21.borg@gmail.com\n\n\r\nSenha: Unimed@256\n\n\r\n_____________________________________________\n\n\r\nFaculdade Unimed\n\n\r\nhttps://www.faculdadeunimed.edu.br\n\n\r\nLogin: 14738475673\n\n\r\nSenha: Unimed@256\n\n\r\n_____________________________________________\n\n\r\nSPdata\n\n",
+    "keywords": [],
+    "steps": [
+      "_____________________________________________",
+      "LGDP",
+      "https://lgpd.unisulmg.com.br",
+      "login: kauan21.borg@gmail.com",
+      "Senha: Unimed@256",
+      "_____________________________________________"
+    ]
+  },
+  {
+    "id": "Chamado #44001 (Resolvido)",
+    "ticket_id": 44001,
+    "solution_id": 42759,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Internet sala 501",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Reconectado a rede",
+    "keywords": [],
+    "steps": [
+      "Reconectado a rede"
+    ]
+  },
+  {
+    "id": "Chamado #43970 (Resolvido)",
+    "ticket_id": 43970,
+    "solution_id": 42717,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > whatsapp",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43956 (Resolvido)",
     "ticket_id": 43956,
     "solution_id": 42668,
@@ -126,6 +243,19 @@
     ]
   },
   {
+    "id": "Chamado #43922 (Resolvido)",
+    "ticket_id": 43922,
+    "solution_id": 42797,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > INTERNET SALA 103",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Resolvido",
+    "keywords": [],
+    "steps": [
+      "Resolvido"
+    ]
+  },
+  {
     "id": "Chamado #43919 (Resolvido)",
     "ticket_id": 43919,
     "solution_id": 42704,
@@ -155,6 +285,19 @@
       "Verificado",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43910 (Resolvido)",
+    "ticket_id": 43910,
+    "solution_id": 42718,
+    "title": "Infraestrutura e Redes > Instalação e Configuração > Impressora Zebra Não está funcionando",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "impressora reconectada",
+    "keywords": [],
+    "steps": [
+      "impressora reconectada"
     ]
   },
   {
@@ -250,6 +393,19 @@
     ]
   },
   {
+    "id": "Chamado #43854 (Resolvido)",
+    "ticket_id": 43854,
+    "solution_id": 42725,
+    "title": "Infraestrutura e Redes > Telefones VoIP > Aparelho com mal contato",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Mal contato resolvido",
+    "keywords": [],
+    "steps": [
+      "Mal contato resolvido"
+    ]
+  },
+  {
     "id": "Chamado #43848 (Resolvido)",
     "ticket_id": 43848,
     "solution_id": 42671,
@@ -339,6 +495,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43829 (Resolvido)",
+    "ticket_id": 43829,
+    "solution_id": 42746,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Tatiane Batista Cardoso Veras",
+    "category": "T.I • Solucionado por lsilveira",
+    "is_ti_group": true,
+    "summary": "Feito. alterado para registro de ponto com senha escolhida pela funcionaria.",
+    "keywords": [],
+    "steps": [
+      "Feito. alterado para registro de ponto com senha escolhida pela funcionaria."
     ]
   },
   {
@@ -467,6 +636,23 @@
     ]
   },
   {
+    "id": "Chamado #43783 (Resolvido)",
+    "ticket_id": 43783,
+    "solution_id": 42799,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 14 V\nTemperatura da água do Radiador: 50° C\nNível do óleo motor: ok\nNível do óleo combustível: ok\nLigar o Motor 10 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 14 V",
+      "Temperatura da água do Radiador: 50° C",
+      "Nível do óleo motor: ok",
+      "Nível do óleo combustível: ok",
+      "Ligar o Motor 10 min. Feito"
+    ]
+  },
+  {
     "id": "Chamado #43770 (Resolvido)",
     "ticket_id": 43770,
     "solution_id": 42522,
@@ -554,6 +740,24 @@
     "keywords": [],
     "steps": [
       "Envie o acesso do HOP TO DESK assim que possível"
+    ]
+  },
+  {
+    "id": "Chamado #43747 (Resolvido)",
+    "ticket_id": 43747,
+    "solution_id": 42732,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Login na Brasíndice",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\n\r\n\r\n\r\nLogin:\r\ninformatica@unimedsudoestemg.coop.br\r\n\r\n\r\nSenha:\r\nME7SPWT5J\r\n\r\n\r\n\r\n \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Login:",
+      "informatica@unimedsudoestemg.coop.br",
+      "Senha:",
+      "ME7SPWT5J",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição."
     ]
   },
   {

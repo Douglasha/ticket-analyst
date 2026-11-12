@@ -1638,39 +1638,33 @@
     "title": "Processo de Autorização de Procedimento no Sistema HRP Unimed — Falha no Tráfego de Senha e Guia de Intercâmbio",
     "domain": "Sistemas Internos / ERP / HRP Unimed / Autorização e Intercâmbio",
     "keywords": [
-      "senha",
-      "senhas",
-      "autorização",
-      "autorizacao",
-      "autorizando",
-      "autorizar",
-      "procedimento",
-      "procedimentos",
-      "não está autorizando",
-      "nao esta autorizando",
-      "não autoriza",
-      "nao autoriza",
       "senha não está trafegando",
       "senha nao esta trafegando",
       "não está trafegando",
       "nao esta trafegando",
+      "senha não trafega",
+      "senha nao trafega",
       "não trafega",
       "nao trafega",
-      "trafegando",
-      "guia",
-      "guias",
-      "número de guia",
-      "numero de guia",
+      "tráfego de senha",
+      "trafego de senha",
+      "não está autorizando",
+      "nao esta autorizando",
+      "não autoriza",
+      "nao autoriza",
+      "falha de autorização",
+      "falha de autorizacao",
+      "guia de intercâmbio",
+      "guia de intercambio",
       "intercâmbio",
       "intercambio",
-      "hrp",
       "ptu",
-      "wautoriza",
-      "206867125"
+      "ptu online",
+      "wautoriza"
     ],
     "symptoms": "Solicitante (frequentemente do setor de Autorização ou Recepção) relata que um procedimento não está autorizando no sistema HRP Unimed ou que a senha (número de guia gerado no processo de autorização do Intercâmbio entre Unimeds) não está trafegando/transmitindo via mensageria/PTU Online, impedindo a liberação do atendimento.",
     "required_info": [
-      "Número da senha / guia de autorização gerada no HRP (já informado: 206867125)",
+      "Número da senha / guia de autorização gerada no HRP",
       "Código do procedimento ou carteirinha do beneficiário (caso necessário para conferência de elegibilidade/cadastro no Intercâmbio)"
     ],
     "resolution_steps": [
@@ -2034,5 +2028,37 @@
       "[PB-UNI-54] Caso o colaborador também necessite sincronizar pastas de rede locais em sua estação de trabalho, orientar a configuração pelo aplicativo Nextcloud Desktop Client (Unidrive) ou solicitar o ID do HopToDesk para apoio remoto."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à dificuldade de acesso e redefinição de senha no **Nextcloud** ({setor}).\n\nNossa equipe técnica de T.I. já está verificando o seu usuário (`{login}`) no painel administrativo do Nextcloud para providenciar a redefinição da sua credencial de acesso.\n\nEm breve, encaminharemos por aqui a sua senha temporária de primeiro acesso juntamente com as orientações de uso e o link para login no navegador web. Caso também necessite de apoio para configurar a sincronização de pastas no seu computador pelo aplicativo (Unidrive), basta nos informar o ID do HopToDesk da sua máquina.\n\nAssim que a redefinição for concluída, avisaremos por aqui para que você possa realizar o teste de acesso!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-55",
+    "domain": "Sistemas Internos / ERP / Sistemas Hospitalares (SGH Spdata / Faturamento)",
+    "title": "Alteração de Data de Cadastro / Atendimento de Paciente no Sistema SGH Spdata — Ajuste para Faturamento / Vencimento de Guia",
+    "keywords": [
+      "alterar a data de cadastro",
+      "alterar data de cadastro",
+      "alteracao da data de cadastro",
+      "alteração da data de cadastro",
+      "data de cadastro da paciente",
+      "nova data",
+      "vencimento da guia",
+      "faturamento dentro do vencimento",
+      "alterar cadastro paciente",
+      "alterar data atendimento spdata",
+      "spdata data cadastro",
+      "sgh spdata data cadastro",
+      "retroagir data",
+      "ajuste de data spdata"
+    ],
+    "symptoms": "Setor de Faturamento ou Recepção Hospitalar (ex.: Hospital Unimed Piumhi ou Hospital sede) solicita a alteração/ajuste retroativo da data de cadastro ou atendimento de paciente no sistema SGH Spdata (ex.: procedimento realizado no dia 22/10, mas cadastrado no sistema em 26/10), com o objetivo de viabilizar o faturamento da conta hospitalar dentro da vigência/vencimento da guia de autorização do convênio e evitar glosas.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-55] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163) ou 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).",
+      "[PB-UNI-55] Acessar a base de dados ou módulo de faturamento/atendimento do sistema SGH Spdata da respectiva unidade (ex.: Hosp. Unimed Piumhi).",
+      "[PB-UNI-55] Localizar o registro de atendimento do(a) paciente informado(a) (ex.: Silva Faria de Jesus) cadastrado na data original (26/10/2026).",
+      "[PB-UNI-55] Verificar a amarração dos itens, taxas, diárias e procedimentos vinculados ao atendimento para garantir a consistência das datas no módulo de faturamento.",
+      "[PB-UNI-55] Executar o ajuste operacional/SQL da data de cadastro/atendimento para a nova data solicitada (ex.: 22/10/2026), alinhando a vigência com a data do procedimento médico e a validade da guia de autorização.",
+      "[PB-UNI-55] Notificar a solicitante no chamado GLPI confirmando a alteração da data e orientando a equipe de faturamento da unidade a prosseguir com o faturamento da conta."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **alteração da data de cadastro da paciente {paciente}** no sistema **SGH Spdata** ({setor}).\n\nIdentificamos todas as informações necessárias no chamado: a paciente realizou o procedimento em **{nova_data}**, porém o cadastro no sistema foi realizado em **{data_antiga}**, data posterior ao vencimento da guia de autorização, demandando a retroação da data para que a conta possa ser faturada dentro da vigência.\n\nNossa equipe de T.I. já está realizando o ajuste operacional no sistema/banco de dados do Spdata para atualizar a data de cadastro para **{nova_data}**.\n\nAssim que o ajuste for concluído no registro da paciente, confirmaremos por aqui para que o setor de Faturamento possa dar sequência na transmissão e fechamento da conta!\n\nPermanecemos à disposição!"
   }
 ]
