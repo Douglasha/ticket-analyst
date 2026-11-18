@@ -300,16 +300,17 @@ export class KnowledgeEngine {
       !isXmlBatalhaoOrSghValueMismatch &&
       !isFormcreatorOrGlpiForm &&
       !isReopenOrRevertAccount &&
-      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|regras?\s+do\s+min|manual\s+de\s+interc[aâ]mbio|prazo\s+de\s+cobranc?a)\b/i.test(
+      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|regras?\s+do\s+min|manual\s+de\s+interc[aâ]mbio|prazo\s+de\s+cobranc?a|bras[ií]ndice|bras[ií]dice|simpro|referenciamento\s+bras[ií]ndice)\b/i.test(
         normTicket
       ) ||
-        (/\btabela\b/i.test(normTicket) &&
-          /\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
-            normTicket
-          ) &&
-          !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
-            normTicket
-          )));
+        (/\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|bras[ií]dice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
+          normTicket
+        ) &&
+        !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
+          normTicket
+        )) ||
+        normTicket.includes("parametrização de sistemas e tabelas") ||
+        ticket.category.includes("Parametrização de Sistemas e Tabelas"));
 
     const isDocusignAccessOrShared =
       /\b(docusign|docu\s*sign)\b/i.test(normTicket) ||
@@ -347,6 +348,58 @@ export class KnowledgeEngine {
         !/\b(erro|falha|travad|reclassifica|toner|impressora|docusign|nextcloud|unidrive)\b/i.test(
           normTicket
         ));
+
+    const isWconectErrorOrMessageSync =
+      /\b(wconect|wconnect|wconectt)\b/i.test(normTicket) &&
+      !/\b(indicador|indicadores|produtividade|relat[oó]rio|relatorios|extra[çc][ãa]o|levantamento|quantitativo)\b/i.test(
+        normTicket
+      ) &&
+      /\b(erro|problema|falha|primeiro\s+contato|n[aã]o\s+recebo|resposta\s+dos\s+pacientes|mensagens?|sem\s+acesso|conex[aã]o|sincroniza)\b/i.test(
+        normTicket
+      );
+
+    const isDesktopWallpaperOrDomainPersonalization =
+      /\b(papel\s+de\s+parede|papeis\s+de\s+parede|pap[eé]is\s+de\s+parede|plano\s+de\s+fundo|fundo\s+de\s+tela|tela\s+de\s+fundo|wallpaper|padroniza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|padronizar\s+(?:a\s+)?[aá]rea\s+de\s+trabalho|personaliza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|personalizar\s+(?:a\s+)?[aá]rea\s+de\s+trabalho|imagem\s+(?:com\s+a\s+|da\s+|de\s+|na\s+)?[aá]rea\s+de\s+trabalho|[aá]rea\s+de\s+trabalho\s+criada)\b/i.test(
+        normTicket
+      ) ||
+      (/\b([aá]rea\s+de\s+trabalho|desktop)\b/i.test(normTicket) &&
+        /\b(padroniza|personaliza|papel\s+de\s+parede|plano\s+de\s+fundo|imagem|imagens|dom[ií]nio|unimedti|unimed256|\bucs\b|\bgpo\b)\b/i.test(
+          normTicket
+        ) &&
+        !/\b(etiqueta|etiquetas|zebradesigner|elgin|atalho|unidrive|nextcloud)\b/i.test(
+          normTicket
+        ));
+
+    const isScannerDeviceInstall =
+      (/\b(instala[cç][aã]o\s+d[eo]\s+scann?ers?|instalar\s+(?:o\s+|um\s+)?scann?ers?|configura[cç][aã]o\s+d[eo]\s+scann?ers?|configurar\s+(?:o\s+|um\s+)?scann?ers?|scann?ers?\s+(?:em|no)\s+meu\s+computador)\b/i.test(
+        normTicket
+      ) ||
+        (ticket.category.includes("Scaners") &&
+          /\b(instala|configura|scann?ers?)\b/i.test(normTicket))) &&
+      !/\b(e-?mail|email|cat[aá]logo|lgpd|scan\s+to\s+e-?mail)\b/i.test(normTicket);
+
+    const isIntranetChatOrSystemBug =
+      /\bintranet\b/i.test(normTicket) &&
+      /\b(chat|destinat[aá]rio|destinat[aá]rios|mensagens?|bug|bugs|falha|erro\s+do\s+destinat[aá]rio|conte[uú]do\s+sens[ií]vel|canal\s+oficial)\b/i.test(
+        normTicket
+      ) &&
+      !/\b(cria[cç][aã]o\s+de\s+usu[aá]rios?|novo\s+colaborador|admiss[aã]o)\b/i.test(normTicket);
+
+    const isSiteMetricsOrGtmTags =
+      !isExternalAgencyOrPortal &&
+      (/\b(google\s+tag\s+manager|\bgtm\b|gtm-[a-z0-9]+|google\s+analytics|search\s+console|pixel\s+(?:da\s+)?meta|tags?\s+de\s+acompanhamento|m[eé]tricas?\s+(?:no\s+site|de\s+crescimento))\b/i.test(
+        normTicket
+      ) ||
+        (/\bsite\s+unimed\b/i.test(normTicket) &&
+          /\b(tags?|m[eé]tricas?|monitoramento)\b/i.test(normTicket)));
+
+    const isAutomationBillingOrMessaging =
+      (/\b(automa[çc][ãa]o|automatiza[çc][ãa]o|automatizar|rotina autom[aá]tica)\b/i.test(normTicket) &&
+        /\b(cobran[çc]a|t[ií]tulos?\s+em\s+atraso|inadimpl[eê]ncia|whatsapp|wpp|mensagens?\s+wpp|mensagens?\s+de\s+cobran[çc]a|disparo)\b/i.test(
+          normTicket
+        )) ||
+      (/\b(t[ií]tulos?\s+em\s+atraso|relat[oó]rio\s+de\s+t[ií]tulos?\s+em\s+atraso)\b/i.test(normTicket) &&
+        /\b(whatsapp|wpp|emails?|mandar\s+um\s+email|mandar\s+um\s+whatsapp)\b/i.test(normTicket));
 
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
@@ -522,11 +575,47 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-16 (Extração de Indicadores/Relatórios) quando o chamado trata de agenda de profissional ou não cita indicadores/relatórios/wconect
+        // Evita parear PB-UNI-56 (Erro/Falha no WConect) quando o chamado não trata de falha/erro no WConect
+        if (pb.id === "PB-UNI-56" && !isWconectErrorOrMessageSync) {
+          continue;
+        }
+        // Evita parear PB-UNI-57 (Padronização Área de Trabalho / Papel de Parede / Domínio UCS) quando o chamado não trata de papel de parede ou padronização de área de trabalho
+        if (pb.id === "PB-UNI-57" && !isDesktopWallpaperOrDomainPersonalization) {
+          continue;
+        }
+        // Evita parear PB-UNI-58 (Instalação de Scanner no Computador) quando o chamado não trata de instalação/configuração de scanner
+        if (pb.id === "PB-UNI-58" && !isScannerDeviceInstall) {
+          continue;
+        }
+        // Evita parear PB-UNI-59 (Bug no Chat da Intranet) quando o chamado não trata de bug/falha no chat da Intranet
+        if (pb.id === "PB-UNI-59" && !isIntranetChatOrSystemBug) {
+          continue;
+        }
+        // Evita parear PB-UNI-60 (Tags de Métricas / GTM no Site Unimed) quando o chamado não trata de tags/métricas no site
+        if (pb.id === "PB-UNI-60" && !isSiteMetricsOrGtmTags) {
+          continue;
+        }
+        // Evita parear PB-UNI-61 (Automação de Cobrança / WhatsApp) quando o chamado não trata de automação de cobrança/mensageria
+        if (pb.id === "PB-UNI-61" && !isAutomationBillingOrMessaging) {
+          continue;
+        }
+        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos) quando o chamado trata de automação de cobrança/mensageria
+        if (pb.id === "PB-UNI-38" && isAutomationBillingOrMessaging) {
+          continue;
+        }
+        // Evita parear PB-UNI-07 (Periféricos / Hardware) e PB-UNI-06 (Apoio a Eventos) quando o chamado trata de padronização de área de trabalho, scanner ou tags/métricas no site
+        if (
+          (pb.id === "PB-UNI-07" || pb.id === "PB-UNI-06") &&
+          (isDesktopWallpaperOrDomainPersonalization || isScannerDeviceInstall || isSiteMetricsOrGtmTags)
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-16 (Extração de Indicadores/Relatórios) quando o chamado trata de agenda de profissional, erro do WConect ou não cita indicadores/relatórios
         if (
           pb.id === "PB-UNI-16" &&
           (/\bagenda\b/i.test(normTicket) ||
-            !/\b(indicador|indicadores|wconect|wconnect|produtividade|relat[oó]rio|extra[çc][ãa]o|levantamento)\b/i.test(
+            isWconectErrorOrMessageSync ||
+            !/\b(indicador|indicadores|produtividade|relat[oó]rio|relatorios|extra[çc][ãa]o|levantamento|quantitativo)\b/i.test(
               normTicket
             ))
         ) {
@@ -589,12 +678,13 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-14 (Relatórios Agendados SGH) quando o chamado não trata de relatório agendado
+        // Evita parear PB-UNI-14 (Relatórios Agendados SGH) quando o chamado não trata de relatório agendado ou trata de falha no WConect
         if (
           pb.id === "PB-UNI-14" &&
-          !/\b(relat[oó]rio|agendad[ao]|envio|disparo|checklist|check-list|di[aá]ri[ao]|smtp)\b/i.test(
-            normTicket
-          )
+          (isWconectErrorOrMessageSync ||
+            !/\b(relat[oó]rio|relatorios|agendad[ao]|disparo|checklist|check-list|di[aá]ri[ao]|smtp)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
@@ -628,7 +718,10 @@ export class KnowledgeEngine {
             normTicket
           );
         const isScanToEmail =
-          (/\b(scan|scanner|digitaliz|digitalizacao)\b/i.test(normTicket) ||
+          !isScannerDeviceInstall &&
+          (/\b(scan\s+to\s+e-?mail|cat[aá]logo\s+de\s+endere[cç]os|cadastr(ar|o)\s+(?:de\s+|o\s+|meu\s+)?e-?mail)\b/i.test(normTicket) ||
+            (/\b(scan|scanner|digitaliz|digitalizacao)\b/i.test(normTicket) &&
+              /\b(e-?mail|email|cat[aá]logo|lgpd|samsung|m4080)\b/i.test(normTicket)) ||
             /\b(cadastr(ar|o))\b[\s\S]{0,30}\b(e-?mail|email)\b/i.test(normTicket) ||
             /\b(e-?mail|email)\b[\s\S]{0,30}\b(impressora|scanner|scan)\b/i.test(normTicket)) &&
           !/\b(nao esta imprimindo|parou de imprimir|spooler|mancha|atolamento|papel preso|qualidade|fila)\b/i.test(
@@ -753,8 +846,8 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear Playbook de Intranet (PB-UNI-22) quando o chamado não cita Intranet
-        if (pb.id === "PB-UNI-22" && !/\bintranet\b/i.test(normTicket)) {
+        // Evita parear Playbook de Intranet (PB-UNI-22) quando o chamado não cita Intranet ou quando trata de bug no chat / falha na Intranet (PB-UNI-59)
+        if (pb.id === "PB-UNI-22" && (!/\bintranet\b/i.test(normTicket) || isIntranetChatOrSystemBug)) {
           continue;
         }
         const isDoubtOrOrientation =
@@ -910,6 +1003,42 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.98);
         }
+        if (
+          pb.id === "PB-UNI-56" &&
+          isWconectErrorOrMessageSync
+        ) {
+          score = Math.max(score, 0.98);
+        }
+        if (
+          pb.id === "PB-UNI-57" &&
+          isDesktopWallpaperOrDomainPersonalization
+        ) {
+          score = Math.max(score, 0.98);
+        }
+        if (
+          pb.id === "PB-UNI-58" &&
+          isScannerDeviceInstall
+        ) {
+          score = Math.max(score, 0.98);
+        }
+        if (
+          pb.id === "PB-UNI-59" &&
+          isIntranetChatOrSystemBug
+        ) {
+          score = Math.max(score, 0.98);
+        }
+        if (
+          pb.id === "PB-UNI-60" &&
+          isSiteMetricsOrGtmTags
+        ) {
+          score = Math.max(score, 0.98);
+        }
+        if (
+          pb.id === "PB-UNI-61" &&
+          isAutomationBillingOrMessaging
+        ) {
+          score = Math.max(score, 0.98);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -986,13 +1115,72 @@ export class KnowledgeEngine {
       ) {
         continue;
       }
-      const score = computeRelevance(
+      if (
+        isWconectErrorOrMessageSync &&
+        /\b(indicadores?|relat[oó]rios?)\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
+      ) {
+        continue;
+      }
+      if (
+        !/\b(wconect|wconnect|wconectt)\b/i.test(normTicket) &&
+        /\b(wconect|wconnect|wconectt)\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
+      ) {
+        continue;
+      }
+      if (
+        isDesktopWallpaperOrDomainPersonalization &&
+        !/\b(papel\s+de\s+parede|plano\s+de\s+fundo|padroniza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|unimed256|unimedti|\bucs\b|\bgpo\b)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      if (
+        isScannerDeviceInstall &&
+        !/\b(instala[cç][aã]o\s+d[eo]\s+scann?ers?|instalar\s+(?:o\s+|um\s+)?scann?ers?|scann?ers?\s+separado)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      if (
+        isIntranetChatOrSystemBug &&
+        !/\b(chat\s+da\s+intranet|chat\s+intranet|destinat[aá]rio\s+errado)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      if (
+        isSiteMetricsOrGtmTags &&
+        !/\b(google\s+tag\s+manager|\bgtm\b|google\s+analytics|search\s+console|pixel\s+(?:da\s+)?meta|tags?\s+de\s+acompanhamento)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      let score = computeRelevance(
         fullTicketText,
         ticketTokens,
         hist.title || "",
         hist.summary || "",
         hist.keywords || []
       );
+      if (
+        isWconectErrorOrMessageSync &&
+        /\b(erro\s+de\s+conex[aã]o\s+wconect|corre[cç][aã]o\s+de\s+bugs.*wconect)/i.test(
+          normalizeText(hist.title || "")
+        )
+      ) {
+        score = Math.max(score, 0.72);
+      }
+      if (
+        isSystemTableParameterization &&
+        /\bbras[ií]ndice\b/i.test(normTicket) &&
+        /\bbras[ií]ndice\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
+      ) {
+        score = Math.max(score, 0.78);
+      }
       const minHistScore = isRoutine ? 0.65 : bestPlaybookScore >= 0.75 ? 0.50 : 0.42;
       if (score >= minHistScore) {
         matches.push({
@@ -1013,6 +1201,96 @@ export class KnowledgeEngine {
       const learnedList = loadLearnedFeedback();
       for (const mem of learnedList) {
         if (String(mem.ticket_id) === String(ticket.id)) continue;
+        // Evita parear memórias de Oncologia (ex.: MEM-#42241) quando o chamado NÃO cita Oncologia
+        if (
+          !/\boncologia\b/i.test(normTicket) &&
+          /\boncologia\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Internet/Wi-Fi/Salas médicas (ex.: MEM-#43498) quando o chamado NÃO trata de internet/wifi
+        if (
+          !/\b(internet|wi-?fi|wifi|roteador|access point)\b/i.test(normTicket) &&
+          /\b(instabilidade da internet|reclama[cç][oõ]es dos m[eé]dicos|salas de atendimento)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de tags de métricas / GTM no site
+        if (
+          isSiteMetricsOrGtmTags &&
+          !/\b(google\s+tag\s+manager|\bgtm\b|google\s+analytics|search\s+console|pixel\s+(?:da\s+)?meta|tags?\s+de\s+acompanhamento)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de relatórios assistenciais/cateteres ou e-mail quando o chamado trata de automação de cobrança/mensageria
+        if (
+          isAutomationBillingOrMessaging &&
+          !/\b(automa[çc][ãa]o|cobran[çc]a|whatsapp|wpp|t[ií]tulos?\s+em\s+atraso)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de WConect (ex.: MEM-#44220) quando o chamado NÃO cita WConect
+        if (
+          !/\b(wconect|wconnect|wconectt)\b/i.test(normTicket) &&
+          /\b(wconect|wconnect|wconectt)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de bug no chat da Intranet
+        if (
+          isIntranetChatOrSystemBug &&
+          !/\b(chat\s+da\s+intranet|chat\s+intranet|destinat[aá]rio\s+errado)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de instalação de scanner no computador
+        if (
+          isScannerDeviceInstall &&
+          !/\b(instala[cç][aã]o\s+d[eo]\s+scann?ers?|instalar\s+(?:o\s+|um\s+)?scann?ers?|scann?ers?\s+separado)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de periféricos/hardware/outros temas quando o chamado trata de padronização de área de trabalho / papel de parede / domínio UCS
+        if (
+          isDesktopWallpaperOrDomainPersonalization &&
+          !/\b(papel\s+de\s+parede|plano\s+de\s+fundo|padroniza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|unimed256|unimedti|\bucs\b|\bgpo\b)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de papel de parede / padronização de área de trabalho quando o chamado NÃO trata desse tema
+        if (
+          !isDesktopWallpaperOrDomainPersonalization &&
+          /\b(papel\s+de\s+parede|plano\s+de\s+fundo|padroniza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de indicadores do WConect (ex.: MEM-#42012) quando o chamado trata de erro/bug operacional no WConect
+        if (
+          isWconectErrorOrMessageSync &&
+          /\b(indicadores?|relat[oó]rios?|per[ií]odo de refer[eê]ncia)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
         // Evita parear memórias de onboarding interno ou acessos genéricos quando o chamado trata de agência externa / gerenciador do portal
         if (
           isExternalAgencyOrPortal &&
@@ -1049,10 +1327,19 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear memórias de outros temas (ex.: exclusão de taxa ou desenvolvimento controle de contas) quando o chamado trata de criação/parametrização de tabela (ex.: DTH - PADRAO)
+        // Evita parear memórias de XML TISS / Hash (ex.: MEM-#42071) quando o chamado NÃO trata de XML
+        if (
+          !/\b(xml|tiss|sigas)\b/i.test(normTicket) &&
+          /\b(xml|hash\s+tiss|recalculador\s+de\s+hash)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${(mem.resolution_steps || []).join(" ")}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas (ex.: exclusão de taxa ou desenvolvimento controle de contas) quando o chamado trata de criação/parametrização de tabela (ex.: DTH - PADRAO, Brasíndice, Simpro)
         if (
           isSystemTableParameterization &&
-          !/\b(criar\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias|faixa\s+(?:de\s+)?998|parametriza[cç][aã]o\s+de\s+sistemas\s+e\s+tabelas)\b/i.test(
+          !/\b(criar\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias|faixa\s+(?:de\s+)?998|parametriza[cç][aã]o\s+de\s+sistemas\s+e\s+tabelas|bras[ií]ndice|simpro)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

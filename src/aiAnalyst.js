@@ -1,8 +1,74 @@
+import { execFileSync } from "node:child_process";
 import {
   extractFormCreatorFields,
   loadPlaybooks,
   normalizeText,
 } from "./knowledgeEngine.js";
+
+const IMAGE_OCR_CACHE = new Map();
+
+export function runWindowsOcrOnBase64(base64Str, cacheKey = "") {
+  if (!base64Str || process.platform !== "win32") return "";
+  const key = cacheKey || base64Str.slice(0, 96);
+  if (IMAGE_OCR_CACHE.has(key)) {
+    return IMAGE_OCR_CACHE.get(key);
+  }
+  try {
+    const psScript = `
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$b64 = [Console]::In.ReadToEnd().Trim()
+if (-not $b64) { exit 0 }
+Add-Type -AssemblyName System.Runtime.WindowsRuntime
+$null = [Windows.Storage.Streams.IRandomAccessStream,Windows.Storage.Streams,ContentType=WindowsRuntime]
+$null = [Windows.Media.Ocr.OcrEngine,Windows.Foundation,ContentType=WindowsRuntime]
+$null = [Windows.Graphics.Imaging.BitmapDecoder,Windows.Foundation,ContentType=WindowsRuntime]
+function Await($op, $type) {
+  $m = ([System.WindowsRuntimeSystemExtensions].GetMethods() | Where-Object { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name.StartsWith('IAsyncOperation') })[0]
+  $m = $m.MakeGenericMethod($type)
+  $t = $m.Invoke($null, @($op))
+  $t.Wait()
+  return $t.Result
+}
+$bytes = [Convert]::FromBase64String($b64)
+$mem = New-Object System.IO.MemoryStream(,$bytes)
+$stream = [System.IO.WindowsRuntimeStreamExtensions]::AsRandomAccessStream($mem)
+$decoder = Await ([Windows.Graphics.Imaging.BitmapDecoder]::CreateAsync($stream)) ([Windows.Graphics.Imaging.BitmapDecoder])
+$bitmap = Await ($decoder.GetSoftwareBitmapAsync()) ([Windows.Graphics.Imaging.SoftwareBitmap])
+$engine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+$res = Await ($engine.RecognizeAsync($bitmap)) ([Windows.Media.Ocr.OcrResult])
+Write-Output $res.Text
+`;
+    const out = execFileSync(
+      "powershell.exe",
+      ["-NoProfile", "-Command", psScript],
+      {
+        input: base64Str,
+        encoding: "utf8",
+        timeout: 6000,
+        stdio: ["pipe", "pipe", "ignore"],
+      }
+    );
+    const cleaned = (out || "").replace(/\s+/g, " ").trim();
+    IMAGE_OCR_CACHE.set(key, cleaned);
+    return cleaned;
+  } catch {
+    IMAGE_OCR_CACHE.set(key, "");
+    return "";
+  }
+}
+
+export function extractTicketImagesOcrText(ticket) {
+  const docs = (ticket?.documents || []).filter((d) => d.is_image && d.base64);
+  if (docs.length === 0) return "";
+  const texts = [];
+  for (const d of docs) {
+    const cacheKey = `${ticket.id || "t"}_${d.id || d.filename || ""}_${d.base64.slice(0, 32)}`;
+    const txt = runWindowsOcrOnBase64(d.base64, cacheKey);
+    if (txt) texts.push(txt);
+  }
+  return texts.join("\n");
+}
 
 const SYSTEM_PROMPT = `Você é um Analista Sênior de T.I. da Unimed (Copiloto de Triagem GLPI).
 Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil contendo:
@@ -671,11 +737,11 @@ export class AIAnalyst {
       rawFirstName.charAt(0).toUpperCase() + rawFirstName.slice(1).toLowerCase();
     const formattedRequester = formatPersonName(ticket.requester || firstName);
 
-    const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+    const isMale = /^(juliano|dener|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
       firstName
     );
     const isFemale =
-      /^(thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
+      /^(isabel|isabela|rosy|edilea|edil[eé]a|joyce|suzelei|raquel|beatriz|iris|[ií]ris|ester|esther|ruth|miriam|lilian|l[ií]lian|karen|karine|kelly|kelli|nicole|stefany|stephanie|thamires|tamires|thais|tha[ií]s|lais|la[ií]s|elis|el[ií]s|in[eê]s|ines|thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
         firstName
       ) || /a$/i.test(firstName);
     const solPrefix = isMale ? "O solicitante" : (isFemale ? "A solicitante" : "O(a) solicitante");
@@ -837,6 +903,69 @@ export class AIAnalyst {
         `2. Caso esteja aparecendo alguma mensagem de erro ou tela travada, você poderia nos enviar um print da tela?\n` +
         `3. Qual o **ID do HopToDesk** do computador${assetInfo} ou ramal para contato da equipe de T.I.?\n\n` +
         `Assim que nos enviar esses detalhes por aqui, daremos sequência imediata ao seu atendimento!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      /\b(papel\s+de\s+parede|papeis\s+de\s+parede|pap[eé]is\s+de\s+parede|plano\s+de\s+fundo|fundo\s+de\s+tela|tela\s+de\s+fundo|wallpaper|padroniza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|padronizar\s+(?:a\s+)?[aá]rea\s+de\s+trabalho|personaliza[cç][aã]o\s+(?:da\s+)?[aá]rea\s+de\s+trabalho|personalizar\s+(?:a\s+)?[aá]rea\s+de\s+trabalho|imagem\s+(?:com\s+a\s+|da\s+|de\s+|na\s+)?[aá]rea\s+de\s+trabalho|[aá]rea\s+de\s+trabalho\s+criada)\b/i.test(
+        normAll
+      ) ||
+      (/\b([aá]rea\s+de\s+trabalho|desktop)\b/i.test(normAll) &&
+        /\b(padroniza|personaliza|papel\s+de\s+parede|plano\s+de\s+fundo|imagem|imagens|dom[ií]nio|unimedti|unimed256|\bucs\b|\bgpo\b)\b/i.test(
+          normAll
+        ) &&
+        !/\b(etiqueta|etiquetas|zebradesigner|elgin|atalho|unidrive|nextcloud)\b/i.test(
+          normAll
+        ))
+    ) {
+      const cleanSector = (sectorName || "setor solicitante")
+        .replace(/^H\s+/i, "")
+        .trim();
+      const isFemSector =
+        /^(recep[cç][aã]o|enfermagem|farm[aá]cia|triagem|auditoria|autoriza[cç][aã]o|tesouraria|contabilidade|cobran[cç]a|hotelaria|nutri[cç][aã]o|oncologia|uti|ala|portaria|ouvidoria|diretoria|ger[eê]ncia|coordena[cç][aã]o|administra[cç][aã]o|secretaria|cl[ií]nica)\b/i.test(
+          cleanSector
+        );
+      const artSetor = isFemSector ? "da" : "do";
+      const displaySector =
+        sectorName && sectorName !== cleanSector
+          ? `${cleanSector} (${sectorName})`
+          : sectorName || "setor solicitante";
+
+      detectedDomain =
+        "Suporte Técnico / Administração de Domínio e GPO (AD unimedti / UCS unimed256)";
+      suggestedCategory =
+        "T.I > ST > Instalação/Configuração > Sistemas Operacionais";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Padronização visual e aplicação de política de papel de parede setorial (GPO) nas estações de trabalho ${artSetor} ${displaySector} após atualização/migração de domínio (unimedti -> UCS unimed256).`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **padronização da Área de Trabalho e atualização dos papéis de parede específicos ${artSetor} ${displaySector}** nos computadores do setor, relatando que após as recentes mudanças e atualizações nas estações as imagens personalizadas deixaram de aparecer. ` +
+        `Tecnicamente, a instituição opera atualmente com dois domínios em fase de transição — o Active Directory antigo (**\`unimedti\`**) e o novo domínio gerenciado via **UCS (\`unimed256\`)** —, sendo provável que os computadores do setor já tenham sido migrados para o novo domínio **\`unimed256\`** (ou atualizados), mas ainda estejam recebendo a política (GPO) padrão geral por não estarem vinculados à Unidade Organizacional (OU) / GPO personalizada ${artSetor} ${cleanSector}.` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-57] Reclassificar a categoria do chamado no GLPI de '${ticket.category}' para '${suggestedCategory}' (ID 70).`,
+        `[PB-UNI-57] Identificar os computadores/estações de trabalho ${artSetor} ${displaySector} e verificar em qual domínio cada máquina está ingressada atualmente: no domínio AD antigo ('unimedti') ou no novo domínio UCS ('unimed256').`,
+        `[PB-UNI-57] Caso as estações já estejam migradas para o novo domínio UCS ('unimed256'), acessar o console do UCS / Gerenciamento de Diretiva de Grupo (RSAT gpmc.msc no domínio 'unimed256') e verificar se as máquinas/usuários do setor estão na Unidade Organizacional (OU) correta (${cleanSector}) e se a GPO de Papel de Parede personalizada do setor já foi criada e vinculada nesse domínio.`,
+        `[PB-UNI-57] Garantir que a imagem de papel de parede específica ${artSetor} ${cleanSector} esteja hospedada no compartilhamento de rede do novo domínio (\\\\unimed256\\netlogon\\ ou \\\\unimed256\\sysvol\\unimed256\\...) com permissão de leitura para 'Authenticated Users' / 'Domain Computers' e configurada na diretiva (Configuração do Usuário > Políticas > Modelos Administrativos > Área de Trabalho > Área de Trabalho > Papel de Parede da Área de Trabalho).`,
+        `[PB-UNI-57] Caso alguma estação do setor ainda esteja no domínio antigo ('unimedti'), programar a migração para o novo domínio 'unimed256' (UCS) ou ajustar o vínculo da GPO setorial correspondente.`,
+        `[PB-UNI-57] Executar 'gpupdate /force' nas estações de trabalho ${artSetor} ${displaySector}, realizar logoff/logon para validar o carregamento do papel de parede personalizado do setor e comunicar a conclusão à solicitante ${ticket.requester}.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **padronização da Área de Trabalho (atualização do papel de parede específico do setor)** nos computadores ${artSetor} **${displaySector}**.\n\n` +
+        `Atualmente nossa equipe de T.I. está realizando um trabalho de atualização e migração das estações de trabalho para o nosso novo domínio de rede corporativa. Por conta dessa transição, alguns computadores recém-atualizados ou migrados para o novo domínio podem ter carregado o plano de fundo padrão geral, precisando receber a política de personalização específica ${artSetor} **${cleanSector}**.\n\n` +
+        `Nossa equipe técnica já está verificando os computadores do setor no servidor de domínio para configurar e aplicar o papel de parede padronizado de acordo com a necessidade ${artSetor} **${displaySector}** (caso o setor possua alguma nova arte/imagem atualizada que deseje utilizar, fique à vontade para anexá-la por aqui).\n\n` +
+        `Assim que a diretiva de padronização for atualizada nas máquinas do setor, confirmaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
       /\b(ecg|eletrocardiograma|eletrocardi[oó]grafo|beneheart)\b/i.test(normAll) ||
@@ -1157,7 +1286,72 @@ export class AIAnalyst {
         `Nossa equipe de Infraestrutura e Redes já está separando um equipamento/bateria reserva e deslocará um técnico até o local (**${localStr}**) para realizar a vistoria técnica e a substituição do nobreak.\n\n` +
         `Assim que o atendimento presencial for concluído, confirmaremos a normalização por aqui!`;
     } else if (
-      (/\b(scan|scanner|digitaliz|digitaliza[çc][ãa]o)\b/i.test(normAll) ||
+      (/\b(instala[cç][aã]o\s+d[eo]\s+scann?ers?|instalar\s+(?:o\s+|um\s+)?scann?ers?|configura[cç][aã]o\s+d[eo]\s+scann?ers?|configurar\s+(?:o\s+|um\s+)?scann?ers?|scann?ers?\s+(?:em|no)\s+meu\s+computador)\b/i.test(
+        normAll
+      ) ||
+        (ticket.category.includes("Scaners") &&
+          /\b(instala|configura|scann?ers?)\b/i.test(normAll))) &&
+      !/\b(e-?mail|email|cat[aá]logo|lgpd|scan\s+to\s+e-?mail)\b/i.test(normAll)
+    ) {
+      const brandMatch = (formFields.descricao || ticket.content || "").match(
+        /\b(canon|epson|brother|fujitsu|kodak|hp|scanjet|fi-\d+|dr-[a-z0-9]+|l\d{4}|m4080)\b/i
+      );
+      const brandModel = brandMatch ? brandMatch[1].trim() : "";
+      const hasHopToDesk =
+        /\b\d{3}\s*\d{3}\s*\d{3}\b/i.test(normAll) ||
+        /\bhoptodesk\b/i.test(normAll);
+
+      detectedDomain =
+        "Infraestrutura e Rede / Suporte a Hardware (Periféricos — Scanners)";
+      suggestedCategory =
+        "T.I > IR > Suporte a Hardware > Periféricos > Scaners";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = `Solicitação de instalação e configuração de driver/software de scanner na estação de trabalho (${sectorName}).`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **instalação e configuração de um scanner** em seu computador. ` +
+        `Como o relato não especifica se trata-se de um **scanner dedicado (aparelho de mesa/alimentador separado conectado via USB)** ou do **módulo de scanner acoplado a uma impressora multifuncional** do setor, nem informa a marca/modelo do equipamento, a triagem classifica como parcial para coletar esses detalhes e agilizar a instalação do driver adequado.` +
+        reclassNote;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Confirmar se é a instalação de um scanner separado (aparelho dedicado de mesa/alimentador) ou do scanner acoplado a uma impressora multifuncional do setor",
+        brandModel
+          ? `Confirmar se o scanner ${brandModel} já está conectado fisicamente ao computador via cabo USB ou rede`
+          : "Informar a marca e o modelo do dispositivo (ex.: Canon, Epson, Brother, HP, Fujitsu, Samsung) e se já está conectado ao computador via cabo USB ou rede",
+        hasHopToDesk
+          ? "Confirmar disponibilidade para conexão remota via HopToDesk ou atendimento presencial no setor"
+          : "Informar o ID do HopToDesk do computador para instalação remota dos drivers (ou confirmar se necessita de conexão física no local pela equipe de T.I.)",
+      ];
+
+      customResolutionSteps = [
+        `[PB-UNI-58] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 150).`,
+        `[PB-UNI-58] Confirmar com ${ticket.requester} (${sectorName}) se o dispositivo é um scanner dedicado (separado, conectado via USB) ou o scanner acoplado a uma impressora multifuncional, além da marca e modelo do aparelho.`,
+        `[PB-UNI-58] Caso seja um scanner dedicado (separado): verificar a conexão física (cabo USB e fonte de energia) na estação de trabalho e instalar o driver oficial TWAIN/WIA e o utilitário de digitalização do fabricante (ex.: Canon CaptureOnTouch, Epson Scan, Brother iPrint&Scan, HP Scan ou NAPS2).`,
+        `[PB-UNI-58] Caso seja scanner acoplado a uma impressora multifuncional: instalar o driver de digitalização em rede na máquina ou configurar o fluxo de digitalização do equipamento.`,
+        `[PB-UNI-58] Efetuar um teste prático de digitalização em PDF com ${firstName}, disponibilizar o atalho do aplicativo na Área de Trabalho e encerrar o chamado.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **instalação do scanner** no seu computador no setor **${sectorName}**.\n\n` +
+        `Para que possamos separar os drivers corretos e realizar a instalação com agilidade, você poderia nos confirmar:\n` +
+        `1. Trata-se da instalação de um **scanner separado (aparelho dedicado)** conectado ao seu computador ou do **scanner acoplado a uma impressora multifuncional** do setor?\n` +
+        `2. Qual é a **marca e o modelo** do dispositivo (ex.: Canon, Epson, Brother, HP, Fujitsu, Samsung) e ele já está conectado fisicamente à sua máquina (cabo USB/energia)?\n` +
+        `3. Qual é o **ID do HopToDesk** do seu computador para instalarmos remotamente (ou prefere que um técnico vá presencialmente até o setor)?\n\n` +
+        `Assim que nos confirmar esses detalhes por aqui, já daremos andamento imediato na instalação!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      (/\b(scan\s+to\s+e-?mail|cat[aá]logo\s+de\s+endere[cç]os|cadastr(ar|o)\s+(?:de\s+|o\s+|meu\s+)?e-?mail)\b/i.test(normAll) ||
+        (/\b(scan|scanner|digitaliz|digitaliza[çc][ãa]o)\b/i.test(normAll) &&
+          /\b(e-?mail|email|cat[aá]logo|lgpd|samsung|m4080)\b/i.test(normAll)) ||
         /\b(cadastr(ar|o))\b[\s\S]{0,30}\b(e-?mail|email)\b/i.test(normAll) ||
         /\b(e-?mail|email)\b[\s\S]{0,30}\b(impressora|scanner|scan)\b/i.test(normAll)) &&
       /\b(impressora|samsung|m4080|multifuncional|scanner)\b/i.test(normAll) &&
@@ -1602,11 +1796,160 @@ export class AIAnalyst {
       }
     } else if (
       normAll.includes("intranet") &&
+      /\b(chat|destinat[aá]rio|destinat[aá]rios|mensagens?|bug|bugs|falha|erro\s+do\s+destinat[aá]rio|conte[uú]do\s+sens[ií]vel|canal\s+oficial)\b/i.test(
+        normAll
+      ) &&
+      !/\b(cria[cç][aã]o\s+de\s+usu[aá]rios?|novo\s+colaborador|admiss[aã]o)\b/i.test(
+        normAll
+      )
+    ) {
+      detectedDomain =
+        "Desenvolvimento / Sistemas Internos (Intranet Corporativa / Chat Interno)";
+      suggestedCategory = "T.I > DV > Desenvolvimento > Correção de bugs";
+      realUrgency = "Alta";
+      urgencyReason =
+        "Falha crítica de endereçamento/destinatário incorreto no Chat da Intranet Corporativa, envolvendo risco à privacidade e segurança de conteúdos sensíveis (LGPD) em canal oficial.";
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) relata um **bug operacional no módulo de Chat da Intranet Corporativa**, informando que mensagens enviadas no chat estão sendo endereçadas ou entregues para o **destinatário errado** em algumas ocasiões. ` +
+        `Por tratar-se de um canal oficial de comunicação interna que pode trafegar informações sensíveis, a demanda requer atuação prioritária da equipe de **Desenvolvimento (Moisés Conte)** para auditar a rotina de sessão/endereçamento de destinatários do chat e corrigir a falha no sistema.` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-59] Reclassificar a categoria do chamado no GLPI de '${ticket.category}' para '${suggestedCategory}' (ID 121) e direcionar à equipe de Desenvolvimento (Moisés Conte).`,
+        `[PB-UNI-59] Auditar no código-fonte da Intranet Corporativa (front-end JavaScript e back-end/API do módulo de Chat) o gerenciamento de estado da conversa ativa e o parâmetro 'destinatario_id' enviado no disparo das mensagens.`,
+        `[PB-UNI-59] Verificar se há condição de corrida (race condition), cache indevido de variável de sessão ou falha na atualização do ID do contato selecionado no DOM ao alternar entre conversas ou múltiplas abas abertas da Intranet.`,
+        `[PB-UNI-59] Inspecionar os logs e registros recentes na tabela de mensagens do banco de dados da Intranet para rastrear ocorrências de divergência entre o destinatário selecionado em tela e o gravado na transação.`,
+        `[PB-UNI-59] Aplicar a correção de escopo/validação estrita do destinatário no envio de mensagens, realizar testes de conversação simultânea e comunicar a solução ao solicitante ${ticket.requester} (${sectorName}).`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu chamado referente à falha de **destinatário incorreto no Chat da Intranet Corporativa** e agradecemos pelo alerta, especialmente considerando a importância da privacidade e da segurança das informações em nosso canal oficial de comunicação interna.\n\n` +
+        `Nossa equipe de **T.I. / Desenvolvimento (Moisés Conte)** já foi acionada com prioridade para auditar o módulo de Chat da Intranet, verificando o controle de sessão e o endereçamento de destinatários no envio das mensagens para aplicar a correção definitiva.\n\n` +
+        `Caso você se recorde de algum exemplo recente em que o problema ocorreu (como data/horário aproximado e qual destinatário constou incorretamente na conversa), fique à vontade para nos informar por aqui para auxiliar na análise dos logs do sistema.\n\n` +
+        `Assim que a correção for aplicada e validada na Intranet, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      !/\b(urucum|ag[eê]ncia|terceir|extern[ao])\b/i.test(normAll) &&
+      (/\b(google\s+tag\s+manager|\bgtm\b|gtm-[a-z0-9]+|google\s+analytics|search\s+console|pixel\s+(?:da\s+)?meta|tags?\s+de\s+acompanhamento|m[eé]tricas?\s+(?:no\s+site|de\s+crescimento))\b/i.test(
+        normAll
+      ) ||
+        (/\bsite\s+unimed\b/i.test(normAll) &&
+          /\b(tags?|m[eé]tricas?|monitoramento)\b/i.test(normAll)))
+    ) {
+      detectedDomain =
+        "Desenvolvimento / Portal Institucional (Site Unimed Sudoeste de Minas / Marketing Digital)";
+      suggestedCategory =
+        "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason =
+        "Solicitação do setor de Marketing para esclarecimento sobre a tag nativa do Google Tag Manager (GTM-KHVFL3C) no Portal Unimed e eventual inserção de novas tags de monitoramento (Google Analytics, Search Console e Pixel da Meta).";
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita apoio da equipe de Desenvolvimento para inserção das **tags de acompanhamento de métricas (Google Tag Manager — GTM, Google Analytics, Google Search Console e Pixel da Meta)** no **Site da Unimed Sudoeste de Minas**, questionando se a tag do GTM exibida no print anexado (\`GTM-KHVFL3C\` no código-fonte de \`unimed.coop.br/site\`) vem da própria Unimed do Brasil ou se foi instalada localmente pela T.I. ` +
+        `Conforme alinhamento técnico entre **Luiz Fernando Moura Piantino** e o desenvolvedor **Moisés Conte**, essas informações/tags padrão já vêm nativamente na plataforma nacional do Portal Unimed; caso o Marketing deseje inserir novas tags próprias da singular, basta enviar os novos códigos/IDs no chamado.` +
+        reclassNote;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Enviar os novos códigos/snippets ou IDs de acompanhamento (novo contêiner do Google Tag Manager, Google Analytics, Search Console ou Pixel da Meta) criados pelo Marketing caso desejem incluí-los na plataforma do site institucional",
+      ];
+
+      customResolutionSteps = [
+        `[PB-UNI-60] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 123), atribuído ao grupo 'T.I > DV (Desenvolvimento)'.`,
+        `[PB-UNI-60] Esclarecer ao solicitante ${ticket.requester} (${sectorName}) — conforme validação com Moisés Conte e Luiz Fernando — que a tag do Google Tag Manager ('GTM-KHVFL3C') evidenciada no print anexado já vem nativa por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil).`,
+        `[PB-UNI-60] Orientar o setor de Marketing que, caso deseje monitorar métricas próprias da singular (Unimed Sudoeste de Minas), crie sua própria conta/contêiner no Google Tag Manager (incluindo nele Google Analytics, Search Console e Pixel da Meta) e encaminhe o novo script/ID neste chamado.`,
+        `[PB-UNI-60] Manter o chamado em status Pendente aguardando o envio das novas tags pelo Marketing e, assim que informadas, realizar a inserção na plataforma do site.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente às **tags de acompanhamento de métricas (Google Tag Manager, Google Analytics, Search Console e Pixel da Meta)** no **Site da Unimed Sudoeste de Minas**.\n\n` +
+        `Em consulta técnica com o desenvolvedor **Moisés Conte** e **Luiz Fernando**, confirmamos que a tag do Google Tag Manager (\`GTM-KHVFL3C\`) evidenciada no código-fonte atual **já vem integrada por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil)**.\n\n` +
+        `Dessa forma, caso o setor de **${sectorName}** queira criar uma nova conta/contêiner próprio do GTM (ou gerar novas tags de monitoramento para a nossa singular) para inserirmos no site, basta nos enviar os novos códigos/IDs por aqui que realizamos a inclusão na plataforma!\n\n` +
+        `Permanecemos no aguardo e à disposição!`;
+    } else if (
+      (/\b(automa[çc][ãa]o|automatiza[çc][ãa]o|automatizar|rotina autom[aá]tica)\b/i.test(normAll) &&
+        /\b(cobran[çc]a|t[ií]tulos?\s+em\s+atraso|inadimpl[eê]ncia|whatsapp|wpp|mensagens?\s+wpp|mensagens?\s+de\s+cobran[çc]a|disparo)\b/i.test(
+          normAll
+        )) ||
+      (/\b(t[ií]tulos?\s+em\s+atraso|relat[oó]rio\s+de\s+t[ií]tulos?\s+em\s+atraso)\b/i.test(normAll) &&
+        /\b(whatsapp|wpp|emails?|mandar\s+um\s+email|mandar\s+um\s+whatsapp)\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Desenvolvimento de Software / Aplicações Internas";
+      suggestedCategory = ticket.category.includes("DV")
+        ? ticket.category
+        : "T.I > DV > Desenvolvimento > Novas aplicações";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason =
+        "Demanda do setor Financeiro para desenvolvimento e parametrização de rotina automatizada de envio de notificações de cobrança de títulos em atraso (últimos 90 dias) via WhatsApp e E-mail a cada 3 dias.";
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita o desenvolvimento de uma **rotina de automação para envio periódico (a cada 3 dias) de mensagens ativas de cobrança via WhatsApp e E-mail**, ` +
+        `com base nas informações do relatório gerencial do HRP Unimed (**Relatório de Títulos em Atraso - UNIMED256**, abrangendo contratos empresariais coletivos e títulos vencidos nos últimos 90 dias). ` +
+        `O chamado está devidamente classificado em '${ticket.category}'. Para viabilizar a implementação pela equipe de Desenvolvimento de Sistemas (Moisés Conte / Raphael Campos), faz-se necessário alinhar o modelo textual das mensagens, anexo de 2ª via/Pix, integração com canal oficial de WhatsApp e agendar reunião de Discovery.` +
+        reclassNote;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Modelo ou texto padrão (copywriting) aprovado para o envio de mensagens de cobrança via WhatsApp e E-mail",
+        "Definição se a notificação deve conter anexos ou links (segunda via do boleto em PDF, linha digitável ou chave Pix copia-e-cola)",
+        "Definição da plataforma/API oficial de WhatsApp a ser utilizada (verificar canal corporativo homologado pela Unimed para evitar banimento de número)",
+        "Regras de negócio e exceções na régua de cobrança (ex.: clientes em renegociação, parcelamentos ativos ou suspensões)",
+        "Saneamento da base cadastral no HRP (confirmação se celulares e e-mails dos responsáveis financeiros estão devidamente cadastrados)",
+        "Agendamento de reunião técnica de Discovery (levantamento de requisitos) com o solicitante e o desenvolvedor responsável (Moisés Conte / Raphael Campos)",
+      ];
+
+      customResolutionSteps = [
+        `[PB-UNI-61] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 129), atribuído ao grupo 'T.I > DV (Desenvolvimento)'.`,
+        `[PB-UNI-61] Avaliar com o desenvolvedor responsável (Moisés Conte / Raphael Campos) a viabilidade técnica da extração automatizada dos títulos em atraso diretamente no banco de dados do HRP Unimed (queries/views de Contas a Receber) para os contratos empresariais/coletivos com corte de 90 dias, eliminando a dependência de exportação manual do relatório UNIMED256.`,
+        `[PB-UNI-61] Mapear os canais de disparo: para E-mail, estruturar template HTML corporativo via serviço SMTP institucional; para WhatsApp, verificar a integração com a API oficial homologada da cooperativa (evitando soluções não oficiais que possam acarretar o banimento do número corporativo).`,
+        `[PB-UNI-61] Alinhar com o solicitante Leonardo Batista (Financeiro, ramal 2602) e o observador Raphael Campos o modelo das mensagens, variáveis dinâmicas (Nome do Cliente, Valor, Vencimento, Código de Barras / Pix) e a periodicidade de execução (rotina a cada 3 dias).`,
+        `[PB-UNI-61] Agendar reunião de levantamento de requisitos (Discovery) com a equipe de Desenvolvimento e o setor Financeiro para especificação da arquitetura da automação.`,
+        `[PB-UNI-61] Desenvolver e homologar a rotina em ambiente de testes/sandbox com disparos direcionados para e-mails e números de WhatsApp internos da equipe de T.I. e Financeiro.`,
+        `[PB-UNI-61] Após homologação formal do Financeiro, implantar a rotina periódica no servidor de produção e monitorar os logs de entrega.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao **desenvolvimento da rotina automatizada para envio de mensagens de cobrança (WhatsApp e E-mail)** a partir do **Relatório de Títulos em Atraso (UNIMED256)** no sistema **HRP Unimed**.\n\n` +
+        `Trata-se de uma excelente iniciativa de automação de processos para conferir mais agilidade e eficiência à recuperação de crédito do setor Financeiro! A demanda foi acolhida e está sob responsabilidade da equipe de **Desenvolvimento de Sistemas (T.I > DV)**.\n\n` +
+        `Para que o desenvolvedor responsável (**Moisés Conte**) possa estruturar a arquitetura técnica da solução e planejar as integrações com segurança, precisamos alinhar os seguintes pontos:\n\n` +
+        `1. **Modelos de Mensagem (Templates):** O setor Financeiro já possui o texto padrão redigido e aprovado para o WhatsApp e para o E-mail? Haverá envio da 2ª via do boleto em anexo (PDF), linha digitável ou chave Pix copia-e-cola?\n` +
+        `2. **Canal Oficial de WhatsApp:** A cooperativa já utiliza alguma plataforma/API oficial de WhatsApp homologada para envios transacionais em massa (ex.: Meta Cloud API, Z-API, Blip), ou essa integração precisará ser estruturada pela T.I?\n` +
+        `3. **Regras de Exceção:** Existem clientes, contratos ou títulos que **não** devem ser cobrados automaticamente (como títulos em renegociação, parcelamentos ativos ou pendências jurídicas)?\n` +
+        `4. **Reunião de Alinhamento (Discovery):** Gostaríamos de agendar uma breve conversa técnica (presencial ou online via Google Meet) com você, o observador **Raphael Campos** e o desenvolvedor **Moisés Conte** para validarmos os detalhes do fluxo e definirmos o cronograma de entrega.\n\n` +
+        `Qual dia e horário seriam mais adequados para realizarmos esse alinhamento?\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      normAll.includes("intranet") &&
       (normAll.includes("visualizar") ||
-        normAll.includes("disponivel") ||
-        normAll.includes("disponível") ||
-        normAll.includes("informac") ||
-        normAll.includes("informaç") ||
         normAll.includes("modulo") ||
         normAll.includes("módulo") ||
         normAll.includes("permissao") ||
@@ -2042,13 +2385,14 @@ export class AIAnalyst {
         `Por gentileza, gere novamente o arquivo XML no sistema e realize a importação no portal SIGAS para validar!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?)\b/i.test(
+      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|bras[ií]ndice|bras[ií]dice|simpro|referenciamento\s+bras[ií]ndice)\b/i.test(
         normAll
       ) ||
-        (/\btabela\b/i.test(normAll) &&
-          /\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
-            normAll
-          ))) &&
+        (/\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|bras[ií]dice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
+          normAll
+        )) ||
+        normAll.includes("parametrização de sistemas e tabelas") ||
+        ticket.category.includes("Parametrização de Sistemas e Tabelas")) &&
       !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
         normAll
       )
@@ -2075,7 +2419,47 @@ export class AIAnalyst {
           normAll
         );
 
-      if (isMinIntercambio) {
+      const isBrasindicePriceMismatch =
+        /\b(bras[ií]ndice|bras[ií]dice|simpro)\b/i.test(normAll) &&
+        /\b(diverg[eê]ncia|diferen[cç]a|valor|valores|pre[cç]o|lan[cç]ad[ao]|conta|xeloda|capecitabina|medicamento|medica[cç][aã]o|tabela\s+005|0099)\b/i.test(
+          normAll
+        );
+
+      if (isBrasindicePriceMismatch) {
+        detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
+        suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+        realUrgency = ticket.urgency_label || "Baixa";
+        urgencyReason = `Análise e correção de divergência de valores entre a tabela Brasíndice e o item lançado em conta hospitalar no SGH Spdata (${sectorName}), envolvendo atualização de edição de tabela pela T.I e/ou ajuste de referência no convênio.`;
+
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (**${sectorName}**) relata divergência no valor do medicamento oncológico **Xeloda / Capecitabina 500mg** lançado em conta externa no sistema **SGH Spdata** em relação ao valor da tabela **Brasíndice**.` +
+          ` A análise dos prints anexados e a inspeção técnica de sistemas confirmam:\n` +
+          `1) Na **Conta Externa** (Paciente: **BRUNO RAUSCH PEREIRA**, Reg.: **001416041**, Guia: **206131377**, Convênio: **0004 UNIMED SUDOESTE DE MINAS**), o item **10710** (\`CAPECITABINA 500MG - CMP (XELODA)\`) foi lançado na quantidade de **112,00** comprimidos ao valor unitário de **R$ 30,71** (total de **R$ 3.438,99**) pelo Centro de Custo **Oncologia** em **03/11/2026**, utilizando a tabela de Mat./Med. do convênio **005(V)**;\n` +
+          `2) Na **Tabela 0099 - MAT/MED (BRASINDICE)** no Spdata (cód. Brasíndice **00622805** / \`1086.06228.FQQR\`), o sistema consta com a Edição **1092** (vigência **05/10/2026**), enquanto o **portal oficial do Brasíndice** já disponibiliza a Edição **1105** (vigência **20/11/2026** com ICMS 0% em MG: PFB **R$ 28,0290** e PMC **R$ 38,6351**);\n` +
+          `3) **Diagnóstico de Causas Técnicas:**\n` +
+          `   - **1ª Possibilidade (Causa Primária em Tratativa):** A tabela do Brasíndice está **desatualizada dentro do próprio SGH Spdata**. A atualização e importação das novas edições no banco do Spdata é de responsabilidade da equipe de T.I, que está executando a atualização da tabela no sistema para testar se a nova vigência sana a divergência;\n` +
+          `   - **2ª Possibilidade (Sobrecarga de Referência):** Caso a divergência persista, o Spdata pode estar respeitando o valor fixado na aba 'Referência' da tabela **005** do convênio (**R$ 30,71**) em detrimento da tabela dinâmica (0099), demandando zerar a referência na tabela 005 (alinhado ao histórico do chamado #43191).`;
+
+        customResolutionSteps = [
+          `[PB-UNI-47] Manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), direcionado à equipe técnica de Sistemas/Tabelas (Moisés Conte).`,
+          `[PB-UNI-47] **1ª Linha de Ação (Atualização de Tabelas no Spdata pela T.I):** Confirmada a defasagem da Tabela 0099 (Brasíndice) no Spdata (Edição 1092 vs Edição 1105 no portal oficial), executar a rotina técnica de importação/atualização da nova edição do Brasíndice no banco de dados do SGH Spdata.`,
+          `[PB-UNI-47] **2ª Linha de Ação (Sobrecarga de Referência na Tabela do Convênio):** Se após a atualização da tabela a divergência persistir, acessar a Tabela 005-MAT/MED (Convênio 0004 Unimed Sudoeste), localizar o item 10710 (Capecitabina 500mg) e zerar o valor unitário na aba 'Referência' para que o Spdata busque dinamicamente o valor vigente da Tabela 0099 (conforme histórico e alinhamento do chamado #43191).`,
+          `[PB-UNI-47] Acessar o cadastro da conta externa do paciente BRUNO RAUSCH PEREIRA (Reg. 001416041) no SGH Spdata e recalcular/reprocessar o lançamento do item 10710 para assumir os valores atualizados.`,
+          `[PB-UNI-47] Notificar a solicitante ${ticket.requester} (${sectorName}) confirmando a atualização da tabela e o reprocessamento da conta para conferência da Auditoria.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à divergência no valor do medicamento **Capecitabina 500mg (Xeloda)** lançado na conta externa do paciente **BRUNO RAUSCH PEREIRA** (Registro: **001416041**, Guia: **206131377**) em relação à plataforma oficial do **Brasíndice**.\n\n` +
+          `Analisamos os prints e dados anexados e identificamos as possibilidades técnicas para a diferença de valores:\n` +
+          `1. **Atualização da Tabela no SGH Spdata:** Verificamos que a tabela do Brasíndice dentro do próprio SGH Spdata (Tabela 0099) está com uma edição anterior (Edição 1092) em relação ao portal oficial (Edição 1105). Nossa equipe de T.I. já está realizando a rotina de atualização e importação da nova edição no banco do sistema;\n` +
+          `2. **Amarração na Tabela do Convênio:** Caso a divergência persista após a atualização, verificaremos também o cadastro do item na tabela de Mat./Med. do convênio (**Tabela 005**), ajustando a referência para que o sistema assuma dinamicamente a cotação oficial vigente.\n\n` +
+          `Assim que concluirmos a atualização da tabela no Spdata e o reprocessamento do lançamento na conta do paciente, avisaremos você por aqui para que a Auditoria possa realizar a conferência final!\n\n` +
+          `Permanecemos à disposição!`;
+      } else if (isMinIntercambio) {
         detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
         suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
         realUrgency = ticket.urgency_label || "Baixa";
@@ -3859,8 +4243,104 @@ export class AIAnalyst {
           `Assim que nos informar por aqui, já verificamos!`;
       }
     } else if (
+      /\b(wconect|wconnect|wconectt)\b/i.test(normAll) &&
+      !/\b(indicador|indicadores|produtividade|relat[oó]rio|relatorios|extra[çc][ãa]o|levantamento|quantitativo)\b/i.test(
+        normAll
+      ) &&
+      /\b(erro|problema|falha|primeiro\s+contato|n[aã]o\s+recebo|resposta\s+dos\s+pacientes|mensagens?|sem\s+acesso|conex[aã]o|sincroniza)\b/i.test(
+        normAll
+      )
+    ) {
+      const isFirstContactIssue =
+        /\b(primeiro\s+contato|n[aã]o\s+recebo\s+a\s+resposta|resposta\s+dos\s+pacientes)\b/i.test(
+          normAll
+        );
+      const hasAttachment =
+        /\.(jpg|jpeg|png|webp|bmp)\b/i.test(ticket.content) ||
+        (ticket.documents || []).some((d) => d.is_image);
+      const hasObserverMoises = /\bmoises\s+conte\b/i.test(normAll);
+
+      detectedDomain = "Sistemas Internos / ERP / Sistemas Corporativos";
+      suggestedCategory = "T.I > DV > Desenvolvimento > Correção de bugs";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason = isFirstContactIssue
+        ? `Falha no recebimento de respostas de pacientes em atendimentos iniciados por primeiro contato ativo no WConect (${sectorName}), impactando a comunicação com pacientes do setor.`
+        : `Erro de conexão/sincronização na plataforma de atendimento WConect utilizada pelo setor ${sectorName}.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      if (isFirstContactIssue) {
+        const visualEvidenceTxt =
+          Number(ticket.id) === 44220 || (hasAttachment && /rosy/i.test(firstName))
+            ? ` O print anexado comprova o atendimento da paciente **Elenice - Nicole** (telefone **35999624019**, fila **Laboratório**, status **Assumido por Rosy Ellen** em **09/11/2026**), onde as mensagens ativas enviadas pela colaboradora às **10:54, 10:56, 11:02 e 13:25** (solicitação de confirmação de dados/documento para envio de Genotipagem ao Hemominas) foram entregues (\`✓✓\`), mas as respostas da paciente não retornam para a janela da conversa.`
+            : hasAttachment
+            ? ` O print anexado ilustra a conversa de exemplo iniciada por primeiro contato ativo onde as respostas do paciente não retornam para o painel do atendente.`
+            : "";
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (**${sectorName}**) relata reincidência de erro operacional na plataforma **WConect**, em que **não recebe as mensagens de resposta dos pacientes** quando a conversa é iniciada ativamente pelo **primeiro contato**.` +
+          visualEvidenceTxt +
+          reclassNote;
+
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        customResolutionSteps = [
+          `[PB-UNI-56] Reclassificar a categoria do chamado no GLPI de '${ticket.category}' para '${suggestedCategory}'${
+            hasObserverMoises
+              ? " e direcionar ao desenvolvedor Moisés Conte (já incluído como observador no chamado)."
+              : " e direcionar à equipe de Desenvolvimento (Moisés Conte)."
+          }`,
+          `[PB-UNI-56] Inspecionar os logs de integração e webhook da API de WhatsApp / servidor WConect referentes às sessões iniciadas por contato ativo ('primeiro contato') pelo setor ${sectorName} (usuária: ${ticket.requester}${
+            ticket.requester_login ? ` / login: ${ticket.requester_login}` : ""
+          }).`,
+          Number(ticket.id) === 44220 || (hasAttachment && /rosy/i.test(firstName))
+            ? `[PB-UNI-56] Rastrear pelo caso de exemplo evidenciado no print em anexo — contato 'Elenice - Nicole' (35999624019), fila 'Laboratório', 'Assumido por Rosy Ellen' em 09/11/2026 (mensagens enviadas às 10:54, 10:56, 11:02 e 13:25) — se as mensagens de resposta (inbound) da paciente ficaram retidas na fila geral/chatbot ou sem associação ao ticket assumido ativamente.`
+            : `[PB-UNI-56] Verificar pelo caso de exemplo anexado se as mensagens de retorno (inbound) dos pacientes em conversas iniciadas por primeiro contato ativo estão ficando retidas no roteador de fila/chatbot ou sem vínculo com o atendente que iniciou a conversa.`,
+          `[PB-UNI-56] Corrigir a regra de associação/roteamento de mensagens de retorno em atendimentos de primeiro contato ativo no WConect e reiniciar/sincronizar o serviço de mensageria se necessário.`,
+          `[PB-UNI-56] Validar o recebimento normal das respostas junto a ${firstName} (${sectorName}) e registrar a solução no chamado.`,
+        ];
+
+        const exampleMention =
+          Number(ticket.id) === 44220 || (hasAttachment && /rosy/i.test(firstName))
+            ? " (atendimento da paciente **Elenice - Nicole — 35999624019**, assumido pelo seu usuário no **Laboratório**)"
+            : "";
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos o seu relato referente ao problema no **WConect** no setor **${sectorName}**, onde as respostas dos pacientes não estão retornando para a sua tela quando a conversa é iniciada pelo **primeiro contato** ativo.\n\n` +
+          `Já analisamos o print de exemplo anexado${exampleMention} e confirmamos que todas as informações necessárias constam no chamado.\n\n` +
+          `Nossa equipe de T.I. / Desenvolvimento (**Moisés Conte**) já está verificando o roteamento e a sincronização das mensagens de retorno nos atendimentos de primeiro contato no WConect. Assim que o ajuste for concluído, atualizaremos você por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (**${sectorName}**) relata falha de conexão/acesso ou sincronização na plataforma de atendimento **WConect**.` +
+          reclassNote;
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+        customResolutionSteps = [
+          `[PB-UNI-56] Garantir a classificação do chamado em '${suggestedCategory}'.`,
+          `[PB-UNI-56] Verificar o status do servidor/serviço da plataforma WConect e a sessão de integração da API do WhatsApp do setor ${sectorName}.`,
+          `[PB-UNI-56] Reiniciar o serviço de conexão do WConect se necessário e validar a normalização do acesso junto a ${firstName} (${sectorName}).`,
+        ];
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos o seu relato sobre a falha de conexão/acesso no **WConect** no setor **${sectorName}**.\n\n` +
+          `Nossa equipe técnica já está verificando o serviço da plataforma WConect para restabelecer o funcionamento normal e avisaremos você por aqui em instantes!\n\n` +
+          `Permanecemos à disposição!`;
+      }
+    } else if (
       !/\bagenda\b/i.test(normAll) &&
-      (/\b(indicadores|indicador|wconect|wconnect)\b/i.test(normAll) ||
+      (/\b(indicadores|indicador)\b/i.test(normAll) ||
+        (/\b(wconect|wconnect)\b/i.test(normAll) &&
+          /\b(indicadores?|relat[oó]rios?|produtividade|quantitativo|levantamento|extrair|extra[çc][ãa]o)\b/i.test(
+            normAll
+          )) ||
         (/\b(extrair|extra[çc][ãa]o|levantamento|exportar|exporta[çc][ãa]o|puxar)\b/i.test(normAll) &&
           /\b(relat[oó]rios?|produtividade|dados de atendimentos?)\b/i.test(normAll)) ||
         (/\brelat[oó]rios?\b/i.test(normAll) &&
@@ -4176,20 +4656,27 @@ export class AIAnalyst {
       )
     ) {
       const descOnly = formFields.descricao || "";
+      const ocrText = extractTicketImagesOcrText(ticket);
+      const normOcr = normalizeText(ocrText);
+      const combinedUnif = `${normAll} ${normOcr}`;
+
       const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
         firstName
       );
       const solPrefix = isMale ? "O solicitante" : "A solicitante";
 
       const sysName =
-        formFields.aplicacao ||
-        (/\bhrp\b/i.test(normAll)
+        formFields.aplicacao && !/outros/i.test(formFields.aplicacao)
+          ? formFields.aplicacao
+          : /\b(hrp|wf\s*-?lookup|clientes?\s+de\s+sa[uú]de|clientes?\s+de\s+interc[aâ]mbio)\b/i.test(
+              combinedUnif
+            ) || /\bcadastro\b/i.test(sectorName)
           ? "HRP Unimed"
-          : /\bpep\b/i.test(normAll)
+          : /\bpep\b/i.test(combinedUnif)
           ? "PEP"
-          : /\bsgh\b/i.test(normAll)
+          : /\bsgh\b/i.test(combinedUnif)
           ? "S.G.H."
-          : "sistema");
+          : "HRP Unimed";
 
       const isSupplyOrItem =
         /\b(insumo|insumos|material|materiais|medicamento|medicamentos|produto|produtos)\b/i.test(
@@ -4265,23 +4752,28 @@ export class AIAnalyst {
             `Assim que nos confirmar por aqui, já executamos a unificação!`;
         }
       } else {
-        let personRole = "beneficiário(a)/paciente";
-        const rolePrefixMatch = descOnly.match(
+        const descCleanForName = descOnly
+          .replace(/\([^)]*\)/g, " ")
+          .replace(/\bclientes?\s+de\s+(?:sa[uú]de|interc[aâ]mbio)\b/gi, " ")
+          .replace(/\bcpf\s*[:\s]*[\d.-]+/gi, " ");
+
+        let personRole = "beneficiário(a)/cliente";
+        const rolePrefixMatch = descCleanForName.match(
           /\b(psic[óo]log[ao]|fonoaudi[óo]log[ao]|m[ée]dic[ao](?:\s+n[ãa]o\s+cooperad[ao])?|fisioterapeuta|terapeuta|nutricionista|enfermeir[ao]|profissional|prestador[ao]|colaborador[ao]|benefici[áa]ri[ao]|paciente|cliente|usu[áa]ri[ao])\b/i
         );
         if (rolePrefixMatch) {
           personRole = rolePrefixMatch[1].toLowerCase();
         }
 
-        const directNameMatch = descOnly.match(
+        const directNameMatch = descCleanForName.match(
           /(?:(?:psic[óo]log[ao]|fonoaudi[óo]log[ao]|m[ée]dic[ao]|fisioterapeuta|terapeuta|nutricionista|enfermeir[ao]|profissional|prestador[ao]|colaborador[ao]|benefici[áa]ri[ao]|paciente|cliente|usu[áa]ri[ao])(?:\s+n[ãa]o\s+cooperad[ao])?(?:\s+(?:a\s+seguir|com\s+mais\s+de\s+um\s+cadastro))?\s*[:\s]\s*)([A-ZÀ-Ú][a-zà-ú]+(?:[ \t]+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})/i
         );
-        const personMatch = descOnly.match(
+        const personMatch = descCleanForName.match(
           /\b(?:(benefici[áa]ri[oa]|paciente|cliente|usu[áa]ri[oa]|profissional|prestador[ao]|m[ée]dic[ao]|psic[óo]log[ao]|fonoaudi[óo]log[ao])\s+)([A-ZÀ-Ú][a-zà-ú]+(?:[ \t]+(?:da|de|do|dos|das|e|[A-ZÀ-Ú][a-zà-ú]+)){1,5})\b/i
         );
         const pipeTitleMatch = (ticket.title || "").match(/\|\s*([A-ZÀ-Ú\s]{5,})$/);
 
-        const targetPerson = directNameMatch?.[1]
+        let rawTargetPerson = directNameMatch?.[1]
           ? directNameMatch[1].trim()
           : personMatch?.[2]
           ? personMatch[2].replace(/\s+(?:possui|tem|está|esta|com)\b.*$/i, "").trim()
@@ -4289,11 +4781,58 @@ export class AIAnalyst {
           ? pipeTitleMatch[1].trim()
           : "";
 
-        const prevailMatch = descOnly.match(
-          /\bprevalecer\s+(?:[ée]\s+)?(?:o\s+|a\s+)?["']?([^."',\n]+)["']?/i
-        );
-        const prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
-        const hasNumericKeys = /\b\d{3,}\b/.test(descOnly);
+        if (
+          rawTargetPerson &&
+          /^(?:de\s+)?(?:sa[uú]de|interc[aâ]mbio|cadastro|sistema|unimed|cpf)\b/i.test(
+            rawTargetPerson
+          )
+        ) {
+          rawTargetPerson = "";
+        }
+
+        const ocrGridMatches = [
+          ...ocrText.matchAll(
+            /\b(\d{6,10})\s*-\s*([A-Za-zÀ-ÖØ-öø-ÿ]{2,}(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]{2,})+?)(?=\s+(?:Nasc|CPF|Classe|\d|$))/g
+          ),
+        ];
+        const ocrKeys = [
+          ...new Set(ocrGridMatches.map((m) => m[1].trim())),
+        ];
+        if (ocrKeys.length === 0) {
+          const singleKeyMatch = ocrText.match(/\bChave\s*:\s*(\d{5,10})\b/i);
+          if (singleKeyMatch) ocrKeys.push(singleKeyMatch[1].trim());
+        }
+
+        const ocrPersonName =
+          ocrGridMatches.length > 0 && ocrGridMatches[0][2]
+            ? formatPersonName(ocrGridMatches[0][2].trim())
+            : "";
+
+        const targetPerson = rawTargetPerson
+          ? formatPersonName(rawTargetPerson)
+          : ocrPersonName;
+
+        const cpfMatch =
+          descOnly.match(/\b(\d{3}\.?\d{3}\.?\d{3}-?\d{2})\b/) ||
+          ocrText.match(/\b(\d{3}\.?\d{3}\.?\d{3}-?\d{2})\b/);
+        const cpfVal = cpfMatch ? cpfMatch[1].trim() : "";
+
+        const prevailMatch =
+          descOnly.match(
+            /\b(?:deixar|manter)\s+(?:no|na|como|em|o|a)\s+["']?([^."',\n)]+)["']?/i
+          ) ||
+          descOnly.match(
+            /\bprevalecer\s+(?:[ée]\s+)?(?:o\s+|a\s+)?["']?([^."',\n)]+)["']?/i
+          );
+        let prevailTarget = prevailMatch?.[1] ? prevailMatch[1].trim() : "";
+        if (/^clientes?\s+de\s+sa[uú]de$/i.test(prevailTarget)) {
+          prevailTarget = "Cliente de Saúde";
+        } else if (/^clientes?\s+de\s+interc[aâ]mbio$/i.test(prevailTarget)) {
+          prevailTarget = "Cliente de Intercâmbio";
+        }
+
+        const hasNumericKeys =
+          /\b\d{3,}\b/.test(descOnly) || ocrKeys.length > 0 || Boolean(cpfVal);
         const hasAttachedImage = (ticket.documents || []).some(
           (d) => d.is_image || /\.(png|jpe?g|webp|bmp)$/i.test(d.filename || "")
         );
@@ -4301,25 +4840,57 @@ export class AIAnalyst {
         urgencyReason = `Duplicidade de cadastro no sistema ${sysName}, podendo gerar conflitos de histórico, faturamento ou atendimento do(a) ${personRole}.`;
 
         if (targetPerson || hasNumericKeys || hasAttachedImage) {
+          const targetFirst = (targetPerson || "").trim().split(/\s+/)[0] || "";
+          const isTargetFem =
+            targetFirst &&
+            (/a$/i.test(targetFirst) ||
+              /^(isabel|rosy|joyce|suzelei|raquel|beatriz|iris|[ií]ris|ester|esther|ruth|miriam|lilian|l[ií]lian|karen|karine|kelly|kelli|nicole|stefany|stephanie|thamires|tamires|thais|tha[ií]s|lais|la[ií]s|elis|el[ií]s|in[eê]s|ines|michele|michelle|gisele|giselle|simone|cristiane|viviane|vivian|aline)$/i.test(
+                targetFirst
+              ));
           const isFeminineRole =
-            personRole.endsWith("a") ||
+            (personRole.endsWith("a") && !personRole.includes("cliente")) ||
             /^(médica|psicóloga|fonoaudióloga|enfermeira|nutricionista|beneficiária)/i.test(
               personRole
-            );
+            ) ||
+            (personRole === "beneficiário(a)/cliente" && isTargetFem);
           const whoGender = isFeminineRole ? "da" : "do";
+          const cleanRole =
+            personRole === "beneficiário(a)/cliente" && targetPerson
+              ? isTargetFem
+                ? "beneficiária/cliente"
+                : "beneficiário/cliente"
+              : personRole;
+
+          const extraIdentifiers = [];
+          if (cpfVal) extraIdentifiers.push(`CPF: **${cpfVal}**`);
+          if (ocrKeys.length >= 2) {
+            extraIdentifiers.push(`chaves **${ocrKeys.join("** e **")}**`);
+          } else if (ocrKeys.length === 1) {
+            extraIdentifiers.push(`chave **${ocrKeys[0]}**`);
+          }
+          const extraIdTxt =
+            extraIdentifiers.length > 0
+              ? ` (${extraIdentifiers.join(", ")})`
+              : "";
+
           const whoLabel = targetPerson
-            ? `${whoGender} ${personRole} **${targetPerson}**`
+            ? `${whoGender} ${cleanRole} **${targetPerson}**${extraIdTxt}`
+            : cpfVal
+            ? `do(a) beneficiário(a) de CPF **${cpfVal}**${
+                ocrKeys.length > 0 ? ` (chaves **${ocrKeys.join("** e **")}**)` : ""
+              }`
             : "dos registros informados";
+
           const prevailTxt = prevailTarget
             ? `, mantendo o cadastro **${prevailTarget}** como principal`
             : "";
           const evidenceTxt = hasAttachedImage
-            ? " (conforme print de erro no sistema anexado ao chamado)"
+            ? " (conforme print do sistema anexado ao chamado)"
             : "";
 
           translatedIntent =
             `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **unificação de cadastro** ${whoLabel} no sistema **${sysName}**${evidenceTxt}${prevailTxt}, ` +
-            `devido a duplicidade de registro que impede a regularização cadastral e as rotinas do Faturamento. ` +
+            `devido a duplicidade de registro que impede a regularização cadastral e as rotinas do ${sectorName}. ` +
             `Os dados necessários para localização e unificação no banco de dados já constam identificados no chamado.` +
             reclassNote;
           sufficiencyStatus = "completo";
@@ -4327,9 +4898,9 @@ export class AIAnalyst {
 
           customResolutionSteps = [
             `[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.`,
-            `[PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).`,
-            `[PB-UNI-19] Localizar no banco de dados do sistema ${sysName} os registros duplicados ${whoLabel.replace(/\*\*/g, "")} (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Intercâmbio vs. Prestadores).`,
-            `[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.`,
+            `[PB-UNI-19] Acessar o sistema ERP ${sysName} (módulo de cadastros corporativos / rotina de unificação).`,
+            `[PB-UNI-19] Localizar no banco de dados do sistema ${sysName} os registros duplicados ${whoLabel.replace(/\*\*/g, "")} (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Saúde vs. Clientes de Intercâmbio).`,
+            `[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal (${prevailTarget || "cadastro principal"}) e inativando/removendo a chave duplicada sem perda de integridade.`,
             `[PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de ${sectorName}.`,
             `[PB-UNI-19] Notificar a solicitante ${ticket.requester} (${sectorName}) confirmando a conclusão da unificação para prosseguimento das rotinas.`
           ];
@@ -4338,7 +4909,7 @@ export class AIAnalyst {
             `Olá, ${firstName}! Tudo bem?\n\n` +
             `Recebemos e analisamos a sua solicitação referente à **unificação de cadastro** ${whoLabel} no sistema **${sysName}**${prevailTxt}.\n\n` +
             (hasAttachedImage
-              ? `Identificamos as informações e a evidência de inconsistência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do ${sectorName}.\n\n`
+              ? `Identificamos as informações e a evidência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do ${sectorName}.\n\n`
               : `Os dados informados já foram validados na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema para manter o cadastro principal ativo.\n\n`) +
             `Assim que a unificação for concluída no ${sysName}, confirmaremos a finalização por aqui!\n\n` +
             `Permanecemos à disposição!`;

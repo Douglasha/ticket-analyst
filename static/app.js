@@ -37,6 +37,7 @@ async function apiFetch(url, options = {}) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
+  initSidebar();
   await checkAuthStatus();
   // Sincroniza a fila automaticamente a cada 60s para remover chamados solucionados/fechados no GLPI
   setInterval(() => {
@@ -44,6 +45,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       loadTickets(false);
     }
   }, 60000);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.altKey && (event.key === "b" || event.key === "B")) {
+    event.preventDefault();
+    toggleSidebar();
+  }
 });
 
 async function checkAuthStatus() {
@@ -86,8 +94,9 @@ function applyAuthenticatedUser(user) {
   const avatarEl = document.getElementById("sidebar-user-avatar");
 
   const displayName = user.fullName || user.username || "Analista T.I.";
+  const displayRole = user.role || "Analista T.I.";
   if (nameEl) nameEl.textContent = displayName;
-  if (roleEl) roleEl.textContent = user.role || "Analista T.I.";
+  if (roleEl) roleEl.textContent = displayRole;
   if (avatarEl) {
     const parts = displayName.trim().split(/\s+/);
     const initials =
@@ -95,6 +104,7 @@ function applyAuthenticatedUser(user) {
         ? `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase()
         : displayName.slice(0, 2).toUpperCase();
     avatarEl.textContent = initials;
+    avatarEl.title = `${displayName} • ${displayRole}`;
   }
 }
 
@@ -175,6 +185,36 @@ async function logoutUser() {
 function initTheme() {
   const savedTheme = localStorage.getItem("ticket_analyst_theme_v2") || "light";
   applyTheme(savedTheme);
+}
+
+function initSidebar() {
+  const savedCollapsed = localStorage.getItem("ticket_analyst_sidebar_collapsed") === "true";
+  applySidebarState(savedCollapsed);
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById("app-sidebar");
+  if (!sidebar) return;
+  const nextCollapsed = !sidebar.classList.contains("collapsed");
+  localStorage.setItem("ticket_analyst_sidebar_collapsed", String(nextCollapsed));
+  applySidebarState(nextCollapsed);
+}
+
+function applySidebarState(collapsed) {
+  const sidebar = document.getElementById("app-sidebar");
+  const icon = document.getElementById("sidebar-toggle-icon");
+  const btn = document.getElementById("sidebar-toggle-btn");
+  if (!sidebar) return;
+
+  if (collapsed) {
+    sidebar.classList.add("collapsed");
+    if (icon) icon.textContent = "chevron_right";
+    if (btn) btn.title = "Expandir menu lateral (Alt+B)";
+  } else {
+    sidebar.classList.remove("collapsed");
+    if (icon) icon.textContent = "chevron_left";
+    if (btn) btn.title = "Recolher menu lateral (Alt+B)";
+  }
 }
 
 function toggleTheme() {

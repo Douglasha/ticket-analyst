@@ -1,5 +1,317 @@
 [
   {
+    "ticket_id": 44301,
+    "title": "Sistemas Operacionais  -  Unificar cadastro",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "unificar",
+      "cadastro",
+      "deixar",
+      "cliente",
+      "saude",
+      "cpf:714",
+      "846-72"
+    ],
+    "problem_summary": "Boa tarde!\nFavor unificar o cadastro.(deixar no cliente de saúde)\nCPF:714.268.846-72",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro** do beneficiário/cliente **Enio Marcos Leal** (CPF: **714.268.846-72**, chaves **57029476** e **80044000**) no sistema **HRP Unimed**, mantendo o cadastro **Cliente de Saúde** como principal.\n\nIdentificamos as informações e a evidência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do Cadastro.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.",
+      "[PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema HRP Unimed os registros duplicados do beneficiário/cliente Enio Marcos Leal (CPF: 714.268.846-72, chaves 57029476 e 80044000) (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Saúde vs. Clientes de Intercâmbio).",
+      "[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal (Cliente de Saúde) e inativando/removendo a chave duplicada sem perda de integridade.",
+      "[PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de Cadastro.",
+      "[PB-UNI-19] Notificar a solicitante Ediléa Almeida (Cadastro) confirmando a conclusão da unificação para prosseguimento das rotinas."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-17T19:39:57.717Z"
+  },
+  {
+    "ticket_id": 44128,
+    "title": "Ajustes em layout/interface  -  Tags de acompanhamento de métricas no site",
+    "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "keywords": [
+      "ajustes",
+      "layout",
+      "interface",
+      "tags",
+      "acompanhamento",
+      "metricas",
+      "site",
+      "solicitamos"
+    ],
+    "problem_summary": "Prezados,\nSolicitamos o apoio de vocês para inserirmos as tags de acompanhamento de acessos ao site da Unimed Sudoeste de Minas para que possamos acompanhar as métricas de crescimento (Google Analytics, Search Console e Pixel da Meta).\nO melhor formato é colocarmos a tag do Google Tag Manager no código do nosso site e, posteriormente, inserir as tags dos outros serviços de monitoramento no GTM.\nVi que em nosso site já consta uma tag do GTM.\nEssa tag vem da própria Unimed Brasil ou foram vocês que instalaram?\nCaso essa conta do GTM já exista, precisaríamos do acesso para avaliar se já estão inclusas as tags do Google Analytics, do Google Search Console e da Meta.\nJá no caso que não tenhamos acesso, precisaríamos criar a conta e fazer as inserções das tags.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente às **tags de acompanhamento de métricas (Google Tag Manager, Google Analytics, Search Console e Pixel da Meta)** no **Site da Unimed Sudoeste de Minas**.\n\nEm consulta técnica com o desenvolvedor **Moisés Conte** e **Luiz Fernando**, confirmamos que a tag do Google Tag Manager (`GTM-KHVFL3C`) evidenciada no código-fonte atual **já vem integrada por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil)**.\n\nDessa forma, caso o setor de **Marketing** queira criar uma nova conta/contêiner próprio do GTM (ou gerar novas tags de monitoramento para a nossa singular) para inserirmos no site, basta nos enviar os novos códigos/IDs por aqui que realizamos a inclusão na plataforma!\n\nPermanecemos no aguardo e à disposição!",
+    "required_info": [
+      "Enviar os novos códigos/snippets ou IDs de acompanhamento (novo contêiner do Google Tag Manager, Google Analytics, Search Console ou Pixel da Meta) criados pelo Marketing caso desejem incluí-los na plataforma do site institucional"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-60] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Ajustes em layout/interface' (ID 123), atribuído ao grupo 'T.I > DV (Desenvolvimento)'.",
+      "[PB-UNI-60] Esclarecer ao solicitante Juliano Augusto de Melo (Marketing) — conforme validação com Moisés Conte e Luiz Fernando — que a tag do Google Tag Manager ('GTM-KHVFL3C') evidenciada no print anexado já vem nativa por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil).",
+      "[PB-UNI-60] Orientar o setor de Marketing que, caso deseje monitorar métricas próprias da singular (Unimed Sudoeste de Minas), crie sua própria conta/contêiner no Google Tag Manager (incluindo nele Google Analytics, Search Console e Pixel da Meta) e encaminhe o novo script/ID neste chamado.",
+      "[PB-UNI-60] Manter o chamado em status Pendente aguardando o envio das novas tags pelo Marketing e, assim que informadas, realizar a inserção na plataforma do site."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-17T18:36:51.359Z"
+  },
+  {
+    "ticket_id": 44279,
+    "title": "Erros de Sistema  -  Mensagens no chat da intranet com destinatário errado",
+    "category": "T.I > DV > Desenvolvimento > Correção de bugs",
+    "keywords": [
+      "erros",
+      "mensagens",
+      "chat",
+      "intranet",
+      "destinatario",
+      "errado",
+      "outros",
+      "descrever"
+    ],
+    "problem_summary": "Boa tarde.\nOcorreu alguns vezes o erro do destinatário errado no chat da intranet.\nConsiderando que possa haver mensagem com conteúdo sensível, recomendo a verificação e correção desta falha no sistema.\nPrincipalmente por se tratar de um canal oficial de comunicação.\nMe mantenho disponível.\nAtt\nDener",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu chamado referente à falha de **destinatário incorreto no Chat da Intranet Corporativa** e agradecemos pelo alerta, especialmente considerando a importância da privacidade e da segurança das informações em nosso canal oficial de comunicação interna.\n\nNossa equipe de **T.I. / Desenvolvimento (Moisés Conte)** já foi acionada com prioridade para auditar o módulo de Chat da Intranet, verificando o controle de sessão e o endereçamento de destinatários no envio das mensagens para aplicar a correção definitiva.\n\nAssim que a correção for aplicada e validada na Intranet, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-59] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Resolução de Problemas > Erros de Sistema' para 'T.I > DV > Desenvolvimento > Correção de bugs' (ID 121) e direcionar à equipe de Desenvolvimento (Moisés Conte).",
+      "[PB-UNI-59] Auditar no código-fonte da Intranet Corporativa (front-end JavaScript e back-end/API do módulo de Chat) o gerenciamento de estado da conversa ativa e o parâmetro 'destinatario_id' enviado no disparo das mensagens.",
+      "[PB-UNI-59] Verificar se há condição de corrida (race condition), cache indevido de variável de sessão ou falha na atualização do ID do contato selecionado no DOM ao alternar entre conversas ou múltiplas abas abertas da Intranet.",
+      "[PB-UNI-59] Inspecionar os logs e registros recentes na tabela de mensagens do banco de dados da Intranet para rastrear ocorrências de divergência entre o destinatário selecionado em tela e o gravado na transação.",
+      "[PB-UNI-59] Aplicar a correção de escopo/validação estrita do destinatário no envio de mensagens, realizar testes de conversação simultânea e comunicar a solução ao solicitante Dener Leite (Recursos Humanos)."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-17T16:19:47.121Z"
+  },
+  {
+    "ticket_id": 44268,
+    "title": "Scaners  -  Instalação de scanner",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Scaners",
+    "keywords": [
+      "scaners",
+      "scanner",
+      "computador",
+      "desde"
+    ],
+    "problem_summary": "Prezados, bom dia!\nSolicito, por gentileza, a instalação do scanner em meu computador. \nAgradeço desde já.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **instalação do scanner** no seu computador no setor **Recursos Humanos**.\n\nPara que possamos separar os drivers corretos e realizar a instalação com agilidade, você poderia nos confirmar:\n1. Trata-se da instalação de um **scanner separado (aparelho dedicado)** conectado ao seu computador ou do **scanner acoplado a uma impressora multifuncional** do setor?\n2. Qual é a **marca e o modelo** do dispositivo (ex.: Canon, Epson, Brother, HP, Fujitsu, Samsung) e ele já está conectado fisicamente à sua máquina (cabo USB/energia)?\n3. Qual é o **ID do HopToDesk** do seu computador para instalarmos remotamente (ou prefere que um técnico vá presencialmente até o setor)?\n\nAssim que nos confirmar esses detalhes por aqui, já daremos andamento imediato na instalação!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Trata-se da instalação de um scanner separado (aparelho dedicado) conectado ao seu computador ou do scanner acoplado a uma impressora multifuncional do setor?",
+      "Qual é a marca e o modelo do dispositivo (ex.: Canon, Epson, Brother, HP, Fujitsu, Samsung) e ele já está conectado fisicamente à sua máquina (cabo USB/energia)?",
+      "Qual é o ID do HopToDesk do seu computador para instalarmos remotamente (ou prefere que um técnico vá presencialmente até o setor)?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-58] Manter a categoria do chamado no GLPI em 'T.I > IR > Suporte a Hardware > Periféricos > Scaners' (ID 150).",
+      "[PB-UNI-58] Confirmar com Carla Eduarda Machado Oliveira (Recursos Humanos) se o dispositivo é um scanner dedicado (separado, conectado via USB) ou o scanner acoplado a uma impressora multifuncional, além da marca e modelo do aparelho.",
+      "[PB-UNI-58] Caso seja um scanner dedicado (separado): verificar a conexão física (cabo USB e fonte de energia) na estação de trabalho e instalar o driver oficial TWAIN/WIA e o utilitário de digitalização do fabricante (ex.: Canon CaptureOnTouch, Epson Scan, Brother iPrint&Scan, HP Scan ou NAPS2).",
+      "[PB-UNI-58] Caso seja scanner acoplado a uma impressora multifuncional: instalar o driver de digitalização em rede na máquina ou configurar o fluxo de digitalização do equipamento.",
+      "[PB-UNI-58] Efetuar um teste prático de digitalização em PDF com Carla, disponibilizar o atalho do aplicativo na Área de Trabalho e encerrar o chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-17T13:33:54.077Z"
+  },
+  {
+    "ticket_id": 44257,
+    "title": "Solicitação Diversa  -  Padronização Área de Trabalho Recepção",
+    "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+    "keywords": [
+      "padronizacao",
+      "area",
+      "trabalho",
+      "recepcao",
+      "computadores",
+      "imagem",
+      "criada",
+      "especifica"
+    ],
+    "problem_summary": "Bom dia, solicito por gentileza a padronização da área de trabalho dos computadores da recepção (imagem com a área de trabalho criada específica para recepção). Após as mudanças e atualizações nos computadores, as imagens não estão mais disponíveis.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **padronização da Área de Trabalho (atualização do papel de parede específico do setor)** nos computadores da **Recepção (H Recepção)**.\n\nAtualmente nossa equipe de T.I. está realizando um trabalho de atualização e migração das estações de trabalho para o nosso novo domínio de rede corporativa. Por conta dessa transição, alguns computadores recém-atualizados ou migrados para o novo domínio podem ter carregado o plano de fundo padrão geral, precisando receber a política de personalização específica da **Recepção**.\n\nNossa equipe técnica já está verificando os computadores do setor no servidor de domínio para configurar e aplicar o papel de parede padronizado de acordo com a necessidade da **Recepção (H Recepção)** (caso o setor possua alguma nova arte/imagem atualizada que deseje utilizar, fique à vontade para anexá-la por aqui).\n\nAssim que a diretiva de padronização for atualizada nas máquinas do setor, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-57] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Solicitação Diversa' para 'T.I > ST > Instalação/Configuração > Sistemas Operacionais' (ID 70).",
+      "[PB-UNI-57] Identificar os computadores/estações de trabalho da Recepção (H Recepção) e verificar em qual domínio cada máquina está ingressada atualmente: no domínio AD antigo ('unimedti') ou no novo domínio UCS ('unimed256').",
+      "[PB-UNI-57] Caso as estações já estejam migradas para o novo domínio UCS ('unimed256'), acessar o console do UCS / Gerenciamento de Diretiva de Grupo (RSAT gpmc.msc no domínio 'unimed256') e verificar se as máquinas/usuários do setor estão na Unidade Organizacional (OU) correta (Recepção) e se a GPO de Papel de Parede personalizada do setor já foi criada e vinculada nesse domínio.",
+      "[PB-UNI-57] Garantir que a imagem de papel de parede específica da Recepção esteja hospedada no compartilhamento de rede do novo domínio (\\\\unimed256\\netlogon\\ ou \\\\unimed256\\sysvol\\unimed256\\...) com permissão de leitura para 'Authenticated Users' / 'Domain Computers' e configurada na diretiva (Configuração do Usuário > Políticas > Modelos Administrativos > Área de Trabalho > Área de Trabalho > Papel de Parede da Área de Trabalho).",
+      "[PB-UNI-57] Caso alguma estação do setor ainda esteja no domínio antigo ('unimedti'), programar a migração para o novo domínio 'unimed256' (UCS) ou ajustar o vínculo da GPO setorial correspondente.",
+      "[PB-UNI-57] Executar 'gpupdate /force' nas estações de trabalho da Recepção (H Recepção), realizar logoff/logon para validar o carregamento do papel de parede personalizado do setor e comunicar a conclusão à solicitante Isabel Cristina dos Santos Teodoro Nepomuceno."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-17T12:52:50.147Z"
+  },
+  {
+    "ticket_id": 44193,
+    "title": "Telefones VoIP  -  Necessito de telefone na mesa da Mayara, dentro da SCIH.",
+    "category": "T.I > IR > Administração de Redes > Telefones VoIP",
+    "keywords": [
+      "telefones",
+      "voip",
+      "necessito",
+      "telefone",
+      "mesa",
+      "mayara",
+      "dentro",
+      "scih"
+    ],
+    "problem_summary": "Necessito de um telefone na mesa da Mayara dentro da SCIH, funcionária nova no setor que irá trabalhar com ligações/ Busca ativa.\nThaís que solicitou.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para **instalar um ponto de telefone (linha/ramal e aparelho)** no novo local solicitado.\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (novo local solicitado)?\n2. Informar se para o ponto de telefone (novo local solicitado) deve ser configurado um novo número de ramal ou transferido um ramal já existente?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (novo local solicitado)?",
+      "Informar se para o ponto de telefone (novo local solicitado) deve ser configurado um novo número de ramal ou transferido um ramal já existente?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-20] Manter a categoria do chamado no GLPI em 'T.I > IR > Administração de Redes > Telefones VoIP'.",
+      "[PB-UNI-20] Verificar presencialmente no local de destino (novo local solicitado) a disponibilidade de ponto de rede/patch panel e tomadas elétricas.",
+      "[PB-UNI-20] Executar o remanejamento físico e as devidas conexões/manobras de cabeamento estruturado e PABX/rede.",
+      "[PB-UNI-20] Realizar os testes operacionais junto ao setor H SCIH e validar a conclusão no chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-17T10:49:01.558Z"
+  },
+  {
+    "ticket_id": 44222,
+    "title": "Solicitação Diversa  -  Mudar a agenda do Gustavo Barbosa Carvalho",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "mudar",
+      "agenda",
+      "gustavo",
+      "barbosa",
+      "carvalho",
+      "inverter",
+      "profissional",
+      "acima"
+    ],
+    "problem_summary": "Por favor inverter a agenda do profissional acima, nos dias Quinta para o período da tarde e na sexta n período da manhã",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de alteração de agenda no sistema **Prontu+ (PEP do Núcleo)**.\n\nPara realizarmos a parametrização corretamente, você poderia nos confirmar:\n- Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo\n\nAssim que nos informar por aqui, já executamos a alteração!",
+    "required_info": [
+      "Dias da semana, horário inicial e final, tempo de duração de cada atendimento e intervalo"
+    ],
+    "resolution_steps": [
+      "[MEM-#43569] [PB-UNI-49] Validar a qualidade e nitidez da fotografia facial anexada (Gustavo Carvalho - Psicólogo.jpeg) para cadastro na base biométrica do sistema de controle de acesso (Control iD / iDFace).",
+      "[MEM-#43569] [PB-UNI-49] Aguardar retorno da solicitante Carla Eduarda Machado Oliveira (Recursos Humanos) indicando a unidade de atuação (Sede ou Hospital), a relação de portas/setores autorizados e eventuais acessos a sistemas adicionais.",
+      "[MEM-#43569] [PB-UNI-49] Acessar o sistema de gerenciamento de controle de acesso (Control iD / iDSecure / iDCloud) ou o terminal iDFace web correspondente à unidade autorizada:",
+      "[MEM-#43569] • Sede Administrativa: terminal Administração (http://192.168.41.115);",
+      "[MEM-#43569] • Hospital Unimed: terminais RX Interno (192.168.40.113), RX Externo (192.168.40.114), UTI NEO Rampa (192.168.40.111), UTI NEO Farmácia (192.168.40.112), Corredor Principal Entrada (192.168.40.10), Corredor Principal Saída (192.168.40.11), Corredor Elevador Entrada (192.168.40.13), Corredor Elevador Saída (192.168.40.14), Corredor Centro Cirúrgico (192.168.40.12), Centro Cirúrgico (192.168.40.116) ou UTI Adulto (192.168.40.15).",
+      "[MEM-#43569] [PB-UNI-49] Cadastrar o usuário Gustavo Barbosa Carvalho (CPF: 127.720.136-69), realizar o upload da fotografia facial para a base biométrica e associar aos grupos de acesso às portas selecionadas."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-16T19:31:51.469Z"
+  },
+  {
+    "ticket_id": 44220,
+    "title": "Aplicativos  -  Erro do WConect",
+    "category": "T.I > ST > Instalação/Configuração > Aplicativos",
+    "keywords": [
+      "erro",
+      "wconect",
+      "novamente",
+      "recebo",
+      "resposta",
+      "pacientes",
+      "envio",
+      "mensagens"
+    ],
+    "problem_summary": "Boa tarde, prezados.\nEstou novamente com problema no meu WConect...\nNão recebo a resposta dos pacientes que envio as mensagens pelo primeiro contato.\nSegue exemplo:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente ao problema no **WConect** no setor **Laboratório**, onde as respostas dos pacientes não estão retornando para a sua tela quando a conversa é iniciada pelo **primeiro contato** ativo.\n\nJá analisamos o print de exemplo anexado (atendimento da paciente **Elenice - Nicole — 35999624019**, assumido pelo seu usuário no **Laboratório**) e confirmamos que todas as informações necessárias constam no chamado.\n\nNossa equipe de T.I. / Desenvolvimento (**Moisés Conte**) já está verificando o roteamento e a sincronização das mensagens de retorno nos atendimentos de primeiro contato no WConect. Assim que o ajuste for concluído, atualizaremos você por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-56] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Instalação/Configuração > Aplicativos' para 'T.I > DV > Desenvolvimento > Correção de bugs' e direcionar ao desenvolvedor Moisés Conte (já incluído como observador no chamado).",
+      "[PB-UNI-56] Inspecionar os logs de integração e webhook da API de WhatsApp / servidor WConect referentes às sessões iniciadas por contato ativo ('primeiro contato') pelo setor Laboratório (usuária: Rosy Ellen Freire Viana / login: rviana).",
+      "[PB-UNI-56] Rastrear pelo caso de exemplo evidenciado no print em anexo — contato 'Elenice - Nicole' (35999624019), fila 'Laboratório', 'Assumido por Rosy Ellen' em 09/11/2026 (mensagens enviadas às 10:54, 10:56, 11:02 e 13:25) — se as mensagens de resposta (inbound) da paciente ficaram retidas na fila geral/chatbot ou sem associação ao ticket assumido ativamente.",
+      "[PB-UNI-56] Corrigir a regra de associação/roteamento de mensagens de retorno em atendimentos de primeiro contato ativo no WConect e reiniciar/sincronizar o serviço de mensageria se necessário.",
+      "[PB-UNI-56] Validar o recebimento normal das respostas junto a Rosy (Laboratório) e registrar a solução no chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-16T17:20:30.072Z"
+  },
+  {
+    "ticket_id": 44159,
+    "title": "Manutenção/Refatoração de Software  -  Analise de Dispersão de Prestadores (dimensionamento de rede)",
+    "category": "T.I > DV > Desenvolvimento > Manutenção/Refatoração de Software",
+    "keywords": [
+      "manutencao",
+      "refatoracao",
+      "software",
+      "analise",
+      "dispersao",
+      "prestadores",
+      "dimensionamento",
+      "rede"
+    ],
+    "problem_summary": "Boa tarde\nConforme conversado com o Raphael, preciso extrair algumas informações do sistema para preencher a planilha anexa. Gostaria de solicitar, por gentileza, o auxílio da TI nesse processo e, se possível, um treinamento para que eu possa compreender como realizar a extração desses relatórios.\nDessa forma, nos próximos anos, poderei realizar a atualização dos dados de forma autônoma.\nDesde já, agradeço",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação dos **indicadores de atendimento do sistema** para o setor **Relacionamento Prestadores**.\n\nPara realizarmos a extração corretamente, você poderia nos informar qual o **período de referência (data inicial e data final ou mês)** que deseja consultar?\n\nAssim que nos confirmar o período por aqui, já geramos e encaminhamos o relatório!",
+    "required_info": [
+      "Informar o período de apuração desejado (data inicial e data final ou mês de referência) para extração dos indicadores no sistema"
+    ],
+    "resolution_steps": [
+      "[Aprendido em MEM-#41961] A colaboradora está relatando que parou de receber seu relatório diário do sistema S.G.H ou Spdata ou sgh, que informa o preenchimento de um determinado relatório. A orientação neste caso é a de que estamos verificando o problema e retornaremos o mais breve possível",
+      "[MEM-#41961] [PB-UNI-14] Verificar no servidor/módulo agendador de tarefas e relatórios do S.G.H. (Spdata) o status da rotina de disparo automático e fila de e-mail (SMTP) do relatório informado.",
+      "[MEM-#41961] [PB-UNI-14] Conferir nos logs de execução se houve travamento da tarefa agendada, falha de autenticação no envio ou erro na consulta SQL do relatório a partir da data relatada.",
+      "[MEM-#41961] [PB-UNI-14] Reprocessar/reiniciar o agendamento no S.G.H., validar o recebimento na caixa de entrada do setor solicitante e comunicar a normalização no chamado.",
+      "[MEM-#41961] [Chamado #41783 (Resolvido)] Sistema reiniciado.",
+      "[MEM-#42561] [PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' caso tenha sido aberto em categoria incorreta (ex: Sistemas Operacionais ou Aplicativos ou demais que não tenham proximidade)."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-13T17:00:40.242Z"
+  },
+  {
+    "ticket_id": 44100,
+    "title": "Erros de Sistema  -  Erro de Sincronização de Pasta",
+    "category": "T.I > ST > Resolução de Problemas > Erros de Sistema",
+    "keywords": [
+      "erros",
+      "erro",
+      "sincronizacao",
+      "pasta",
+      "next",
+      "cloud",
+      "vazia",
+      "porem"
+    ],
+    "problem_summary": "Boa tarde!\nMinha pasta está vazia, porém as auditoras colocaram anexos lá, só não aparece para mim.\nat.te",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nPara verificarmos o seu acesso ao **Nextcloud** rapidamente, você poderia nos confirmar:\n1. Qual é o **nome da pasta** específica que você não está conseguindo abrir?\n2. Você está tentando acessar pelo **navegador** ou pelo **atalho no computador**?\n\nFicamos no aguardo para regularizar seu acesso!",
+    "required_info": [
+      "Qual é o nome da pasta específica que você não está conseguindo abrir?",
+      "Você está tentando acessar pelo navegador ou pelo atalho no computador?"
+    ],
+    "resolution_steps": [
+      "[MEM-#42404] [MEM-#42159] [PB-UNI-02] Verificar no painel administrativo do Nextcloud se a conta do usuário está ativa ou bloqueada por tentativas de login.",
+      "[MEM-#42404] [MEM-#42159] [PB-UNI-02] Checar as permissões do grupo/setor (ex: H Auditoria) sobre a pasta compartilhada no Nextcloud.",
+      "[MEM-#42404] [MEM-#42159] [PB-UNI-02] Se o usuário utiliza o Nextcloud Desktop Client no Windows, conectar remotamente na estação via HopToDesk e validar se a sessão do cliente desconectou ou se o mapeamento local quebrou.",
+      "[MEM-#42404] [MEM-#42159] [Chamado #41867 (Resolvido)] Diagnóstico: Falha de leitura/bloqueio temporário de arquivo (Cannot open for input) na sincronização do agente Nextcloud.",
+      "[MEM-#42404] [MEM-#42159] [Chamado #41867 (Resolvido)] Ação Realizada: Efetuada a limpeza de arquivos temporários da máquina, liberação dos processos pendentes e reinicialização do sistema operacional.",
+      "[MEM-#42404] [MEM-#42159] [Chamado #41867 (Resolvido)] Resultado: O cliente Nextcloud retomou o fluxo de sincronização normalmente sem novos alertas de erro. Serviço normalizado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-12T17:19:33.120Z"
+  },
+  {
+    "ticket_id": 44080,
+    "title": "Resolução de Problemas  -  Unificar cadastro",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "unificar",
+      "cadastro",
+      "hrp",
+      "sobre",
+      "psicologa",
+      "seguir:",
+      "michelle",
+      "aparecida"
+    ],
+    "problem_summary": "Boa tarde!\nSobre a psicóloga a seguir: Michelle Aparecida Silva\nEla possui dois cadastros no sistema. Solicito, por gentileza, que seja feita a unificação dos registros, mantendo como principal o cadastro correto.\nChave do item a ser unificado:\nChave do item a ser mantido:",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos e analisamos a sua solicitação referente à **unificação de cadastro** da psicóloga **Michelle Aparecida Silva** no sistema **HRP Unimed**.\n\nIdentificamos as informações e a evidência de inconsistência anexada ao chamado. Nossa equipe técnica de Banco de Dados já iniciou o procedimento de substituição e unificação de chaves no sistema, mantendo o cadastro correto como principal para viabilizar as rotinas do Faturamento.\n\nAssim que a unificação for concluída no HRP Unimed, confirmaremos a finalização por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-19] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados' (ID 146/147) caso tenha sido aberto em categoria genérica de Service Desk.",
+      "[PB-UNI-19] Acessar o sistema ERP HRP Unimed (módulo de cadastros corporativos / rotina de unificação).",
+      "[PB-UNI-19] Localizar no banco de dados do sistema HRP Unimed os registros duplicados da psicóloga Michelle Aparecida Silva (avaliando histórico de atendimentos e classes cadastrais, ex.: Clientes de Intercâmbio vs. Prestadores).",
+      "[PB-UNI-19] Executar a rotina padrão de unificação de cadastros e substituição de chaves no banco de dados, migrando o histórico para o registro indicado como principal e inativando/removendo a chave duplicada sem perda de integridade.",
+      "[PB-UNI-19] Validar a integridade referencial dos registros e confirmar a liberação do cadastro para o setor de Faturamento.",
+      "[PB-UNI-19] Notificar a solicitante Luana Tozzi (Faturamento) confirmando a conclusão da unificação para prosseguimento das rotinas."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-12T14:55:53.406Z"
+  },
+  {
     "ticket_id": 43869,
     "title": "Sistemas Operacionais  -  Suporte HRP",
     "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",

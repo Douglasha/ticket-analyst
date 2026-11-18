@@ -1,5 +1,638 @@
 [
   {
+    "id": "Chamado #44321 (Resolvido)",
+    "ticket_id": 44321,
+    "solution_id": 43067,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44301 (Resolvido)",
+    "ticket_id": 44301,
+    "solution_id": 43033,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Unificar cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro Unificado:\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 17/11/2026 - 16:42:38Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 17/11/2026 - 16:42:43Deleção das chaves originais deletadas com sucesso em: 17/11/2026 - 16:42:44\n\n\r\n \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, p",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro Unificado:",
+      "Início da substituição da(s) chave(s) do arquivo em: 17/11/2026 - 16:42:38Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 17/11/2026 - 16:42:43Deleção das chaves originais deletadas com sucesso em: 17/11/2026 - 16:42:44",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44274 (Resolvido)",
+    "ticket_id": 44274,
+    "solution_id": 43014,
+    "title": "Suporte Técnico e Service Desk > Criação de Usuários > Gabriela",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nO login \"recepnucleo\" foi criado e a senha fornecida à colaboradora Gabriela. Os favoritos e senhas do computador da recepção do núcleo foram devidamente copiados.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "O login \"recepnucleo\" foi criado e a senha fornecida à colaboradora Gabriela. Os favoritos e senhas do computador da recepção do núcleo foram devidamente copiados.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44271 (Resolvido)",
+    "ticket_id": 44271,
+    "solution_id": 43019,
+    "title": "Infraestrutura e Redes > Telefones VoIP",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Resolvido. Feito troca de fonte de energia pelo técnico Felipe",
+    "keywords": [],
+    "steps": [
+      "Resolvido. Feito troca de fonte de energia pelo técnico Felipe"
+    ]
+  },
+  {
+    "id": "Chamado #44270 (Resolvido)",
+    "ticket_id": 44270,
+    "solution_id": 43018,
+    "title": "Infraestrutura e Redes > Periféricos > Impressoras",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Impressora OK",
+    "keywords": [],
+    "steps": [
+      "Impressora OK"
+    ]
+  },
+  {
+    "id": "Chamado #44268 (Resolvido)",
+    "ticket_id": 44268,
+    "solution_id": 43015,
+    "title": "Infraestrutura e Redes > Scaners > Instalação de scanner",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Scanner de mesa montado no computador, aplicativo instalado e colaboradora orientada sobre como utilizá-lo",
+    "keywords": [],
+    "steps": [
+      "Scanner de mesa montado no computador, aplicativo instalado e colaboradora orientada sobre como utilizá-lo"
+    ]
+  },
+  {
+    "id": "Chamado #44264 (Resolvido)",
+    "ticket_id": 44264,
+    "solution_id": 42999,
+    "title": "Infraestrutura e Redes > Impressoras > ERRO NA IMPRESSÃO DE ETIQUETA",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Erro pontual. Testou novamente e foi.",
+    "keywords": [],
+    "steps": [
+      "Erro pontual. Testou novamente e foi."
+    ]
+  },
+  {
+    "id": "Chamado #44261 (Resolvido)",
+    "ticket_id": 44261,
+    "solution_id": 43040,
+    "title": "Verificação do Portal Transparência [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nRelatório parou de funcionar, solicitado apoio a federação\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Relatório parou de funcionar, solicitado apoio a federação",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44260 (Resolvido)",
+    "ticket_id": 44260,
+    "solution_id": 43034,
+    "title": "Atualizar Simpro [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nTabela atualizada\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Tabela atualizada",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44259 (Resolvido)",
+    "ticket_id": 44259,
+    "solution_id": 43011,
+    "title": "Atualizar HRP [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Atualizado conforme as regras previstas em POP\nSetor envolvido informado",
+    "keywords": [],
+    "steps": [
+      "Atualizado conforme as regras previstas em POP",
+      "Setor envolvido informado"
+    ]
+  },
+  {
+    "id": "Chamado #44243 (Resolvido)",
+    "ticket_id": 44243,
+    "solution_id": 42970,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Unificar cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro Unificado\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 16/11/2026 - 17:06:14Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 16/11/2026 - 17:06:23Deleção das chaves originais deletadas com sucesso em: 16/11/2026 - 17:06:24\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permane",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro Unificado",
+      "Início da substituição da(s) chave(s) do arquivo em: 16/11/2026 - 17:06:14Substituição da(s) 2 chave(s) do arquivo executada com sucesso em: 16/11/2026 - 17:06:23Deleção das chaves originais deletadas com sucesso em: 16/11/2026 - 17:06:24",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44228 (Resolvido)",
+    "ticket_id": 44228,
+    "solution_id": 42991,
+    "title": "Atualizações dos BI's [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Atualizações feita.",
+    "keywords": [],
+    "steps": [
+      "Atualizações feita."
+    ]
+  },
+  {
+    "id": "Chamado #44225 (Resolvido)",
+    "ticket_id": 44225,
+    "solution_id": 42997,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Divergencia de valores Brasíndice",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia!\n\n\r\nIsso aconteceu porque eu estava importando a tabela novamente. Nesse processo, primeiro importo o arquivo PFB e depois o PMC, pois os dois se complementam.\n\n\r\nProvavelmente, você emitiu a conta nesse intervalo, quando ainda estava carregado apenas o valor do PFB, que é o menor.\n\n\r\nMas agora a importação já foi concluída e os valores est",
+    "keywords": [],
+    "steps": [
+      "Bom dia!",
+      "Isso aconteceu porque eu estava importando a tabela novamente. Nesse processo, primeiro importo o arquivo PFB e depois o PMC, pois os dois se complementam.",
+      "Provavelmente, você emitiu a conta nesse intervalo, quando ainda estava carregado apenas o valor do PFB, que é o menor.",
+      "Mas agora a importação já foi concluída e os valores estão ajustados corretamente."
+    ]
+  },
+  {
+    "id": "Chamado #44222 (Resolvido)",
+    "ticket_id": 44222,
+    "solution_id": 42963,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Mudar a agenda do Gustavo Barbosa Carvalho",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nHorário atualizado conforme solicitado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Horário atualizado conforme solicitado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44220 (Resolvido)",
+    "ticket_id": 44220,
+    "solution_id": 42998,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Erro do WConect",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Bom dia.\n\nFoi identificada e corrigida uma falha relacionada aos contatos cadastrados com e sem o 9º dígito, que fazia com que as respostas dos clientes fossem direcionadas para novas conversas.\n\n\r\nRealizamos os ajustes necessários para que as mensagens sejam vinculadas corretamente às conversas já iniciadas, evitando a duplicidade de contatos e co",
+    "keywords": [],
+    "steps": [
+      "Bom dia.",
+      "Foi identificada e corrigida uma falha relacionada aos contatos cadastrados com e sem o 9º dígito, que fazia com que as respostas dos clientes fossem direcionadas para novas conversas.",
+      "Realizamos os ajustes necessários para que as mensagens sejam vinculadas corretamente às conversas já iniciadas, evitando a duplicidade de contatos e conversas."
+    ]
+  },
+  {
+    "id": "Chamado #44215 (Resolvido)",
+    "ticket_id": 44215,
+    "solution_id": 42984,
+    "title": "Verificar Atualizações e Submissão da PNGPPD [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Iniciar a confecção dos materiais e evidencias.",
+    "keywords": [],
+    "steps": [
+      "Iniciar a confecção dos materiais e evidencias."
+    ]
+  },
+  {
+    "id": "Chamado #44210 (Resolvido)",
+    "ticket_id": 44210,
+    "solution_id": 42958,
+    "title": "Segurança da Informação > Gestão de Acessos > Kauan Pereira Borges - 147.384.756-73",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\ncadastro realizado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "cadastro realizado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44203 (Resolvido)",
+    "ticket_id": 44203,
+    "solution_id": 42939,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Portal SPData",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "https://portal.spdata.com.br/#\nUsuario: agomes\nSenha: Unimed@256\n\n\r\nUsuario: vsilva\nSenha: Unimed@256",
+    "keywords": [],
+    "steps": [
+      "https://portal.spdata.com.br/#",
+      "Usuario: agomes",
+      "Senha: Unimed@256",
+      "Usuario: vsilva",
+      "Senha: Unimed@256"
+    ]
+  },
+  {
+    "id": "Chamado #44200 (Resolvido)",
+    "ticket_id": 44200,
+    "solution_id": 42936,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Mayara Cristine Guimaraes Batista",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "USUARIO: mbatista\nSenha: Unimed@256",
+    "keywords": [],
+    "steps": [
+      "USUARIO: mbatista",
+      "Senha: Unimed@256"
+    ]
+  },
+  {
+    "id": "Chamado #44199 (Resolvido)",
+    "ticket_id": 44199,
+    "solution_id": 42935,
+    "title": "Banco de Dados e Análise de Dados > Alteração de Dados / Ajustes SQL Pontuais > Alteração via Banco",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nCadastro alterado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Cadastro alterado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44195 (Resolvido)",
+    "ticket_id": 44195,
+    "solution_id": 42933,
+    "title": "Suporte Técnico e Service Desk > Bloqueio de Contas > AMANDA GABRIELA CARLETTO MEDEIROS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais bloqueadas:\n\n\r\nE-mail\nGLPI\nSPDATA\nNextcloud\nBiomentria Facial\nAutoLac\nUsuário Computador\nNEA\nIntranet\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais bloqueadas:",
+      "E-mail",
+      "GLPI",
+      "SPDATA",
+      "Nextcloud"
+    ]
+  },
+  {
+    "id": "Chamado #44192 (Resolvido)",
+    "ticket_id": 44192,
+    "solution_id": 42934,
+    "title": "IR > Verificar Computadores para Manutenção Preventiva [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Manutenções preventivas em dia",
+    "keywords": [],
+    "steps": [
+      "Manutenções preventivas em dia"
+    ]
+  },
+  {
+    "id": "Chamado #44186 (Resolvido)",
+    "ticket_id": 44186,
+    "solution_id": 42930,
+    "title": "Atualizar Benner [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Bloqueio de acesso\nDownload da Atualizacao\nAplicação dos Pacotes\nAtualização do WES\nInstalação dos Artefatos\nliberação do acesso\n\nTudo OK",
+    "keywords": [],
+    "steps": [
+      "Bloqueio de acesso",
+      "Download da Atualizacao",
+      "Aplicação dos Pacotes",
+      "Atualização do WES",
+      "Instalação dos Artefatos",
+      "liberação do acesso"
+    ]
+  },
+  {
+    "id": "Chamado #44184 (Resolvido)",
+    "ticket_id": 44184,
+    "solution_id": 42910,
+    "title": "Infraestrutura e Redes > Internet e WiFi > Senha Wifi",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue senha: 41199-90651\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue senha: 41199-90651",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44182 (Resolvido)",
+    "ticket_id": 44182,
+    "solution_id": 42925,
+    "title": "Suporte Técnico e Service Desk > Acesso e Permissões > Criação de aceso - Página inicial do computador",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue credenciais: \n\n\r\ndomínio: unimed256\nlogin: mbaptista\nsenha: Mminas@@256\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue credenciais:",
+      "domínio: unimed256",
+      "login: mbaptista",
+      "senha: Mminas@@256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição."
+    ]
+  },
+  {
+    "id": "Chamado #44180 (Resolvido)",
+    "ticket_id": 44180,
+    "solution_id": 42927,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificado\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificado",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44163 (Resolvido)",
+    "ticket_id": 44163,
+    "solution_id": 42893,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > AS PASTAS DA AUDITORIA EXTERNA NÃO ESTAVAM CONECTADAS OU ATUALIZADAS",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nA aplicação estava desatualizada, após atualização, sincronização foi restabelecida.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "A aplicação estava desatualizada, após atualização, sincronização foi restabelecida.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44159 (Resolvido)",
+    "ticket_id": 44159,
+    "solution_id": 43022,
+    "title": "Desenvolvimento e Qualidade > Manutenção/Refatoração de Software > Analise de Dispersão de Prestadores (dimensionamento de rede)",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Atualizado.",
+    "keywords": [],
+    "steps": [
+      "Atualizado."
+    ]
+  },
+  {
+    "id": "Chamado #44150 (Resolvido)",
+    "ticket_id": 44150,
+    "solution_id": 42882,
+    "title": "Desenvolvimento e Qualidade > Novas aplicações > Criação de Etiqueta/ Controle de Contas",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nEtiquetas criadas conforme solicitado, alterado somente o nome de pendência para aguardando:\n\n\r\nAguardando Farmácia\nAguardando NAS\n\n\r\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Etiquetas criadas conforme solicitado, alterado somente o nome de pendência para aguardando:",
+      "Aguardando Farmácia",
+      "Aguardando NAS",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44149 (Resolvido)",
+    "ticket_id": 44149,
+    "solution_id": 42900,
+    "title": "T.I > IR > Suporte a Hardware > Suprimentos > Verificar suprimentos do hospital [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Suprimentos Verificados.",
+    "keywords": [],
+    "steps": [
+      "Suprimentos Verificados."
+    ]
+  },
+  {
+    "id": "Chamado #44145 (Resolvido)",
+    "ticket_id": 44145,
+    "solution_id": 42866,
+    "title": "Suporte Técnico e Service Desk > Redefinição de Senhas > Daniela Duarte Cabral",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue nova senha: 123456\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue nova senha: 123456",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44139 (Resolvido)",
+    "ticket_id": 44139,
+    "solution_id": 42885,
+    "title": "T.I > IR > Energia e Geradores > Monitoramento de Geradores > Testar Gerador [R]",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Carga da Bateria: 14 V\nTemperatura da água do Radiador: 50° C\nNível do óleo motor: ok\nNível do óleo combustível: ok\nLigar o Motor 10 min. Feito",
+    "keywords": [],
+    "steps": [
+      "Carga da Bateria: 14 V",
+      "Temperatura da água do Radiador: 50° C",
+      "Nível do óleo motor: ok",
+      "Nível do óleo combustível: ok",
+      "Ligar o Motor 10 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #44127 (Resolvido)",
+    "ticket_id": 44127,
+    "solution_id": 42883,
+    "title": "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #44126 (Resolvido)",
+    "ticket_id": 44126,
+    "solution_id": 42884,
+    "title": "Verificação do Backup [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "feito",
+    "keywords": [],
+    "steps": [
+      "feito"
+    ]
+  },
+  {
+    "id": "Chamado #44121 (Resolvido)",
+    "ticket_id": 44121,
+    "solution_id": 42886,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Atualização do SPData",
+    "category": "T.I • Solucionado por rbernardes",
+    "is_ti_group": true,
+    "summary": "Resolvido",
+    "keywords": [],
+    "steps": [
+      "Resolvido"
+    ]
+  },
+  {
+    "id": "Chamado #44119 (Resolvido)",
+    "ticket_id": 44119,
+    "solution_id": 42880,
+    "title": "Infraestrutura e Redes > Instalação e Configuração > Impressora",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Impressora reconfigurada",
+    "keywords": [],
+    "steps": [
+      "Impressora reconfigurada"
+    ]
+  },
+  {
+    "id": "Chamado #44117 (Resolvido)",
+    "ticket_id": 44117,
+    "solution_id": 42901,
+    "title": "T.I > IR > Administração de Redes > Telefones VoIP > Verificar gravador (ligações) [R]",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Gravações Verificadas.",
+    "keywords": [],
+    "steps": [
+      "Gravações Verificadas."
+    ]
+  },
+  {
+    "id": "Chamado #44108 (Resolvido)",
+    "ticket_id": 44108,
+    "solution_id": 42826,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Abertura de conta",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConta reaberta\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Conta reaberta",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44100 (Resolvido)",
+    "ticket_id": 44100,
+    "solution_id": 42821,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > Erro de Sincronização de Pasta",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nVerificou-se que a pasta havia sido renomeada pela colaboradora Bruna, do setor de auditoria, o que impedia seu acesso. Solicitamos à coordenadora Priscila Santos que restaurasse o nome original da pasta e, após a alteração, os arquivos ficaram disponíveis.\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecem",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Verificou-se que a pasta havia sido renomeada pela colaboradora Bruna, do setor de auditoria, o que impedia seu acesso. Solicitamos à coordenadora Priscila Santos que restaurasse o nome original da pasta e, após a alteração, os arquivos ficaram disponíveis.",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44099 (Resolvido)",
+    "ticket_id": 44099,
+    "solution_id": 42815,
+    "title": "Suporte Técnico e Service Desk > Desbloqueio de Contas > LORENA CRISTINA CARVALHO TEIXIEIRA",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nSegue desbloqueio de credenciais\n\n\r\nLogin: CPF\nSenha: Uni@@0256\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Segue desbloqueio de credenciais",
+      "Login: CPF",
+      "Senha: Uni@@0256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44096 (Resolvido)",
+    "ticket_id": 44096,
+    "solution_id": 42816,
+    "title": "Infraestrutura e Redes > Administração de Redes > telefone estragado Ramal IP 2487",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Fonte de energia alocada",
+    "keywords": [],
+    "steps": [
+      "Fonte de energia alocada"
+    ]
+  },
+  {
+    "id": "Chamado #44086 (Resolvido)",
+    "ticket_id": 44086,
+    "solution_id": 42881,
+    "title": "Suporte Técnico e Service Desk > Solicitação Diversa > NextCloud na área de trabalho",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Next Cloud instalado",
+    "keywords": [],
+    "steps": [
+      "Next Cloud instalado"
+    ]
+  },
+  {
     "id": "Chamado #44084 (Resolvido)",
     "ticket_id": 44084,
     "solution_id": 42809,
@@ -18,6 +651,22 @@
     ]
   },
   {
+    "id": "Chamado #44080 (Resolvido)",
+    "ticket_id": 44080,
+    "solution_id": 42813,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Unificar cadastro",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nInício da substituição da(s) chave(s) do arquivo em: 12/11/2026 - 11:34:33Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 12/11/2026 - 11:35:12Deleção das chaves originais deletadas com sucesso em: 12/11/2026 - 11:35:12\n\n\r\n \n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposiçã",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Início da substituição da(s) chave(s) do arquivo em: 12/11/2026 - 11:34:33Substituição da(s) 1 chave(s) do arquivo executada com sucesso em: 12/11/2026 - 11:35:12Deleção das chaves originais deletadas com sucesso em: 12/11/2026 - 11:35:12",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #44076 (Resolvido)",
     "ticket_id": 44076,
     "solution_id": 42808,
@@ -33,6 +682,19 @@
       "Spdata",
       "NEA",
       "SafeWeb (Certificado Digital Hospital)"
+    ]
+  },
+  {
+    "id": "Chamado #44063 (Resolvido)",
+    "ticket_id": 44063,
+    "solution_id": 42942,
+    "title": "T.I > ST > Registro de Chamados > Alinhamento de Chamados ServiceDesk [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -63,6 +725,35 @@
     "steps": [
       "Bom dia.",
       "Realizado o ajuste via banco de dados, verifica se agora consegue emitir a conta para atualizar o valor no modulo financeiro."
+    ]
+  },
+  {
+    "id": "Chamado #44058 (Resolvido)",
+    "ticket_id": 44058,
+    "solution_id": 42819,
+    "title": "Banco de Dados e Análise de Dados > Administração de Banco de Dados > NOTA FISCAL DE COMPRA DA FARMACIA NAO INTEGRADA AO FINANCEIRO",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #44055 (Resolvido)",
+    "ticket_id": 44055,
+    "solution_id": 42812,
+    "title": "Verificar Formulário SafeId [R]",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
     ]
   },
   {
@@ -178,6 +869,37 @@
     "keywords": [],
     "steps": [
       "Reconectado a rede"
+    ]
+  },
+  {
+    "id": "Chamado #43992 (Resolvido)",
+    "ticket_id": 43992,
+    "solution_id": 42814,
+    "title": "Suporte Técnico e Service Desk > Aplicativos > Acesso ao NextCloud",
+    "category": "T.I • Solucionado por damaral",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nConstatamos que o login informado no print (laboratorio@unimedsudoestemg.coop.br) não existe no Nextcloud. O login correto é apenas **laboratorio**. Por gentileza, tente acessar novamente utilizando os dados corretos:\n\n\r\nLogin: laboratorio \nSenha: Lminas@0256\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanec",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Constatamos que o login informado no print (laboratorio@unimedsudoestemg.coop.br) não existe no Nextcloud. O login correto é apenas **laboratorio**. Por gentileza, tente acessar novamente utilizando os dados corretos:",
+      "Login: laboratorio",
+      "Senha: Lminas@0256",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43986 (Resolvido)",
+    "ticket_id": 43986,
+    "solution_id": 42938,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -367,6 +1089,21 @@
     ]
   },
   {
+    "id": "Chamado #43917 (Resolvido)",
+    "ticket_id": 43917,
+    "solution_id": 42940,
+    "title": "Atualizar HRP [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Bom dia,\n\nSistema atualizado conforme solicitado,\n\nAtenciosamente,",
+    "keywords": [],
+    "steps": [
+      "Bom dia,",
+      "Sistema atualizado conforme solicitado,",
+      "Atenciosamente,"
+    ]
+  },
+  {
     "id": "Chamado #43910 (Resolvido)",
     "ticket_id": 43910,
     "solution_id": 42718,
@@ -392,6 +1129,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43887 (Resolvido)",
+    "ticket_id": 43887,
+    "solution_id": 42986,
+    "title": "Atualizações dos BI's [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Atrasado, farei no chamado atual.",
+    "keywords": [],
+    "steps": [
+      "Atrasado, farei no chamado atual."
     ]
   },
   {
@@ -423,6 +1173,19 @@
       "Prezados(as),",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43881 (Resolvido)",
+    "ticket_id": 43881,
+    "solution_id": 42985,
+    "title": "Verificar Atualizações e Submissão da PNGPPD [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Verificando novas demandas do caderno",
+    "keywords": [],
+    "steps": [
+      "Verificando novas demandas do caderno"
     ]
   },
   {
@@ -562,6 +1325,50 @@
     ]
   },
   {
+    "id": "Chamado #43845 (Resolvido)",
+    "ticket_id": 43845,
+    "solution_id": 43008,
+    "title": "Importação tabela Brasindice [R]",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "importação realizada.",
+    "keywords": [],
+    "steps": [
+      "importação realizada."
+    ]
+  },
+  {
+    "id": "Chamado #43844 (Resolvido)",
+    "ticket_id": 43844,
+    "solution_id": 42990,
+    "title": "T.I > SI > Monitoramento e Análise de Segurança > Monitoramento de Antivírus [R]",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Verificação feita por Rodrigo",
+    "keywords": [],
+    "steps": [
+      "Verificação feita por Rodrigo"
+    ]
+  },
+  {
+    "id": "Chamado #43843 (Resolvido)",
+    "ticket_id": 43843,
+    "solution_id": 42941,
+    "title": "Atualizar Benner [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Bloqueio de acesso\nDownload da Atualizacao\nAplicação dos Pacotes\nAtualização do WES\nInstalação dos Artefatos\nliberação do acesso\n\nTudo OK",
+    "keywords": [],
+    "steps": [
+      "Bloqueio de acesso",
+      "Download da Atualizacao",
+      "Aplicação dos Pacotes",
+      "Atualização do WES",
+      "Instalação dos Artefatos",
+      "liberação do acesso"
+    ]
+  },
+  {
     "id": "Chamado #43839 (Resolvido)",
     "ticket_id": 43839,
     "solution_id": 42569,
@@ -683,6 +1490,32 @@
     ]
   },
   {
+    "id": "Chamado #43806 (Resolvido)",
+    "ticket_id": 43806,
+    "solution_id": 42989,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Integração de Resultados de Exames SPData",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Acesso foi liberado",
+    "keywords": [],
+    "steps": [
+      "Acesso foi liberado"
+    ]
+  },
+  {
+    "id": "Chamado #43804 (Resolvido)",
+    "ticket_id": 43804,
+    "solution_id": 42988,
+    "title": "Suporte Técnico e Service Desk > Sistemas Operacionais > Assinatura - Token - Dra. Joyce",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Instalado, semana passada",
+    "keywords": [],
+    "steps": [
+      "Instalado, semana passada"
+    ]
+  },
+  {
     "id": "Chamado #43803 (Resolvido)",
     "ticket_id": 43803,
     "solution_id": 42531,
@@ -746,6 +1579,21 @@
     ]
   },
   {
+    "id": "Chamado #43785 (Resolvido)",
+    "ticket_id": 43785,
+    "solution_id": 42858,
+    "title": "Infraestrutura e Redes > Atualizações e Patches > Intranet",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Prezados(as),\n\n\r\nApós as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.\n\n\r\nAtenciosamente.",
+    "keywords": [],
+    "steps": [
+      "Prezados(as),",
+      "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
+      "Atenciosamente."
+    ]
+  },
+  {
     "id": "Chamado #43783 (Resolvido)",
     "ticket_id": 43783,
     "solution_id": 42799,
@@ -760,6 +1608,32 @@
       "Nível do óleo motor: ok",
       "Nível do óleo combustível: ok",
       "Ligar o Motor 10 min. Feito"
+    ]
+  },
+  {
+    "id": "Chamado #43779 (Resolvido)",
+    "ticket_id": 43779,
+    "solution_id": 42944,
+    "title": "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
+    ]
+  },
+  {
+    "id": "Chamado #43778 (Resolvido)",
+    "ticket_id": 43778,
+    "solution_id": 42943,
+    "title": "Verificação do Backup [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -842,14 +1716,14 @@
   {
     "id": "Chamado #43748 (Resolvido)",
     "ticket_id": 43748,
-    "solution_id": 42483,
+    "solution_id": 42518,
     "title": "Suporte Técnico e Service Desk > Solicitação Diversa > Arqclient",
     "category": "T.I • Solucionado por fsilva",
     "is_ti_group": true,
-    "summary": "Envie o acesso do HOP TO DESK assim que possível",
+    "summary": "Arq client reinstalado.",
     "keywords": [],
     "steps": [
-      "Envie o acesso do HOP TO DESK assim que possível"
+      "Arq client reinstalado."
     ]
   },
   {
@@ -884,6 +1758,19 @@
       "Realizado acesso à estação de trabalho do colaborador e executadas as seguintes ações: limpeza dos arquivos temporários e reinicialização do sistema operacional. Após esses procedimentos, o sistema GED voltou a funcionar corretamente.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43723 (Resolvido)",
+    "ticket_id": 43723,
+    "solution_id": 42945,
+    "title": "T.I > ST > Registro de Chamados > Alinhamento de Chamados ServiceDesk [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -1013,6 +1900,19 @@
     ]
   },
   {
+    "id": "Chamado #43649 (Resolvido)",
+    "ticket_id": 43649,
+    "solution_id": 42946,
+    "title": "T.I > IR > Administração de Redes > Verificação Mikrotik [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
+    ]
+  },
+  {
     "id": "Chamado #43644 (Resolvido)",
     "ticket_id": 43644,
     "solution_id": 42424,
@@ -1065,6 +1965,19 @@
     "keywords": [],
     "steps": [
       "Entrei em contato com Núcleo e me confirmaram que já estabilizou, depois da Manutenção Elétrica."
+    ]
+  },
+  {
+    "id": "Chamado #43622 (Resolvido)",
+    "ticket_id": 43622,
+    "solution_id": 42987,
+    "title": "Suporte Técnico e Service Desk > Erros de Sistema > e-mail automático",
+    "category": "T.I • Solucionado por lpiantino",
+    "is_ti_group": true,
+    "summary": "Resolvido, via chamado",
+    "keywords": [],
+    "steps": [
+      "Resolvido, via chamado"
     ]
   },
   {
@@ -1599,6 +2512,19 @@
     ]
   },
   {
+    "id": "Chamado #43498 (Resolvido)",
+    "ticket_id": 43498,
+    "solution_id": 43023,
+    "title": "Suporte Técnico e Service Desk > Conectividade > Internet",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "conexão de rede foi verificada e está funcionando corretamente.",
+    "keywords": [],
+    "steps": [
+      "conexão de rede foi verificada e está funcionando corretamente."
+    ]
+  },
+  {
     "id": "Chamado #43493 (Resolvido)",
     "ticket_id": 43493,
     "solution_id": 42237,
@@ -1685,6 +2611,19 @@
       "Após alguns minutos, o serviço foi normalizado. Realizamos novo contato com a colaboradora para validar o acesso, sendo confirmado que a autenticação no sistema foi concluída com sucesso e o funcionamento restabelecido.",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43481 (Resolvido)",
+    "ticket_id": 43481,
+    "solution_id": 42947,
+    "title": "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines [R]",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Feito",
+    "keywords": [],
+    "steps": [
+      "Feito"
     ]
   },
   {
@@ -2250,6 +3189,19 @@
     ]
   },
   {
+    "id": "Chamado #43281 (Resolvido)",
+    "ticket_id": 43281,
+    "solution_id": 42964,
+    "title": "Infraestrutura e Redes > Manutenção de Computadores > Notebook da sala de cirurgia",
+    "category": "T.I • Solucionado por fsilva",
+    "is_ti_group": true,
+    "summary": "Notebook reparado",
+    "keywords": [],
+    "steps": [
+      "Notebook reparado"
+    ]
+  },
+  {
     "id": "Chamado #43277 (Resolvido)",
     "ticket_id": 43277,
     "solution_id": 42326,
@@ -2796,6 +3748,21 @@
       "Opção inclusa",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #43136 (Resolvido)",
+    "ticket_id": 43136,
+    "solution_id": 42857,
+    "title": "Desenvolvimento e Qualidade > Correção de bugs > INTEGRAÇÃO LABORATÓRIO",
+    "category": "T.I • Solucionado por mconte",
+    "is_ti_group": true,
+    "summary": "Prezado(a),\n\n\r\nO chamado foi encerrado por falta de interatividade. Caso seja necessário, por gentileza, abra uma nova requisição.\n\n\r\nAtenciosamente,",
+    "keywords": [],
+    "steps": [
+      "Prezado(a),",
+      "O chamado foi encerrado por falta de interatividade. Caso seja necessário, por gentileza, abra uma nova requisição.",
+      "Atenciosamente,"
     ]
   },
   {
@@ -4248,6 +5215,19 @@
       "Verificado, sem novos cadastros",
       "Após as tratativas, encerramos este chamado. Caso necessário, permanecemos à disposição.",
       "Atenciosamente."
+    ]
+  },
+  {
+    "id": "Chamado #42729 (Resolvido)",
+    "ticket_id": 42729,
+    "solution_id": 42950,
+    "title": "Banco de Dados e Análise de Dados > Relatórios > BAIXA SOFTWARE ANTIGOS",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Pode baixar as licenças intangíveis de software windows 7",
+    "keywords": [],
+    "steps": [
+      "Pode baixar as licenças intangíveis de software windows 7"
     ]
   },
   {
@@ -6497,6 +7477,19 @@
     ]
   },
   {
+    "id": "Chamado #42113 (Resolvido)",
+    "ticket_id": 42113,
+    "solution_id": 42948,
+    "title": "Suporte Técnico e Service Desk > Resolução de Problemas > Fechamento de lote",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Resolvido trocando via banco",
+    "keywords": [],
+    "steps": [
+      "Resolvido trocando via banco"
+    ]
+  },
+  {
     "id": "Chamado #42112 (Resolvido)",
     "ticket_id": 42112,
     "solution_id": 42278,
@@ -8602,6 +9595,19 @@
     "keywords": [],
     "steps": [
       "Programa instalado, colaboradoras instruídas e testaram replicando o conhecimento sobre."
+    ]
+  },
+  {
+    "id": "Chamado #39775 (Resolvido)",
+    "ticket_id": 39775,
+    "solution_id": 42949,
+    "title": "Suporte Técnico e Service Desk > Registro de Chamados > Impressora para a recepção do 2 andar do centro de especialidades médicas e nobreak",
+    "category": "T.I • Solucionado por rcampos",
+    "is_ti_group": true,
+    "summary": "Comprada e instalada",
+    "keywords": [],
+    "steps": [
+      "Comprada e instalada"
     ]
   },
   {
