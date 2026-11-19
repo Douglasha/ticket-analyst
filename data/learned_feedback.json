@@ -1,5 +1,198 @@
 [
   {
+    "ticket_id": 44402,
+    "title": "Acesso e Permissões  -  Izabel heloisa Duarte da silva",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "izabel",
+      "heloisa",
+      "duarte",
+      "silva",
+      "email",
+      "geral"
+    ],
+    "problem_summary": "Acesso ao email GERAL UNIMED",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à inclusão do seu e-mail institucional no grupo de distribuição **Geral Unimed** (`geral@unimedsudoestemg.coop.br`) para o setor **Auditoria** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando a inserção da sua conta no grupo correspondente no painel de administração de e-mails corporativos. Assim que a configuração for concluída e sincronizada, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-67] Acessar o painel administrativo de e-mails corporativos da cooperativa (Locaweb / Webmail Seguro / painel de mensageria).",
+      "[PB-UNI-67] Localizar a caixa postal institucional de Izabel Heloisa Duarte da Silva (Auditoria - Unimed).",
+      "[PB-UNI-67] Inserir o endereço de e-mail como membro ativo na lista de distribuição / grupo 'Geral Unimed' (geral@unimedsudoestemg.coop.br).",
+      "[PB-UNI-67] Validar a propagação e sincronização das regras de entrega de mensagens do grupo.",
+      "[PB-UNI-67] Notificar Izabel no chamado do GLPI confirmando a conclusão e colher validação nos próximos comunicados disparados."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-19T13:33:47.871Z"
+  },
+  {
+    "ticket_id": 44401,
+    "title": "Impressoras  -  Manutenção preventiva em impressora SAMSUNG M4080FX",
+    "category": "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+    "keywords": [
+      "impressoras",
+      "manutencao",
+      "preventiva",
+      "impressora",
+      "samsung",
+      "m4080fx",
+      "ontem",
+      "manha"
+    ],
+    "problem_summary": "Bom dia pessoal, ontem de manhã a nossa impressora apresentou uma mensagem de \"falha no fusor\", não queria imprimir e pediu que fosse reiniciada. Reiniciamos e ela voltou a normalidade, mas a tarde estava com mais lentidão para impressões. Gostaríamos de solicitar uma verificação preventiva antes que possa dar algum problema futuro e fiquemos sem ela rsrs.",
+    "custom_instruction": "Trata-se de manutenção preventiva na impressora Samsung M4080FX do setor de Compras que apresentou alerta de \"falha no fusor\". \nClassifique como COMPLETO. Não solicite ID de acesso remoto (HopToDesk).\nConfirme na resposta pública que a equipe de Infraestrutura e Redes fará a vistoria presencial no setor de Compras para checar a vida útil da Unidade Fusora no painel e inspecionar o equipamento para evitar paradas futuras.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à manutenção preventiva na impressora **SAMSUNG M4080FX** do setor de **Compras**.\n\nGostaríamos de esclarecer que as impressoras Samsung modelos M4020 e M4080 são equipamentos terceirizados sob contrato de locação com o fornecedor **Repromaq**. Por se tratar de uma falha física no equipamento (alerta de falha na unidade fusora ('falha no fusor') e lentidão no processamento de impressões), nossa equipe de T.I. já está abrindo o chamado técnico diretamente junto ao suporte da Repromaq para agendamento da visita do técnico credenciado para revisão e manutenção da máquina.\n\nAcompanharemos o atendimento por aqui e, assim que a Repromaq confirmar a data/horário da visita ou concluir a manutenção, atualizaremos você no chamado!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-68] Confirmar os dados do equipamento terceirizado (SAMSUNG M4080FX) localizado no setor Compras e o sintoma reportado (alerta de falha na unidade fusora ('falha no fusor') e lentidão no processamento de impressões).",
+      "[PB-UNI-68] Acessar o canal de atendimento e suporte técnico do fornecedor de outsourcing Repromaq e formalizar a abertura de chamado para manutenção preventiva/corretiva no equipamento.",
+      "[PB-UNI-68] Informar à Repromaq o relato de alerta de falha na unidade fusora ('falha no fusor') e lentidão no processamento de impressões para que o técnico credenciado traga os insumos e peças de reposição necessárias (fusor/roletes).",
+      "[PB-UNI-68] Registrar o número de protocolo do chamado da Repromaq como nota técnica interna no GLPI para acompanhamento.",
+      "[PB-UNI-68] Acompanhar a visita técnica presencial do profissional da Repromaq no setor Compras, validar os testes de impressão pós-manutenção e concluir o chamado no GLPI."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-19T11:39:54.214Z",
+    "updated_at": "2026-11-19T14:04:18.944Z"
+  },
+  {
+    "ticket_id": 44380,
+    "title": "Acesso e Permissões  -  Worley de Freitas",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "worley",
+      "freitas",
+      "incluir",
+      "e-mail",
+      "geral",
+      "pois"
+    ],
+    "problem_summary": "Favor incluir o e-mail do colaborador Worley no e-mail geral@unimedsudoestemg.coop.br , pois ele não rece os e-mails.\nAtenciosamente,\nCintia Medeiros\n35 3529-2626",
+    "custom_instruction": "Trata-se da inclusão do e-mail do colaborador Worley de Freitas dentro do grupo de e-mails: Geral Unimed (geralunimed@unimedsudoestemg.coop.br). Confirme a resposta pública que a equipe de T.I fará a inclusão do e-mail no grupo conforme solicitado.",
+    "reply_template": "Olá, {solicitante}! Tudo bem? A equipe de TI está trabalhando para incluir o e-mail do colaborador Worley de Freitas no grupo geralunimed@unimedsudoestemg.coop.br conforme solicitado. Assim que a solicitação for concluída, confirmaremos por aqui! Permanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[Diretriz do Analista] Trata-se da inclusão do e-mail do colaborador Worley de Freitas dentro do grupo de e-mails: Geral Unimed (geralunimed@unimedsudoestemg.coop.br). Confirme a resposta pública que a equipe de T.I fará a inclusão do e-mail no grupo conforme solicitado.",
+      "[PB-UNI-12] Localizar o cadastro de Worley de Freitas (CPF: 98544116006) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de E-mail Institucional para a unidade Hospital Unimed (setor Comercial).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-19T11:24:52.650Z",
+    "updated_at": "2026-11-19T12:21:30.038Z"
+  },
+  {
+    "ticket_id": 44364,
+    "title": "Resolução de Problemas  -  Alterar atendimento para urgência.",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "alterar",
+      "hrp",
+      "recomendado",
+      "frederico",
+      "via",
+      "banco",
+      "carater",
+      "eletivo"
+    ],
+    "problem_summary": "Boa Tarde!\n \nConforme recomendado pelo Frederico, por gentileza, alterar via banco, o caráter de atendimento de eletivo para urgência da senha à seguir.\nSenha: 210800316\nDesde já agradeço!\n \nAt.te.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à alteração do caráter de atendimento de **eletivo para urgência** da senha **210800316** no sistema **HRP Unimed**.\n\nGostaríamos de esclarecer que, por se tratar de uma autorização de **Unimed Intercâmbio**, a alteração direta via banco de dados em nosso sistema local **não atualiza o status na Unimed de origem do beneficiário**, onde o atendimento permaneceria registrado como eletivo. Isso causaria divergência no processo de faturamento e auditoria, gerando glosa na compensação do Intercâmbio Nacional.\n\nDessa forma, o procedimento operacional correto e homologado para esses casos é:\n1. Realizar o **cancelamento da guia/senha atual (210800316)** diretamente no sistema **HRP Unimed**;\n2. Efetuar uma **nova solicitação de autorização** já com o caráter de atendimento desejado (**Urgência**).\n\nAssim, a nova transação será devidamente registrada e transmitida com os parâmetros corretos para a Unimed do cliente. Este procedimento também está formalizado em nossa Base de Conhecimento no GLPI (**Artigo KB #94**).\n\nCaso necessite de algum apoio ou orientação adicional no cancelamento ou nova emissão, nossa equipe de T.I. permanece à total disposição!",
+    "required_info": [
+      "Realizar o cancelamento da guia/senha atual (210800316) diretamente no sistema HRP Unimed;",
+      "Efetuar uma nova solicitação de autorização já com o caráter de atendimento desejado (Urgência)."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-66] Manter a categoria do chamado no GLPI em 'T.I > ST > Resolução de Problemas' (ou reclassificar para 'T.I > ST > Dúvidas e Orientações' - ID 160), vinculando o artigo oficial da Base de Conhecimento KB #94 ('HRP Unimed > Guia de Intercâmbio Nacional: Impossibilidade de Alteração de Caráter de Atendimento via Banco e Procedimento de Cancelamento').",
+      "[PB-UNI-66] Esclarecer a Suyane Costa Batista (Autorização) que, em conformidade com as regras do Intercâmbio Nacional e mensageria PTU/WAutoriza, a alteração do caráter de atendimento não pode ser executada via banco de dados local, pois o status não é atualizado na Unimed do beneficiário (permanecendo lá como eletivo), acarretando divergência cadastral e glosa na compensação federativa.",
+      "[PB-UNI-66] Orientar o setor de Autorização a realizar o cancelamento da guia/senha 210800316 diretamente no sistema HRP Unimed e registrar uma nova solicitação de autorização já com o caráter correto (Urgência).",
+      "[PB-UNI-66] Registrar nota técnica interna no GLPI referenciando o Artigo KB #94 e posicionar o chamado para encerramento após validação do setor."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-18T18:35:24.776Z"
+  },
+  {
+    "ticket_id": 43841,
+    "title": "Parametrização de Sistemas e Tabelas  -  ATUALIZAÇÃO DE TABELAS",
+    "category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+    "keywords": [
+      "parametrizacao",
+      "tabelas",
+      "atualizacao",
+      "atualizar",
+      "tabela",
+      "tuss-",
+      "diarias",
+      "taxas"
+    ],
+    "problem_summary": "Prezados,\nBom dia !\nGentileza atualizar a tabela TUSS- DIÁRIAS, TAXAS E GASES.\nNo sistema gestor SPData.\nAtt",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à atualização da tabela **TUSS - DIÁRIAS, TAXAS E GASES** (`00952 - V - TUSS - DIÁRIAS, TAXAS E GASES`) no sistema **SGH Spdata**.\n\nGostaríamos de esclarecer que, diferentemente de outras tabelas do sistema, o **SGH Spdata não possui ferramenta ou rotina para realizar a importação automática em lote** desta tabela.\n\nPor esse motivo, a gestão e a atualização da tabela **TUSS - Diárias, Taxas e Gases (`00952`)** devem ser realizadas **manualmente pelo próprio setor de Faturamento**, acessando **item a item** diretamente na tela **Tabela de Diárias e Taxas** (`Tabelas - SPDATA SGH > Tabela de Controle: 00952 - V - TUSS - DIÁRIAS, TAXAS E GASES`):\n- Para **atualizar um item existente**, basta selecioná-lo na listagem **\"Dados da Tabela\"** (ou clicar em **\"Pesquisar\"**), ajustar os campos/valores no quadro inferior **\"Manutenção\"** (ou no botão **\"Valores\"**) e clicar em **\"Gravar\"**;\n- Para **incluir um novo código TUSS**, basta clicar no botão **\"Novo\"**, preencher os dados do procedimento no quadro **\"Manutenção\"** e clicar em **\"Gravar\"**.\n\nTambém registramos essa orientação passo a passo na Base de Conhecimento do GLPI (**Artigo KB #92**). Caso algum colaborador do setor precise de liberação de permissão nessa tela ou auxílio em alguma dúvida pontual, nossa equipe de T.I. permanece à inteira disposição!",
+    "required_info": [
+      "Para atualizar um item existente, basta selecioná-lo na listagem \"Dados da Tabela\" (ou clicar em \"Pesquisar\"), ajustar os campos/valores no quadro inferior \"Manutenção\" (ou no botão \"Valores\") e clicar em \"Gravar\";",
+      "Para incluir um novo código TUSS, basta clicar no botão \"Novo\", preencher os dados do procedimento no quadro \"Manutenção\" e clicar em \"Gravar\"."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-64] Manter a categoria do chamado no GLPI em 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), vinculando o artigo oficial da Base de Conhecimento KB #92 ('SGH - Spdata > Tabelas > Atualização Manual da Tabela TUSS - Diárias, Taxas e Gases (Tabela 00952)').",
+      "[PB-UNI-64] Esclarecer formalmente a Priscila Santos (H Faturamento) que o sistema SGH Spdata não dispõe de recurso ou rotina para importação automática de arquivos para a tabela '00952 - V - TUSS - DIÁRIAS, TAXAS E GASES'.",
+      "[PB-UNI-64] Orientar que a gestão e atualização dessa tabela devem ser feitas manualmente pelo próprio setor de Faturamento dentro do módulo 'Tabelas - SPDATA SGH' (tela 'Tabela de Diárias e Taxas' > Tabela de Controle '00952 - V - TUSS - DIÁRIAS, TAXAS E GASES'), acessando item a item no quadro 'Manutenção' (utilizando os botões 'Novo', 'Valores', 'Reajuste' e 'Gravar').",
+      "[PB-UNI-64] Colocar a equipe de T.I. à disposição caso algum colaborador do H Faturamento necessite de liberação de permissão de acesso/edição na tela 'Tabela de Diárias e Taxas' ou auxílio pontual em algum item específico."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-18T14:44:44.721Z"
+  },
+  {
+    "ticket_id": 44325,
+    "title": "Ajustes em layout/interface  -  Adicionar etiqueta no GLPI",
+    "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+    "keywords": [
+      "adicionar",
+      "etiqueta",
+      "etiquetas",
+      "glpi",
+      "adicao",
+      "andamento",
+      "aguardando"
+    ],
+    "problem_summary": "Bom dia, gostaria de solicitar a adição da etiqueta \"Em andamento\" e \"Aguardando retorno\", por gentileza.\nNotamos também que tem 2 etiquetas iguais, somente com cores diferentes, se não interferir em nada e quiserem excluir uma dessas para a lista ficar mais limpa: \n\"Aguardando contabilidade\" (esta pode manter a vermelha) e \"Aguardando entrega\" (esta pode manter a azul, por favor)",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à **manutenção e adição de etiquetas no sistema GLPI** para o setor de **Compras** (inclusão das etiquetas **\"Em andamento\"** e **\"Aguardando retorno\"** e regularização das **2 etiquetas iguais com cores diferentes**).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou o cadastro das novas etiquetas e a padronização/remoção da etiqueta duplicada no painel administrativo do sistema.\n\nAssim que as etiquetas estiverem atualizadas e disponíveis para uso no setor, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-62] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Ajustes em layout/interface'.",
+      "[PB-UNI-62] Acessar o painel administrativo do GLPI (no GLPI: Configurar > Plug-ins > Etiquetas / Tags ou Configurar > Listas suspensas > Etiquetas) com perfil Super-Admin.",
+      "[PB-UNI-62] Cadastrar as novas etiquetas solicitadas pelo setor Compras ('Em andamento' e 'Aguardando retorno'), definindo a paleta de cores de identificação visual e vinculando a visibilidade à entidade/grupo correspondente.",
+      "[PB-UNI-62] Localizar as 2 etiquetas cadastradas com o mesmo nome e cores diferentes apontadas pela solicitante, verificar os chamados vinculados, unificar os vínculos na etiqueta oficial e remover/inativar a etiqueta duplicada.",
+      "[PB-UNI-62] Validar a disponibilização da lista atualizada de etiquetas no GLPI e comunicar a conclusão a Uanne Reis (Compras) (referência histórica: Chamado #44150)."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-18T13:36:10.812Z"
+  },
+  {
+    "ticket_id": 44337,
+    "title": "Acesso e Permissões  -  Gustavo Barbosa Carvalho",
+    "category": "T.I > ST > Acesso e Permissões",
+    "keywords": [
+      "acesso",
+      "permissoes",
+      "gustavo",
+      "barbosa",
+      "carvalho",
+      "liberar",
+      "atendimentos",
+      "online"
+    ],
+    "problem_summary": "Por favor liberar o colaborador para atendimentos online, segue o CRP-04/74366",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **PEP (Colaboradores do Núcleo)** para o setor **Clinica** (Núcleo Passos).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Gustavo Barbosa Carvalho (CPF: 12772013669) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de PEP (Colaboradores do Núcleo) para a unidade Núcleo Passos (setor Clinica).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-18T12:49:20.468Z"
+  },
+  {
     "ticket_id": 44301,
     "title": "Sistemas Operacionais  -  Unificar cadastro",
     "category": "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
@@ -31,14 +224,13 @@
     "title": "Ajustes em layout/interface  -  Tags de acompanhamento de métricas no site",
     "category": "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
     "keywords": [
-      "ajustes",
-      "layout",
-      "interface",
       "tags",
       "acompanhamento",
       "metricas",
       "site",
-      "solicitamos"
+      "gtm",
+      "analytics",
+      "pixel"
     ],
     "problem_summary": "Prezados,\nSolicitamos o apoio de vocês para inserirmos as tags de acompanhamento de acessos ao site da Unimed Sudoeste de Minas para que possamos acompanhar as métricas de crescimento (Google Analytics, Search Console e Pixel da Meta).\nO melhor formato é colocarmos a tag do Google Tag Manager no código do nosso site e, posteriormente, inserir as tags dos outros serviços de monitoramento no GTM.\nVi que em nosso site já consta uma tag do GTM.\nEssa tag vem da própria Unimed Brasil ou foram vocês que instalaram?\nCaso essa conta do GTM já exista, precisaríamos do acesso para avaliar se já estão inclusas as tags do Google Analytics, do Google Search Console e da Meta.\nJá no caso que não tenhamos acesso, precisaríamos criar a conta e fazer as inserções das tags.",
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente às **tags de acompanhamento de métricas (Google Tag Manager, Google Analytics, Search Console e Pixel da Meta)** no **Site da Unimed Sudoeste de Minas**.\n\nEm consulta técnica com o desenvolvedor **Moisés Conte** e **Luiz Fernando**, confirmamos que a tag do Google Tag Manager (`GTM-KHVFL3C`) evidenciada no código-fonte atual **já vem integrada por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil)**.\n\nDessa forma, caso o setor de **Marketing** queira criar uma nova conta/contêiner próprio do GTM (ou gerar novas tags de monitoramento para a nossa singular) para inserirmos no site, basta nos enviar os novos códigos/IDs por aqui que realizamos a inclusão na plataforma!\n\nPermanecemos no aguardo e à disposição!",

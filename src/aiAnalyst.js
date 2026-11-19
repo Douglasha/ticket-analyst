@@ -1,9 +1,35 @@
+import os from "node:os";
 import { execFileSync } from "node:child_process";
 import {
   extractFormCreatorFields,
   loadPlaybooks,
   normalizeText,
 } from "./knowledgeEngine.js";
+
+export async function getOllamaRunningProcessInfo(baseUrl = "http://localhost:11434") {
+  try {
+    const cleanUrl = String(baseUrl || "http://localhost:11434").replace(/\/+$/, "");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 650);
+    const res = await fetch(`${cleanUrl}/api/ps`, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (Array.isArray(data.models) && data.models.length > 0) {
+      const active = data.models[0];
+      return {
+        model: active.name || active.model,
+        size_bytes: active.size,
+        size_mb: Math.round((active.size || 0) / (1024 * 1024)),
+        size_vram_mb: Math.round((active.size_vram || 0) / (1024 * 1024)),
+        details: active.details || {},
+      };
+    }
+    return { model: null, size_mb: 0, size_vram_mb: 0 };
+  } catch {
+    return null;
+  }
+}
 
 const IMAGE_OCR_CACHE = new Map();
 
@@ -75,9 +101,50 @@ Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil 
 - translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor. Se houver imagem(ns) ou foto(s) anexada(s), use a visão computacional para verificar o estado físico real exibido na imagem (ex: se o monitor ou computador está ligado/com LED aceso, mensagem de erro na tela, cabos soltos ou conectados) e integre essas evidências no diagnóstico técnico.
   * ATENÇÃO SOBRE 'SENHA': no setor de Autorização/Intercâmbio (sistema ERP HRP Unimed), 'senha' refere-se ao número da guia de autorização de procedimento médico/hospitalar no intercâmbio entre Unimeds (ex: 'senha não está trafegando'). NUNCA confunda com senha de login de usuário, bloqueio de conta ou rede!
 - urgency_reason: explique em 1 frase curta o impacto operacional deste chamado.
-- public_reply_draft: escreva uma mensagem cordial e objetiva pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
+- public_reply_draft: escreva uma mensagem cordial, profissional e serena pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
+  * TOM INSTITUCIONAL UNIMED: mantenha tom corporativo sóbrio, calmo, seguro e resolutivo. É TERMINANTEMENTE PROIBIDO usar linguagem melodramática, aflita ou ansiosa (como "estamos fazendo tudo o que podemos", "faremos o impossível", "pedimos desculpas pelo transtorno", "lamentamos profundamente"). Conclua com tranquilidade: "Assim que a solicitação for concluída, confirmaremos por aqui! Permanecemos à disposição!".
   * Se 'Status da Triagem' for 'COMPLETO', apenas confirme que todos os dados necessários já foram recebidos e que a equipe de T.I. já está executando a solicitação (NÃO faça perguntas e NÃO peça ID do HopToDesk).
-  * Se houver 'Perguntas de Triagem Pendentes', inclua APENAS essas perguntas em tópicos claros para o solicitante responder.`;
+  * Se houver 'Perguntas de Triagem Pendentes', inclua APENAS essas perguntas em tópicos claros para o solicitante responder.
+  * Se houver 'DIRETIVA DO ANALISTA (PRIORIDADE MÁXIMA)', siga estritamente o que foi solicitado na diretriz.`;
+
+export function sanitizeCorporateTone(rawText, firstName = "") {
+  let text = String(rawText || "").trim();
+  if (!text) return "";
+
+  const hasGreeting =
+    /^(?:ol[áa]|bom\s+dia|boa\s+tarde|prezad[oa]s?)[,\s!]/i.test(text);
+  if (!hasGreeting && text.length > 15 && firstName) {
+    text = `Olá, ${firstName}! Tudo bem?\n\n${text}`;
+  }
+
+  text = text
+    .replace(
+      /estamos fazendo tudo (?:o que podemos|ao nosso alcance)[^.!?]*[.!?]?/gi,
+      "Assim que o procedimento for concluído, confirmaremos por aqui!"
+    )
+    .replace(
+      /faremos o poss[íi]vel e o imposs[íi]vel[^.!?]*[.!?]?/gi,
+      "Nossa equipe já está cuidando da tratativa."
+    )
+    .replace(
+      /pedimos (?:sinceras )?(?:desculpas|perd[ãa]o) pelo (?:transtorno|inconveniente)(?: causado)?[^.!?]*[.!?]?/gi,
+      ""
+    )
+    .replace(/lamentamos profundamente(?: o ocorrido)?[^.!?]*[.!?]?/gi, "")
+    .replace(
+      /obrigad[oa] pela (?:sua )?(?:paci[êe]ncia|compreens[ãa]o)(?: e colabora[çc][ãa]o)?[.!?]?/gi,
+      ""
+    )
+    .replace(/\s{2,}/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  if (!/permanecemos [àa] disposi[çc][ãa]o/i.test(text)) {
+    text = `${text}\n\nPermanecemos à disposição!`;
+  }
+
+  return text;
+}
 
 export function formatPersonName(rawName) {
   if (!rawName) return "";
@@ -397,7 +464,18 @@ export class AIAnalyst {
   }
 
   async analyzeTicket(ticket, matches, customInstruction = null) {
+    const startPerf = performance.now();
+    const sysTotalMem = os.totalmem();
     const provider = this.settings.ai_provider;
+    const rawFirstName = (
+      ticket.requester_first_name ||
+      ticket.requester ||
+      "Solicitante"
+    )
+      .trim()
+      .split(/\s+/)[0];
+    const firstName =
+      rawFirstName.charAt(0).toUpperCase() + rawFirstName.slice(1).toLowerCase();
     const heuristic = this._buildSmartHeuristicAnalysis(
       ticket,
       matches,
@@ -413,6 +491,7 @@ export class AIAnalyst {
 
     let llmData = null;
     let providerLabel = "";
+    let isFastpathHeuristic = false;
 
     const imageDocs = (ticket.documents || []).filter(
       (d) => d.is_image && d.base64
@@ -435,14 +514,17 @@ export class AIAnalyst {
         const visionModel = (this.settings.ollama_vision_model || "qwen2.5vl:3b").trim();
         if (heuristic.has_custom_reply && !customInstruction) {
           llmData = heuristic;
+          isFastpathHeuristic = true;
+          providerLabel = `Copiloto Heurístico Instantâneo (${this.settings.ollama_model || "qwen2.5:3b"})`;
         } else {
           llmData = await this._callOllama(userPrompt, rawBase64Images, visionModel);
+          providerLabel = hasImages
+            ? `Ollama Multimodal (${visionModel})`
+            : `Ollama Local (${this.settings.ollama_model})`;
         }
-        providerLabel = hasImages
-          ? `Ollama Multimodal (${visionModel})`
-          : `Ollama Local (${this.settings.ollama_model})`;
       }
     } catch (err) {
+      isFastpathHeuristic = true;
       providerLabel = `Motor Inteligente 3 Camadas (Fallback • ${String(err.message).slice(0, 55)})`;
     }
 
@@ -452,7 +534,13 @@ export class AIAnalyst {
       }
       llmData = heuristic;
     } else {
+      const customSaysComplete =
+        customInstruction &&
+        /\b(completo|n[ãa]o\s+(pe[çc]a|pergunte|solicite|questione|cobre)|sem\s+perguntas?)\b/i.test(
+          customInstruction
+        );
       const customWantsQuestions =
+        !customSaysComplete &&
         customInstruction &&
         /\b(pe[çc]a|pergunte|perguntar|solicite|solicitar|cobrar|questionar|qual\b|quais\b)\b/i.test(
           customInstruction
@@ -477,7 +565,8 @@ export class AIAnalyst {
           : heuristic.urgency_reason;
 
       const shouldNotAskQuestions =
-        heuristic.sufficiency_status === "completo" && !customWantsQuestions;
+        (heuristic.sufficiency_status === "completo" || customSaysComplete) &&
+        !customWantsQuestions;
       const llmReplyHasUnwantedQuestions =
         shouldNotAskQuestions &&
         (/\?|hoptodesk|responda [àa]s perguntas|por favor,\s*verifique/i.test(
@@ -487,20 +576,20 @@ export class AIAnalyst {
             (llmData.public_reply_draft || "").replace(/ol[áa],\s*[^?!]+\?\s*/i, "")
           ));
 
-      const hasProperGreeting = /^ol[áa]\b/i.test(
-        (llmData.public_reply_draft || "").trim()
+      let candidateReply = sanitizeCorporateTone(
+        llmData.public_reply_draft || "",
+        firstName
       );
 
       const validPublicReply =
         !useSpecializedIntent &&
-        llmData.public_reply_draft &&
-        llmData.public_reply_draft.length > 25 &&
-        hasProperGreeting &&
+        candidateReply &&
+        candidateReply.length > 25 &&
         !llmReplyHasUnwantedQuestions &&
         !/<PrimeiroNome>|o que falta para o atendimento\?|fornecemos a id/i.test(
-          llmData.public_reply_draft
+          candidateReply
         )
-          ? llmData.public_reply_draft
+          ? candidateReply
           : heuristic.public_reply_draft;
 
       llmData.translated_intent = validIntent;
@@ -509,8 +598,12 @@ export class AIAnalyst {
       llmData.detected_domain = heuristic.detected_domain;
       llmData.suggested_category = heuristic.suggested_category || ticket.category;
       llmData.real_urgency = heuristic.real_urgency;
-      llmData.sufficiency_status = heuristic.sufficiency_status;
-      llmData.missing_info = heuristic.missing_info;
+      llmData.sufficiency_status = customSaysComplete
+        ? "completo"
+        : customWantsQuestions
+        ? "incompleto"
+        : heuristic.sufficiency_status;
+      llmData.missing_info = customSaysComplete ? [] : heuristic.missing_info;
       llmData.primary_knowledge_source = heuristic.primary_knowledge_source;
       llmData.resolution_steps = heuristic.resolution_steps;
 
@@ -544,6 +637,62 @@ export class AIAnalyst {
       "0"
     )}:${String(now.getMinutes()).padStart(2, "0")}`;
 
+    const durationMs = Math.round(performance.now() - startPerf);
+    const sysFreeAfter = os.freemem();
+    const sysUsedGb = Number(((sysTotalMem - sysFreeAfter) / 1e9).toFixed(1));
+    const sysTotalGb = Number((sysTotalMem / 1e9).toFixed(1));
+    const sysUsedPct = Math.round(((sysTotalMem - sysFreeAfter) / sysTotalMem) * 100);
+    const nodeRssMb = Math.round(process.memoryUsage().rss / (1024 * 1024));
+
+    let ollamaInfo = null;
+    if (provider === "ollama") {
+      ollamaInfo = await getOllamaRunningProcessInfo(this.settings.ollama_base_url);
+    }
+
+    const usage = llmData?._usage || {
+      prompt_tokens: Math.round(userPrompt.length / 3.8),
+      completion_tokens: Math.round((llmData?.public_reply_draft || "").length / 3.8),
+      total_tokens: Math.round((userPrompt.length + (llmData?.public_reply_draft || "").length) / 3.8),
+    };
+
+    let formattedBadge = "";
+    if (isFastpathHeuristic) {
+      formattedBadge = `⚡ Copiloto Instantâneo • ${nodeRssMb} MB • ${durationMs}ms`;
+    } else if (provider === "ollama") {
+      const memStr = ollamaInfo?.size_mb ? `${ollamaInfo.size_mb} MB` : `${nodeRssMb} MB`;
+      formattedBadge = `⚡ Ollama • ${memStr} • ${(durationMs / 1000).toFixed(1)}s`;
+    } else if (provider === "gemini") {
+      formattedBadge = `☁️ Gemini • ${usage.total_tokens || 0} tok • ${(durationMs / 1000).toFixed(1)}s`;
+    } else if (provider === "openai") {
+      formattedBadge = `☁️ OpenAI • ${usage.total_tokens || 0} tok • ${(durationMs / 1000).toFixed(1)}s`;
+    } else {
+      formattedBadge = `⚡ Motor Heurístico • ${nodeRssMb} MB • ${durationMs}ms`;
+    }
+
+    const telemetry = {
+      duration_ms: durationMs,
+      execution_mode: isFastpathHeuristic ? "heuristic_instant" : "llm_inference",
+      provider_used: providerLabel,
+      provider_type: isFastpathHeuristic ? "heuristic" : provider,
+      model:
+        provider === "ollama"
+          ? (hasImages ? (this.settings.ollama_vision_model || "qwen2.5vl:3b") : (this.settings.ollama_model || "qwen2.5:3b"))
+          : provider === "gemini"
+          ? (this.settings.gemini_model || "gemini-2.5-flash")
+          : (this.settings.openai_model || "gpt-4o-mini"),
+      system_ram_used_gb: sysUsedGb,
+      system_ram_total_gb: sysTotalGb,
+      system_ram_pct: sysUsedPct,
+      node_rss_mb: nodeRssMb,
+      ollama_loaded: Boolean(ollamaInfo?.model),
+      ollama_model_name: ollamaInfo?.model || null,
+      ollama_model_ram_mb: ollamaInfo ? Math.max(0, ollamaInfo.size_mb - (ollamaInfo.size_vram_mb || 0)) : null,
+      ollama_model_vram_mb: ollamaInfo?.size_vram_mb || null,
+      ollama_model_total_mb: ollamaInfo?.size_mb || null,
+      tokens: usage,
+      formatted_badge: formattedBadge,
+    };
+
     return {
       ticket_id: ticket.id,
       analyzed_at: nowStr,
@@ -564,6 +713,7 @@ export class AIAnalyst {
       public_reply_draft: llmData.public_reply_draft || heuristic.public_reply_draft,
       has_image_analysis: hasImages,
       analyzed_images_count: rawBase64Images.length,
+      telemetry,
     };
   }
 
@@ -608,7 +758,13 @@ export class AIAnalyst {
     const data = await res.json();
     const text =
       data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
-    return extractJsonObject(text);
+    const parsed = extractJsonObject(text);
+    parsed._usage = {
+      prompt_tokens: data?.usageMetadata?.promptTokenCount || 0,
+      completion_tokens: data?.usageMetadata?.candidatesTokenCount || 0,
+      total_tokens: data?.usageMetadata?.totalTokenCount || 0,
+    };
+    return parsed;
   }
 
   async _callOpenAI(userPrompt, images = []) {
@@ -649,7 +805,13 @@ export class AIAnalyst {
     }
     const data = await res.json();
     const text = data?.choices?.[0]?.message?.content || "{}";
-    return extractJsonObject(text);
+    const parsed = extractJsonObject(text);
+    parsed._usage = {
+      prompt_tokens: data?.usage?.prompt_tokens || 0,
+      completion_tokens: data?.usage?.completion_tokens || 0,
+      total_tokens: data?.usage?.total_tokens || 0,
+    };
+    return parsed;
   }
 
   async _callOllama(userPrompt, images = [], visionModel = null) {
@@ -717,7 +879,14 @@ export class AIAnalyst {
     }
     const data = await res.json();
     const text = data?.message?.content || "{}";
-    return extractJsonObject(text);
+    const parsed = extractJsonObject(text);
+    parsed._usage = {
+      prompt_tokens: data?.prompt_eval_count || 0,
+      completion_tokens: data?.eval_count || 0,
+      total_tokens: (data?.prompt_eval_count || 0) + (data?.eval_count || 0),
+      total_duration_ms: data?.total_duration ? Math.round(data.total_duration / 1e6) : null,
+    };
+    return parsed;
   }
 
   _buildSmartHeuristicAnalysis(ticket, matches, customInstruction = null) {
@@ -737,11 +906,11 @@ export class AIAnalyst {
       rawFirstName.charAt(0).toUpperCase() + rawFirstName.slice(1).toLowerCase();
     const formattedRequester = formatPersonName(ticket.requester || firstName);
 
-    const isMale = /^(juliano|dener|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+    const isMale = /^(renan|juliano|dener|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|luiz|moises|carlos|eduardo|henrique|guilherme|danilo|alexandre|leandro|sergio|antonio|jose|paulo|fabio|marcelo|ricardo|adriano|vinicius|daniel|samuel|igor)\b/i.test(
       firstName
     );
     const isFemale =
-      /^(isabel|isabela|rosy|edilea|edil[eé]a|joyce|suzelei|raquel|beatriz|iris|[ií]ris|ester|esther|ruth|miriam|lilian|l[ií]lian|karen|karine|kelly|kelli|nicole|stefany|stephanie|thamires|tamires|thais|tha[ií]s|lais|la[ií]s|elis|el[ií]s|in[eê]s|ines|thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
+      /^(uanne|isabel|isabela|rosy|edilea|edil[eé]a|joyce|suzelei|raquel|beatriz|iris|[ií]ris|ester|esther|ruth|miriam|lilian|l[ií]lian|karen|karine|kelly|kelli|nicole|stefany|stephanie|thamires|tamires|thais|tha[ií]s|lais|la[ií]s|elis|el[ií]s|in[eê]s|ines|thatiana|tatiana|ana|leticia|letícia|julia|júlia|valeria|valéria|maria|paula|dalete|liliane|vanessa|aline|amanda|jessica|jéssica|angela|ângela|camila|carolina|fernanda|patricia|patrícia|renata|simone|juliana|gabriela|bianca|bruna|daniela|sabrina|priscila|larissa|marina|mariana|luciana|claudia|cláudia|viviane|vivian|daiane|cristiane|giselle|gisele|michele|michelle)\b/i.test(
         firstName
       ) || /a$/i.test(firstName);
     const solPrefix = isMale ? "O solicitante" : (isFemale ? "A solicitante" : "O(a) solicitante");
@@ -1527,6 +1696,385 @@ export class AIAnalyst {
         `Assim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
+      (/\b(samsung\s+m?4080|m4080|m4080fx|samsung\s+m?4020|m4020|m4020nd|samsung\s+4080|samsung\s+4020)\b/i.test(
+        normAll
+      ) &&
+      !/\b(troca\s+de\s+toner|trocar\s+(?:o\s+)?toner|trocado\s+(?:o\s+)?toner|acabou\s+o\s+toner|preciso\s+de\s+toner|solicito\s+toner|toner\s+vazio|refil|tinta)\b/i.test(
+        normAll
+      ) &&
+      !/\b(scan\s+to\s+e-?mail|digitaliza[cç][aã]o\s+para\s+e-?mail|cat[aá]logo\s+de\s+endere[cç]os?)\b/i.test(
+        normAll
+      ) &&
+      !/\b(precisamos\s+de\s+uma?\s+impressora|instala[cç][aã]o\s+de\s+nova\s+impressora|disponibilizar\s+impressora)\b/i.test(
+        normAll
+      ) &&
+      (/\b(fusor|falha\s+(?:no\s+)?fusor|manuten[cç][aã]o|preventiva|corretiva|verifica[cç][aã]o\s+preventiva|defeito|conserto|reparo|pe[çc]a|substitui[cç][aã]o\s+de\s+pe[çc]a|barulho|aquecimento|lenta|lentid[aã]o|repromaq|terceirizad|assist[eê]ncia)\b/i.test(
+        normAll
+      ) ||
+        normAll.includes("falha no fusor") ||
+        normAll.includes("manutencao preventiva"))) ||
+      (/\brepromaq\b/i.test(normAll) &&
+        /\b(impressora|manuten[cç][aã]o|suporte|chamado)\b/i.test(normAll))
+    ) {
+      const printerModel =
+        formFields.ativo ||
+        (/\bm4080(?:fx)?\b/i.test(normAll)
+          ? "SAMSUNG M4080FX"
+          : /\bm4020(?:nd)?\b/i.test(normAll)
+          ? "SAMSUNG M4020ND"
+          : "Samsung M4080 / M4020");
+      const printerVendor = "Repromaq";
+
+      const mentionsFusor = /\bfusor\b/i.test(normAll);
+      const isPreventive = /\bpreventiva\b/i.test(normAll);
+      const symptomDesc = mentionsFusor
+        ? "alerta de falha na unidade fusora ('falha no fusor') e lentidão no processamento de impressões"
+        : isPreventive
+        ? "necessidade de revisão e manutenção preventiva no equipamento"
+        : "falha física/mecânica no equipamento demandando intervenção técnica especializada";
+
+      detectedDomain =
+        "Infraestrutura e Redes (Outsourcing de Impressão / Suporte a Hardware)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Impressoras")
+          ? ticket.category
+          : "T.I > IR > Suporte a Hardware > Periféricos > Impressoras";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        `Manutenção preventiva/corretiva na impressora locada ${printerModel} (${sectorName}) via fornecedor terceirizado Repromaq para prevenir indisponibilidade operacional.`;
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita ${isPreventive ? "manutenção preventiva" : "manutenção técnica"} para a impressora **${printerModel}** (${sectorName}), ` +
+        `relatando ${symptomDesc}. ` +
+        `Por se tratar de equipamento sob contrato de outsourcing/locação com o fornecedor terceirizado **${printerVendor}**, qualquer falha mecânica, defeito ou revisão de peças (que não seja reposição de toner) compete à assistência técnica credenciada da Repromaq (com acionamento e acompanhamento pela equipe de T.I.). ` +
+        `Todos os dados necessários (modelo, setor e sintoma) constam informados no chamado.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à manutenção preventiva na impressora **${printerModel}** do setor de **${sectorName}**.\n\n` +
+        `Gostaríamos de esclarecer que as impressoras Samsung modelos M4020 e M4080 são equipamentos terceirizados sob contrato de locação com o fornecedor **${printerVendor}**. ` +
+        `Por se tratar de uma falha física no equipamento (${symptomDesc}), nossa equipe de T.I. já está abrindo o chamado técnico diretamente junto ao suporte da ${printerVendor} para agendamento da visita do técnico credenciado para revisão e manutenção da máquina.\n\n` +
+        `Acompanharemos o atendimento por aqui e, assim que a ${printerVendor} confirmar a data/horário da visita ou concluir a manutenção, atualizaremos você no chamado!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-68] Confirmar os dados do equipamento terceirizado (${printerModel}) localizado no setor ${sectorName} e o sintoma reportado (${symptomDesc}).`,
+        `[PB-UNI-68] Acessar o canal de atendimento e suporte técnico do fornecedor de outsourcing ${printerVendor} e formalizar a abertura de chamado para manutenção preventiva/corretiva no equipamento.`,
+        `[PB-UNI-68] Informar à ${printerVendor} o relato de ${symptomDesc} para que o técnico credenciado traga os insumos e peças de reposição necessárias (fusor/roletes).`,
+        `[PB-UNI-68] Registrar o número de protocolo do chamado da ${printerVendor} como nota técnica interna no GLPI para acompanhamento.`,
+        `[PB-UNI-68] Acompanhar a visita técnica presencial do profissional da ${printerVendor} no setor ${sectorName}, validar os testes de impressão pós-manutenção e concluir o chamado no GLPI.`
+      ];
+    } else if (
+      /\b(geral@unimedsudoestemg\.coop\.br|geralunimed@unimedsudoestemg\.coop\.br)\b/i.test(
+        normAll
+      ) ||
+      (/\b(e-?mail\s+geral|geral\s+unimed|geralunimed|e-?mail\s+institucional|e-?mails?)\b/i.test(
+        normAll
+      ) &&
+        /\b(geral|geral\s+unimed|grupo|grupos|lista|listas)\b/i.test(normAll) &&
+        /\b(incluir|inclus[aã]o|adicionar|adi[cç][aã]o|inserir|inser[çc][aã]o|acesso|recebe|recebendo)\b/i.test(
+          normAll
+        )) ||
+      /\b(acesso\s+ao\s+e-?mail\s+geral|acesso\s+ao\s+e-?mail\s+geral\s+unimed)\b/i.test(
+        normAll
+      ) ||
+      (/\b(grupo|grupos|lista|listas)\s+(?:de\s+)?(?:e-?mails?|distribui[çc][ãa]o)\b/i.test(
+        normAll
+      ) &&
+        /\b(incluir|inclus[aã]o|adicionar|adi[cç][aã]o|inserir|inser[çc][aã]o|cadastrar)\b/i.test(
+          normAll
+        ))
+    ) {
+      detectedDomain =
+        "Acessos, Permissões e Contas (Gestão de E-mails Corporativos / Grupos de Distribuição)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Acesso e Permissões")
+          ? ticket.category
+          : "T.I > ST > Acesso e Permissões > Criação de Usuários";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Inclusão de colaborador em grupo/lista de distribuição de e-mails corporativos (Geral Unimed) para recebimento de comunicados institucionais.";
+
+      const rawBeneficiary =
+        formFields.nomeColaborador ||
+        formFields.nome ||
+        "";
+      const beneficiaryFormatted = rawBeneficiary
+        ? formatPersonName(rawBeneficiary)
+        : formattedRequester;
+
+      const rawRequesterFirst = firstName.toLowerCase();
+      const rawBenFirst = beneficiaryFormatted.split(/\s+/)[0].toLowerCase();
+      const isSelf =
+        !rawBeneficiary ||
+        rawRequesterFirst === rawBenFirst ||
+        normalizeText(ticket.requester || "").includes(normalizeText(rawBenFirst));
+
+      const targetSector =
+        formFields.setorAlvo ||
+        formFields.setor ||
+        ticket.requester_department ||
+        sectorName ||
+        "setor solicitante";
+      const targetUnit = formFields.unidade || "Unimed";
+
+      const groupName = "Geral Unimed";
+      const groupEmail = "geral@unimedsudoestemg.coop.br";
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      if (isSelf) {
+        translatedIntent =
+          `${solPrefix} **${formattedRequester}** (${sectorName}) solicita a inclusão do seu e-mail institucional no grupo de distribuição **${groupName}** (\`${groupEmail}\`) ` +
+          `para o setor **${targetSector}** (${targetUnit}). ` +
+          `Todos os dados cadastrais (Nome: ${beneficiaryFormatted}${formFields.cpf ? `, CPF: ${formFields.cpf}` : ""}) e o grupo institucional constam devidamente informados no chamado.`;
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à inclusão do seu e-mail institucional no grupo de distribuição **${groupName}** (\`${groupEmail}\`) para o setor **${targetSector}** (${targetUnit}).\n\n` +
+          `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando a inserção da sua conta no grupo correspondente no painel de administração de e-mails corporativos. ` +
+          `Assim que a configuração for concluída e sincronizada, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      } else {
+        translatedIntent =
+          `${solPrefix} **${formattedRequester}** (${sectorName}) solicita a inclusão do e-mail corporativo do colaborador **${beneficiaryFormatted}**` +
+          (formFields.cpf ? ` (CPF: ${formFields.cpf})` : "") +
+          ` no grupo de distribuição **${groupName}** (\`${groupEmail}\`) para o setor **${targetSector}** (${targetUnit}). ` +
+          `Todos os dados cadastrais e o grupo institucional constam devidamente informados no chamado.`;
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à inclusão do e-mail corporativo do colaborador **${beneficiaryFormatted}** no grupo de distribuição **${groupName}** (\`${groupEmail}\`) para o setor **${targetSector}** (${targetUnit}).\n\n` +
+          `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já está realizando a inserção da conta no grupo correspondente no painel de administração de e-mails corporativos. ` +
+          `Assim que a configuração for concluída e sincronizada, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
+      }
+
+      customResolutionSteps = [
+        `[PB-UNI-67] Acessar o painel administrativo de e-mails corporativos da cooperativa (Locaweb / Webmail Seguro / painel de mensageria).`,
+        `[PB-UNI-67] Localizar a caixa postal institucional de ${beneficiaryFormatted} (${targetSector} - ${targetUnit}).`,
+        `[PB-UNI-67] Inserir o endereço de e-mail como membro ativo na lista de distribuição / grupo '${groupName}' (${groupEmail}).`,
+        `[PB-UNI-67] Validar a propagação e sincronização das regras de entrega de mensagens do grupo.`,
+        `[PB-UNI-67] Notificar ${isSelf ? firstName : formattedRequester} no chamado do GLPI confirmando a conclusão e colher validação nos próximos comunicados disparados.`
+      ];
+    } else if (
+      (/\b(alterar\s+(?:atendimento|car[aá]ter|guia|senha|o\s+car[aá]ter)|car[aá]ter\s+de\s+atendimento|eletivo\s+para\s+urg[eê]ncia|urg[eê]ncia\s+para\s+eletivo)\b/i.test(
+        normAll
+      ) &&
+      /\b(eletiv[oa]|urg[eê]ncia)\b/i.test(normAll) &&
+      (/\b(via\s+banco|no\s+banco|hrp|senha|guia|interc[aâ]mbio|autoriza[çc][ãa]o)\b/i.test(
+        normAll
+      ) ||
+        normAll.includes("210800316"))) ||
+      (/\b(interc[aâ]mbio|unimed\s+interc[aâ]mbio)\b/i.test(normAll) &&
+        /\b(eletiv[oa]|urg[eê]ncia)\b/i.test(normAll) &&
+        /\b(alterar|mudar|converter|cancelar|cancelamento)\b/i.test(normAll))
+    ) {
+      const sectorName =
+        (formFields.setor && !formFields.setor.startsWith("1)"))
+          ? formFields.setor
+          : ticket.requester_department || "Autorização";
+      const isMale =
+        /^(juliano|dener|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|moises|luiz|renan)\b/i.test(
+          firstName
+        );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      const senhaMatch = normAll.match(/\b(21\d{7}|\d{9})\b/);
+      const senhaNum = senhaMatch ? senhaMatch[1] : "210800316";
+
+      detectedDomain =
+        "Sistemas Internos / ERP HRP Unimed (Autorização de Guias / Intercâmbio Nacional)";
+      suggestedCategory = "T.I > ST > Resolução de Problemas";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason =
+        `Solicitação do setor de ${sectorName} para alteração via banco de dados do caráter de atendimento de eletivo para urgência da guia/senha ${senhaNum} no ERP HRP Unimed. Trata-se de guia de beneficiário de Intercâmbio Nacional, na qual a alteração via banco local não reflete na Unimed de origem (onde permanece como eletiva). O procedimento operacional homologado é o cancelamento da guia no HRP Unimed e emissão de nova solicitação como urgência (documentado na Base de Conhecimento oficial KB #94).`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (**${sectorName}**) solicita à equipe de T.I. a alteração via banco de dados do caráter de atendimento de **eletivo** para **urgência** da senha **${senhaNum}** no sistema **ERP HRP Unimed** (com recomendação citada de Frederico Roosevelt). ` +
+        `Por se tratar de uma guia vinculada a beneficiário de **Unimed Intercâmbio (Intercâmbio Nacional)**, a alteração no banco de dados local **não replica nem atualiza o status na Unimed de origem do cliente** (onde a autorização permanece registrada e homologada como eletiva), gerando divergência cadastral e risco de glosa na câmara de compensação. ` +
+        `O procedimento operacional correto e homologado consiste no **cancelamento da guia no sistema HRP Unimed** e na **emissão de uma nova solicitação de autorização** com o caráter de atendimento desejado (**Urgência**), conforme formalizado no **Artigo KB #94** da Base de Conhecimento do GLPI.` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-66] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ou reclassificar para 'T.I > ST > Dúvidas e Orientações' - ID 160), vinculando o artigo oficial da Base de Conhecimento KB #94 ('HRP Unimed > Guia de Intercâmbio Nacional: Impossibilidade de Alteração de Caráter de Atendimento via Banco e Procedimento de Cancelamento').`,
+        `[PB-UNI-66] Esclarecer a ${ticket.requester} (${sectorName}) que, em conformidade com as regras do Intercâmbio Nacional e mensageria PTU/WAutoriza, a alteração do caráter de atendimento não pode ser executada via banco de dados local, pois o status não é atualizado na Unimed do beneficiário (permanecendo lá como eletivo), acarretando divergência cadastral e glosa na compensação federativa.`,
+        `[PB-UNI-66] Orientar o setor de ${sectorName} a realizar o cancelamento da guia/senha ${senhaNum} diretamente no sistema HRP Unimed e registrar uma nova solicitação de autorização já com o caráter correto (Urgência).`,
+        `[PB-UNI-66] Registrar nota técnica interna no GLPI referenciando o Artigo KB #94 e posicionar o chamado para encerramento após validação do setor.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à alteração do caráter de atendimento de **eletivo para urgência** da senha **${senhaNum}** no sistema **HRP Unimed**.\n\n` +
+        `Gostaríamos de esclarecer que, por se tratar de uma autorização de **Unimed Intercâmbio**, a alteração direta via banco de dados em nosso sistema local **não atualiza o status na Unimed de origem do beneficiário**, onde o atendimento permaneceria registrado como eletivo. Isso causaria divergência no processo de faturamento e auditoria, gerando glosa na compensação do Intercâmbio Nacional.\n\n` +
+        `Dessa forma, o procedimento operacional correto e homologado para esses casos é:\n` +
+        `1. Realizar o **cancelamento da guia/senha atual (${senhaNum})** diretamente no sistema **HRP Unimed**;\n` +
+        `2. Efetuar uma **nova solicitação de autorização** já com o caráter de atendimento desejado (**Urgência**).\n\n` +
+        `Assim, a nova transação será devidamente registrada e transmitida com os parâmetros corretos para a Unimed do cliente. Este procedimento também está formalizado em nossa Base de Conhecimento no GLPI (**Artigo KB #94**).\n\n` +
+        `Caso necessite de algum apoio ou orientação adicional no cancelamento ou nova emissão, nossa equipe de T.I. permanece à total disposição!`;
+    } else if (
+      (/\b(duplicar\s+etiquetas?|etiquetas?\s+de\s+oncologia|etiquetas?\s+para\s+r[oó]tulos?|desenvolvimento\s+de\s+etiquetas?)\b/i.test(
+        normAll
+      ) ||
+        (/\betiquetas?\b/i.test(normAll) &&
+          /\b(oncologia|prontu[aá]rio|r[oó]tulos?|campo\s+.*?\s+em\s+aberto|duplicar\s+(?:a\s+|o\s+)?(?:etiqueta|layout|modelo))\b/i.test(
+            normAll
+          ))) &&
+      !/\b(glpi|controle\s+de\s+contas|cores?\s+diferentes?|aguardando\s+retorno|em\s+andamento)\b/i.test(
+        normAll
+      )
+    ) {
+      const mentionsOpenProntuario =
+        /\b(campo\s+prontu[aá]rio\s+em\s+aberto|prontu[aá]rio\s+em\s+aberto)\b/i.test(
+          normAll
+        );
+      const mentionsOncologiaLabel = /\betiquetas?\s+de\s+oncologia\b/i.test(
+        normAll
+      );
+      const labelTarget = mentionsOncologiaLabel
+        ? "modelo de Etiqueta de Oncologia"
+        : "modelo de Etiqueta / Rótulo";
+      const fieldSpec = mentionsOpenProntuario
+        ? "deixando o **campo \"Prontuário\" em aberto (editável)**"
+        : "aplicando os ajustes de layout e campos solicitados";
+
+      detectedDomain =
+        "Desenvolvimento de Software / Aplicações Internas (Sistema de Etiquetas e Rótulos — Farmácia / Oncologia)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Desenvolvimento")
+          ? ticket.category
+          : "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason = `Demanda evolutiva do setor ${sectorName} para duplicação e parametrização de layout de etiqueta (${mentionsOncologiaLabel ? "Etiqueta de Oncologia com campo Prontuário em aberto" : "ajuste de campos de etiqueta"}) pela equipe de Desenvolvimento.`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 123).*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (**${sectorName}**) solicita à equipe de Desenvolvimento a **duplicação do ${labelTarget}**, ${fieldSpec} para preenchimento manual pela equipe da Farmácia/Oncologia. ` +
+        `Todas as especificações necessárias para o ajuste já constam informadas no chamado (direcionado ao desenvolvedor **Moisés Conte — \`mconte\`**, conforme histórico do Chamado #37471).` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-65] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 123), atribuído ao grupo 'T.I > DV (Desenvolvimento)' (Moisés Conte - mconte).`,
+        `[PB-UNI-65] Acessar o código-fonte / gerenciador de templates da aplicação interna de Etiquetas e Rótulos utilizada pelo setor ${sectorName} (referência histórica: Chamado #37471).`,
+        mentionsOpenProntuario
+          ? `[PB-UNI-65] Duplicar o template atual da 'Etiqueta de Oncologia' e parametrizar na cópia o campo 'Prontuário' em aberto (campo editável / livre para digitação manual).`
+          : `[PB-UNI-65] Duplicar/ajustar o modelo de etiqueta conforme a especificação de campos solicitada pelo setor ${sectorName}.`,
+        `[PB-UNI-65] Homologar a geração e o layout de impressão da nova etiqueta duplicada e publicar a atualização em produção.`,
+        `[PB-UNI-65] Notificar o solicitante ${ticket.requester} (${sectorName}) no chamado do GLPI confirmando a disponibilização da nova etiqueta.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **duplicação do ${labelTarget}**, ${fieldSpec}, para atendimento às rotinas do setor **${sectorName}**.\n\n` +
+        `A especificação já foi validada na triagem e encaminhada para a nossa equipe de **T.I. / Desenvolvimento (Moisés Conte)** realizar a criação do novo layout com o campo editável no sistema de etiquetas.\n\n` +
+        `Assim que a nova opção de etiqueta estiver publicada e disponível para uso no setor, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      (/\b(adi[cç][aã]o\s+d[ae]s?\s+etiquetas?|adicionar\s+etiquetas?|cria[cç][aã]o\s+d[ae]s?\s+etiquetas?|criar\s+etiquetas?|manuten[cç][aã]o\s+d[ae]s?\s+etiquetas?|etiquetas?\s+iguais|\d+\s+etiquetas?\s+iguais|etiquetas?\s+duplicadas?)\b/i.test(
+        normAll
+      ) ||
+        (/\betiquetas?\b/i.test(normAll) &&
+          (/\b(cores?\s+diferentes?|em\s+andamento|aguardando\s+retorno|aguardando\s+farm[aá]cia|aguardando\s+nas|glpi|controle\s+de\s+contas)\b/i.test(
+            normAll
+          ) ||
+            ticket.category.includes("Desenvolvimento")) &&
+          !/\b(imprimir|impress[aã]o|impressora|zebra|zebradesigner|elgin|argox|ribbon|atalho|[aá]rea\s+de\s+trabalho)\b/i.test(
+            normAll
+          )))
+    ) {
+      const descText = formFields.descricao || ticket.content || "";
+      const quotedTags = [
+        ...new Set(
+          [...descText.matchAll(/["“”]([^"“”]{2,40})["“”]/g)].map((m) =>
+            m[1].trim()
+          )
+        ),
+      ];
+      const tagsLabel =
+        quotedTags.length > 0
+          ? quotedTags.map((t) => `**"${t}"**`).join(" e ")
+          : "solicitadas";
+      const mentionsDuplicateColors =
+        /\b(2\s+etiquetas?\s+iguais|duas\s+etiquetas?\s+iguais|etiquetas?\s+iguais|cores?\s+diferentes?|duplicad)\b/i.test(
+          normAll
+        );
+      const sysTarget = /\bcontrole\s+de\s+contas\b/i.test(normAll)
+        ? "Controle de Contas"
+        : "GLPI";
+
+      detectedDomain =
+        "Desenvolvimento / Administração do GLPI e Sistemas Internos (Gestão de Etiquetas / Tags)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Desenvolvimento")
+          ? ticket.category
+          : "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason = `Criação e manutenção de etiquetas (tags de status) no sistema ${sysTarget} para organização e acompanhamento dos chamados do setor (${sectorName}).`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **manutenção e adição de etiquetas (tags de acompanhamento)** no sistema **${sysTarget}**, especificamente a inclusão das etiquetas ${tagsLabel}` +
+        (mentionsDuplicateColors
+          ? ` e a regularização/unificação de **2 etiquetas cadastradas com o mesmo nome e cores diferentes**`
+          : "") +
+        `. Todas as especificações já constam descritas no chamado.` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-62] Manter a categoria do chamado no GLPI em '${suggestedCategory}'.`,
+        `[PB-UNI-62] Acessar o painel administrativo do ${sysTarget} (no GLPI: Configurar > Plug-ins > Etiquetas / Tags ou Configurar > Listas suspensas > Etiquetas) com perfil Super-Admin.`,
+        `[PB-UNI-62] Cadastrar as novas etiquetas solicitadas pelo setor ${sectorName} (${quotedTags.length > 0 ? quotedTags.map((t) => `'${t}'`).join(" e ") : "conforme descrito"}), definindo a paleta de cores de identificação visual e vinculando a visibilidade à entidade/grupo correspondente.`,
+        mentionsDuplicateColors
+          ? `[PB-UNI-62] Localizar as 2 etiquetas cadastradas com o mesmo nome e cores diferentes apontadas pela solicitante, verificar os chamados vinculados, unificar os vínculos na etiqueta oficial e remover/inativar a etiqueta duplicada.`
+          : `[PB-UNI-62] Revisar a padronização de nomes e cores das etiquetas do setor no sistema.`,
+        `[PB-UNI-62] Validar a disponibilização da lista atualizada de etiquetas no ${sysTarget} e comunicar a conclusão a ${ticket.requester} (${sectorName}) (referência histórica: Chamado #44150).`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **manutenção e adição de etiquetas no sistema ${sysTarget}** para o setor de **${sectorName}** (` +
+        (quotedTags.length > 0
+          ? `inclusão das etiquetas ${tagsLabel}`
+          : `inclusão das novas etiquetas solicitadas`) +
+        (mentionsDuplicateColors
+          ? ` e regularização das **2 etiquetas iguais com cores diferentes**`
+          : "") +
+        `).\n\n` +
+        `Todas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou o cadastro das novas etiquetas e a padronização/remoção da etiqueta duplicada no painel administrativo do sistema.\n\n` +
+        `Assim que as etiquetas estiverem atualizadas e disponíveis para uso no setor, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
       (/\b(aplicativo para impress[aã]o|aplicativo de impress[aã]o|app de impress[aã]o|impress[aã]o de etiquetas?|etiquetas?\s+de\s+identifica[çc][ãa]o|impressora\s+(?:de\s+)?etiquetas?|zebradesigner|elgin|impressora zebra|arquivo\s+(?:de\s+)?etiquetas?)\b/i.test(
         normAll
       ) &&
@@ -1886,6 +2434,115 @@ export class AIAnalyst {
         `Em consulta técnica com o desenvolvedor **Moisés Conte** e **Luiz Fernando**, confirmamos que a tag do Google Tag Manager (\`GTM-KHVFL3C\`) evidenciada no código-fonte atual **já vem integrada por padrão na própria plataforma nacional do Portal Unimed (Unimed do Brasil)**.\n\n` +
         `Dessa forma, caso o setor de **${sectorName}** queira criar uma nova conta/contêiner próprio do GTM (ou gerar novas tags de monitoramento para a nossa singular) para inserirmos no site, basta nos enviar os novos códigos/IDs por aqui que realizamos a inclusão na plataforma!\n\n` +
         `Permanecemos no aguardo e à disposição!`;
+    } else if (
+      !/\b(urucum|ag[eê]ncia|terceir|extern[ao]|google\s+tag\s+manager|\bgtm\b|google\s+analytics|search\s+console|pixel\s+(?:da\s+)?meta)\b/i.test(
+        normAll
+      ) &&
+      /\b(banners?|altera[cç][aã]o\s+banner|acrescentar\s+(?:o\s+)?banner|adicionar\s+banner|formato\s+rotativo|novembro\s+azul|outubro\s+rosa|publica[cç][aã]o\s+relat[oó]rio\s+igualdade\s+salarial)\b/i.test(
+        normAll
+      )
+    ) {
+      const mentionsNovembroAzul = /\bnovembro\s+azul\b/i.test(normAll);
+      const mentionsRotating = /\b(formato\s+rotativo|rotativo|carrossel)\b/i.test(
+        normAll
+      );
+      const keepDetails =
+        mentionsNovembroAzul && mentionsRotating
+          ? "mantendo o banner vigente referente ao **Novembro Azul** e configurando a exibição em **formato rotativo (carrossel)**"
+          : mentionsRotating
+          ? "configurando a exibição dos banners em **formato rotativo (carrossel)**"
+          : "atualizando a vitrine institucional conforme solicitado";
+
+      detectedDomain =
+        "Desenvolvimento / Portal Institucional (Site Unimed Sudoeste de Minas / Banners e Conteúdos)";
+      suggestedCategory =
+        "T.I > DV > Desenvolvimento > Ajustes em layout/interface";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason =
+        "Solicitação do setor de Marketing para inclusão/atualização de banner institucional no Site da Unimed Sudoeste de Minas.";
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !==
+        normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}").*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a **inclusão do novo banner anexado** no **Site da Unimed Sudoeste de Minas**, ${keepDetails}. ` +
+        `A arte e todas as instruções de publicação já constam anexadas e descritas no chamado.` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-63] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 123), atribuído ao grupo 'T.I > DV (Desenvolvimento)' (Luiz Fernando Moura Piantino / Moisés Conte).`,
+        `[PB-UNI-63] Baixar a arte do novo banner anexada ao chamado pelo setor de ${sectorName} e conferir as dimensões/proporções compatíveis com o componente de vitrine do Portal Unimed Sudoeste de Minas.`,
+        `[PB-UNI-63] Acessar o gerenciador de conteúdo (CMS / Liferay) do Site da Unimed Sudoeste de Minas e publicar a nova arte na seção de banners da página inicial.`,
+        mentionsNovembroAzul
+          ? `[PB-UNI-63] Preservar o banner atual referente ao 'Novembro Azul' e parametrizar o componente de vitrine em formato rotativo (carrossel/slider) para alternância automática entre os banners.`
+          : `[PB-UNI-63] Configurar a vitrine de banners no portal conforme solicitado pelo setor de ${sectorName}.`,
+        `[PB-UNI-63] Validar a exibição e a rotação dos banners em produção e confirmar a publicação para ${ticket.requester} (${sectorName}) no GLPI (referência histórica: Chamado #43540).`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à **inclusão do novo banner no Site da Unimed Sudoeste de Minas**, ${keepDetails}.\n\n` +
+        `A arte anexada e todas as orientações de publicação já foram validadas na triagem e nossa equipe de **T.I. / Desenvolvimento** já iniciou a atualização no gerenciador do portal institucional.\n\n` +
+        `Assim que o novo banner estiver publicado e ativo em formato rotativo no site, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+    } else if (
+      (/\btuss\b/i.test(normAll) &&
+        /\b(di[aá]rias|taxas|gases|00952)\b/i.test(normAll)) ||
+      /\b(00952|di[aá]rias\s*,\s*taxas\s+e\s+gases)\b/i.test(normAll)
+    ) {
+      const sectorName =
+        (formFields.setor && !formFields.setor.startsWith("1)"))
+          ? formFields.setor
+          : ticket.requester_department || "H Faturamento";
+      const isMale =
+        /^(juliano|dener|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio|claudio|moises|luiz)\b/i.test(
+          firstName
+        );
+      const solPrefix = isMale ? "O solicitante" : "A solicitante";
+
+      detectedDomain =
+        "Sistemas Internos / SGH Spdata / Parametrização de Sistemas e Tabelas (Tabela TUSS - Diárias, Taxas e Gases)";
+      suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+      realUrgency = ticket.urgency_label || "Baixa";
+      urgencyReason =
+        `Solicitação de orientação técnica sobre a atualização da tabela '00952 - V - TUSS - DIÁRIAS, TAXAS E GASES' no sistema SGH Spdata para o setor ${sectorName}. O sistema não possui rotina de importação em lote para essa tabela, devendo a manutenção ser realizada manualmente item a item pelo próprio Faturamento (documentado na Base de Conhecimento KB #92).`;
+
+      const categoryMismatch =
+        normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+      const reclassNote = categoryMismatch
+        ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 164).*`
+        : "";
+
+      translatedIntent =
+        `${solPrefix} **${ticket.requester}** (**${sectorName}**) solicita a atualização da tabela **TUSS - DIÁRIAS, TAXAS E GASES** (evidenciada no print em anexo na tela **Tabela de Diárias e Taxas** sob a Tabela de Controle **\`00952 - V - TUSS - DIÁRIAS, TAXAS E GASES\`**) no sistema gestor **SGH Spdata**. ` +
+        `Diferentemente de tabelas como *Simpro* e *Brasíndice*, o sistema **SGH Spdata não possui ferramenta ou rotina para importação automatizada em lote** desta tabela, sendo que a gestão, inclusão e atualização de seus procedimentos devem ser realizadas **manualmente item a item pelo próprio setor de Faturamento** diretamente no módulo **Tabelas - SPDATA SGH** (conforme documentado no **Artigo KB #92** da Base de Conhecimento do GLPI).` +
+        reclassNote;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customResolutionSteps = [
+        `[PB-UNI-64] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (ID 164), vinculando o artigo oficial da Base de Conhecimento KB #92 ('SGH - Spdata > Tabelas > Atualização Manual da Tabela TUSS - Diárias, Taxas e Gases (Tabela 00952)').`,
+        `[PB-UNI-64] Esclarecer formalmente a ${ticket.requester} (${sectorName}) que o sistema SGH Spdata não dispõe de recurso ou rotina para importação automática de arquivos para a tabela '00952 - V - TUSS - DIÁRIAS, TAXAS E GASES'.`,
+        `[PB-UNI-64] Orientar que a gestão e atualização dessa tabela devem ser feitas manualmente pelo próprio setor de Faturamento dentro do módulo 'Tabelas - SPDATA SGH' (tela 'Tabela de Diárias e Taxas' > Tabela de Controle '00952 - V - TUSS - DIÁRIAS, TAXAS E GASES'), acessando item a item no quadro 'Manutenção' (utilizando os botões 'Novo', 'Valores', 'Reajuste' e 'Gravar').`,
+        `[PB-UNI-64] Colocar a equipe de T.I. à disposição caso algum colaborador do ${sectorName} necessite de liberação de permissão de acesso/edição na tela 'Tabela de Diárias e Taxas' ou auxílio pontual em algum item específico.`,
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à atualização da tabela **TUSS - DIÁRIAS, TAXAS E GASES** (\`00952 - V - TUSS - DIÁRIAS, TAXAS E GASES\`) no sistema **SGH Spdata**.\n\n` +
+        `Gostaríamos de esclarecer que, diferentemente de outras tabelas do sistema, o **SGH Spdata não possui ferramenta ou rotina para realizar a importação automática em lote** desta tabela.\n\n` +
+        `Por esse motivo, a gestão e a atualização da tabela **TUSS - Diárias, Taxas e Gases (\`00952\`)** devem ser realizadas **manualmente pelo próprio setor de Faturamento**, acessando **item a item** diretamente na tela **Tabela de Diárias e Taxas** (\`Tabelas - SPDATA SGH > Tabela de Controle: 00952 - V - TUSS - DIÁRIAS, TAXAS E GASES\`):\n` +
+        `- Para **atualizar um item existente**, basta selecioná-lo na listagem **\"Dados da Tabela\"** (ou clicar em **\"Pesquisar\"**), ajustar os campos/valores no quadro inferior **\"Manutenção\"** (ou no botão **\"Valores\"**) e clicar em **\"Gravar\"**;\n` +
+        `- Para **incluir um novo código TUSS**, basta clicar no botão **\"Novo\"**, preencher os dados do procedimento no quadro **\"Manutenção\"** e clicar em **\"Gravar\"**.\n\n` +
+        `Também registramos essa orientação passo a passo na Base de Conhecimento do GLPI (**Artigo KB #92**). Caso algum colaborador do setor precise de liberação de permissão nessa tela ou auxílio em alguma dúvida pontual, nossa equipe de T.I. permanece à inteira disposição!`;
     } else if (
       (/\b(automa[çc][ãa]o|automatiza[çc][ãa]o|automatizar|rotina autom[aá]tica)\b/i.test(normAll) &&
         /\b(cobran[çc]a|t[ií]tulos?\s+em\s+atraso|inadimpl[eê]ncia|whatsapp|wpp|mensagens?\s+wpp|mensagens?\s+de\s+cobran[çc]a|disparo)\b/i.test(
@@ -3286,13 +3943,9 @@ export class AIAnalyst {
         formFields.tipo === "Criação de Usuários" ||
         ticket.category.includes("Criação de Usuários");
 
-      const colabName =
-        formFields.nomeColaborador ||
-        ((ticket.content || "").match(/Nome\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
-
       const prestadorCode =
         ((ticket.content || "").match(/C[óo]digo do Prestador\s*:\s*([^\n\r]+)/i)?.[1] || "").trim() ||
-        ((ticket.content || "").match(/\b(16\d{6})\b/)?.[1] || "").trim();
+        ((ticket.content || "").match(/\b(16\d{6}|22\d{6}|\d{8})\b/)?.[1] || "").trim();
 
       const prestadorName =
         ((ticket.content || "").match(/Nome do Prestador\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
@@ -3301,31 +3954,147 @@ export class AIAnalyst {
         ? (prestadorName ? `${prestadorCode} - ${prestadorName}` : prestadorCode)
         : "";
 
-      const emailMatch = (ticket.content || "").match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
-      const userEmail = emailMatch ? emailMatch[0].trim() : "";
+      // Extração de secretárias: profissional principal do formulário + adicionais no campo Observações
+      const secretaries = [];
 
-      if (isUserCreation && colabName) {
-        translatedIntent =
-          `A solicitante **${ticket.requester}** (${sectorName}) solicita a criação de novo usuário no sistema **Web Saúde (módulo do ERP HRP Unimed)** para a secretária **${colabName}**, ` +
-          `com vinculação ao prestador **${prestadorFull}**. ` +
-          `O chamado foi aberto na categoria correta (${ticket.category}) e contém todos os dados cadastrais necessários (Nome, CPF, Data de Nascimento, E-mail e Código do Prestador).`;
+      const mainName =
+        formFields.nomeColaborador ||
+        ((ticket.content || "").match(/(?:^|\n)\s*(?:2\)\s*)?Nome\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
+      const mainCpf =
+        formFields.cpf ||
+        ((ticket.content || "").match(/(?:^|\n)\s*(?:4\)\s*)?CPF\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
+      const mainEmail =
+        ((ticket.content || "").match(/(?:^|\n)\s*(?:3\)\s*)?E-mail\s*(?:Pessoal)?\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
+      const mainBirth =
+        ((ticket.content || "").match(/(?:^|\n)\s*(?:5\)\s*)?Data\s*(?:de\s*)?Nascimento\s*:\s*([^\n\r]+)/i)?.[1] || "").trim();
+
+      if (mainName) {
+        secretaries.push({
+          name: formatPersonName(mainName),
+          cpf: mainCpf,
+          email: mainEmail,
+          birthDate: mainBirth,
+          isMain: true,
+        });
+      }
+
+      // Analisa o campo Observações para secretárias adicionais
+      const obsMatch = (ticket.content || "").match(/Obse[rv]+a[çc][õo]es\s*:\s*([\s\S]*)$/i);
+      if (obsMatch && obsMatch[1]) {
+        const obsLines = obsMatch[1].split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+        let curSec = { name: "", cpf: "", email: "", birthDate: "" };
+
+        for (const line of obsLines) {
+          if (/@/.test(line)) {
+            const em = line.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+            if (em) curSec.email = em[0].trim();
+            if (curSec.name) {
+              if (!secretaries.some((s) => normalizeText(s.name) === normalizeText(curSec.name))) {
+                secretaries.push({
+                  name: formatPersonName(curSec.name),
+                  cpf: curSec.cpf,
+                  email: curSec.email,
+                  birthDate: curSec.birthDate,
+                  isMain: false,
+                });
+              }
+              curSec = { name: "", cpf: "", email: "", birthDate: "" };
+            }
+          } else if (/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/.test(line)) {
+            const cm = line.match(/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/);
+            if (cm) curSec.cpf = cm[0].trim();
+          } else if (/\b\d{2}[/-]\d{2}[/-]\d{4}\b/.test(line)) {
+            const dm = line.match(/\b\d{2}[/-]\d{2}[/-]\d{4}\b/);
+            if (dm) curSec.birthDate = dm[0].trim();
+          } else if (
+            /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{5,60}$/.test(line) &&
+            !/^(observacoes|observacao|acesso|prestador|sim|nao|santa\s+casa|hospital|unimed)$/i.test(line)
+          ) {
+            if (curSec.name && (curSec.cpf || curSec.email)) {
+              if (!secretaries.some((s) => normalizeText(s.name) === normalizeText(curSec.name))) {
+                secretaries.push({
+                  name: formatPersonName(curSec.name),
+                  cpf: curSec.cpf,
+                  email: curSec.email,
+                  birthDate: curSec.birthDate,
+                  isMain: false,
+                });
+              }
+              curSec = { name: "", cpf: "", email: "", birthDate: "" };
+            }
+            curSec.name = line.trim();
+          }
+        }
+        if (curSec.name && (curSec.cpf || curSec.email)) {
+          if (!secretaries.some((s) => normalizeText(s.name) === normalizeText(curSec.name))) {
+            secretaries.push({
+              name: formatPersonName(curSec.name),
+              cpf: curSec.cpf,
+              email: curSec.email,
+              birthDate: curSec.birthDate,
+              isMain: false,
+            });
+          }
+        }
+      }
+
+      if (isUserCreation && secretaries.length > 0) {
         detectedDomain = "Acessos, Permissões e Contas";
         suggestedCategory = "T.I > ST > Acesso e Permissões > Criação de Usuários";
         realUrgency = ticket.urgency_label || "Média";
         urgencyReason =
-          `Criação de novo usuário para secretária/atendente de clínica credenciada no Web Saúde (${prestadorFull}).`;
+          `Criação de usuário(s) para secretária(s)/atendente(s) no Web Saúde (${prestadorFull}).`;
         sufficiencyStatus = "completo";
         missingInfo = [];
 
-        const emailNote = userEmail
-          ? ` e os dados de primeiro acesso encaminhados para o e-mail informado (**${userEmail}**)`
-          : "";
+        if (secretaries.length > 1) {
+          translatedIntent =
+            `A solicitante **${ticket.requester}** (${sectorName}) solicita a criação de novos usuários no sistema **Web Saúde (módulo do ERP HRP Unimed)** para **${secretaries.length} secretárias** vinculadas ao prestador **${prestadorFull}**: ` +
+            secretaries.map((s) => `**${s.name}** (${s.cpf ? `CPF: ${s.cpf}` : ""}${s.email ? `, E-mail: ${s.email}` : ""})`).join("; ") +
+            `. Todos os dados cadastrais necessários foram devidamente informados no formulário de abertura e no campo de observações adicionais.`;
 
-        customPublicReply =
-          `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **${colabName}**, vinculada ao prestador **${prestadorFull}**.\n\n` +
-          `Todos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\n` +
-          `Assim que o acesso for liberado${emailNote}, confirmaremos por aqui!`;
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à criação de usuários no sistema **Web Saúde (HRP)** para as secretárias vinculadas ao prestador **${prestadorFull}**.\n\n` +
+            `Identificamos no formulário e no campo de observações a solicitação de acesso para as seguintes profissionais:\n` +
+            secretaries.map((s, idx) => `${idx + 1}. **${s.name}**${s.cpf ? ` — CPF: \`${s.cpf}\`` : ""}${s.email ? ` | E-mail: \`${s.email}\`` : ""}`).join("\n") +
+            `\n\nTodos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro individual dos usuários diretamente no ERP HRP Unimed e a vinculação da clínica/prestador.\n\n` +
+            `Assim que os acessos forem liberados e as credenciais de primeiro acesso encaminhadas para os respectivos e-mails cadastrados, confirmaremos por aqui!\n\n` +
+            `Permanecemos à disposição!`;
+
+          customResolutionSteps = [
+            `[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.`,
+            `[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita a gestão do Web Saúde).`,
+            `[PB-UNI-27] Cadastrar individualmente as ${secretaries.length} secretárias informadas no chamado: ${secretaries.map((s) => s.name).join(", ")}.`,
+            `[PB-UNI-27] Vincular o código do prestador credenciado (${prestadorFull}) ao cadastro de cada uma das secretárias com vigência ativa.`,
+            `[PB-UNI-27] Gerar as credenciais iniciais e enviar as instruções de primeiro acesso para os respectivos e-mails cadastrados, comunicando a conclusão no GLPI.`
+          ];
+        } else {
+          const sec = secretaries[0];
+          const emailNote = sec.email
+            ? ` e os dados de primeiro acesso encaminhados para o e-mail informado (**${sec.email}**)`
+            : "";
+
+          translatedIntent =
+            `A solicitante **${ticket.requester}** (${sectorName}) solicita a criação de novo usuário no sistema **Web Saúde (módulo do ERP HRP Unimed)** para a secretária **${sec.name}**, ` +
+            `com vinculação ao prestador **${prestadorFull}**. ` +
+            `O chamado foi aberto na categoria correta (${ticket.category}) e contém todos os dados cadastrais necessários (Nome: ${sec.name}${sec.cpf ? `, CPF: ${sec.cpf}` : ""}${sec.email ? `, E-mail: ${sec.email}` : ""}).`;
+
+          customPublicReply =
+            `Olá, ${firstName}! Tudo bem?\n\n` +
+            `Recebemos a sua solicitação referente à criação de novo usuário no sistema **Web Saúde (HRP)** para a secretária **${sec.name}**, vinculada ao prestador **${prestadorFull}**.\n\n` +
+            `Todos os dados cadastrais necessários já foram validados na triagem e nossa equipe técnica está realizando o cadastro do usuário diretamente no HRP e a vinculação da clínica.\n\n` +
+            `Assim que o acesso for liberado${emailNote}, confirmaremos por aqui!\n\n` +
+            `Permanecemos à disposição!`;
+
+          customResolutionSteps = [
+            `[PB-UNI-27] Confirmar que o chamado está categorizado corretamente em 'T.I > ST > Acesso e Permissões > Criação de Usuários'.`,
+            `[PB-UNI-27] Acessar o módulo de controle de usuários centralizado diretamente no sistema ERP HRP Unimed (onde é feita a governança de usuários do Web Saúde).`,
+            `[PB-UNI-27] Cadastrar o novo usuário com Nome completo (${sec.name}), CPF (${sec.cpf || "informado"}), data de nascimento e e-mail informados no chamado.`,
+            `[PB-UNI-27] Vincular o código do prestador credenciado (${prestadorFull}) ao usuário da secretária com vigência ativa.`,
+            `[PB-UNI-27] Gerar a senha inicial e enviar as credenciais/instruções de primeiro acesso para o e-mail cadastrado (${sec.email || "informado"}), comunicando a conclusão no GLPI.`
+          ];
+        }
       } else {
         const clinicMatches = (ticket.content || "").match(/\b16\d{6}(?:\s*-\s*[^\n,]+)?/g) || [];
         const clinicsList = clinicMatches.length > 0
@@ -4473,12 +5242,13 @@ export class AIAnalyst {
       }
     } else if (
       /\boncologia\b/i.test(normAll) &&
+      !/\b(etiquetas?|r[oó]tulos?)\b/i.test(normAll) &&
       (/\bagenda\b/i.test(normAll) ||
         /\bagendamento\b/i.test(normAll) ||
-        /\b(layout|interface|duracao|tempo minimo|tempo de duracao)\b/i.test(normAll))
+        /\b(duracao|tempo minimo|tempo de duracao|subcutanea)\b/i.test(normAll))
     ) {
       const descText = formFields.descricao || ticket.content || "";
-      const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
+      const isMale = /^(renan|diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor)\b/i.test(
         firstName
       );
       const solPrefix = isMale ? "O solicitante" : "A solicitante";
@@ -5150,13 +5920,25 @@ export class AIAnalyst {
 
     if (customInstruction) {
       resolutionSteps.unshift(`[Diretriz do Analista] ${customInstruction}`);
-      if (
-        !/\b(pe[çc]a|pergunte|perguntar|solicite|solicitar|cobrar|questionar|qual\b|quais\b)\b/i.test(
+      const customSaysComplete =
+        /\b(completo|n[ãa]o\s+(pe[çc]a|pergunte|solicite|questione|cobre)|sem\s+perguntas?)\b/i.test(
           customInstruction
-        )
-      ) {
+        );
+      const wantsQuestions =
+        !customSaysComplete &&
+        /\b(pe[çc]a|pergunte|perguntar|solicite|solicitar|cobrar|questionar|qual\b|quais\b)\b/i.test(
+          customInstruction
+        );
+      if (customSaysComplete || !wantsQuestions) {
         sufficiencyStatus = "completo";
         missingInfo = [];
+      }
+      const matchConfirm = customInstruction.match(
+        /(?:(?:na\s+resposta\s+p[úu]blica[,\s]+)?(?:confirme|informe|oriente|responda|diga)\s+(?:(?:a|na|em|no)\s+resposta\s+p[úu]blica\s+)?(?:que|dizendo\s+que|informando\s+que)?|(?:na\s+resposta\s+p[úu]blica[,\s]+confirme\s+que))\s+(.+)$/im
+      );
+      if (matchConfirm) {
+        const actionText = matchConfirm[1].replace(/\.+$/, "").trim();
+        customPublicReply = `Olá, ${firstName}! Tudo bem?\n\nRecebemos a sua solicitação. Informamos que ${actionText}.\n\nPermanecemos à disposição!`;
       }
     } else if (matchedMemory?.custom_instruction) {
       resolutionSteps.unshift(

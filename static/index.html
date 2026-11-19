@@ -243,12 +243,27 @@
         </p>
       </div>
 
-      <div class="flex items-center gap-2.5 pt-1">
-        <button onclick="loadTickets()" class="btn-counters-outline inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium shadow-sm">
+      <div class="flex flex-wrap items-center gap-2 pt-1">
+        <!-- Live System Telemetry Indicator -->
+        <div id="system-telemetry-badge" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono surface-sub border border-white/10 shadow-sm" title="Uso de Memória RAM da Máquina e Status do Modelo LLM">
+          <span class="material-symbols-outlined text-xs text-emerald-500">memory</span>
+          <span id="system-telemetry-text">RAM: -- | LLM: --</span>
+        </div>
+        <!-- Auto-Triage Toggle -->
+        <button id="btn-toggle-autotriage" onclick="toggleAutoTriage()" class="btn-counters-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-sm" title="Ativar/desativar triagem periódica automática de novos chamados em segundo plano">
+          <span class="material-symbols-outlined icon-sm text-amber-500" id="autotriage-icon">bolt</span>
+          <span id="autotriage-label">Auto-Triagem: Off</span>
+        </button>
+        <!-- Teste de Regressão dos Playbooks -->
+        <button onclick="runSystemRegressionTests()" class="btn-counters-outline inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium shadow-sm" title="Executar teste de integridade dos 68 Playbooks da Unimed">
+          <span class="material-symbols-outlined icon-sm text-teal-600">verified</span>
+          <span class="hidden md:inline">Testar Playbooks</span>
+        </button>
+        <button onclick="loadTickets()" class="btn-counters-outline inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium shadow-sm">
           <span class="material-symbols-outlined icon-sm">sync</span>
           <span>Sincronizar</span>
         </button>
-        <button onclick="analyzeAllVisible()" id="btn-analyze-batch" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
+        <button onclick="analyzeAllVisible()" id="btn-analyze-batch" class="btn-counters-primary inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">
           <span class="material-symbols-outlined icon-sm">auto_awesome</span>
           <span>Analisar Fila</span>
         </button>
@@ -335,6 +350,18 @@
           />
         </div>
 
+        <!-- BANNER DE INCIDENTES EM MASSA (CLUSTERING) -->
+        <div id="incident-clusters-box" class="hidden rounded-xl p-3.5 bg-amber-500/10 border border-amber-500/30 text-xs space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 font-bold text-amber-800 dark:text-amber-300">
+              <span class="material-symbols-outlined icon-sm animate-pulse">crisis_alert</span>
+              <span id="incident-clusters-title">Alerta de Incidentes em Massa Detectados</span>
+            </div>
+            <button onclick="dismissIncidentClusters()" class="text-[11px] underline opacity-70 hover:opacity-100" style="color: var(--text-muted);">Dispensar Alerta</button>
+          </div>
+          <div id="incident-clusters-list" class="space-y-1.5"></div>
+        </div>
+
         <!-- GRID PRINCIPAL: LISTA DE CHAMADOS (5 cols) + PAINEL DE TRATATIVA (7 cols) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-1">
 
@@ -407,15 +434,16 @@
                 </div>
 
                 <!-- Barra de instrução opcional (recolhida por padrão) -->
-                <div id="custom-instruction-bar" class="hidden flex items-center gap-2 surface-sub p-2 rounded-lg">
-                  <span class="material-symbols-outlined icon-sm ml-1" style="color: var(--brand-soft-text);">edit_note</span>
-                  <input
-                    type="text"
+                <div id="custom-instruction-bar" class="hidden flex items-start gap-2 surface-sub p-2.5 rounded-lg border border-teal-700/20">
+                  <span class="material-symbols-outlined icon-sm mt-1 shrink-0" style="color: var(--brand-soft-text);">edit_note</span>
+                  <textarea
                     id="custom-instruction-input"
-                    placeholder="Instrução adicional para o Copiloto (ex: Peça o ID do AnyDesk)..."
-                    class="flex-1 bg-transparent text-xs focus:outline-none"
-                  />
-                  <button onclick="analyzeCurrentTicket(true)" class="btn-counters-primary px-3 py-1 rounded-md text-xs font-medium shrink-0">
+                    rows="2"
+                    placeholder="Instrução adicional para o Copiloto (ex: Classifique como COMPLETO, informe que faremos vistoria presencial)..."
+                    class="flex-1 bg-transparent text-xs focus:outline-none resize-none leading-relaxed"
+                    style="color: var(--text-main);"
+                  ></textarea>
+                  <button onclick="analyzeCurrentTicket(true)" class="btn-counters-primary px-3 py-1.5 rounded-md text-xs font-semibold shrink-0 mt-0.5">
                     Aplicar
                   </button>
                 </div>
@@ -475,6 +503,35 @@
                       <button onclick="toggleCategoryReclassBox(true)" id="btn-open-reclass" class="text-[11px] underline opacity-80 hover:opacity-100" style="color: var(--brand-soft-text);" title="Escolher ou alterar a categoria deste chamado no GLPI">Alterar</button>
                     </span>
                     <span>Motivo: <span id="analysis-urgency-reason"></span></span>
+                  </div>
+
+                  <!-- CARD DE TELEMETRIA DA INFERÊNCIA & CONSUMO DE HARDWARE -->
+                  <div id="analysis-telemetry-box" class="surface-sub rounded-xl p-3 border border-white/10 space-y-2">
+                    <div class="flex items-center justify-between text-xs">
+                      <div class="flex items-center gap-1.5 font-bold" style="color: var(--brand-soft-text);">
+                        <span class="material-symbols-outlined icon-sm">speed</span>
+                        <span>Telemetria de Hardware & Inferência da LLM</span>
+                      </div>
+                      <span id="telemetry-duration" class="font-mono text-[11px] font-semibold px-2 py-0.5 rounded-full surface-card" style="color: var(--brand-soft-text);">0.0s</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                      <div class="surface-card rounded-lg p-2 border border-white/5" title="Provedor ativo e modo de execução (Rede Neural vs Copiloto Heurístico)">
+                        <div class="text-[10px] uppercase font-semibold text-muted">Provedor / Modo</div>
+                        <div id="telemetry-model-name" class="font-semibold text-[11px] truncate mt-0.5" style="color: var(--text-main);">-</div>
+                      </div>
+                      <div class="surface-card rounded-lg p-2 border border-white/5" title="Consumo de VRAM na GPU ou RAM do modelo de IA">
+                        <div class="text-[10px] uppercase font-semibold text-muted">Memória da LLM</div>
+                        <div id="telemetry-model-mem" class="font-mono font-semibold text-[11px] mt-0.5 text-emerald-500">-</div>
+                      </div>
+                      <div class="surface-card rounded-lg p-2 border border-white/5" title="Memória RAM física específica alocada para o processo do Ticket Analyst executar esta análise">
+                        <div class="text-[10px] uppercase font-semibold text-muted">RAM do Processo (Node)</div>
+                        <div id="telemetry-process-ram" class="font-mono font-semibold text-[11px] mt-0.5 text-teal-600">-</div>
+                      </div>
+                      <div class="surface-card rounded-lg p-2 border border-white/5" title="Memória RAM global em uso por todo o computador (Windows + programas abertos)">
+                        <div class="text-[10px] uppercase font-semibold text-muted">RAM Total do PC</div>
+                        <div id="telemetry-host-ram" class="font-mono font-semibold text-[11px] mt-0.5" style="color: var(--text-main);">-</div>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- Card Interativo de Reclassificação de Categoria no GLPI -->

@@ -28,7 +28,7 @@ const STOPWORDS = new Set([
   "obrigada", "segue", "hoje", "data", "colaboradora", "colaborador", "devido", "certa",
   "certo", "vossa", "arquivos", "arquivo", "print", "gostaria", "solicitar", "poderia", "poderiam",
   "unimedsudoestemg", "unimed256", "coop", "br", "com", "gov", "org", "net", "http", "https", "www",
-  "link", "login", "webmail", "seguro"
+  "link", "login", "webmail", "seguro", "desenvolvimento", "qualidade", "ajustes", "layout", "interface", "solicitamos"
 ]);
 
 export function normalizeText(text) {
@@ -268,8 +268,22 @@ export class KnowledgeEngine {
       ) ||
        normTicket.includes("pasta compartilhada - unidrive"));
 
+    const isHrpIntercambioGuiaStatusChange =
+      (/\b(alterar\s+(?:atendimento|car[aá]ter|guia|senha|o\s+car[aá]ter)|car[aá]ter\s+de\s+atendimento|eletivo\s+para\s+urg[eê]ncia|urg[eê]ncia\s+para\s+eletivo)\b/i.test(
+        normTicket
+      ) &&
+      /\b(eletiv[oa]|urg[eê]ncia)\b/i.test(normTicket) &&
+      (/\b(via\s+banco|no\s+banco|hrp|senha|guia|interc[aâ]mbio|autoriza[çc][ãa]o)\b/i.test(
+        normTicket
+      ) ||
+        normTicket.includes("210800316"))) ||
+      (/\b(interc[aâ]mbio|unimed\s+interc[aâ]mbio)\b/i.test(normTicket) &&
+        /\b(eletiv[oa]|urg[eê]ncia)\b/i.test(normTicket) &&
+        /\b(alterar|mudar|converter|cancelar|cancelamento)\b/i.test(normTicket));
+
     const isHrpAuthorizationOrIntercambio =
-      (/\b(autoriza[çc][ãa]o|autorizando|autorizar|procedimento|procedimentos|interc[âa]mbio|guia|guias|ptu|wautoriza|trafegando|trafega|trafegar)\b/i.test(
+      !isHrpIntercambioGuiaStatusChange &&
+      ((/\b(autoriza[çc][ãa]o|autorizando|autorizar|procedimento|procedimentos|interc[âa]mbio|guia|guias|ptu|wautoriza|trafegando|trafega|trafegar)\b/i.test(
         normTicket
       ) &&
       /\b(senha|senhas|guia|guias|206867125)\b/i.test(normTicket) &&
@@ -277,7 +291,7 @@ export class KnowledgeEngine {
         normTicket
       )) ||
       /\bsenha\s+(?:n[ãa]o\s+est[áa]\s+trafegando|n[ãa]o\s+trafega|de\s+autoriza[çc][ãa]o)\b/i.test(normTicket) ||
-      (/\b(procedimento|guia)\b/i.test(normTicket) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normTicket));
+      (/\b(procedimento|guia)\b/i.test(normTicket) && /\b(n[ãa]o est[áa] autorizando|n[ãa]o autoriza|falha na autoriza[çc][ãa]o)\b/i.test(normTicket)));
 
     const isReopenOrRevertAccount =
       (/\b(reabrir|reabertura|abrir conta|abrir contas|abrir registro|abertura de (?:uma\s+)?contas?|abertura de registros?|ativar (?:a\s+)?contas?|reativar (?:a\s+)?contas?|encerrad[ao] erroneamente|revers[aã]o de encerramento|reverter encerramento|reverter processo de encerramento|voltar remessa|reabrir remessa|revers[aã]o da remessa|revers[aã]o no controle de contas|reverter contas|contas reabertas|processo revertido)\b/i.test(
@@ -296,7 +310,13 @@ export class KnowledgeEngine {
         (/\b(valores?|valor)\b/i.test(normTicket) &&
           /\b(carregad[oa]s?|importa[cç][aã]o|importar|fatura|diferen[cç]a)\b/i.test(normTicket)));
 
+    const isTussDiariasTaxasGasesManualUpdate =
+      (/\btuss\b/i.test(normTicket) &&
+        /\b(di[aá]rias|taxas|gases|00952)\b/i.test(normTicket)) ||
+      /\b(00952|di[aá]rias\s*,\s*taxas\s+e\s+gases)\b/i.test(normTicket);
+
     const isSystemTableParameterization =
+      !isTussDiariasTaxasGasesManualUpdate &&
       !isXmlBatalhaoOrSghValueMismatch &&
       !isFormcreatorOrGlpiForm &&
       !isReopenOrRevertAccount &&
@@ -401,6 +421,82 @@ export class KnowledgeEngine {
       (/\b(t[ií]tulos?\s+em\s+atraso|relat[oó]rio\s+de\s+t[ií]tulos?\s+em\s+atraso)\b/i.test(normTicket) &&
         /\b(whatsapp|wpp|emails?|mandar\s+um\s+email|mandar\s+um\s+whatsapp)\b/i.test(normTicket));
 
+    const isCustomLabelLayoutOrFieldDev =
+      (/\b(duplicar\s+etiquetas?|etiquetas?\s+de\s+oncologia|etiquetas?\s+para\s+r[oó]tulos?|desenvolvimento\s+de\s+etiquetas?)\b/i.test(
+        normTicket
+      ) ||
+        (/\betiquetas?\b/i.test(normTicket) &&
+          /\b(oncologia|prontu[aá]rio|r[oó]tulos?|campo\s+.*?\s+em\s+aberto|duplicar\s+(?:a\s+|o\s+)?(?:etiqueta|layout|modelo))\b/i.test(
+            normTicket
+          ))) &&
+      !/\b(glpi|controle\s+de\s+contas|cores?\s+diferentes?|aguardando\s+retorno|em\s+andamento)\b/i.test(
+        normTicket
+      );
+
+    const isGlpiOrSystemTagManagement =
+      !isCustomLabelLayoutOrFieldDev &&
+      (/\b(adi[cç][aã]o\s+d[ae]s?\s+etiquetas?|adicionar\s+etiquetas?|cria[cç][aã]o\s+d[ae]s?\s+etiquetas?|criar\s+etiquetas?|manuten[cç][aã]o\s+d[ae]s?\s+etiquetas?|etiquetas?\s+iguais|\d+\s+etiquetas?\s+iguais|etiquetas?\s+duplicadas?)\b/i.test(
+        normTicket
+      ) ||
+      (/\betiquetas?\b/i.test(normTicket) &&
+        (/\b(cores?\s+diferentes?|em\s+andamento|aguardando\s+retorno|aguardando\s+farm[aá]cia|aguardando\s+nas|glpi|controle\s+de\s+contas)\b/i.test(
+          normTicket
+        ) ||
+          ticket.category.includes("Desenvolvimento")) &&
+        !/\b(imprimir|impress[aã]o|impressora|zebra|zebradesigner|elgin|argox|ribbon|atalho|[aá]rea\s+de\s+trabalho)\b/i.test(
+          normTicket
+        )));
+
+    const isSiteBannerOrContentUpdate =
+      !isSiteMetricsOrGtmTags &&
+      !isExternalAgencyOrPortal &&
+      /\b(banners?|altera[cç][aã]o\s+banner|acrescentar\s+(?:o\s+)?banner|adicionar\s+banner|formato\s+rotativo|novembro\s+azul|outubro\s+rosa|publica[cç][aã]o\s+relat[oó]rio\s+igualdade\s+salarial)\b/i.test(
+        normTicket
+      );
+
+    const isEmailDistributionGroup =
+      !isExternalAgencyOrPortal &&
+      (/\b(geral@unimedsudoestemg\.coop\.br|geralunimed@unimedsudoestemg\.coop\.br)\b/i.test(
+        normTicket
+      ) ||
+      (/\b(e-?mail\s+geral|geral\s+unimed|geralunimed|e-?mail\s+institucional|e-?mails?)\b/i.test(
+        normTicket
+      ) &&
+        /\b(geral|geral\s+unimed|grupo|grupos|lista|listas)\b/i.test(normTicket) &&
+        /\b(incluir|inclus[aã]o|adicionar|adi[cç][aã]o|inserir|inser[çc][aã]o|acesso|recebe|recebendo)\b/i.test(
+          normTicket
+        )) ||
+      /\b(acesso\s+ao\s+e-?mail\s+geral|acesso\s+ao\s+e-?mail\s+geral\s+unimed)\b/i.test(
+        normTicket
+      ) ||
+      (/\b(grupo|grupos|lista|listas)\s+(?:de\s+)?(?:e-?mails?|distribui[çc][ãa]o)\b/i.test(
+        normTicket
+      ) &&
+        /\b(incluir|inclus[aã]o|adicionar|adi[cç][aã]o|inserir|inser[çc][aã]o|cadastrar)\b/i.test(
+          normTicket
+        )));
+
+    const isRepromaqSamsungMaintenance =
+      (/\b(samsung\s+m?4080|m4080|m4080fx|samsung\s+m?4020|m4020|m4020nd|samsung\s+4080|samsung\s+4020)\b/i.test(
+        normTicket
+      ) &&
+      !/\b(troca\s+de\s+toner|trocar\s+(?:o\s+)?toner|trocado\s+(?:o\s+)?toner|acabou\s+o\s+toner|preciso\s+de\s+toner|solicito\s+toner|toner\s+vazio|refil|tinta)\b/i.test(
+        normTicket
+      ) &&
+      !/\b(scan\s+to\s+e-?mail|digitaliza[cç][aã]o\s+para\s+e-?mail|cat[aá]logo\s+de\s+endere[cç]os?)\b/i.test(
+        normTicket
+      ) &&
+      !/\b(precisamos\s+de\s+uma?\s+impressora|instala[cç][aã]o\s+de\s+nova\s+impressora|disponibilizar\s+impressora)\b/i.test(
+        normTicket
+      ) &&
+      (/\b(fusor|falha\s+(?:no\s+)?fusor|manuten[cç][aã]o|preventiva|corretiva|verifica[cç][aã]o\s+preventiva|defeito|conserto|reparo|pe[çc]a|substitui[cç][aã]o\s+de\s+pe[çc]a|barulho|aquecimento|lenta|lentid[aã]o|repromaq|terceirizad|assist[eê]ncia)\b/i.test(
+        normTicket
+      ) ||
+        normTicket.includes("falha no fusor") ||
+        normTicket.includes("manutencao preventiva"))) ||
+      (/\brepromaq\b/i.test(normTicket) &&
+        /\b(impressora|manuten[cç][aã]o|suporte|chamado)\b/i.test(normTicket));
+
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
     if (!isRoutine) {
@@ -493,7 +589,7 @@ export class KnowledgeEngine {
               ) &&
               /\b(conta|caixa|acesso|permissao|redirecion)\b/i.test(normTicket)));
 
-          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal || isHospitalMedicalRecordRegistration || isFacialBiometricOrDoorAccess) {
+          if (isWebSaudeNas || isHardwareOrInfra || isUnification || !hasAccessContext || isSystemError || isFormcreatorOrGlpiForm || isEmailManagement || isUnlockAccount || isExternalAgencyOrPortal || isHospitalMedicalRecordRegistration || isFacialBiometricOrDoorAccess || isHrpIntercambioGuiaStatusChange || isEmailDistributionGroup) {
             continue;
           }
         }
@@ -599,14 +695,50 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-61" && !isAutomationBillingOrMessaging) {
           continue;
         }
-        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos) quando o chamado trata de automação de cobrança/mensageria
-        if (pb.id === "PB-UNI-38" && isAutomationBillingOrMessaging) {
+        // Evita parear PB-UNI-62 (Criação/Manutenção de Etiquetas no GLPI / Controle de Contas) quando o chamado não trata de gestão de etiquetas de sistema
+        if (pb.id === "PB-UNI-62" && !isGlpiOrSystemTagManagement) {
           continue;
         }
-        // Evita parear PB-UNI-07 (Periféricos / Hardware) e PB-UNI-06 (Apoio a Eventos) quando o chamado trata de padronização de área de trabalho, scanner ou tags/métricas no site
+        // Evita parear PB-UNI-63 (Banners e Conteúdos no Site Unimed) quando o chamado não trata de banner/conteúdo no site
+        if (pb.id === "PB-UNI-63" && !isSiteBannerOrContentUpdate) {
+          continue;
+        }
+        // Evita parear PB-UNI-64 (Atualização Manual da Tabela TUSS - Diárias, Taxas e Gases no Spdata) quando o chamado não trata dessa tabela
+        if (pb.id === "PB-UNI-64" && !isTussDiariasTaxasGasesManualUpdate) {
+          continue;
+        }
+        // Evita parear PB-UNI-65 (Criação/Duplicação de Modelos de Etiquetas e Rótulos — Farmácia / Oncologia) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-65" && !isCustomLabelLayoutOrFieldDev) {
+          continue;
+        }
+        // Evita parear PB-UNI-66 (Alteração de Caráter de Atendimento em Guia de Intercâmbio Nacional) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-66" && !isHrpIntercambioGuiaStatusChange) {
+          continue;
+        }
+        // Evita parear PB-UNI-67 (Inclusão de Colaborador em Grupos e Listas de Distribuição de E-mails) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-67" && !isEmailDistributionGroup) {
+          continue;
+        }
+        // Evita parear PB-UNI-68 (Manutenção em Samsung M4020/M4080 via Repromaq) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-68" && !isRepromaqSamsungMaintenance) {
+          continue;
+        }
+        // Evita parear PB-SD-02 (Falha de Impressão Genérica) quando o chamado trata de manutenção/defeito físico em Samsung M4020/M4080 (PB-UNI-68 - Repromaq)
+        if (pb.id === "PB-SD-02" && isRepromaqSamsungMaintenance) {
+          continue;
+        }
+        // Evita parear PB-UNI-39 (Impressão Física de Etiquetas / ZebraDesigner) e PB-SD-02 (Falha de Impressão) quando o chamado trata de etiquetas de status do GLPI (PB-UNI-62) ou desenvolvimento de layout/campos de etiqueta (PB-UNI-65)
+        if ((pb.id === "PB-UNI-39" || pb.id === "PB-SD-02") && (isGlpiOrSystemTagManagement || isCustomLabelLayoutOrFieldDev)) {
+          continue;
+        }
+        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos) quando o chamado trata de automação de cobrança/mensageria ou inclusão em grupos de distribuição
+        if (pb.id === "PB-UNI-38" && (isAutomationBillingOrMessaging || isEmailDistributionGroup)) {
+          continue;
+        }
+        // Evita parear PB-UNI-07 (Periféricos / Hardware) e PB-UNI-06 (Apoio a Eventos) quando o chamado trata de padronização de área de trabalho, scanner, tags/métricas no site, etiquetas do GLPI, banner no site, tabela TUSS ou layout de etiqueta
         if (
           (pb.id === "PB-UNI-07" || pb.id === "PB-UNI-06") &&
-          (isDesktopWallpaperOrDomainPersonalization || isScannerDeviceInstall || isSiteMetricsOrGtmTags)
+          (isDesktopWallpaperOrDomainPersonalization || isScannerDeviceInstall || isSiteMetricsOrGtmTags || isGlpiOrSystemTagManagement || isSiteBannerOrContentUpdate || isTussDiariasTaxasGasesManualUpdate || isCustomLabelLayoutOrFieldDev)
         ) {
           continue;
         }
@@ -665,7 +797,11 @@ export class KnowledgeEngine {
         // Evita parear PB-UNI-30 (Agenda Oncologia) quando o chamado não trata do sistema ou agendamento de Oncologia
         if (
           pb.id === "PB-UNI-30" &&
-          !/\boncologia\b/i.test(normTicket)
+          (!/\boncologia\b/i.test(normTicket) ||
+            isCustomLabelLayoutOrFieldDev ||
+            !/\b(agenda|agendamento|dura[cç][aã]o|tempo\s+m[ií]nimo|hor[aá]rios?|subcut[aâ]nea|procedimentos?)\b/i.test(
+              normTicket
+            ))
         ) {
           continue;
         }
@@ -756,7 +892,7 @@ export class KnowledgeEngine {
         // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora ou aplicativo de etiquetas/atalho
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut)
+          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut || isGlpiOrSystemTagManagement)
         ) {
           continue;
         }
@@ -854,8 +990,8 @@ export class KnowledgeEngine {
           /\b(d[uú]vidas?|orienta[cç][aã]o|orienta[cç][õo]es|como fazer|onde fica|onde encontro|n[aã]o encontrei|n[aã]o achei|como preencher|onde anexar|instru[cç][aã]o de uso|passo a passo|desapercebid[ao])\b/i.test(
             normTicket
           );
-        // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações ou quando se trata de autorização/senha no HRP
-        if (pb.id === "PB-UNI-37" && (!isDoubtOrOrientation || isHrpAuthorizationOrIntercambio)) {
+        // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações ou quando se trata de autorização/senha/guia no HRP
+        if (pb.id === "PB-UNI-37" && (!isDoubtOrOrientation || isHrpAuthorizationOrIntercambio || isHrpIntercambioGuiaStatusChange)) {
           continue;
         }
         let score = computeRelevance(
@@ -1039,6 +1175,48 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.98);
         }
+        if (
+          pb.id === "PB-UNI-62" &&
+          isGlpiOrSystemTagManagement
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-63" &&
+          isSiteBannerOrContentUpdate
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-64" &&
+          isTussDiariasTaxasGasesManualUpdate
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-65" &&
+          isCustomLabelLayoutOrFieldDev
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-66" &&
+          isHrpIntercambioGuiaStatusChange
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-67" &&
+          isEmailDistributionGroup
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-68" &&
+          isRepromaqSamsungMaintenance
+        ) {
+          score = Math.max(score, 0.99);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -1084,6 +1262,18 @@ export class KnowledgeEngine {
       }
       if (isDocusignAccessOrShared && /\b(docusign|acesso compartilhado)\b/i.test(normKbTitle)) {
         score = Math.max(score, 0.96);
+      }
+      if (
+        isTussDiariasTaxasGasesManualUpdate &&
+        /\b(tuss|00952|di[aá]rias,\s*taxas\s+e\s+gases)\b/i.test(normKbTitle)
+      ) {
+        score = Math.max(score, 0.96);
+      }
+      if (
+        isHrpIntercambioGuiaStatusChange &&
+        /\b(interc[aâ]mbio|eletivo|urg[eê]ncia|hrp)\b/i.test(normKbTitle)
+      ) {
+        score = Math.max(score, 0.98);
       }
       const minKbScore = isRoutine ? 0.65 : bestPlaybookScore >= 0.75 ? 0.55 : 0.45;
       if (score >= minKbScore) {
@@ -1159,6 +1349,45 @@ export class KnowledgeEngine {
       ) {
         continue;
       }
+      if (
+        isGlpiOrSystemTagManagement &&
+        (!/\betiquetas?\b/i.test(normalizeText(`${hist.title} ${hist.summary}`)) ||
+          /\b(bitdefender|antiv[ií]rus|zebra|impressora)\b/i.test(
+            normalizeText(`${hist.title} ${hist.summary}`)
+          ))
+      ) {
+        continue;
+      }
+      if (
+        isSiteBannerOrContentUpdate &&
+        !/\b(banners?|igualdade\s+salarial)\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
+      ) {
+        continue;
+      }
+      if (
+        isTussDiariasTaxasGasesManualUpdate &&
+        !/\b(tuss|00952|di[aá]rias,\s*taxas\s+e\s+gases)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      if (
+        isCustomLabelLayoutOrFieldDev &&
+        !/\b(etiquetas?\s+para\s+r[oó]tulos?|duplicar\s+etiqueta)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
+      if (
+        isHrpIntercambioGuiaStatusChange &&
+        !/\b(interc[aâ]mbio|guia|urg[eê]ncia|eletiv|senha\s+de\s+autoriza|car[aá]ter)\b/i.test(
+          normalizeText(`${hist.title} ${hist.summary}`)
+        )
+      ) {
+        continue;
+      }
       let score = computeRelevance(
         fullTicketText,
         ticketTokens,
@@ -1166,6 +1395,24 @@ export class KnowledgeEngine {
         hist.summary || "",
         hist.keywords || []
       );
+      if (
+        isCustomLabelLayoutOrFieldDev &&
+        /\betiquetas?\s+para\s+r[oó]tulos?\b/i.test(normalizeText(hist.title || ""))
+      ) {
+        score = Math.max(score, 0.86);
+      }
+      if (
+        isGlpiOrSystemTagManagement &&
+        /\bcria[cç][aã]o\s+de\s+etiquetas?\b/i.test(normalizeText(hist.title || ""))
+      ) {
+        score = Math.max(score, 0.85);
+      }
+      if (
+        isSiteBannerOrContentUpdate &&
+        /\baltera[cç][aã]o\s+banner\s+site\b/i.test(normalizeText(hist.title || ""))
+      ) {
+        score = Math.max(score, 0.88);
+      }
       if (
         isWconectErrorOrMessageSync &&
         /\b(erro\s+de\s+conex[aã]o\s+wconect|corre[cç][aã]o\s+de\s+bugs.*wconect)/i.test(
@@ -1201,6 +1448,59 @@ export class KnowledgeEngine {
       const learnedList = loadLearnedFeedback();
       for (const mem of learnedList) {
         if (String(mem.ticket_id) === String(ticket.id)) continue;
+        // Evita parear memórias de Tags de Métricas / GTM no site (ex.: MEM-#44128) quando o chamado NÃO trata de tags/métricas no site
+        if (
+          !isSiteMetricsOrGtmTags &&
+          /\b(google\s+tag\s+manager|\bgtm\b|gtm-khvfl3c|tags?\s+de\s+acompanhamento\s+de\s+m[eé]tricas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Etiquetas no GLPI (ex.: MEM-#44325) quando o chamado NÃO trata de etiquetas no GLPI
+        if (
+          !isGlpiOrSystemTagManagement &&
+          /\b(adicionar\s+etiqueta\s+no\s+glpi|manuten[cç][aã]o\s+e\s+adi[cç][aã]o\s+de\s+etiquetas)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${mem.reply_template || ""}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de banner/conteúdo no site
+        if (
+          isSiteBannerOrContentUpdate &&
+          !/\bbanners?\b/i.test(normalizeText(`${mem.title} ${mem.problem_summary}`))
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata da tabela TUSS - Diárias, Taxas e Gases (00952)
+        if (
+          isTussDiariasTaxasGasesManualUpdate &&
+          !/\b(tuss|00952|di[aá]rias,\s*taxas\s+e\s+gases)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de desenvolvimento/duplicação de layout de etiqueta (ex.: etiqueta de oncologia)
+        if (
+          isCustomLabelLayoutOrFieldDev &&
+          !/\b(duplicar\s+etiqueta|etiquetas?\s+de\s+oncologia|etiquetas?\s+para\s+r[oó]tulos?)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de criação/manutenção de etiquetas no GLPI
+        if (
+          isGlpiOrSystemTagManagement &&
+          (!/\betiquetas?\b/i.test(normalizeText(`${mem.title} ${mem.problem_summary}`)) ||
+            /\b(zebra|impressora|bitdefender|atalho)\b/i.test(
+              normalizeText(`${mem.title} ${mem.problem_summary}`)
+            ))
+        ) {
+          continue;
+        }
         // Evita parear memórias de Oncologia (ex.: MEM-#42241) quando o chamado NÃO cita Oncologia
         if (
           !/\boncologia\b/i.test(normTicket) &&
@@ -1313,6 +1613,15 @@ export class KnowledgeEngine {
         if (
           isNextcloudDuplicationOrConflict &&
           !/\b(duplic|conflito|extens[aã]o)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros temas quando o chamado trata de alteração de caráter de atendimento em guia de Intercâmbio Nacional
+        if (
+          isHrpIntercambioGuiaStatusChange &&
+          !/\b(interc[aâ]mbio|guia|urg[eê]ncia|eletiv|senha\s+de\s+autoriza|car[aá]ter)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {
@@ -1547,6 +1856,31 @@ export class KnowledgeEngine {
         if (
           /\b(internet|wi-?fi|wifi|sinal|roteador|access point)\b/i.test(normTicket) &&
           /\b(oncologia|agenda|duracao|tempo minimo|medica[çc][aã]o|subcutanea|desenvolvimento|layout|interface)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros colaboradores quando o chamado trata de Inclusão em Grupos/Listas de E-mail (PB-UNI-67)
+        if (
+          isEmailDistributionGroup &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Redefinição de Senhas quando o chamado NÃO trata de redefinição ou esquecimento de senha
+        if (
+          !/\b(senha|redefini|redefinir|resetar|esqueci|desbloqueio\s+de\s+senha)\b/i.test(normTicket) &&
+          /\b(redefini[çc][ãa]o\s+de\s+senhas?|reset\s+de\s+senha)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de Troca de Toner quando o chamado trata de manutenção/defeito físico em impressora Samsung Repromaq (PB-UNI-68)
+        if (
+          isRepromaqSamsungMaintenance &&
+          /\b(troca\s+de\s+toner|toner|tonner)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
         ) {

@@ -1,4 +1,5 @@
 import path from "node:path";
+import os from "node:os";
 import express from "express";
 import cors from "cors";
 
@@ -19,7 +20,8 @@ import {
   loadPlaybooks,
   savePlaybooks,
 } from "./knowledgeEngine.js";
-import { AIAnalyst } from "./aiAnalyst.js";
+import { AIAnalyst, getOllamaRunningProcessInfo } from "./aiAnalyst.js";
+import { runRegressionTests } from "../scripts/test_playbook_regressions.js";
 import {
   COOKIE_NAME,
   authenticateUser,
@@ -542,6 +544,255 @@ app.post("/api/settings/test-glpi", async (req, res) => {
     res.json(status);
   } catch (err) {
     res.status(500).json({ ok: false, message: err.message });
+  }
+});
+
+// ====================================================================
+// TELEMETRIA E RECURSOS DO SISTEMA / LLMS EM TEMPO REAL
+// ====================================================================
+app.get("/api/system/telemetry", async (_req, res) => {
+  try {
+    const settings = loadSettings();
+    const totalMem = os.totalmem();
+    const freeMem = os.freemem();
+    const usedMem = totalMem - freeMem;
+    const procMem = process.memoryUsage();
+
+    let ollamaInfo = null;
+    if (settings.ai_provider === "ollama") {
+      ollamaInfo = await getOllamaRunningProcessInfo(settings.ollama_base_url);
+    }
+
+    res.json({
+      timestamp: Date.now(),
+      platform: os.platform(),
+      system_ram: {
+        total_gb: Number((totalMem / 1e9).toFixed(1)),
+        free_gb: Number((freeMem / 1e9).toFixed(1)),
+        used_gb: Number((usedMem / 1e9).toFixed(1)),
+        used_pct: Math.round((usedMem / totalMem) * 100),
+      },
+      host_memory: {
+        total_gb: Number((totalMem / 1e9).toFixed(1)),
+        free_gb: Number((freeMem / 1e9).toFixed(1)),
+        used_gb: Number((usedMem / 1e9).toFixed(1)),
+        usage_percent: Math.round((usedMem / totalMem) * 100),
+      },
+      process_memory: {
+        rss_mb: Math.round(procMem.rss / (1024 * 1024)),
+        heap_used_mb: Math.round(procMem.heapUsed / (1024 * 1024)),
+      },
+      node_process_memory: {
+        rss_mb: Math.round(procMem.rss / (1024 * 1024)),
+        heap_used_mb: Math.round(procMem.heapUsed / (1024 * 1024)),
+      },
+      provider: settings.ai_provider,
+      active_provider: settings.ai_provider,
+      model: settings.ai_provider === "ollama" ? settings.ollama_model : (settings.ai_provider === "gemini" ? settings.gemini_model : settings.openai_model),
+      ollama: ollamaInfo || { model: null, size_mb: 0, size_vram_mb: 0 },
+      ollama_model: ollamaInfo?.model ? {
+        name: ollamaInfo.model,
+        size_mb: ollamaInfo.size_mb,
+        size_vram_mb: ollamaInfo.size_vram_mb,
+      } : null,
+    });
+  } catch (err) {
+    res.status(500).json({ detail: err.message });
+  }
+});
+
+// ====================================================================
+// DETECÇÃO E AGRUPAMENTO DE INCIDENTES EM MASSA (CLUSTERING)
+// ====================================================================
+function detectIncidentClusters(tickets = [], analyses = {}) {
+  const clustersDef = [
+    {
+      id: "cluster_wconect",
+      name: "Instabilidade no WConect WhatsApp",
+      icon: "chat",
+      severity: "high",
+      regex: /\b(wconect|wconnect|disparo\s+whatsapp|mensagens?\s+wpp|mensageria)\b/i,
+    },
+    {
+      id: "cluster_network",
+      name: "Queda ou Instabilidade de Rede / Conectividade Wi-Fi",
+      icon: "wifi_off",
+      severity: "high",
+      regex: /\b(internet|wi-?fi|wifi|sem\s+rede|queda\s+de\s+link|sem\s+conex[aã]o|roteador|access\s+point)\b/i,
+    },
+    {
+      id: "cluster_voip",
+      name: "Telefonia / Ramais VoIP Inoperantes",
+      icon: "phone_disabled",
+      severity: "medium",
+      regex: /\b(telefone\s+mudo|ramal\s+sem\s+sinal|telefone\s+sem\s+sinal|pabx|linha\s+muda|trocar\s+ramal)\b/i,
+    },
+    {
+      id: "cluster_hrp",
+      name: "ERP HRP Unimed / Guias e Autorizações de Intercâmbio",
+      icon: "local_hospital",
+      severity: "high",
+      regex: /\b(hrp|guia\s+de\s+autoriza|senha\s+de\s+autoriza|interc[aâ]mbio|ptu|wautoriza|car[aá]ter\s+de\s+atendimento)\b/i,
+    },
+    {
+      id: "cluster_spdata",
+      name: "SGH Spdata / Faturamento e Tabelas",
+      icon: "table_chart",
+      severity: "medium",
+      regex: /\b(spdata|sgh|tuss|di[aá]rias,\s*taxas\s+e\s+gases|00952|ipsm|ipsmmg)\b/i,
+    },
+    {
+      id: "cluster_printers",
+      name: "Impressoras / Periféricos e Suprimentos",
+      icon: "print",
+      severity: "low",
+      regex: /\b(impressora|toner|recarga|tinta|etiquetas?\s+de\s+impress[aã]o|zebra)\b/i,
+    },
+    {
+      id: "cluster_nextcloud",
+      name: "Nextcloud / Unidrive / Conflito de Pastas",
+      icon: "cloud_sync",
+      severity: "medium",
+      regex: /\b(nextcloud|unidrive|sincroniza[çc][ãa]o|pasta\s+g|pasta\s+h)\b/i,
+    },
+  ];
+
+  const detected = [];
+  for (const c of clustersDef) {
+    const matchingTickets = [];
+    const depts = new Set();
+
+    for (const t of tickets) {
+      const text = `${t.title || ""} ${t.content || ""} ${t.category || ""}`;
+      if (c.regex.test(text)) {
+        matchingTickets.push({
+          id: t.id,
+          title: t.title,
+          requester: t.requester,
+          department: t.requester_department || "Setor",
+        });
+        if (t.requester_department) {
+          depts.add(t.requester_department);
+        }
+      }
+    }
+
+    if (matchingTickets.length >= 2) {
+      detected.push({
+        id: c.id,
+        name: c.name,
+        icon: c.icon,
+        severity: c.severity,
+        count: matchingTickets.length,
+        ticket_ids: matchingTickets.map((m) => m.id),
+        tickets: matchingTickets,
+        departments: Array.from(depts),
+        description: `${matchingTickets.length} chamados correlacionados detectados nos setores: ${Array.from(depts).join(", ") || "diversos"}.`,
+      });
+    }
+  }
+
+  return detected;
+}
+
+app.get("/api/tickets/incident-clusters", async (_req, res) => {
+  try {
+    const settings = loadSettings();
+    const client = new GLPIClient(settings);
+    const tickets = await client.listTickets();
+    const cache = loadAnalysesCache();
+    const clusters = detectIncidentClusters(tickets, cache);
+    res.json({ clusters, total_clusters: clusters.length });
+  } catch (err) {
+    res.status(500).json({ detail: err.message, clusters: [] });
+  }
+});
+
+// ====================================================================
+// TRIAGEM AUTOMÁTICA EM SEGUNDO PLANO (BACKGROUND AUTO-TRIAGE)
+// ====================================================================
+const autoTriageState = {
+  enabled: false,
+  timerId: null,
+  lastRun: null,
+  lastCount: 0,
+  totalAnalyzed: 0,
+};
+
+async function executeAutoTriageRun() {
+  if (!autoTriageState.enabled) return;
+  try {
+    const settings = loadSettings();
+    const client = new GLPIClient(settings);
+    const kbEngine = new KnowledgeEngine(client);
+    const analyst = new AIAnalyst(settings);
+
+    const openTickets = await client.listTickets();
+    const cache = loadAnalysesCache();
+    let analyzedThisRun = 0;
+
+    for (const ticket of openTickets) {
+      if (!cache[String(ticket.id)]) {
+        const matches = await kbEngine.searchAllLayers(ticket, 4);
+        const analysis = await analyst.analyzeTicket(ticket, matches);
+        saveAnalysisToCache(analysis);
+        analyzedThisRun += 1;
+        autoTriageState.totalAnalyzed += 1;
+      }
+    }
+
+    autoTriageState.lastRun = new Date().toISOString();
+    autoTriageState.lastCount = analyzedThisRun;
+    if (analyzedThisRun > 0) {
+      console.log(`[AutoTriage] Triagem em segundo plano analisou ${analyzedThisRun} novos chamados.`);
+    }
+  } catch (err) {
+    console.error("[AutoTriage] Erro na execução da auto-triagem:", err.message);
+  }
+}
+
+app.get("/api/system/auto-triage/status", (_req, res) => {
+  res.json({
+    enabled: autoTriageState.enabled,
+    last_run: autoTriageState.lastRun,
+    last_count: autoTriageState.lastCount,
+    total_auto_analyzed: autoTriageState.totalAnalyzed,
+  });
+});
+
+app.post("/api/system/auto-triage/toggle", async (req, res) => {
+  const desired = typeof req.body?.enabled === "boolean" ? req.body.enabled : !autoTriageState.enabled;
+  autoTriageState.enabled = desired;
+
+  if (autoTriageState.enabled) {
+    if (autoTriageState.timerId) clearInterval(autoTriageState.timerId);
+    executeAutoTriageRun();
+    autoTriageState.timerId = setInterval(executeAutoTriageRun, 180000); // a cada 3 minutos
+  } else {
+    if (autoTriageState.timerId) {
+      clearInterval(autoTriageState.timerId);
+      autoTriageState.timerId = null;
+    }
+  }
+
+  res.json({
+    ok: true,
+    enabled: autoTriageState.enabled,
+    message: autoTriageState.enabled
+      ? "Auto-triagem em segundo plano ATIVADA (executa a cada 3 min)."
+      : "Auto-triagem em segundo plano DESATIVADA.",
+  });
+});
+
+// ====================================================================
+// TESTES DE REGRESSÃO HEURÍSTICA VIA API
+// ====================================================================
+app.get("/api/system/test-regressions", async (_req, res) => {
+  try {
+    const report = await runRegressionTests();
+    res.json(report);
+  } catch (err) {
+    res.status(500).json({ detail: err.message, all_passed: false });
   }
 });
 

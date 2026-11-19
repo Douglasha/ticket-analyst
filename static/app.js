@@ -13,6 +13,12 @@ let state = {
   glpiCategories: [],
   dismissedCategoryTickets: {},
   settings: null,
+  clusterFilterTicketIds: null,
+  incidentClusters: [],
+  autoTriage: {
+    enabled: false,
+    lastRun: null,
+  },
 };
 
 let searchTimeout = null;
@@ -39,10 +45,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
   initSidebar();
   await checkAuthStatus();
+  if (state.user) {
+    fetchSystemTelemetry();
+    checkAutoTriageStatus();
+    fetchIncidentClusters();
+  }
+
+  // Atualiza telemetria da máquina e status do modelo a cada 6s
+  setInterval(() => {
+    if (state.user && !document.hidden) {
+      fetchSystemTelemetry();
+    }
+  }, 6000);
+
   // Sincroniza a fila automaticamente a cada 60s para remover chamados solucionados/fechados no GLPI
   setInterval(() => {
     if (state.user && !document.getElementById("tab-triage")?.classList.contains("hidden")) {
       loadTickets(false);
+      fetchIncidentClusters();
     }
   }, 60000);
 });
@@ -160,6 +180,9 @@ async function handleLoginSubmit(event) {
 
     await loadSettingsData();
     await loadTickets(true);
+    fetchSystemTelemetry();
+    checkAutoTriageStatus();
+    fetchIncidentClusters();
   } catch (err) {
     errText.textContent = "Erro ao conectar ao servidor: " + err.message;
     errBox.classList.remove("hidden");
@@ -322,6 +345,14 @@ async function loadTickets(autoSelectFirst = false) {
         !t.is_closed_or_solved &&
         !/solucionado|fechado/i.test(t.status_label || "")
     );
+
+    // Aplica filtro por cluster de incidente se ativo
+    if (Array.isArray(state.clusterFilterTicketIds) && state.clusterFilterTicketIds.length > 0) {
+      state.tickets = state.tickets.filter((t) =>
+        state.clusterFilterTicketIds.includes(t.id)
+      );
+    }
+
     state.analyses = { ...state.analyses, ...(data.analyses || {}) };
 
     // Atualiza indicador de modo (Simulação vs Produção)
@@ -463,6 +494,23 @@ function renderTicketList() {
       )}</span>
             <span class="font-medium shrink-0">${escapeHtml(t.assigned_group)}</span>
           </div>
+          ${(() => {
+            if (analysis && analysis.telemetry) {
+              const tel = analysis.telemetry;
+              const bText = tel.formatted_badge || (tel.duration_ms ? `${tel.duration_ms}ms` : "");
+              if (bText) {
+                return `
+                  <div class="flex items-center justify-between text-[10px] font-mono mt-1 pt-1 border-t border-white/5 opacity-85" style="color: var(--brand-soft-text);">
+                    <span class="inline-flex items-center gap-1 truncate" title="Duração: ${tel.duration_ms || 0}ms | RAM Host: ${tel.system_ram_used_gb || '--'}GB | Tokens: ${tel.tokens?.total_tokens || '--'}">
+                      ${escapeHtml(bText)}
+                    </span>
+                    <span class="shrink-0 text-[9px] opacity-70 font-sans" style="color: var(--text-muted);">${tel.provider_type === "ollama" ? (tel.ollama_loaded ? "VRAM Ativa" : "RAM") : "Cloud"}</span>
+                  </div>
+                `;
+              }
+            }
+            return "";
+          })()}
         </div>
       `;
     })
@@ -701,6 +749,7 @@ async function analyzeCurrentTicket(forceRefresh = false) {
       updateKpiCards();
       renderTicketList();
       renderAnalysisBox(data.analysis);
+      fetchSystemTelemetry();
       if (forceRefresh) {
         showToast(`Tratativa do chamado #${ticketId} atualizada.`);
       }
@@ -734,6 +783,7 @@ async function analyzeAllVisible() {
     if (state.selectedTicketId && state.analyses[String(state.selectedTicketId)]) {
       renderAnalysisBox(state.analyses[String(state.selectedTicketId)]);
     }
+    fetchSystemTelemetry();
     showToast(`${data.analyzed_count} chamados analisados com sucesso.`);
   } catch (err) {
     showToast("Erro ao analisar fila: " + err.message, "error");
@@ -971,6 +1021,108 @@ function renderAnalysisBox(analysis) {
     analysis.detected_domain;
   document.getElementById("analysis-provider-label").textContent =
     analysis.provider_used;
+
+  // 0. Atualiza Telemetria & Recursos de Hardware da Inferência
+  let tel = analysis.telemetry;
+  if (!tel && analysis.analyzed_at) {
+    tel = {
+      duration_ms: null,
+      model: analysis.provider_used || "Análise Prévia (Cache)",
+      provider_used: analysis.provider_used || "Análise Prévia (Cache)",
+      provider_type: /gemini/i.test(analysis.provider_used || "")
+        ? "gemini"
+        : /openai/i.test(analysis.provider_used || "")
+        ? "openai"
+        : "ollama",
+      ollama_model_total_mb: null,
+      system_ram_used_gb: null,
+      tokens: null,
+      is_cached_legacy: true,
+    };
+  }
+
+  const telDurationEl = document.getElementById("telemetry-duration");
+  const telModelEl = document.getElementById("telemetry-model-name");
+  const telModelMemEl = document.getElementById("telemetry-model-mem");
+  const telProcRamEl = document.getElementById("telemetry-process-ram");
+  const telHostRamEl = document.getElementById("telemetry-host-ram");
+
+  if (tel) {
+    if (telDurationEl) {
+      if (tel.is_cached_legacy) {
+        telDurationEl.textContent = "Em Cache";
+      } else {
+        const durText =
+          tel.duration_ms >= 1000
+            ? `${(tel.duration_ms / 1000).toFixed(2)}s`
+            : `${tel.duration_ms || 0}ms`;
+        const tokText = tel.tokens?.total_tokens
+          ? ` • ${tel.tokens.total_tokens} tk`
+          : "";
+        telDurationEl.textContent = `${durText}${tokText}`;
+      }
+    }
+    if (telModelEl) {
+      if (tel.execution_mode === "heuristic_instant") {
+        telModelEl.textContent = `${tel.model || "qwen2.5:3b"} (Instantâneo)`;
+        telModelEl.title =
+          "Resolvido pelo Copiloto Heurístico local sem necessidade de inferência pesada";
+      } else {
+        telModelEl.textContent = tel.model || analysis.provider_used || "-";
+        telModelEl.title = tel.provider_used || "";
+      }
+    }
+    if (telModelMemEl) {
+      if (tel.is_cached_legacy) {
+        telModelMemEl.textContent = "Histórico em disco";
+      } else if (tel.ollama_model_total_mb) {
+        const vram = tel.ollama_model_vram_mb
+          ? `${tel.ollama_model_vram_mb}MB VRAM`
+          : "";
+        const ram = tel.ollama_model_ram_mb
+          ? `${tel.ollama_model_ram_mb}MB RAM`
+          : "";
+        telModelMemEl.textContent =
+          [vram, ram].filter(Boolean).join(" + ") ||
+          `${tel.ollama_model_total_mb} MB`;
+      } else if (tel.execution_mode === "heuristic_instant") {
+        telModelMemEl.textContent = "0 MB (Heurístico)";
+        telModelMemEl.title =
+          "Não consumiu VRAM/RAM da LLM pois a resposta foi resolvida pelo Copiloto Local.";
+      } else if (tel.provider_type === "ollama") {
+        telModelMemEl.textContent = tel.ollama_loaded
+          ? "Ollama Ativo"
+          : "0 MB (Ocioso)";
+      } else {
+        telModelMemEl.textContent = "Nuvem (0 MB local)";
+      }
+    }
+    if (telProcRamEl) {
+      if (tel.node_rss_mb) {
+        telProcRamEl.textContent = `${tel.node_rss_mb} MB (Processo)`;
+        telProcRamEl.title = `Memória física RAM específica alocada para o processo do Ticket Analyst executar esta análise: ${tel.node_rss_mb} MB.`;
+      } else if (tel.is_cached_legacy) {
+        telProcRamEl.textContent = "Reanalise para aferir";
+      } else {
+        telProcRamEl.textContent = "-";
+      }
+    }
+    if (telHostRamEl) {
+      telHostRamEl.textContent = tel.system_ram_used_gb
+        ? `${tel.system_ram_used_gb}/${tel.system_ram_total_gb} GB (${tel.system_ram_pct}%)`
+        : tel.is_cached_legacy
+        ? "Reanalise para aferir"
+        : "-";
+      telHostRamEl.title =
+        "Memória RAM total em uso por todo o computador (Windows + Chrome + outros aplicativos).";
+    }
+  } else {
+    if (telDurationEl) telDurationEl.textContent = "--";
+    if (telModelEl) telModelEl.textContent = analysis.provider_used || "-";
+    if (telModelMemEl) telModelMemEl.textContent = "--";
+    if (telProcRamEl) telProcRamEl.textContent = "--";
+    if (telHostRamEl) telHostRamEl.textContent = "--";
+  }
 
   document.getElementById("analysis-intent").textContent =
     analysis.translated_intent;
@@ -1797,4 +1949,221 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+/* =========================================================================
+ * 10. MLOPS TELEMETRY, MASS INCIDENTS, AUTO-TRIAGE & REGRESSION TESTING
+ * ========================================================================= */
+
+// Telemetria em tempo real do sistema (RAM da Máquina, Processo Node e LLM)
+async function fetchSystemTelemetry() {
+  try {
+    const res = await apiFetch("/api/system/telemetry");
+    if (!res.ok) return;
+    const data = await res.json();
+    const badgeEl = document.getElementById("system-telemetry-badge");
+    const textEl = document.getElementById("system-telemetry-text");
+    if (!badgeEl || !textEl) return;
+
+    const hostMem = data.system_ram || data.host_memory || {};
+    const freeGb = hostMem.free_gb != null ? hostMem.free_gb : "--";
+    const usedGb = hostMem.used_gb != null ? hostMem.used_gb : "--";
+    const totalGb = hostMem.total_gb != null ? hostMem.total_gb : "--";
+    const usagePct =
+      hostMem.used_pct != null
+        ? hostMem.used_pct
+        : hostMem.usage_percent != null
+        ? hostMem.usage_percent
+        : "--";
+    const provider = String(
+      data.provider || data.active_provider || "ollama"
+    ).toUpperCase();
+
+    let llmDetail = "";
+    if (data.ollama_model && data.ollama_model.name) {
+      const om = data.ollama_model;
+      const vram =
+        om.size_vram_mb > 0
+          ? `${om.size_vram_mb}MB VRAM`
+          : `${om.size_mb}MB RAM`;
+      llmDetail = ` • ${om.name} (${vram})`;
+    } else if (data.ollama && data.ollama.model) {
+      const om = data.ollama;
+      const vram =
+        om.size_vram_mb > 0
+          ? `${om.size_vram_mb}MB VRAM`
+          : `${om.size_mb}MB RAM`;
+      llmDetail = ` • ${om.model} (${vram})`;
+    } else if (data.model) {
+      llmDetail = ` • ${data.model}`;
+    }
+
+    textEl.textContent = `RAM: ${usedGb}/${totalGb}GB (${usagePct}%) • ${provider}${llmDetail}`;
+    badgeEl.title = `Host RAM: ${usedGb} GB usados de ${totalGb} GB (${freeGb} GB livres, ${usagePct}% em uso)\nProcesso Node.js RSS: ${
+      data.process_memory?.rss_mb || data.node_process_memory?.rss_mb || "--"
+    } MB\nProvedor Ativo: ${provider}\nModelo: ${data.model || "--"}`;
+  } catch (e) {
+    // Silencioso em caso de erro de rede transiente
+  }
+}
+
+// Alerta de incidentes em massa (clustering)
+async function fetchIncidentClusters() {
+  try {
+    const res = await apiFetch("/api/tickets/incident-clusters");
+    if (!res.ok) return;
+    const data = await res.json();
+    state.incidentClusters = data.clusters || [];
+
+    const box = document.getElementById("incident-clusters-box");
+    const listEl = document.getElementById("incident-clusters-list");
+    const titleEl = document.getElementById("incident-clusters-title");
+    if (!box || !listEl) return;
+
+    if (!state.incidentClusters || state.incidentClusters.length === 0) {
+      box.classList.add("hidden");
+      listEl.innerHTML = "";
+      return;
+    }
+
+    box.classList.remove("hidden");
+    const totalImpacted = state.incidentClusters.reduce((acc, c) => acc + (c.count || 0), 0);
+    if (titleEl) {
+      titleEl.textContent = `Alerta de Incidente em Massa: ${state.incidentClusters.length} padrão(ões) detectado(s) (${totalImpacted} chamados)`;
+    }
+
+    listEl.innerHTML = state.incidentClusters.map((cluster) => {
+      const isFiltered = Array.isArray(state.clusterFilterTicketIds) &&
+        state.clusterFilterTicketIds.length === cluster.ticket_ids.length &&
+        cluster.ticket_ids.every((id) => state.clusterFilterTicketIds.includes(id));
+
+      const filterBtnLabel = isFiltered ? "Remover Filtro" : `Filtrar (${cluster.count} chamados)`;
+      const filterBtnClass = isFiltered
+        ? "bg-amber-600 text-white font-bold"
+        : "bg-amber-500/20 text-amber-800 dark:text-amber-200 hover:bg-amber-500/30";
+
+      return `
+        <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded-lg bg-white/40 dark:bg-black/20 border border-amber-500/20 text-xs">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="px-2 py-0.5 rounded-full font-bold text-[10px] bg-amber-500 text-white uppercase tracking-wider shrink-0">${escapeHtml(cluster.label)}</span>
+            <span class="font-medium truncate" style="color: var(--text-main);">${escapeHtml(cluster.description)}</span>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-[11px] font-mono opacity-80" style="color: var(--text-secondary);">IDs: #${cluster.ticket_ids.slice(0, 5).join(", #")}${cluster.ticket_ids.length > 5 ? "..." : ""}</span>
+            <button onclick="toggleClusterFilter('${cluster.id}')" class="px-2.5 py-1 rounded text-[11px] font-semibold transition ${filterBtnClass}">
+              ${filterBtnLabel}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  } catch (e) {
+    console.error("Erro ao verificar clusters de incidentes:", e);
+  }
+}
+
+function toggleClusterFilter(clusterId) {
+  const cluster = (state.incidentClusters || []).find((c) => c.id === clusterId);
+  if (!cluster) return;
+
+  const isCurrentFilter = Array.isArray(state.clusterFilterTicketIds) &&
+    state.clusterFilterTicketIds.length === cluster.ticket_ids.length &&
+    cluster.ticket_ids.every((id) => state.clusterFilterTicketIds.includes(id));
+
+  if (isCurrentFilter) {
+    state.clusterFilterTicketIds = null;
+    showToast("Filtro de incidente em massa desativado.");
+  } else {
+    state.clusterFilterTicketIds = [...cluster.ticket_ids];
+    showToast(`Filtrando ${cluster.ticket_ids.length} chamados do cluster "${cluster.label}".`, "info");
+  }
+
+  loadTickets(false);
+  fetchIncidentClusters();
+}
+
+function dismissIncidentClusters() {
+  const box = document.getElementById("incident-clusters-box");
+  if (box) box.classList.add("hidden");
+  if (state.clusterFilterTicketIds) {
+    state.clusterFilterTicketIds = null;
+    loadTickets(false);
+  }
+}
+
+// Auto-Triagem em Segundo Plano
+async function checkAutoTriageStatus() {
+  try {
+    const res = await apiFetch("/api/system/auto-triage/status");
+    if (!res.ok) return;
+    const data = await res.json();
+    state.autoTriage = data;
+    updateAutoTriageUI(data.enabled, data);
+  } catch (e) {
+    // Silencioso
+  }
+}
+
+async function toggleAutoTriage() {
+  try {
+    const res = await apiFetch("/api/system/auto-triage/toggle", { method: "POST" });
+    if (!res.ok) return;
+    const data = await res.json();
+    state.autoTriage = data;
+    updateAutoTriageUI(data.enabled, data);
+    showToast(data.message, data.enabled ? "success" : "info");
+  } catch (e) {
+    showToast("Erro ao alternar auto-triagem: " + e.message, "error");
+  }
+}
+
+function updateAutoTriageUI(enabled, details) {
+  const btn = document.getElementById("btn-toggle-autotriage");
+  const icon = document.getElementById("autotriage-icon");
+  const label = document.getElementById("autotriage-label");
+  if (!btn || !icon || !label) return;
+
+  if (enabled) {
+    btn.className = "btn-counters-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400";
+    icon.className = "material-symbols-outlined icon-sm text-emerald-500 animate-pulse";
+    icon.textContent = "bolt";
+    label.textContent = "Auto-Triagem: ON";
+    btn.title = `Auto-triagem ativa a cada 3 min. Total analisado: ${details?.analyzed_count || 0}. Clique para desativar.`;
+  } else {
+    btn.className = "btn-counters-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-sm";
+    icon.className = "material-symbols-outlined icon-sm text-amber-500";
+    icon.textContent = "bolt";
+    label.textContent = "Auto-Triagem: OFF";
+    btn.title = "Clique para ativar a triagem periódica automática de novos chamados em segundo plano";
+  }
+}
+
+// Teste de Regressão Heurístico dos Playbooks da Unimed
+async function runSystemRegressionTests() {
+  const btn = event?.currentTarget || document.querySelector("button[onclick='runSystemRegressionTests()']");
+  const originalHtml = btn ? btn.innerHTML : null;
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<span class="material-symbols-outlined icon-sm animate-spin text-teal-600">progress_activity</span> <span>Testando...</span>`;
+  }
+
+  showToast("Executando suíte de testes de regressão dos Playbooks...", "info");
+
+  try {
+    const res = await apiFetch("/api/system/test-regressions");
+    const data = await res.json();
+
+    if (data.passed) {
+      showToast(`Sucesso! ${data.total}/${data.total} Playbooks testados passaram sem colisão em ${data.duration_ms}ms!`, "success");
+    } else {
+      showToast(`Atenção: ${data.failed}/${data.total} teste(s) falharam na suíte de regressão.`, "error");
+    }
+  } catch (e) {
+    showToast("Erro ao executar teste de regressão: " + e.message, "error");
+  } finally {
+    if (btn && originalHtml) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
 }
