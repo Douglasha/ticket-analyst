@@ -35,7 +35,9 @@ async function apiFetch(url, options = {}) {
     credentials: "same-origin",
   });
   if (res.status === 401 && !url.startsWith("/api/auth/")) {
-    showLoginScreen();
+    state.user = null;
+    localStorage.removeItem("ta_auth_token");
+    showLoginScreen(false);
     throw new Error("Sessão expirada. Faça login novamente.");
   }
   return res;
@@ -44,6 +46,13 @@ async function apiFetch(url, options = {}) {
 document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
   initSidebar();
+
+  // Foca inicialmente no campo de usuário sem interferir em digitação já iniciada
+  const initialUsernameInput = document.getElementById("login-username");
+  if (initialUsernameInput && !document.activeElement?.tagName?.match(/INPUT|TEXTAREA|SELECT/i)) {
+    initialUsernameInput.focus();
+  }
+
   await checkAuthStatus();
   if (state.user) {
     fetchSystemTelemetry();
@@ -78,7 +87,7 @@ async function checkAuthStatus() {
   try {
     const res = await apiFetch("/api/auth/me");
     if (!res.ok) {
-      showLoginScreen();
+      showLoginScreen(false);
       return;
     }
     const data = await res.json();
@@ -88,18 +97,49 @@ async function checkAuthStatus() {
       await loadSettingsData();
       await loadTickets(true);
     } else {
-      showLoginScreen();
+      showLoginScreen(false);
     }
   } catch {
-    showLoginScreen();
+    showLoginScreen(false);
   }
 }
 
-function showLoginScreen() {
+function showLoginScreen(forceFocus = false) {
   const screen = document.getElementById("login-screen");
+  const wasHidden = screen ? screen.classList.contains("hidden") : false;
   if (screen) screen.classList.remove("hidden");
-  const userInput = document.getElementById("login-username");
-  if (userInput) setTimeout(() => userInput.focus(), 50);
+
+  // Proteção de foco: se o usuário já estiver interagindo ou focado em Usuário ou Senha,
+  // NUNCA sequestra o foco de volta para o primeiro campo a menos que forceFocus seja explicitamente true.
+  const activeEl = document.activeElement;
+  const usernameInput = document.getElementById("login-username");
+  const passwordInput = document.getElementById("login-password");
+  const isInteracting =
+    activeEl && (activeEl === usernameInput || activeEl === passwordInput);
+
+  if (isInteracting && !forceFocus) {
+    return;
+  }
+
+  // Se a tela de login já estava visível e não é um foco forçado, não interfere na digitação
+  if (!wasHidden && !forceFocus) {
+    return;
+  }
+
+  // Foco inteligente
+  if (usernameInput) {
+    setTimeout(() => {
+      // Reavalia antes de focar: se o usuário clicou ou focou na senha nesse intervalo, não rouba o foco
+      const currentActive = document.activeElement;
+      if (currentActive === passwordInput) return;
+
+      if (!usernameInput.value.trim()) {
+        usernameInput.focus();
+      } else if (passwordInput && !passwordInput.value) {
+        passwordInput.focus();
+      }
+    }, 50);
+  }
 }
 
 function hideLoginScreen() {
@@ -201,7 +241,7 @@ async function logoutUser() {
   localStorage.removeItem("ta_auth_token");
   state.user = null;
   state.tickets = [];
-  showLoginScreen();
+  showLoginScreen(true);
   showToast("Sessão encerrada com segurança.", "info");
 }
 

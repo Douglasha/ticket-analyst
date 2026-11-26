@@ -509,7 +509,7 @@
   {
     "id": "PB-UNI-16",
     "domain": "Sistemas Internos / ERP / Sistemas Corporativos",
-    "title": "Solicitação de Extração de Indicadores e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
+    "title": "Solicitação de Extração de Indicadores, Produção Médica e Relatórios Gerenciais (WConect / BI / Sistemas Internos)",
     "keywords": [
       "indicadores",
       "indicador",
@@ -520,7 +520,19 @@
       "relatorio de atendimento",
       "extracao de relatorio",
       "levantamento de dados",
-      "produtividade"
+      "produtividade",
+      "extração produção cooperados",
+      "extracao producao cooperados",
+      "produção dos médicos",
+      "producao dos medicos",
+      "produção cooperados",
+      "producao cooperados",
+      "produção médica",
+      "producao medica",
+      "envio de produção",
+      "envio de producao",
+      "extração via excel",
+      "extracao via excel"
     ],
     "symptoms": "Solicitação de extração ou envio de indicadores de atendimento, produtividade ou relatórios gerenciais de sistemas internos (ex: WConect por recepcionista, BI, SGH), frequentemente aberta na categoria incorreta (ex: Sistemas Operacionais ou Aplicativos).",
     "required_info": [
@@ -2588,5 +2600,310 @@
       "[PB-UNI-68] Acompanhar o agendamento e a visita presencial do técnico da Repromaq ao setor, validando os testes de impressão após o reparo para encerramento do chamado no GLPI."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à manutenção preventiva/corretiva da impressora **{modelo}** do setor **{setor}**.\n\nInformamos que os modelos Samsung M4020 e M4080 são equipamentos terceirizados sob contrato de outsourcing com o fornecedor **Repromaq**. Por se tratar de uma falha/necessidade de manutenção no equipamento ({sintoma}), nossa equipe de T.I. já está abrindo o chamado técnico diretamente junto à Repromaq para agendamento da visita técnica de revisão e reparo.\n\nAcompanharemos o atendimento junto ao fornecedor e, assim que a visita técnica for confirmada ou a manutenção for concluída, atualizaremos você por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-69",
+    "domain": "Banco de Dados, BI e Relatórios (SGH Spdata / Relatórios Agendados)",
+    "title": "Inclusão de E-mail em Relatórios Agendados e Periódicos do Hospital (Sistema SGH / Spdata — Atendimentos, Óbitos e Internados)",
+    "keywords": [
+      "relatorios atendimentos hospital",
+      "relatórios atendimentos hospital",
+      "atendimentos realizados no hospital",
+      "relatorios de todos os atendimentos",
+      "relatórios de todos os atendimentos",
+      "pacientes evoluidos a obito",
+      "pacientes evoluídos à óbito",
+      "evoluídos a óbito",
+      "evoluídos à óbito",
+      "atendimento externo adulto",
+      "atendimento externo pediatrico",
+      "atendimento externo pediátrico",
+      "lista de pacientes internados",
+      "pacientes internados",
+      "vsilva@unimedsudoestemg.coop.br",
+      "viviane do nucleo",
+      "viviane do núcleo",
+      "relatorios spdata",
+      "relatórios spdata",
+      "relatorios agendados spdata",
+      "hora em hora",
+      "receber os relatorios",
+      "receber os relatórios"
+    ],
+    "symptoms": "Solicitação de colaborador(a) (ex.: Vanessa do setor Promoprev no chamado #44426) para cadastramento/inclusão de seu e-mail corporativo no envio automático de relatórios periódicos de atendimentos do Hospital Unimed gerados pelo sistema SGH Spdata (ex.: Relatório de pacientes evoluídos a óbito, Atendimento externo adulto, Atendimento externo pediátrico e Lista de pacientes internados, espelhando a rotina da colaboradora Viviane do Núcleo). Como o SPdata gera essas rotinas de hora em hora, é necessário alinhar com a colaboradora quais períodos/horários e frequência desejada para recebimento das mensagens em sua caixa postal.",
+    "required_info": [
+      "Definição dos períodos, horários ou frequência desejada para o disparo dos relatórios na caixa postal (uma vez ao dia, horários específicos ou de hora em hora)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-69] Manter a categoria do chamado no GLPI em 'T.I > BD > Big Data e BI > Relatórios' (atribuído à equipe de Banco de Dados / Sistemas).",
+      "[PB-UNI-69] Identificar os 4 relatórios periódicos do SGH Spdata vinculados à rotina de atendimentos do Hospital Unimed: 1) Pacientes evoluídos a óbito; 2) Atendimento externo adulto; 3) Atendimento externo pediátrico; 4) Lista de pacientes internados (referência: colaboradora Viviane do Núcleo).",
+      "[PB-UNI-69] Alinhar com a solicitante (Vanessa - Promoprev) a frequência e períodos de entrega desejados para não sobrecarregar sua caixa de e-mail (uma vez que o agendador padrão do SPdata executa de hora em hora).",
+      "[PB-UNI-69] Acessar o módulo agendador de relatórios / rotinas automáticas do SGH Spdata e cadastrar a conta de e-mail vsilva@unimedsudoestemg.coop.br na lista de destinatários com a periodicidade definida.",
+      "[PB-UNI-69] Validar o disparo do primeiro lote de relatórios com a solicitante e encerrar o chamado no GLPI."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para inclusão do seu e-mail (**{email}**) para recebimento dos relatórios periódicos de atendimentos do Hospital no sistema **SGH (Spdata)**, espelhando o envio já realizado para a colaboradora Viviane do Núcleo:\n1. **Relatório de pacientes evoluídos a óbito**;\n2. **Atendimento externo adulto**;\n3. **Atendimento externo pediátrico**;\n4. **Lista de pacientes internados**.\n\nComo o agendador do SPdata gera esses relatórios com rotina **de hora em hora**, para que possamos parametrizar o envio sem sobrecarregar a sua caixa de entrada, você poderia nos confirmar:\n- **Quais períodos ou horários você deseja receber esses relatórios?** *(Por exemplo: uma vez ao dia pela manhã, no fechamento do dia, em horários específicos ou realmente de hora em hora?)*\n\nAssim que você nos confirmar a periodicidade desejada por aqui, já configuramos o agendamento no SPdata!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-70",
+    "domain": "Parametrização de Sistemas e Tabelas (SGH Spdata / PEP)",
+    "title": "Criação e Parametrização de Protocolo / Prescrição Padrão no PEP SGH (Prescrição Geral — SPDATA)",
+    "keywords": [
+      "criar modelo de prescricao no pep",
+      "criar modelo de prescrição no pep",
+      "modelo de prescricao no pep",
+      "modelo de prescrição no pep",
+      "prescricao no pep",
+      "prescrição no pep",
+      "protocolo prescricao geral",
+      "protocolos prescrição geral",
+      "prescricao srpa",
+      "prescrição srpa",
+      "recuperacao pos-anestesica",
+      "recuperação pós-anestésica",
+      "sala de recuperacao",
+      "sala de recuperação",
+      "anestesistas e cirurgioes",
+      "anestesistas e cirurgiões",
+      "prescricao padrao",
+      "prescrição padrão",
+      "tornar esta prescricao em protocolo padrao",
+      "tornar esta prescrição em protocolo padrão",
+      "lancar itens"
+    ],
+    "symptoms": "Solicitação de profissional de saúde, médico, coordenação de enfermagem ou centro cirúrgico (ex.: Fernanda no setor H Centro Cirúrgico no chamado #44464) para cadastrar ou disponibilizar um modelo/protocolo de prescrição padrão no PEP do sistema SGH Spdata (ex.: Prescrição SRPA pós-operatória para anestesistas e cirurgiões com relação de medicamentos/cuidados anexada). Trata-se de procedimento operacional padrão do PEP (criado via Histórico do Prontuário ou no menu Configurações > Protocolos Prescrição Geral), documentado no Artigo KB #96 da Base de Conhecimento.",
+    "required_info": [
+      "Relação de medicamentos, dosagens, vias de administração, dietas e cuidados da prescrição padrão (fornecida no relato ou em arquivo anexo como Prescrição SRPA.odt)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-70] Reclassificar a categoria do chamado no GLPI de 'T.I > DV > Desenvolvimento > Novas aplicações' para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164) ou 'T.I > ST > Dúvidas e Orientações' (ID 160).",
+      "[PB-UNI-70] Consultar o artigo oficial da Base de Conhecimento GLPI KB #96 ('SGH - Spdata > PEP > Como Criar Protocolo e Modelo de Prescrição Padrão no PEP SGH (Prescrição Geral)').",
+      "[PB-UNI-70] Analisar a minuta/anexo fornecido pelo solicitante (ex.: anexo 'Prescrição SRPA.odt' da Fernanda - Centro Cirúrgico) contendo a grade de medicamentos, diluições, vias e cuidados para anestesistas e cirurgiões.",
+      "[PB-UNI-70] Acessar o sistema SPDATA no menu: SGH > PEP > Configurações > Protocolos Prescrição Geral (ou converter uma prescrição confirmada no Histórico do prontuário clicando com botão direito em 'Tornar esta prescrição em protocolo padrão').",
+      "[PB-UNI-70] Preencher os campos do protocolo: Código Protocolo, Descrição (ex.: 'PRESCRIÇÃO SRPA - RECUPERAÇÃO CIRÚRGICA'), Vigência Inicial, Uso Geral, Especialidades/Acomodações aplicáveis e lançar os itens com dosagens e frequências.",
+      "[PB-UNI-70] Gravar o protocolo no PEP, confirmar a disponibilização para os prescritores e responder ao solicitante no GLPI referenciando o Artigo KB #96."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à criação do modelo/protocolo de prescrição padrão no **PEP do sistema SGH Spdata** ({titulo}), com base na minuta encaminhada ({anexo}).\n\nInformamos que a criação de prescrições padrão no sistema SPDATA segue o procedimento oficial homologado e documentado no **Artigo KB #96** da Base de Conhecimento do GLPI, contando com duas alternativas:\n1. **Via Configurações do PEP:** Acessando `SGH > PEP > Configurações > Protocolos Prescrição Geral`, onde definimos código, vigência, uso (Geral), especialidades e realizamos o lançamento dos itens com dosagens e vias;\n2. **Via Histórico da Prescrição:** Clicando com o botão direito sobre uma prescrição confirmada no prontuário e selecionando *\"Tornar esta prescrição em protocolo padrão\"*.\n\nNossa equipe de T.I. / Sistemas já iniciou o cadastramento do protocolo conforme a relação de medicamentos e orientações da SRPA encaminhada. Assim que a parametrização for finalizada e disponibilizada para os anestesistas e cirurgiões, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-71",
+    "domain": "Segurança da Informação, Governança e Compliance (Auditorias PALC / ONA / AutoLac)",
+    "title": "Evidências de Segurança da Informação, Rastreabilidade e Backup para Auditorias e Acreditações (PALC / ONA — Sistema AutoLac)",
+    "keywords": [
+      "auditoria diagnostica palc",
+      "auditoria diagnóstica palc",
+      "palc 2025",
+      "palc",
+      "certificacao ona",
+      "certificação ona",
+      "auditoria ona",
+      "acreditacao laboratorial",
+      "acreditação laboratorial",
+      "registros de controle de acesso",
+      "rastreabilidade",
+      "alteracao e recuperacao de registros eletronicos",
+      "alteração e recuperação de registros eletrônicos",
+      "recuperacao de registros eletronicos",
+      "recuperação de registros eletrônicos",
+      "autolac",
+      "laboratorio",
+      "laboratório",
+      "compliance auditorias",
+      "politicas de si",
+      "políticas de si",
+      "audit trail",
+      "trilha de auditoria"
+    ],
+    "symptoms": "Solicitação da Coordenação do Laboratório (ex.: Rosy Ellen Freire Viana no chamado #44502) demandando a formalização dos registros de controle de acesso, rastreabilidade de dados, trilha de auditoria (audit trail) para alterações e recuperação de registros eletrônicos (política de backup e testes de restauração/restore) no sistema de informação laboratorial AutoLac, em atendimento aos requisitos normativos da Auditoria Diagnóstica PALC 2025 (SBPC/ML) e do processo de certificação da ONA.",
+    "required_info": [
+      "Alinhamento técnico com a Coordenação do Laboratório e equipe de Segurança da Informação (Raphael Campos) para consolidação do Dossiê de Evidências de T.I. (POP de Backup/Restore, Matriz de Perfis AutoLac e Logs de Auditoria)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-71] Manter a categoria do chamado no GLPI em 'T.I > SI > Compliance, Auditorias e Políticas de SI' e grupo atribuído 'T.I > SI (Segurança)'.",
+      "[PB-UNI-71] Identificar os 4 pilares normativos exigidos pela auditoria PALC/ONA para o sistema AutoLac: 1) Controle de acesso individual e matriz de perfis; 2) Rastreabilidade analítica; 3) Trilha de auditoria (audit trail) para alterações/retificações de laudos; 4) POP de Backup, retenção legal (20 anos) e relatório de teste de restauração (restore).",
+      "[PB-UNI-71] Consolidar o Dossiê Técnico de Evidências de Segurança e T.I. em conjunto com o gestor de Segurança da Informação (Raphael Campos).",
+      "[PB-UNI-71] Alinhar com a Coordenação do Laboratório (Rosy Ellen) e a consultoria de acreditação a apresentação dos relatórios de auditoria e procedimentos homologados.",
+      "[PB-UNI-71] Disponibilizar os documentos formais no chamado e posicionar para encerramento após validação dos quesitos da auditoria."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nCompreendemos perfeitamente a sua solicitação. Os itens solicitados referem-se aos requisitos normativos do capítulo de Tecnologia da Informação e Gestão de Registros Eletrônicos das acreditações **PALC 2025 (SBPC/ML)** e **ONA** para o sistema **AutoLac** do Laboratório.\n\nNossa equipe de Segurança da Informação e Sistemas (em conjunto com o Raphael Campos) já está consolidando o **Dossiê de Evidências de T.I.** composto pelos seguintes pontos:\n1. **Controle de Acesso e Perfis:** Política de credenciais individuais, matriz de permissões de acesso por função (Recepção, Coleta, Bancada Técnica e Responsável Técnico) e política de bloqueio automático por inatividade;\n2. **Rastreabilidade e Trilha de Auditoria (*Audit Trail*):** Declaração técnica de logs do AutoLac demonstrando a identificação de operador em cada fase analítica e o histórico auditável de qualquer retificação/alteração de laudos (com usuário, data/hora, valor anterior e justificativa);\n3. **Recuperação de Registros Eletrônicos (Backup e Continuidade):** Procedimento Operacional Padrão (POP) da rotina diária de backup do banco de dados do AutoLac, política de retenção legal e o relatório/evidência do teste periódico de restauração (*Restore Test*).\n\nEstamos finalizando a montagem desse kit documental e entraremos em contato com você para alinharmos a apresentação conjunta dessas evidências para a consultoria e auditoria diagnóstica!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-72",
+    "domain": "Banco de Dados, DBA e Ajustes SQL (HRP Unimed / Patrimônio)",
+    "title": "Unificação de Recursos / Cadastros de Ativo Imobilizado no HRP Unimed (Ajuste via IDE Engine — Contabilidade e Patrimônio)",
+    "keywords": [
+      "ativo imobilizado",
+      "ativos imobilizados",
+      "dois recursos",
+      "2 recursos",
+      "cadastrado com dois recursos",
+      "ajuste via banco de dados",
+      "alteracao de dados",
+      "alteração de dados",
+      "ajustes sql pontuais",
+      "lotes de ativos imobilizados",
+      "termo de responsabilidade",
+      "recurso correto",
+      "movdepos",
+      "ide engine",
+      "oeinfnh",
+      "ai00007",
+      "patrimonio",
+      "patrimônio"
+    ],
+    "symptoms": "Solicitação do setor de Contabilidade ou Patrimônio (ex.: Christian Dominiquini no chamado #44577) para unificação ou correção de recursos duplicados vinculados a um lote/item de ativo imobilizado no sistema HRP Unimed (ex.: item OEINFNH000721 cadastrado com dois recursos, devendo prevalecer o recurso AI00007 - MONITOR DE COMPUTADOR), destravando a emissão do Termo de Responsabilidade e regularizando o extrato do patrimônio. Procedimento homologado via IDE Engine documentado no Artigo KB #89 da Base de Conhecimento.",
+    "required_info": [
+      "Identificação do item/lote de ativo imobilizado no HRP (ex.: OEINFNH000721) e código/descrição do recurso que deve prevalecer como principal (ex.: AI00007 - MONITOR DE COMPUTADOR)"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-72] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).",
+      "[PB-UNI-72] Consultar o artigo oficial da Base de Conhecimento GLPI KB #89 ('HRP - Alterar recurso de ativo imobilizado quando lote possui 2 recursos (IDE Engine)').",
+      "[PB-UNI-72] Acessar o sistema HRP Unimed no menu: Patrimônio > Lotes de Ativos Imobilizados, localizar o lote pelo número informado ({itemAtivo}) e obter a chave do item.",
+      "[PB-UNI-72] No cadastro de recurso (ou extrato do lote), identificar a chave correspondente ao recurso correto informado ({recursoAtivo}).",
+      "[PB-UNI-72] Abrir a ferramenta SQL na IDE Engine e atualizar o campo RECURSO com a chave correta no cadastro do lote e na tabela de movimentações de depósito (MovDepos).",
+      "[PB-UNI-72] Validar no HRP a unificação do recurso e confirmar que o Termo de Responsabilidade pode ser emitido normalmente sem bloqueios, comunicando a conclusão ao solicitante."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste de recurso do ativo imobilizado **{itemAtivo}** no sistema **HRP Unimed**.\n\nInformamos que as informações fornecidas (item patrimonial e recurso correto **{recursoAtivo}**) já foram validadas na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de unificação via IDE Engine, conforme a rotina homologada e documentada no **Artigo KB #89** da Base de Conhecimento do GLPI.\n\nAssim que o recurso for unificado nas tabelas do lote e movimentação de depósito (MovDepos), liberando a emissão normal do Termo de Responsabilidade no HRP, confirmaremos a conclusão por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-73",
+    "domain": "Administração do GLPI / Gestão de Documentos e Mime Types",
+    "title": "Falha no Upload / Anexo de Arquivos no GLPI (\"Tipo de arquivo não permitido\" — Gestão de Tipos de Documentos e Mime Types)",
+    "keywords": [
+      "arquivo não está anexando",
+      "arquivo nao esta anexando",
+      "tipo de arquivo não permitido",
+      "tipo de arquivo nao permitido",
+      "não é anexado ao tentar realizar o upload",
+      "nao e anexado ao tentar realizar o upload",
+      "upload durante o andamento de um chamado",
+      "anexo no glpi",
+      "erro ao anexar arquivo no glpi",
+      "glpi tipo de arquivo não permitido",
+      "glpi tipo de arquivo nao permitido",
+      "documenttype.php",
+      "tipos de documentos glpi",
+      "upload glpi",
+      "anexando"
+    ],
+    "symptoms": "Usuário relata impossibilidade de anexar ou fazer upload de arquivos durante o andamento ou abertura de chamados no GLPI, com o sistema apresentando a mensagem em barra amarela/laranja \"Tipo de arquivo não permitido\" (ex.: Douglas Henrique Amaral no chamado #44637 tentando anexar arquivo PDF \"PROTOCOLO DE RESPOSTA AO OFÍCIO\"). Ocorre quando a extensão do arquivo não está cadastrada com permissão de envio ativa ou quando o MIME type gerado pela aplicação de origem não consta na lista de tipos MIME permitidos da tabela de Tipos de Documentos do GLPI.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-73] Reclassificar a categoria do chamado no GLPI de \"T.I > DV > Desenvolvimento > Correção de bugs\" para \"T.I > ST > Resolução de Problemas > Erros de Sistema\" (ID 73).",
+      "[PB-UNI-73] Acessar o GLPI com perfil administrativo (Super-Admin) no menu: Configurar > Tipos de documentos (front/documenttype.php).",
+      "[PB-UNI-73] Localizar a extensão do arquivo envolvido na tentativa de upload (ex.: \"pdf\" ou extensão correspondente ao arquivo que falhou).",
+      "[PB-UNI-73] Verificar se o parâmetro \"Autorizado para envio\" está configurado como \"Sim\".",
+      "[PB-UNI-73] Verificar a lista de Tipos MIME autorizados para a extensão e incluir variações necessárias (ex.: application/pdf, application/x-pdf, application/acrobat, application/vnd.pdf) para contemplar PDFs gerados por diferentes plataformas e assinadores digitais.",
+      "[PB-UNI-73] Se o arquivo possuir extensão em letras maiúsculas (ex.: .PDF) e a instalação do GLPI aplicar correspondência estrita de caixa, cadastrar também a extensão em maiúsculo ou instruir o usuário.",
+      "[PB-UNI-73] Realizar teste de upload no GLPI e notificar o solicitante no chamado confirmando a liberação do anexo."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos o seu relato referente à mensagem de erro **\"Tipo de arquivo não permitido\"** ao tentar realizar o upload de anexo no acompanhamento do chamado no **GLPI**.\n\nInformamos que as informações e evidências enviadas já foram validadas na triagem técnica e nossa equipe de Administração de Sistemas já está realizando a verificação e liberação das permissões na tabela de **Tipos de Documentos** do GLPI (autorização para envio e inclusão dos tipos MIME correspondentes ao arquivo).\n\nAssim que o ajuste for concluído e o upload estiver liberado no sistema, confirmaremos por aqui para que você possa anexar o documento normalmente!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-74",
+    "domain": "Sistemas Internos / ERP HRP Unimed / Faturamento e Auditoria / Reversão de Processos",
+    "title": "Reversão de Processo / Ajuste Operacional — Mudança de Acomodação em Guia de Internação no ERP HRP Unimed (Cálculo de Honorários Médicos)",
+    "keywords": [
+      "mudança de acomodação",
+      "mudanca de acomodacao",
+      "troca de acomodação",
+      "troca de acomodacao",
+      "acomodação quarto coletivo",
+      "acomodacao quarto coletivo",
+      "quarto coletivo",
+      "apartamento simples",
+      "calcule corretamente os honorários médicos",
+      "honorários médicos",
+      "campo 41",
+      "tipo de acomodação autorizada",
+      "tipo de acomodacao autorizada",
+      "senha de internação",
+      "senha de internacao",
+      "reversão de processos",
+      "reversao de processos",
+      "ajustes operacionais"
+    ],
+    "symptoms": "Solicitação do setor de Faturamento (ex.: Luana Tozzi no chamado #44639) ou Auditoria para alteração/ajuste operacional do campo \"41 - Tipo de Acomodação Autorizada\" em guia/senha de internação no ERP HRP Unimed (ex.: alteração de Apartamento para Quarto Coletivo na senha 207283124), com o objetivo de que o sistema calcule e rateie corretamente os honorários médicos devidos. Não se trata de defeito técnico ou erro de software, mas sim de ajuste/reversão de processo operacional.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-74] Reclassificar a categoria do chamado no GLPI de \"T.I > ST > Resolução de Problemas\" para \"T.I > ST > Reversão de Processos / Ajustes Operacionais\" (ID 163).",
+      "[PB-UNI-74] Acessar o sistema ERP HRP Unimed no módulo de Autorizações de Internação.",
+      "[PB-UNI-74] Localizar a guia/solicitação de internação pela senha informada (ex.: {senha}, chave {chave}).",
+      "[PB-UNI-74] Acessar o item assistencial/insumo correspondente à diária (ex.: código 60000805 - DIÁRIA DE QUARTO COLETIVO DE 2 LEITOS) e localizar o campo \"41 - Tipo de Acomodação Autorizada\".",
+      "[PB-UNI-74] Realizar a troca do campo de \"12 - APARTAMENTO SIMPLES\" para a opção informada \"41 - QUARTO COLETIVO DE 2 LEITOS\".",
+      "[PB-UNI-74] Salvar a alteração no HRP Unimed e confirmar que a guia/senha está pronta para o recálculo dos honorários médicos pelo setor de Faturamento.",
+      "[PB-UNI-74] Notificar a solicitante no chamado do GLPI confirmando a conclusão do ajuste operacional."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste operacional de **mudança de acomodação** na guia/senha de internação **{senha}** no sistema **ERP HRP Unimed**.\n\nInformamos que as informações e evidências enviadas já foram validadas na triagem técnica e nossa equipe já está realizando a alteração do campo **Tipo de Acomodação Autorizada** para **Quarto Coletivo**, permitindo o cálculo e a contabilização correta dos honorários médicos pelo setor de Faturamento.\n\nAssim que o ajuste for concluído e o recálculo estiver liberado no sistema, confirmaremos por aqui!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-75",
+    "domain": "Desenvolvimento de Software / Projetos e Novas Aplicações / Gestão da Qualidade",
+    "title": "Implantação de Ferramenta / Totem de Pesquisa de Satisfação e Experiência do Cliente (Laboratório Unimed — Acreditação PALC / Compras e T.I.)",
+    "keywords": [
+      "pesquisa de satisfação",
+      "pesquisa de satisfacao",
+      "avaliação da satisfação",
+      "avaliacao da satisfacao",
+      "experiência do cliente",
+      "experiencia do cliente",
+      "totem eletrônico",
+      "totem eletronico",
+      "totem de avaliação",
+      "totem de avaliacao",
+      "totem ou tablet",
+      "tablet de avaliação",
+      "pesquisa de satisfação laboratório",
+      "pesquisa de satisfacao laboratorio",
+      "acreditação palc satisfação",
+      "acreditacao palc satisfacao",
+      "ferramenta de avaliação da satisfação",
+      "ferramenta de avaliacao da satisfacao",
+      "novas aplicações pesquisa de satisfação"
+    ],
+    "symptoms": "Solicitação da Coordenação ou Recepção do Laboratório Unimed (ex.: Rosy Ellen Freire Viana no chamado #44698) demandando o apoio dos setores de Tecnologia da Informação (TI) e Compras para prospecção de mercado, avaliação de viabilidade técnica/operacional e implantação de uma ferramenta digital ou totem eletrônico/tablet de pesquisa de satisfação e experiência do cliente. O objetivo institucional é estabelecer o monitoramento contínuo da percepção dos clientes (tempo de espera, cordialidade, recepção, coleta) com consolidação de resultados e relatórios gerenciais, atendendo aos requisitos normativos de gestão da qualidade para a Acreditação do Laboratório junto ao Programa PALC (SBPC/ML).",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-75] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120), confirmando o enquadramento em projetos de novas ferramentas/aplicações corporativas.",
+      "[PB-UNI-75] Ajustar a urgência real para Média/Alta no GLPI em função do cronograma institucional de adequação aos requisitos de qualidade da Acreditação PALC (SBPC/ML) do Laboratório Unimed.",
+      "[PB-UNI-75] Alinhar com o setor de Compras (Gestão de Suprimentos) a abertura de processo de cotação e prospecção de mercado para fornecedores especializados em totens/tablets e plataformas de pesquisa de satisfação (NPS/CSAT) na área de saúde.",
+      "[PB-UNI-75] Avaliar com a equipe técnica de TI (Infraestrutura/Redes e Sistemas) a viabilidade dos modelos: 1) Totem físico autônomo com tablet/display touchscreen e conectividade Wi-Fi/PoE; 2) Software SaaS em nuvem com painel web para gestão de relatórios gerenciais e exportação de indicadores; 3) Possibilidade de integração futura com o sistema de atendimento/painel de senhas.",
+      "[PB-UNI-75] Consolidar o comparativo técnico de requisitos, estimativa de custos e cronograma de homologação, agendando reunião de alinhamento com a solicitante Rosy Ellen (Laboratório) e com o setor de Compras.",
+      "[PB-UNI-75] Manter o chamado atualizado com os pareceres técnicos de viabilidade e propostas comerciais analisadas."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao projeto de implantação da **ferramenta de pesquisa de satisfação e experiência do cliente** para o **Laboratório Unimed**, em atendimento aos requisitos normativos da **Acreditação PALC (SBPC/ML)**.\n\nInformamos que a sua solicitação foi classificada como **completa**, pois já contém o detalhamento de todos os requisitos essenciais da solução (perguntas objetivas e campo aberto, avaliação por etapas do atendimento — recepção, coleta, cordialidade e tempo de espera —, consolidação de dados e emissão de relatórios gerenciais de indicadores).\n\nA categoria do chamado foi mantida em **T.I > DV > Desenvolvimento > Novas aplicações** e as seguintes frentes técnicas já foram iniciadas:\n1. **Alinhamento com Compras:** Abertura de prospecção de mercado e coleta de propostas comerciais junto a fornecedores especializados em totens físicos, tablets e plataformas de pesquisa de satisfação (NPS/CSAT) homologadas para o ambiente laboratorial/hospitalar;\n2. **Avaliação Técnica de TI:** Levantamento dos requisitos de conectividade (rede Wi-Fi/cabeada no balcão da Recepção do Laboratório), alimentação elétrica/segurança do equipamento e recursos de gestão de relatórios na nuvem;\n3. **Validação de Cronograma:** Consolidação dos orçamentos e do estudo de viabilidade técnica para apresentação à Coordenação do Laboratório e definição do plano de implantação aderente ao calendário da auditoria PALC.\n\nAssim que compilarmos as primeiras alternativas de fornecedores e estimativas orçamentárias, entraremos em contato para alinharmos os próximos passos!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-76",
+    "domain": "Desenvolvimento de Software / Projetos e Novas Aplicações / Gestão de Atendimento",
+    "title": "Desenvolvimento / Implantação de Painel de Senhas e Gerenciador de Fila de Atendimento (Recepção Externa / Hospital / Pronto Atendimento)",
+    "keywords": [
+      "painel de senha",
+      "painel de senhas",
+      "gerenciador de fila",
+      "gerenciador de filas",
+      "gerenciar a fila de atendimento",
+      "fila de atendimento",
+      "chamador de senha",
+      "chamador de senhas",
+      "sistema de senhas",
+      "controle de fila",
+      "controle de filas",
+      "recepção externa painel",
+      "recepcao externa painel",
+      "novas aplicações painel de senha",
+      "novas aplicacoes painel de senha",
+      "painel de atendimento"
+    ],
+    "symptoms": "Solicitação da Administração Hospitalar ou Recepções (ex.: Douglas Henrique Amaral no chamado #44632) demandando o desenvolvimento ou implantação de uma nova aplicação de Painel de Senhas / Gerenciador de Filas para organizar o fluxo de pacientes na Recepção Externa do Hospital Unimed (ou outros postos de atendimento), contemplando categorização de filas (Normal, Preferencial/Prioritária, Triagem), interface web de chamada de senhas para os guichês de atendimento, display em TV/monitor para a sala de espera com avisos visuais/sonoros e acompanhamento de métricas de tempo de espera.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-76] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120), confirmando o enquadramento em novas aplicações corporativas.",
+      "[PB-UNI-76] Direcionar a demanda para a equipe de Desenvolvimento de Software (Moisés Conte) para início da etapa de levantamento e especificação de requisitos da aplicação.",
+      "[PB-UNI-76] Definir o modelo de arquitetura de software: aplicação web responsiva com interface cliente para o guichê (chamada de próxima senha, rechamada, transferência) e tela de exibição para TV da recepção com sintetizador de voz (TTS) ou sinal sonoro.",
+      "[PB-UNI-76] Mapear os tipos de atendimento/filas requeridos pelo setor: Normal, Preferencial/Prioritária (idosos, gestantes, PCDs por lei), Urgência/Triagem e serviços específicos.",
+      "[PB-UNI-76] Alinhar com a equipe de Infraestrutura e Redes os requisitos de hardware na Recepção Externa: TV/monitor HDMI na sala de espera, mini-PC/Smart TV/Raspberry Pi conectado à rede local e impressora térmica de senhas (ou dispenser de senhas pré-impressas/totem).",
+      "[PB-UNI-76] Apresentar o protótipo/versão beta para validação operacional com a supervisão da Recepção Externa e planejar a implantação piloto."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desenvolvimento da aplicação de Painel de Senha e Gerenciador de Fila de Atendimento** para a **Recepção Externa do Hospital Unimed**.\n\nA demanda já foi recepcionada pela equipe de Desenvolvimento de Software (**Moisés**) sob a categoria **T.I > DV > Desenvolvimento > Novas aplicações** (ID 120).\n\nPara estruturarmos a modelagem do sistema e o cronograma de entrega, já estamos levantando os seguintes requisitos técnicos e operacionais:\n1. **Estrutura das Filas:** Categorias de atendimento necessárias (ex.: Atendimento Normal, Prioritário/Preferencial por lei, Triagem/Urgência e Exames);\n2. **Interface do Operador:** Módulo web leve para que os atendentes nos guichês da Recepção Externa possam chamar a próxima senha, rechamar ou transferir pacientes diretamente pelo navegador;\n3. **Hardware e Exibição:** Alinhamento com a equipe de Infraestrutura de T.I. para conexão da tela/TV na sala de espera (com aviso sonoro e visual da senha/guichê) e método de emissão das senhas (impressora térmica de tickets ou dispenser físico);\n4. **Métricas de Atendimento:** Painel gerencial para registro dos tempos médios de espera e de atendimento por guichê.\n\nO desenvolvedor responsável já está iniciando o desenho da solução e, em breve, apresentaremos um protótipo operacional para validação junto à equipe da Recepção Externa!\n\nPermanecemos à disposição!"
   }
 ]

@@ -1,5 +1,284 @@
 [
   {
+    "ticket_id": 44632,
+    "title": "Novas aplicações  -  Painel de Senha",
+    "category": "T.I > DV > Desenvolvimento > Novas aplicações",
+    "keywords": [
+      "novas",
+      "aplicacoes",
+      "painel",
+      "senha",
+      "aplicacao",
+      "gerenciar",
+      "fila",
+      "recepcao"
+    ],
+    "problem_summary": "Desenvolvimento de uma aplicação para gerenciar a fila de atendimento na recepção externa",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desenvolvimento da aplicação de Painel de Senha e Gerenciador de Fila de Atendimento** para a **Recepção Externa do Hospital Unimed**.\n\nA demanda já foi recepcionada pela equipe de Desenvolvimento de Software (**Moisés**) sob a categoria oficial **T.I > DV > Desenvolvimento > Novas aplicações** (ID 120).\n\nPara estruturarmos a modelagem do sistema e o cronograma de entrega, já estamos levantando os seguintes requisitos técnicos e operacionais:\n1. **Estrutura das Filas:** Categorias de atendimento necessárias (ex.: Atendimento Normal, Prioritário/Preferencial por lei, Triagem/Urgência e Exames);\n2. **Interface do Operador:** Módulo web leve para que os atendentes nos guichês da Recepção Externa possam chamar a próxima senha, rechamar ou transferir pacientes diretamente pelo navegador;\n3. **Hardware e Exibição:** Alinhamento com a equipe de Infraestrutura de T.I. para conexão da tela/TV na sala de espera (com aviso sonoro e visual da senha/guichê) e método de emissão das senhas (impressora térmica de tickets ou dispenser físico);\n4. **Métricas de Atendimento:** Painel gerencial para registro dos tempos médios de espera e de atendimento por guichê.\n\nO desenvolvedor responsável já está iniciando o desenho da solução e, em breve, apresentaremos um protótipo operacional para validação junto à equipe da Recepção Externa!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Estrutura das Filas: Categorias de atendimento necessárias (ex.: Atendimento Normal, Prioritário/Preferencial por lei, Triagem/Urgência e Exames);",
+      "Interface do Operador: Módulo web leve para que os atendentes nos guichês da Recepção Externa possam chamar a próxima senha, rechamar ou transferir pacientes diretamente pelo navegador;",
+      "Hardware e Exibição: Alinhamento com a equipe de Infraestrutura de T.I. para conexão da tela/TV na sala de espera (com aviso sonoro e visual da senha/guichê) e método de emissão das senhas (impressora térmica de tickets ou dispenser físico);",
+      "Métricas de Atendimento: Painel gerencial para registro dos tempos médios de espera e de atendimento por guichê."
+    ],
+    "resolution_steps": [
+      "[PB-UNI-76] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120), confirmando o enquadramento em novas aplicações corporativas.",
+      "[PB-UNI-76] Direcionar a demanda para a equipe de Desenvolvimento de Software (Moisés Conte) para início da etapa de levantamento e especificação de requisitos da aplicação.",
+      "[PB-UNI-76] Definir o modelo de arquitetura de software: aplicação web responsiva com interface cliente para o guichê (chamada de próxima senha, rechamada, transferência) e tela de exibição para TV da recepção com sintetizador de voz (TTS) ou sinal sonoro.",
+      "[PB-UNI-76] Mapear os tipos de atendimento/filas requeridos pelo setor: Normal, Preferencial/Prioritária (idosos, gestantes, PCDs por lei), Urgência/Triagem e serviços específicos.",
+      "[PB-UNI-76] Alinhar com a equipe de Infraestrutura e Redes os requisitos de hardware na Recepção Externa: TV/monitor HDMI na sala de espera, mini-PC/Smart TV/Raspberry Pi conectado à rede local e impressora térmica de senhas (ou dispenser de senhas pré-impressas/totem).",
+      "[PB-UNI-76] Apresentar o protótipo/versão beta para validação operacional com a supervisão da Recepção Externa e planejar a implantação piloto."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-26T18:22:26.006Z"
+  },
+  {
+    "ticket_id": 44575,
+    "title": "Sistemas Operacionais  -  Extração produção cooperados via excel",
+    "category": "T.I > BD > Big Data e BI > Relatórios",
+    "keywords": [
+      "extracao",
+      "producao",
+      "cooperados",
+      "via",
+      "excel",
+      "recebi",
+      "pede",
+      "enviado"
+    ],
+    "problem_summary": "Prezados(a) boa tarde\nRecebi a solicitação em anexo no qual pede que seja enviado a produção dos médicos em excel e também segregado por tipo de atendimento.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação acompanhada do documento de autorização em anexo para extração da **produção dos médicos cooperados em planilha Excel (segregada por tipo de atendimento)**.\n\nInformamos que os parâmetros foram validados na triagem técnica e nossa equipe de Banco de Dados e BI já está realizando o levantamento e a extração dos dados conforme o documento anexado.\n\nAssim que a planilha consolidada for gerada, encaminharemos o arquivo por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' (ID 111), retirando da categoria genérica de Sistemas Operacionais.",
+      "[PB-UNI-16] Validar o termo de autorização formal em PDF anexado ao chamado pelo setor de Relacionamento com Prestadores.",
+      "[PB-UNI-16] Acessar o banco de dados corporativo / ferramenta de BI e executar a consulta de produção dos médicos cooperados com a segregação por tipo de atendimento solicitada.",
+      "[PB-UNI-16] Exportar os resultados consolidados em formato de planilha Excel (.xlsx), conferir os totais e disponibilizar no chamado para a solicitante."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-26T11:11:48.632Z"
+  },
+  {
+    "ticket_id": 44646,
+    "title": "Solicitação Diversa  -  LOCAL",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "local",
+      "criar",
+      "local:",
+      "ressonancia"
+    ],
+    "problem_summary": "Favor Criar Local: RESSONANCIA",
+    "reply_template": "Olá, {solicitante}! Tudo bem? Estamos analisando os dados necessários para criar o local 'RESSONANCIA'. Assim que a solicitação for concluída, confirmaremos por aqui! Permanecemos à disposição!",
+    "required_info": [
+      "Detalhar os dados específicos necessários para execução da solicitação"
+    ],
+    "resolution_steps": [
+      "Realizar contato ou envio de acompanhamento solicitando os detalhes técnicos pendentes (print do erro, ativo ou registro afetado).",
+      "Verificar logs e permissões relacionadas ao serviço/sistema reportado pelo usuário.",
+      "Executar o teste assistido com o usuário e documentar a solução na Base de Conhecimento do GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-25T18:57:03.874Z"
+  },
+  {
+    "ticket_id": 44639,
+    "title": "Resolução de Problemas  -  Mudança de Acomodação",
+    "category": "T.I > ST > Resolução de Problemas",
+    "keywords": [
+      "mudanca",
+      "acomodacao",
+      "hrp",
+      "sobre",
+      "senha",
+      "internacao",
+      "seguir:",
+      "realizar"
+    ],
+    "problem_summary": "Boa tarde!\nSobre a senha de internação a seguir:\nPor gentileza realizar a troca do campo em destaque para a acomodação QUARTO COLETIVO.\n \nA troca se faz necessária para que o sistema calcule corretamente os honorários médicos",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste operacional de **mudança de acomodação** na guia/senha de internação **207283124** no sistema **ERP HRP Unimed**.\n\nInformamos que as informações e evidências enviadas já foram validadas na triagem técnica e nossa equipe já está realizando a alteração do campo **Tipo de Acomodação Autorizada** para **Quarto Coletivo** (*QUARTO COLETIVO DE 2 LEITOS*), permitindo que o sistema calcule e contabilize corretamente os honorários médicos pelo setor de Faturamento.\n\nAssim que o ajuste for concluído no sistema e a guia estiver liberada para o recálculo, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-74] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Resolução de Problemas' para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-74] Acessar o sistema ERP HRP Unimed no módulo de Autorizações de Internação.",
+      "[PB-UNI-74] Localizar a guia/solicitação de internação pela senha informada (207283124, chave 207290172).",
+      "[PB-UNI-74] Acessar o item assistencial correspondente à diária (60000805 - DIÁRIA DE QUARTO COLETIVO DE 2 LEITOS) e localizar o campo '41 - Tipo de Acomodação Autorizada'.",
+      "[PB-UNI-74] Realizar a troca do campo de '12 - APARTAMENTO SIMPLES' para a opção informada '41 - QUARTO COLETIVO DE 2 LEITOS' (Classe: Coletiva).",
+      "[PB-UNI-74] Salvar a alteração no HRP Unimed e validar a liberação para que o setor de Faturamento proceda com o recálculo correto dos honorários médicos."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-25T18:44:51.303Z"
+  },
+  {
+    "ticket_id": 44578,
+    "title": "Integração entre sistemas  -  Parametrização de Tabelas - IPSM",
+    "category": "T.I > ST > Parametrização de Sistemas e Tabelas",
+    "keywords": [
+      "integracao",
+      "parametrizacao",
+      "tabelas",
+      "ipsm",
+      "tabela",
+      "medicamentos-vigencia",
+      "-24"
+    ],
+    "problem_summary": "Boa Tarde!\nSegue em anexo a tabela do IPSM para parametrização no sistema.\nMedicamentos-Vigência -24/11/2026",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à parametrização e atualização da **tabela de Medicamentos do convênio IPSM (Batalhão)** no sistema **SGH Spdata**, com vigência a partir de **24/11/2026**, conforme a planilha anexada (**Vigencia 24-11-26.xlsx**).\n\nInformamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica e nossa equipe de Sistemas/Tabelas (Moisés) já iniciou o procedimento de importação e parametrização dos novos valores no SGH Spdata.\n\nAssim que a nova vigência da tabela estiver importada e liberada no sistema para faturamento e auditoria das contas hospitalares, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), direcionando ao analista técnico de Sistemas/Tabelas (Moisés Conte).",
+      "[PB-UNI-47] Baixar a planilha anexada no chamado (Vigencia 24-11-26.xlsx) com os valores atualizados da tabela de Medicamentos do convênio IPSM / Batalhão (vigência a partir de 24/11/2026).",
+      "[PB-UNI-47] Acessar o sistema SGH Spdata no módulo de parametrização de Tabelas de Convênios e selecionar o convênio IPSM (Batalhão).",
+      "[PB-UNI-47] Executar a rotina de importação da nova vigência (24/11/2026) dos medicamentos no banco de dados do SGH Spdata.",
+      "[PB-UNI-47] Validar a consulta dos itens e valores no sistema para certificar que os preços vigentes foram atualizados para faturamento e auditoria de contas, notificando a solicitante Mayra Morais (H Auditoria) da conclusão da importação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-25T11:21:26.875Z"
+  },
+  {
+    "ticket_id": 44577,
+    "title": "Administração de Banco de Dados  -  AJUSTE VIA BANCO DE DADOS",
+    "category": "T.I > BD > Administração de Banco de Dados",
+    "keywords": [
+      "administracao",
+      "banco",
+      "ajuste",
+      "via",
+      "conversado",
+      "item",
+      "oeinfnh000721",
+      "responsavel:"
+    ],
+    "problem_summary": "Boa tarde !!\nConforme já conversado, solicito ajuste via banco de dados do item OEINFNH000721. \nResponsável: Frederico.\nO item consta cadastrado com dois recursos. Considerar somente recurso AI00007 - MONITOR DE COMPUTADOR.\nObrigado !!",
+    "custom_instruction": "Trata-se da unificação de dois cadastros de ativos no sistema HRP Unimed. Considerar a solicitação como completa, uma vez que o solicitante forneceu todas as informações necessárias. Reclassificar a categoria para: Alteração de Dados / Ajustes SQL Pontuais.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao ajuste de recurso do ativo imobilizado **OEINFNH000721** no sistema **HRP Unimed**.\n\nInformamos que as informações fornecidas (item patrimonial e recurso correto **AI00007 - MONITOR DE COMPUTADOR**) já foram validadas na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de unificação via IDE Engine, conforme a rotina homologada e documentada no **Artigo KB #89** da Base de Conhecimento do GLPI.\n\nAssim que o recurso for unificado nas tabelas do lote e movimentação de depósito (MovDepos), liberando a emissão normal do Termo de Responsabilidade no HRP, confirmaremos a conclusão por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-72] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 147).",
+      "[PB-UNI-72] Consultar o artigo oficial da Base de Conhecimento GLPI KB #89 ('HRP - Alterar recurso de ativo imobilizado quando lote possui 2 recursos (IDE Engine)').",
+      "[PB-UNI-72] Acessar o sistema HRP Unimed no menu: Patrimônio > Lotes de Ativos Imobilizados, localizar o lote pelo número informado (OEINFNH000721) e copiar sua chave de identificação.",
+      "[PB-UNI-72] No cadastro de recurso (ou extrato do lote), identificar a chave correspondente ao recurso correto (AI00007 - MONITOR DE COMPUTADOR).",
+      "[PB-UNI-72] Abrir a ferramenta SQL na IDE Engine e atualizar o campo RECURSO com a chave correta tanto no cadastro do lote quanto na tabela de movimentações de depósito (MovDepos).",
+      "[PB-UNI-72] Validar no HRP a unificação do recurso e confirmar que o Termo de Responsabilidade pode ser emitido normalmente sem bloqueios, comunicando a conclusão ao solicitante."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-25T10:38:20.946Z",
+    "updated_at": "2026-11-25T11:03:45.930Z"
+  },
+  {
+    "ticket_id": 44576,
+    "title": "Criação de Usuários  -  Joao Pedro Lisboa da Cruz",
+    "category": "T.I > ST > Acesso e Permissões > Criação de Usuários",
+    "keywords": [
+      "criacao",
+      "joao",
+      "pedro",
+      "lisboa",
+      "cruz",
+      "liberar",
+      "acesso",
+      "novo"
+    ],
+    "problem_summary": "Prezados,\nSolicito liberar o acesso para este novo colaborador.\nObrigada!",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação de acesso ao **Intranet** para o setor **GED** (Unimed).\n\nTodas as informações necessárias já constam no chamado e nossa equipe de T.I. já iniciou a liberação do seu acesso. Assim que o perfil for configurado e liberado para uso, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-12] Localizar o cadastro de Joao Pedro Lisboa da Cruz (CPF: 70564202657) no sistema correspondente.",
+      "[PB-UNI-12] Conceder e vincular as permissões do módulo de Intranet para a unidade Unimed (setor GED).",
+      "[PB-UNI-12] Validar a ativação do perfil de acesso e notificar a colaboradora no chamado para teste e homologação."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-24T19:53:33.878Z"
+  },
+  {
+    "ticket_id": 44568,
+    "title": "Reversão de Processos / Ajustes Operacionais  -",
+    "category": "T.I > ST > Reversão de Processos / Ajustes Operacionais",
+    "keywords": [
+      "reversao",
+      "processos",
+      "controle",
+      "contas",
+      "conta",
+      "referente",
+      "registro",
+      "encerrada"
+    ],
+    "problem_summary": "Boa tarde!\nA conta referente ao registro 1415270 foi encerrada no controle de contas, porém preciso abra ela novamente pois preciso fazer uma movimentação nesta conta.\nAtenciosamente.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à reabertura / reversão de encerramento da conta **1415270** no sistema **Controle de Contas** (H Faturamento).\n\nOs dados informados já foram validados na triagem e nossa equipe técnica está realizando o processo no sistema para que volte a ficar disponível para movimentação e conferência no setor.\n\nAssim que o processo for concluído, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "required_info": [],
+    "resolution_steps": [
+      "[Aprendido em MEM-#43103] Pedidos do H Faturamento solicitando 'abertura de conta' ou 'abertura de uma conta' no Controle de Contas com n?mero de conta/registro e nome do paciente referem-se ? reabertura/revers?o de encerramento de conta (PB-UNI-28). Sugerir reclassifica??o para 'T.I > ST > Revers?o de Processos / Ajustes Operacionais' (ID 163), classificar como COMPLETO e confirmar a libera??o da conta informada.",
+      "[PB-UNI-28] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).",
+      "[PB-UNI-28] Acessar o sistema Controle de Contas com perfil de administração do Faturamento / Service Desk.",
+      "[PB-UNI-28] Localizar a conta informada (conta 1415270) e verificar o status atual de encerramento/fechamento.",
+      "[PB-UNI-28] Executar a rotina de reversão de encerramento / reabertura no Controle de Contas para retornar ao status em aberto / em digitação.",
+      "[PB-UNI-28] Confirmar que a conta está liberada para movimentação pelo setor de H Faturamento."
+    ],
+    "sufficiency_status": "completo",
+    "created_at": "2026-11-24T19:51:17.678Z"
+  },
+  {
+    "ticket_id": 44483,
+    "title": "Solicitação Diversa  -  mudança de local",
+    "category": "T.I > ST > Solicitação Diversa",
+    "keywords": [
+      "mudanca",
+      "local",
+      "fazer",
+      "trabalho",
+      "sala",
+      "onde",
+      "auditoria"
+    ],
+    "problem_summary": "por gentileza fazer a mudança de local de trabalho para a sala onde era a auditoria.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para realizar a mudança/instalação física solicitada (por gentileza fazer a mudança de local de trabalho para a sala onde era a auditoria.).\n\nNossa equipe de Infraestrutura e Redes já está analisando o pedido para programar o atendimento presencial no setor. Para agilizarmos a execução no local, você poderia nos confirmar:\n1. Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (novo local solicitado)?\n\nAssim que nos confirmar por aqui, já programamos a ida do técnico até o local!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Confirmar a localização exata e disponibilidade de infraestrutura (rede/energia) no destino (novo local solicitado)?"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-20] Manter a categoria do chamado no GLPI em 'T.I > ST > Solicitação Diversa'.",
+      "[PB-UNI-20] Verificar presencialmente no local de destino (novo local solicitado) a disponibilidade de ponto de rede/patch panel e tomadas elétricas.",
+      "[PB-UNI-20] Executar o remanejamento físico e as devidas conexões/manobras de cabeamento estruturado e PABX/rede.",
+      "[PB-UNI-20] Realizar os testes operacionais junto ao setor Promoprev e validar a conclusão no chamado."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-23T12:44:44.539Z"
+  },
+  {
+    "ticket_id": 44426,
+    "title": "Relatórios  -  Relatórios Atendimentos Hospital",
+    "category": "T.I > BD > Big Data e BI > Relatórios",
+    "keywords": [
+      "relatorios",
+      "atendimentos",
+      "realizados",
+      "sejam",
+      "enviados",
+      "e-mail",
+      "vsilva",
+      "mesma"
+    ],
+    "problem_summary": "Solicito que os relatórios de todos os atendimentos realizados no hospital sejam enviados para o e-mail vsilva@unimedsudoestemg.coop.br, da mesma forma que a colaboradora Viviane do Núcleo os recebe em sua caixa de entrada.",
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação para inclusão do seu e-mail (**vsilva@unimedsudoestemg.coop.br**) para recebimento dos relatórios de atendimentos realizados no Hospital Unimed no sistema **SGH (Spdata)**, espelhando a rotina da colaboradora Viviane do Núcleo:\n1. **Relatório de pacientes evoluídos a óbito**;\n2. **Atendimento externo adulto**;\n3. **Atendimento externo pediátrico**;\n4. **Lista de pacientes internados**.\n\nComo o agendador do SPdata gera esses relatórios com rotina **de hora em hora**, para que possamos parametrizar o envio sem sobrecarregar a sua caixa de entrada, você poderia nos confirmar rapidamente:\n- **Quais períodos ou horários você deseja receber esses relatórios?** *(Por exemplo: uma vez ao dia pela manhã, no fechamento do dia, em horários específicos ou realmente de hora em hora?)*\n\nAssim que você nos confirmar a periodicidade desejada por aqui, nossa equipe de Banco de Dados já realizará a parametrização do agendamento no SPdata!\n\nPermanecemos à disposição!",
+    "required_info": [
+      "Relatório de pacientes evoluídos a óbito;",
+      "Atendimento externo adulto;",
+      "Atendimento externo pediátrico;",
+      "Lista de pacientes internados.",
+      "Quais períodos ou horários você deseja receber esses relatórios? *(Por exemplo: uma vez ao dia pela manhã, no fechamento do dia, em horários específicos ou realmente de hora em hora?)*"
+    ],
+    "resolution_steps": [
+      "[PB-UNI-69] Manter a categoria do chamado no GLPI em 'T.I > BD > Big Data e BI > Relatórios' (equipe de Banco de Dados / Sistemas).",
+      "[PB-UNI-69] Identificar os 4 relatórios periódicos do SGH Spdata vinculados à rotina de atendimentos do Hospital Unimed: 1) Pacientes evoluídos a óbito; 2) Atendimento externo adulto; 3) Atendimento externo pediátrico; 4) Lista de pacientes internados (referência: colaboradora Viviane do Núcleo).",
+      "[PB-UNI-69] Colher a resposta de Vanessa sobre a periodicidade e períodos/horários desejados para entrega na caixa postal vsilva@unimedsudoestemg.coop.br (uma vez que a rotina padrão do SPdata gera de hora em hora).",
+      "[PB-UNI-69] Acessar o módulo agendador de tarefas/relatórios do SGH Spdata e cadastrar a conta vsilva@unimedsudoestemg.coop.br na lista de distribuição dos relatórios com os horários definidos.",
+      "[PB-UNI-69] Validar o disparo do primeiro lote de relatórios com a solicitante e concluir o chamado no GLPI."
+    ],
+    "sufficiency_status": "parcial",
+    "created_at": "2026-11-19T18:27:31.516Z"
+  },
+  {
     "ticket_id": 44402,
     "title": "Acesso e Permissões  -  Izabel heloisa Duarte da silva",
     "category": "T.I > ST > Acesso e Permissões",

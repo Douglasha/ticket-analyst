@@ -185,7 +185,7 @@ export class KnowledgeEngine {
       .join(" ");
 
     // Usa apenas o título útil, tipo, ativo, motivo e a descrição real do usuário (evitando nomes de observadores e cabeçalhos)
-    const cleanTitle = ticket.title.split(">").slice(-2).join(" ");
+    const cleanTitle = (ticket.title || ticket.name || "").split(">").slice(-2).join(" ");
     const fullTicketText = [
       cleanTitle,
       formFields.tipo,
@@ -315,8 +315,14 @@ export class KnowledgeEngine {
         /\b(di[aá]rias|taxas|gases|00952)\b/i.test(normTicket)) ||
       /\b(00952|di[aá]rias\s*,\s*taxas\s+e\s+gases)\b/i.test(normTicket);
 
+    const isIpsmTable =
+      /\b(ipsm|ipsmmg|batalh[aã]o|batalhao)\b/i.test(normTicket) &&
+      /\b(tabela|tabelas|medicamento|medicamentos|parametriza|importa|vig[eê]ncia)\b/i.test(normTicket) &&
+      !isXmlBatalhaoOrSghValueMismatch;
+
     const isSystemTableParameterization =
-      !isTussDiariasTaxasGasesManualUpdate &&
+      isIpsmTable ||
+      (!isTussDiariasTaxasGasesManualUpdate &&
       !isXmlBatalhaoOrSghValueMismatch &&
       !isFormcreatorOrGlpiForm &&
       !isReopenOrRevertAccount &&
@@ -330,7 +336,7 @@ export class KnowledgeEngine {
           normTicket
         )) ||
         normTicket.includes("parametrização de sistemas e tabelas") ||
-        ticket.category.includes("Parametrização de Sistemas e Tabelas"));
+        ticket.category.includes("Parametrização de Sistemas e Tabelas")));
 
     const isDocusignAccessOrShared =
       /\b(docusign|docu\s*sign)\b/i.test(normTicket) ||
@@ -496,6 +502,83 @@ export class KnowledgeEngine {
         normTicket.includes("manutencao preventiva"))) ||
       (/\brepromaq\b/i.test(normTicket) &&
         /\b(impressora|manuten[cç][aã]o|suporte|chamado)\b/i.test(normTicket));
+
+    const isHospitalSpdataScheduledReports =
+      /\b(relat[oó]rios?\s+atendimentos?\s+hospital|atendimentos?\s+realizados?\s+no\s+hospital|relat[oó]rios?\s+de\s+todos\s+os\s+atendimentos?|vsilva@unimedsudoestemg\.coop\.br|viviane\s+do\s+n[uú]cleo|evolu[ií]dos?\s+[aà]\s+[oó]bito|atendimento\s+externo\s+adulto|atendimento\s+externo\s+pedi[aá]trico|pacientes?\s+internados?)\b/i.test(
+        normTicket
+      ) ||
+      (/\brelat[oó]rios?\b/i.test(normTicket) &&
+        /\b(atendimentos?|hospital)\b/i.test(normTicket) &&
+        /\b(enviados?|enviar|receber|caixa\s+de\s+entrada|e-?mail)\b/i.test(normTicket) &&
+        /\b(spdata|sgh|viviane|nucleo|n[uú]cleo|promoprev|vsilva)\b/i.test(normTicket));
+
+    const isPepPrescriptionProtocol =
+      /\b(prescri[cç][aã]o\s+no\s+pep|modelo\s+de\s+prescri[cç][aã]o|protocolos?\s+prescri[cç][aã]o|prescri[cç][aã]o\s+geral|prescri[cç][aã]o\s+srpa|srpa|recupera[cç][aã]o\s+p[oó]s-anest[eé]sica|anestesistas?\s+e\s+cirurgi[oõ]es|tornar\s+esta\s+prescri[cç][aã]o\s+em\s+protocolo\s+padr[aã]o|protocolo\s+padr[aã]o\s+de\s+prescri[cç][aã]o)\b/i.test(
+        normTicket
+      ) ||
+      (/\bprescri[cç][aã]o\b/i.test(normTicket) &&
+        /\b(pep|spdata|sgh|modelo|protocolo|srpa)\b/i.test(normTicket));
+
+    const isPalcOnaLaboratorioAudit =
+      !/\b(pesquisa\s+de\s+satisfa[cç][aã]o|avalia[cç][aã]o\s+da\s+satisfa[cç][aã]o|experi[êe]ncia\s+do\s+cliente|totem|tablet)\b/i.test(
+        normTicket
+      ) &&
+      /\b(palc|ona|auditoria\s+diagn[oó]stica|auditoria\s+palc|acredita[cç][aã]o|registros?\s+de\s+controle\s+de\s+acesso|rastreabilidade|recupera[cç][aã]o\s+de\s+registros?\s+eletr[oô]nicos?|altera[cç][aã]o\s+e\s+recupera[cç][aã]o|audit\s+trail|trilha\s+de\s+auditoria)\b/i.test(
+        normTicket
+      ) &&
+      (/\b(laborat[oó]rio|autolac|palc|ona|registros?\s+eletr[oô]nicos?|compliance)\b/i.test(
+        normTicket
+      ) ||
+        (ticket.category || "").includes("Compliance") ||
+        (ticket.requester_department || "").includes("Laborat"));
+
+    const isLaboratorioCustomerSatisfactionTool =
+      /\b(pesquisa\s+de\s+satisfa[cç][aã]o|avalia[cç][aã]o\s+da\s+satisfa[cç][aã]o|experi[êe]ncia\s+do\s+cliente)\b/i.test(
+        normTicket
+      ) &&
+      /\b(laborat[oó]rio|palc|totem|tablet|novas\s+aplica[cç][õo]es)\b/i.test(
+        normTicket
+      );
+
+    const isHrpAtivoImobilizadoRecurso =
+      /\b(ativo\s+imobilizado|ativos\s+imobilizados|dois\s+recursos|2\s+recursos|cadastrado\s+com\s+dois\s+recursos|ajuste\s+via\s+banco\s+de\s+dados|recurso\s+ai|lotes?\s+de\s+ativos?|termo\s+de\s+responsabilidade|movdepos|oeinfnh)\b/i.test(
+        normTicket
+      ) ||
+      (/\brecurso\b/i.test(normTicket) &&
+        /\b(item|lote|ativo|patrim[oô]nio|banco\s+de\s+dados)\b/i.test(normTicket) &&
+        /\b(considerar|somente|monitor|computador|oeinfnh|ai\d+)\b/i.test(normTicket));
+
+    const isGlpiAttachmentOrUploadError =
+      (/\bglpi\b/i.test(normTicket) ||
+        /\b(andamento\s+de\s+um\s+chamado|acompanhamento|abertura\s+de\s+chamado)\b/i.test(normTicket)) &&
+      (/\b(anexar|anexando|anexo|upload|tipo de arquivo n[aã]o permitido|arquivo n[aã]o [eé] anexado)\b/i.test(
+        normTicket
+      ) ||
+        /\btipo de arquivo n[aã]o permitido\b/i.test(normTicket));
+
+    const isHrpAccommodationChange =
+      /\b(mudan[cç]a\s+de\s+acomoda[cç][aã]o|troca\s+de\s+acomoda[cç][aã]o|acomoda[cç][aã]o\s+quarto\s+coletivo|quarto\s+coletivo|apartamento\s+simples|tipo\s+de\s+acomoda[cç][aã]o\s+autorizada|campo\s+41)\b/i.test(
+        normTicket
+      ) ||
+      (/\bacomoda[cç][aã]o\b/i.test(normTicket) &&
+        /\b(quarto\s+coletivo|apartamento|honor[aá]rios?\s+m[eé]dicos?|troca\s+d[eo]\s+campo|mudar|trocar)\b/i.test(
+          normTicket
+        ));
+
+    const isMedicalProductionExtraction =
+      /\b(produ[çc][ãa]o\s+cooperados?|produ[çc][ãa]o\s+dos\s+m[ée]dicos?|produ[çc][ãa]o\s+m[ée]dica|extra[çc][ãa]o\s+produ[çc][ãa]o|envio\s+de\s+produ[çc][ãa]o)\b/i.test(
+        normTicket
+      ) ||
+      (/\bprodu[çc][ãa]o\b/i.test(normTicket) &&
+        /\b(cooperados?|m[ée]dicos?|m[ée]dica|excel|segregado)\b/i.test(normTicket));
+
+    const isQueueOrPainelSenhaDev =
+      /\b(painel\s+de\s+senhas?|gerenciador\s+de\s+filas?|fila\s+de\s+atendimento|chamador\s+de\s+senhas?|sistema\s+de\s+senhas?|controle\s+de\s+filas?)\b/i.test(
+        normTicket
+      ) &&
+      !/\b(impressora|spooler|toner|mancha|atolamento|papel preso)\b/i.test(
+        normTicket
+      );
 
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
@@ -723,6 +806,65 @@ export class KnowledgeEngine {
         if (pb.id === "PB-UNI-68" && !isRepromaqSamsungMaintenance) {
           continue;
         }
+        // Evita parear PB-UNI-69 (Inclusão de E-mail em Relatórios do Hospital no SGH Spdata) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-69" && !isHospitalSpdataScheduledReports) {
+          continue;
+        }
+        // Evita parear PB-UNI-70 (Criação de Prescrição Padrão no PEP SGH) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-70" && !isPepPrescriptionProtocol) {
+          continue;
+        }
+        // Evita parear playbooks de agenda, formulários ou desenvolvimento de novas aplicações quando o chamado trata de prescrição padrão no PEP SGH (PB-UNI-70)
+        if (
+          isPepPrescriptionProtocol &&
+          (pb.id === "PB-UNI-18" || pb.id === "PB-UNI-09" || pb.id === "PB-UNI-32" || pb.id === "PB-UNI-30")
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-71 (Auditorias PALC / ONA / AutoLac) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-71" && !isPalcOnaLaboratorioAudit) {
+          continue;
+        }
+        // Evita parear playbooks de acessos, secretárias ou integração quando o chamado trata de auditoria PALC/ONA do Laboratório (PB-UNI-71)
+        if (
+          isPalcOnaLaboratorioAudit &&
+          (pb.id === "PB-UNI-27" || pb.id === "PB-UNI-12" || pb.id === "PB-UNI-04" || pb.id === "PB-UNI-01")
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-72 (Unificação de Ativos Imobilizados / Recursos no HRP) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-72" && !isHrpAtivoImobilizadoRecurso) {
+          continue;
+        }
+        // Evita parear PB-UNI-73 (Falha no Upload / Anexo de Arquivos no GLPI) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-73" && !isGlpiAttachmentOrUploadError) {
+          continue;
+        }
+        // Evita parear PB-UNI-74 (Mudança de Acomodação no HRP) quando o chamado não trata disso
+        if (pb.id === "PB-UNI-74" && !isHrpAccommodationChange) {
+          continue;
+        }
+        // Evita parear PB-UNI-66, PB-SD-02, PB-UNI-12 ou PB-UNI-19 quando o chamado trata de mudança de acomodação (PB-UNI-74)
+        if (
+          isHrpAccommodationChange &&
+          (pb.id === "PB-UNI-66" || pb.id === "PB-SD-02" || pb.id === "PB-UNI-12" || pb.id === "PB-UNI-19" || pb.id === "PB-UNI-20")
+        ) {
+          continue;
+        }
+        // Evita parear relatórios agendados do SGH ou desenvolvimento de bugs quando o chamado trata de falha de anexo no GLPI (PB-UNI-73)
+        if (
+          isGlpiAttachmentOrUploadError &&
+          (pb.id === "PB-UNI-14" || pb.id === "PB-UNI-32" || pb.id === "PB-UNI-29")
+        ) {
+          continue;
+        }
+        // Evita parear unificação genérica de pessoas/insumos, hardware físico ou acessos quando o chamado trata de unificação de recursos de ativo imobilizado (PB-UNI-72)
+        if (
+          isHrpAtivoImobilizadoRecurso &&
+          (pb.id === "PB-UNI-19" || pb.id === "PB-UNI-20" || pb.id === "PB-UNI-07" || pb.id === "PB-UNI-12")
+        ) {
+          continue;
+        }
         // Evita parear PB-SD-02 (Falha de Impressão Genérica) quando o chamado trata de manutenção/defeito físico em Samsung M4020/M4080 (PB-UNI-68 - Repromaq)
         if (pb.id === "PB-SD-02" && isRepromaqSamsungMaintenance) {
           continue;
@@ -731,8 +873,8 @@ export class KnowledgeEngine {
         if ((pb.id === "PB-UNI-39" || pb.id === "PB-SD-02") && (isGlpiOrSystemTagManagement || isCustomLabelLayoutOrFieldDev)) {
           continue;
         }
-        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos) quando o chamado trata de automação de cobrança/mensageria ou inclusão em grupos de distribuição
-        if (pb.id === "PB-UNI-38" && (isAutomationBillingOrMessaging || isEmailDistributionGroup)) {
+        // Evita parear PB-UNI-38 (Gestão de E-mails Corporativos) quando o chamado trata de automação de cobrança/mensageria, inclusão em grupos de distribuição ou relatórios do hospital
+        if (pb.id === "PB-UNI-38" && (isAutomationBillingOrMessaging || isEmailDistributionGroup || isHospitalSpdataScheduledReports)) {
           continue;
         }
         // Evita parear PB-UNI-07 (Periféricos / Hardware) e PB-UNI-06 (Apoio a Eventos) quando o chamado trata de padronização de área de trabalho, scanner, tags/métricas no site, etiquetas do GLPI, banner no site, tabela TUSS ou layout de etiqueta
@@ -742,14 +884,16 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-16 (Extração de Indicadores/Relatórios) quando o chamado trata de agenda de profissional, erro do WConect ou não cita indicadores/relatórios
+        // Evita parear PB-UNI-16 (Extração de Indicadores/Relatórios) quando o chamado trata de relatórios agendados do hospital, agenda de profissional, erro do WConect ou não cita indicadores/relatórios
         if (
           pb.id === "PB-UNI-16" &&
-          (/\bagenda\b/i.test(normTicket) ||
+          (isHospitalSpdataScheduledReports ||
+            /\bagenda\b/i.test(normTicket) ||
             isWconectErrorOrMessageSync ||
-            !/\b(indicador|indicadores|produtividade|relat[oó]rio|relatorios|extra[çc][ãa]o|levantamento|quantitativo)\b/i.test(
-              normTicket
-            ))
+            (!isMedicalProductionExtraction &&
+              !/\b(indicador|indicadores|produtividade|relat[oó]rio|relatorios|extra[çc][ãa]o|levantamento|quantitativo)\b/i.test(
+                normTicket
+              )))
         ) {
           continue;
         }
@@ -814,10 +958,11 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
-        // Evita parear PB-UNI-14 (Relatórios Agendados SGH) quando o chamado não trata de relatório agendado ou trata de falha no WConect
+        // Evita parear PB-UNI-14 (Relatórios Agendados SGH) quando o chamado não trata de relatório agendado, trata de novos relatórios do hospital ou trata de falha no WConect
         if (
           pb.id === "PB-UNI-14" &&
           (isWconectErrorOrMessageSync ||
+            isHospitalSpdataScheduledReports ||
             !/\b(relat[oó]rio|relatorios|agendad[ao]|disparo|checklist|check-list|di[aá]ri[ao]|smtp)\b/i.test(
               normTicket
             ))
@@ -889,10 +1034,10 @@ export class KnowledgeEngine {
             normTicket
           );
 
-        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora ou aplicativo de etiquetas/atalho
+        // Evita parear Playbook de Falha de Impressão (PB-SD-02) quando o chamado pede remanejamento físico de equipamento ou instalação de ponto de telefone/rede ou cadastro de e-mail/scan ou troca de toner/tintas/suprimentos ou instalação/fornecimento de nova impressora ou aplicativo de etiquetas/atalho ou desenvolvimento de painel de senhas
         if (
           (pb.id === "PB-SD-02" || pb.id === "PB-UNI-08") &&
-          (isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut || isGlpiOrSystemTagManagement)
+          (isQueueOrPainelSenhaDev || isRelocationOrPhoneInstall || isScanToEmail || isSupplyOrTonerRequest || isPrinterInstallOrNewRequest || isLabelAppOrDesktopShortcut || isGlpiOrSystemTagManagement)
         ) {
           continue;
         }
@@ -992,6 +1137,27 @@ export class KnowledgeEngine {
           );
         // Evita parear PB-UNI-37 (Dúvidas e Orientações) quando o chamado não trata de dúvidas ou orientações ou quando se trata de autorização/senha/guia no HRP
         if (pb.id === "PB-UNI-37" && (!isDoubtOrOrientation || isHrpAuthorizationOrIntercambio || isHrpIntercambioGuiaStatusChange)) {
+          continue;
+        }
+        // Evita parear PB-UNI-71 (Evidências de Segurança/AutoLac para PALC) quando se trata de pesquisa de satisfação/totem
+        if (
+          pb.id === "PB-UNI-71" &&
+          (isLaboratorioCustomerSatisfactionTool || !isPalcOnaLaboratorioAudit)
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-75 (Pesquisa de Satisfação/Totem no Laboratório) quando não se trata de pesquisa de satisfação/totem
+        if (
+          pb.id === "PB-UNI-75" &&
+          !isLaboratorioCustomerSatisfactionTool
+        ) {
+          continue;
+        }
+        // Evita parear PB-UNI-76 (Painel de Senhas / Gerenciador de Filas) quando não se trata de painel de senhas/fila de atendimento
+        if (
+          pb.id === "PB-UNI-76" &&
+          !isQueueOrPainelSenhaDev
+        ) {
           continue;
         }
         let score = computeRelevance(
@@ -1111,9 +1277,9 @@ export class KnowledgeEngine {
         }
         if (
           pb.id === "PB-UNI-47" &&
-          isSystemTableParameterization
+          (isSystemTableParameterization || isIpsmTable)
         ) {
-          score = Math.max(score, 0.96);
+          score = Math.max(score, isIpsmTable ? 0.98 : 0.96);
         }
         if (
           pb.id === "PB-UNI-48" &&
@@ -1217,6 +1383,60 @@ export class KnowledgeEngine {
         ) {
           score = Math.max(score, 0.99);
         }
+        if (
+          pb.id === "PB-UNI-69" &&
+          isHospitalSpdataScheduledReports
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-70" &&
+          isPepPrescriptionProtocol
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-71" &&
+          isPalcOnaLaboratorioAudit
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-72" &&
+          isHrpAtivoImobilizadoRecurso
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-73" &&
+          isGlpiAttachmentOrUploadError
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-74" &&
+          isHrpAccommodationChange
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-16" &&
+          isMedicalProductionExtraction
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-75" &&
+          isLaboratorioCustomerSatisfactionTool
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-76" &&
+          isQueueOrPainelSenhaDev
+        ) {
+          score = Math.max(score, 0.99);
+        }
         if (score >= 0.35) {
           if (score > bestPlaybookScore) bestPlaybookScore = score;
           matches.push({
@@ -1272,6 +1492,18 @@ export class KnowledgeEngine {
       if (
         isHrpIntercambioGuiaStatusChange &&
         /\b(interc[aâ]mbio|eletivo|urg[eê]ncia|hrp)\b/i.test(normKbTitle)
+      ) {
+        score = Math.max(score, 0.98);
+      }
+      if (
+        isPepPrescriptionProtocol &&
+        /\b(prescri[cç][aã]o|protocolo|pep|sgh)\b/i.test(normKbTitle)
+      ) {
+        score = Math.max(score, 0.98);
+      }
+      if (
+        isHrpAtivoImobilizadoRecurso &&
+        /\b(ativo\s+imobilizado|recurso|ide\s+engine|lote)\b/i.test(normKbTitle)
       ) {
         score = Math.max(score, 0.98);
       }
@@ -1408,6 +1640,12 @@ export class KnowledgeEngine {
         score = Math.max(score, 0.85);
       }
       if (
+        isHrpAccommodationChange &&
+        /\bacomoda[cç][aã]o\b/i.test(normalizeText(hist.title || ""))
+      ) {
+        score = Math.max(score, 0.88);
+      }
+      if (
         isSiteBannerOrContentUpdate &&
         /\baltera[cç][aã]o\s+banner\s+site\b/i.test(normalizeText(hist.title || ""))
       ) {
@@ -1427,6 +1665,12 @@ export class KnowledgeEngine {
         /\bbras[ií]ndice\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
       ) {
         score = Math.max(score, 0.78);
+      }
+      if (
+        isIpsmTable &&
+        /\b(ipsm|batalh[aã]o)\b/i.test(normalizeText(`${hist.title} ${hist.summary}`))
+      ) {
+        score = Math.max(score, 0.88);
       }
       const minHistScore = isRoutine ? 0.65 : bestPlaybookScore >= 0.75 ? 0.50 : 0.42;
       if (score >= minHistScore) {
@@ -1650,6 +1894,15 @@ export class KnowledgeEngine {
           isSystemTableParameterization &&
           !/\b(criar\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias|faixa\s+(?:de\s+)?998|parametriza[cç][aã]o\s+de\s+sistemas\s+e\s+tabelas|bras[ií]ndice|simpro)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
+          )
+        ) {
+          continue;
+        }
+        // Evita parear memória de atualização manual de TUSS 00952 quando o chamado trata de tabela de medicamentos IPSM/Batalhão (que é importada pela TI)
+        if (
+          isIpsmTable &&
+          /\b(00952|tuss.*00952|manuten[cç][aã]o.*manual|atualiza[cç][aã]o\s+manual)\b/i.test(
+            normalizeText(`${mem.title} ${mem.problem_summary} ${(mem.resolution_steps || []).join(" ")}`)
           )
         ) {
           continue;
@@ -1883,6 +2136,48 @@ export class KnowledgeEngine {
           /\b(troca\s+de\s+toner|toner|tonner)\b/i.test(
             normalizeText(`${mem.title} ${mem.problem_summary}`)
           )
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros relatórios quando o chamado trata de Inclusão em Relatórios do Hospital no SGH Spdata (PB-UNI-69)
+        if (
+          isHospitalSpdataScheduledReports &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros chamados quando o chamado trata de criação de protocolo/prescrição no PEP SGH (PB-UNI-70)
+        if (
+          isPepPrescriptionProtocol &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros chamados quando o chamado trata de auditoria PALC/ONA do Laboratório (PB-UNI-71)
+        if (
+          isPalcOnaLaboratorioAudit &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros chamados quando o chamado trata de unificação de recursos de ativo imobilizado no HRP (PB-UNI-72)
+        if (
+          isHrpAtivoImobilizadoRecurso &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros chamados quando o chamado trata de falha no upload/anexo de arquivos no GLPI (PB-UNI-73)
+        if (
+          isGlpiAttachmentOrUploadError &&
+          mem.ticket_id !== ticket.id
+        ) {
+          continue;
+        }
+        // Evita parear memórias de outros chamados quando o chamado trata de mudança de acomodação no HRP (PB-UNI-74)
+        if (
+          isHrpAccommodationChange &&
+          mem.ticket_id !== ticket.id
         ) {
           continue;
         }

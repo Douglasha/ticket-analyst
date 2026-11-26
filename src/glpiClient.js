@@ -963,6 +963,7 @@ export class GLPIClient {
         { id: 162, name: "Apoio a Eventos / Empréstimo de Equipamentos", completename: "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos" },
         { id: 163, name: "Reversão de Processos / Ajustes Operacionais", completename: "T.I > ST > Reversão de Processos / Ajustes Operacionais" },
         { id: 164, name: "Parametrização de Sistemas e Tabelas", completename: "T.I > ST > Parametrização de Sistemas e Tabelas" },
+        { id: 147, name: "Alteração de Dados / Ajustes SQL Pontuais", completename: "T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais" },
       ];
     }
 

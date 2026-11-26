@@ -82,7 +82,7 @@
       <!-- Formulário de Login -->
       <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Usuário GLPI</label>
+          <label for="login-username" class="block text-xs font-semibold mb-1.5 cursor-pointer" style="color: var(--text-secondary);">Usuário GLPI</label>
           <div class="relative">
             <span class="material-symbols-outlined icon-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--text-muted);">person</span>
             <input
@@ -98,7 +98,7 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-secondary);">Senha</label>
+          <label for="login-password" class="block text-xs font-semibold mb-1.5 cursor-pointer" style="color: var(--text-secondary);">Senha</label>
           <div class="relative">
             <span class="material-symbols-outlined icon-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--text-muted);">lock</span>
             <input
@@ -1032,6 +1032,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=14"></script>
+  <script src="/static/app.js?v=15"></script>
 </body>
 </html>

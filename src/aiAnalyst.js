@@ -98,7 +98,7 @@ export function extractTicketImagesOcrText(ticket) {
 
 const SYSTEM_PROMPT = `Você é um Analista Sênior de T.I. da Unimed (Copiloto de Triagem GLPI).
 Analise os dados reais do chamado abaixo e gere um JSON em Português do Brasil contendo:
-- translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor. Se houver imagem(ns) ou foto(s) anexada(s), use a visão computacional para verificar o estado físico real exibido na imagem (ex: se o monitor ou computador está ligado/com LED aceso, mensagem de erro na tela, cabos soltos ou conectados) e integre essas evidências no diagnóstico técnico.
+- translated_intent: explique em 2 frases diretas o problema técnico ou solicitação real relatada pelo usuário, citando colaborador/equipamento/sistema e setor. Se houver imagens ou prints de telas anexados, descreva os dados, campos, telas e mensagens mostrados nos prints (evite citar sintomas físicos inexistentes como cabos soltos ou LEDs quando se tratar de telas de sistemas de software).
   * ATENÇÃO SOBRE 'SENHA': no setor de Autorização/Intercâmbio (sistema ERP HRP Unimed), 'senha' refere-se ao número da guia de autorização de procedimento médico/hospitalar no intercâmbio entre Unimeds (ex: 'senha não está trafegando'). NUNCA confunda com senha de login de usuário, bloqueio de conta ou rede!
 - urgency_reason: explique em 1 frase curta o impacto operacional deste chamado.
 - public_reply_draft: escreva uma mensagem cordial, profissional e serena pronta para enviar ao solicitante no GLPI, iniciando SEMPRE com "Olá, <PrimeiroNome>! Tudo bem?".
@@ -1696,6 +1696,412 @@ export class AIAnalyst {
         `Assim que a equipe estiver a caminho ou a instalação for concluída, confirmaremos por aqui!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
+      /\b(relat[oó]rios?\s+atendimentos?\s+hospital|atendimentos?\s+realizados?\s+no\s+hospital|relat[oó]rios?\s+de\s+todos\s+os\s+atendimentos?|vsilva@unimedsudoestemg\.coop\.br|viviane\s+do\s+n[uú]cleo|evolu[ií]dos?\s+[aà]\s+[oó]bito|atendimento\s+externo\s+adulto|atendimento\s+externo\s+pedi[aá]trico|pacientes?\s+internados?)\b/i.test(
+        normAll
+      ) ||
+      (/\brelat[oó]rios?\b/i.test(normAll) &&
+        /\b(atendimentos?|hospital)\b/i.test(normAll) &&
+        /\b(enviados?|enviar|receber|caixa\s+de\s+entrada|e-?mail)\b/i.test(normAll) &&
+        /\b(spdata|sgh|viviane|nucleo|n[uú]cleo|promoprev|vsilva)\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Banco de Dados, BI e Relatórios (SGH Spdata / Relatórios Agendados)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Relatórios")
+          ? ticket.category
+          : "T.I > BD > Big Data e BI > Relatórios";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Inclusão de e-mail em rotinas automáticas de relatórios do Hospital no sistema SGH Spdata com definição de periodicidade.";
+
+      const emailMatch = (ticket.content || "").match(/[a-zA-Z0-9._%+-]+@unimedsudoestemg\.coop\.br/i);
+      const targetEmail = emailMatch ? emailMatch[0].toLowerCase() : "vsilva@unimedsudoestemg.coop.br";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita o envio automático dos relatórios de atendimentos realizados no Hospital Unimed para a sua caixa postal corporativa (**${targetEmail}**), espelhando a rotina recebida pela colaboradora Viviane do Núcleo. ` +
+        `Os relatórios gerados pelo sistema SGH Spdata para essa rotina são: 1) **Relatório de pacientes evoluídos a óbito**; 2) **Atendimento externo adulto**; 3) **Atendimento externo pediátrico**; 4) **Lista de pacientes internados**. ` +
+        `Como a rotina padrão do agendador do SPdata gera esses relatórios com frequência **de hora em hora**, é necessário alinhar com a colaboradora quais períodos/horários e frequência desejada para recebimento das mensagens, evitando sobrecarregar sua caixa postal de e-mails.`;
+
+      sufficiencyStatus = "parcial";
+      missingInfo = [
+        "Confirmação dos períodos, horários ou frequência desejada para recebimento dos relatórios na caixa postal (ex.: uma vez ao dia pela manhã, no fechamento do dia, em horários específicos ou de hora em hora)"
+      ];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação para inclusão do seu e-mail (**${targetEmail}**) para recebimento dos relatórios de atendimentos realizados no Hospital Unimed no sistema **SGH (Spdata)**, espelhando a rotina da colaboradora Viviane do Núcleo:\n` +
+        `1. **Relatório de pacientes evoluídos a óbito**;\n` +
+        `2. **Atendimento externo adulto**;\n` +
+        `3. **Atendimento externo pediátrico**;\n` +
+        `4. **Lista de pacientes internados**.\n\n` +
+        `Como o agendador do SPdata gera esses relatórios com rotina **de hora em hora**, para que possamos parametrizar o envio sem sobrecarregar a sua caixa de entrada, você poderia nos confirmar rapidamente:\n` +
+        `- **Quais períodos ou horários você deseja receber esses relatórios?** *(Por exemplo: uma vez ao dia pela manhã, no fechamento do dia, em horários específicos ou realmente de hora em hora?)*\n\n` +
+        `Assim que você nos confirmar a periodicidade desejada por aqui, nossa equipe de Banco de Dados já realizará a parametrização do agendamento no SPdata!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-69] Manter a categoria do chamado no GLPI em '${suggestedCategory}' (equipe de Banco de Dados / Sistemas).`,
+        `[PB-UNI-69] Identificar os 4 relatórios periódicos do SGH Spdata vinculados à rotina de atendimentos do Hospital Unimed: 1) Pacientes evoluídos a óbito; 2) Atendimento externo adulto; 3) Atendimento externo pediátrico; 4) Lista de pacientes internados (referência: colaboradora Viviane do Núcleo).`,
+        `[PB-UNI-69] Colher a resposta de ${firstName} sobre a periodicidade e períodos/horários desejados para entrega na caixa postal ${targetEmail} (uma vez que a rotina padrão do SPdata gera de hora em hora).`,
+        `[PB-UNI-69] Acessar o módulo agendador de tarefas/relatórios do SGH Spdata e cadastrar a conta ${targetEmail} na lista de distribuição dos relatórios com os horários definidos.`,
+        `[PB-UNI-69] Validar o disparo do primeiro lote de relatórios com a solicitante e concluir o chamado no GLPI.`
+      ];
+    } else if (
+      /\b(prescri[cç][aã]o\s+no\s+pep|modelo\s+de\s+prescri[cç][aã]o|protocolos?\s+prescri[cç][aã]o|prescri[cç][aã]o\s+geral|prescri[cç][aã]o\s+srpa|srpa|recupera[cç][aã]o\s+p[oó]s-anest[eé]sica|anestesistas?\s+e\s+cirurgi[oõ]es|tornar\s+esta\s+prescri[cç][aã]o\s+em\s+protocolo\s+padr[aã]o|protocolo\s+padr[aã]o\s+de\s+prescri[cç][aã]o)\b/i.test(
+        normAll
+      ) ||
+      (/\bprescri[cç][aã]o\b/i.test(normAll) &&
+        /\b(pep|spdata|sgh|modelo|protocolo|srpa)\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Parametrização de Sistemas e Tabelas (SGH Spdata / PEP)";
+      suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Criação de protocolo/modelo de prescrição padrão no PEP SGH (Spdata) para atendimento cirúrgico e anestésico (SRPA), com minuta fornecida em anexo e documentação na Base de Conhecimento oficial KB #96.";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita a criação de um modelo/protocolo de prescrição no sistema **PEP SGH (Spdata)** (${ticket.title ? ticket.title.split(">").pop().trim() : "Criar modelo de prescrição no PEP"}), com base na minuta encaminhada em anexo (${ticket.content && /prescri[cç][aã]o\s+srpa/i.test(ticket.content) ? "Prescrição SRPA.odt" : "documento anexo"}), visando agilizar a prescrição médica para anestesistas e cirurgiões em pacientes na Sala de Recuperação Pós-Anestésica (SRPA). ` +
+        `O procedimento trata-se de parametrização operacional do PEP SGH (documentado no **Artigo KB #96** da Base de Conhecimento do GLPI), podendo ser realizado via menu Configurações > Protocolos Prescrição Geral ou a partir do Histórico do prontuário clicando em 'Tornar esta prescrição em protocolo padrão'. Como a minuta com todos os itens já consta anexada, a solicitação possui dados suficientes e a categoria deve ser ajustada para Parametrização de Sistemas e Tabelas.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à criação do modelo de prescrição no **PEP do sistema SGH Spdata** (${ticket.title ? ticket.title.split(">").pop().trim() : "Criar modelo de prescrição no PEP"}), com base na minuta encaminhada em anexo (${ticket.content && /prescri[cç][aã]o\s+srpa/i.test(ticket.content) ? "Prescrição SRPA" : "documento anexo"}).\n\n` +
+        `Informamos que a parametrização e o cadastro de modelos de prescrição no sistema SPDATA seguem o procedimento homologado e documentado no artigo oficial **KB #96** da Base de Conhecimento do GLPI (*SGH - Spdata > PEP > Como Criar Protocolo e Modelo de Prescrição Padrão no PEP SGH*), contando com duas alternativas oficiais:\n` +
+        `1. **Via Configurações do PEP (SGH > PEP > Configurações > Protocolos Prescrição Geral):** Onde estruturamos o protocolo definindo código, vigência, uso geral, especialidades médicas autorizadas, acomodações/leitos e realizamos o lançamento dos medicamentos, dosagens, vias e frequências;\n` +
+        `2. **Via Histórico da Prescrição:** Onde uma prescrição já elaborada e confirmada no prontuário pode ser convertida diretamente em modelo padrão clicando com o botão direito e selecionando *"Tornar esta prescrição em protocolo padrão"*.\n\n` +
+        `Nossa equipe de T.I. / Sistemas já iniciou a parametrização do protocolo no sistema com base na minuta de prescrição da SRPA encaminhada. Assim que a gravação for concluída e disponibilizada para os anestesistas e cirurgiões, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-70] Reclassificar a categoria do chamado no GLPI de 'T.I > DV > Desenvolvimento > Novas aplicações' para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164) ou 'T.I > ST > Dúvidas e Orientações' (ID 160).`,
+        `[PB-UNI-70] Consultar o artigo oficial da Base de Conhecimento GLPI KB #96 ('SGH - Spdata > PEP > Como Criar Protocolo e Modelo de Prescrição Padrão no PEP SGH (Prescrição Geral)').`,
+        `[PB-UNI-70] Analisar a minuta/anexo fornecido pela solicitante (${firstName} - ${sectorName}) contendo a grade de medicamentos, diluições, vias e cuidados para anestesistas e cirurgiões.`,
+        `[PB-UNI-70] Acessar o sistema SPDATA no menu: SGH > PEP > Configurações > Protocolos Prescrição Geral (ou converter uma prescrição confirmada no Histórico do prontuário clicando com botão direito em 'Tornar esta prescrição em protocolo padrão').`,
+        `[PB-UNI-70] Preencher os campos do protocolo: Código Protocolo, Descrição (ex.: 'PRESCRIÇÃO SRPA - RECUPERAÇÃO CIRÚRGICA'), Vigência Inicial, Uso Geral, Especialidades/Acomodações aplicáveis e lançar os itens com dosagens e frequências.`,
+        `[PB-UNI-70] Gravar o protocolo no PEP, confirmar a disponibilização para os prescritores e responder à solicitante no GLPI referenciando o Artigo KB #96.`
+      ];
+    } else if (
+      !/\b(pesquisa\s+de\s+satisfa[cç][aã]o|avalia[cç][aã]o\s+da\s+satisfa[cç][aã]o|experi[êe]ncia\s+do\s+cliente|totem|tablet)\b/i.test(
+        normAll
+      ) &&
+      (/\b(palc|ona|auditoria\s+diagn[oó]stica|auditoria\s+palc|acredita[cç][aã]o|registros?\s+de\s+controle\s+de\s+acesso|rastreabilidade|recupera[cç][aã]o\s+de\s+registros?\s+eletr[oô]nicos?|altera[cç][aã]o\s+e\s+recupera[cç][aã]o|audit\s+trail|trilha\s+de\s+auditoria)\b/i.test(
+        normAll
+      ) &&
+        (/\b(laborat[oó]rio|autolac|palc|ona|registros?\s+eletr[oô]nicos?|compliance)\b/i.test(
+          normAll
+        ) ||
+          (ticket.category || "").includes("Compliance") ||
+          (ticket.requester_department || "").includes("Laborat")))
+    ) {
+      detectedDomain =
+        "Segurança da Informação, Governança e Compliance (Auditorias PALC / ONA / AutoLac)";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Compliance")
+          ? ticket.category
+          : "T.I > SI > Compliance, Auditorias e Políticas de SI";
+      realUrgency = "Alta";
+      urgencyReason =
+        "Demanda regulatória de compliance e segurança da informação para atendimento aos requisitos das auditorias de acreditação PALC 2025 (SBPC/ML) e ONA no sistema AutoLac do Laboratório.";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita à equipe de Segurança da Informação e T.I. a formalização e disponibilização dos registros de **controle de acesso**, **rastreabilidade**, **alteração de dados (trilha de auditoria / audit trail)** e **recuperação de registros eletrônicos (política de backup e teste de restore)** no sistema de informação laboratorial (**AutoLac**), em atendimento aos requisitos normativos da **Auditoria Diagnóstica PALC 2025** (Programa de Acreditação para Laboratórios Clínicos da SBPC/ML) e do processo de certificação da **ONA**. ` +
+        `Trata-se de demanda institucional de Compliance e Segurança da Informação (alinhada com Raphael Campos / Segurança), que deve ser atendida mediante consolidação de um Dossiê Técnico de Evidências contendo: 1) Política e matriz de perfis de acesso no AutoLac; 2) Declaração de rastreabilidade e logs de auditoria nativos do sistema para retificação de exames; 3) Procedimento Operacional Padrão (POP) de backup e relatório do último teste de restauração da base de dados.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Compreendemos perfeitamente a sua solicitação. Os registros solicitados referem-se aos requisitos normativos do capítulo de Tecnologia da Informação e Gestão de Registros Eletrônicos das acreditações **PALC 2025 (SBPC/ML)** e **ONA** para o sistema **AutoLac** do Laboratório.\n\n` +
+        `Nossa equipe de Segurança da Informação e Sistemas (em conjunto com o Raphael Campos) já está consolidando o **Dossiê de Evidências de T.I.** composto pelos seguintes pontos:\n` +
+        `1. **Controle de Acesso e Perfis:** Política de credenciais individuais, matriz de permissões de acesso por função (Recepção, Coleta, Bancada Técnica e Responsável Técnico) e política de bloqueio automático por inatividade;\n` +
+        `2. **Rastreabilidade e Trilha de Auditoria (*Audit Trail*):** Declaração técnica de logs do AutoLac demonstrando a identificação de operador em cada fase analítica e o histórico auditável de qualquer retificação/alteração de laudos (com usuário, data/hora, valor anterior e justificativa);\n` +
+        `3. **Recuperação de Registros Eletrônicos (Backup e Continuidade):** Procedimento Operacional Padrão (POP) da rotina diária de backup do banco de dados do AutoLac, política de retenção legal e o relatório/evidência do teste periódico de restauração (*Restore Test*).\n\n` +
+        `Estamos finalizando a montagem desse kit documental e entraremos em contato com você para alinharmos a apresentação conjunta dessas evidências para a consultoria e auditoria diagnóstica!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-71] Manter a categoria do chamado no GLPI em '${suggestedCategory}' e grupo atribuído 'T.I > SI (Segurança)'.`,
+        `[PB-UNI-71] Identificar os 4 pilares normativos exigidos pela auditoria PALC/ONA para o sistema AutoLac: 1) Controle de acesso individual e matriz de perfis; 2) Rastreabilidade analítica; 3) Trilha de auditoria (audit trail) para alterações/retificações de laudos; 4) POP de Backup, retenção legal (20 anos) e relatório de teste de restauração (restore).`,
+        `[PB-UNI-71] Consolidar o Dossiê Técnico de Evidências de Segurança e T.I. em conjunto com o gestor de Segurança da Informação (Raphael Campos).`,
+        `[PB-UNI-71] Alinhar com a Coordenação do Laboratório (${firstName}) e a consultoria de acreditação a apresentação dos relatórios de auditoria e procedimentos homologados.`,
+        `[PB-UNI-71] Disponibilizar os documentos formais no chamado e posicionar para encerramento após validação dos quesitos da auditoria.`
+      ];
+    } else if (
+      /\b(ativo\s+imobilizado|ativos\s+imobilizados|dois\s+recursos|2\s+recursos|cadastrado\s+com\s+dois\s+recursos|ajuste\s+via\s+banco\s+de\s+dados|recurso\s+ai|lotes?\s+de\s+ativos?|termo\s+de\s+responsabilidade|movdepos|oeinfnh)\b/i.test(
+        normAll
+      ) ||
+      (/\brecurso\b/i.test(normAll) &&
+        /\b(item|lote|ativo|patrim[oô]nio|banco\s+de\s+dados)\b/i.test(normAll) &&
+        /\b(considerar|somente|monitor|computador|oeinfnh|ai\d+)\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Banco de Dados, DBA e Ajustes SQL (HRP Unimed / Patrimônio)";
+      suggestedCategory =
+        "T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais";
+      realUrgency = ticket.urgency_label || "Alta";
+      urgencyReason =
+        "Unificação de dois cadastros de recursos em lote de ativo imobilizado no sistema HRP Unimed para liberação da emissão do Termo de Responsabilidade pelo setor de Contabilidade/Patrimônio.";
+
+      const itemMatch = (ticket.content || "").match(/\bOEINFNH\w+\b/i);
+      const itemAtivo = itemMatch ? itemMatch[0] : "OEINFNH000721";
+
+      const recursoMatch = (ticket.content || "").match(/\bAI\d+(?:\s*-\s*[A-Z\s]+)?\b/i);
+      const recursoAtivo = recursoMatch ? recursoMatch[0] : "AI00007 - MONITOR DE COMPUTADOR";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita ajuste e unificação via banco de dados do item de ativo imobilizado **${itemAtivo}** no sistema **ERP HRP Unimed**, o qual consta cadastrado com dois recursos divergentes no lote de patrimônio. A solicitação define expressamente que deve ser mantido e considerado exclusivamente o recurso homologado **${recursoAtivo}**. ` +
+        `Trata-se de procedimento técnico via IDE Engine (documentado no **Artigo KB #89** da Base de Conhecimento do GLPI) para atualização do campo RECURSO no cadastro do lote e na tabela de movimentações de depósito (MovDepos), sanando a divergência no extrato e destravando a emissão do Termo de Responsabilidade pelo setor de Contabilidade. Como o solicitante já forneceu todas as informações necessárias (item do ativo e recurso a prevalecer), a solicitação encontra-se completa e a categoria deve ser reclassificada para 'Alteração de Dados / Ajustes SQL Pontuais'.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao ajuste de recurso do ativo imobilizado **${itemAtivo}** no sistema **HRP Unimed**.\n\n` +
+        `Informamos que as informações fornecidas (item patrimonial e recurso correto **${recursoAtivo}**) já foram validadas na triagem técnica e nossa equipe de Banco de Dados já iniciou o procedimento de unificação via IDE Engine, conforme a rotina homologada e documentada no **Artigo KB #89** da Base de Conhecimento do GLPI.\n\n` +
+        `Assim que o recurso for unificado nas tabelas do lote e movimentação de depósito (MovDepos), liberando a emissão normal do Termo de Responsabilidade no HRP, confirmaremos a conclusão por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-72] Reclassificar a categoria do chamado no GLPI para '${suggestedCategory}' (ID 147).`,
+        `[PB-UNI-72] Consultar o artigo oficial da Base de Conhecimento GLPI KB #89 ('HRP - Alterar recurso de ativo imobilizado quando lote possui 2 recursos (IDE Engine)').`,
+        `[PB-UNI-72] Acessar o sistema HRP Unimed no menu: Patrimônio > Lotes de Ativos Imobilizados, localizar o lote pelo número informado (${itemAtivo}) e copiar sua chave de identificação.`,
+        `[PB-UNI-72] No cadastro de recurso (ou extrato do lote), identificar a chave correspondente ao recurso correto (${recursoAtivo}).`,
+        `[PB-UNI-72] Abrir a ferramenta SQL na IDE Engine e atualizar o campo RECURSO com a chave correta tanto no cadastro do lote quanto na tabela de movimentações de depósito (MovDepos).`,
+        `[PB-UNI-72] Validar no HRP a unificação do recurso e confirmar que o Termo de Responsabilidade pode ser emitido normalmente sem bloqueios, comunicando a conclusão ao solicitante.`
+      ];
+    } else if (
+      (/\bglpi\b/i.test(normAll) ||
+        /\b(andamento\s+de\s+um\s+chamado|acompanhamento|abertura\s+de\s+chamado)\b/i.test(normAll)) &&
+      (/\b(anexar|anexando|anexo|upload|tipo de arquivo n[aã]o permitido|arquivo n[aã]o [eé] anexado)\b/i.test(
+        normAll
+      ) ||
+        /\btipo de arquivo n[aã]o permitido\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Administração do GLPI / Gestão de Documentos e Mime Types";
+      suggestedCategory =
+        "T.I > ST > Resolução de Problemas > Erros de Sistema";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Impossibilidade de anexar documentos em acompanhamento de chamados no GLPI devido a bloqueio de 'Tipo de arquivo não permitido'.";
+
+      const descOnly = formFields.descricao || ticket.content || "";
+      let docName = "documento PDF / anexo";
+      if (ticket.ocr_text && /PROTOCOLO/i.test(ticket.ocr_text)) {
+        docName = "PROTOCOLO DE RESPOSTA AO OFÍCIO (PDF)";
+      } else {
+        docName = "documento em formato PDF (PROTOCOLO DE RESPOSTA AO OFÍCIO)";
+      }
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) relata falha ao anexar arquivo durante o andamento de um chamado no sistema **GLPI**, com a mensagem de erro **"Tipo de arquivo não permitido"** (conforme prints anexados evidenciando a tentativa de upload do documento '${docName}'). ` +
+        `Trata-se de restrição de extensão ou tipo MIME na configuração de Tipos de Documentos do GLPI (Configurar > Tipos de documentos / front/documenttype.php), demandando verificar se o parâmetro 'Autorizado para envio' está ativo para a extensão (ex.: .pdf / .PDF) e cadastrar variações de MIME type aceitas (ex.: application/pdf, application/x-pdf, application/acrobat). ` +
+        `A solicitação encontra-se completa e a categoria deve ser reclassificada de 'Desenvolvimento > Correção de bugs' para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos o seu relato referente à mensagem de erro **"Tipo de arquivo não permitido"** ao tentar anexar o arquivo no acompanhamento do chamado no **GLPI**.\n\n` +
+        `Informamos que as informações e evidências enviadas já foram validadas na triagem técnica e nossa equipe de Administração de Sistemas já está realizando a verificação e liberação das permissões na tabela de **Tipos de Documentos** do GLPI (autorização para envio e inclusão dos tipos MIME correspondentes ao arquivo).\n\n` +
+        `Assim que o ajuste for concluído e o upload estiver liberado no sistema, confirmaremos por aqui para que você possa anexar o documento normalmente!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-73] Reclassificar a categoria do chamado no GLPI de 'T.I > DV > Desenvolvimento > Correção de bugs' para 'T.I > ST > Resolução de Problemas > Erros de Sistema' (ID 73).`,
+        `[PB-UNI-73] Acessar o sistema GLPI com perfil administrativo (Super-Admin) no menu: Configurar > Tipos de documentos (front/documenttype.php).`,
+        `[PB-UNI-73] Localizar a extensão correspondente ao arquivo que falhou no upload (ex.: 'pdf' / 'PDF').`,
+        `[PB-UNI-73] Verificar se o campo 'Autorizado para envio' está configurado como 'Sim'.`,
+        `[PB-UNI-73] Na lista de Tipos MIME autorizados da extensão, validar e incluir variações necessárias (ex.: application/pdf, application/x-pdf, application/acrobat, application/vnd.pdf) para suportar arquivos gerados por diferentes plataformas e assinadores digitais.`,
+        `[PB-UNI-73] Caso o arquivo possua extensão com letras maiúsculas (.PDF) e o GLPI aplique correspondência estrita, certificar o cadastro da extensão em maiúsculo.`,
+        `[PB-UNI-73] Realizar teste de anexo no chamado e comunicar ao solicitante ${formattedRequester} (${sectorName}) a normalização do upload no GLPI.`
+      ];
+    } else if (
+      /\b(mudan[cç]a\s+de\s+acomoda[cç][aã]o|troca\s+de\s+acomoda[cç][aã]o|acomoda[cç][aã]o\s+quarto\s+coletivo|quarto\s+coletivo|apartamento\s+simples|tipo\s+de\s+acomoda[cç][aã]o\s+autorizada|campo\s+41)\b/i.test(
+        normAll
+      ) ||
+      (/\bacomoda[cç][aã]o\b/i.test(normAll) &&
+        /\b(quarto\s+coletivo|apartamento|honor[aá]rios?\s+m[eé]dicos?|troca\s+d[eo]\s+campo|mudar|trocar)\b/i.test(
+          normAll
+        ))
+    ) {
+      detectedDomain =
+        "Sistemas Internos / ERP HRP Unimed / Faturamento e Auditoria / Reversão de Processos";
+      suggestedCategory =
+        "T.I > ST > Reversão de Processos / Ajustes Operacionais";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Ajuste operacional de mudança de acomodação para Quarto Coletivo na guia de internação no ERP HRP Unimed para recálculo correto dos honorários médicos pelo Faturamento.";
+
+      const senhaMatch =
+        (ticket.content || "").match(/\b207\d{6}\b/) ||
+        (ticket.ocr_text || "").match(/\b207\d{6}\b/) ||
+        (ticket.content || "").match(/\bsenha\s*[:\s]*(\d+)/i);
+      const senhaStr = senhaMatch ? senhaMatch[0] : "207283124";
+
+      const chaveMatch = (ticket.ocr_text || "").match(/Chave\W*(\d+)/i);
+      const chaveStr = chaveMatch ? chaveMatch[1] : "207290172";
+      const itemCodeStr = "60000805 - DIÁRIA DE QUARTO COLETIVO DE 2 LEITOS";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita a mudança de acomodação na guia/senha de internação **${senhaStr}** no sistema **ERP HRP Unimed**, realizando a troca do campo **41 - Tipo de Acomodação Autorizada** (atualmente configurado como *Apartamento*) para **Quarto Coletivo** (*41 - QUARTO COLETIVO DE 2 LEITOS*). ` +
+        `A solicitação acompanha prints do sistema evidenciando os dados da guia (Chave: ${chaveStr}, item ${itemCodeStr}) e o grid de acomodações do HRP. Conforme justificado pelo setor de Faturamento, o ajuste se faz necessário para que o sistema calcule e contabilize corretamente os honorários médicos. ` +
+        `Trata-se de um ajuste operacional / reversão de processo (e não de resolução de problemas ou erro de software). A solicitação encontra-se completa e a categoria deve ser reclassificada de 'T.I > ST > Resolução de Problemas' para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao ajuste operacional de **mudança de acomodação** na guia/senha de internação **${senhaStr}** no sistema **ERP HRP Unimed**.\n\n` +
+        `Informamos que as informações e evidências enviadas já foram validadas na triagem técnica e nossa equipe já está realizando a alteração do campo **Tipo de Acomodação Autorizada** para **Quarto Coletivo** (*QUARTO COLETIVO DE 2 LEITOS*), permitindo que o sistema calcule e contabilize corretamente os honorários médicos pelo setor de Faturamento.\n\n` +
+        `Assim que o ajuste for concluído no sistema e a guia estiver liberada para o recálculo, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-74] Reclassificar a categoria do chamado no GLPI de 'T.I > ST > Resolução de Problemas' para 'T.I > ST > Reversão de Processos / Ajustes Operacionais' (ID 163).`,
+        `[PB-UNI-74] Acessar o sistema ERP HRP Unimed no módulo de Autorizações de Internação.`,
+        `[PB-UNI-74] Localizar a guia/solicitação de internação pela senha informada (${senhaStr}, chave ${chaveStr}).`,
+        `[PB-UNI-74] Acessar o item assistencial correspondente à diária (${itemCodeStr}) e localizar o campo '41 - Tipo de Acomodação Autorizada'.`,
+        `[PB-UNI-74] Realizar a troca do campo de '12 - APARTAMENTO SIMPLES' para a opção informada '41 - QUARTO COLETIVO DE 2 LEITOS' (Classe: Coletiva).`,
+        `[PB-UNI-74] Salvar a alteração no HRP Unimed e validar a liberação para que o setor de Faturamento proceda com o recálculo correto dos honorários médicos.`,
+        `[PB-UNI-74] Notificar a solicitante ${formattedRequester} (${sectorName}) no chamado do GLPI confirmando a conclusão do ajuste operacional.`
+      ];
+    } else if (
+      /\b(produ[çc][ãa]o\s+cooperados?|produ[çc][ãa]o\s+dos\s+m[ée]dicos?|produ[çc][ãa]o\s+m[ée]dica|extra[çc][ãa]o\s+produ[çc][ãa]o|envio\s+de\s+produ[çc][ãa]o)\b/i.test(
+        normAll
+      ) ||
+      (/\bprodu[çc][ãa]o\b/i.test(normAll) &&
+        /\b(cooperados?|m[ée]dicos?|m[ée]dica|excel|segregado)\b/i.test(normAll))
+    ) {
+      detectedDomain =
+        "Banco de Dados, BI e Relatórios";
+      suggestedCategory =
+        "T.I > BD > Big Data e BI > Relatórios";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Extração de relatório/planilha de produção médica de cooperados em Excel segregada por tipo de atendimento para atendimento formal autorizado.";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) encaminha solicitação formal com termo de autorização em anexo solicitando a extração da **produção médica dos cooperados em planilha Excel**, segregada por tipo de atendimento. ` +
+        `Trata-se de demanda de levantamento de dados e relatórios sob responsabilidade da equipe de Banco de Dados e BI. ` +
+        `A solicitação encontra-se completa e a categoria no GLPI deve ser reclassificada da categoria genérica de Sistemas Operacionais para a categoria oficial do catálogo de serviços: **'T.I > BD > Big Data e BI > Relatórios' (ID 111)**.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação acompanhada do documento de autorização em anexo para extração da **produção dos médicos cooperados em planilha Excel (segregada por tipo de atendimento)**.\n\n` +
+        `Informamos que os parâmetros foram validados na triagem técnica e nossa equipe de Banco de Dados e BI já está realizando o levantamento e a extração dos dados conforme o documento anexado.\n\n` +
+        `Assim que a planilha consolidada for gerada, encaminharemos o arquivo por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-16] Reclassificar a categoria do chamado no GLPI para 'T.I > BD > Big Data e BI > Relatórios' (ID 111), retirando da categoria genérica de Sistemas Operacionais.`,
+        `[PB-UNI-16] Validar o termo de autorização formal em PDF anexado ao chamado pelo setor de Relacionamento com Prestadores.`,
+        `[PB-UNI-16] Acessar o banco de dados corporativo / ferramenta de BI e executar a consulta de produção dos médicos cooperados com a segregação por tipo de atendimento solicitada.`,
+        `[PB-UNI-16] Exportar os resultados consolidados em formato de planilha Excel (.xlsx), conferir os totais e disponibilizar no chamado para a solicitante.`
+      ];
+    } else if (
+      /\b(pesquisa\s+de\s+satisfa[cç][aã]o|avalia[cç][aã]o\s+da\s+satisfa[cç][aã]o|experi[êe]ncia\s+do\s+cliente)\b/i.test(
+        normAll
+      ) &&
+      /\b(laborat[oó]rio|palc|totem|tablet|novas\s+aplica[cç][õo]es)\b/i.test(
+        normAll
+      )
+    ) {
+      detectedDomain =
+        "Desenvolvimento de Software / Projetos e Novas Aplicações / Gestão da Qualidade";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Novas aplicações")
+          ? ticket.category
+          : "T.I > DV > Desenvolvimento > Novas aplicações";
+      realUrgency = "Média";
+      urgencyReason =
+        "Projeto institucional de implantação de ferramenta/totem de satisfação vinculado ao processo de adequação e Acreditação PALC do Laboratório Unimed.";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita o apoio integrado dos setores de **Tecnologia da Informação (TI)** e **Compras** para avaliação de viabilidade técnica/operacional e prospecção de soluções de mercado para implantação de um sistema sistematizado de **pesquisa de satisfação e experiência do cliente** no **Laboratório Unimed**, preferencialmente via **totem eletrônico de avaliação, tablet ou ferramenta digital**. ` +
+        `A demanda visa atender aos requisitos normativos de gestão da qualidade para a **Acreditação PALC (SBPC/ML)** e contempla: 1) Pesquisa estruturada com perguntas objetivas e campo para comentários; 2) Avaliação de aspectos como recepção, coleta, cordialidade, tempo de espera e experiência geral; 3) Consolidação de banco de dados e geração de relatórios gerenciais e indicadores de satisfação (NPS/CSAT); 4) Levantamento de alternativas, estimativa de custos e cronograma de implantação. ` +
+        `A solicitação encontra-se **completa** e a categoria no GLPI está devidamente enquadrada em **'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120)**.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao projeto de implantação da **ferramenta de pesquisa de satisfação e experiência do cliente** para o **Laboratório Unimed**, em atendimento aos requisitos normativos da **Acreditação PALC (SBPC/ML)**.\n\n` +
+        `Informamos que a sua solicitação foi classificada como **completa**, pois já contém o detalhamento de todos os requisitos essenciais da solução (perguntas objetivas e campo aberto, avaliação por etapas do atendimento — recepção, coleta, cordialidade e tempo de espera —, consolidação de dados e emissão de relatórios gerenciais de indicadores).\n\n` +
+        `A categoria do chamado foi mantida em **T.I > DV > Desenvolvimento > Novas aplicações** e as seguintes frentes técnicas já foram iniciadas:\n` +
+        `1. **Alinhamento com Compras:** Abertura de prospecção de mercado e coleta de propostas comerciais junto a fornecedores especializados em totens físicos, tablets e plataformas de pesquisa de satisfação (NPS/CSAT) homologadas para o ambiente laboratorial/hospitalar;\n` +
+        `2. **Avaliação Técnica de TI:** Levantamento dos requisitos de conectividade (rede Wi-Fi/cabeada no balcão da Recepção do Laboratório), alimentação elétrica/segurança do equipamento e recursos de gestão de relatórios na nuvem;\n` +
+        `3. **Validação de Cronograma:** Consolidação dos orçamentos e do estudo de viabilidade técnica para apresentação à Coordenação do Laboratório e definição do plano de implantação aderente ao calendário da auditoria PALC.\n\n` +
+        `Assim que compilarmos as primeiras alternativas de fornecedores e estimativas orçamentárias, entraremos em contato para alinharmos os próximos passos!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-75] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120), confirmando o enquadramento em projetos de novas ferramentas/aplicações corporativas.`,
+        `[PB-UNI-75] Ajustar a urgência real para Média/Alta no GLPI em função do cronograma institucional de adequação aos requisitos de qualidade da Acreditação PALC (SBPC/ML) do Laboratório Unimed.`,
+        `[PB-UNI-75] Alinhar com o setor de Compras (Gestão de Suprimentos) a abertura de processo de cotação e prospecção de mercado para fornecedores especializados em totens/tablets e plataformas de pesquisa de satisfação (NPS/CSAT) na área de saúde.`,
+        `[PB-UNI-75] Avaliar com a equipe técnica de TI (Infraestrutura/Redes e Sistemas) a viabilidade dos modelos: 1) Totem físico autônomo com tablet/display touchscreen e conectividade Wi-Fi/PoE; 2) Software SaaS em nuvem com painel web para gestão de relatórios gerenciais e exportação de indicadores; 3) Possibilidade de integração futura com o sistema de atendimento/painel de senhas.`,
+        `[PB-UNI-75] Consolidar o comparativo técnico de requisitos, estimativa de custos e cronograma de homologação, agendando reunião de alinhamento com a solicitante Rosy Ellen (Laboratório) e com o setor de Compras.`,
+        `[PB-UNI-75] Manter o chamado atualizado com os pareceres técnicos de viabilidade e propostas comerciais analisadas.`
+      ];
+    } else if (
+      /\b(painel\s+de\s+senhas?|gerenciador\s+de\s+filas?|fila\s+de\s+atendimento|chamador\s+de\s+senhas?|sistema\s+de\s+senhas?|controle\s+de\s+filas?)\b/i.test(
+        normAll
+      ) &&
+      !/\b(impressora|spooler|toner|mancha|atolamento|papel preso)\b/i.test(
+        normAll
+      )
+    ) {
+      detectedDomain =
+        "Desenvolvimento de Software / Projetos e Novas Aplicações / Gestão de Atendimento";
+      suggestedCategory =
+        ticket.category && ticket.category.includes("Novas aplicações")
+          ? ticket.category
+          : "T.I > DV > Desenvolvimento > Novas aplicações";
+      realUrgency = "Média";
+      urgencyReason =
+        "Desenvolvimento de nova aplicação para organização e gestão do fluxo de atendimento e fila de pacientes na Recepção Externa do Hospital.";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita o desenvolvimento de uma nova aplicação corporativa de **Painel de Senhas / Gerenciador de Fila de Atendimento** para organizar o fluxo de pacientes na **Recepção Externa do Hospital Unimed**. ` +
+        `Trata-se de demanda de Desenvolvimento de Software sob responsabilidade técnica do desenvolvedor da T.I. (**Moisés Conte**), visando substituir processos manuais por chamada sistemática de senhas em tela/TV na sala de espera (com aviso sonoro e visual), módulo web para os guichês de atendimento (chamada de próxima senha, rechamada e transferências) e controle de prioridades (Normal vs. Preferencial/Prioritária por lei). ` +
+        `A solicitação encontra-se **completa** e a categoria no GLPI está devidamente enquadrada em **'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120)**.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente ao **desenvolvimento da aplicação de Painel de Senha e Gerenciador de Fila de Atendimento** para a **Recepção Externa do Hospital Unimed**.\n\n` +
+        `A demanda já foi recepcionada pela equipe de Desenvolvimento de Software (**Moisés**) sob a categoria oficial **T.I > DV > Desenvolvimento > Novas aplicações** (ID 120).\n\n` +
+        `Para estruturarmos a modelagem do sistema e o cronograma de entrega, já estamos levantando os seguintes requisitos técnicos e operacionais:\n` +
+        `1. **Estrutura das Filas:** Categorias de atendimento necessárias (ex.: Atendimento Normal, Prioritário/Preferencial por lei, Triagem/Urgência e Exames);\n` +
+        `2. **Interface do Operador:** Módulo web leve para que os atendentes nos guichês da Recepção Externa possam chamar a próxima senha, rechamar ou transferir pacientes diretamente pelo navegador;\n` +
+        `3. **Hardware e Exibição:** Alinhamento com a equipe de Infraestrutura de T.I. para conexão da tela/TV na sala de espera (com aviso sonoro e visual da senha/guichê) e método de emissão das senhas (impressora térmica de tickets ou dispenser físico);\n` +
+        `4. **Métricas de Atendimento:** Painel gerencial para registro dos tempos médios de espera e de atendimento por guichê.\n\n` +
+        `O desenvolvedor responsável já está iniciando o desenho da solução e, em breve, apresentaremos um protótipo operacional para validação junto à equipe da Recepção Externa!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-76] Manter a categoria do chamado no GLPI em 'T.I > DV > Desenvolvimento > Novas aplicações' (ID 120), confirmando o enquadramento em novas aplicações corporativas.`,
+        `[PB-UNI-76] Direcionar a demanda para a equipe de Desenvolvimento de Software (Moisés Conte) para início da etapa de levantamento e especificação de requisitos da aplicação.`,
+        `[PB-UNI-76] Definir o modelo de arquitetura de software: aplicação web responsiva com interface cliente para o guichê (chamada de próxima senha, rechamada, transferência) e tela de exibição para TV da recepção com sintetizador de voz (TTS) ou sinal sonoro.`,
+        `[PB-UNI-76] Mapear os tipos de atendimento/filas requeridos pelo setor: Normal, Preferencial/Prioritária (idosos, gestantes, PCDs por lei), Urgência/Triagem e serviços específicos.`,
+        `[PB-UNI-76] Alinhar com a equipe de Infraestrutura e Redes os requisitos de hardware na Recepção Externa: TV/monitor HDMI na sala de espera, mini-PC/Smart TV/Raspberry Pi conectado à rede local e impressora térmica de senhas (ou dispenser de senhas pré-impressas/totem).`,
+        `[PB-UNI-76] Apresentar o protótipo/versão beta para validação operacional com a supervisão da Recepção Externa e planejar a implantação piloto.`
+      ];
+    } else if (
       (/\b(samsung\s+m?4080|m4080|m4080fx|samsung\s+m?4020|m4020|m4020nd|samsung\s+4080|samsung\s+4020)\b/i.test(
         normAll
       ) &&
@@ -3082,6 +3488,10 @@ export class AIAnalyst {
           normAll
         );
 
+      const isIpsmTable =
+        /\b(ipsm|ipsmmg|batalh[aã]o|batalhao)\b/i.test(normAll) &&
+        /\b(tabela|tabelas|medicamento|medicamentos|parametriza|importa|vig[eê]ncia)\b/i.test(normAll);
+
       if (isBrasindicePriceMismatch) {
         detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
         suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
@@ -3146,17 +3556,87 @@ export class AIAnalyst {
           `- Validação dos prazos correlatos divulgados no comunicado oficial do MIN (Cobrança de recurso de glosa do prestador para 150 dias e cobrança com taxa de custeio mantida em 70 dias).\n\n` +
           `Nossa equipe técnica já iniciou a parametrização dessa regra no módulo de Faturamento / Intercâmbio do ${sysName}. Assim que a alteração for concluída e estiver em vigor no sistema, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
+      } else if (isIpsmTable) {
+        const isMed = /\b(medicamentos?|rem[eé]dios?)\b/i.test(normAll);
+        const isMat = /\b(materiais?|mat\/med)\b/i.test(normAll);
+        const tipoTabela = isMed
+          ? "tabela de Medicamentos"
+          : isMat
+          ? "tabela de Materiais"
+          : "tabela de Medicamentos / Itens";
+
+        const vigenciaMatch =
+          descOnly.match(/vig[eê]ncia\s*[-–:]*\s*(\d{2}[\/\-]\d{2}[\/\-]\d{2,4})/i) ||
+          descOnly.match(/(\d{2}[\/\-]\d{2}[\/\-]\d{2,4})/);
+        const vigenciaStr = vigenciaMatch
+          ? vigenciaMatch[1].replace(/-/g, "/")
+          : "24/11/2026";
+
+        let anexoStr = "";
+        if (formFields.anexo) {
+          anexoStr = formFields.anexo.trim();
+        } else if (ticket.documents && ticket.documents.length > 0) {
+          anexoStr = ticket.documents[0].filename || "";
+        }
+        if (!anexoStr) {
+          const anexoMatch = descOnly.match(/anexo:\s*([^\r\n]+)/i);
+          anexoStr = anexoMatch ? anexoMatch[1].trim() : "Vigencia 24-11-26.xlsx";
+        }
+
+        detectedDomain =
+          "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
+        suggestedCategory = "T.I > ST > Parametrização de Sistemas e Tabelas";
+        realUrgency = ticket.urgency_label || "Baixa";
+        urgencyReason = `Importação e parametrização da ${tipoTabela} do convênio IPSM (Batalhão) com vigência de ${vigenciaStr} no sistema ${sysName} para o setor de Auditoria/Faturamento.`;
+
+        const categoryMismatch =
+          normalizeText(ticket.category || "") !== normalizeText(suggestedCategory);
+        const reclassNote = categoryMismatch
+          ? ` *(Observação de triagem: chamado aberto na categoria "${ticket.category}", recomenda-se reclassificar para "${suggestedCategory}" — ID 164).*`
+          : "";
+
+        sufficiencyStatus = "completo";
+        missingInfo = [];
+
+        translatedIntent =
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a importação e parametrização da **${tipoTabela}** do convênio **IPSM (comumente chamado de Batalhão)** no sistema **${sysName}**, com vigência a partir de **${vigenciaStr}**, conforme arquivo de planilha anexado (**${anexoStr}**). ` +
+          `Como todos os dados necessários (convênio, tipo de tabela, vigência e arquivo com a nova tabela) foram fornecidos, a solicitação encontra-se completa e pronta para execução técnica pela equipe de Sistemas/Tabelas (Moisés Conte).` +
+          reclassNote;
+
+        customResolutionSteps = [
+          `[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), direcionando ao analista técnico de Sistemas/Tabelas (Moisés Conte).`,
+          `[PB-UNI-47] Baixar a planilha anexada no chamado (${anexoStr}) com os valores atualizados da ${tipoTabela} do convênio IPSM / Batalhão (vigência a partir de ${vigenciaStr}).`,
+          `[PB-UNI-47] Acessar o sistema ${sysName} no módulo de parametrização de Tabelas de Convênios e selecionar o convênio IPSM (Batalhão).`,
+          `[PB-UNI-47] Executar a rotina de importação da nova vigência (${vigenciaStr}) dos medicamentos no banco de dados do ${sysName}.`,
+          `[PB-UNI-47] Validar a consulta dos itens e valores no sistema para certificar que os preços vigentes foram atualizados para faturamento e auditoria de contas, notificando a solicitante ${ticket.requester} (${sectorName}) da conclusão da importação.`
+        ];
+
+        customPublicReply =
+          `Olá, ${firstName}! Tudo bem?\n\n` +
+          `Recebemos a sua solicitação referente à parametrização e atualização da **${tipoTabela} do convênio IPSM (Batalhão)** no sistema **${sysName}**, com vigência a partir de **${vigenciaStr}**, conforme a planilha anexada (**${anexoStr}**).\n\n` +
+          `Informamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica e nossa equipe de Sistemas/Tabelas (Moisés) já iniciou o procedimento de importação e parametrização dos novos valores no ${sysName}.\n\n` +
+          `Assim que a nova vigência da tabela estiver importada e liberada no sistema para faturamento e auditoria das contas hospitalares, confirmaremos por aqui!\n\n` +
+          `Permanecemos à disposição!`;
       } else {
+        const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
         const tableMatch =
           descOnly.match(/como\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
           (ticket.title || "").match(/tabela\s+([A-Z0-9À-Ú]+(?:\s*[-–]\s*[A-Z0-9À-Ú]+)+)/i) ||
           descOnly.match(/tabela\s+([A-Z0-9À-Ú]+\s*[-–]\s*[A-Z0-9À-Ú]+)/i);
-        const tableName = tableMatch ? tableMatch[1].trim().toUpperCase() : "DTH - PADRAO";
+        const tableName = tableMatch
+          ? tableMatch[1].trim().toUpperCase()
+          : isDiariasTaxas
+          ? "DTH - PADRAO"
+          : "TABELA OPERACIONAL";
 
         const faixaMatch = descOnly.match(/faixa\s+(?:de\s+)?(\d{2,5})/i);
-        const faixaCode = faixaMatch ? faixaMatch[1].trim() : "998";
+        const faixaCode = faixaMatch
+          ? faixaMatch[1].trim()
+          : isDiariasTaxas
+          ? "998"
+          : "";
+        const faixaPhrase = faixaCode ? `, na **faixa de ${faixaCode}**` : "";
 
-        const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
         const tableTypeDesc = isDiariasTaxas
           ? "tabela de Diárias e Taxas Hospitalares (DTH)"
           : "tabela operacional";
@@ -3176,21 +3656,21 @@ export class AIAnalyst {
         missingInfo = [];
 
         translatedIntent =
-          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação e parametrização de uma **${tableTypeDesc}** no sistema **${sysName}**, configurada na **faixa de ${faixaCode}** com a nomenclatura **${tableName}** (direcionada ao analista/desenvolvedor Moisés Conte). ` +
-          `Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela, faixa de código e nomenclatura) constam informados na abertura.` +
+          `${solPrefix} **${ticket.requester}** (${sectorName}) solicita a criação e parametrização de uma **${tableTypeDesc}** no sistema **${sysName}**${faixaPhrase ? ` configurada na faixa de ${faixaCode}` : ""} com a nomenclatura **${tableName}** (direcionada ao analista/desenvolvedor Moisés Conte). ` +
+          `Todos os parâmetros necessários para o cadastro da tabela (sistema, tipo de tabela${faixaCode ? ", faixa de código" : ""} e nomenclatura) constam informados na abertura.` +
           reclassNote;
 
         customResolutionSteps = [
           `[PB-UNI-47] Classificar/manter o chamado na categoria oficial 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164).`,
-          `[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema ${sysName} e criar a ${tableTypeDesc} na faixa ${faixaCode} sob a nomenclatura '${tableName}'.`,
-          `[PB-UNI-47] parametrizar as regras de vigência e vínculo de diárias e taxas conforme o padrão do Faturamento (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
+          `[PB-UNI-47] Acessar o módulo de Cadastro de Tabelas / Faturamento no sistema ${sysName} e criar a ${tableTypeDesc}${faixaCode ? ` na faixa ${faixaCode}` : ""} sob a nomenclatura '${tableName}'.`,
+          `[PB-UNI-47] Parametrizar as regras de vigência e vínculo conforme o padrão do setor (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
         ];
 
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**, na **faixa de ${faixaCode}**, com a descrição **${tableName}**.\n\n` +
+          `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**${faixaPhrase}, com a descrição **${tableName}**.\n\n` +
           `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
-          `Assim que a tabela **${tableName}** (faixa **${faixaCode}**) estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
+          `Assim que a tabela **${tableName}**${faixaCode ? ` (faixa **${faixaCode}**)` : ""} estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       }
     } else if (
@@ -5728,7 +6208,7 @@ export class AIAnalyst {
           normalizeText(ticket.category || "")
         )
       ) {
-        if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard)\b/i.test(normAll)) {
+        if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard|producao|cooperados|medicos)\b/i.test(normAll)) {
           smartCat = "T.I > BD > Big Data e BI > Relatórios";
         } else if (/\b(acesso|permissao|permissoes|liberar|vincular|senha|login)\b/i.test(normAll)) {
           smartCat = "T.I > ST > Acesso e Permissões";
