@@ -11,6 +11,7 @@ Este arquivo garante que qualquer sessão do **Antigravity** (seja no Desktop ou
 - **Organização:** Setor de T.I. da **Unimed Sudoeste de Minas / Hospital Unimed**.
 - **Objetivo:** Copiloto de triagem e tratativa prévia de chamados integrado à API REST do GLPI (`http://192.168.41.125/apirest.php`) e ao Ollama local (`qwen2.5:3b`, além de suporte a Gemini e OpenAI).
 - **Execução do Servidor:** Rodar com `node src/server.js` (evitar `node --watch` em produção Windows para que scans do Windows Defender em `node_modules` não reiniciem o processo durante chamadas longas de SMTP do GLPI ao enviar `ITILFollowup`).
+- **Implantação On-Premise via Docker:** O projeto conta com `Dockerfile`, `docker-compose.yml` e documentação técnica completa em `docs/DEPLOY_DOCKER_ONPREMISE.md`, orquestrando a aplicação Node.js (`ticket-analyst-app`) e o Ollama (`ticket-analyst-ollama`) com rede bridge interna (`http://ollama:11434`), persistência de dados em `./data` e suporte opcional a GPU NVIDIA.
 - **Sincronização Contínua com GitHub:** Sempre que forem concluídas alterações (novos playbooks, correções de bugs, ajustes de heurística, interface ou documentação), o Antigravity deve automaticamente realizar o commit e push para o repositório remoto (`origin/main` em `https://github.com/Douglasha/ticket-analyst.git`), garantindo que o GitHub esteja permanentemente em dia com o ambiente local.
 
 ## 2. Regras de Negócio e Triagem Consolidadas

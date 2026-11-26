@@ -102,3 +102,18 @@ node src/server.js
 
 Em seguida, acesse no navegador: **http://localhost:8000**
 
+---
+
+### 3. Hospedagem On-Premise com Docker & Docker Compose (Recomendado para Produção)
+Para implantar a aplicação e o Ollama 24/7 em um servidor Linux dedicado na infraestrutura local da Unimed:
+
+Consulte o guia completo: **[Guia de Implantação On-Premise (Docker)](docs/DEPLOY_DOCKER_ONPREMISE.md)**.
+
+Comando rápido com Docker Compose:
+```bash
+docker compose up -d --build
+docker compose exec ollama ollama pull qwen2.5:3b
+docker compose exec ollama ollama pull qwen2.5vl:3b
+```
+
+
