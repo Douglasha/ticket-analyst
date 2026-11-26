@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  # Serviço da LLM Local (Ollama)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ticket-analyst-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    # Se o servidor possuir placa de vídeo dedicada NVIDIA, descomente o bloco abaixo para acelerar por GPU:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    networks:
+      - ticket-network
+
+  # Serviço do Copiloto (GLPI Ticket Analyst)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ticket-analyst-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - NODE_ENV=production
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=qwen2.5:3b
+      - OLLAMA_VISION_MODEL=qwen2.5vl:3b
+      - AI_PROVIDER=ollama
+      - GLPI_API_URL=http://192.168.41.125/apirest.php
+      - GLPI_DEFAULT_GROUP=T.I
+      - GLPI_VERIFY_SSL=false
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ollama
+    networks:
+      - ticket-network
+
+volumes:
+  ollama_models:
+    name: ticket-analyst-ollama-models
+
+networks:
+  ticket-network:
+    name: ticket-analyst-network
+    driver: bridge
