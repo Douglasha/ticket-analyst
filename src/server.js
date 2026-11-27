@@ -284,7 +284,7 @@ app.post("/api/tickets/:ticketId/analyze", async (req, res) => {
       saveLearnedFeedbackEntry({
         ticket_id: ticketId,
         title: cleanTitle,
-        category: ticket.category,
+        category: analysis.suggested_category || ticket.category,
         keywords: extractTokens(
           `${cleanTitle} ${formFields.tipo} ${formFields.problema} ${formFields.aplicacao} ${formFields.descricao}`
         ).slice(0, 8),

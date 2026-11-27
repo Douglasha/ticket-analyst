@@ -146,6 +146,105 @@ export function sanitizeCorporateTone(rawText, firstName = "") {
   return text;
 }
 
+export const OFFICIAL_GLPI_TI_CATEGORIES = [
+  "T.I > BD > Administração de Banco de Dados",
+  "T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais",
+  "T.I > BD > Administração de Banco de Dados > Backup e Restauração",
+  "T.I > BD > Administração de Banco de Dados > Criação e Configuração",
+  "T.I > BD > Administração de Banco de Dados > Otimização de Performance",
+  "T.I > BD > Big Data e BI > Dashboards",
+  "T.I > BD > Big Data e BI > Integração de Fontes de Dados",
+  "T.I > BD > Big Data e BI > Relatórios",
+  "T.I > DV > Desenvolvimento > Ajustes em layout/interface",
+  "T.I > DV > Desenvolvimento > Atualização de versão/sistema",
+  "T.I > DV > Desenvolvimento > Correção de bugs",
+  "T.I > DV > Desenvolvimento > Integração entre sistemas",
+  "T.I > DV > Desenvolvimento > Manutenção/Refatoração de Software",
+  "T.I > DV > Desenvolvimento > Novas aplicações",
+  "T.I > IR > Administração de Redes > Configuração de Switches/Roteadores",
+  "T.I > IR > Administração de Redes > Telefones VoIP",
+  "T.I > IR > Administração de Redes > VPN e Acesso Remoto",
+  "T.I > IR > Câmeras e Monitoramento > Instalação/Configuração de Câmeras",
+  "T.I > IR > Câmeras e Monitoramento > Manutenção de Câmeras/NVD",
+  "T.I > IR > Câmeras e Monitoramento > Solicitação de Gravações Telefônicas",
+  "T.I > IR > Câmeras e Monitoramento > Solicitação de Imagens",
+  "T.I > IR > Conectividade > Internet e WiFi",
+  "T.I > IR > Conectividade > Lentidão e Quedas de Rede",
+  "T.I > IR > Energia e Geradores > Manutenção em Sistemas de Redundância",
+  "T.I > IR > Energia e Geradores > Monitoramento de Geradores",
+  "T.I > IR > Energia e Geradores > Teste/Manutenção de Nobreaks/UPS",
+  "T.I > IR > Gestão de Servidores > Atualizações e Patches",
+  "T.I > IR > Gestão de Servidores > Backup e Restauração",
+  "T.I > IR > Gestão de Servidores > Instalação e Configuração",
+  "T.I > IR > Gestão de Servidores > Verificação de Virtual Machines",
+  "T.I > IR > Suporte a Hardware",
+  "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+  "T.I > IR > Suporte a Hardware > Manutenção Preventiva",
+  "T.I > IR > Suporte a Hardware > Periféricos > Áudio e Vídeo",
+  "T.I > IR > Suporte a Hardware > Periféricos > Impressoras",
+  "T.I > IR > Suporte a Hardware > Periféricos > Monitor",
+  "T.I > IR > Suporte a Hardware > Periféricos > Mouses",
+  "T.I > IR > Suporte a Hardware > Periféricos > Scaners",
+  "T.I > IR > Suporte a Hardware > Periféricos > Teclados",
+  "T.I > IR > Suporte a Hardware > Substituição de Peças",
+  "T.I > IR > Suporte a Hardware > Suprimentos > Etiquetas",
+  "T.I > IR > Suporte a Hardware > Suprimentos > Ribbons",
+  "T.I > IR > Suporte a Hardware > Suprimentos > Tintas",
+  "T.I > IR > Suporte a Hardware > Suprimentos > Toners",
+  "T.I > SI > Compliance, Auditorias e Políticas de SI > LGPD e Regulações",
+  "T.I > SI > Gestão de Acessos > Auditoria e Controle de Privilégios",
+  "T.I > SI > Gestão de Acessos > Revisão de Acessos",
+  "T.I > SI > Monitoramento e Análise de Segurança > Detecção de Anomalias",
+  "T.I > SI > Monitoramento e Análise de Segurança > Logs e Alertas",
+  "T.I > SI > Monitoramento e Análise de Segurança > Monitoramento de Antivírus",
+  "T.I > SI > Resposta a Incidentes > Registro de Incidente de Proteção de Dados Pessoais",
+  "T.I > ST > Acesso e Permissões",
+  "T.I > ST > Acesso e Permissões > Bloqueio de Contas",
+  "T.I > ST > Acesso e Permissões > Criação de Usuários",
+  "T.I > ST > Acesso e Permissões > Desbloqueio de Contas",
+  "T.I > ST > Acesso e Permissões > Redefinição de Senhas",
+  "T.I > ST > Apoio a Eventos / Empréstimo de Equipamentos",
+  "T.I > ST > Dúvidas e Orientações",
+  "T.I > ST > Instalação/Configuração > Aplicativos",
+  "T.I > ST > Instalação/Configuração > Sistemas Operacionais",
+  "T.I > ST > Parametrização de Sistemas e Tabelas",
+  "T.I > ST > Resolução de Problemas > Erros de Sistema",
+  "T.I > ST > Resolução de Problemas > Travamentos",
+  "T.I > ST > Reversão de Processos / Ajustes Operacionais",
+  "T.I > ST > Solicitação Diversa",
+  "T.I > TR > Treinamentos > Ferramentas Corporativas",
+  "T.I > TR > Treinamentos > Segurança Digital",
+  "T.I > TR > Treinamentos > Treinamentos Técnicos",
+];
+
+export function resolveCategoryFromDirective(directive, candidates = OFFICIAL_GLPI_TI_CATEGORIES) {
+  if (!directive) return null;
+  const normDir = normalizeText(directive)
+    .replace(/^(a|o|as|os|de|da|do|para|em|na|no)\s+/g, "")
+    .replace(/\b(categoria|grupo)\b/g, "")
+    .trim();
+  if (normDir.length < 3) return null;
+
+  // 1. Match exato
+  const exact = candidates.find((c) => normalizeText(c) === normDir);
+  if (exact) return exact;
+
+  // 2. Match no último segmento (ex: "Manutenção de Computadores" bate com "... > Manutenção de Computadores")
+  const lastSegMatch = candidates.find((c) => {
+    const lastSeg = normalizeText(c.split(">").pop().trim());
+    return lastSeg === normDir || normDir.includes(lastSeg) || lastSeg.includes(normDir);
+  });
+  if (lastSegMatch) return lastSegMatch;
+
+  // 3. Substring geral
+  const subMatch = candidates.find(
+    (c) => normalizeText(c).includes(normDir) || normDir.includes(normalizeText(c))
+  );
+  if (subMatch) return subMatch;
+
+  return null;
+}
+
 export function formatPersonName(rawName) {
   if (!rawName) return "";
   const lowers = new Set(["de", "da", "do", "dos", "das", "e"]);
@@ -512,7 +611,7 @@ export class AIAnalyst {
           : `OpenAI (${this.settings.openai_model})`;
       } else if (provider === "ollama") {
         const visionModel = (this.settings.ollama_vision_model || "qwen2.5vl:3b").trim();
-        if (heuristic.has_custom_reply && !customInstruction) {
+        if (heuristic.has_custom_reply && (!customInstruction || Boolean(heuristic.custom_reply_from_instruction))) {
           llmData = heuristic;
           isFastpathHeuristic = true;
           providerLabel = `Copiloto Heurístico Instantâneo (${this.settings.ollama_model || "qwen2.5:3b"})`;
@@ -546,7 +645,7 @@ export class AIAnalyst {
           customInstruction
         );
       const useSpecializedIntent =
-        heuristic.has_custom_reply && !customInstruction;
+        heuristic.has_custom_reply && (!customInstruction || Boolean(heuristic.custom_reply_from_instruction));
 
       const validIntent =
         !useSpecializedIntent &&
@@ -1041,7 +1140,26 @@ export class AIAnalyst {
       const assetInfo = formFields.ativo ? ` (${formFields.ativo})` : "";
 
       detectedDomain = "Suporte Técnico Geral / Service Desk";
-      suggestedCategory = ticket.category;
+      let smartCatVague = ticket.category;
+      if (
+        /\b(sistemas operacionais|aplicativos|solicitacao diversa|manutencao|manutenção)\b/i.test(
+          normalizeText(ticket.category || "")
+        )
+      ) {
+        if (/\b(teclado|teclados)\b/i.test(normAll)) {
+          smartCatVague = "T.I > IR > Suporte a Hardware > Periféricos > Teclados";
+        } else if (/\b(mouse|mouses)\b/i.test(normAll)) {
+          smartCatVague = "T.I > IR > Suporte a Hardware > Periféricos > Mouses";
+        } else if (
+          /\b(manuten[cç][aã]o\s+de\s+computador(?:es)?|manuten[cç][aã]o\s+(?:no\s+|do\s+)?computador|computador\s+com\s+defeito|conserto\s+de\s+computador|pc\s+com\s+defeito|computador\s+n[aã]o\s+liga|formata[cç][aã]o\s+de\s+computador)\b/i.test(
+            normAll
+          ) &&
+          !/\b(impressora|scanner|leitor|nobreak|estabilizador)\b/i.test(normAll)
+        ) {
+          smartCatVague = "T.I > IR > Suporte a Hardware > Manutenção de Computadores";
+        }
+      }
+      suggestedCategory = smartCatVague;
       realUrgency = ticket.urgency_label || "Média";
       urgencyReason =
         "Chamado com descrição vaga/insuficiente, necessitando de detalhamento pelo solicitante para direcionamento e suporte técnico adequado.";
@@ -1060,7 +1178,9 @@ export class AIAnalyst {
       ];
 
       customResolutionSteps = [
-        `[PB-UNI-53] Manter a categoria do chamado no GLPI em '${ticket.category}'.`,
+        suggestedCategory !== ticket.category
+          ? `[PB-UNI-53] Reclassificar a categoria do chamado no GLPI para '${suggestedCategory}'.`
+          : `[PB-UNI-53] Manter a categoria do chamado no GLPI em '${ticket.category}'.`,
         `[PB-UNI-53] Responder ao(à) solicitante ${ticket.requester} (${sectorName}) solicitando o detalhamento claro da demanda e evidências visuais (prints ou mensagens de erro).`,
         isWhatsApp
           ? `[PB-UNI-53] Caso o setor utilize plataforma web de atendimento WhatsApp (ex.: AscSac no setor ${sectorName}), checar com a equipe se a dificuldade é de alternância de painéis (clássico vs. novo) ou conectividade de canal.`
@@ -6310,6 +6430,13 @@ export class AIAnalyst {
         } else if (/\b(mouse|mouses)\b/i.test(normAll)) {
           smartCat = "T.I > IR > Suporte a Hardware > Periféricos > Mouses";
         } else if (
+          /\b(manuten[cç][aã]o\s+de\s+computador(?:es)?|manuten[cç][aã]o\s+(?:no\s+|do\s+)?computador|computador\s+com\s+defeito|conserto\s+de\s+computador|pc\s+com\s+defeito|computador\s+n[aã]o\s+liga|formata[cç][aã]o\s+de\s+computador)\b/i.test(
+            normAll
+          ) &&
+          !/\b(impressora|scanner|leitor|nobreak|estabilizador)\b/i.test(normAll)
+        ) {
+          smartCat = "T.I > IR > Suporte a Hardware > Manutenção de Computadores";
+        } else if (
           /\b(tabela|tabelas|parametriza|vig[eê]ncia|dth|di[aá]rias\s+e\s+taxas|bras[ií]ndice|simpro|ipsm|batalh[aã]o)\b/i.test(
             normAll
           )
@@ -6462,7 +6589,7 @@ export class AIAnalyst {
       }
     }
 
-    const resolutionSteps = [];
+    let resolutionSteps = [];
     if (customResolutionSteps && customResolutionSteps.length > 0) {
       resolutionSteps.push(...customResolutionSteps);
     } else {
@@ -6520,11 +6647,26 @@ export class AIAnalyst {
         sufficiencyStatus = "completo";
         missingInfo = [];
       }
+      const catDirectiveMatch = customInstruction.match(
+        /(?:reclassificar(?:\s+(?:a\s+)?categoria)?(?:\s+do\s+chamado)?\s+para(?:\s+(?:a|o)(?:\s+de)?)?|sugerir(?:\s+a)?\s+categoria(?:\s+(?:de|para))?|mudar(?:\s+(?:a\s+)?categoria)?(?:\s+do\s+chamado)?\s+para(?:\s+(?:a|o)(?:\s+de)?)?|alterar(?:\s+(?:a\s+)?categoria)?(?:\s+do\s+chamado)?\s+para(?:\s+(?:a|o)(?:\s+de)?)?|categoria\s*:\s*)([^.,;\n]+)/i
+      );
+      if (catDirectiveMatch) {
+        const resolved = resolveCategoryFromDirective(catDirectiveMatch[1].trim());
+        if (resolved) {
+          suggestedCategory = resolved;
+          resolutionSteps = resolutionSteps.filter(
+            (s) => !/(?:reclassificar|manter)\s+a\s+categoria/i.test(s)
+          );
+          resolutionSteps.unshift(
+            `[Diretriz do Analista] Reclassificar a categoria do chamado no GLPI para "${resolved}".`
+          );
+        }
+      }
       const matchConfirm = customInstruction.match(
-        /(?:(?:na\s+resposta\s+p[úu]blica[,\s]+)?(?:confirme|informe|oriente|responda|diga)\s+(?:(?:a|na|em|no)\s+resposta\s+p[úu]blica\s+)?(?:que|dizendo\s+que|informando\s+que)?|(?:na\s+resposta\s+p[úu]blica[,\s]+confirme\s+que))\s+(.+)$/im
+        /(?:(?:na\s+resposta\s+p[úu]blica[,\s]+)?(?:confirme|confirmar|informe|informar|oriente|orientar|responda|responder|diga|dizer|avise|avisar)\s+(?:(?:a|na|em|no)\s+resposta\s+p[úu]blica\s+)?(?:que|dizendo\s+que|informando\s+que)?|(?:na\s+resposta\s+p[úu]blica[,\s]+confirme\s+que))\s+(.+)$/im
       );
       if (matchConfirm) {
-        const actionText = matchConfirm[1].replace(/\.+$/, "").trim();
+        const actionText = matchConfirm[1].replace(/\.+$/, "").trim().replace(/^que\s+/i, "");
         customPublicReply = `Olá, ${firstName}! Tudo bem?\n\nRecebemos a sua solicitação. Informamos que ${actionText}.\n\nPermanecemos à disposição!`;
       }
     } else if (matchedMemory?.custom_instruction) {
@@ -6671,6 +6813,7 @@ export class AIAnalyst {
 
     return {
       has_custom_reply: Boolean(customPublicReply),
+      custom_reply_from_instruction: Boolean(customInstruction && customPublicReply),
       translated_intent: translatedIntent,
       detected_domain: detectedDomain,
       suggested_category: suggestedCategory,
