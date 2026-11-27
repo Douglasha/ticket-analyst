@@ -386,6 +386,23 @@ export async function runRegressionTests() {
       expectedSufficiency: "completo",
       preventedPlaybooks: ["PB-UNI-53", "PB-SD-02", "PB-UNI-07", "PB-UNI-26"],
     },
+    {
+      id: "TEST-25-PB-UNI-78",
+      name: "Alteração de Status de Lote de Credenciado no HRP via Banco (IDE Engine — slote)",
+      ticket: {
+        id: 44413,
+        title: "Banco de Dados e Análise de Dados > Administração de Banco de Dados > Alteração via banco",
+        content: "▸ Primeira seção\n\n1) Tipo de Solicitação: Administração de Banco de Dados\n2) Setor Solicitante: Faturamento\n3) Observador: \n\n▸ Administração de Banco de Dados\n\n1) Título: Alteração via banco\n2) Localização: Faturamento\n3) Descrição:\n\nBom Dia!\n\nEm relação aos lotes:\n\nPreciso que seja alterado o status para \"em faturamento\".\n\nSeguindo as recomendações da FederaçãoMG\n\nLote exemplo: 203316826",
+        category: "T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais",
+        urgency: 1,
+        urgency_label: "Muito baixa",
+        requester: "Frederico Roosevelt",
+        requester_department: "Faturamento",
+      },
+      expectedPlaybook: "PB-UNI-78",
+      expectedSufficiency: "completo",
+      preventedPlaybooks: ["PB-UNI-53", "PB-SD-02", "PB-UNI-12", "PB-UNI-19"],
+    },
   ];
 
   const results = [];

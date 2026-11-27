@@ -2941,5 +2941,40 @@
       "[PB-UNI-77] Validar com a equipe do posto de trabalho a normalização da digitação e concluir o atendimento no chamado."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à falha no **teclado do computador** no setor **{setor}**.\n\nInformamos que as informações fornecidas já foram validadas na triagem técnica (chamado classificado como **completo**) e a categoria no GLPI foi direcionada para a equipe de Hardware (**T.I > IR > Suporte a Hardware > Periféricos > Teclados**).\n\nComo se trata de uma estação em setor assistencial ({setor}), nossa equipe de Infraestrutura e Redes já priorizou o atendimento e um técnico está se deslocando até o local com um teclado USB reserva para realizar o teste e a **substituição física imediata**!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-78",
+    "domain": "Banco de Dados e Análise de Dados",
+    "title": "Alteração de Status de Lote de Credenciado no HRP Unimed via Banco de Dados (IDE Engine — Tabela slote)",
+    "keywords": [
+      "lote",
+      "lotes",
+      "status do lote",
+      "status de lote",
+      "alteracao via banco",
+      "alterar via banco",
+      "alteracao de status",
+      "alterar status",
+      "em faturamento",
+      "pronto para faturamento",
+      "slote",
+      "credenciado",
+      "lotes de credenciados",
+      "ide engine",
+      "engine 82",
+      "federacaomg",
+      "federacao"
+    ],
+    "symptoms": "Solicitação do setor de Faturamento / Contas Médicas (ex.: Frederico Roosevelt no chamado #44413) solicitando alteração pontual de status de lote de credenciado no sistema HRP Unimed para 'Em faturamento' (ou outro status operacional), decorrente de bloqueio de movimentação na interface web e seguindo recomendações técnicas da FederaçãoMG. Demanda consulta e atualização na tabela 'slote' via console SQL iDBC s[Q] da IDE Engine (UNI256:80 - Engine 82.0.19) com filtro por número do lote, conferência da chave, versão e alteração do campo status.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-78] Manter a categoria do chamado no GLPI em 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 148).",
+      "[PB-UNI-78] Acessar o sistema ERP HRP Unimed em 'Processamento de guias > Lotes de credenciados' e localizar o lote pelo número informado para validar credenciado, quantidade de guias, valor e status atual no rodapé.",
+      "[PB-UNI-78] Abrir a aplicação IDE Engine (ambiente UNI256:80 - Engine 82.0.19) e acessar a ferramenta de console SQL iDBC s[Q].",
+      "[PB-UNI-78] Executar a consulta: select chave, versao, status from slote where numero = ('<NUMERO_DO_LOTE>') para obter os identificadores e a versão atual de concorrência.",
+      "[PB-UNI-78] Atualizar o campo status para o código numérico solicitado (ex.: status correspondente a 'Em faturamento' conforme FederaçãoMG) diretamente na grid editável da IDE ou via comando UPDATE com commit.",
+      "[PB-UNI-78] Retornar à tela de Lotes de Credenciados no HRP Unimed, recarregar a pesquisa do lote e certificar-se de que o status foi atualizado para liberação do faturamento pelo setor."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à alteração de status do **lote de credenciado {lote}** no sistema **HRP Unimed**.\n\nInformamos que os parâmetros foram validados na triagem técnica (chamado classificado como **completo**) e nossa equipe de Banco de Dados já iniciou o procedimento de ajuste de status via IDE Engine na tabela `slote`, em conformidade com as diretrizes da FederaçãoMG.\n\nAssim que a atualização for concluída no banco e o lote liberado para movimentação no HRP, confirmaremos por aqui!\n\nPermanecemos à disposição!"
   }
 ]

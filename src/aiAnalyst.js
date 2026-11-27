@@ -2303,6 +2303,54 @@ export class AIAnalyst {
         `[PB-UNI-77] Validar junto à equipe do posto de trabalho a normalização da digitação e funcionamento no sistema e concluir o chamado no GLPI.`
       ];
     } else if (
+      (/\b(lote|lotes)\b/i.test(normAll) &&
+        /\b(status|status do lote|alterar status|altera[cç][aã]o via banco|alterar via banco|em faturamento|pronto para faturamento|slote)\b/i.test(
+          normAll
+        )) ||
+      /\b(slote)\b/i.test(normAll) ||
+      (/\baltera[cç][aã]o via banco\b/i.test(normAll) &&
+        /\b(faturamento|lote|lotes|federa[cç][aã]o)\b/i.test(normAll))
+    ) {
+      detectedDomain = "Banco de Dados e Análise de Dados";
+      suggestedCategory =
+        "T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais";
+      realUrgency = ticket.urgency_label || "Média";
+      urgencyReason =
+        "Alteração pontual de status de lote de credenciado no banco de dados do HRP Unimed para liberação do processamento de faturamento de contas.";
+
+      const numMatch =
+        normAll.match(/\b(20\d{6,8})\b/) ||
+        normAll.match(/\blote[s:\s]+([0-9]{6,10})\b/i);
+      const loteNum = numMatch
+        ? numMatch[1]
+        : (formFields.descricao.match(/\b\d{6,10}\b/) || [])[0] || "";
+      const loteLabel = loteNum ? `nº **${loteNum}**` : "de credenciado";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) solicita a **alteração de status do lote ${loteLabel}** no sistema **HRP Unimed** para prosseguimento do faturamento, ` +
+        `conforme recomendações técnicas alinhadas junto à FederaçãoMG. ` +
+        `Demanda execução de consulta e ajuste de status diretamente na tabela \`slote\` via console SQL iDBC s[Q] da IDE Engine (UNI256:80 - Engine 82.0.19). ` +
+        `A categoria no GLPI está devidamente classificada em **'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 148)**.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à alteração de status do **lote ${loteLabel}** no sistema **HRP Unimed**.\n\n` +
+        `Informamos que os parâmetros foram validados na triagem técnica (chamado classificado como **completo**) e nossa equipe de Banco de Dados já iniciou o procedimento de consulta e alteração do status na tabela \`slote\` via IDE Engine, em conformidade com as diretrizes da FederaçãoMG.\n\n` +
+        `Assim que o ajuste for concluído no banco e o lote liberado para movimentação no HRP, confirmaremos por aqui!\n\n` +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-78] Manter a categoria do chamado no GLPI em 'T.I > BD > Administração de Banco de Dados > Alteração de Dados / Ajustes SQL Pontuais' (ID 148).`,
+        `[PB-UNI-78] Acessar o sistema ERP HRP Unimed em 'Processamento de guias > Lotes de credenciados' e pesquisar o lote ${loteNum ? `nº ${loteNum}` : "informado"} para conferir a capa, credenciado, quantidade de guias e status atual no rodapé da tela.`,
+        `[PB-UNI-78] Abrir a aplicação IDE Engine (ambiente UNI256:80 - Engine 82.0.19) e acessar a ferramenta de console SQL iDBC s[Q].`,
+        `[PB-UNI-78] Executar a consulta: select chave, versao, status from slote where numero = ('${loteNum || "<NUMERO_DO_LOTE>"}') para obter a chave única, status atual e versão de concorrência.`,
+        `[PB-UNI-78] Realizar a alteração do campo status na grid de dados da IDE Engine (ou via comando UPDATE) para o código numérico solicitado (ex.: status correspondente a 'Em faturamento' conforme alinhado com a FederaçãoMG) e salvar.`,
+        `[PB-UNI-78] Retornar ao HRP Unimed em 'Lotes de credenciados', recarregar a pesquisa do lote e confirmar que o status foi atualizado para liberação das rotinas do setor de Faturamento.`
+      ];
+    } else if (
       (/\b(samsung\s+m?4080|m4080|m4080fx|samsung\s+m?4020|m4020|m4020nd|samsung\s+4080|samsung\s+4020)\b/i.test(
         normAll
       ) &&
