@@ -3698,14 +3698,16 @@ export class AIAnalyst {
           `[PB-UNI-47] Validar a consulta dos itens e valores no sistema para certificar que os preços vigentes foram atualizados para faturamento e auditoria de contas, notificando a solicitante ${ticket.requester} (${sectorName}) da conclusão da importação.`
         ];
 
+        const categoryOrientation = categoryMismatch
+          ? `*(Orientação: para agilizar futuras solicitações de tabelas, sugerimos abrir o chamado na categoria **${suggestedCategory}**)*.\n\n`
+          : "";
+
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
-          `Recebemos a sua solicitação referente à parametrização e atualização da **${tipoTabela} do convênio IPSM (Batalhão)** no sistema **${sysName}**, com vigência a partir de **${vigenciaStr}**, conforme a planilha anexada (**${anexoStr}**).\n\n` +
-          `Informamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica (chamado classificado como **completo**) e nossa equipe de Sistemas/Tabelas (**Moisés Conte**) já iniciou o procedimento de importação e parametrização dos novos valores no ${sysName}.\n\n` +
-          (categoryMismatch
-            ? `*(Observação: a categoria do chamado no GLPI foi direcionada para a equipe de Sistemas em **${suggestedCategory}** — ID 164)*.\n\n`
-            : "") +
-          `Assim que a nova vigência da tabela estiver importada e liberada no sistema para faturamento e auditoria das contas hospitalares, confirmaremos por aqui!\n\n` +
+          `Recebemos a sua solicitação referente à ${tipoTabela} do convênio IPSM (Batalhão) com a planilha em anexo.\n\n` +
+          `Informamos que o setor de T.I. já está em tratativas para realizar a parametrização dos novos valores no sistema.\n\n` +
+          categoryOrientation +
+          `Assim que a parametrização for concluída, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       } else {
         const isDiariasTaxas = /\b(di[aá]rias\s+e\s+taxas|dth)\b/i.test(normAll);
@@ -3756,10 +3758,15 @@ export class AIAnalyst {
           `[PB-UNI-47] Parametrizar as regras de vigência e vínculo conforme o padrão do setor (${sectorName}) e confirmar a disponibilização da tabela '${tableName}' para a solicitante ${ticket.requester}.`,
         ];
 
+        const categoryOrientationTable = categoryMismatch
+          ? `*(Orientação: para agilizar futuras solicitações de tabelas, sugerimos abrir o chamado na categoria **${suggestedCategory}**)*.\n\n`
+          : "";
+
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
           `Recebemos a sua solicitação para criação da **${tableTypeDesc}** no sistema **${sysName}**${faixaPhrase}, com a descrição **${tableName}**.\n\n` +
-          `Os parâmetros informados já foram validados e nossa equipe técnica (Moisés) já está realizando o cadastro e a parametrização da tabela no sistema.\n\n` +
+          `Informamos que o setor de T.I. já está em tratativas para realizar o cadastro e a parametrização da tabela no sistema.\n\n` +
+          categoryOrientationTable +
           `Assim que a tabela **${tableName}**${faixaCode ? ` (faixa **${faixaCode}**)` : ""} estiver criada e liberada para uso no ${sysName}, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       }

@@ -19159,7 +19159,7 @@
   },
   "44753": {
     "ticket_id": 44753,
-    "analyzed_at": "27/11/2026 11:43",
+    "analyzed_at": "27/11/2026 13:16",
     "provider_used": "Copiloto Heurístico Instantâneo (qwen2.5:3b)",
     "translated_intent": "A solicitante **Bruna Ferreira Costa** (H Auditoria) solicita a importação e parametrização da **tabela de Medicamentos** do convênio **IPSM (comumente chamado de Batalhão)** no sistema **SGH Spdata**, com vigência a partir de **26/11/2026**, conforme arquivo de planilha anexado (**Vigencia 26-11-26.xlsx**). Como todos os dados necessários (convênio, tipo de tabela, vigência e arquivo com a nova tabela) foram fornecidos, a solicitação encontra-se completa e pronta para execução técnica pela equipe de Sistemas/Tabelas (Moisés Conte). *(Observação de triagem: chamado aberto na categoria \"T.I > DV > Desenvolvimento > Integração entre sistemas\", recomenda-se reclassificar para \"T.I > ST > Parametrização de Sistemas e Tabelas\" — ID 164).*",
     "detected_domain": "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas",
@@ -19195,19 +19195,19 @@
       "[PB-UNI-47] Validar a consulta dos itens e valores no sistema para certificar que os preços vigentes foram atualizados para faturamento e auditoria de contas, notificando a solicitante Bruna Ferreira Costa (H Auditoria) da conclusão da importação."
     ],
     "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Bruna Ferreira Costa** (H Auditoria) solicita a importação e parametrização da **tabela de Medicamentos** do convênio **IPSM (comumente chamado de Batalhão)** no sistema **SGH Spdata**, com vigência a partir de **26/11/2026**, conforme arquivo de planilha anexado (**Vigencia 26-11-26.xlsx**). Como todos os dados necessários (convênio, tipo de tabela, vigência e arquivo com a nova tabela) foram fornecidos, a solicitação encontra-se completa e pronta para execução técnica pela equipe de Sistemas/Tabelas (Moisés Conte). *(Observação de triagem: chamado aberto na categoria \"T.I > DV > Desenvolvimento > Integração entre sistemas\", recomenda-se reclassificar para \"T.I > ST > Parametrização de Sistemas e Tabelas\" — ID 164).*\n\nClassificação Sugerida: T.I > ST > Parametrização de Sistemas e Tabelas | Prioridade Real: Muito baixa\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-47)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-47] Reclassificar a categoria do chamado no GLPI de 'T.I > DV > Desenvolvimento > Integração entre sistemas' para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), direcionando ao analista técnico de Sistemas/Tabelas (Moisés Conte).\n  2. [PB-UNI-47] Baixar a planilha anexada no chamado (Vigencia 26-11-26.xlsx) com os valores atualizados da tabela de Medicamentos do convênio IPSM / Batalhão (vigência a partir de 26/11/2026).\n  3. [PB-UNI-47] Acessar o sistema SGH Spdata no módulo de parametrização de Tabelas de Convênios e selecionar o convênio IPSM (Batalhão).\n  4. [PB-UNI-47] Executar a rotina de importação da nova vigência (26/11/2026) dos medicamentos no banco de dados do SGH Spdata.\n  5. [PB-UNI-47] Validar a consulta dos itens e valores no sistema para certificar que os preços vigentes foram atualizados para faturamento e auditoria de contas, notificando a solicitante Bruna Ferreira Costa (H Auditoria) da conclusão da importação.",
-    "public_reply_draft": "Olá, Bruna! Tudo bem?\n\nRecebemos a sua solicitação referente à parametrização e atualização da **tabela de Medicamentos do convênio IPSM (Batalhão)** no sistema **SGH Spdata**, com vigência a partir de **26/11/2026**, conforme a planilha anexada (**Vigencia 26-11-26.xlsx**).\n\nInformamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica (chamado classificado como **completo**) e nossa equipe de Sistemas/Tabelas (**Moisés Conte**) já iniciou o procedimento de importação e parametrização dos novos valores no SGH Spdata.\n\n*(Observação: a categoria do chamado no GLPI foi direcionada para a equipe de Sistemas em **T.I > ST > Parametrização de Sistemas e Tabelas** — ID 164)*.\n\nAssim que a nova vigência da tabela estiver importada e liberada no sistema para faturamento e auditoria das contas hospitalares, confirmaremos por aqui!\n\nPermanecemos à disposição!",
+    "public_reply_draft": "Olá, Bruna! Tudo bem?\n\nRecebemos a sua solicitação referente à tabela de Medicamentos do convênio IPSM (Batalhão) com a planilha em anexo.\n\nInformamos que o setor de T.I. já está em tratativas para realizar a parametrização dos novos valores no sistema.\n\n*(Orientação: para agilizar futuras solicitações de tabelas, sugerimos abrir o chamado na categoria **T.I > ST > Parametrização de Sistemas e Tabelas**)*.\n\nAssim que a parametrização for concluída, confirmaremos por aqui!\n\nPermanecemos à disposição!",
     "has_image_analysis": false,
     "analyzed_images_count": 0,
     "telemetry": {
-      "duration_ms": 16,
+      "duration_ms": 18,
       "execution_mode": "heuristic_instant",
       "provider_used": "Copiloto Heurístico Instantâneo (qwen2.5:3b)",
       "provider_type": "heuristic",
       "model": "qwen2.5:3b",
-      "system_ram_used_gb": 14.8,
+      "system_ram_used_gb": 15.7,
       "system_ram_total_gb": 16.9,
-      "system_ram_pct": 88,
-      "node_rss_mb": 57,
+      "system_ram_pct": 93,
+      "node_rss_mb": 52,
       "ollama_loaded": false,
       "ollama_model_name": null,
       "ollama_model_ram_mb": null,
@@ -19215,10 +19215,10 @@
       "ollama_model_total_mb": null,
       "tokens": {
         "prompt_tokens": 481,
-        "completion_tokens": 233,
-        "total_tokens": 714
+        "completion_tokens": 133,
+        "total_tokens": 614
       },
-      "formatted_badge": "⚡ Copiloto Instantâneo • 57 MB • 16ms"
+      "formatted_badge": "⚡ Copiloto Instantâneo • 52 MB • 18ms"
     }
   },
   "undefined": {
