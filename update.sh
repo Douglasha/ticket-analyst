@@ -17,16 +17,17 @@ git fetch origin main
 LOCAL_HASH=$(git rev-parse HEAD)
 REMOTE_HASH=$(git rev-parse origin/main)
 
-if [ "$LOCAL_HASH" = "$REMOTE_HASH" ]; then
+if [ "$LOCAL_HASH" = "$REMOTE_HASH" ] && [ "$1" != "--force" ] && [ "$1" != "-f" ]; then
     echo "✅ O sistema já está na versão mais recente ($LOCAL_HASH)."
-    echo "Nenhuma atualização pendente."
+    echo "Nenhuma atualização de código pendente."
+    echo "Para forçar reconstrução dos containers, use: ./update.sh --force"
     exit 0
 fi
 
-echo "⬇️ [2/4] Baixando novidades do repositório remoto..."
-# Descarta alterações automáticas geradas pelo runtime nos arquivos de cache/histórico rastreados para evitar travas de merge
-git checkout -- data/analyses_cache.json data/resolved_history.json 2>/dev/null || true
-git pull origin main
+echo "⬇️ [2/4] Sincronizando com o repositório remoto..."
+# Descarta alterações locais em arquivos rastreados para garantir sincronização 100% limpa e sem conflitos
+git checkout -- . 2>/dev/null || true
+git pull origin main || git reset --hard origin/main
 
 echo "🐳 [3/4] Recompilando e reiniciando o container da aplicação..."
 docker compose up -d --build app
