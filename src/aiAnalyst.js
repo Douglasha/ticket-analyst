@@ -3529,9 +3529,14 @@ export class AIAnalyst {
         `Por gentileza, gere novamente o arquivo XML no sistema e realize a importação no portal SIGAS para validar!\n\n` +
         `Permanecemos à disposição!`;
     } else if (
-      (/\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|bras[ií]ndice|bras[ií]dice|simpro|referenciamento\s+bras[ií]ndice)\b/i.test(
-        normAll
-      ) ||
+      (matches.some((m) => m.id === "PB-UNI-47" || m.source_id === "PB-UNI-47") ||
+        (/\b(ipsm|ipsmmg|batalh[aã]o|batalhao)\b/i.test(normAll) &&
+          /\b(tabela|tabelas|medicamento|medicamentos|medica[cç][aã]o|parametriza|importa|vig[eê]ncia)\b/i.test(normAll)) ||
+        (/\btabelas?\b/i.test(normAll) &&
+          /\b(parametriza[cç][aã]o|parametrizar|parametrizad[ao]|para\s+ser\s+parametrizad[ao]|importa[cç][aã]o|importar)\b/i.test(normAll)) ||
+        /\b(criar\s+tabela|cria[cç][aã]o\s+de\s+tabela|nova\s+tabela|tabela\s+dth|dth\s*[-–]?\s*padr[aã]o|tabela\s+de\s+di[aá]rias\s+e\s+taxas|faixa\s+(?:de\s+)?998|importar\s+tabela|importa[cç][aã]o\s+de\s+tabela|atualizar\s+tabela|parametrizar\s+tabela|parametriza[cç][aã]o\s+de\s+(?:sistemas?\s+e\s+)?tabelas?|bras[ií]ndice|bras[ií]dice|simpro|referenciamento\s+bras[ií]ndice)\b/i.test(
+          normAll
+        ) ||
         (/\b(dth|di[aá]rias\s+e\s+taxas|simpro|bras[ií]ndice|bras[ií]dice|tuss|cbhpm|amb|faixa\s+(?:de\s+)?\d{2,4})\b/i.test(
           normAll
         )) ||
@@ -3539,7 +3544,8 @@ export class AIAnalyst {
         ticket.category.includes("Parametrização de Sistemas e Tabelas")) &&
       !/\b(excluir|exclus[aã]o|estornar|estorno|cancelar|cancelamento|unifica|duplicad)\b/i.test(
         normAll
-      )
+      ) &&
+      !/\bxml\b/i.test(normAll)
     ) {
       const descOnly = formFields.descricao || ticket.content || "";
       const isMale = /^(diego|frederico|rafael|humberto|walisson|douglas|lucas|joao|pedro|bruno|gabriel|felipe|rodrigo|marcos|tiago|thiago|gustavo|matheus|leonardo|andre|vitor|victor|tarcisio)\b/i.test(
@@ -3571,7 +3577,7 @@ export class AIAnalyst {
 
       const isIpsmTable =
         /\b(ipsm|ipsmmg|batalh[aã]o|batalhao)\b/i.test(normAll) &&
-        /\b(tabela|tabelas|medicamento|medicamentos|parametriza|importa|vig[eê]ncia)\b/i.test(normAll);
+        /\b(tabela|tabelas|medicamento|medicamentos|medica[cç][aã]o|parametriza|importa|vig[eê]ncia)\b/i.test(normAll);
 
       if (isBrasindicePriceMismatch) {
         detectedDomain = "Sistemas Internos / ERP / Parametrização de Sistemas e Tabelas";
@@ -3638,7 +3644,7 @@ export class AIAnalyst {
           `Nossa equipe técnica já iniciou a parametrização dessa regra no módulo de Faturamento / Intercâmbio do ${sysName}. Assim que a alteração for concluída e estiver em vigor no sistema, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       } else if (isIpsmTable) {
-        const isMed = /\b(medicamentos?|rem[eé]dios?)\b/i.test(normAll);
+        const isMed = /\b(medicamentos?|rem[eé]dios?|medica[cç][aã]o)\b/i.test(normAll);
         const isMat = /\b(materiais?|mat\/med)\b/i.test(normAll);
         const tipoTabela = isMed
           ? "tabela de Medicamentos"
@@ -3685,7 +3691,7 @@ export class AIAnalyst {
           reclassNote;
 
         customResolutionSteps = [
-          `[PB-UNI-47] Reclassificar a categoria do chamado no GLPI para 'T.I > ST > Parametrização de Sistemas e Tabelas' (ID 164), direcionando ao analista técnico de Sistemas/Tabelas (Moisés Conte).`,
+          `[PB-UNI-47] Reclassificar a categoria do chamado no GLPI de '${ticket.category || "Desenvolvimento > Integração entre sistemas"}' para '${suggestedCategory}' (ID 164), direcionando ao analista técnico de Sistemas/Tabelas (Moisés Conte).`,
           `[PB-UNI-47] Baixar a planilha anexada no chamado (${anexoStr}) com os valores atualizados da ${tipoTabela} do convênio IPSM / Batalhão (vigência a partir de ${vigenciaStr}).`,
           `[PB-UNI-47] Acessar o sistema ${sysName} no módulo de parametrização de Tabelas de Convênios e selecionar o convênio IPSM (Batalhão).`,
           `[PB-UNI-47] Executar a rotina de importação da nova vigência (${vigenciaStr}) dos medicamentos no banco de dados do ${sysName}.`,
@@ -3695,7 +3701,10 @@ export class AIAnalyst {
         customPublicReply =
           `Olá, ${firstName}! Tudo bem?\n\n` +
           `Recebemos a sua solicitação referente à parametrização e atualização da **${tipoTabela} do convênio IPSM (Batalhão)** no sistema **${sysName}**, com vigência a partir de **${vigenciaStr}**, conforme a planilha anexada (**${anexoStr}**).\n\n` +
-          `Informamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica e nossa equipe de Sistemas/Tabelas (Moisés) já iniciou o procedimento de importação e parametrização dos novos valores no ${sysName}.\n\n` +
+          `Informamos que os parâmetros e o arquivo enviado já foram validados na triagem técnica (chamado classificado como **completo**) e nossa equipe de Sistemas/Tabelas (**Moisés Conte**) já iniciou o procedimento de importação e parametrização dos novos valores no ${sysName}.\n\n` +
+          (categoryMismatch
+            ? `*(Observação: a categoria do chamado no GLPI foi direcionada para a equipe de Sistemas em **${suggestedCategory}** — ID 164)*.\n\n`
+            : "") +
           `Assim que a nova vigência da tabela estiver importada e liberada no sistema para faturamento e auditoria das contas hospitalares, confirmaremos por aqui!\n\n` +
           `Permanecemos à disposição!`;
       } else {
@@ -6282,10 +6291,10 @@ export class AIAnalyst {
         ? "Sistemas Internos / ERP / Sistemas Corporativos"
         : "Suporte Técnico Geral / Service Desk";
 
-      // Checagem inteligente de categoria caso o solicitante tenha escolhido uma categoria desalinhada (ex: Sistemas Operacionais / Aplicativos / Solicitação Diversa / Manutenção)
+      // Checagem inteligente de categoria caso o solicitante tenha escolhido uma categoria desalinhada (ex: Sistemas Operacionais / Aplicativos / Solicitação Diversa / Manutenção / Integração entre sistemas)
       let smartCat = ticket.category;
       if (
-        /\b(sistemas operacionais|aplicativos|solicitacao diversa|manutencao|manutenção)\b/i.test(
+        /\b(sistemas operacionais|aplicativos|solicitacao diversa|manutencao|manutenção|integra[cç][aã]o entre sistemas)\b/i.test(
           normalizeText(ticket.category || "")
         )
       ) {
@@ -6293,6 +6302,12 @@ export class AIAnalyst {
           smartCat = "T.I > IR > Suporte a Hardware > Periféricos > Teclados";
         } else if (/\b(mouse|mouses)\b/i.test(normAll)) {
           smartCat = "T.I > IR > Suporte a Hardware > Periféricos > Mouses";
+        } else if (
+          /\b(tabela|tabelas|parametriza|vig[eê]ncia|dth|di[aá]rias\s+e\s+taxas|bras[ií]ndice|simpro|ipsm|batalh[aã]o)\b/i.test(
+            normAll
+          )
+        ) {
+          smartCat = "T.I > ST > Parametrização de Sistemas e Tabelas";
         } else if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard|producao|cooperados|medicos)\b/i.test(normAll)) {
           smartCat = "T.I > BD > Big Data e BI > Relatórios";
         } else if (/\b(acesso|permissao|permissoes|liberar|vincular|senha|login)\b/i.test(normAll)) {
