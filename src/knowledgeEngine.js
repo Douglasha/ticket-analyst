@@ -73,7 +73,7 @@ export function extractFormCreatorFields(rawContent) {
 
   let descricao = "";
   const descMatch = text.match(
-    /(?:Descri[çc][ãa]o|Obseva[çc][õo]es|Observa[çc][õo]es)\s*:\s*([\s\S]*?)(?:\n\s*\d+\)\s*(?:Anexo|Arquivos?|Ativos?)|\n\s*▸|$)/i
+    /(?:Descri[çc][ãa]o|Obseva[çc][õo]es|Observa[çc][õo]es|Descreva\s+o\s+problema)\s*:\s*([\s\S]*?)(?:\n\s*\d+\)\s*(?:Anexo|Arquivos?|Ativos?)|\n\s*▸|$)/i
   );
   if (descMatch && descMatch[1]) {
     descricao = descMatch[1].replace(/\n{2,}/g, "\n").trim();
@@ -579,6 +579,14 @@ export class KnowledgeEngine {
       !/\b(impressora|spooler|toner|mancha|atolamento|papel preso)\b/i.test(
         normTicket
       );
+
+    const isKeyboardOrMouseHardwareFailure =
+      /\b(teclado|teclados|mouse|mouses)\b/i.test(normTicket) &&
+      (/\b(falha|defeito|falhando|n[aã]o digita|n[aã]o est[aá] digitando|tecla|letras|bot[aã]o|trocar|troca|substitui[cç][aã]o|ruim|estragad|parou)\b/i.test(
+        normTicket
+      ) ||
+        /\bteclado de computador\b/i.test(normTicket)) &&
+      !/\b(impressora|spooler|toner|scanner)\b/i.test(normTicket);
 
     // 3ª Camada: Playbooks Locais da Equipe de TI
     let bestPlaybookScore = 0;
@@ -1160,6 +1168,14 @@ export class KnowledgeEngine {
         ) {
           continue;
         }
+        // Evita parear PB-UNI-07 quando o chamado é especificamente de teclado ou mouse com falha de digitação (PB-UNI-77)
+        if (pb.id === "PB-UNI-07" && isKeyboardOrMouseHardwareFailure) {
+          continue;
+        }
+        // Evita parear PB-UNI-77 quando o chamado não trata de teclado ou mouse
+        if (pb.id === "PB-UNI-77" && !isKeyboardOrMouseHardwareFailure) {
+          continue;
+        }
         let score = computeRelevance(
           fullTicketText,
           ticketTokens,
@@ -1434,6 +1450,12 @@ export class KnowledgeEngine {
         if (
           pb.id === "PB-UNI-76" &&
           isQueueOrPainelSenhaDev
+        ) {
+          score = Math.max(score, 0.99);
+        }
+        if (
+          pb.id === "PB-UNI-77" &&
+          isKeyboardOrMouseHardwareFailure
         ) {
           score = Math.max(score, 0.99);
         }

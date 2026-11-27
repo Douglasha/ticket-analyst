@@ -19051,6 +19051,112 @@
       "formatted_badge": "⚡ Copiloto Instantâneo • 93 MB • 30ms"
     }
   },
+  "44722": {
+    "ticket_id": 44722,
+    "analyzed_at": "27/11/2026 11:30",
+    "provider_used": "Copiloto Heurístico Instantâneo (qwen2.5:3b)",
+    "translated_intent": "A solicitante **Adriana Aparecida de Paiva** (H UTI Adulto) relata falha física no **teclado do computador** no local **H UTI Adulto** (Teclado com falha de digitação de algumas letras). O chamado foi aberto inicialmente via formulário externo de manutenção e escalonado para a T.I. A categoria do chamado no GLPI foi corrigida de **'Hospital > Manutenção'** para a categoria oficial de periféricos de entrada **'T.I > IR > Suporte a Hardware > Periféricos > Teclados'** (ID 152). A solicitação encontra-se **completa**, com setor, equipamento e sintoma identificados, demandando deslocamento presencial de técnico de Infraestrutura e Redes munido de teclado USB reserva homologado para teste e substituição imediata no posto de trabalho.",
+    "detected_domain": "Infraestrutura e Redes / Suporte a Hardware / Periféricos",
+    "suggested_category": "T.I > IR > Suporte a Hardware > Periféricos > Teclados",
+    "real_urgency": "Alta",
+    "urgency_reason": "Falha de funcionamento em teclado em setor assistencial crítico (H UTI Adulto), demandando atendimento presencial prioritário para troca física e continuidade do atendimento médico/assistencial no PEP/SGH.",
+    "sufficiency_status": "completo",
+    "missing_info": [],
+    "knowledge_matches": [
+      {
+        "layer": "local_playbook",
+        "layer_label": "3ª Camada • Playbook Local de Processos TI",
+        "source_id": "PB-UNI-77",
+        "title": "Falha / Manutenção e Substituição de Teclado ou Mouse de Computador (Periféricos de Entrada — Categoria Teclados/Mouses)",
+        "category": "Infraestrutura e Redes / Suporte a Hardware / Periféricos",
+        "summary": "Solicitação de setores hospitalares ou administrativos (ex.: Adriana Aparecida de Paiva na UTI Adulto no chamado #44722), frequentemente aberta via formulário de manutenção predial/eletrônica e escalonada para a T.I., relatando falha física em teclado ou mouse de computador (ex.: teclas com falha de digitação de letras, teclas presas, mau contato USB ou botão de mouse falhando). Demanda reclassificação da categoria genérica ou externa (ex.: Hospital > Manutenção) para a categoria oficial do GLPI 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152) ou 'Mouses' (ID 151), com deslocamento de técnico presencial munido de periférico USB reserva homologado para teste e substituição física imediata, sem interrupção das atividades assistenciais.",
+        "steps": [
+          "[PB-UNI-77] Reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152) ou 'Periféricos > Mouses' (ID 151), corrigindo o escalonamento de 'Hospital > Manutenção'.",
+          "[PB-UNI-77] Ajustar a urgência real para Alta/Muito Alta quando envolver setores assistenciais críticos (ex.: UTI Adulto, Pronto Atendimento, Centro Cirúrgico) onde a digitação no PEP/SGH é contínua.",
+          "[PB-UNI-77] Deslocar técnico de Infraestrutura e Redes (T.I > IR) até o local informado (ex.: UTI Adulto) munido de um teclado USB novo/reserva do estoque técnico.",
+          "[PB-UNI-77] Realizar o teste físico do periférico no computador: conectar em outra porta USB traseira para descartar mau contato de porta e confirmar a falha de resposta das teclas.",
+          "[PB-UNI-77] Constatada a avaria de membrana/hardware, efetuar a substituição imediata pelo periférico reserva e recolher o item com defeito para descarte/sucateamento.",
+          "[PB-UNI-77] Validar com a equipe do posto de trabalho a normalização da digitação e concluir o atendimento no chamado."
+        ],
+        "score": 0.99
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#41977",
+        "title": "Solicitação Diversa  -  Teclado recepção",
+        "category": "T.I > IR > Suporte a Hardware > Periféricos > Teclados",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+        "steps": [
+          "[PB-UNI-07] Separar um equipamento substituto (teclado/mouse USB) testado do estoque técnico de suporte.",
+          "[PB-UNI-07] Deslocar-se até o setor indicado (ex: Hospital Unimed - Ala 2, estação patrimônio informado) e realizar a substituição física.",
+          "[PB-UNI-07] Atualizar o controle de insumos/estoque se aplicável e colher validação do usuário no local."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nJá registramos a sua solicitação de substituição do equipamento para o computador indicado no setor.\n\nNossa equipe de Suporte Técnico já separou o item substituto e irá até o seu setor para realizar a troca física. Qualquer detalhe adicional sobre a localização exata da máquina no posto, pode responder por aqui!",
+        "required_info": [
+          "Localização/posto exato ou número de patrimônio do computador onde o periférico deve ser substituído"
+        ],
+        "sufficiency_status": "parcial",
+        "custom_instruction": "",
+        "score": 0.9
+      },
+      {
+        "layer": "learned_memory",
+        "layer_label": "Memória Contínua • Aprendido com o Analista",
+        "source_id": "MEM-#42771",
+        "title": "Manutenção de Computadores  -  Computador não liga o monitor DHU-0374-SCIH",
+        "category": "T.I > IR > Suporte a Hardware > Manutenção de Computadores",
+        "summary": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "steps": [
+          "[PB-UNI-07] Deslocar técnico de suporte até o setor SCIH para realizar o diagnóstico presencial da estação DHU-0374-SCIH.",
+          "[PB-UNI-07] Verificar conexões físicas dos cabos de vídeo e energia (HDMI/DisplayPort/VGA), checar se há sinal de vídeo ou mensagem 'Sem Sinal'/'No Signal'.",
+          "[PB-UNI-07] Inspecionar o gabinete/CPU do computador para verificar se os coolers giram, se há bipes de POST, falha na placa-mãe, memória RAM ou travamento na inicialização do Windows.",
+          "[PB-UNI-07] Caso seja constatado defeito físico irreparável no monitor ou CPU durante o teste in loco, providenciar a substituição por equipamento de backup do estoque.",
+          "[PB-UNI-07] Testar e validar o funcionamento da máquina junto à colaboradora no setor SCIH e finalizar o chamado."
+        ],
+        "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação e analisamos as informações e a imagem anexada referente à estação de trabalho (**DHU-0374-SCIH**) no setor **SCIH**.\n\nNossa equipe técnica já está programando o atendimento presencial no setor para analisar o equipamento no local e diagnosticar o ocorrido (conferindo a inicialização do computador, cabeamento e sinal de vídeo). Caso seja identificada alguma falha de hardware que não possa ser resolvida no local, realizaremos o reparo ou a devida substituição.\n\nPermanecemos à disposição!",
+        "required_info": [],
+        "sufficiency_status": "completo",
+        "custom_instruction": "Nunca prometer substituição física imediata de equipamento/monitor sem antes realizar o diagnóstico presencial. Confirmar o deslocamento da equipe técnica para verificar conexões de cabos, sinal de vídeo e inicialização da CPU. Somente realizar troca se for constatado defeito físico irreparável no local.",
+        "score": 0.85
+      }
+    ],
+    "primary_knowledge_source": "3ª Camada • Playbook Local de Processos TI (PB-UNI-77) + Memória Contínua • Aprendido com o Analista (MEM-#41977)",
+    "resolution_steps": [
+      "[PB-UNI-77] Reclassificar a categoria do chamado no GLPI de 'Hospital > Manutenção' para 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152), ajustando o direcionamento para o grupo de Infraestrutura e Redes.",
+      "[PB-UNI-77] Ajustar a urgência real para Alta/Muito Alta no GLPI, tendo em vista o impacto operacional imediato na digitação e evolução de prontuários no PEP/SGH na H UTI Adulto.",
+      "[PB-UNI-77] Deslocar técnico de Infraestrutura e Redes (T.I > IR) até a H UTI Adulto munido de um teclado USB novo/reserva do estoque técnico.",
+      "[PB-UNI-77] Realizar o teste físico do periférico no computador: conectar em outra porta USB traseira da CPU para descartar mau contato de porta USB ou conector frouxo.",
+      "[PB-UNI-77] Confirmada a falha de membrana/switches/sensor ótico, efetuar a substituição imediata pelo periférico reserva homologado e recolher o componente avariado para descarte ou sucateamento.",
+      "[PB-UNI-77] Validar junto à equipe do posto de trabalho a normalização da digitação e funcionamento no sistema e concluir o chamado no GLPI."
+    ],
+    "private_note_draft": "[TRATATIVA PRÉVIA - COPILOTO DE T.I.]\n----------------------------------------\nENTENDIMENTO TÉCNICO:\nA solicitante **Adriana Aparecida de Paiva** (H UTI Adulto) relata falha física no **teclado do computador** no local **H UTI Adulto** (Teclado com falha de digitação de algumas letras). O chamado foi aberto inicialmente via formulário externo de manutenção e escalonado para a T.I. A categoria do chamado no GLPI foi corrigida de **'Hospital > Manutenção'** para a categoria oficial de periféricos de entrada **'T.I > IR > Suporte a Hardware > Periféricos > Teclados'** (ID 152). A solicitação encontra-se **completa**, com setor, equipamento e sintoma identificados, demandando deslocamento presencial de técnico de Infraestrutura e Redes munido de teclado USB reserva homologado para teste e substituição imediata no posto de trabalho.\n\nClassificação Sugerida: T.I > IR > Suporte a Hardware > Periféricos > Teclados | Prioridade Real: Alta\nBase Consultada: 3ª Camada • Playbook Local de Processos TI (PB-UNI-77) + Memória Contínua • Aprendido com o Analista (MEM-#41977)\n\nTRIAGEM DE INFORMAÇÕES (COMPLETO):\n  - Dados suficientes no relato para iniciar a tratativa.\n\nROTEIRO DE RESOLUÇÃO SUGERIDO:\n  1. [PB-UNI-77] Reclassificar a categoria do chamado no GLPI de 'Hospital > Manutenção' para 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152), ajustando o direcionamento para o grupo de Infraestrutura e Redes.\n  2. [PB-UNI-77] Ajustar a urgência real para Alta/Muito Alta no GLPI, tendo em vista o impacto operacional imediato na digitação e evolução de prontuários no PEP/SGH na H UTI Adulto.\n  3. [PB-UNI-77] Deslocar técnico de Infraestrutura e Redes (T.I > IR) até a H UTI Adulto munido de um teclado USB novo/reserva do estoque técnico.\n  4. [PB-UNI-77] Realizar o teste físico do periférico no computador: conectar em outra porta USB traseira da CPU para descartar mau contato de porta USB ou conector frouxo.\n  5. [PB-UNI-77] Confirmada a falha de membrana/switches/sensor ótico, efetuar a substituição imediata pelo periférico reserva homologado e recolher o componente avariado para descarte ou sucateamento.\n  6. [PB-UNI-77] Validar junto à equipe do posto de trabalho a normalização da digitação e funcionamento no sistema e concluir o chamado no GLPI.",
+    "public_reply_draft": "Olá, Adriana! Tudo bem?\n\nRecebemos a sua solicitação referente à falha no **teclado de computador** no setor **H UTI Adulto**.\n\nInformamos que as informações fornecidas já foram validadas na triagem técnica (chamado classificado como **completo**) e o chamado foi direcionado para a equipe de Hardware (**T.I > IR > Suporte a Hardware > Periféricos > Teclados**).\n\nComo se trata de uma estação em setor assistencial crítico (**H UTI Adulto**), nossa equipe de Infraestrutura e Redes já priorizou o atendimento e um técnico está se deslocando até o local com um teclado USB reserva para realizar o teste e a **substituição física imediata**!\n\nPermanecemos à disposição!",
+    "has_image_analysis": false,
+    "analyzed_images_count": 0,
+    "telemetry": {
+      "duration_ms": 14,
+      "execution_mode": "heuristic_instant",
+      "provider_used": "Copiloto Heurístico Instantâneo (qwen2.5:3b)",
+      "provider_type": "heuristic",
+      "model": "qwen2.5:3b",
+      "system_ram_used_gb": 15.5,
+      "system_ram_total_gb": 16.9,
+      "system_ram_pct": 92,
+      "node_rss_mb": 59,
+      "ollama_loaded": false,
+      "ollama_model_name": null,
+      "ollama_model_ram_mb": null,
+      "ollama_model_vram_mb": null,
+      "ollama_model_total_mb": null,
+      "tokens": {
+        "prompt_tokens": 447,
+        "completion_tokens": 176,
+        "total_tokens": 623
+      },
+      "formatted_badge": "⚡ Copiloto Instantâneo • 59 MB • 14ms"
+    }
+  },
   "undefined": {
     "updated_at": "2026-10-23T16:38:16.897Z",
     "ticket_date_mod": "",

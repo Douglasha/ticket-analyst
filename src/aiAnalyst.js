@@ -974,10 +974,19 @@ export class AIAnalyst {
       sufficiencyStatus = "completo";
       missingInfo = [];
     } else if (
+      !matches.some((m) => m.id === "PB-UNI-77" || m.source_id === "PB-UNI-77") &&
+      !(
+        /\b(teclado|teclados|mouse|mouses)\b/i.test(normAll) &&
+        /\b(falha|defeito|falhando|letras?|teclas?|bot[aã]o|substitui[cç][aã]o|troca|manuten[cç][aã]o)\b/i.test(normAll)
+      ) &&
       (() => {
-        const rawDesc = (formFields.descricao || formFields.problema || "")
+        const rawDesc = (
+          (formFields.descricao && formFields.descricao.length > 20
+            ? formFields.descricao
+            : formFields.problema || formFields.descricao) || ""
+        )
           .replace(/▸[^\n]+/g, "")
-          .replace(/\d+\)\s*[^:\n]+:[^\n]*/g, "")
+          .replace(/^\s*\d+\)\s*[^:\n]+:\s*/gm, "")
           .replace(/<[^>]+>/g, "")
           .trim();
         const normDesc = normalizeText(rawDesc);
@@ -2100,6 +2109,78 @@ export class AIAnalyst {
         `[PB-UNI-76] Mapear os tipos de atendimento/filas requeridos pelo setor: Normal, Preferencial/Prioritária (idosos, gestantes, PCDs por lei), Urgência/Triagem e serviços específicos.`,
         `[PB-UNI-76] Alinhar com a equipe de Infraestrutura e Redes os requisitos de hardware na Recepção Externa: TV/monitor HDMI na sala de espera, mini-PC/Smart TV/Raspberry Pi conectado à rede local e impressora térmica de senhas (ou dispenser de senhas pré-impressas/totem).`,
         `[PB-UNI-76] Apresentar o protótipo/versão beta para validação operacional com a supervisão da Recepção Externa e planejar a implantação piloto.`
+      ];
+    } else if (
+      (/\b(teclado|teclados|mouse|mouses)\b/i.test(normAll) &&
+        (/\b(falha|defeito|falhando|n[aã]o digita|n[aã]o est[aá] digitando|tecla|teclas|letras|bot[aã]o|bot[oõ]es|trocar|troca|substitui[cç][aã]o|ruim|estragad|parou|manuten[cç][aã]o)\b/i.test(
+          normAll
+        ) ||
+          /\b(manuten[cç][aã]o\s+eletr[oô]nica\s*\|\s*teclado|manuten[cç][aã]o\s+eletr[oô]nica\s*\|\s*mouse)\b/i.test(
+            normAll
+          ))) &&
+      !/\b(impressora|toner|fusor|repromaq|pabx|ramal|voip|wi-?fi|internet|bi\b|relat[oó]rio)\b/i.test(
+        normAll
+      )
+    ) {
+      const isMouse =
+        /\b(mouse|mouses)\b/i.test(normAll) &&
+        !/\b(teclado|teclados)\b/i.test(normAll);
+      const itemType = isMouse ? "mouse" : "teclado";
+      const itemTypeUpper = isMouse ? "Mouse" : "Teclado";
+
+      detectedDomain =
+        "Infraestrutura e Redes / Suporte a Hardware / Periféricos";
+      suggestedCategory = isMouse
+        ? "T.I > IR > Suporte a Hardware > Periféricos > Mouses"
+        : "T.I > IR > Suporte a Hardware > Periféricos > Teclados";
+
+      const isCriticalUnit =
+        /\b(uti|cti|pronto\s+atendimento|pa\b|emerg[eê]ncia|centro\s+cir[uú]rgico|bloco\s+cir[uú]rgico|hemodi[aá]lise|maternidade)\b/i.test(
+          normAll
+        );
+      realUrgency = isCriticalUnit ? "Alta" : (ticket.urgency_label || "Média");
+      urgencyReason = isCriticalUnit
+        ? `Falha de funcionamento em ${itemType} em setor assistencial crítico (${sectorName}), demandando atendimento presencial prioritário para troca física e continuidade do atendimento médico/assistencial no PEP/SGH.`
+        : `Falha de hardware/periférico (${itemType}) em estação de trabalho, demandando teste e substituição física do componente pela equipe de Infraestrutura.`;
+
+      const targetLoc =
+        formFields.localizacao || formFields.setor || sectorName || "setor solicitante";
+
+      const reclassNote =
+        ticket.category &&
+        (ticket.category.toLowerCase().includes("manutenção") ||
+          ticket.category.toLowerCase().includes("manutencao") ||
+          ticket.category.toLowerCase().includes("sistemas operacionais") ||
+          ticket.category.toLowerCase().includes("aplicativos"))
+          ? ` A categoria do chamado no GLPI foi corrigida de **'${ticket.category}'** para a categoria oficial de periféricos de entrada **'${suggestedCategory}'** (ID ${isMouse ? "151" : "152"}).`
+          : "";
+
+      translatedIntent =
+        `${solPrefix} **${formattedRequester}** (${sectorName}) relata falha física no **${itemType} do computador** no local **${targetLoc}** (${formFields.problema || "falha de funcionamento/digitação"}). ` +
+        `O chamado foi aberto inicialmente via formulário externo de manutenção e escalonado para a T.I.${reclassNote} ` +
+        `A solicitação encontra-se **completa**, com setor, equipamento e sintoma identificados, demandando deslocamento presencial de técnico de Infraestrutura e Redes munido de ${itemType} USB reserva homologado para teste e substituição imediata no posto de trabalho.`;
+
+      sufficiencyStatus = "completo";
+      missingInfo = [];
+
+      customPublicReply =
+        `Olá, ${firstName}! Tudo bem?\n\n` +
+        `Recebemos a sua solicitação referente à falha no **${itemType} de computador** no setor **${sectorName}**.\n\n` +
+        `Informamos que as informações fornecidas já foram validadas na triagem técnica (chamado classificado como **completo**) e o chamado foi direcionado para a equipe de Hardware (**${suggestedCategory}**).\n\n` +
+        (isCriticalUnit
+          ? `Como se trata de uma estação em setor assistencial crítico (**${sectorName}**), nossa equipe de Infraestrutura e Redes já priorizou o atendimento e um técnico está se deslocando até o local com um ${itemType} USB reserva para realizar o teste e a **substituição física imediata**!\n\n`
+          : `Nossa equipe de Infraestrutura e Redes já programou o atendimento presencial e um técnico irá até o setor com um ${itemType} USB reserva para realizar o teste e a **substituição física** do periférico.\n\n`) +
+        `Permanecemos à disposição!`;
+
+      customResolutionSteps = [
+        `[PB-UNI-77] Reclassificar a categoria do chamado no GLPI de '${ticket.category || "Hospital > Manutenção"}' para '${suggestedCategory}' (ID ${isMouse ? "151" : "152"}), ajustando o direcionamento para o grupo de Infraestrutura e Redes.`,
+        isCriticalUnit
+          ? `[PB-UNI-77] Ajustar a urgência real para Alta/Muito Alta no GLPI, tendo em vista o impacto operacional imediato na digitação e evolução de prontuários no PEP/SGH na ${sectorName}.`
+          : `[PB-UNI-77] Manter a urgência real em nível Médio no GLPI para atendimento presencial pela equipe de Infraestrutura e Redes.`,
+        `[PB-UNI-77] Deslocar técnico de Infraestrutura e Redes (T.I > IR) até a ${targetLoc} munido de um ${itemType} USB novo/reserva do estoque técnico.`,
+        `[PB-UNI-77] Realizar o teste físico do periférico no computador: conectar em outra porta USB traseira da CPU para descartar mau contato de porta USB ou conector frouxo.`,
+        `[PB-UNI-77] Confirmada a falha de membrana/switches/sensor ótico, efetuar a substituição imediata pelo periférico reserva homologado e recolher o componente avariado para descarte ou sucateamento.`,
+        `[PB-UNI-77] Validar junto à equipe do posto de trabalho a normalização da digitação e funcionamento no sistema e concluir o chamado no GLPI.`
       ];
     } else if (
       (/\b(samsung\s+m?4080|m4080|m4080fx|samsung\s+m?4020|m4020|m4020nd|samsung\s+4080|samsung\s+4020)\b/i.test(
@@ -6201,14 +6282,18 @@ export class AIAnalyst {
         ? "Sistemas Internos / ERP / Sistemas Corporativos"
         : "Suporte Técnico Geral / Service Desk";
 
-      // Checagem inteligente de categoria caso o solicitante tenha escolhido uma categoria desalinhada (ex: Sistemas Operacionais / Aplicativos / Solicitação Diversa)
+      // Checagem inteligente de categoria caso o solicitante tenha escolhido uma categoria desalinhada (ex: Sistemas Operacionais / Aplicativos / Solicitação Diversa / Manutenção)
       let smartCat = ticket.category;
       if (
-        /\b(sistemas operacionais|aplicativos|solicitacao diversa)\b/i.test(
+        /\b(sistemas operacionais|aplicativos|solicitacao diversa|manutencao|manutenção)\b/i.test(
           normalizeText(ticket.category || "")
         )
       ) {
-        if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard|producao|cooperados|medicos)\b/i.test(normAll)) {
+        if (/\b(teclado|teclados)\b/i.test(normAll)) {
+          smartCat = "T.I > IR > Suporte a Hardware > Periféricos > Teclados";
+        } else if (/\b(mouse|mouses)\b/i.test(normAll)) {
+          smartCat = "T.I > IR > Suporte a Hardware > Periféricos > Mouses";
+        } else if (/\b(relatorio|relatorios|indicador|indicadores|bi|dashboard|producao|cooperados|medicos)\b/i.test(normAll)) {
           smartCat = "T.I > BD > Big Data e BI > Relatórios";
         } else if (/\b(acesso|permissao|permissoes|liberar|vincular|senha|login)\b/i.test(normAll)) {
           smartCat = "T.I > ST > Acesso e Permissões";

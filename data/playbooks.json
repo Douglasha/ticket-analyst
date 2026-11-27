@@ -2905,5 +2905,41 @@
       "[PB-UNI-76] Apresentar o protótipo/versão beta para validação operacional com a supervisão da Recepção Externa e planejar a implantação piloto."
     ],
     "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente ao **desenvolvimento da aplicação de Painel de Senha e Gerenciador de Fila de Atendimento** para a **Recepção Externa do Hospital Unimed**.\n\nA demanda já foi recepcionada pela equipe de Desenvolvimento de Software (**Moisés**) sob a categoria **T.I > DV > Desenvolvimento > Novas aplicações** (ID 120).\n\nPara estruturarmos a modelagem do sistema e o cronograma de entrega, já estamos levantando os seguintes requisitos técnicos e operacionais:\n1. **Estrutura das Filas:** Categorias de atendimento necessárias (ex.: Atendimento Normal, Prioritário/Preferencial por lei, Triagem/Urgência e Exames);\n2. **Interface do Operador:** Módulo web leve para que os atendentes nos guichês da Recepção Externa possam chamar a próxima senha, rechamar ou transferir pacientes diretamente pelo navegador;\n3. **Hardware e Exibição:** Alinhamento com a equipe de Infraestrutura de T.I. para conexão da tela/TV na sala de espera (com aviso sonoro e visual da senha/guichê) e método de emissão das senhas (impressora térmica de tickets ou dispenser físico);\n4. **Métricas de Atendimento:** Painel gerencial para registro dos tempos médios de espera e de atendimento por guichê.\n\nO desenvolvedor responsável já está iniciando o desenho da solução e, em breve, apresentaremos um protótipo operacional para validação junto à equipe da Recepção Externa!\n\nPermanecemos à disposição!"
+  },
+  {
+    "id": "PB-UNI-77",
+    "domain": "Infraestrutura e Redes / Suporte a Hardware / Periféricos",
+    "title": "Falha / Manutenção e Substituição de Teclado ou Mouse de Computador (Periféricos de Entrada — Categoria Teclados/Mouses)",
+    "keywords": [
+      "teclado",
+      "teclados",
+      "teclado de computador",
+      "falha de digitação",
+      "falha de digitacao",
+      "tecla falhando",
+      "teclas falhando",
+      "teclado falhando",
+      "troca de teclado",
+      "trocar teclado",
+      "mouse",
+      "mouses",
+      "troca de mouse",
+      "trocar mouse",
+      "mouse falhando",
+      "clique falhando",
+      "manutenção eletrônica teclado",
+      "manutencao eletronica teclado"
+    ],
+    "symptoms": "Solicitação de setores hospitalares ou administrativos (ex.: Adriana Aparecida de Paiva na UTI Adulto no chamado #44722), frequentemente aberta via formulário de manutenção predial/eletrônica e escalonada para a T.I., relatando falha física em teclado ou mouse de computador (ex.: teclas com falha de digitação de letras, teclas presas, mau contato USB ou botão de mouse falhando). Demanda reclassificação da categoria genérica ou externa (ex.: Hospital > Manutenção) para a categoria oficial do GLPI 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152) ou 'Mouses' (ID 151), com deslocamento de técnico presencial munido de periférico USB reserva homologado para teste e substituição física imediata, sem interrupção das atividades assistenciais.",
+    "required_info": [],
+    "resolution_steps": [
+      "[PB-UNI-77] Reclassificar a categoria do chamado no GLPI para 'T.I > IR > Suporte a Hardware > Periféricos > Teclados' (ID 152) ou 'Periféricos > Mouses' (ID 151), corrigindo o escalonamento de 'Hospital > Manutenção'.",
+      "[PB-UNI-77] Ajustar a urgência real para Alta/Muito Alta quando envolver setores assistenciais críticos (ex.: UTI Adulto, Pronto Atendimento, Centro Cirúrgico) onde a digitação no PEP/SGH é contínua.",
+      "[PB-UNI-77] Deslocar técnico de Infraestrutura e Redes (T.I > IR) até o local informado (ex.: UTI Adulto) munido de um teclado USB novo/reserva do estoque técnico.",
+      "[PB-UNI-77] Realizar o teste físico do periférico no computador: conectar em outra porta USB traseira para descartar mau contato de porta e confirmar a falha de resposta das teclas.",
+      "[PB-UNI-77] Constatada a avaria de membrana/hardware, efetuar a substituição imediata pelo periférico reserva e recolher o item com defeito para descarte/sucateamento.",
+      "[PB-UNI-77] Validar com a equipe do posto de trabalho a normalização da digitação e concluir o atendimento no chamado."
+    ],
+    "reply_template": "Olá, {solicitante}! Tudo bem?\n\nRecebemos a sua solicitação referente à falha no **teclado do computador** no setor **{setor}**.\n\nInformamos que as informações fornecidas já foram validadas na triagem técnica (chamado classificado como **completo**) e a categoria no GLPI foi direcionada para a equipe de Hardware (**T.I > IR > Suporte a Hardware > Periféricos > Teclados**).\n\nComo se trata de uma estação em setor assistencial ({setor}), nossa equipe de Infraestrutura e Redes já priorizou o atendimento e um técnico está se deslocando até o local com um teclado USB reserva para realizar o teste e a **substituição física imediata**!\n\nPermanecemos à disposição!"
   }
 ]

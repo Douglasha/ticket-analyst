@@ -369,6 +369,23 @@ export async function runRegressionTests() {
       expectedSufficiency: "completo",
       preventedPlaybooks: ["PB-SD-02", "PB-UNI-36", "PB-UNI-39", "PB-UNI-31"],
     },
+    {
+      id: "TEST-24-PB-UNI-77",
+      name: "Falha de Digitação e Substituição de Teclado no Posto de Trabalho (UTI Adulto / Hospital Manutenção)",
+      ticket: {
+        id: 44722,
+        title: "Manutenção Eletrônica | Teclado de computador",
+        content: "1) Tipo de Manutenção: Eletrônica\n2) Título: Teclado de computador\n3) Equipamento:\n4) Urgência: Muito Alta\n5) Local: UTI Adulto\n6) Setor Solicitante: H UTI Adulto\n7) Descreva o problema: Teclado com falha de digitação de algumas letras",
+        category: "Hospital > Manutenção",
+        urgency: 1,
+        urgency_label: "Muito baixa",
+        requester: "Adriana Aparecida de Paiva",
+        requester_department: "Hospital > UTI Adulto",
+      },
+      expectedPlaybook: "PB-UNI-77",
+      expectedSufficiency: "completo",
+      preventedPlaybooks: ["PB-UNI-53", "PB-SD-02", "PB-UNI-07", "PB-UNI-26"],
+    },
   ];
 
   const results = [];
