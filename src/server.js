@@ -802,8 +802,9 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(STATIC_DIR, "index.html"));
 });
 
-app.listen(PORT, "127.0.0.1", () => {
+const HOST = process.env.HOST || "0.0.0.0";
+app.listen(PORT, HOST, () => {
   console.log(
-    `GLPI Ticket Analyst (Node.js) rodando em http://localhost:${PORT}`
+    `GLPI Ticket Analyst (Node.js) rodando em http://${HOST}:${PORT}`
   );
 });
