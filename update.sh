@@ -24,6 +24,8 @@ if [ "$LOCAL_HASH" = "$REMOTE_HASH" ]; then
 fi
 
 echo "⬇️ [2/4] Baixando novidades do repositório remoto..."
+# Descarta alterações automáticas geradas pelo runtime nos arquivos de cache/histórico rastreados para evitar travas de merge
+git checkout -- data/analyses_cache.json data/resolved_history.json 2>/dev/null || true
 git pull origin main
 
 echo "🐳 [3/4] Recompilando e reiniciando o container da aplicação..."
